@@ -70,8 +70,6 @@ The function will also automatically print (if requested) the exact
 command to reproduce the access to the selected data set.
 
 
-
-
 ## A last word of caution
 
 Many API services seems to still be in their early stages, and data
