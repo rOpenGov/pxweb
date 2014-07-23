@@ -6,36 +6,39 @@
 #' @param node A string with the name of the node to fetch. This is ignored if \code{path} is supplied.
 #' @param topnodes A string or list of strings with the names of the parent nodes of \code{node}. This is ignored if \code{path} is supplied.
 #' @param quiet Quiet mode (never return a message to the user)
-#' @param ... Further arguments passed to  \code{baseURL()}.
+#' @param baseURL The base URL to use, depending on the web service. Needed if path argument is not provided.
+#' @param ... Further arguments passed to  \code{base_url()}.
 #' @export
 #' @examples
 #' # Define variable name
-#' topnode <- scbGetMetadata()
+#' api_parameters() # List options
+#' baseURL <- base_url("sweSCB", "v1", "sv")
+#' topnode <- scbGetMetadata(baseURL = baseURL)
 #' 
 #' # Get metadata for the first element in the top node
 #' nextnode <- scbGetMetadata(topnode$URL[1])
-#' 
-#' # Get metadata for a named node with named topnodes
-#' a_node <- scbGetMetadata()
-#' 
 
-scbGetMetadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TRUE, ...) {
-
-   # path = NULL; node = NULL; topnodes = NULL; quiet = TRUE
+scbGetMetadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TRUE, baseURL = NULL, ...) {
 
    # Build a URL if no path is supplied
    if (is.null(path)) {
-      if (is.null(node)) {
-         url <- baseURL(...)
-      } else {
-         url <- buildPath(node, topnodes)
+
+      if (is.null(baseURL)) {
+        stop("Error in pxweb::scbGetMetadata: provide the baseURL argument!")
       }
+
+      if (is.null(node)) {
+	 url <- baseURL
+      } else {
+         url <- buildPath(node, topnodes, baseURL)
+      }
+
    } else {
       # If a path is supplied, build a URL from that path and ignore the node and topnodes arguments
       url <- path
    }
       
-      df <- try(
+   df <- try(
          data.frame(
          t(sapply(
             RJSONIO::fromJSON(
@@ -58,7 +61,7 @@ scbGetMetadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TR
       df$id <- as.character(df$id)
       
       # Set the URL of each subnode
-      df$URL <- buildPath(df$id, baseUrl = url)
+      df$URL <- buildPath(df$id, baseURL = url)
       
    } else {
       
@@ -67,7 +70,6 @@ scbGetMetadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TR
          message("The data node returned is a bottom node.\nIf the name of your node object is `node`, call scbGetDims(node$URL) to get further information about the data node.")
       }
    }
-   
-   
+      
    return(df)
 }

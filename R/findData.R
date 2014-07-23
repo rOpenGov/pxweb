@@ -1,7 +1,8 @@
-#' @title Find and download data from SCB
+#' @title Find and download data from PX-WEB API
 #'
 #' @description Wrapper function (for \link{scbGetData} and \link{scbGetMetadata}) to simply find and download data from SCB to the current R session. 
 #' 
+#' @param baseURL The base URL to use, depending on the web service. 
 #' @param history keep the history when the function is running.
 #' @param ... further parameters. These are currently ignored.
 #' 
@@ -11,13 +12,16 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' myDownloadedData <- findData()
+#' api_parameters() # List options
+#' baseURL <- base_url("sweSCB", "v1", "sv")
+#' d <- findData(baseURL)
 #' }
 #' 
 
-findData <- function(history = FALSE,...){
+findData <- function(baseURL, history = FALSE, ...){
+
   # Get top node
-  Node <- scbGetMetadata() 
+  Node <- scbGetMetadata(baseURL = baseURL) 
   
   # List to store nodes
   allNodes <- list()
@@ -28,9 +32,9 @@ findData <- function(history = FALSE,...){
   # The main program
   while(!quit) { 
     # Generate header
-    if (!history) { cat("\014") }
-    cat("CONTENT OF SCB API AT CURRENT (", length(allNodes) + 1, ") NODE LEVEL:\n", sep="") 
-    cat(rep("=", round(getOption("width")*0.9)), "\n",sep="")
+    if (!history) { message("\014") }
+    message("CONTENT OF SCB API AT CURRENT (", length(allNodes)+1, ") NODE LEVEL:\n", sep="") 
+    message(rep("=", round(getOption("width")*0.9)), "\n",sep="") 
     
     # Print information in node and ask for choice
     .findData.printNode(Node)
@@ -152,10 +156,9 @@ findData <- function(history = FALSE,...){
   }
   
   if(download){
-    cat("Downloading... \n")
-    save(dataNode, varList, cleanBool, file = "tmp.RData")
+    message("Downloading... ")
     tempData <- scbGetData(dataNode$URL, varList, clean = cleanBool)
-    cat("Done.\n")
+    message("Done.\n")
   }
   
   # Print the code to repeat the downloading from SCB
@@ -244,7 +247,7 @@ findData <- function(history = FALSE,...){
   
   while(!inputOK) {
     # Print title, alternatives and so forth
-    cat(textTitle)
+    message(textTitle)
     if (type == "alt") {
       if (inputScan == "a") {
         toprint <- varDF
@@ -253,9 +256,9 @@ findData <- function(history = FALSE,...){
       }
       .findData.printNode(xscb = toprint, print = TRUE)
     }
-    cat(textHead)
+    message(textHead)
     if (type != "text") {
-      cat(.findData.inputBaseCat(baseCat, codedAlt), "\n")
+      message(.findData.inputBaseCat(baseCat, codedAlt), "\n")
     }
     
     # Get input from the user (if not test run)
@@ -290,15 +293,15 @@ findData <- function(history = FALSE,...){
     if(type == "text") {
       if(make.names(inputScan) != inputScan) {
         inputOK <- FALSE
-        cat("This is not a valid name of a data.frame object in R.\n")
-        cat("You could change the name to '", 
+        message("This is not a valid name of a data.frame object in R.\n")
+        message("You could change the name to '", 
             make.names(inputScan),
             "'.\n", sep="")
       }
     }
         
     if(!inputOK){
-      cat("Sorry, no such entry allowed. Please try again!\n\n")
+      message("Sorry, no such entry allowed. Please try again!\n\n")
     }
   } 
 
@@ -370,7 +373,7 @@ findData <- function(history = FALSE,...){
   }
   # Print node text or save it as a character value
   if (print) {
-    cat(finalText)
+    message(finalText)
   } else {
     return(finalText)
   }
@@ -379,8 +382,8 @@ findData <- function(history = FALSE,...){
 .findData.printCode <- function(url, varListText, clean) {
   # Print the code used to download the data
   
-  cat("To download the same data from SCB again, use the following code:\n\n")
-  cat("myDataSetName",
+  message("To download the same data from SCB again, use the following code:\n\n")
+  message("myDataSetName",
       " <- \n  scbGetData(url = \"", 
       url,
       "\",\n",
@@ -390,21 +393,21 @@ findData <- function(history = FALSE,...){
   # Print the chosen alternatives for each data dimension
   for (i in 1:length(varListText)){
     if(i != 1){
-      cat(rep(" ", 25), sep="")
+      message(rep(" ", 25), sep="")
     }
-    cat(varListText[i], sep="")
+    message(varListText[i], sep="")
     if (i != length(varListText)) {
-      cat(",\n",sep="")
+      message(",\n",sep="")
     }
   }
 
-  cat("),\n")
+  message("),\n")
   
   # Print if the data should be cleaned or not
-  cat(rep(" ",13), 
+  message(rep(" ",13), 
       "clean = ",
       as.character(clean), sep="")
-  cat(")\n\n")
+  message(")\n\n")
 }
 
 

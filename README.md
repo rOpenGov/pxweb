@@ -1,45 +1,51 @@
-finSCB v0.3.4
+pxweb v0.3.4
 =======
 
 ## Introduction
 
-finSCB is an R package to interface with the API of Statistics Finland
+pxweb is an R package to interface with the PX-WEB API.
 
 This R package is in a preliminary alpha phase and the code is based
 on the very closely related
 [sweSCB](https://github.com/rOpenGov/sweSCB) package and the [demo
 version of the Statistics Finland
 API](http://pxwebapi2.stat.fi/api1.html). For more information, see
-[StatFi page](http://www.stat.fi/org/avoindata/api.html). We are
-aiming to integrate these into a generic API package in the
-future. All comments, issues, bug fixes and pull requests are very
+[StatFi page](http://www.stat.fi/org/avoindata/api.html). We are now
+integrating the generic parts from these packages into a shared API
+package. All comments, issues, bug fixes and pull requests are very
 welcome.
 
-This package is a part of the international R open government data and computation project [rOpenGov](http://ropengov.github.io/). 
+This package is a part of the international R open government data and
+computation project [rOpenGov](http://ropengov.github.io/).
 
-The package offers methods to fetch information about the data hierarchy stored behind the API; extract metadata; fetch actual data; and clean up the results.
+The package offers methods to fetch information about the data
+hierarchy stored behind the PX-WEB API; extract metadata; fetch actual
+data; and clean up the results.
 
-## A brief note on using the SCB API
+
+## A brief note on using the API
 
 The API is a RESTful API. The data consists of a metadata part and a data part. The metadata part is structured in a hierarchical node tree, where each node contains information about any (sub-)nodes that are below it in the tree structure or, if the nodes is at the bottom of the tree structure, the data referenced by the node as well as what dimensions are available for the data at that subnode.
 
-Use the `devtools` package for easy installation of the latest version from GitHub:
+Use the `devtools` package to install the latest version:
 ```r
 library("devtools")
-devtools::install_github("finSCB","rOpenGov")
-library(finSCB)
+devtools::install_github("pxweb","rOpenGov")
+library(pxweb)
 ```
 
 ## Easy access to SCB data
 
-Data in the SCB API is structured in a data tree and a wrapper function `findSCBdata()` has been written for easy navigation and access to data through the SCB api. To get data from SCB simply run the function from the R command line:
+Data in the API is structured in a data tree and a wrapper function `findData()` has been written for easy navigation and access to data through the API. To get data, simply run the function from the R command line:
+
 ```r
 d <- findData()
 ```
-The function will automatically print (if requested) the code needed to reproduce the access to SCB data.
+
+The function will automatically print (if requested) the code needed to reproduce the access to data.
 
 
-## Advanced access to SCB data (not tested yet)
+## Advanced access (not tested yet - TODO)
 
 ### Exploring the top node of the API data tree
 Data in the SCB API is structured in a data tree. To explore the top node of the data tree, use `scbGetMetadata()`. Provided with no parameters, the function fetches metadata from the top node in the API:
@@ -87,7 +93,7 @@ The data can now be inspected, e.g. by doing `View(sdata)`.
 
 
 ### Cleaning up the results
-Unfortunately, the beta version of the SCB web API often returns faulty formatted data, which can cause a lot of pain. In version 0.3 of finSCB this can be handled directly by setting the parameter `clean = TRUE` in the `scbGetData()` function. So to get cleaned and molten data for the same call as in the previous example, just add `clean = TRUE`:
+Unfortunately, the beta version of the SCB web API often returns faulty formatted data, which can cause a lot of pain. In version 0.3 of pxweb this can be handled directly by setting the parameter `clean = TRUE` in the `scbGetData()` function. So to get cleaned and molten data for the same call as in the previous example, just add `clean = TRUE`:
 ```r
 sdata <- scbGetData(bottomNode$URL, 
   list(SPIN2007 = "*", ContentsCode = "PR0301I4", Tid = c("2010M02","2011M03")),
@@ -96,10 +102,10 @@ sdata <- scbGetData(bottomNode$URL,
 The data should now be ready for use. 
 
 ## A last word of caution
-The SCB web API seems to still be in its early stages, and data quality is sometimes not perfect. If you find an obvious error in your data and it's not obvious that this is because of programming errors in `finSCB`, please consider filing a bug report to the developers at SCB. Follow [this link](http://www.scb.se/api) to find information on how to contact them.
+The SCB web API seems to still be in its early stages, and data quality is sometimes not perfect. If you find an obvious error in your data and it's not obvious that this is because of programming errors in `pxweb`, please consider filing a bug report to the developers at SCB. Follow [this link](http://www.scb.se/api) to find information on how to contact them.
 
 ## Further examples
-Further examples of advanced package usage are included in the "examples" folder installed with this package. To locate this folder on your system, run `system.file(package = "finSCB")` from the R terminal.
+Further examples of advanced package usage are included in the "examples" folder installed with this package. To locate this folder on your system, run `system.file(package = "pxweb")` from the R terminal.
 
 ## Development information
 This package is still in its early development stages. The package can already be used in its present form to construct a simple menu system, to mine the SCB API for data, or to discover new data. However, work is needed to improve usability and widen the range of possible applications. You are invited to contribute to package development in any way you can and want to. You will, of course, be given due credit for your work.
@@ -109,7 +115,7 @@ Please use the GitHub issue tracker for reporting bugs and making further featur
 
 IMPORTANT: When submitting a bug, you can make the lives of the developers easier by submitting the following information along with your bug report:
 - The output of `sessionInfo()`
-- The output of `packageVersion("finSCB")`
+- The output of `packageVersion("pxweb")`
 
 ## Open source license
 Please note that all source code contained in this project is open source licensed under the Affero Gnu Public License v3. This means that you are allowed to modify, use, and spread the source code freely withoug any permission from the author. HOWEVER, this source code and ANY derivatives thereof MUST be licensed with the same open source license. For further information about the AGPLv3, see LICENSE included with the source code of this package.

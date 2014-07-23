@@ -4,7 +4,7 @@
 \title{Get data}
 \usage{
 scbGetMetadata(path = NULL, node = NULL, topnodes = NULL, quiet = TRUE,
-  ...)
+  baseURL = NULL, ...)
 }
 \arguments{
 \item{path}{URL to fetch metadata from. If left empty, the function constructs a URL from the \code{node} and \code{topnodes} arguments}
@@ -15,19 +15,20 @@ scbGetMetadata(path = NULL, node = NULL, topnodes = NULL, quiet = TRUE,
 
 \item{quiet}{Quiet mode (never return a message to the user)}
 
-\item{...}{Further arguments passed to  \code{baseURL()}.}
+\item{baseURL}{The base URL to use, depending on the web service. Needed if path argument is not provided.}
+
+\item{...}{Further arguments passed to  \code{base_url()}.}
 }
 \description{
 Get data from the API. If at the lowest node, provide the user with a friendly message about this.
 }
 \examples{
 # Define variable name
-topnode <- scbGetMetadata()
+api_parameters() # List options
+baseURL <- base_url("sweSCB", "v1", "sv")
+topnode <- scbGetMetadata(baseURL = baseURL)
 
 # Get metadata for the first element in the top node
 nextnode <- scbGetMetadata(topnode$URL[1])
-
-# Get metadata for a named node with named topnodes
-a_node <- scbGetMetadata()
 }
 

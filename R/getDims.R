@@ -11,7 +11,8 @@
 #' 
 #' ## CONTINUED FROM EXAMPLES IN scbGetMetadata()
 #' # Get metadata for a named variable
-#' url <- paste(c(baseURL(),"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
+#' baseURL <- base_url("sweSCB", "v1", "sv")
+#' url <- paste(c(baseURL,"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
 #' metadata <- scbGetMetadata(url)
 #' 
 #' # Get dimensions (names of dimensions are printed in the terminal)

@@ -1,0 +1,12 @@
+{
+  "statfi": {
+      "version": ["v1"], 
+      "lang": ["fi"] 
+            },
+
+  "sweSCB": { 
+      "version": ["v1"], 
+      "lang": ["se"] 
+        }
+}
+

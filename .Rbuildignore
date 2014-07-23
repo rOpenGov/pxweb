@@ -1,0 +1,22 @@
+# Extra material related but not to be included in the package
+./inst/extras/eurostat.Rcheck/*
+./inst/extras/..Rcheck/*
+./inst/extras/...Rcheck/*
+./inst/extras/*
+./inst/extras/.*
+./inst/extras/*.Rmd
+inst/extras/.RData
+
+
+# Git related
+./.git*
+
+# Travis scripts
+.travis.yml
+
+# Misc
+./.*~
+./*~
+
+^.*\.Rproj$
+^\.Rproj\.user$

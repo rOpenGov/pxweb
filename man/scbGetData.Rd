@@ -6,7 +6,7 @@
 scbGetData(url, dims, clean = FALSE)
 }
 \arguments{
-\item{url}{URL to get data from (it is usually sufficient to submit the base URL, supplied via the baseURL() function, and the name of the variable).}
+\item{url}{URL to get data from (it is usually sufficient to submit the base URL, supplied via the base_url() function, and the name of the variable).}
 
 \item{dims}{A list of dimensional parameters to filter data by. Note that values \emph{must} be submitted for all dimensions of the data. If you don't want to filter data, submit an asterisk in quotation marks ("*") instead of values for that dimension.}
 
@@ -23,7 +23,8 @@ For detailed examples see the installed example files in the \code{examples} fol
 \examples{
 ## CONTINUED FROM EXAMPLES IN scbGetMetadata()
 # Get metadata for a variable
-url <- paste(c(baseURL(),"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
+baseURL <- base_url("sweSCB","v1","sv")
+url <- paste(c(baseURL,"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
 metadata <- scbGetMetadata(url)
 
 # Get dimensions (names of dimensions are printed in the terminal)

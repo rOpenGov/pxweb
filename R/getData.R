@@ -2,7 +2,7 @@
 #' 
 #' This function fetches actual data (i.e. values) from the SCB web API. 
 #' 
-#' @param url URL to get data from (it is usually sufficient to submit the base URL, supplied via the baseURL() function, and the name of the variable).
+#' @param url URL to get data from (it is usually sufficient to submit the base URL, supplied via the base_url() function, and the name of the variable).
 #' @param dims A list of dimensional parameters to filter data by. Note that values \emph{must} be submitted for all dimensions of the data. If you don't want to filter data, submit an asterisk in quotation marks ("*") instead of values for that dimension.
 #' @param clean Clean and melt the data to R format.
 #' 
@@ -18,7 +18,8 @@
 #' @examples
 #' ## CONTINUED FROM EXAMPLES IN scbGetMetadata()
 #' # Get metadata for a variable
-#' url <- paste(c(baseURL(),"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
+#' baseURL <- base_url("sweSCB","v1","sv")
+#' url <- paste(c(baseURL,"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
 #' metadata <- scbGetMetadata(url)
 #' 
 #' # Get dimensions (names of dimensions are printed in the terminal)
@@ -66,11 +67,11 @@ scbGetData <- function(url, dims, clean = FALSE) {
    
    # Print error message
    if (class(response)=="try-error"){
-      stop(str_join("No Internet connection to ",url),
+      stop(str_join("No internet connection to ",url),
            call.=FALSE)
    }
-   if(response$headers$statusmessage != "OK") {
-     stop(str_join(response$headers$status, response$headers$statusmessage, content(response,as='text'), sep=" "),
+   if(httr::http_status(response)$category != "success") {
+     stop(httr::http_status(response)$message,
           call.=FALSE)
    }
    
@@ -106,7 +107,6 @@ scbGetData <- function(url, dims, clean = FALSE) {
 #' 
 
 .scbClean <- function(data2clean, head, url) {  
-
   # Assertions
   stopifnot(ncol(data2clean) == length(head))
   stopifnot(class(data2clean) == "data.frame")
@@ -115,11 +115,7 @@ scbGetData <- function(url, dims, clean = FALSE) {
   
   # Convert to data table
   data2clean <- as.data.table(data2clean)
-
-  return(data2clean)
-
-  skip <- TRUE
-  if (skip) { # Commented out this 21.7.2014 due to errors   
+   
   # Get metadata to use in creating factors of Tid and contentCode
   contentNode <- scbGetMetadata(url)
    
@@ -152,8 +148,6 @@ scbGetData <- function(url, dims, clean = FALSE) {
                       } else {x}})
     )
   newhead[!notIdIndex] <- idvars
-  # Tassa kaatuu - load("Rpackages/tmp.RData")
-
   setnames(data2clean,old=names(data2clean), new=newhead)
   
   # Melt the data to long format 
@@ -175,6 +169,4 @@ scbGetData <- function(url, dims, clean = FALSE) {
   meltData$variable <- NULL
    
   return(meltData)
-  }
-
 }

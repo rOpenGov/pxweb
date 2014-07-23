@@ -1,14 +1,13 @@
-Package: finSCB
+Package: pxweb
 Type: Package
-Title: An R interface to the web API of Statistics Finland
+Title: R interface to the PX-WEB API
 Version: 0.3.4
-Date: 2014-07-21
-Author: Love Hansson, Leo Lahti, Mans Magnusson
+Date: 2014-07-22
+Author: Leo Lahti, Mans Magnusson
 Maintainer: Mans Magnusson <louhos@googlegroups.com>
-Description: Interface for the REST API of Statistics Finland. The
-    package offers methods to fetch information about the data hierarchy stored
-    behind the API; extract metadata; fetch actual data; and clean up the
-    results. Based on a similar package for Sweden, the sweSCB.
+Description: Generic interface for the PX-WEB REST API to fetch information
+    about the data hierarchy; extract metadata and actual data; and clean up
+    the results.
 Imports:
     data.table,
     stringr,

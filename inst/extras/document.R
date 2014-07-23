@@ -2,7 +2,7 @@ library(devtools)
 document("../../")
 
 #library(knitr)
-#knit("../../vignettes/eurostat_tutorial.Rmd", "../../vignettes/eurostat_tutorial.md")
+#knit("../../vignettes/pxweb_tutorial.Rmd", "../../vignettes/pxweb_tutorial.md")
 
 
 
