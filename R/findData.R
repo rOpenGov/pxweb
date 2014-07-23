@@ -157,6 +157,7 @@ findData <- function(baseURL, history = FALSE, ...){
   
   if(download){
     message("Downloading... ")
+save(dataNode, varList, cleanBool, file = "tmp.RData")
     tempData <- scbGetData(dataNode$URL, varList, clean = cleanBool)
     message("Done.\n")
   }
