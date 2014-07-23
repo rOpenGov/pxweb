@@ -1,0 +1,20 @@
+Package: finSCB
+Type: Package
+Title: An R interface to the web API of Statistics Finland
+Version: 0.3.4
+Date: 2014-07-21
+Author: Love Hansson, Leo Lahti, Mans Magnusson
+Maintainer: Mans Magnusson <louhos@googlegroups.com>
+Description: Interface for the REST API of Statistics Finland. The
+    package offers methods to fetch information about the data hierarchy stored
+    behind the API; extract metadata; fetch actual data; and clean up the
+    results. Based on a similar package for Sweden, the sweSCB.
+Imports:
+    data.table,
+    stringr,
+    RJSONIO,
+    httr
+License: AGPL-3
+Suggests:
+    testthat,
+    ggplot2
