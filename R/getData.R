@@ -115,10 +115,16 @@ scbGetData <- function(url, dims, clean = FALSE) {
   
   # Convert to data table
   data2clean <- as.data.table(data2clean)
-   
+  
   # Get metadata to use in creating factors of Tid and contentCode
   contentNode <- scbGetMetadata(url)
-   
+  
+  return(data2clean)
+
+  # FIXME: Not working with generic APIs, only with sweSCB
+  skip <- TRUE
+  if (skip) {
+ 
   # Collect factor labels for tid and contentCode and convert
   # other variables to factor variables
   idvars <- character(0)
@@ -169,4 +175,6 @@ scbGetData <- function(url, dims, clean = FALSE) {
   meltData$variable <- NULL
    
   return(meltData)
+  }
+
 }
