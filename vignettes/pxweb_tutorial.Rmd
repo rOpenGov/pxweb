@@ -1,0 +1,87 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{pxweb Markdown Vignette made with knitr}
+-->
+
+PX-WEB API Interface for R
+===========
+
+This R package provides tools to access PX-WEB APIs.
+
+Your [contributions](http://ropengov.github.com/contact.html) and [bug
+reports and other feedback](https://github.com/ropengov/pxweb) are
+welcome!
+
+
+## Available data sources and tools
+
+[Installation](#installation) (Installation)  
+
+[Statistics Finland](#statfi) (Statistics Finland)  
+* [Standard queries](#statfibasic) (An Example)
+
+
+## <a name="installation"></a>Installation
+
+Install the stable release version in R:
+
+```{r install, eval=FALSE}
+install.packages("pxweb")
+```
+
+Test the installation by loading the library:
+
+```{r test, message=FALSE, warning=FALSE, eval=TRUE}
+library(pxweb)
+```
+
+We also recommend setting the UTF-8 encoding:
+
+```{r locale, eval=FALSE}
+Sys.setlocale(locale="UTF-8") 
+```
+
+
+## <a name="statfi"></a>Statistics Finland
+
+Source: [Statistics Finland](http://www.stat.fi/)
+
+### <a name="statfibasic"></a>Basic example
+
+List available parameters from the API:
+
+```{r apiparameters, message=FALSE, eval=TRUE}
+# List available database options
+library(pxweb)
+print(api_parameters())
+```
+
+Interactive API query (not run):
+
+```{r standardquery, message=FALSE, eval=FALSE}
+baseURL <- base_url("statfi", "v1", "fi")
+d <- findData(baseURL)
+```
+
+
+## Licensing and Citations
+
+This work can be freely used, modified and distributed under the open license specified in the [DESCRIPTION file](https://github.com/rOpenGov/pxweb/blob/master/DESCRIPTION).
+
+Kindly cite the work as follows
+
+```{r citation, message=FALSE, eval=TRUE}
+citation("pxweb")
+```
+
+## Session info
+
+This vignette was created with
+
+```{r sessioninfo, message=FALSE, warning=FALSE}
+sessionInfo()
+```
+
+
+
+

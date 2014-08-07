@@ -4,7 +4,7 @@ citEntry(entry="misc",
          title = "pxweb: R tools for PX-WEB APIs",
          author = personList(
 	   person(given ="Leo", family="Lahti", email = "ropengov-forum@googlegroups.com"),
-	   person(given ="Måns", family="Magnusson"),
+	   person(given ="Mans", family="Magnusson"),
 	   person(given ="Love", family="Hansson")
          ),
 	 journal = "",
