@@ -1,8 +1,8 @@
 Package: pxweb
 Type: Package
 Title: R interface to the PX-WEB API
-Version: 0.3.4
-Date: 2014-07-22
+Version: 0.3.41
+Date: 2014-08-07
 Author: Leo Lahti, Mans Magnusson
 Maintainer: Mans Magnusson <louhos@googlegroups.com>
 Description: Generic interface for the PX-WEB REST API to fetch information

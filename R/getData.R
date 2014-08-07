@@ -1,13 +1,13 @@
-#' Get data from a bottom node in SCB API
+#' Get data from a bottom node in PX-WEB API
 #' 
-#' This function fetches actual data (i.e. values) from the SCB web API. 
+#' This function fetches actual data (i.e. values) from the PX-WEB API. 
 #' 
 #' @param url URL to get data from (it is usually sufficient to submit the base URL, supplied via the base_url() function, and the name of the variable).
 #' @param dims A list of dimensional parameters to filter data by. Note that values \emph{must} be submitted for all dimensions of the data. If you don't want to filter data, submit an asterisk in quotation marks ("*") instead of values for that dimension.
 #' @param clean Clean and melt the data to R format.
 #' 
 #' @details
-#' There are five documented filter types in the SCB API documentation; "Item", "All", "Top", "Agg" and "Vs". This function currently only supports the "Item" and "All" modes. 
+#' There are five documented filter types in the PX-WEB API documentation; "Item", "All", "Top", "Agg" and "Vs". This function currently only supports the "Item" and "All" modes. 
 #' To use "Item" selection, simply submit a value or vector of values with each dimensional parameter. To use "All" selection, submit a wildcard asterisk ("*") instead of a value.
 #' For detailed examples see the installed example files in the \code{examples} folder of \code{path.package("sweSCB")} (these are also viewable on the project's GitHub page).
 #' 
@@ -87,7 +87,7 @@ scbGetData <- function(url, dims, clean = FALSE) {
      
    # Clean and melt data 
    if (clean) {
-      b <- .scbClean(data2clean=b, head=head, url=url)
+      b <- pxwebClean(data2clean=b, head=head, url=url)
    }
    
    return(b)
@@ -95,9 +95,9 @@ scbGetData <- function(url, dims, clean = FALSE) {
 
 
 
-#' Clean raw data from SCB
+#' Clean raw data from PX-WEB
 #' 
-#' This function clean the raw data from SCB to R tall R format. 
+#' This function clean the raw data from PX-WEB to R tall format. 
 #' 
 #' @param data2clean Data to clean.
 #' @param head Full variable names as character vector
@@ -106,7 +106,7 @@ scbGetData <- function(url, dims, clean = FALSE) {
 #' @return data frame melted and in R (numeric) format
 #' 
 
-.scbClean <- function(data2clean, head, url) {  
+pxwebClean <- function(data2clean, head, url) {  
   # Assertions
   stopifnot(ncol(data2clean) == length(head))
   stopifnot(class(data2clean) == "data.frame")

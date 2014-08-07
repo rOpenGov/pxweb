@@ -5,6 +5,9 @@
 ./inst/extras/*
 ./inst/extras/.*
 ./inst/extras/*.Rmd
+./inst/extras/.RData
+./inst/extras/*.RData
+inst/extras/*.RData
 inst/extras/.RData
 
 

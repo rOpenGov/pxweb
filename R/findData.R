@@ -1,6 +1,6 @@
 #' @title Find and download data from PX-WEB API
 #'
-#' @description Wrapper function (for \link{scbGetData} and \link{scbGetMetadata}) to simply find and download data from SCB to the current R session. 
+#' @description Wrapper function (for \link{scbGetData} and \link{scbGetMetadata}) to simply find and download data to the current R session. 
 #' 
 #' @param baseURL The base URL to use, depending on the web service. 
 #' @param history keep the history when the function is running.
@@ -55,7 +55,7 @@ findData <- function(baseURL, history = FALSE, ...){
       # Check if it is the botton node and if so, ask to download data
       if (Node$type[as.numeric(inputValue)] == "t") {
         downloadedData<-
-          .findData.Download(dataNode=
+          findData.Download(dataNode=
             list(scbGetMetadata(
               Node$URL[as.numeric(inputValue)]),
               Node$URL[as.numeric(inputValue)]
@@ -81,7 +81,7 @@ findData <- function(baseURL, history = FALSE, ...){
 #' @param test_input Vector of length 4 to test inputs to the first 4 questions in the query.
 #' @param ... further parameters. These are currently ignored.
 #' 
-.findData.Download <- function(dataNode, test_input = NULL, ...) {
+findData.Download <- function(dataNode, test_input = NULL, ...) {
   # Assertions
   stopifnot(length(test_input) == 0 | length(test_input) == 3 )
   

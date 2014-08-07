@@ -13,7 +13,7 @@ findData(baseURL, history = FALSE, ...)
 \item{...}{further parameters. These are currently ignored.}
 }
 \description{
-Wrapper function (for \link{scbGetData} and \link{scbGetMetadata}) to simply find and download data from SCB to the current R session.
+Wrapper function (for \link{scbGetData} and \link{scbGetMetadata}) to simply find and download data to the current R session.
 }
 \examples{
 \dontrun{
