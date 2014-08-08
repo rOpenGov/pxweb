@@ -6,7 +6,7 @@
 PX-WEB API Interface for R
 ===========
 
-This R package provides tools to access PX-WEB APIs.
+This R package provides tools to access PX-WEB API that [a number of organizations](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/) use to distribute hierarchical data.
 
 Your [contributions](http://ropengov.github.com/contact.html) and [bug
 reports and other feedback](https://github.com/ropengov/pxweb) are
