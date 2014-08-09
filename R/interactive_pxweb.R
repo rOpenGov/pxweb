@@ -1,6 +1,6 @@
 #' @title Find and download data interactively from PX-WEB API
 #'
-#' @description Wrapper function (for \link{scbGetData} and \link{scbGetMetadata}) to simply find and download data to the current R session. 
+#' @description Wrapper function (for \link{get_pxweb} and \link{scbGetMetadata}) to simply find and download data to the current R session. 
 #' 
 #' @param baseURL The base URL to use, depending on the web service. 
 #' @param history keep the history when the function is running.
@@ -8,7 +8,7 @@
 #' 
 #' 
 #' @seealso
-#' \code{\link{scbGetMetadata}}, \code{\link{scbGetData}}
+#' \code{\link{scbGetMetadata}}, \code{\link{get_pxweb}}
 #' @export
 #' @examples
 #' \dontrun{
@@ -75,7 +75,7 @@ interactive_pxweb <- function(baseURL, history = FALSE, ...){
 #' @title Traverse node for query alternatives and download data.
 #'
 #' @description Goes through the dataNode and ask user for input for all 
-#' variables and then put this together to a query for \link{scbGetData}.
+#' variables and then put this together to a query for \link{get_pxweb}.
 #' 
 #' @param dataNode Botton node in node tree.
 #' @param test_input Vector of length 4 to test inputs to the first 4 questions in the query.
@@ -157,7 +157,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
   
   if(download){
     message("Downloading... ")
-    tempData <- scbGetData(dataNode$URL, varList, clean = cleanBool)
+    tempData <- get_pxweb(dataNode$URL, varList, clean = cleanBool)
     message("Done.\n")
   }
   
@@ -384,7 +384,7 @@ findData.printCode <- function(url, varListText, clean) {
   
   message("To download the same data again, use the following code:\n\n")
   message("myDataSetName",
-      " <- \n  scbGetData(url = \"", 
+      " <- \n  get_pxweb(url = \"", 
       url,
       "\",\n",
       rep(" ",13),

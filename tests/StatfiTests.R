@@ -14,5 +14,5 @@ dims[["Alue"]] <- c("*"))
 dims[["Asuntokunnan koko"]] <- c("*")
 dims[["Talotyyppi"]] <- c("S")
 dims[["Vuosi"]] <- c("*")
-myDataSetName <- scbGetData(url = data.url, dims = dims, clean = TRUE)
+myDataSetName <- get_pxweb(url = data.url, dims = dims, clean = TRUE)
 

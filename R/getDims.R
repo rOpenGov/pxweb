@@ -19,7 +19,7 @@
 #' dims <- scbGetDims(metadata)
 #' 
 #' # Get data
-#' test <- scbGetData(metadata$URL, dims=list(
+#' test <- get_pxweb(metadata$URL, dims=list(
 #'    Myndighet = "C02",
 #'    Kon = "*",
 #'    Heltiddeltid = "*",

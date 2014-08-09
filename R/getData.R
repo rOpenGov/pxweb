@@ -26,7 +26,7 @@
 #' dims <- scbGetDims(metadata)
 #' 
 #' # Get data
-#' test <- scbGetData(metadata$URL, dims=list(
+#' test <- get_pxweb(metadata$URL, dims=list(
 #'    Myndighet = "C02",
 #'    Kon = "*",
 #'    Heltiddeltid = "*",
@@ -35,7 +35,7 @@
 #' ))
 #' 
 
-scbGetData <- function(url, dims, clean = FALSE) {
+get_pxweb <- function(url, dims, clean = FALSE) {
 
    dimNames <- names(dims)
    

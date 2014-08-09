@@ -111,7 +111,7 @@ testDownloadSCBdata <- function(DLAll=FALSE, seed=as.integer(Sys.time()), nodes,
       }
       names(dims)[length(dims)] <- dim$code
     }
-    tempObj <- suppressWarnings(try(scbGetData(url=bottomNodes$URL[i],clean=TRUE,
+    tempObj <- suppressWarnings(try(get_pxweb(url=bottomNodes$URL[i],clean=TRUE,
                                                dims=dims)))
     if(class(tempObj)=="try-error") bottomNodes$DLerror[i] <- TRUE
     i <- i + 1
