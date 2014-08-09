@@ -12,7 +12,7 @@
 #' For detailed examples see the installed example files in the \code{examples} folder of \code{path.package("pxweb")} (these are also viewable on the project's GitHub page).
 #' 
 #' @seealso
-#' \code{\link{scbGetMetadata}}, \code{\link{scbGetDims}}, \code{\link{scbGetLevels}}
+#' \code{\link{scbGetMetadata}}, \code{\link{get_pxweb_dims}}, \code{\link{scbGetLevels}}
 #' 
 #' @export
 #' @examples
@@ -23,7 +23,7 @@
 #' metadata <- scbGetMetadata(url)
 #' 
 #' # Get dimensions (names of dimensions are printed in the terminal)
-#' dims <- scbGetDims(metadata)
+#' dims <- get_pxweb_dims(metadata)
 #' 
 #' # Get data
 #' test <- get_pxweb(metadata$URL, dims=list(

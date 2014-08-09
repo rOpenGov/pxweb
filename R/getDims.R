@@ -16,7 +16,7 @@
 #' metadata <- scbGetMetadata(url)
 #' 
 #' # Get dimensions (names of dimensions are printed in the terminal)
-#' dims <- scbGetDims(metadata)
+#' dims <- get_pxweb_dims(metadata)
 #' 
 #' # Get data
 #' test <- get_pxweb(metadata$URL, dims=list(
@@ -28,7 +28,7 @@
 #' ))
 #' 
 
-scbGetDims <- function(node, verbose=TRUE) {
+get_pxweb_dims <- function(node, verbose=TRUE) {
 	
 	## Deparse metadata object into elements
 	# Title

@@ -67,7 +67,7 @@ scbGetMetadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TR
       
       df$URL <- url
       if (!quiet) {
-         message("The data node returned is a bottom node.\nIf the name of your node object is `node`, call scbGetDims(node$URL) to get further information about the data node.")
+         message("The data node returned is a bottom node.\nIf the name of your node object is `node`, call get_pxweb_dims(node$URL) to get further information about the data node.")
       }
    }
       
