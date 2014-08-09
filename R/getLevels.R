@@ -7,9 +7,9 @@
 #' @param quiet Quiet mode. Whether to stop with an error if the input node does not contain any subnodes. If set to \code{TRUE}, the function will quietly return FALSE without any errors. (default: \code{FALSE})
 #' @param ... further argument to send to \code{scbGetMetadata}
 #' @export
-#' @examples lev <- scbGetLevels(baseURL = base_url("sweSCB", "v1", "sv"))
+#' @examples lev <- get_pxweb_levels(baseURL = base_url("sweSCB", "v1", "sv"))
 
-scbGetLevels <- function(
+get_pxweb_levels <- function(
 	baseURL,
 	descriptions = FALSE,
 	quiet = FALSE,

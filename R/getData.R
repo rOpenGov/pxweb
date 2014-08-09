@@ -12,7 +12,7 @@
 #' For detailed examples see the installed example files in the \code{examples} folder of \code{path.package("pxweb")} (these are also viewable on the project's GitHub page).
 #' 
 #' @seealso
-#' \code{\link{scbGetMetadata}}, \code{\link{get_pxweb_dims}}, \code{\link{scbGetLevels}}
+#' \code{\link{scbGetMetadata}}, \code{\link{get_pxweb_dims}}, \code{\link{get_pxweb_levels}}
 #' 
 #' @export
 #' @examples
