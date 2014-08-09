@@ -98,7 +98,7 @@ get_pxweb <- function(url, dims, clean = FALSE) {
      
    # Clean and melt data 
    if (clean) {
-      b <- pxwebClean(data2clean=b, head=head, url=url)
+      b <- clean_pxweb(data2clean=b, head=head, url=url)
    }
    
    return(b)
@@ -117,7 +117,7 @@ get_pxweb <- function(url, dims, clean = FALSE) {
 #' @return data frame melted and in R (numeric) format
 #' 
 
-pxwebClean <- function(data2clean, head, url) {  
+clean_pxweb <- function(data2clean, head, url) {  
   # Assertions
   stopifnot(ncol(data2clean) == length(head))
   stopifnot(class(data2clean) == "data.frame")
