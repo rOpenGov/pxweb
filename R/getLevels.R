@@ -5,7 +5,7 @@
 #' @param baseURL The base URL to use, depending on the web service. 
 #' @param descriptions Whether to include node descriptions with the list of node IDs. (default: \code{FALSE})
 #' @param quiet Quiet mode. Whether to stop with an error if the input node does not contain any subnodes. If set to \code{TRUE}, the function will quietly return FALSE without any errors. (default: \code{FALSE})
-#' @param ... further argument to send to \code{scbGetMetadata}
+#' @param ... further argument to send to \code{get_pxweb_metadata}
 #' @export
 #' @examples lev <- get_pxweb_levels(baseURL = base_url("sweSCB", "v1", "sv"))
 
@@ -16,7 +16,7 @@ get_pxweb_levels <- function(
 	...
 ) {
 	
-	nodeData <- scbGetMetadata(baseURL = baseURL, quiet = TRUE, ...)
+	nodeData <- get_pxweb_metadata(baseURL = baseURL, quiet = TRUE, ...)
 	
 	if(!("id" %in% names(nodeData))) {
 

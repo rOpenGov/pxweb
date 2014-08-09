@@ -12,15 +12,15 @@
 #' For detailed examples see the installed example files in the \code{examples} folder of \code{path.package("pxweb")} (these are also viewable on the project's GitHub page).
 #' 
 #' @seealso
-#' \code{\link{scbGetMetadata}}, \code{\link{get_pxweb_dims}}, \code{\link{get_pxweb_levels}}
+#' \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_dims}}, \code{\link{get_pxweb_levels}}
 #' 
 #' @export
 #' @examples
-#' ## CONTINUED FROM EXAMPLES IN scbGetMetadata()
+#' ## CONTINUED FROM EXAMPLES IN get_pxweb_metadata()
 #' # Get metadata for a variable
 #' baseURL <- base_url("sweSCB","v1","sv")
 #' url <- paste(c(baseURL,"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
-#' metadata <- scbGetMetadata(url)
+#' metadata <- get_pxweb_metadata(url)
 #' 
 #' # Get dimensions (names of dimensions are printed in the terminal)
 #' dims <- get_pxweb_dims(metadata)
@@ -128,7 +128,7 @@ clean_pxweb <- function(data2clean, head, url) {
   data2clean <- as.data.table(data2clean)
   
   # Get metadata to use in creating factors of Tid and contentCode
-  contentNode <- scbGetMetadata(url)
+  contentNode <- get_pxweb_metadata(url)
   
   return(data2clean)
 
