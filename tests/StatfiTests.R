@@ -10,7 +10,7 @@ baseURL <- base_url("statfi", "v1", "fi")
 # Custom query: 
 dims <- list()
 data.url <- "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/StatFin/asu/asas/010_asas_tau_101.px"
-dims[["Alue"]] <- c("*"))
+dims[["Alue"]] <- c("*")
 dims[["Asuntokunnan koko"]] <- c("*")
 dims[["Talotyyppi"]] <- c("S")
 dims[["Vuosi"]] <- c("*")
