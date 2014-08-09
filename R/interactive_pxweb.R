@@ -55,7 +55,7 @@ interactive_pxweb <- function(baseURL, history = FALSE, ...){
       # Check if it is the botton node and if so, ask to download data
       if (Node$type[as.numeric(inputValue)] == "t") {
         downloadedData<-
-          findData.Download(dataNode=
+          download_pxweb(dataNode=
             list(get_pxweb_metadata(
               Node$URL[as.numeric(inputValue)]),
               Node$URL[as.numeric(inputValue)]
@@ -81,7 +81,7 @@ interactive_pxweb <- function(baseURL, history = FALSE, ...){
 #' @param test_input Vector of length 4 to test inputs to the first 4 questions in the query.
 #' @param ... further parameters. These are currently ignored.
 #' 
-findData.Download <- function(dataNode, test_input = NULL, ...) {
+download_pxweb <- function(dataNode, test_input = NULL, ...) {
   # Assertions
   stopifnot(length(test_input) == 0 | length(test_input) == 3 )
   
