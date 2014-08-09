@@ -13,18 +13,18 @@
 #' # Define variable name
 #' api_parameters() # List options
 #' baseURL <- base_url("sweSCB", "v1", "sv")
-#' topnode <- scbGetMetadata(baseURL = baseURL)
+#' topnode <- get_pxweb_metadata(baseURL = baseURL)
 #' 
 #' # Get metadata for the first element in the top node
-#' nextnode <- scbGetMetadata(topnode$URL[1])
+#' nextnode <- get_pxweb_metadata(topnode$URL[1])
 
-scbGetMetadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TRUE, baseURL = NULL, ...) {
+get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TRUE, baseURL = NULL, ...) {
 
    # Build a URL if no path is supplied
    if (is.null(path)) {
 
       if (is.null(baseURL)) {
-        stop("Error in pxweb::scbGetMetadata: provide the baseURL argument!")
+        stop("Error in pxweb::get_pxweb_metadata: provide the baseURL argument!")
       }
 
       if (is.null(node)) {
