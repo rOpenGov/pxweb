@@ -5,7 +5,7 @@ api_parameters()
 
 # Standard query that asks for options
 baseURL <- base_url("statfi", "v1", "fi")
-#d <- findData(baseURL)
+#d <- interactive_pxweb(baseURL)
 
 # Custom query: 
 dims <- list()

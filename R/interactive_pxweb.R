@@ -1,4 +1,4 @@
-#' @title Find and download data from PX-WEB API
+#' @title Find and download data interactively from PX-WEB API
 #'
 #' @description Wrapper function (for \link{scbGetData} and \link{scbGetMetadata}) to simply find and download data to the current R session. 
 #' 
@@ -14,11 +14,11 @@
 #' \dontrun{
 #' api_parameters() # List options
 #' baseURL <- base_url("sweSCB", "v1", "sv")
-#' d <- findData(baseURL)
+#' d <- interactive_pxweb(baseURL)
 #' }
 #' 
 
-findData <- function(baseURL, history = FALSE, ...){
+interactive_pxweb <- function(baseURL, history = FALSE, ...){
 
   # Get top node
   Node <- scbGetMetadata(baseURL = baseURL) 
@@ -37,8 +37,8 @@ findData <- function(baseURL, history = FALSE, ...){
     message(rep("=", round(getOption("width")*0.9)), "\n",sep="") 
     
     # Print information in node and ask for choice
-    .findData.printNode(Node)
-    inputValue <- .findData.input(type = "node", input = Node)
+    findData.printNode(Node)
+    inputValue <- findData.input(type = "node", input = Node)
 
     if (inputValue == "q") { quit <- TRUE; next() }
 
@@ -100,19 +100,19 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
   dataNode <- dataNode[[1]]
   
   # Ask if the file should be downloaded
-  inputDown <- .findData.input(
+  inputDown <- findData.input(
     type = "yesno",
     input = str_c("Do you want to download '", dataNodeName, "'?", sep=""),
     test_input = testInputDown)
   download <- inputDown == "y"
   
-  inputClean <- .findData.input(
+  inputClean <- findData.input(
     type = "yesno",
     input = "Do you want to clean and melt this file (to wide R format)?",
     test_input = testInputClean)
   cleanBool <- inputClean == "y"
   
-  inputCode <- .findData.input(
+  inputCode <- findData.input(
     type="yesno",
     input="Do you want to print the code for downloading this data?",
     test_input = testInputCode)
@@ -132,7 +132,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
                         text = listElem$valueTexts,
                         stringsAsFactors = FALSE)
     # Ask for input from user
-    varAlt <- .findData.input(
+    varAlt <- findData.input(
       type="alt", 
       input=list(varDF, listElem$text),
       test_input = testInputVarAlt)
@@ -163,7 +163,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
   
   # Print the code to repeat the downloading 
   if (inputCode == "y") {
-    .findData.printCode(dataNode$URL,
+    findData.printCode(dataNode$URL,
                            varListText,
                            clean = cleanBool)
   }
@@ -171,7 +171,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
   if(download){ return(tempData) } else {return(invisible(NULL))}
 }
 
-.findData.inputBaseCat <- function(alt, codedAlt) {
+findData.inputBaseCat <- function(alt, codedAlt) {
   # The function prints the 'alt' rows in 'codedAlt'.
   # The purpose is to print alternatives for each input from the user
   output<-"\n("
@@ -188,7 +188,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
   return(str_join(output,")", sep=""))
 }
 
-.findData.input <- function(type, input = NULL, test_input = character(0), silent = FALSE){
+findData.input <- function(type, input = NULL, test_input = character(0), silent = FALSE){
   # If silent sink output
   if(silent){
     temp <- tempfile()
@@ -254,11 +254,11 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
       } else {
         toprint <- varDFshort
       }
-      .findData.printNode(xscb = toprint, print = TRUE)
+      findData.printNode(xscb = toprint, print = TRUE)
     }
     message(textHead)
     if (type != "text") {
-      message(.findData.inputBaseCat(baseCat, codedAlt), "\n")
+      message(findData.inputBaseCat(baseCat, codedAlt), "\n")
     }
     
     # Get input from the user (if not test run)
@@ -281,7 +281,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
     if (type == "text") inputScan <- inputScanRaw
     
     # Scan for duplicates and do corrections
-    inputScan <- .findData.inputConvert(inputScan)
+    inputScan <- findData.inputConvert(inputScan)
     
     # Test if the input are OK (valid)
     inputOK <- 
@@ -314,7 +314,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
   return(inputScan)
 }
 
-.findData.printNode <- function(xscb, print=TRUE) {
+findData.printNode <- function(xscb, print=TRUE) {
   # Preparations of for printing the node
   xscb$text <- as.character(xscb$text) 
   nSCBidlen <- max(str_length(as.character(xscb$id))) # Get max str length of id
@@ -379,7 +379,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
   }
 }
 
-.findData.printCode <- function(url, varListText, clean) {
+findData.printCode <- function(url, varListText, clean) {
   # Print the code used to download the data
   
   message("To download the same data again, use the following code:\n\n")
@@ -411,7 +411,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
 }
 
 
-.findData.inputConvert <- function(input) {
+findData.inputConvert <- function(input) {
   # Set the output (for input of length == 1)
   output <- input  
 

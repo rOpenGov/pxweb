@@ -61,7 +61,7 @@ Interactive API query (not run):
 
 ```{r standardquery, message=FALSE, eval=FALSE}
 baseURL <- base_url("statfi", "v1", "fi")
-d <- findData(baseURL)
+d <- interactive_pxweb(baseURL)
 ```
 
 
