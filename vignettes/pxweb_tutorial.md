@@ -6,9 +6,9 @@
 PX-WEB API Interface for R
 ===========
 
-This R package provides tools to access PX-WEB APIs.
-
-Your [contributions](http://ropengov.github.com/contact.html) and [bug
+This R package provides tools to access [PX-WEB
+API](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf). Your
+[contributions](http://ropengov.github.com/contact.html) and [bug
 reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
 
@@ -16,10 +16,13 @@ welcome!
 ## Available data sources and tools
 
 [Installation](#installation) (Installation)  
+[Examples](#examples) (Examples)  
 
-[Statistics Finland](#statfi) (Statistics Finland)  
-* [Standard queries](#statfibasic) (An Example)
+[A number of organizations](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/) use to distribute hierarchical data. You can browse the available data sets at:
 
+* [SCB](Source: [SCB](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) (Statistiska centralbyrån) (Sweden)
+* [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) (Statistics Finland)
+* [Other organizations with PX-WEB API](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/)
 
 ## <a name="installation"></a>Installation
 
@@ -44,18 +47,14 @@ We also recommend setting the UTF-8 encoding:
 Sys.setlocale(locale="UTF-8") 
 ```
 
+## <a name="examples"></a>Examples
 
-## <a name="statfi"></a>Statistics Finland
+Some examples on using the R tools to fetch px-web API data.
 
-Source: [Statistics Finland](http://www.stat.fi/)
-
-### <a name="statfibasic"></a>Basic example
-
-List available parameters from the API:
+### Listing available database parameters
 
 
 ```r
-# List available database options
 library(pxweb)
 print(api_parameters())
 ```
@@ -77,12 +76,14 @@ print(api_parameters())
 ## [1] "sv"
 ```
 
+### Fetching data from [Statistics Finland](http://www.stat.fi/org/avoindata/api.html) PX-WEB API:
+
 Interactive API query (not run):
 
 
 ```r
 baseURL <- base_url("statfi", "v1", "fi")
-d <- findData(baseURL)
+d <- interactive_pxweb(baseURL)
 ```
 
 
@@ -139,7 +140,7 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.3.41 knitr_1.6   
+## [1] pxweb_0.3.43 knitr_1.6   
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] data.table_1.9.2 evaluate_0.5.5   formatR_0.10     httr_0.4        

@@ -21,11 +21,11 @@ To use "Item" selection, simply submit a value or vector of values with each dim
 For detailed examples see the installed example files in the \code{examples} folder of \code{path.package("pxweb")} (these are also viewable on the project's GitHub page).
 }
 \examples{
-## CONTINUED FROM EXAMPLES IN scbGetMetadata()
+## CONTINUED FROM EXAMPLES IN get_pxweb_metadata()
 # Get metadata for a variable
 baseURL <- base_url("sweSCB","v1","sv")
 url <- paste(c(baseURL,"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
-metadata <- scbGetMetadata(url)
+metadata <- get_pxweb_metadata(url)
 
 # Get dimensions (names of dimensions are printed in the terminal)
 dims <- get_pxweb_dims(metadata)
@@ -40,6 +40,6 @@ test <- get_pxweb(metadata$URL, dims=list(
 ))
 }
 \seealso{
-\code{\link{scbGetMetadata}}, \code{\link{get_pxweb_dims}}, \code{\link{get_pxweb_levels}}
+\code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_dims}}, \code{\link{get_pxweb_levels}}
 }
 

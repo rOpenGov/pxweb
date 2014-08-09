@@ -14,11 +14,11 @@ get_pxweb_dims(node, verbose = TRUE)
 Deparse and reorder data form the metadata object for pretty output
 }
 \examples{
-## CONTINUED FROM EXAMPLES IN scbGetMetadata()
+## CONTINUED FROM EXAMPLES IN get_pxweb_metadata()
 # Get metadata for a named variable
 baseURL <- base_url("sweSCB", "v1", "sv")
 url <- paste(c(baseURL,"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
-metadata <- scbGetMetadata(url)
+metadata <- get_pxweb_metadata(url)
 
 # Get dimensions (names of dimensions are printed in the terminal)
 dims <- get_pxweb_dims(metadata)
@@ -33,6 +33,6 @@ test <- get_pxweb(metadata$URL, dims=list(
 ))
 }
 \seealso{
-\link{scbGetMetadata}
+\link{get_pxweb_metadata}
 }
 
