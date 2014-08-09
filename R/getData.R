@@ -1,15 +1,15 @@
 #' Get data from a bottom node in PX-WEB API
 #' 
-#' This function fetches actual data (i.e. values) from the PX-WEB API. 
+#' This function fetches actual data (i.e. values)
 #' 
-#' @param url URL to get data from (it is usually sufficient to submit the base URL, supplied via the base_url() function, and the name of the variable).
+#' @param url URL to get data from (usually sufficient to submit the base URL, supplied via the base_url() function, and the name of the variable).
 #' @param dims A list of dimensional parameters to filter data by. Note that values \emph{must} be submitted for all dimensions of the data. If you don't want to filter data, submit an asterisk in quotation marks ("*") instead of values for that dimension.
 #' @param clean Clean and melt the data to R format.
 #' 
 #' @details
 #' There are five documented filter types in the PX-WEB API documentation; "Item", "All", "Top", "Agg" and "Vs". This function currently only supports the "Item" and "All" modes. 
 #' To use "Item" selection, simply submit a value or vector of values with each dimensional parameter. To use "All" selection, submit a wildcard asterisk ("*") instead of a value.
-#' For detailed examples see the installed example files in the \code{examples} folder of \code{path.package("sweSCB")} (these are also viewable on the project's GitHub page).
+#' For detailed examples see the installed example files in the \code{examples} folder of \code{path.package("pxweb")} (these are also viewable on the project's GitHub page).
 #' 
 #' @seealso
 #' \code{\link{scbGetMetadata}}, \code{\link{scbGetDims}}, \code{\link{scbGetLevels}}
@@ -61,7 +61,18 @@ scbGetData <- function(url, dims, clean = FALSE) {
       url = url,
       body = toJSON(list(
          query = queryBody,
+
+	 # FIXME how about providing the format already through
+	 # function arguments.  The user could then select between the
+	 # supported formats (px, csv, json, xlsx, json-stat,
+	 # sdmx). However this might be unnecessarily complex. For
+	 # instance px format does not function properly in R, and
+	 # xlsx access would not have much added value in R
+	 # context. JSON might be more efficient for transfers
+	 # (smaller file size?) than CSV, so we could consider that
+	 # instead.
          response = list(format = "csv")
+
       ))
    ), silent=TRUE)
    

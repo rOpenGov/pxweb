@@ -68,7 +68,7 @@ getContent <- function(response, type = "csv") {
 #' 
 #' ...
 #' 
-#' @param database Source database ('sweSCB' or 'statfi')
+#' @param database API provider ('sweSCB' or 'statfi')
 #' @param version The version of SCB API to use. (Default: \code{v1})
 #' @param lang The language (two letters) to use in the fetched data. (Default: \code{sv})
 #' @param ... Additional parameters. These are currently ignored.
