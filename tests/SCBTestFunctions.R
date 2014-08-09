@@ -9,7 +9,7 @@
 #' 
 testGetSCBnodes <- function(delay_s=1){
   require(data.table)
-  nodes <- as.data.table(scbGetMetadata(path=baseURL()))
+  nodes <- as.data.table(get_pxweb_metadata(path=baseURL()))
   nodes$level <- 1
   nodes$checked <- FALSE
   nodes$error <- FALSE
@@ -19,7 +19,7 @@ testGetSCBnodes <- function(delay_s=1){
     ptm <- proc.time()    
     if(nodes$type[i]=="l" & !nodes$checked[i]){
       cat("Check node:",nodes$id[i],"level",nodes$level[i],"\n")
-      tempDF <- suppressWarnings(try(scbGetMetadata(path=nodes$URL[i]),silent=TRUE))
+      tempDF <- suppressWarnings(try(get_pxweb_metadata(path=nodes$URL[i]),silent=TRUE))
       if(class(tempDF)=="try-error"){
         if(str_detect(tempDF[1],pattern="Error : No internet connection to")){
           diff <- proc.time()-ptm
@@ -61,7 +61,7 @@ testNodeMetadata <- function(nodes){
   i <- 1
   while(i < nrow(bottomNodes)){
     ptm <- proc.time()    
-    tempObj <- suppressWarnings(try(scbGetMetadata(path=bottomNodes$URL[i])))
+    tempObj <- suppressWarnings(try(get_pxweb_metadata(path=bottomNodes$URL[i])))
     if(class(tempObj)=="try-error"){
       bottomNodes$error[i] <- TRUE
       Sys.sleep(2)

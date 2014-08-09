@@ -1,4 +1,5 @@
-#' Functions from sweSCB package that are not called anywhere (yet) but might be useful later
+#' Functions from sweSCB package that are not called anywhere (yet)
+#' but might be useful later
 
 #' Function to deparse an URL into its components.
 #' 
@@ -34,14 +35,14 @@ deparseLevels <- function(place, returnDistance=FALSE, baseURL, ...) {
 checkForLevels <- function(url) {
 	
 	if(missing(url))
-		stop("ERROR: Function sweSCB::checkForLevels(): parameter `url` empty.\n
+		stop("ERROR: Function pxweb::checkForLevels(): parameter `url` empty.\n
 			 Please see traceback() for more information.")
 	
 	if(is.null(url)) {
 		return(FALSE)
 	}
 	
-	nodeData <- scbGetMetadata(url)
+	nodeData <- get_pxweb_metadata(url)
 	if(!("id" %in% names(nodeData))) {
 		return(FALSE)
 	}

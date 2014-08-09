@@ -1,6 +1,6 @@
 #' @title Find and download data interactively from PX-WEB API
 #'
-#' @description Wrapper function (for \link{get_pxweb} and \link{scbGetMetadata}) to simply find and download data to the current R session. 
+#' @description Wrapper function (for \link{get_pxweb} and \link{get_pxweb_metadata}) to simply find and download data to the current R session. 
 #' 
 #' @param baseURL The base URL to use, depending on the web service. 
 #' @param history keep the history when the function is running.
@@ -8,7 +8,7 @@
 #' 
 #' 
 #' @seealso
-#' \code{\link{scbGetMetadata}}, \code{\link{get_pxweb}}
+#' \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb}}
 #' @export
 #' @examples
 #' \dontrun{
@@ -21,7 +21,7 @@
 interactive_pxweb <- function(baseURL, history = FALSE, ...){
 
   # Get top node
-  Node <- scbGetMetadata(baseURL = baseURL) 
+  Node <- get_pxweb_metadata(baseURL = baseURL) 
   
   # List to store nodes
   allNodes <- list()
@@ -56,7 +56,7 @@ interactive_pxweb <- function(baseURL, history = FALSE, ...){
       if (Node$type[as.numeric(inputValue)] == "t") {
         downloadedData<-
           findData.Download(dataNode=
-            list(scbGetMetadata(
+            list(get_pxweb_metadata(
               Node$URL[as.numeric(inputValue)]),
               Node$URL[as.numeric(inputValue)]
             ))
@@ -66,7 +66,7 @@ interactive_pxweb <- function(baseURL, history = FALSE, ...){
       # If not the bottom node, traverse to the next node (and save the current node)
       # to be able to traverse back up in the node tree
       allNodes[[length(allNodes) + 1]] <- Node
-      Node <- scbGetMetadata(Node$URL[as.numeric(inputValue)])
+      Node <- get_pxweb_metadata(Node$URL[as.numeric(inputValue)])
     }
   }
 }
