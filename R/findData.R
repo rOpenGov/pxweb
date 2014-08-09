@@ -33,7 +33,7 @@ findData <- function(baseURL, history = FALSE, ...){
   while(!quit) { 
     # Generate header
     if (!history) { message("\014") }
-    message("CONTENT OF SCB API AT CURRENT (", length(allNodes)+1, ") NODE LEVEL:\n", sep="") 
+    message("CONTENT OF PX-WEB API AT CURRENT (", length(allNodes)+1, ") NODE LEVEL:\n", sep="") 
     message(rep("=", round(getOption("width")*0.9)), "\n",sep="") 
     
     # Print information in node and ask for choice
@@ -77,7 +77,7 @@ findData <- function(baseURL, history = FALSE, ...){
 #' @description Goes through the dataNode and ask user for input for all 
 #' variables and then put this together to a query for \link{scbGetData}.
 #' 
-#' @param dataNode Botton node in SCB node tree.
+#' @param dataNode Botton node in node tree.
 #' @param test_input Vector of length 4 to test inputs to the first 4 questions in the query.
 #' @param ... further parameters. These are currently ignored.
 #' 
@@ -137,7 +137,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
       input=list(varDF, listElem$text),
       test_input = testInputVarAlt)
     
-    # Convert the alternatives from the user to the SCB api format
+    # Convert the alternatives from the user to the PX-WEB API format
     if (varAlt[1] != "*") {
       tempAlt <- character(0)
       tempAlt <- listElem$values[as.numeric(varAlt)]
@@ -145,7 +145,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
       tempAlt <- "*"
     }
     
-    # Save the alternative to use to download data from SCB api
+    # Save the alternative to use to download data 
     varList[[listElem$code]] <- tempAlt    
     varListText <- c(varListText,
                      str_c(listElem$code,
@@ -161,7 +161,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
     message("Done.\n")
   }
   
-  # Print the code to repeat the downloading from SCB
+  # Print the code to repeat the downloading 
   if (inputCode == "y") {
     .findData.printCode(dataNode$URL,
                            varListText,
@@ -382,7 +382,7 @@ findData.Download <- function(dataNode, test_input = NULL, ...) {
 .findData.printCode <- function(url, varListText, clean) {
   # Print the code used to download the data
   
-  message("To download the same data from SCB again, use the following code:\n\n")
+  message("To download the same data again, use the following code:\n\n")
   message("myDataSetName",
       " <- \n  scbGetData(url = \"", 
       url,
