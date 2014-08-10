@@ -103,13 +103,13 @@ citation("pxweb")
 ## Kindly cite the pxweb R package as follows:
 ## 
 ##   (C) Leo Lahti, Mans Magnusson, and Love Hansson (rOpenGov 2014).
-##   pxweb: R tools for PX-WEB API URL:
-##   http://ropengov.github.com/pxweb
+##   pxweb: R tools for PX-WEB API.  URL:
+##   http://github.com/ropengov/pxweb
 ## 
 ## A BibTeX entry for LaTeX users is
 ## 
 ##   @Misc{,
-##     title = {pxweb: R tools for PX-WEB APIs},
+##     title = {pxweb: R tools for PX-WEB API},
 ##     author = {Leo Lahti and Mans Magnusson and Love Hansson},
 ##     year = {2014},
 ##   }
@@ -140,7 +140,7 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.3.43 knitr_1.6   
+## [1] pxweb_0.3.44 knitr_1.6   
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] data.table_1.9.2 evaluate_0.5.5   formatR_0.10     httr_0.4        
