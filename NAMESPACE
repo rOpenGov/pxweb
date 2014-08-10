@@ -3,6 +3,8 @@
 export(api_parameters)
 export(base_url)
 export(checkForLevels)
+export(clean_pxweb)
+export(download_pxweb)
 export(get_pxweb)
 export(get_pxweb_dims)
 export(get_pxweb_levels)

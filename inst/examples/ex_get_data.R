@@ -8,7 +8,7 @@ metadata <- get_pxweb_metadata(varname)
 dims <- get_pxweb_dims(metadata)
 
 # Get data
-test <- get_pxweb_data(metadata$URL, dims=list(
+test <- get_pxweb(metadata$URL, dims=list(
 	Fodelseland = "010",
 	Alder="*",
 	ContentsCode = "*",

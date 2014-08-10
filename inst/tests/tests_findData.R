@@ -1,9 +1,9 @@
-# Testing the functions in the R package rSCB:
+# Testing the functions in the R package pxweb:
 # file: SCBdata.R
 # require(testthat)
 # test_file("inst/tests/tests_finddata.R")
 # load("inst/tests/testFiles.Rdata")
-# test_package("sweSCB")
+# test_package("pxweb")
 
 cat("findData.inputBaseCat : ")
 
@@ -54,12 +54,12 @@ test_that(desc="findData.inputConvert",{
               is_equivalent_to("*"))  
 })
 
-cat("\nfindData.Download : ")
+cat("\ndownload_pxweb : ")
 
-test_that(desc="findData.Download",{
+test_that(desc="download_pxweb",{
   load("testFiles.Rdata")
-  expect_output(findData.Download(dataNode=testNullNode, test_input=c("n", "n", "y")),
-                "To download the same data from SCB again, use the following code:")
+  expect_output(download_pxweb(dataNode = testNullNode, test_input = c("n", "n", "y")),
+                "To download the same data again, use the following code:")
 })
 
 cat("\nfindData.input : ")

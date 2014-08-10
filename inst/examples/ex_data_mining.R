@@ -32,7 +32,7 @@ for(i in 1:length(dims)) {
 }
 
 # Submit a query containing one or several values for each of the named dimensions
-sdata <- get_pxweb_data(datanode$URL, list(ContentsCode = "AM0110D1", Utbildningsgrupp = "*", Kon = "*", Tid = "2012"))
+sdata <- get_pxweb(datanode$URL, list(ContentsCode = "AM0110D1", Utbildningsgrupp = "*", Kon = "*", Tid = "2012"))
 
 # Create a simple bar plot with the resulting data
 ggplot(sdata,aes(x=utbildningsgrupp.SUN.2000,y=Grundlön.2012,fill=kön)) + geom_bar(position=position_dodge()) + coord_flip()

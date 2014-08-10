@@ -4,8 +4,8 @@ library(pxweb)
 api_parameters() 
 
 # Standard query that asks for options
-baseURL <- base_url("statfi", "v1", "fi")
-#d <- interactive_pxweb(baseURL)
+url <- base_url("statfi", "v1", "fi")
+#d <- interactive_pxweb(url)
 
 # Custom query: 
 dims <- list()

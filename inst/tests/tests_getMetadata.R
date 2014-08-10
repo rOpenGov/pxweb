@@ -1,13 +1,13 @@
-# Testing the functions in the R package sweSCB:
-# file: getMetaData.R
+# Testing the functions in the R package pxweb:
+# file: get_pxweb_metadata.R
 # require(testthat)
 # test_file("inst/tests/tests.R")
-# test_package("sweSCB")
+# test_package("pxweb")
 
-cat("getMetaData : ")
+cat("get_pxweb_metadata : ")
 
-test_that(desc="getMetadata works",{
-  testFile<-get_pxweb_metadata()
+test_that(desc="get_pxweb_metadata works",{
+  testFile <- get_pxweb_metadata(baseURL = base_url("sweSCB", "v1", "sv"))
   expect_that(testFile,is_a("data.frame"))
   expect_that(dim(testFile),is_equivalent_to(c(21,4)))
 

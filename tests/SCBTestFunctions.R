@@ -9,7 +9,7 @@
 #' 
 testGetSCBnodes <- function(delay_s=1){
   require(data.table)
-  nodes <- as.data.table(get_pxweb_metadata(path=baseURL()))
+  nodes <- as.data.table(get_pxweb_metadata(path=base_url()))
   nodes$level <- 1
   nodes$checked <- FALSE
   nodes$error <- FALSE

@@ -1,17 +1,17 @@
-# Testing the functions in the R package rSCB:
+# Testing the functions in the R package pxweb:
 # file: SCBdata.R
 # require(testthat)
-# test_file("inst/tests/tests_get_pxweb_data.R")
+# test_file("inst/tests/tests_get_pxweb.R")
 # load("inst/tests/testFiles.Rdata")
 # test_package("pxweb")
 
-cat("get_pxweb_data : ")
+cat("get_pxweb : ")
 
-test_that(desc="get_pxweb_data",{
+test_that(desc="get_pxweb",{
   ptm <- proc.time()
   expect_that({
     testData <- 
-      get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+      get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
                  dims = list(Region = c('00', '01'),
                              Civilstand = c('*'),
                              Alder = c('0', 'tot'),
@@ -29,7 +29,7 @@ test_that(desc="get_pxweb_data",{
   ptm <- proc.time()
   expect_that({
     testData2 <- 
-      get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
+      get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
                  dims = list(ContentsCode = c('PR0101A1'),
                              Tid = c('*')),
                  clean = TRUE)
@@ -43,11 +43,11 @@ test_that(desc="get_pxweb_data",{
 
 cat("\n.clean_pxweb : ")
 
-test_that(desc="get_pxweb_data",{
+test_that(desc="get_pxweb",{
   ptm <- proc.time()
   expect_that({
     cleanTestData <-
-      get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+      get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
                  dims = list(Region = c('00', '01'),
                              Civilstand = c('*'),
                              Alder = c('0', 'tot'),
@@ -75,11 +75,12 @@ test_that(desc="get_pxweb_data",{
 cat("\nExample tests : ")
 
 test_that(desc="Documentation examples",{
-  # Test example in get_pxweb_data()
+  # Test example in get_pxweb()
+
   expect_that({ 
-    url <- paste(c(baseURL(),"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
+    url <- paste(c(base_url("sweSCB", version = "v1", lang = "sv"),"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
   }, not(throws_error()))
-  
+
   expect_that({   
     metadata <- get_pxweb_metadata(url)
   }, not(throws_error()))
@@ -89,9 +90,10 @@ test_that(desc="Documentation examples",{
     dims <- get_pxweb_dims(metadata)
     sink()
   }, not(throws_error()))
+
   
   expect_that({   
-    test <- get_pxweb_data(metadata$URL, dims=list(
+    test <- get_pxweb(metadata$URL, dims=list(
       Myndighet = "C02",
       Kon = "*",
       Heltiddeltid = "*",
@@ -101,13 +103,14 @@ test_that(desc="Documentation examples",{
 })  
 
 
+
 cat("\nDownload tests: ")
 
 test_that(desc="Examples",{
   ptm <- proc.time()
   expect_that({
     cleanTestData <-
-      get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv",
+      get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv",
                  dims = list(SNI2007 = c('*'),
                              ContentsCode = c('*'),
                              Tid = c('*')),
@@ -119,7 +122,7 @@ test_that(desc="Examples",{
   ptm <- proc.time()
   expect_that({ 
     cleanTestData <-
-      get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/MI/MI0814/MarkanvTatortZonArea",
+      get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/MI/MI0814/MarkanvTatortZonArea",
                  dims = list(Region = c('*'),
                              Kmzon = c('*'),
                              ArealStrandzon = c('*'),
@@ -133,7 +136,7 @@ test_that(desc="Examples",{
   ptm <- proc.time()
   expect_that({ 
     cleanTestData <-
-      get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/UF/UF0539/Medb30",
+      get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/UF/UF0539/Medb30",
                  dims = list(Svarsalternativ='*',
                              Kon='*',
                              Studievag='*',
@@ -152,7 +155,7 @@ test_that(desc="Big query",{
   ptm <- proc.time()
    expect_that({
      cleanTestData <-
-      get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+      get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
                  dims = list(Region = c('*'), Civilstand = c('*'), Alder = c('*'), Kon = c('*'), ContentsCode = c('*'),Tid = c('*')),
                  clean = FALSE)
   }, throws_error())

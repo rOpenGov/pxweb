@@ -27,7 +27,6 @@
 #'    Tid = "*"
 #' ))
 #' 
-
 get_pxweb_dims <- function(node, verbose=TRUE) {
 	
 	## Deparse metadata object into elements
@@ -40,8 +39,8 @@ get_pxweb_dims <- function(node, verbose=TRUE) {
 	names <- sapply(vars, function(var,i) { var$code }, 1:ndim)
 	
 	if(verbose) {
-		cat("Title: \n", title, "\n")
-		cat("Names: \n", names, "\n")
+	  message(paste("Title: \n", title, "\n"))
+	  message(paste("Names: \n", names, "\n"))
 	}
 	
 	return(vars)
