@@ -2,13 +2,13 @@
 varname <- "BefProgFoddaMedel10"
 
 # Get metadata
-metadata <- scbGetMetadata(varname)
+metadata <- get_pxweb_metadata(varname)
 
 # Get dimensions (names of dimensions are printed in the terminal)
-dims <- scbGetDims(metadata)
+dims <- get_pxweb_dims(metadata)
 
 # Get data
-test <- scbGetData(metadata$URL, dims=list(
+test <- get_pxweb_data(metadata$URL, dims=list(
 	Fodelseland = "010",
 	Alder="*",
 	ContentsCode = "*",

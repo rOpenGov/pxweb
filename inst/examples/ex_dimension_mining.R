@@ -14,7 +14,7 @@ kSamplesize = 10
 
 # RUN --------------------------------------------------------------------------
 ## INIT: Define the data containers
-hierarchy <- as.data.table(scbGetLevels(descriptions=TRUE))
+hierarchy <- as.data.table(get_pxweb_levels(descriptions=TRUE))
 setnames(
    hierarchy,
    names(hierarchy),
@@ -78,7 +78,7 @@ for (j in 2:kMaxLevels) {
 				if (!nodeId %in% c("BE0001T04BAr")) {
 					
 					# Trim levels (some levels are returned with trailing whitespace)
-					queryLevels <- scbGetLevels(path = nodeURL, descriptions=TRUE, quiet=FALSE)
+					queryLevels <- get_pxweb_levels(path = nodeURL, descriptions=TRUE, quiet=FALSE)
 				} else {
 					queryLevels <- NULL
 				}
