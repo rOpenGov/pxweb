@@ -14,5 +14,5 @@ dims[["Alue"]] <- c("*")
 dims[["Asuntokunnan koko"]] <- c("*")
 dims[["Talotyyppi"]] <- c("S")
 dims[["Vuosi"]] <- c("*")
-myDataSetName <- get_pxweb(url = data.url, dims = dims, clean = TRUE)
+d <- get_pxweb(url = data.url, dims = dims, clean = TRUE)
 

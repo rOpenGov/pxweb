@@ -85,6 +85,7 @@ base_url <- function(database, version = "v1", lang = "en", ...) {
 
   } else if (database == "statfi") {
 
+    #Was: 
     url <- paste(sprintf("http://pxwebapi2.stat.fi/PXWeb/api/%s/%s/StatFin",version,lang))
 
   }
