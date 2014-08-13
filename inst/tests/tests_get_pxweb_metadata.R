@@ -4,6 +4,7 @@
 # test_file("inst/tests/tests.R")
 # test_package("pxweb")
 
+cat("\n\n API tests for Statistics Sweden:\n")
 cat("get_pxweb_metadata : ")
 
 test_that(desc="get_pxweb_metadata works",{

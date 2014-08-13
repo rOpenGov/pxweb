@@ -1,10 +1,11 @@
 # Testing the functions in the R package pxweb:
-# file: SCBdata.R
 # require(testthat)
 # test_file("inst/tests/tests_get_pxweb.R")
 # load("inst/tests/testFiles.Rdata")
 # test_package("pxweb")
 
+
+cat("\n\n API tests for Statistics Sweden:\n")
 cat("get_pxweb : ")
 
 test_that(desc="get_pxweb",{
@@ -150,7 +151,6 @@ test_that(desc="Examples",{
 
 
 cat("\nBig query tests : ")
-
 test_that(desc="Big query",{
   ptm <- proc.time()
    expect_that({
@@ -158,7 +158,7 @@ test_that(desc="Big query",{
       get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
                  dims = list(Region = c('*'), Civilstand = c('*'), Alder = c('*'), Kon = c('*'), ContentsCode = c('*'),Tid = c('*')),
                  clean = FALSE)
-  }, throws_error())
+  }, not(throws_error()))
   diff <- proc.time()-ptm
   Sys.sleep(max(1.1-diff[3],0))
 })  
