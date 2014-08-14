@@ -1,6 +1,6 @@
 # Test suits for the examples in the documentation
 
-cat("\ntests_pxweb_examples : ")
+cat("\ntests_pxweb_examples.R : ")
 
 test_that(desc="Examples in get_pxweb()",{
 

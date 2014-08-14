@@ -65,10 +65,19 @@ api_tests_get_pxweb_data <- list(
                 ContentsCode='*',
                 Tid='*'),
     clean = FALSE,
-    test_dim = c(NA, NA))
+    test_dim = c(NA, NA)),
   
-  # Add Bennys example here
+  # Test swedish letters
+  list( 
+    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/ME/ME0104/ME0104C/ME0104T3",
+    dims = list(Region = c('*'),
+                Partimm = c('M','C','FP','KD','MP','S','V','SD','ÖVRIGA'),
+                ContentsCode = c('ME0104B7'),
+                Tid = c('2010')),
+    clean = TRUE,
+    test_dim = c(2907, 5))
 )
+
 
 test_that(desc="get_pxweb_data()",{  
   for (test in api_tests_get_pxweb_data){
@@ -88,62 +97,4 @@ test_that(desc="get_pxweb_data()",{
     expect_equal(object=class(test_data), "data.frame", info=test$url)     
   }
 })
-
-# 
-# 
-# test_that(desc="get_pxweb_data()",{
-#   expect_that({
-#     test_data <- 
-#       get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
-#                 dims = list(Region = c('00', '01'),
-#                             Civilstand = c('*'),
-#                             Alder = c('0', 'tot'),
-#                             Kon = c('*'),
-#                             ContentsCode = c('BE0101N1'),
-#                             Tid = c('2010', '2011', '2012', '2013')),
-#                 clean = FALSE)
-#   }, not(throws_error()))
-#   diff <- proc.time()-ptm
-#   Sys.sleep(max(1.1-diff[3],0))
-#   
-#   expect_equal(object=dim(testData), c(32,8))
-#   expect_equal(object=class(testData), "data.frame")
-# 
-# })
-# 
-# 
-# test_that(desc="get_pxweb",{
-#   ptm <- proc.time()
-#   expect_that({
-#     testData <- 
-#       get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
-#                 dims = list(Region = c('00', '01'),
-#                              Civilstand = c('*'),
-#                              Alder = c('0', 'tot'),
-#                              Kon = c('*'),
-#                              ContentsCode = c('BE0101N1'),
-#                              Tid = c('2010', '2011', '2012', '2013')),
-#                  clean = FALSE)
-#   }, not(throws_error()))
-#   diff <- proc.time()-ptm
-#   Sys.sleep(max(1.1-diff[3],0))
-#   
-#   expect_equal(object=dim(testData), c(32,8))
-#   expect_equal(object=class(testData), "data.frame")
-#   
-#   ptm <- proc.time()
-#   expect_that({
-#     testData2 <- 
-#       get_pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
-#                  dims = list(ContentsCode = c('PR0101A1'),
-#                              Tid = c('*')),
-#                  clean = TRUE)
-#   }, not(throws_error()))
-#   diff <- proc.time()-ptm
-#   Sys.sleep(max(1.1-diff[3],0))  
-# 
-#   expect_equal(object=class(testData2), "data.frame")
-#   expect_equal(object=ncol(testData2), 3)
-# })
-
 
