@@ -19,9 +19,9 @@ test_that(desc="clean_pxweb",{
     ptm <- proc.time()
     expect_that({
       test_data <-
-        get_pxweb(url = test$url,
-                  dims = test$dims,
-                  clean = TRUE)
+        get_pxweb_data(url = test$url,
+                       dims = test$dims,
+                       clean = TRUE)
     }, not(throws_error()), info = test$url)
     diff <- proc.time()-ptm
     Sys.sleep(max(1.1-diff[3],0))

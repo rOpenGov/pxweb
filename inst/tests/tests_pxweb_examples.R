@@ -20,7 +20,7 @@ test_that(desc="Examples in get_pxweb()",{
   
   
   expect_that({   
-    test <- get_pxweb(metadata$URL, dims=list(
+    test <- get_pxweb_data(metadata$URL, dims=list(
       Myndighet = "C02",
       Kon = "*",
       Heltiddeltid = "*",

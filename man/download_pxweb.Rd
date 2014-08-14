@@ -14,6 +14,6 @@ download_pxweb(dataNode, test_input = NULL, ...)
 }
 \description{
 Goes through the dataNode and ask user for input for all
-variables and then put this together to a query for \link{get_pxweb}.
+variables and then put this together to a query for \link{get_pxweb_data}.
 }
 

@@ -211,7 +211,7 @@ findData.printCode <- function(url, varListText, clean) {
   
   cat("To download the same data again, use the following code:\n\n")
   cat("myDataSetName",
-      " <- \n  get_pxweb(url = \"", 
+      " <- \n  get_pxweb_data(url = \"", 
       url,
       "\",\n",
       rep(" ",13),

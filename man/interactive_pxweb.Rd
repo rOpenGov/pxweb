@@ -13,7 +13,7 @@ interactive_pxweb(baseURL, history = FALSE, ...)
 \item{...}{further parameters. These are currently ignored.}
 }
 \description{
-Wrapper function (for \link{get_pxweb} and \link{get_pxweb_metadata}) to simply find and download data to the current R session.
+Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session.
 }
 \examples{
 \dontrun{
@@ -23,6 +23,6 @@ d <- interactive_pxweb(baseURL)
 }
 }
 \seealso{
-\code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb}}
+\code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_data}}
 }
 

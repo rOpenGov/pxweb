@@ -1,7 +1,7 @@
 #' @title Traverse node for query alternatives and download data.
 #'
 #' @description Goes through the dataNode and ask user for input for all 
-#' variables and then put this together to a query for \link{get_pxweb}.
+#' variables and then put this together to a query for \link{get_pxweb_data}.
 #' 
 #' @param dataNode Botton node in node tree.
 #' @param test_input Vector of length 4 to test inputs to the first 4 questions in the query.
@@ -83,7 +83,7 @@ download_pxweb <- function(dataNode, test_input = NULL, ...) {
   
   if(download){
     message("Downloading... ")
-    tempData <- get_pxweb(dataNode$URL, varList, clean = cleanBool)
+    tempData <- get_pxweb_data(dataNode$URL, varList, clean = cleanBool)
     message("Done.\n")
   }
   
