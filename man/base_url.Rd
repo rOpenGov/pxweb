@@ -10,7 +10,7 @@ base_url(database, version = "v1", lang = "en", ...)
 
 \item{version}{The version of SCB API to use. (Default: \code{v1})}
 
-\item{lang}{The language (two letters) to use in the fetched data. (Default: \code{sv})}
+\item{lang}{The language (two letters) to use in the fetched data. (Default: \code{en})}
 
 \item{...}{Additional parameters. These are currently ignored.}
 }

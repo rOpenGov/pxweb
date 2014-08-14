@@ -3,7 +3,7 @@
 \alias{api_parameters}
 \title{Return options for database, version and language choices}
 \usage{
-api_parameters(...)
+api_parameters(url = NULL)
 }
 \arguments{
 \item{...}{Additional parameters; currently ignored}

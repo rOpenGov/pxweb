@@ -1,12 +1,17 @@
 {
-  "statfi": {
+  "pxwebapi2.stat.fi": {
+      "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]/StatFin",
       "version": ["v1"], 
       "lang": ["fi"] 
             },
 
-  "sweSCB": { 
+  "api.scb.se": { 
+      "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]/ssd",
       "version": ["v1"], 
-      "lang": ["sv"] 
+      "lang": ["sv", "en"],
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 100000
         }
 }
 
