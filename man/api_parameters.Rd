@@ -6,7 +6,7 @@
 api_parameters(url = NULL)
 }
 \arguments{
-\item{...}{Additional parameters; currently ignored}
+\item{url}{Get parameters for the api with this url (NULL = get all API configs)}
 }
 \description{
 ...
