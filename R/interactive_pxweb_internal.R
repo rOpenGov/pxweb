@@ -74,7 +74,7 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
   
   while(!inputOK) {
     # Print title, alternatives and so forth
-    message(textTitle)
+    cat(textTitle)
     if (type == "alt") {
       if (inputScan == "a") {
         toprint <- varDF
@@ -83,9 +83,9 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
       }
       findData.printNode(xscb = toprint, print = TRUE)
     }
-    message(textHead)
+    cat(textHead)
     if (type != "text") {
-      message(findData.inputBaseCat(baseCat, codedAlt), "\n")
+      cat(findData.inputBaseCat(baseCat, codedAlt), "\n")
     }
     
     # Get input from the user (if not test run)
@@ -120,15 +120,15 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     if(type == "text") {
       if(make.names(inputScan) != inputScan) {
         inputOK <- FALSE
-        message("This is not a valid name of a data.frame object in R.\n")
-        message("You could change the name to '", 
+        cat("This is not a valid name of a data.frame object in R.\n")
+        cat("You could change the name to '", 
             make.names(inputScan),
             "'.\n", sep="")
       }
     }
         
     if(!inputOK){
-      message("Sorry, no such entry allowed. Please try again!\n\n")
+      cat("Sorry, no such entry allowed. Please try again!\n\n")
     }
   } 
 
@@ -200,7 +200,7 @@ findData.printNode <- function(xscb, print=TRUE) {
   }
   # Print node text or save it as a character value
   if (print) {
-    message(finalText)
+    cat(finalText)
   } else {
     return(finalText)
   }
@@ -209,8 +209,8 @@ findData.printNode <- function(xscb, print=TRUE) {
 findData.printCode <- function(url, varListText, clean) {
   # Print the code used to download the data
   
-  message("To download the same data again, use the following code:\n\n")
-  message("myDataSetName",
+  cat("To download the same data again, use the following code:\n\n")
+  cat("myDataSetName",
       " <- \n  get_pxweb(url = \"", 
       url,
       "\",\n",
@@ -220,21 +220,21 @@ findData.printCode <- function(url, varListText, clean) {
   # Print the chosen alternatives for each data dimension
   for (i in 1:length(varListText)){
     if(i != 1){
-      message(rep(" ", 25), sep="")
+      cat(rep(" ", 25), sep="")
     }
-    message(varListText[i], sep="")
+    cat(varListText[i], sep="")
     if (i != length(varListText)) {
-      message(",\n",sep="")
+      cat(",\n",sep="")
     }
   }
 
-  message("),\n")
+  cat("),\n")
   
   # Print if the data should be cleaned or not
-  message(rep(" ",13), 
+  cat(rep(" ",13), 
       "clean = ",
       as.character(clean), sep="")
-  message(")\n\n")
+  cat(")\n\n")
 }
 
 

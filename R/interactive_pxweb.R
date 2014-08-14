@@ -18,6 +18,8 @@
 #' }
 #' 
 
+
+
 interactive_pxweb <- function(baseURL, history = FALSE, ...){
 
   # Get top node
@@ -32,9 +34,9 @@ interactive_pxweb <- function(baseURL, history = FALSE, ...){
   # The main program
   while(!quit) { 
     # Generate header
-    if (!history) { message("\014") }
-    message("CONTENT OF PX-WEB API AT CURRENT (", length(allNodes)+1, ") NODE LEVEL:\n", sep="") 
-    message(rep("=", round(getOption("width")*0.9)), "\n",sep="") 
+    if (!history) { cat("\014") }
+    cat("Content of '", str_split(baseURL,pattern="/")[[1]][3], "' at current (", length(allNodes)+1, ") node level:\n", sep="") 
+    cat(rep("=", round(getOption("width")*0.9)), "\n",sep="") 
     
     # Print information in node and ask for choice
     findData.printNode(Node)
