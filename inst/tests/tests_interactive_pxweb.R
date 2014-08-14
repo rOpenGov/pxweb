@@ -1,11 +1,6 @@
-# Testing the functions in the R package pxweb:
-# file: SCBdata.R
-# require(testthat)
-# test_file("inst/tests/tests_finddata.R")
-# load("inst/tests/testFiles.Rdata")
-# test_package("pxweb")
+# Test suite interactive_pxweb()
 
-cat("findData.inputBaseCat : ")
+cat("\ninteractive_pxweb() :")
 
 test_that(desc="findData.inputBaseCat",{
   load("testFiles.Rdata")
@@ -16,8 +11,6 @@ test_that(desc="findData.inputBaseCat",{
 
 })
 
-cat("\nfindData.printNode : ")
-
 test_that(desc="findData.printNode",{
   xscb <-data.frame(id=c("01","02","03"),
                     text=c("Värde 1","Värde 2", "Värde 3"))
@@ -27,8 +20,6 @@ test_that(desc="findData.printNode",{
   expect_that(findData.printNode(xscb, print=FALSE),is_a("character"))
   expect_match(findData.printNode(xscb, print=FALSE),"Värde 1")
 })
-
-cat("\nfindData.printCode : ")
 
 test_that(desc="findData.printCode",{
   varListText <- c("first","second","last") 
@@ -41,8 +32,6 @@ test_that(desc="findData.printCode",{
                 "list\\(first")
 })
 
-cat("\nfindData.inputConvert : ")
-
 test_that(desc="findData.inputConvert",{
   expect_that(findData.inputConvert(c("2","2:3","3:7","6")), 
               is_equivalent_to(c("2","3","4","5","6","7")))
@@ -54,15 +43,11 @@ test_that(desc="findData.inputConvert",{
               is_equivalent_to("*"))  
 })
 
-cat("\ndownload_pxweb : ")
-
 test_that(desc="download_pxweb",{
   load("testFiles.Rdata")
   expect_output(download_pxweb(dataNode = testNullNode, test_input = c("n", "n", "y")),
                 "To download the same data again, use the following code:")
 })
-
-cat("\nfindData.input : ")
 
 test_that(desc="findData.input",{
   load("testFiles.Rdata")
@@ -83,7 +68,4 @@ test_that(desc="findData.input",{
               is_equivalent_to(c("1","2","3","10","11","12")))
 
 })
-
-cat("\n")
-
 

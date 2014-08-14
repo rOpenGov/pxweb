@@ -1,9 +1,9 @@
-# Test the examples in the documentation
+# Test suits for the examples in the documentation
 
-cat("\ntests_pxweb_examples.R : ")
-test_that(desc="Documentation examples",{
-  # Test example in get_pxweb()
-  
+cat("\ntests_pxweb_examples : ")
+
+test_that(desc="Examples in get_pxweb()",{
+
   expect_that({ 
     url <- paste(c(base_url("sweSCB", version = "v1", lang = "sv"),"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
   }, not(throws_error()))

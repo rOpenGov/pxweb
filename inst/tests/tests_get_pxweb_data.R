@@ -1,4 +1,4 @@
-# Test suite get_pxweb_data()
+# Test suite for get_pxweb_data()
 
 # Below is the tests that should be conducted as a list. 
 # Each listelement is a named object that contains url and dims 
@@ -7,7 +7,7 @@
 # the size of the data.frame is test_dim, if missing values the dimension is not tested.
 # in test_dim. If NA in test_dim, the dimension is ignored.
 
-cat("\nget_pxweb_data : ")
+cat("\ntests_get_pxweb_data.R : ")
 
 api_tests_get_pxweb_data <- list(
   list(
@@ -16,6 +16,17 @@ api_tests_get_pxweb_data <- list(
                 Tid = c('*')),
     clean = TRUE,
     test_dim = c(NA, 3)),
+  
+  list(
+    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+    dims = list(Region = c('00', '01'),
+                Civilstand = c('*'),
+                Alder = c('0', 'tot'),
+                Kon = c('*'),
+                ContentsCode = c('BE0101N1'),
+                Tid = c('2010', '2011', '2012', '2013')),
+    clean = TRUE,
+    test_dim = c(128, 7)),
   
   list(
     url="http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
@@ -59,8 +70,6 @@ api_tests_get_pxweb_data <- list(
   # Add Bennys example here
 )
 
-# test <- api_tests_get_pxweb_data[[1]]
-
 test_that(desc="get_pxweb_data()",{  
   for (test in api_tests_get_pxweb_data){
     ptm <- proc.time()
@@ -74,9 +83,9 @@ test_that(desc="get_pxweb_data()",{
     diff <- proc.time()-ptm
     Sys.sleep(max(1.1-diff[3],0))
     
-    if(!is.na(test$test_dim[1])) expect_equal(object=nrow(test_data), test$test_dim[1])
-    if(!is.na(test$test_dim[2])) expect_equal(object=ncol(test_data), test$test_dim[2])
-    expect_equal(object=class(test_data), "data.frame")     
+    if(!is.na(test$test_dim[1])) expect_equal(object=nrow(test_data), test$test_dim[1], info=test$url)
+    if(!is.na(test$test_dim[2])) expect_equal(object=ncol(test_data), test$test_dim[2], info=test$url)
+    expect_equal(object=class(test_data), "data.frame", info=test$url)     
   }
 })
 
