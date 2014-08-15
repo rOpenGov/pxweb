@@ -41,6 +41,12 @@ test_that(desc="findData.inputConvert",{
               is_equivalent_to(c("2","5","10","11")))
   expect_that(findData.inputConvert("*"), 
               is_equivalent_to("*"))  
+  expect_that(findData.inputConvert(":3"), 
+              is_equivalent_to(as.character(1:3)))  
+  expect_that(findData.inputConvert(":3, 5"), 
+              is_equivalent_to(as.character(c(1:3,5))))
+  expect_that(findData.inputConvert("1, 3, 5:", max=7), 
+              is_equivalent_to(as.character(c(1,3,5:7))))
 })
 
 test_that(desc="download_pxweb",{
