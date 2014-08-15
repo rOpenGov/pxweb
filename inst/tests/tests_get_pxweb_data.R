@@ -46,6 +46,17 @@ api_tests_get_pxweb_data <- list(
                 Tid = c('*')),
     clean = FALSE,
     test_dim = c(NA, NA)),
+  
+  list(
+    url = "http://api.scb.se/OV0104/v1/doris/en/ssd/UF/UF0536/Fullfoljt",
+    dims = list(Studresultat = c('3'),
+                Kon = c('1'),
+                UtlBakgrund = c('1'),
+                Program = c('31'),
+                ContentsCode = c('UF0536A1'),
+                Tid = c('2007')),
+    clean = FALSE,
+    test_dim = c(NA, NA)),
 
   list(
     url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/MI/MI0814/MarkanvTatortZonArea",

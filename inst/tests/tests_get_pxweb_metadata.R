@@ -4,7 +4,9 @@ cat("\ntests_get_pxweb_metadata.R : ")
 
 api_tests_get_pxweb_metadata_baseURL <- list(
   list(baseURL = base_url("sweSCB", "v1", "sv"),
-       test_dims = c(21, 4))
+       test_dims = c(21, 4)),
+  list(baseURL = base_url("sweSCB", "v1", "en"),
+       test_dims = c(16, 4))
   )
 
 test_that(desc="baseURL",{
@@ -27,7 +29,9 @@ api_tests_get_pxweb_metadata_path <- list(
   "http://api.scb.se/OV0104/v1/doris/sv/ssd/NV/NV0119/IVPKNLonAr",
   "http://api.scb.se/OV0104/v1/doris/sv/ssd/HA/HA0201/HA0201B/ExpTotalKNMan",
   "http://api.scb.se/OV0104/v1/doris/sv/ssd/HA/HA0201/HA0201B/ExpTotalKNAr",
-  "http://api.scb.se/OV0104/v1/doris/sv/ssd/HA/HA0201/HA0201B/ImpTotalKNMan"
+  "http://api.scb.se/OV0104/v1/doris/sv/ssd/HA/HA0201/HA0201B/ImpTotalKNMan",
+  "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014",
+  "http://api.scb.se/OV0104/v1/doris/en/ssd/UF/UF0536/Fullfoljt"
 )
 
 test_that(desc="baseURL",{
