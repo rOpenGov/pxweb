@@ -82,9 +82,9 @@ download_pxweb <- function(dataNode, test_input = NULL, ...) {
   }
   
   if(download){
-    message("Downloading... ")
+    cat("Downloading... ")
     tempData <- get_pxweb_data(dataNode$URL, varList, clean = cleanBool)
-    message("Done.\n")
+    cat("Done.\n")
   }
   
   # Print the code to repeat the downloading 
