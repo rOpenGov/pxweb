@@ -19,3 +19,18 @@ test_that(desc="api_parameters()",{
   }
 })
 
+
+test_that(desc="api_timer()",{  
+  
+  expect_that({
+    res <-
+      system.time(
+        for(i in 1:4){
+          api_timer(api_url="http://foo.bar/")      
+        })}, 
+    not(throws_error()))
+  
+  expect_more_than(object=res[3],expected=4)
+})
+
+
