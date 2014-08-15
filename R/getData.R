@@ -57,6 +57,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
    }
    
    # Get data
+   api_timer(url, calls=2)
    response <- try(POST(
       url = url,
       body = toJSON(list(

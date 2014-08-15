@@ -20,17 +20,20 @@ test_that(desc="api_parameters()",{
 })
 
 
+api_file <- paste(tempdir(), "api_time_stamp.Rdata", sep="/")
+if(file.exists(api_file)) file.remove(api_file)
+
 test_that(desc="api_timer()",{  
   
   expect_that({
     res <-
       system.time(
         for(i in 1:4){
-          api_timer(api_url="http://foo.bar/")      
+          pxweb:::api_timer(api_url="http://foo.bar/")     
         })}, 
     not(throws_error()))
   
   expect_more_than(object=res[3],expected=4)
 })
 
-
+if(file.exists(api_file)) file.remove(api_file)
