@@ -92,7 +92,6 @@ api_tests_get_pxweb_data <- list(
 
 test_that(desc="get_pxweb_data()",{  
   for (test in api_tests_get_pxweb_data){
-    ptm <- proc.time()
     expect_that({
       test_data <- 
         get_pxweb_data(url = test$url,
@@ -100,8 +99,6 @@ test_that(desc="get_pxweb_data()",{
                        clean = test$clean)}, 
       not(throws_error()),
       info = test$url)
-    diff <- proc.time()-ptm
-    Sys.sleep(max(1.1-diff[3],0))
     
     if(!is.na(test$test_dim[1])) expect_equal(object=nrow(test_data), test$test_dim[1], info=test$url)
     if(!is.na(test$test_dim[2])) expect_equal(object=ncol(test_data), test$test_dim[2], info=test$url)

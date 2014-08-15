@@ -1,4 +1,4 @@
-# Test suite for big queries
+# Test suite for utils functions
 
 cat("\ntests_utils.R : ")
 

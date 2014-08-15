@@ -15,7 +15,6 @@ api_tests_big_query <- list(
 
 test_that(desc="big queries",{  
   for (test in api_tests_big_query){
-    ptm <- proc.time()
     expect_that({
       test_data <- 
         get_pxweb(url = test$url,
@@ -23,8 +22,6 @@ test_that(desc="big queries",{
                   clean = FALSE)}, 
       not(throws_error()),
       info = test$url)
-      diff <- proc.time()-ptm
-      Sys.sleep(max(1.1-diff[3],0))
   }
 })
 

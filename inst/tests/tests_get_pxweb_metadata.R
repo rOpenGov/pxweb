@@ -11,12 +11,9 @@ api_tests_get_pxweb_metadata_baseURL <- list(
 
 test_that(desc="baseURL",{
   for (test in api_tests_get_pxweb_metadata_baseURL){
-    ptm <- proc.time()
     expect_that({
       test_file <- get_pxweb_metadata(baseURL = test$baseURL)
     }, not(throws_error()))
-    diff <- proc.time()-ptm
-    Sys.sleep(max(1.1-diff[3],0))
     
     expect_that(test_file, is_a("data.frame"), info = test$baseURL)
     expect_that(dim(test_file), is_equivalent_to(test$test_dims))
@@ -36,12 +33,9 @@ api_tests_get_pxweb_metadata_path <- list(
 
 test_that(desc="baseURL",{
   for (test in api_tests_get_pxweb_metadata_path){
-    ptm <- proc.time()
     expect_that({
       test_file <- get_pxweb_metadata(path = test)
     }, not(throws_error()))
-    diff <- proc.time()-ptm
-    Sys.sleep(max(1.1-diff[3],0))
     
     expect_is(object = test_file$variables$variables[[1]], "list")
   }

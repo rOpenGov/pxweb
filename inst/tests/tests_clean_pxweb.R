@@ -16,15 +16,12 @@ api_tests_clean_pxweb <- list(
 
 test_that(desc="clean_pxweb",{
   for (test in api_tests_clean_pxweb){
-    ptm <- proc.time()
     expect_that({
       test_data <-
         get_pxweb_data(url = test$url,
                        dims = test$dims,
                        clean = TRUE)
     }, not(throws_error()), info = test$url)
-    diff <- proc.time()-ptm
-    Sys.sleep(max(1.1-diff[3],0))
 
     expect_is(object=test_data[,ncol(test_data)], "numeric", info = test$url)
     
