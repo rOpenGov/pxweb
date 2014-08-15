@@ -105,7 +105,7 @@ base_url <- function(database, version = "v1", lang = "en", ...) {
 api_parameters <- function(url=NULL) {
   api.file <- system.file("extdata/api.json", package = "pxweb")
   api.list <- RJSONIO::fromJSON(api.file)
-  if(!is.null(url)) api.list[str_split(url, "/")[[1]][3]]
+  if(!is.null(url)) api.list <- api.list[str_split(url, "/")[[1]][3]][[1]]
   return(api.list)
 }
  
