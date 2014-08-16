@@ -36,11 +36,11 @@ get_pxweb_dims <- function(node, verbose=TRUE) {
 	vars <- node$variables$variables
 	ndim <- length(vars)
 	
-	names <- sapply(vars, function(var,i) { var$code }, 1:ndim)
+	names(vars) <- sapply(vars, function(var,i) { var$code }, 1:ndim)
 	
 	if(verbose) {
 	  message(paste("Title: \n", title, "\n"))
-	  message(paste("Names: \n", names, "\n"))
+	  message(paste("Names: \n", names(vars), "\n"))
 	}
 	
 	return(vars)
