@@ -16,11 +16,12 @@
 #' 
 #' @export
 #' @examples
+#' \dontrun{
 #' test_data <- 
 #'   get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet", 
 #'                  dims = list(ContentsCode = c('PR0101A1'), Tid = c('*')),
 #'                  clean = FALSE)
-#'                  
+#' }
 
 get_pxweb_data <- function(url, dims, clean = FALSE) {
 

@@ -12,8 +12,8 @@ clean_pxweb(data2clean, head, url, content_node = NULL)
 
 \item{url}{url to the bottom nod (to get meta data)}
 
-\item{content_node}{node with content downloaded with \link{get_pxweb_metadata()}.
-If NULL, meta data is downloaded with \link{get_pxweb_metadata()}.}
+\item{content_node}{node with content downloaded with \link{get_pxweb_metadata}.
+If NULL, meta data is downloaded with \link{get_pxweb_metadata}.}
 }
 \value{
 data frame melted and in R (numeric) format

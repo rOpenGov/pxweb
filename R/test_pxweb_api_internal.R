@@ -69,8 +69,8 @@ test_pxweb_api_get_node_metadata <- function(nodes){
 
 #' Download data for each bottom node in the pxweb api
 #' 
-#' @param nodes Nodes downloaded with \link{test_pxweb_api_get_nodes()}
-#' @param nodesList Node metadata downloaded with \link{test_pxweb_api_get_node_metadata()}
+#' @param nodes Nodes downloaded with \link{test_pxweb_api_get_nodes}
+#' @param nodesList Node metadata downloaded with \link{test_pxweb_api_get_node_metadata}
 #' @param download_all Should all data be downloaded (TRUE) or sample (FALSE)
 #' @param seed Seed to use if download_all is FALSE and a sample is downloaded
 #' 

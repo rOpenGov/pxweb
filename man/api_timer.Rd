@@ -15,8 +15,4 @@ api_timer(api_url, calls = 1)
 \description{
 Use this before function that uses api calls.
 }
-\examples{
-url <- base_url("sweSCB", "v1", "sv")
-api_timer(url)
-}
 

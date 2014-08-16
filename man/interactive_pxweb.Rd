@@ -16,9 +16,9 @@ interactive_pxweb(baseURL, history = FALSE, ...)
 Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session.
 }
 \examples{
-\dontrun{
 api_parameters() # List options
 baseURL <- base_url("sweSCB", "v1", "sv")
+\dontrun{
 d <- interactive_pxweb(baseURL)
 }
 }

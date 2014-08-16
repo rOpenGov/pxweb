@@ -7,9 +7,9 @@ test_pxweb_api_get_data(nodes, nodesList, download_all = FALSE,
   seed = as.integer(Sys.time()))
 }
 \arguments{
-\item{nodes}{Nodes downloaded with \link{test_pxweb_api_get_nodes()}}
+\item{nodes}{Nodes downloaded with \link{test_pxweb_api_get_nodes}}
 
-\item{nodesList}{Node metadata downloaded with \link{test_pxweb_api_get_node_metadata()}}
+\item{nodesList}{Node metadata downloaded with \link{test_pxweb_api_get_node_metadata}}
 
 \item{download_all}{Should all data be downloaded (TRUE) or sample (FALSE)}
 

@@ -20,14 +20,18 @@ If '*' is used it will get the numberof values for this dimension using a
 get_pxweb_metadata call.
 }
 \examples{
-url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-dims = list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'),
+url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'),
             ContentsCode = c('*'), Tid = c('*'))
+\dontrun{
 batches <- create_batch_list(url, dims)
+}
 
-url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
-dims = list(ContentsCode = c('*'),
+url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet"
+dims <- list(ContentsCode = c('*'),
             Tid = c('*'))
+\dontrun{
 batches <- create_batch_list(url, dims)
+}
 }
 

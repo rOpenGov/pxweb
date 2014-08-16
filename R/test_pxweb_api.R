@@ -16,8 +16,9 @@
 #' \code{download_error} : Whether there were errors encountered during download
 #' 
 #' @examples
+#' \dontrun{
 #' test_data <- test_pxweb_api(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK")
-#' 
+#' }
 #' @export
 #'  
 test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time())){
@@ -29,6 +30,6 @@ test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time()))
   res <- test_pxweb_api_get_data(nodes=nodes, seed=seed,
                                  nodesList=nodes_list, 
                                  download_all=download_all)
-  res <- rbind.fill(nodes[nodes$type == "l", ], res)
+  res <- plyr::rbind.fill(nodes[nodes$type == "l", ], res)
   return(res)
 }

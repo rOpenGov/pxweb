@@ -76,9 +76,6 @@ getContent <- function(response, type = "csv") {
 #' @param api_url The url to be passed to \link{api_parameters} to get api_configs.
 #' @param calls The number of calls that the functions should count per function call. Default is one.
 #' 
-#' @examples 
-#' url <- base_url("sweSCB", "v1", "sv")
-#' api_timer(url)
 
 api_timer <- function(api_url, calls = 1){
   
@@ -113,16 +110,19 @@ api_timer <- function(api_url, calls = 1){
 #' @param dims The dimension object to use for downloading
 #' 
 #' @examples
-#' url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-#' dims = list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
+#' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+#' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
 #'             ContentsCode = c('*'), Tid = c('*'))
+#' \dontrun{
 #' batches <- create_batch_list(url, dims)
+#' }
 #' 
-#' url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
-#' dims = list(ContentsCode = c('*'),
+#' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet"
+#' dims <- list(ContentsCode = c('*'),
 #'             Tid = c('*'))
+#' \dontrun{
 #' batches <- create_batch_list(url, dims)
-#' 
+#' }
 create_batch_list <- function(url, dims){
   
   starred_dim <- logical(length(dims))

@@ -5,8 +5,8 @@
 #' @param data2clean Data to clean.
 #' @param head Full variable names as character vector
 #' @param url url to the bottom nod (to get meta data)
-#' @param content_node node with content downloaded with \link{get_pxweb_metadata()}. 
-#' If NULL, meta data is downloaded with \link{get_pxweb_metadata()}.
+#' @param content_node node with content downloaded with \link{get_pxweb_metadata}. 
+#' If NULL, meta data is downloaded with \link{get_pxweb_metadata}.
 #' 
 #' @return data frame melted and in R (numeric) format
 #' 

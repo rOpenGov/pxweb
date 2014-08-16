@@ -11,9 +11,9 @@
 #' \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_data}}
 #' @export
 #' @examples
-#' \dontrun{
 #' api_parameters() # List options
 #' baseURL <- base_url("sweSCB", "v1", "sv")
+#' \dontrun{
 #' d <- interactive_pxweb(baseURL)
 #' }
 #' 

@@ -14,11 +14,13 @@ get_pxweb_dims(node, verbose = TRUE)
 Deparse and reorder data form the metadata object for pretty output
 }
 \examples{
+\dontrun{
 # Download meta data
 bottom_node <- get_pxweb_metadata("http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv")
 
 # Get dimensions (names of dimensions are printed in the terminal)
 dims <- get_pxweb_dims(bottom_node)
+}
 }
 \seealso{
 \link{get_pxweb_metadata}
