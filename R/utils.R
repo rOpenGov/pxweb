@@ -147,4 +147,73 @@ api_timer <- function(api_url, calls = 1){
 }
 
 
+
+
+
+#' The function takes an url and a dims object and calculates if this needs to
+#' be downloaded in batches due to download limit restrictions in the pxweb api.
+#' If '*' is used it will get the numberof values for this dimension using a 
+#' get_pxweb_metadata call.
+#' 
+#' @param url The url to download from.
+#' @param dims The dimension object to use for downloading
+#' 
+#' @examples
+#' url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+#' dims = list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
+#'             ContentsCode = c('*'), Tid = c('*'))
+#' batches <- create_batch_list(url, dims)
+#' 
+#' url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
+#' dims = list(ContentsCode = c('*'),
+#'             Tid = c('*'))
+#' batches <- create_batch_list(url, dims)
+#' 
+create_batch_list <- function(url, dims){
+  
+  starred_dim <- logical(length(dims))
+  dim_length <- integer(length(dims))
+  names(dim_length) <- names(starred_dim) <- names(dims)
+  for(d in seq_along(dims)){ # d <- 3
+    if(length(dims[[d]]) == 1 && str_detect(string=dims[[d]], "\\*")) starred_dim[d] <- TRUE
+    dim_length[d] <- length(dims[[d]])
+  }
+  if(any(starred_dim)) {
+    node <- get_pxweb_metadata(url)
+    alldims <- suppressMessages(get_pxweb_dims(node))
+    for(d in which(starred_dim)){
+      dim_length[d] <- length(alldims[[names(dim_length)[d]]]$values)
+    }
+  } else {
+    node <- NULL
+  }
+
+  # Get api parameters
+  api_param <- api_parameters(url)
+  
+  # Calculate current chunk size
+  chunk_size <- prod(dim_length)
+  if(chunk_size > api_param$max_values_to_download){
+    # Calculate bathces and bathc sizes
+    arg_max <- which.max(dim_length)
+    batch_size <- floor(dim_length[arg_max] / chunk_size * api_param$max_values_to_download)
+    if(batch_size == 0) stop("Too large query! This should not happen, please send the api call to the maintainer.", call.=FALSE)
+    no_batch <- dim_length[arg_max] %/% batch_size
+    if(dim_length[arg_max] %% batch_size != 0) no_batch + 1    
+    message("This is a large query. The data will be downloaded in ",no_batch," batches.")
+    # Create list with calls
+    batch_list <- list(url=url, dims=list(), content_node=node)
+    for (b in 1:no_batch){ # b <- 1
+      batch_values_index <- ((b-1)*batch_size+1):min((b*batch_size), dim_length[arg_max])
+      batch_values <- alldims[[names(dim_length)[arg_max]]]$values[batch_values_index]
+      batch_list$dims[[b]] <- dims
+      batch_list$dims[[b]][[names(dim_length[arg_max])]] <- batch_values
+    }
+  } else {
+    batch_list <- list(url=url, dims=list(dims=dims), content_node=node)
+  }
+  
+  return(batch_list)
+  
+}
  

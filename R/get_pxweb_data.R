@@ -16,84 +16,97 @@
 #' 
 #' @export
 #' @examples
-#' ## CONTINUED FROM EXAMPLES IN get_pxweb_metadata()
-#' # Get metadata for a variable
-#' baseURL <- base_url("sweSCB","v1","sv")
-#' url <- paste(c(baseURL,"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
-#' metadata <- get_pxweb_metadata(url)
-#' 
-#' # Get dimensions (names of dimensions are printed in the terminal)
-#' dims <- get_pxweb_dims(metadata)
-#' 
-#' # Get data
-#' test <- get_pxweb_data(metadata$URL, dims=list(
-#'    Myndighet = "C02",
-#'    Kon = "*",
-#'    Heltiddeltid = "*",
-#'    ContentsCode = "*",
-#'    Tid = "*"
-#' ))
-#' 
+#' test_data <- 
+#'   get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet", 
+#'                  dims = list(ContentsCode = c('PR0101A1'), Tid = c('*')),
+#'                  clean = FALSE)
+#'                  
 
 get_pxweb_data <- function(url, dims, clean = FALSE) {
 
    dimNames <- names(dims)
+   batches <- create_batch_list(url, dims)
+   content_node <- batches$content_node
+   b_list <- list()
    
-   queryBody <- list()
-   
-   # Define the query list
-   for (i in 1:length(dims)) {
-      if (length(dims[[dimNames[i]]]) == 1) {
-         filter = ifelse(dims[[dimNames[i]]] == "*", "all", "item")
-      } else {
-         filter = "item"
-      }
-      
-      queryBody[[i]] <- list(
-         code = dimNames[i],
-         selection = list(filter = filter,
-                          values = as.list(dims[[dimNames[i]]])
-         ))
-   }
-   
-   # Get data
-   api_timer(url, calls=2)
-   response <- try(POST(
-      url = url,
-      body = toJSON(list(
-         query = queryBody,
-	 # NOTE: JSON might be more efficient for downloads (smaller file size)
-         response = list(format = "csv")
-
-      ))
-   ), silent=TRUE)
-   
-   # Print error message
-   if (class(response)=="try-error"){
-      stop(str_join("No internet connection to ",url),
-           call.=FALSE)
-   }
-   if(httr::http_status(response)$category != "success") {
-     stop(httr::http_status(response)$message,
-          call.=FALSE)
-   }
-   
-   # Parse data into human-readable form
-   # (Due to a weird encoding issue on Windows this generates a warning
-   # about faulty encoding. Hence the suppressMessages() encapsulation...)
-   suppressMessages(a <- content(response, as="text"))
-   if(str_sub(a,1,1)==",") a <- str_sub(a,2,nchar(a)) # Correcting when the first element is , (few variables)
-   b <- read.table(textConnection(a), sep=',', header=TRUE, stringsAsFactors=FALSE)
-   head <- str_split(string=str_sub(a, start=1, end=str_locate(a,"\n")[[1]]),"\",\"")[[1]]
-   head <- str_replace_all(string=head,pattern="\r|\n|\"","")
-   rm(a)
+   for (batch_no in 1:length(batches$dims)){
+     queryBody <- list()
      
-   # Clean and melt data 
-   if (clean) {
-     b <- clean_pxweb(data2clean=b, head=head, url=url)
-   }
-   
-   return(b)
+     # Define the query list
+     for (i in 1:length(batches$dims[[batch_no]])) {
+        if (length(batches$dims[[batch_no]] [[dimNames[i]]]) == 1) {
+           filter = ifelse(batches$dims[[batch_no]] [[dimNames[i]]] == "*", "all", "item")
+        } else {
+           filter = "item"
+        }
+        
+        queryBody[[i]] <- list(
+           code = dimNames[i],
+           selection = list(filter = filter,
+                            values = as.list(batches$dims[[batch_no]][[dimNames[i]]])
+           ))
+     }
+     
+     # Get data
+     api_timer(batches$url, calls=2) # Try to change this to 1 (think that extra call in pxweb_clean)
+     response <- try(POST(
+        url = batches$url,
+        body = toJSON(list(
+           query = queryBody,
+  	 # NOTE: JSON might be more efficient for downloads (smaller file size)
+           response = list(format = "csv")
+  
+        ))
+     ), silent=TRUE)
+     
+     # Print error message
+     if (class(response)=="try-error"){
+        stop(str_join("No internet connection to ",batches$url),
+             call.=FALSE)
+     }
+     if(httr::http_status(response)$category != "success") {
+       stop(httr::http_status(response)$message,
+            call.=FALSE)
+     }
+     
+     # Parse data into human-readable form
+     # (Due to a weird encoding issue on Windows this generates a warning
+     # about faulty encoding. Hence the suppressMessages() encapsulation...)
+     suppressMessages(a <- content(response, as="text"))
+     if(str_sub(a,1,1)==",") a <- str_sub(a,2,nchar(a)) # Correcting when the first element is , (few variables)
+     b <- read.table(textConnection(a), sep=',', header=TRUE, stringsAsFactors=FALSE)
+     head <- str_split(string=str_sub(a, start=1, end=str_locate(a,"\n")[[1]]),"\",\"")[[1]]
+     head <- str_replace_all(string=head,pattern="\r|\n|\"","")
+     rm(a)
+     
+     # Clean, melt and concatenate data 
+     if (batch_no == 2){
+      time_used <- !all(batches$dim[[1]]$Tid == batches$dim[[2]]$Tid)
+     }
+     if (clean) {
+       b <- clean_pxweb(data2clean=b, head=head, url=batches$url, content_node=content_node)
+       content_node <- b[["content_node"]]
+       if(batch_no == 1){
+         res <- b[["data"]]
+       } else {
+         res <- rbind(res, b[["data"]])
+       }
+     } else { # If !clean
+       if(batch_no == 1){
+         res <- b
+       } else if(time_used) {
+         res <- cbind(res, b[,length(batches$dim[[1]]):ncol(b)])
+       } else {
+         res <- rbind(res, b)
+       }
+     } 
+     # Give messages
+     if(length(batches$dims) > 2 & batch_no%%10 != 0) message(".", appendLF=FALSE)
+     if(batch_no > 2 & batch_no%%10 == 0) message(" ",batch_no)
+   } 
+   if(length(batches$dims) > 2) message("\nDownload done.")
+
+   return(res)
 }
 
 
