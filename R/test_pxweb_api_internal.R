@@ -16,7 +16,7 @@ test_pxweb_api_get_nodes <- function(url){
   nodes$error <- FALSE
 
   i <- 1 
-  while(i < nrow(nodes)){
+  while(i <= nrow(nodes)){
     if(nodes$type[i]=="l" & !nodes$checked[i]){
       message("Check node (level ", nodes$level[i] ,") : ", nodes$id[i])
       tempDF <- suppressWarnings(try(get_pxweb_metadata(path=nodes$URL[i]), silent=TRUE))
