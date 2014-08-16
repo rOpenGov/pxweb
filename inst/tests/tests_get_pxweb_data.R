@@ -86,7 +86,16 @@ api_tests_get_pxweb_data <- list(
                 ContentsCode = c('ME0104B7'),
                 Tid = c('2010')),
     clean = TRUE,
-    test_dim = c(2907, 5))
+    test_dim = c(2907, 5)),
+  
+  list( 
+    url = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014",
+    dims = list(Alder = c('0', '1', '2', '3', '4'),
+                Kon = c('1', '2'),
+                ContentsCode = c('BE0401AW'),
+                Tid = c('2014', '2015', '2016', '2017', '2018')),
+    clean = FALSE,
+    test_dim = c(NA, NA))
 )
 
 
