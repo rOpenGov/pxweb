@@ -6,7 +6,8 @@
 #' @param dataNode Botton node in node tree.
 #' @param test_input Vector of length 4 to test inputs to the first 4 questions in the query.
 #' @param ... further parameters. These are currently ignored.
-#' @export
+#' 
+#' 
 download_pxweb <- function(dataNode, test_input = NULL, ...) {
   # Assertions
   stopifnot(length(test_input) == 0 | length(test_input) == 3 )

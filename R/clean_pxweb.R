@@ -7,7 +7,9 @@
 #' @param url url to the bottom nod (to get meta data)
 #' 
 #' @return data frame melted and in R (numeric) format
-#' @export
+#' 
+#' 
+#' 
 
 clean_pxweb <- function(data2clean, head, url) {  
 
