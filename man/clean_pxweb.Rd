@@ -3,7 +3,7 @@
 \alias{clean_pxweb}
 \title{Clean raw data from PX-WEB}
 \usage{
-clean_pxweb(data2clean, head, url)
+clean_pxweb(data2clean, head, url, content_node = NULL)
 }
 \arguments{
 \item{data2clean}{Data to clean.}
@@ -11,6 +11,9 @@ clean_pxweb(data2clean, head, url)
 \item{head}{Full variable names as character vector}
 
 \item{url}{url to the bottom nod (to get meta data)}
+
+\item{content_node}{node with content downloaded with \link{get_pxweb_metadata()}.
+If NULL, meta data is downloaded with \link{get_pxweb_metadata()}.}
 }
 \value{
 data frame melted and in R (numeric) format

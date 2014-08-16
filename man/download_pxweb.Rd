@@ -6,7 +6,7 @@
 download_pxweb(dataNode, test_input = NULL, ...)
 }
 \arguments{
-\item{dataNode}{Botton node in node tree.}
+\item{dataNode}{Bottom node in node tree.}
 
 \item{test_input}{Vector of length 4 to test inputs to the first 4 questions in the query.}
 

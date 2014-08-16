@@ -23,12 +23,9 @@ get_pxweb_metadata(path = NULL, node = NULL, topnodes = NULL,
 Get data from the API. If at the lowest node, provide the user with a friendly message about this.
 }
 \examples{
-# Define variable name
-api_parameters() # List options
-baseURL <- base_url("sweSCB", "v1", "sv")
-topnode <- get_pxweb_metadata(baseURL = baseURL)
+api_url <- base_url("sweSCB", "v1", "sv")
+top_node <- get_pxweb_metadata(api_url)
 
-# Get metadata for the first element in the top node
-nextnode <- get_pxweb_metadata(topnode$URL[1])
+bottom_node <- get_pxweb_metadata("http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv")
 }
 

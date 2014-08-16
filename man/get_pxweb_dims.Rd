@@ -14,23 +14,11 @@ get_pxweb_dims(node, verbose = TRUE)
 Deparse and reorder data form the metadata object for pretty output
 }
 \examples{
-## CONTINUED FROM EXAMPLES IN get_pxweb_metadata()
-# Get metadata for a named variable
-baseURL <- base_url("sweSCB", "v1", "sv")
-url <- paste(c(baseURL,"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
-metadata <- get_pxweb_metadata(url)
+# Download meta data
+bottom_node <- get_pxweb_metadata("http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv")
 
 # Get dimensions (names of dimensions are printed in the terminal)
-dims <- get_pxweb_dims(metadata)
-
-# Get data
-test <- get_pxweb_data(metadata$URL, dims=list(
-   Myndighet = "C02",
-   Kon = "*",
-   Heltiddeltid = "*",
-   ContentsCode = "*",
-   Tid = "*"
-))
+dims <- get_pxweb_dims(bottom_node)
 }
 \seealso{
 \link{get_pxweb_metadata}
