@@ -128,6 +128,7 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
                          stringsAsFactors = FALSE)
   textTitle <- alt <- character(0)
   baseCat <- numeric(0)
+  max_cat <- NA
   
   # Define the different types of input
   if (type == "node") {
@@ -149,6 +150,7 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     baseCat <- c(1,3,6)
     varDF <- input[[1]]
     alt <- rownames(varDF)
+    max_cat <- length(alt)
     
     # Calculate a short list of alternatives
     if (nrow(varDF) > 11) {
@@ -208,7 +210,7 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     if (type == "text") inputScan <- inputScanRaw
     
     # Scan for duplicates and do corrections
-    inputScan <- findData.inputConvert(inputScan)
+    inputScan <- findData.inputConvert(inputScan, max_value=max_cat)
     
     # Test if the input are OK (valid)
     inputOK <- 
@@ -338,17 +340,22 @@ findData.printCode <- function(url, varListText, clean) {
 }
 
 
-findData.inputConvert <- function(input) {
+findData.inputConvert <- function(input, max_value=NA) {
   # Set the output (for input of length == 1)
   output <- input  
 
-  # Do conversions for 
+  # Do conversions for  i<-1
   if (length(input) > 1 || str_detect(input, ":")) {
     output <- character(0)
-    for(i in 1 : length(input)) {
+    for(i in 1 : length(input)) { # i <- 2
       # Split input values on the format [0-9]+:[0-9]+
       if (str_detect(input[i], ":")){
         index <- as.numeric(unlist(str_split(input[i], pattern = ":")))
+        if(is.na(index[1])) index[1] <- 1
+        if(is.na(index[2])) {
+          index[2] <- max_value
+          if(is.na(max_value)) index[2] <- index[1]
+        }
         output <- c(output, as.character(index[1]:index[2]))
       } else {
         # Otherwise just add the value

@@ -33,7 +33,7 @@ test_that(desc="findData.printCode",{
 })
 
 test_that(desc="findData.inputConvert",{
-  expect_that(findData.inputConvert(c("2","2:3","3:7","6")), 
+  expect_that(findData.inputConvert(input=c("2","2:3","3:7","6")), 
               is_equivalent_to(c("2","3","4","5","6","7")))
   expect_that(findData.inputConvert(c("4:5")), 
               is_equivalent_to(c("4","5")))
@@ -41,12 +41,14 @@ test_that(desc="findData.inputConvert",{
               is_equivalent_to(c("2","5","10","11")))
   expect_that(findData.inputConvert("*"), 
               is_equivalent_to("*"))  
-  expect_that(findData.inputConvert(":3"), 
+  expect_that(findData.inputConvert(input=":3"), 
               is_equivalent_to(as.character(1:3)))  
-  expect_that(findData.inputConvert(":3, 5"), 
+  expect_that(findData.inputConvert(c(":3","5")), 
               is_equivalent_to(as.character(c(1:3,5))))
-  expect_that(findData.inputConvert("1, 3, 5:", max=7), 
+  expect_that(findData.inputConvert(c("1", "3", "5:"), max_value=7), 
               is_equivalent_to(as.character(c(1,3,5:7))))
+  expect_that(findData.inputConvert(c("1", "3", "5:")), 
+              is_equivalent_to(as.character(c(1,3,5))))
 })
 
 test_that(desc="download_pxweb",{
@@ -72,6 +74,8 @@ test_that(desc="findData.input",{
                      "testingVärde")
   expect_that(findData.input(type="alt", input=test_varDF, test_input="10:12, 1 ,3:1, 2", silent=TRUE),
               is_equivalent_to(c("1","2","3","10","11","12")))
+  expect_that(findData.input(type="alt", input=test_varDF, test_input="7:,3", silent=TRUE),
+              is_equivalent_to(c("3",as.character(7:20))))
 
 })
 
