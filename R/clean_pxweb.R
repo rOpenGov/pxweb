@@ -5,13 +5,15 @@
 #' @param data2clean Data to clean.
 #' @param head Full variable names as character vector
 #' @param url url to the bottom nod (to get meta data)
+#' @param content_node node with content downloaded with \link{get_pxweb_metadata()}. 
+#' If NULL, meta data is downloaded with \link{get_pxweb_metadata()}.
 #' 
 #' @return data frame melted and in R (numeric) format
 #' 
 #' 
 #' 
 
-clean_pxweb <- function(data2clean, head, url) {  
+clean_pxweb <- function(data2clean, head, url, content_node=NULL) {  
 
   # Assertions
   stopifnot(ncol(data2clean) == length(head))
@@ -23,8 +25,12 @@ clean_pxweb <- function(data2clean, head, url) {
   data2clean <- as.data.table(data2clean)
   
   # Get metadata to use in creating factors of Tid and contentCode
-  contentNode <- get_pxweb_metadata(url)
-
+  if(is.null(content_node)){
+    contentNode <- get_pxweb_metadata(url)
+  } else {
+    contentNode <- content_node
+  }
+  
   # FIXME: cleaning not working with generic APIs, only with sweSCB
   if (!length(grep("scb", url)) == 1) {
     return(data2clean)
@@ -79,7 +85,7 @@ clean_pxweb <- function(data2clean, head, url) {
   meltData$value <- NULL
   meltData$variable <- NULL
    
-  return(meltData)
+  return(list(data=meltData, content_node = contentNode))
   }
 
 }
