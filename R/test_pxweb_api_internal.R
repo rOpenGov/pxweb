@@ -98,6 +98,7 @@ test_pxweb_api_get_data <- function(nodes, nodesList, download_all=FALSE, seed=a
     }
     tempObj <- suppressWarnings(try(get_pxweb_data(url=bottomNodes$URL[i],clean=TRUE,
                                                    dims=dims)))
+    bottomNodes$checked[i] <- TRUE
     if(class(tempObj)=="try-error") bottomNodes$download_error[i] <- TRUE
     i <- i + 1
   }

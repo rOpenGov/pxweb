@@ -18,7 +18,7 @@
 #' @export
 #'  
 test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time())){
-  
+  library(plyr)
   nodes <- test_pxweb_api_get_nodes(url=url)
   message("\n")
   nodes_list <- test_pxweb_api_get_node_metadata(nodes=nodes)
@@ -26,5 +26,6 @@ test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time()))
   res <- test_pxweb_api_get_data(nodes=nodes, seed=seed,
                                  nodesList=nodes_list, 
                                  download_all=download_all)
+  res <- rbind.fill(nodes[nodes$type == "l", ], res)
   return(res)
 }
