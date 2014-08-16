@@ -64,52 +64,6 @@ getContent <- function(response, type = "csv") {
     return(content)
 }
 
-#' Return base URL to API
-#' 
-#' ...
-#' 
-#' @param database API provider ('sweSCB' or 'statfi')
-#' @param version The version of SCB API to use. (Default: \code{v1})
-#' @param lang The language (two letters) to use in the fetched data. (Default: \code{en})
-#' @param ... Additional parameters. These are currently ignored.
-#' @export
-#' @examples
-#' a <- base_url("sweSCB", "v2", "en")
-#' print(a)
-#' 
-base_url <- function(database, version = "v1", lang = "en", ...) {
-
-  if (database == "sweSCB") {
-
-    url <- paste(sprintf("http://api.scb.se/OV0104/%s/doris/%s/ssd",version,lang))
-
-  } else if (database == "statfi") {
-
-    #Was: 
-    url <- paste(sprintf("http://pxwebapi2.stat.fi/PXWeb/api/%s/%s/StatFin",version,lang))
-
-  }
-  return(url)
-}
-
-
-
-
-#' Return options for database, version and language choices
-#' 
-#' ...
-#' 
-#' @param url Get parameters for the api with this url (NULL = get all API configs)
-#' @export
-#' @examples api_parameters()
-api_parameters <- function(url=NULL) {
-  api.file <- system.file("extdata/api.json", package = "pxweb")
-  api.list <- RJSONIO::fromJSON(api.file)
-  if(!is.null(url)) api.list <- api.list[str_split(url, "/")[[1]][3]][[1]]
-  return(api.list)
-}
-
-
 
 
 
