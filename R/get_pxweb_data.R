@@ -81,14 +81,14 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      head <- str_replace_all(string=head,pattern="\r|\n|\"","")
      rm(a)
      
-     #print(" Clean, melt and concatenate data ")
-     print(batch_no)
+     # print(" Clean, melt and concatenate data ")
+     # print(batch_no)
      if (batch_no == 2){
       time_used <- !all(batches$dim[[1]]$Tid == batches$dim[[2]]$Tid)
      }
 
      if (clean) {
-       message("Cleaning the data..")
+       #message("Cleaning the data..")
        #save(b, head, batches, content_node, file = "tmp.RData")
        b <- clean_pxweb(data2clean=b, head=head, url=batches$url, content_node=content_node)
        content_node <- b[["content_node"]]
@@ -106,7 +106,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
          res <- rbind(res, b)
        }
      } 
-     print("Give messages")
+     # print("Give messages")
      if(length(batches$dims) > 2 & batch_no%%10 != 0) message(".", appendLF=FALSE)
      if(batch_no > 2 & batch_no%%10 == 0) message(" ",batch_no)
    } 

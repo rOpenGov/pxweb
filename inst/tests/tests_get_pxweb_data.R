@@ -95,7 +95,18 @@ api_tests_get_pxweb_data <- list(
                 ContentsCode = c('BE0401AW'),
                 Tid = c('2014', '2015', '2016', '2017', '2018')),
     clean = FALSE,
-    test_dim = c(NA, NA))
+    test_dim = c(NA, NA)),
+  
+  list(
+    url = "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/StatFin/asu/asas/010_asas_tau_101.px",
+    dims = list("Alue" = c("*"),
+                 "Asuntokunnan koko" = c("*"),
+                 "Talotyyppi" = c("S"),
+                 "Vuosi" = c("*")
+                 ),
+    clean = FALSE,
+    test_dim = c(2568, NA)
+  )  
 )
 
 

@@ -11,8 +11,18 @@ api_tests_clean_pxweb <- list(
                 Kon = c('*'),
                 ContentsCode = c('BE0101N1'),
                 Tid = c('2010', '2011', '2012', '2013'))
+    ),
+  
+  list(
+    url = "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/StatFin/asu/asas/010_asas_tau_101.px",
+    dims = list("Alue" = c("*"),
+                "Asuntokunnan koko" = c("*"),
+                "Talotyyppi" = c("S"),
+                "Vuosi" = c("*")
     )
+  )
 )
+
 
 test_that(desc="clean_pxweb",{
   for (test in api_tests_clean_pxweb){
