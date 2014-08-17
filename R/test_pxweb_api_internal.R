@@ -7,9 +7,9 @@
 #' Two variables are added: 
 #' \code{checked} : The node has been checked
 #' \code{error} : Whether there were errors encountered with the call
-#' 
+#' @import data.table 
 test_pxweb_api_get_nodes <- function(url){
-  require(data.table)
+
   nodes <- as.data.table(get_pxweb_metadata(path=url))
   nodes$level <- 1
   nodes$checked <- FALSE
@@ -76,9 +76,8 @@ test_pxweb_api_get_node_metadata <- function(nodes){
 #' 
 #' @return 
 #' data.frame with information \code{download_error} containing download errors
-#' 
+#' @import data.table 
 test_pxweb_api_get_data <- function(nodes, nodesList, download_all=FALSE, seed=as.integer(Sys.time())){
-  require(data.table)
   
   bottomNodes <- nodes[nodes$type=="t",]  
   set.seed(seed)
