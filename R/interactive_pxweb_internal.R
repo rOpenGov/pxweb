@@ -311,7 +311,7 @@ findData.printNode <- function(xscb, print=TRUE) {
 findData.printCode <- function(url, varListText, clean) {
   # Print the code used to download the data
   
-  cat("To download the same data again, use the following code:\n\n")
+  cat("To download the same data again, use the following code:\n(save code using UTF-8 encoding)\n\n")
   cat("myDataSetName",
       " <- \n  get_pxweb_data(url = \"", 
       url,
