@@ -5,7 +5,7 @@ api_parameters()
 
 # Standard query that asks for options
 url <- base_url("statfi", "v1", "fi")
-#d <- interactive_pxweb(url)
+d <- interactive_pxweb(url)
 
 # Custom query: 
 dims <- list()
@@ -14,5 +14,5 @@ dims[["Alue"]] <- c("*")
 dims[["Asuntokunnan koko"]] <- c("*")
 dims[["Talotyyppi"]] <- c("S")
 dims[["Vuosi"]] <- c("*")
-d <- get_pxweb(url = data.url, dims = dims, clean = TRUE)
+d <- get_pxweb_data(url = data.url, dims = dims, clean = TRUE)
 

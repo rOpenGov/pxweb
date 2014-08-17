@@ -31,9 +31,10 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
    b_list <- list()
    
    for (batch_no in 1:length(batches$dims)){
+
      queryBody <- list()
      
-     # Define the query list
+     # print("Define the query list")
      for (i in 1:length(batches$dims[[batch_no]])) {
         if (length(batches$dims[[batch_no]] [[dimNames[i]]]) == 1) {
            filter = ifelse(batches$dims[[batch_no]] [[dimNames[i]]] == "*", "all", "item")
@@ -48,7 +49,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
            ))
      }
      
-     # Get data
+     # print("Get data")
      api_timer(batches$url, calls=2) # Try to change this to 1 (think that extra call in pxweb_clean)
      response <- try(POST(
         url = batches$url,
@@ -60,7 +61,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
         ))
      ), silent=TRUE)
      
-     # Print error message
+     # print("Print error message")
      if (class(response)=="try-error"){
         stop(str_join("No internet connection to ",batches$url),
              call.=FALSE)
@@ -70,7 +71,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
             call.=FALSE)
      }
      
-     # Parse data into human-readable form
+     # print("Parse data into human-readable form")
      # (Due to a weird encoding issue on Windows this generates a warning
      # about faulty encoding. Hence the suppressMessages() encapsulation...)
      suppressMessages(a <- content(response, as="text"))
@@ -80,11 +81,15 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      head <- str_replace_all(string=head,pattern="\r|\n|\"","")
      rm(a)
      
-     # Clean, melt and concatenate data 
+     #print(" Clean, melt and concatenate data ")
+     print(batch_no)
      if (batch_no == 2){
       time_used <- !all(batches$dim[[1]]$Tid == batches$dim[[2]]$Tid)
      }
+
      if (clean) {
+       message("Cleaning the data..")
+       #save(b, head, batches, content_node, file = "tmp.RData")
        b <- clean_pxweb(data2clean=b, head=head, url=batches$url, content_node=content_node)
        content_node <- b[["content_node"]]
        if(batch_no == 1){
@@ -101,10 +106,11 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
          res <- rbind(res, b)
        }
      } 
-     # Give messages
+     print("Give messages")
      if(length(batches$dims) > 2 & batch_no%%10 != 0) message(".", appendLF=FALSE)
      if(batch_no > 2 & batch_no%%10 == 0) message(" ",batch_no)
    } 
+
    if(length(batches$dims) > 2) message("\nDownload done.")
 
    return(res)

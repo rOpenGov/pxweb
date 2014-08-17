@@ -10,8 +10,6 @@
 #' 
 #' @return data frame melted and in R (numeric) format
 #' 
-#' 
-#' 
 
 clean_pxweb <- function(data2clean, head, url, content_node=NULL) {  
 
@@ -32,9 +30,9 @@ clean_pxweb <- function(data2clean, head, url, content_node=NULL) {
   }
   
   # FIXME: cleaning not working with generic APIs, only with sweSCB
-  if (!length(grep("scb", url)) == 1) {
-    return(data2clean)
-  } else {
+  #if (!length(grep("scb", url)) == 1) {
+  #  return(data2clean)
+  #} else {
  
   # Collect factor labels for tid and contentCode and convert
   # other variables to factor variables
@@ -86,6 +84,6 @@ clean_pxweb <- function(data2clean, head, url, content_node=NULL) {
   meltData$variable <- NULL
    
   return(list(data=meltData, content_node = contentNode))
-  }
+  #}
 
 }

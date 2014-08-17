@@ -16,9 +16,6 @@
 #' \dontrun{
 #' d <- interactive_pxweb(baseURL)
 #' }
-#' 
-
-
 
 interactive_pxweb <- function(baseURL, history = FALSE, ...){
 
@@ -69,6 +66,7 @@ interactive_pxweb <- function(baseURL, history = FALSE, ...){
       # to be able to traverse back up in the node tree
       allNodes[[length(allNodes) + 1]] <- Node
       Node <- get_pxweb_metadata(Node$URL[as.numeric(inputValue)])
+
     }
   }
 }
