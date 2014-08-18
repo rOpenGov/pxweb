@@ -170,4 +170,60 @@ create_batch_list <- function(url, dims){
   return(batch_list)
   
 }
+
+
+#' The function calculates the dimension of a query. That means the numberof
+#' categories for each variable downloaded
+#' 
+#' @param url The url the query uses
+#' @param dims The dimension object to use for downloading
+#' @param content_node Used if already a content node has been downloaded
+#' 
+#' @return
+#' list with two slots 
+#' [[1]] containes named vector with number of slots
+#' [[2]] containes content_node got with \link{get_pxweb_metadata}
+#' 
+#' @examples
+#' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+#' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
+#'             ContentsCode = c('*'), Tid = c('*'))
+#' \dontrun{
+#' get_dim_size(url, dims)
+#' }
+#' 
+#' url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014"
+#' dims <- list(Alder = c('0', '1', '2', '3', '4'),
+#'              Kon = c('1', '2'),ContentsCode = c('BE0401AW'),
+#'              Tid = c('2014', '2015', '2016', '2017', '2018'))
+#' \dontrun{
+#' get_dim_size(url, dims)
+#' }
+
+get_dim_size <- function(url, dims, content_node=NULL){
+  stopifnot(is.character(url), is.list(dims))
+  
+  starred_dim <- logical(length(dims))
+  dim_length <- integer(length(dims))
+  names(dim_length) <- names(starred_dim) <- names(dims)
+  for(d in seq_along(dims)){ # d <- 3
+    if(length(dims[[d]]) == 1 && str_detect(string=dims[[d]], "\\*")) starred_dim[d] <- TRUE
+    dim_length[d] <- length(dims[[d]])
+  }
+  if(any(starred_dim)) {
+    if(is.null(content_node)){
+      node <- get_pxweb_metadata(url)
+    } else {
+      node <- content_node
+    }
+    alldims <- suppressMessages(get_pxweb_dims(node))
+    for(d in which(starred_dim)){
+      dim_length[d] <- length(alldims[[names(dim_length)[d]]]$values)
+    }
+  } else {
+    node <- NULL
+  }
+  return(list(dim_length, node))
+}
+
  
