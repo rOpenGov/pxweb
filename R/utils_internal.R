@@ -125,22 +125,10 @@ api_timer <- function(api_url, calls = 1){
 #' }
 create_batch_list <- function(url, dims){
   
-  starred_dim <- logical(length(dims))
-  dim_length <- integer(length(dims))
-  names(dim_length) <- names(starred_dim) <- names(dims)
-  for(d in seq_along(dims)){ # d <- 3
-    if(length(dims[[d]]) == 1 && str_detect(string=dims[[d]], "\\*")) starred_dim[d] <- TRUE
-    dim_length[d] <- length(dims[[d]])
-  }
-  if(any(starred_dim)) {
-    node <- get_pxweb_metadata(url)
-    alldims <- suppressMessages(get_pxweb_dims(node))
-    for(d in which(starred_dim)){
-      dim_length[d] <- length(alldims[[names(dim_length)[d]]]$values)
-    }
-  } else {
-    node <- NULL
-  }
+  # Get dimension size of call
+  dim_size <- get_dim_size()
+  dim_length <- dim_size[[2]]
+  node <- dim_size[[2]]
 
   # Get api parameters
   api_param <- api_parameters(url)
