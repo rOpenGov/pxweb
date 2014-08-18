@@ -87,3 +87,25 @@ clean_pxweb <- function(data2clean, head, url, content_node=NULL) {
   #}
 
 }
+
+
+#' Calculates which dimensions that are used as row and col variables in data
+#' 
+#' @param dim_data2clean The dimension of the data from PXWEB
+#' @param dim_size for the call from \link{get_dim_size}
+#' 
+#' @return list with index (row and col dim)
+#' 
+
+calc_dim_type <- function(dim_data2clean, dim_size){
+  
+  for(i in seq_along(dim_size)){
+    if(prod(dim_size[1:i]) == dim_data2clean[1]) {
+      row_col_variables <- list("row_variables" = 1:i, 
+                                "col_variables" = (i+1):length(dim_size))
+      return(row_col_variables)
+    }
+  }
+  stop("Can't calculate row and col variables.")
+  
+}
