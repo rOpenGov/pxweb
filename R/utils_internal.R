@@ -214,4 +214,33 @@ get_dim_size <- function(url, dims, content_node=NULL){
   return(list(dim_length, node))
 }
 
- 
+
+#' The function calculates the dimension of a data object 
+#' 
+#' @param dim_length Vector from \link{get_dim_size}
+#' @param clean Is the data cleaned (TRUE/FALSE)
+#' 
+#' @return
+#' An integer vector of length 2
+#' 
+#' @examples
+#' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+#' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
+#'             ContentsCode = c('*'), Tid = c('*'))
+#' \dontrun{
+#' call_size <- get_dim_size(url, dims)
+#' calculate_data_dim(call_size[[1]], TRUE)
+#' calculate_data_dim(call_size[[1]], FALSE)
+#' }
+
+calculate_data_dim <- function(dim_length, clean){
+  len <- length(dim_length)
+  if(clean){
+    res <- c(prod(dim_length), len + 1)
+  } else {
+    res <- c(prod(dim_length[-((len-1):len)]), (len-2) + prod(dim_length[((len-1):len)]))    
+  }
+  return(res)
+}
+
+
