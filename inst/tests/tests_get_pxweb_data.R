@@ -119,9 +119,9 @@ test_that(desc="get_pxweb_data()",{
                        clean = test$clean)}, 
       not(throws_error()),
       info = test$url)
-    
-    if(!is.na(test$test_dim[1])) expect_equal(object=nrow(test_data), test$test_dim[1], info=test$url)
-    if(!is.na(test$test_dim[2])) expect_equal(object=ncol(test_data), test$test_dim[2], info=test$url)
+
+    test_dim_size <- calculate_data_dim(get_dim_size(url = test$url, dims=test$dims)[[1]], test$clean)
+    expect_equal(object=dim(test_data), test_dim_size, info=test$url)
     expect_equal(object=class(test_data), "data.frame", info=test$url)     
   }
 })
