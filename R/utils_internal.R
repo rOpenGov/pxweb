@@ -126,10 +126,10 @@ api_timer <- function(api_url, calls = 1){
 create_batch_list <- function(url, dims){
   
   # Get dimension size of call
-  dim_size <- get_dim_size(url=url,dims=dims)
+  dim_size <- pxweb:::get_dim_size(url=url,dims=dims)
   dim_length <- dim_size[[1]]
   node <- dim_size[[2]]
-
+  
   # Get api parameters
   api_param <- api_parameters(url)
   
@@ -147,7 +147,7 @@ create_batch_list <- function(url, dims){
     batch_list <- list(url=url, dims=list(), content_node=node)
     for (b in 1:no_batch){ # b <- 1
       batch_values_index <- ((b-1)*batch_size+1):min((b*batch_size), dim_length[arg_max])
-      batch_values <- alldims[[names(dim_length)[arg_max]]]$values[batch_values_index]
+      batch_values <- node$variables$variables[[arg_max]]$values[batch_values_index]
       batch_list$dims[[b]] <- dims
       batch_list$dims[[b]][[names(dim_length[arg_max])]] <- batch_values
     }
