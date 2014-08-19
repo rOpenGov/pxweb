@@ -4,12 +4,17 @@ cat("\ntests_clean_pxweb.R : ")
 
 api_tests_clean_pxweb <- list(
   list(
+    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
+    dims = list(ContentsCode = c('PR0101A1'),
+                Tid = c('*'))),
+  
+  list(
     url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
     dims = list(Region = c('00', '01'),
                 Civilstand = c('*'),
                 Alder = c('0', 'tot'),
                 Kon = c('*'),
-                ContentsCode = c('BE0101N1'),
+                ContentsCode = c('*'),
                 Tid = c('2010', '2011', '2012', '2013'))
     ),
   
@@ -20,26 +25,91 @@ api_tests_clean_pxweb <- list(
                 "Talotyyppi" = c("S"),
                 "Vuosi" = c("*")
     )
+  ),
+  
+  list(
+    url = "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/StatFin/asu/asas/010_asas_tau_101.px",
+    dims = list("Alue" = c("*"),
+                "Asuntokunnan koko" = c("*"),
+                "Talotyyppi" = c("*"),
+                "Vuosi" = c("1985", "1987")
+    )
+  ),
+  
+  list(
+    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK/TK1001/TK1001A/Fordon",
+    dims = list("Fordonsslag" = c("MCEJMOPED"),
+                "Bestand" = c("AVST"),
+                "ContentsCode" = c("TK1001A1"),
+                "Tid" = c("1997M06")
+    )
+  ),
+  
+  list(
+    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+    dims = list(Region = c('00', '01'),
+                Civilstand = c('*'),
+                Alder = c('0', 'tot'),
+                Kon = c('*'),
+                ContentsCode = c('BE0101N1'),
+                Tid = c('2010'))
   )
 )
 
-
 test_that(desc="clean_pxweb",{
   for (test in api_tests_clean_pxweb){
-    expect_that({
-      test_data <-
-        get_pxweb_data(url = test$url,
-                       dims = test$dims,
-                       clean = TRUE)
-    }, not(throws_error()), info = test$url)
-
-    expect_is(object=test_data[,ncol(test_data)], "numeric", info = test$url)
+    test_data <-
+      get_pxweb_data(url = test$url,
+                     dims = test$dims,
+                     clean = FALSE)
     
-    for(j in 1:(ncol(test_data)-1)){
-      expect_equal(object=sum(is.na(test_data[,j])), 0)
-      expect_is(object=test_data[,j], "factor", 
+    expect_that({
+      test_clean <- pxweb:::clean_pxweb(data2clean=test_data, 
+                                        url=test$url, 
+                                        dims=test$dims,
+                                        content_node=get_pxweb_metadata(path=test$url))
+    }, not(throws_error()), info = test$url)
+    
+    expect_is(object=test_clean[[1]][,ncol(test_clean[[1]])], "numeric", info = test$url)
+    
+    for(j in 1:(ncol(test_clean[[1]])-1)){
+      expect_equal(object=sum(is.na(test_clean[[1]][,j])), 0)
+      expect_is(object=test_clean[[1]][,j], "factor", 
                 info=paste(test$url, " : col ", j, ".", sep=""))
     }
   }
 })
 
+
+
+api_tests_clean_pxweb_numbers <- list(
+  list(
+    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+    dims = list(Region = c('00', '01'),
+                Civilstand = c('*'),
+                Alder = c('0', 'tot'),
+                Kon = c('*'),
+                ContentsCode = c('BE0101N1'),
+                Tid = c('2010'))
+  )
+)
+
+test_that(desc="clean_pxweb",{
+  for (test in api_tests_clean_pxweb_numbers){
+      test_data <-
+        get_pxweb_data(url = test$url,
+                       dims = test$dims,
+                       clean = FALSE)
+      
+      test_data_clean <-
+        pxweb:::clean_pxweb(data2clean=test_data, 
+                            url=test$url, 
+                            dims=test$dims,
+                            content_node=get_pxweb_metadata(path=test$url))
+      
+      expect_true(object=all(
+        test_data_clean[[1]]$values == 
+          suppressWarnings(as.numeric(str_replace_all(test_data[,ncol(test_data)],"\\s",""))))
+      )
+  }
+})
