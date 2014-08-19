@@ -4,6 +4,7 @@
 #' 
 #' @param data2clean Data to clean.
 #' @param url url to the bottom nod (to get meta data)
+#' @param dims dimension of the api-call 
 #' @param content_node node with content downloaded with \link{get_pxweb_metadata}. 
 #' If NULL, meta data is downloaded with \link{get_pxweb_metadata}.
 #' 
@@ -29,9 +30,9 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
    
   # Collect factor labels for tid and contentCode and convert
   # other variables to factor variables
-  dim_size <- pxweb:::get_dim_size(url=url, dims=dims, content_node=contentNode)[[1]]
+  dim_size <- get_dim_size(url=url, dims=dims, content_node=contentNode)[[1]]
   dim_var_type <- 
-    pxweb:::calc_dim_type(dim_data2clean = dim(data2clean), 
+    calc_dim_type(dim_data2clean = dim(data2clean), 
                           dim_size = dim_size)
 
   # Melt the data to long format  idvars 

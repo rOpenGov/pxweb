@@ -1,7 +1,7 @@
 Package: pxweb
 Type: Package
 Title: R interface to the PX-WEB API
-Version: 0.3.47
+Version: 0.3.50
 Date: 2014-08-17
 Author: Mans Magnusson, Leo Lahti, Love Hansson
 Maintainer: Mans Magnusson <ropengov-forum@googlegroups.com>

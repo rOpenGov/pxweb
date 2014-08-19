@@ -126,7 +126,7 @@ api_timer <- function(api_url, calls = 1){
 create_batch_list <- function(url, dims){
   
   # Get dimension size of call
-  dim_size <- pxweb:::get_dim_size(url=url,dims=dims)
+  dim_size <- get_dim_size(url=url,dims=dims)
   dim_length <- dim_size[[1]]
   node <- dim_size[[2]]
   

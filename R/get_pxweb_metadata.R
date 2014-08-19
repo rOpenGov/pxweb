@@ -38,7 +38,7 @@ get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet 
       url <- path
    }
       
-   pxweb:::api_timer(url)
+   api_timer(url)
    df <- try(
          data.frame(
          t(sapply(

@@ -26,7 +26,7 @@
 get_pxweb_data <- function(url, dims, clean = FALSE) {
 
    dimNames <- names(dims)
-   batches <- pxweb:::create_batch_list(url, dims)
+   batches <- create_batch_list(url, dims)
    content_node <- batches$content_node
    b_list <- list()
    
@@ -50,7 +50,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      }
      
      # print("Get data")
-     pxweb:::api_timer(batches$url, calls=2) # Try to change this to 1 (think that extra call in pxweb_clean)
+     api_timer(batches$url, calls=2) 
      response <- try(POST(
         url = batches$url,
         body = toJSON(list(

@@ -10,6 +10,8 @@ clean_pxweb(data2clean, url, dims, content_node = NULL)
 
 \item{url}{url to the bottom nod (to get meta data)}
 
+\item{dims}{dimension of the api-call}
+
 \item{content_node}{node with content downloaded with \link{get_pxweb_metadata}.
 If NULL, meta data is downloaded with \link{get_pxweb_metadata}.}
 }
