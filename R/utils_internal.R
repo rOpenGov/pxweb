@@ -141,7 +141,7 @@ create_batch_list <- function(url, dims){
     batch_size <- floor(dim_length[arg_max] / chunk_size * api_param$max_values_to_download)
     if(batch_size == 0) stop("Too large query! This should not happen, please send the api call to the maintainer.", call.=FALSE)
     no_batch <- dim_length[arg_max] %/% batch_size
-    if(dim_length[arg_max] %% batch_size != 0) no_batch + 1    
+    if(dim_length[arg_max] %% batch_size != 0) no_batch <- no_batch + 1
     message("This is a large query. The data will be downloaded in ",no_batch," batches.")
     # Create list with calls
     batch_list <- list(url=url, dims=list(), content_node=node)
