@@ -106,7 +106,15 @@ api_tests_get_pxweb_data <- list(
                  ),
     clean = TRUE,
     test_dim = c(2568, NA)
-  )  
+  )  ,
+  
+  list(
+    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK/TK1001/TK1001S/SnabbStatTK1001",
+    dims = list("ContentsCode" = c("TK1001AE"),
+                "Tid" = c("2014M02")
+    ),
+    clean = TRUE
+  )    
 )
 
 
