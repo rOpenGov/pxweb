@@ -90,9 +90,15 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
 calc_dim_type <- function(dim_data2clean, dim_size){
   
   if(prod(dim_size) == 1){    
-    row_col_variables <- list("row_variables" = 1:(dim_data2clean[2]-1), 
-                              "col_variables" = dim_data2clean[2]:length(dim_size))
-    return(row_col_variables)
+    if(all(dim_data2clean == 1)){
+      row_col_variables <- list("row_variables" = numeric(0), 
+                                "col_variables" = dim_data2clean[2]:length(dim_size))
+      return(row_col_variables)
+    } else {
+      row_col_variables <- list("row_variables" = 1:(dim_data2clean[2]-1), 
+                                "col_variables" = dim_data2clean[2]:length(dim_size))
+      return(row_col_variables)
+    }
 
   } else if (prod(dim_size) == dim_data2clean[2]){
     

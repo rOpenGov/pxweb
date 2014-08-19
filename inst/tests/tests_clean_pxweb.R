@@ -53,6 +53,12 @@ api_tests_clean_pxweb <- list(
                 Kon = c('*'),
                 ContentsCode = c('BE0101N1'),
                 Tid = c('2010'))
+  ),
+  
+  list(
+    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK/TK1001/TK1001S/SnabbStatTK1001",
+    dims = list("ContentsCode" = c("TK1001AE"),
+                "Tid" = c("2014M02"))
   )
 )
 
