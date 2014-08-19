@@ -14,13 +14,19 @@ api_tests_test_pxweb_api <- list(
   )
 )
 
+test_seeds <- c(as.integer(Sys.time()), 1408310599)
+
+# test <- api_tests_test_pxweb_api[[1]]
+
 test_that(desc="test_pxweb_api()",{    
   for (test in api_tests_test_pxweb_api){
-    expect_that({
-      test_data <- suppressMessages(test_pxweb_api(url=test$url))}, 
-      not(throws_error()),
-      info = test$url)
-    
-    expect_equal(object=dim(test_data), test$test_dim, info=test$url)
+    for (seed in test_seeds){
+      expect_that({
+        test_data <- test_pxweb_api(url=test$url, seed=seed)}, 
+        not(throws_error()),
+        info = paste(test$url, ", seed ", seed, sep=""))
+      
+      expect_equal(object=dim(test_data[[1]]), test$test_dim, info=test$url)
+    }
   }
 })

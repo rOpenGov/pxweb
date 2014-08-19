@@ -83,6 +83,7 @@ test_pxweb_api_get_data <- function(nodes, nodesList, download_all=FALSE, seed=a
   set.seed(seed)
   bottomNodes$download_error <- FALSE
   i <- 1
+  calls <- list()
   while(i <= nrow(bottomNodes)){
     message("Download (", i, "/", nrow(bottomNodes),"): ", bottomNodes$id[i])
 
@@ -99,8 +100,12 @@ test_pxweb_api_get_data <- function(nodes, nodesList, download_all=FALSE, seed=a
                                                    dims=dims)))
     bottomNodes$checked[i] <- TRUE
     if(class(tempObj)=="try-error") bottomNodes$download_error[i] <- TRUE
+    
+    calls[[bottomNodes$id[i]]] <- 
+      list(url=bottomNodes$URL[i],
+           dims = dims)    
     i <- i + 1
   }
-  return(bottomNodes)
+  return(list(data=bottomNodes, calls=calls))
 }
 
