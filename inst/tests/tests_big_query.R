@@ -11,8 +11,7 @@ api_tests_big_query <- list(
                 Kon = c('*'), 
                 ContentsCode = c('*'),
                 Tid = as.character(1970:1971)),
-    clean=TRUE,
-    test_dim = c(979200, 7)),
+    clean=TRUE),
   
   list(
     url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
@@ -22,8 +21,7 @@ api_tests_big_query <- list(
                 Kon = c('*'), 
                 ContentsCode = c('*'),
                 Tid = as.character(1970)),
-    clean=FALSE,
-    test_dim = c(248880, 6))
+    clean=FALSE)
   )
 
 test_that(desc="big queries",{  
@@ -36,8 +34,11 @@ test_that(desc="big queries",{
       not(throws_error()),
       info = test$url)
     
-    if(!is.na(test$test_dim[1])) expect_equal(object=nrow(test_data), test$test_dim[1], info=test$url)
-    if(!is.na(test$test_dim[2])) expect_equal(object=ncol(test_data), test$test_dim[2], info=test$url)
+    test_dim_size <- 
+      pxweb:::calculate_data_dim(dim_length=pxweb:::get_dim_size(url = test$url, dims=test$dims)[[1]], 
+                                 clean=test$clean)
+    expect_equal(object=dim(test_data), test_dim_size, info=test$url)
+    expect_equal(object=class(test_data), "data.frame", info=test$url)
     rm(test_data)
   }
 })
