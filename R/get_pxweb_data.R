@@ -26,7 +26,7 @@
 get_pxweb_data <- function(url, dims, clean = FALSE) {
 
    dimNames <- names(dims)
-   batches <- create_batch_list(url, dims)
+   batches <- pxweb:::create_batch_list(url, dims)
    content_node <- batches$content_node
    b_list <- list()
    
@@ -50,7 +50,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      }
      
      # print("Get data")
-     api_timer(batches$url, calls=2) # Try to change this to 1 (think that extra call in pxweb_clean)
+     pxweb:::api_timer(batches$url, calls=2) # Try to change this to 1 (think that extra call in pxweb_clean)
      response <- try(POST(
         url = batches$url,
         body = toJSON(list(
@@ -79,18 +79,19 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      b <- read.table(textConnection(a), sep=',', header=TRUE, stringsAsFactors=FALSE)
      head <- str_split(string=str_sub(a, start=1, end=str_locate(a,"\n")[[1]]),"\",\"")[[1]]
      head <- str_replace_all(string=head,pattern="\r|\n|\"","")
+     colnames(b) <- head
      rm(a)
      
      # print(" Clean, melt and concatenate data ")
      # print(batch_no)
      if (batch_no == 2){
-      time_used <- !all(batches$dim[[1]]$Tid == batches$dim[[2]]$Tid)
+       time_used <- !all(batches$dim[[1]]$Tid == batches$dim[[2]]$Tid)
      }
 
      if (clean) {
        #message("Cleaning the data..")
        #save(b, head, batches, content_node, file = "tmp.RData")
-       b <- clean_pxweb(data2clean=b, head=head, url=batches$url, content_node=content_node)
+       b <- clean_pxweb(data2clean=b, url=batches$url, dims = batches$dims[[batch_no]], content_node=content_node)
        content_node <- b[["content_node"]]
        if(batch_no == 1){
          res <- b[["data"]]
