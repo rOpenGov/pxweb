@@ -104,7 +104,7 @@ api_tests_get_pxweb_data <- list(
                  "Talotyyppi" = c("S"),
                  "Vuosi" = c("*")
                  ),
-    clean = FALSE,
+    clean = TRUE,
     test_dim = c(2568, NA)
   )  
 )
@@ -120,7 +120,7 @@ test_that(desc="get_pxweb_data()",{
       not(throws_error()),
       info = test$url)
 
-    test_dim_size <- calculate_data_dim(get_dim_size(url = test$url, dims=test$dims)[[1]], test$clean)
+    test_dim_size <- pxweb:::calculate_data_dim(pxweb:::get_dim_size(url = test$url, dims=test$dims)[[1]], test$clean)
     expect_equal(object=dim(test_data), test_dim_size, info=test$url)
     expect_equal(object=class(test_data), "data.frame", info=test$url)     
   }
