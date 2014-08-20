@@ -1,4 +1,4 @@
-pxweb v0.3.4
+pxweb v0.3.5
 =======
 
 ## Introduction
