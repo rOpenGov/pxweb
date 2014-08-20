@@ -50,12 +50,13 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      }
      
      # print("Get data")
-     api_timer(batches$url, calls=2) 
+     api_timer(batches$url) 
      response <- try(POST(
         url = batches$url,
         body = toJSON(list(
            query = queryBody,
   	 # NOTE: JSON might be more efficient for downloads (smaller file size)
+     # NOTE: JSON includes comments/metadata
            response = list(format = "csv")
   
         ))
