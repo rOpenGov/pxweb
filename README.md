@@ -54,7 +54,7 @@ Data in the API is structured in a data tree and a wrapper function `findData()`
 
 ```r
 # Define the database-specific base URL:
-baseURL <- base_url(database = "sweSCB", version = "v1", language = "sv")
+baseURL <- base_url(database = "sweSCB", version = "v1", lang = "sv")
 
 # Fetch the data from the specified database:
 d <- interactive_pxweb(baseURL)
