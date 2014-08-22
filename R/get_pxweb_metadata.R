@@ -10,7 +10,7 @@
 #' @param ... Further arguments passed to  \code{base_url()}.
 #' @export
 #' @examples
-#' api_url <- base_url("sweSCB", "v1", "sv")
+#' api_url <- base_url("api.scb.se", "v1", "sv")
 #' \donttest{
 #' top_node <- get_pxweb_metadata(api_url)
 #' 

@@ -63,64 +63,23 @@ print(api_parameters())
 ```
 
 ```
-## $foo.bar
-## $foo.bar$url
-## [1] "http://foo.bar/[version]/[lang]"
+## [[1]]
+## api:         pxwebapi2.stat.fi
+## limit(s):    30 calls per 10 sec. 
+##              Max 100000 values per call.
+## version(s):  v1 
+## language(s): fi 
+## base url:
+##  http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]/StatFin 
 ## 
-## $foo.bar$version
-## [1] "v1"
-## 
-## $foo.bar$lang
-## [1] "sv" "en"
-## 
-## $foo.bar$calls_per_period
-## [1] 1
-## 
-## $foo.bar$period_in_seconds
-## [1] 2
-## 
-## $foo.bar$max_values_to_download
-## [1] 1000
-## 
-## 
-## $pxwebapi2.stat.fi
-## $pxwebapi2.stat.fi$url
-## [1] "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]/StatFin"
-## 
-## $pxwebapi2.stat.fi$version
-## [1] "v1"
-## 
-## $pxwebapi2.stat.fi$lang
-## [1] "fi"
-## 
-## $pxwebapi2.stat.fi$calls_per_period
-## [1] 30
-## 
-## $pxwebapi2.stat.fi$period_in_seconds
-## [1] 10
-## 
-## $pxwebapi2.stat.fi$max_values_to_download
-## [1] 1e+05
-## 
-## 
-## $api.scb.se
-## $api.scb.se$url
-## [1] "http://api.scb.se/OV0104/[version]/doris/[lang]/ssd"
-## 
-## $api.scb.se$version
-## [1] "v1"
-## 
-## $api.scb.se$lang
-## [1] "sv" "en"
-## 
-## $api.scb.se$calls_per_period
-## [1] 30
-## 
-## $api.scb.se$period_in_seconds
-## [1] 10
-## 
-## $api.scb.se$max_values_to_download
-## [1] 1e+05
+## [[2]]
+## api:         api.scb.se
+## limit(s):    30 calls per 10 sec. 
+##              Max 100000 values per call.
+## version(s):  v1 
+## language(s): sv, en 
+## base url:
+##  http://api.scb.se/OV0104/[version]/doris/[lang]/ssd
 ```
 
 

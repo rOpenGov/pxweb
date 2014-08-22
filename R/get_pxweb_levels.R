@@ -9,7 +9,7 @@
 #' @export
 #' @examples 
 #' \donttest{
-#' topnode_levels <- get_pxweb_levels(baseURL = base_url("sweSCB", "v1", "sv"))
+#' topnode_levels <- get_pxweb_levels(baseURL = base_url("api.scb.se", "v1", "sv"))
 #' }
 
 get_pxweb_levels <- function(

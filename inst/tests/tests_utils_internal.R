@@ -22,11 +22,23 @@ test_that(desc="api_timer()",{
 if(file.exists(api_file)) file.remove(api_file)
 
 
-#' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet"
-#' dims <- list(ContentsCode = c('*'),
-#'             Tid = c('*'))
-#' \dontrun{
-#' batches <- create_batch_list(url, dims)
-#' }
+
+api_tests_create_batch_list <- list(
+  list(
+    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
+    dims = list(ContentsCode = c('*'),
+                 Tid = c('*'))
+    )
+)
+
+
+test_that(desc="create_batch_list()",{  
+  for (test in api_tests_create_batch_list){
+  expect_that({
+    res <- create_batch_list(url=test$url, dims=test$dims)
+      }, 
+    not(throws_error()))
+  }
+})
 
 

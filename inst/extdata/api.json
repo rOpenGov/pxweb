@@ -1,12 +1,4 @@
 {
-  "foo.bar": { 
-      "url" : "http://foo.bar/[version]/[lang]",
-      "version": ["v1"], 
-      "lang": ["sv", "en"],
-      "calls_per_period": 1,
-      "period_in_seconds": 2,
-      "max_values_to_download" : 1000
-        },
 
   "pxwebapi2.stat.fi": {
       "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]/StatFin",
@@ -24,6 +16,14 @@
       "calls_per_period": 30,
       "period_in_seconds": 10,
       "max_values_to_download" : 100000
+        },
+
+  "foo.bar": { 
+      "url" : "http://foo.bar/[version]/[lang]",
+      "version": ["v1"], 
+      "lang": ["sv", "en"],
+      "calls_per_period": 1,
+      "period_in_seconds": 2,
+      "max_values_to_download" : 1000
         }
 }
-

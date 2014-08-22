@@ -3,12 +3,12 @@
 \alias{base_url}
 \title{Return base URL to API}
 \usage{
-base_url(database, version = "v1", lang = "en", ...)
+base_url(api, version = "v1", lang = "en", ...)
 }
 \arguments{
-\item{database}{API provider ('sweSCB' or 'statfi')}
+\item{api}{API provider ('api.scb.se' or 'pxwebapi2.stat.fi')}
 
-\item{version}{The version of SCB API to use. (Default: \code{v1})}
+\item{version}{The version of PXWEB API to use. (Default: \code{v1})}
 
 \item{lang}{The language (two letters) to use in the fetched data. (Default: \code{en})}
 
@@ -18,7 +18,7 @@ base_url(database, version = "v1", lang = "en", ...)
 ...
 }
 \examples{
-a <- base_url("sweSCB", "v2", "en")
+a <- base_url("api.scb.se", "v1", "sv")
 print(a)
 }
 

@@ -82,7 +82,7 @@ api_timer <- function(api_url, calls = 1){
   api_timestamp_file <- paste(tempdir(), "api_time_stamp.Rdata", sep="/")
   
   if(!file.exists(api_timestamp_file)){ # File doesn't exist
-    api_timer <- list(config = pxweb::api_parameters(api_url), 
+    api_timer <- list(config = api_parameters(api_url)[[1]], 
                       calls = rep(Sys.time(), calls))
     save(api_timer, file=api_timestamp_file)
   } else { # File exist
@@ -131,7 +131,7 @@ create_batch_list <- function(url, dims){
   node <- dim_size[[2]]
   
   # Get api parameters
-  api_param <- api_parameters(url)
+  api_param <- api_parameters(url)[[1]]
   
   # Calculate current chunk size
   chunk_size <- prod(dim_length)

@@ -3,9 +3,9 @@
 cat("\ntests_get_pxweb_metadata.R : ")
 
 api_tests_get_pxweb_metadata_baseURL <- list(
-  list(baseURL = base_url("sweSCB", "v1", "sv"),
+  list(baseURL = base_url("api.scb.se", "v1", "sv"),
        test_dims = c(21, 4)),
-  list(baseURL = base_url("sweSCB", "v1", "en"),
+  list(baseURL = base_url("api.scb.se", "v1", "en"),
        test_dims = c(16, 4))
   )
 
