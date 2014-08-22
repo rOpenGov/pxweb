@@ -27,11 +27,18 @@ data; and clean up the results.
 
 The API is a RESTful API. The data consists of a metadata part and a data part. The metadata part is structured in a hierarchical node tree, where each node contains information about any (sub-)nodes that are below it in the tree structure or, if the nodes is at the bottom of the tree structure, the data referenced by the node as well as what dimensions are available for the data at that subnode.
 
+## Installation
+
 Use the `devtools` package to install the latest version:
 ```r
 library("devtools")
 devtools::install_github("pxweb","rOpenGov")
 library(pxweb)
+```
+
+A tutorial is included with the package with:
+```r
+vignette(topic="pxweb_tutorial")
 ```
 
 ## Easy access to PX-web data

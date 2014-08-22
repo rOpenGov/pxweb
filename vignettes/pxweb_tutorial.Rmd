@@ -1,6 +1,6 @@
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{pxweb Markdown Vignette made with knitr}
+%\VignetteIndexEntry{pxweb}
 -->
 
 PX-WEB API Interface for R
@@ -20,7 +20,7 @@ welcome!
 
 [A number of organizations](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/) use to distribute hierarchical data. You can browse the available data sets at:
 
-* [SCB](Source: [SCB](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) (Statistiska centralbyrån) (Sweden)
+* [SCB](Source: [SCB](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) (Statistics Sweden)
 * [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) (Statistics Finland)
 * [Other organizations with PX-WEB API](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/)
 
