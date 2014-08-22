@@ -38,7 +38,7 @@ library(pxweb)
 
 A tutorial is included with the package with:
 ```r
-vignette(topic="pxweb_tutorial")
+vignette(topic="pxweb")
 ```
 
 ## Easy access to PX-web data
@@ -57,20 +57,20 @@ print(c(database, version, language))
 ```
 
 
-Data in the API is structured in a data tree and a wrapper function `findData()` has been written for easy navigation and access to data through the API. To get data, run the following from the R command line:
+Data in the API is structured in a data tree and a wrapper function `interactive_pxweb()` has been written for easy navigation and access to data through the API. To get data, run the following from the R command line:
 
 ```r
 # Define the database-specific base URL:
-baseURL <- base_url(database = "sweSCB", version = "v1", lang = "sv")
+baseURL <- base_url(database = "api.scb.se", version = "v1", lang = "sv")
 
 # Fetch the data from the specified database:
 d <- interactive_pxweb(baseURL)
 
 # Fetch the data from sweSCB (Swedish Statistics bureau)
-d <- interactive_pxweb(base_url(database = "sweSCB", version = "v1", lang = "sv"))
+d <- interactive_pxweb(base_url(database = "api.scb.se", version = "v1", lang = "sv"))
 
 # Fetch the data from statfi (Statistics Finland)
-d <- interactive_pxweb(base_url(database = "statfi", version = "v1", lang = "fi"))
+d <- interactive_pxweb(base_url(database = "pxwebapi2.stat.fi", version = "v1", lang = "fi"))
 ```
 
 The function will also automatically print (if requested) the exact
