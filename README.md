@@ -61,16 +61,16 @@ Data in the API is structured in a data tree and a wrapper function `findData()`
 
 ```r
 # Define the database-specific base URL:
-baseURL <- base_url(database = "sweSCB", version = "v1", language = "sv")
+baseURL <- base_url(database = "sweSCB", version = "v1", lang = "sv")
 
 # Fetch the data from the specified database:
-d <- findData(baseURL)
+d <- interactive_pxweb(baseURL)
 
 # Fetch the data from sweSCB (Swedish Statistics bureau)
-d <- findData(base_url(database = "sweSCB", version = "v1", language = "sv"))
+d <- interactive_pxweb(base_url(database = "sweSCB", version = "v1", lang = "sv"))
 
 # Fetch the data from statfi (Statistics Finland)
-d <- findData(base_url(database = "statfi", version = "v1", language = "fi"))
+d <- interactive_pxweb(base_url(database = "statfi", version = "v1", lang = "fi"))
 ```
 
 The function will also automatically print (if requested) the exact
