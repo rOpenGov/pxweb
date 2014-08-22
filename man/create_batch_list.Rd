@@ -23,14 +23,14 @@ get_pxweb_metadata call.
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'),
             ContentsCode = c('*'), Tid = c('*'))
-\dontrun{
+\donttest{
 batches <- create_batch_list(url, dims)
 }
 
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet"
 dims <- list(ContentsCode = c('*'),
             Tid = c('*'))
-\dontrun{
+\donttest{
 batches <- create_batch_list(url, dims)
 }
 }

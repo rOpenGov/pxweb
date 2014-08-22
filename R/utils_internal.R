@@ -113,14 +113,14 @@ api_timer <- function(api_url, calls = 1){
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
 #'             ContentsCode = c('*'), Tid = c('*'))
-#' \dontrun{
+#' \donttest{
 #' batches <- create_batch_list(url, dims)
 #' }
 #' 
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet"
 #' dims <- list(ContentsCode = c('*'),
 #'             Tid = c('*'))
-#' \dontrun{
+#' \donttest{
 #' batches <- create_batch_list(url, dims)
 #' }
 create_batch_list <- function(url, dims){
@@ -176,7 +176,7 @@ create_batch_list <- function(url, dims){
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
 #'             ContentsCode = c('*'), Tid = c('*'))
-#' \dontrun{
+#' \donttest{
 #' get_dim_size(url, dims)
 #' }
 #' 
@@ -184,7 +184,7 @@ create_batch_list <- function(url, dims){
 #' dims <- list(Alder = c('0', '1', '2', '3', '4'),
 #'              Kon = c('1', '2'),ContentsCode = c('BE0401AW'),
 #'              Tid = c('2014', '2015', '2016', '2017', '2018'))
-#' \dontrun{
+#' \donttest{
 #' get_dim_size(url, dims)
 #' }
 
@@ -227,7 +227,7 @@ get_dim_size <- function(url, dims, content_node=NULL){
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
 #'             ContentsCode = c('*'), Tid = c('*'))
-#' \dontrun{
+#' \donttest{
 #' call_size <- get_dim_size(url, dims)
 #' calculate_data_dim(call_size[[1]], TRUE)
 #' calculate_data_dim(call_size[[1]], FALSE)

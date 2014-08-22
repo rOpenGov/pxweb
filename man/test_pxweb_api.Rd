@@ -24,7 +24,7 @@ The function can be used to test a whole pxweb api by using the api base url.
 By using a branch in a tree the api is tested below this branch.
 }
 \examples{
-\dontrun{
+\donttest{
 test_data <- test_pxweb_api(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK")
 }
 }

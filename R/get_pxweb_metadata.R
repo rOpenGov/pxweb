@@ -11,7 +11,7 @@
 #' @export
 #' @examples
 #' api_url <- base_url("sweSCB", "v1", "sv")
-#' \dontrun{
+#' \donttest{
 #' top_node <- get_pxweb_metadata(api_url)
 #' 
 #' bottom_node <- get_pxweb_metadata("http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv")

@@ -21,7 +21,7 @@ To use "Item" selection, simply submit a value or vector of values with each dim
 For detailed examples see the installed example files in the \code{examples} folder of \code{path.package("pxweb")} (these are also viewable on the project's GitHub page).
 }
 \examples{
-\dontrun{
+\donttest{
 test_data <-
   get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
                  dims = list(ContentsCode = c('PR0101A1'), Tid = c('*')),

@@ -16,7 +16,7 @@
 #' \code{download_error} : Whether there were errors encountered during download
 #' 
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' test_data <- test_pxweb_api(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK")
 #' }
 #' @export

@@ -18,7 +18,7 @@ Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to si
 \examples{
 api_parameters() # List options
 baseURL <- base_url("sweSCB", "v1", "sv")
-\dontrun{
+\donttest{
 d <- interactive_pxweb(baseURL)
 }
 }

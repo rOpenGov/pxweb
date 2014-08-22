@@ -13,7 +13,7 @@
 #' @examples
 #' api_parameters() # List options
 #' baseURL <- base_url("sweSCB", "v1", "sv")
-#' \dontrun{
+#' \donttest{
 #' d <- interactive_pxweb(baseURL)
 #' }
 

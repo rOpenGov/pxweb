@@ -26,7 +26,7 @@ categories for each variable downloaded
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'),
             ContentsCode = c('*'), Tid = c('*'))
-\dontrun{
+\donttest{
 get_dim_size(url, dims)
 }
 
@@ -34,7 +34,7 @@ url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRe
 dims <- list(Alder = c('0', '1', '2', '3', '4'),
              Kon = c('1', '2'),ContentsCode = c('BE0401AW'),
              Tid = c('2014', '2015', '2016', '2017', '2018'))
-\dontrun{
+\donttest{
 get_dim_size(url, dims)
 }
 }
