@@ -1,5 +1,10 @@
-pxweb v0.3.5
+pxweb
 =======
+
+[![Build Status](https://api.travis-ci.org/rOpenGov/pxweb.png)](https://travis-ci.org/rOpenGov/pxweb)
+[![Stories in Ready](https://badge.waffle.io/ropengov/pxweb.png?label=TODO)](http://waffle.io/ropengov/pxweb)
+
+
 
 ## Introduction
 
