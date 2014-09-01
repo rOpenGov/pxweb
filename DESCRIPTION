@@ -1,8 +1,8 @@
 Package: pxweb
 Type: Package
 Title: R interface to the PX-WEB API
-Version: 0.3.51
-Date: 2014-08-22
+Version: 0.3.52
+Date: 2014-09-01
 Author: Mans Magnusson, Leo Lahti, Love Hansson
 Maintainer: Mans Magnusson <ropengov-forum@googlegroups.com>
 Description: Generic interface for the PX-WEB REST API to fetch information
@@ -15,7 +15,7 @@ Imports:
     stringr,
     RJSONIO,
     httr
-License: AGPL-3
+License: BSD_2_clause + file LICENSE
 Suggests:
     testthat,
     ggplot2,

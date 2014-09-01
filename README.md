@@ -3,24 +3,22 @@ pxweb v0.3.5
 
 ## Introduction
 
-pxweb is an R package to interface with the PX-WEB API.
+pxweb is an R package to interface with the PX-WEB API, and it offers
+methods to fetch information about the data hierarchy stored behind
+the PX-WEB API; extract metadata; fetch actual data; and clean up the
+results.
 
-This R package is in a preliminary alpha phase and the code is based
-on the very closely related
+The R package is in a development phase and the code is based on the
 [sweSCB](https://github.com/rOpenGov/sweSCB) package and the [demo
 version of the Statistics Finland
 API](http://pxwebapi2.stat.fi/api1.html). For more information, see
 [StatFi page](http://www.stat.fi/org/avoindata/api.html). We are now
 integrating the generic parts from these packages into a shared API
-package. All comments, issues, bug fixes and pull requests are very
+package. Comments, issues, bug fixes and pull requests are very
 welcome.
 
-This package is a part of the international R open government data and
-computation project [rOpenGov](http://ropengov.github.io/).
-
-The package offers methods to fetch information about the data
-hierarchy stored behind the PX-WEB API; extract metadata; fetch actual
-data; and clean up the results.
+The pxweb package is a part of the international R open government
+data and computation project [rOpenGov](http://ropengov.github.io/).
 
 
 ## A brief note on using the API
@@ -87,13 +85,11 @@ community](http://ropengov.github.io/contribute/).
 
 ## Development information
 
-This package is still in its early development stages. The package can
-already be used in its present form to construct a simple menu system,
-to mine the PX-web APIs for data, or to discover new data. However,
-work is needed to improve usability and widen the range of possible
-applications. You are invited to contribute to package development in
-any way you can and want to. You will, of course, be given due credit
-for your work.
+The package can be used to construct a simple menu system, to mine the
+PX-web APIs for data, or to discover new data. Further work is needed
+to improve usability and widen the range of possible applications. You
+are invited to contribute to package development in any way you can
+and want to. You will, of course, be given due credit for your work.
 
 ## Reporting bugs
 
@@ -103,6 +99,3 @@ IMPORTANT: When submitting a bug, you can make the lives of the developers easie
 - The output of `sessionInfo()`
 - The output of `packageVersion("pxweb")`
 
-## Open source license
-
-Please note that all source code contained in this project is open source licensed under the Affero Gnu Public License v3. This means that you are allowed to modify, use, and spread the source code freely withoug any permission from the author. HOWEVER, this source code and ANY derivatives thereof MUST be licensed with the same open source license. For further information about the AGPLv3, see LICENSE included with the source code of this package.
