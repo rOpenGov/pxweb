@@ -5,3 +5,6 @@ inst/extras/*~
 *.RData
 *.Rcheck
 *.Rout
+.Rproj.user
+.Rhistory
+*.Rproj
