@@ -114,7 +114,14 @@ api_tests_get_pxweb_data <- list(
                 "Tid" = c("2014M02")
     ),
     clean = TRUE
-  )    
+  ),
+  
+  list(
+    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/MI/MI0814/MarkanvTatortZonArea",
+    dims = list(Region = c('*'), Kmzon = c('*'), ArealStrandzon = c('*'), ContentsCode = c('*'), Tid = c('*')
+    ),
+    clean = TRUE
+  )
 )
 
 
