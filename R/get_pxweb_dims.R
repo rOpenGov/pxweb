@@ -1,4 +1,4 @@
-#' Get data dimensions form a bottom node in SCB API
+#' Get data dimensions form a bottom node in a PX-Web/PC-Axis API
 #' 
 #' Deparse and reorder data form the metadata object for pretty output
 #' 
