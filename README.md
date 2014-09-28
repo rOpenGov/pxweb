@@ -47,33 +47,33 @@ vignette(topic="pxweb")
 ## Easy access to PX-web data
 
 Various web services host PX-web data. To use the service, you need to
-specify the database, version and language. For available options,
+specify the api, version and language. For available options,
 use for instance:
 
 ```r
 # List options
 pars <- api_parameters() 
-database <- names(pars)[[2]]
-version <- pars[[database]]$version
-language <- pars[[database]]$lang
-print(c(database, version, language))
+api <- names(pars)[[2]]
+version <- pars[[api]]$version
+language <- pars[[api]]$lang
+print(c(api, version, language))
 ```
 
 
 Data in the API is structured in a data tree and a wrapper function `interactive_pxweb()` has been written for easy navigation and access to data through the API. To get data, run the following from the R command line:
 
 ```r
-# Define the database-specific base URL:
-baseURL <- base_url(database = "api.scb.se", version = "v1", lang = "sv")
+# Define the api-specific base URL:
+baseURL <- base_url(api = "api.scb.se", version = "v1", lang = "sv")
 
-# Fetch the data from the specified database:
+# Fetch the data from the specified api:
 d <- interactive_pxweb(baseURL)
 
 # Fetch the data from sweSCB (Swedish Statistics bureau)
-d <- interactive_pxweb(base_url(database = "api.scb.se", version = "v1", lang = "sv"))
+d <- interactive_pxweb(base_url(api = "api.scb.se", version = "v1", lang = "sv"))
 
 # Fetch the data from statfi (Statistics Finland)
-d <- interactive_pxweb(base_url(database = "pxwebapi2.stat.fi", version = "v1", lang = "fi"))
+d <- interactive_pxweb(base_url(api = "pxwebapi2.stat.fi", version = "v1", lang = "fi"))
 ```
 
 The function will also automatically print (if requested) the exact
