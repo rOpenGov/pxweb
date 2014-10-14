@@ -52,7 +52,7 @@ Some examples on using the R tools to fetch px-web API data.
 
 ```{r apiparameters, message=FALSE, eval=TRUE}
 library(pxweb)
-print(api_parameters())
+print(api_parameters("statfi"))
 ```
 
 ### Fetching data from [Statistics Finland](http://www.stat.fi/org/avoindata/api.html) PX-WEB API:

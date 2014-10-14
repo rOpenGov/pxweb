@@ -60,23 +60,124 @@ print(api_parameters())
 ```
 
 ```
-## [[1]]
-## api:         pxwebapi2.stat.fi
-## limit(s):    30 calls per 10 sec. 
-##              Max 100000 values per call.
-## version(s):  v1 
-## language(s): fi 
-## base url:
-##  http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]/StatFin 
+## $statfi
+## $statfi$url
+## [1] "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]/StatFin"
 ## 
-## [[2]]
-## api:         api.scb.se
-## limit(s):    30 calls per 10 sec. 
-##              Max 100000 values per call.
-## version(s):  v1 
-## language(s): sv, en 
-## base url:
-##  http://api.scb.se/OV0104/[version]/doris/[lang]/ssd
+## $statfi$version
+## [1] "v1"
+## 
+## $statfi$lang
+## [1] "fi"
+## 
+## $statfi$calls_per_period
+## [1] 30
+## 
+## $statfi$period_in_seconds
+## [1] 10
+## 
+## $statfi$max_values_to_download
+## [1] 1e+05
+## 
+## 
+## $pxnet2.stat.fi
+## $pxnet2.stat.fi$url
+## [1] "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]/StatFin"
+## 
+## $pxnet2.stat.fi$version
+## [1] "v1"
+## 
+## $pxnet2.stat.fi$lang
+## [1] "fi"
+## 
+## $pxnet2.stat.fi$calls_per_period
+## [1] 30
+## 
+## $pxnet2.stat.fi$period_in_seconds
+## [1] 10
+## 
+## $pxnet2.stat.fi$max_values_to_download
+## [1] 1e+05
+## 
+## 
+## $pxwebapi2.stat.fi
+## $pxwebapi2.stat.fi$url
+## [1] "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]/StatFin"
+## 
+## $pxwebapi2.stat.fi$version
+## [1] "v1"
+## 
+## $pxwebapi2.stat.fi$lang
+## [1] "fi"
+## 
+## $pxwebapi2.stat.fi$calls_per_period
+## [1] 30
+## 
+## $pxwebapi2.stat.fi$period_in_seconds
+## [1] 10
+## 
+## $pxwebapi2.stat.fi$max_values_to_download
+## [1] 1e+05
+## 
+## 
+## $scb
+## $scb$url
+## [1] "http://api.scb.se/OV0104/[version]/doris/[lang]/ssd"
+## 
+## $scb$version
+## [1] "v1"
+## 
+## $scb$lang
+## [1] "sv" "en"
+## 
+## $scb$calls_per_period
+## [1] 30
+## 
+## $scb$period_in_seconds
+## [1] 10
+## 
+## $scb$max_values_to_download
+## [1] 1e+05
+## 
+## 
+## $api.scb.se
+## $api.scb.se$url
+## [1] "http://api.scb.se/OV0104/[version]/doris/[lang]/ssd"
+## 
+## $api.scb.se$version
+## [1] "v1"
+## 
+## $api.scb.se$lang
+## [1] "sv" "en"
+## 
+## $api.scb.se$calls_per_period
+## [1] 30
+## 
+## $api.scb.se$period_in_seconds
+## [1] 10
+## 
+## $api.scb.se$max_values_to_download
+## [1] 1e+05
+## 
+## 
+## $foo.bar
+## $foo.bar$url
+## [1] "http://foo.bar/[version]/[lang]"
+## 
+## $foo.bar$version
+## [1] "v1"
+## 
+## $foo.bar$lang
+## [1] "sv" "en"
+## 
+## $foo.bar$calls_per_period
+## [1] 1
+## 
+## $foo.bar$period_in_seconds
+## [1] 2
+## 
+## $foo.bar$max_values_to_download
+## [1] 1000
 ```
 
 ### Fetching data from [Statistics Finland](http://www.stat.fi/org/avoindata/api.html) PX-WEB API:
@@ -143,10 +244,10 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.3.52 knitr_1.6   
+## [1] pxweb_0.4.22 knitr_1.6   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] data.table_1.9.2 evaluate_0.5.5   formatR_0.10     httr_0.4        
+##  [1] data.table_1.9.2 evaluate_0.5.5   formatR_1.0      httr_0.5        
 ##  [5] plyr_1.8.1       Rcpp_0.11.2      reshape2_1.4     RJSONIO_1.3-0   
 ##  [9] stringr_0.6.2    tools_3.1.1
 ```

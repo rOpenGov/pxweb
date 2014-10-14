@@ -6,11 +6,24 @@
 #' @export
 #' @examples api_parameters()
 api_parameters <- function(url=NULL) {
+
   api.file <- system.file("extdata/api.json", package = "pxweb")
   api.list <- RJSONIO::fromJSON(api.file)
-  if(!is.null(url)) api.list <- api.list[str_split(url, "/")[[1]][3]]
-  class(api.list) <- "api_parameters"
+
+  # If API is specified, pick the parameters
+  if(!is.null(url)) {
+    if (!url %in% names(api.list)) {
+      # http://api.scb.se/OV0104 into api.scb.se
+      api.name <- str_split(url, "/")[[1]][3]
+    } else {
+      api.name <- url
+    }
+    api.list <- api.list[api.name]
+    class(api.list) <- "api_parameters"
+  }
+
   return(api.list)
+
 }
 
 #' Print method for api_parameters.
