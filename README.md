@@ -69,7 +69,7 @@ baseURL <- base_url(api = "api.scb.se", version = "v1", lang = "sv")
 # Fetch the data from the specified api:
 d <- interactive_pxweb(baseURL)
 
-# Fetch the data from sweSCB (Swedish Statistics bureau)
+# Fetch the data from SCB (Statistics Sweden)
 d <- interactive_pxweb(base_url(api = "api.scb.se", version = "v1", lang = "sv"))
 
 # Fetch the data from statfi (Statistics Finland)
@@ -98,7 +98,7 @@ and want to. You will, of course, be given due credit for your work.
 
 ## Reporting bugs
 
-Please use the GitHub issue tracker for reporting bugs and making further feature requests.
+Please use the GitHub issue tracker [here](https://github.com/rOpenGov/pxweb/issues) for reporting bugs and making further feature requests.
 
 IMPORTANT: When submitting a bug, you can make the lives of the developers easier by submitting the following information along with your bug report:
 - The output of `sessionInfo()`
