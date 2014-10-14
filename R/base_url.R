@@ -20,7 +20,8 @@ base_url <- function(api, version = "v1", lang = "en", ...) {
   } else if (api == "pxwebapi2.stat.fi") {
 
     #Was: 
-    url <- paste(sprintf("http://pxwebapi2.stat.fi/PXWeb/api/%s/%s/StatFin",version,lang))
+    #url <- paste(sprintf("http://pxwebapi2.stat.fi/PXWeb/api/%s/%s/StatFin",version,lang))
+    url <- paste(sprintf("http://pxnet2.stat.fi/PXWeb/pxweb/%s/StatFin", lang))
 
   }
   return(url)
