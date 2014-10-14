@@ -17,11 +17,11 @@ base_url <- function(api, version = "v1", lang = "en", ...) {
 
     url <- paste(sprintf("http://api.scb.se/OV0104/%s/doris/%s/ssd",version,lang))
 
-  } else if (api == "pxwebapi2.stat.fi") {
+  } else if (api %in% c("pxnet2.stat.fi", "statfi")) {
 
     #Was: 
-    #url <- paste(sprintf("http://pxwebapi2.stat.fi/PXWeb/api/%s/%s/StatFin",version,lang))
-    url <- paste(sprintf("http://pxnet2.stat.fi/PXWeb/pxweb/%s/StatFin", lang))
+    url <- paste(sprintf("http://pxwebapi2.stat.fi/PXWeb/api/%s/%s/StatFin",version,lang))
+    #url <- paste(sprintf("http://pxnet2.stat.fi/PXWeb/pxweb/%s/StatFin", lang))
 
   }
   return(url)
