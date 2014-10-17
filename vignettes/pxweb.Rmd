@@ -13,6 +13,7 @@ reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
 
 
+
 ## Available data sources and tools
 
 [Installation](#installation) (Installation)  
@@ -26,6 +27,7 @@ welcome!
 
 ## <a name="installation"></a>Installation
 
+
 Install the stable release version in R:
 
 ```{r install, eval=FALSE}
@@ -37,6 +39,14 @@ Test the installation by loading the library:
 ```{r test, message=FALSE, warning=FALSE, eval=TRUE}
 library(pxweb)
 ```
+
+A tutorial is included with the package with:
+```r
+vignette(topic="pxweb")
+```
+
+
+### Other issues
 
 We also recommend setting the UTF-8 encoding:
 
@@ -60,8 +70,15 @@ print(api_parameters("statfi"))
 Interactive API query (not run):
 
 ```{r standardquery, message=FALSE, eval=FALSE}
-baseURL <- base_url("statfi", "v1", "fi")
+# Define the api-specific base URL:
+baseURL <- base_url(api = "api.scb.se", version = "v1", lang = "sv")
 d <- interactive_pxweb(baseURL)
+
+# Fetching data from SCB (Statistics Sweden)
+d <- interactive_pxweb(base_url(api = "scb", version = "v1", lang = "sv"))
+
+# Fetching data from statfi (Statistics Finland)
+d <- interactive_pxweb(base_url(api = "statfi", version = "v1", lang = "fi"))
 ```
 
 
@@ -74,6 +91,16 @@ Kindly cite the work as follows
 ```{r citation, message=FALSE, eval=TRUE}
 citation("pxweb")
 ```
+
+## About the API
+
+The data in this RESTful API consists of a metadata part and a data
+part. Metadata is structured in a hierarchical node tree, where each
+node contains information about subnodes that are below it in the tree
+or, if the nodes is at the bottom of the tree structure, the data
+referenced by the node as well as what dimensions are available for
+the data at that subnode.
+
 
 ## Session info
 
