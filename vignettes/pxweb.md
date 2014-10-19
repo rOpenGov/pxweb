@@ -13,6 +13,7 @@ reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
 
 
+
 ## Available data sources and tools
 
 [Installation](#installation) (Installation)  
@@ -25,6 +26,7 @@ welcome!
 * [Other organizations with PX-WEB API](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/)
 
 ## <a name="installation"></a>Installation
+
 
 Install the stable release version in R:
 
@@ -39,6 +41,14 @@ Test the installation by loading the library:
 ```r
 library(pxweb)
 ```
+
+A tutorial is included with the package with:
+```r
+vignette(topic="pxweb")
+```
+
+
+### Other issues
 
 We also recommend setting the UTF-8 encoding:
 
@@ -56,27 +66,18 @@ Some examples on using the R tools to fetch px-web API data.
 
 ```r
 library(pxweb)
-print(api_parameters())
+print(api_parameters("statfi"))
 ```
 
 ```
 ## [[1]]
-## api:         pxwebapi2.stat.fi
+## api:         statfi
 ## limit(s):    30 calls per 10 sec. 
 ##              Max 100000 values per call.
 ## version(s):  v1 
 ## language(s): fi 
 ## base url:
-##  http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]/StatFin 
-## 
-## [[2]]
-## api:         api.scb.se
-## limit(s):    30 calls per 10 sec. 
-##              Max 100000 values per call.
-## version(s):  v1 
-## language(s): sv, en 
-## base url:
-##  http://api.scb.se/OV0104/[version]/doris/[lang]/ssd
+##  http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]/StatFin
 ```
 
 ### Fetching data from [Statistics Finland](http://www.stat.fi/org/avoindata/api.html) PX-WEB API:
@@ -85,8 +86,15 @@ Interactive API query (not run):
 
 
 ```r
-baseURL <- base_url("statfi", "v1", "fi")
+# Define the api-specific base URL:
+baseURL <- base_url(api = "api.scb.se", version = "v1", lang = "sv")
 d <- interactive_pxweb(baseURL)
+
+# Fetching data from SCB (Statistics Sweden)
+d <- interactive_pxweb(base_url(api = "scb", version = "v1", lang = "sv"))
+
+# Fetching data from statfi (Statistics Finland)
+d <- interactive_pxweb(base_url(api = "statfi", version = "v1", lang = "fi"))
 ```
 
 
@@ -118,6 +126,16 @@ citation("pxweb")
 ##   }
 ```
 
+## About the API
+
+The data in this RESTful API consists of a metadata part and a data
+part. Metadata is structured in a hierarchical node tree, where each
+node contains information about subnodes that are below it in the tree
+or, if the nodes is at the bottom of the tree structure, the data
+referenced by the node as well as what dimensions are available for
+the data at that subnode.
+
+
 ## Session info
 
 This vignette was created with
@@ -143,10 +161,10 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.3.52 knitr_1.6   
+## [1] pxweb_0.4.23 knitr_1.6   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] data.table_1.9.2 evaluate_0.5.5   formatR_0.10     httr_0.4        
+##  [1] data.table_1.9.2 evaluate_0.5.5   formatR_1.0      httr_0.5        
 ##  [5] plyr_1.8.1       Rcpp_0.11.2      reshape2_1.4     RJSONIO_1.3-0   
 ##  [9] stringr_0.6.2    tools_3.1.1
 ```

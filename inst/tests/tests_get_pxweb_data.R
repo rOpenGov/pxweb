@@ -98,7 +98,8 @@ api_tests_get_pxweb_data <- list(
     test_dim = c(NA, NA)),
   
   list(
-    url = "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/StatFin/asu/asas/010_asas_tau_101.px",
+    paste(base_url("pxwebapi2.stat.fi", lang = "fi", ...), 
+    	           "/asu/asas/010_asas_tau_101.px", sep = ""),
     dims = list("Alue" = c("*"),
                  "Asuntokunnan koko" = c("*"),
                  "Talotyyppi" = c("S"),
