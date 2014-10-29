@@ -1,4 +1,12 @@
 {
+  "jordbruksverket": {
+      "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]/",
+      "version": ["v1"], 
+      "lang": ["sv"],
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
+            },
 
   "statfi": {
       "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]/StatFin",
