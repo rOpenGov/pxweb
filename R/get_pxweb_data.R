@@ -34,7 +34,8 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
 
      queryBody <- list()
      
-     # print("Define the query list")
+     # print("Define the query list") 
+     # batch_no <- i <- 1
      for (i in 1:length(batches$dims[[batch_no]])) {
         if (length(batches$dims[[batch_no]] [[dimNames[i]]]) == 1) {
            filter = ifelse(batches$dims[[batch_no]] [[dimNames[i]]] == "*", "all", "item")

@@ -18,9 +18,12 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
   stopifnot(class(url) == "character")
   
   # Convert to data table
+  # Store and change name to fix bug with varnames in data.table (cant have comma in varname)
+  colnames(data2clean) <- str_replace_all(colnames(data2clean), pattern = ",", ";")
   head <- colnames(data2clean)
+  #colnames(data2clean) <- as.character(1:length(head))
   data2clean <- as.data.table(data2clean)
-  
+    
   # Get metadata to use in creating factors of Tid and contentCode
   if(is.null(content_node)){
     contentNode <- get_pxweb_metadata(url)
@@ -35,11 +38,10 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
     calc_dim_type(dim_data2clean = dim(data2clean), 
                           dim_size = dim_size)
 
-  # Melt the data to long format  idvars 
+  # Melt the data to long format idvars 
   meltData <- data2clean[, list(variable = names(.SD), value = unlist(.SD, use.names = F)), 
                          by = eval(names(data2clean)[dim_var_type$row_variables])]
   meltData <- as.data.frame(meltData)
-
 
   # Convert to factors
   for (idvar in names(data2clean)[dim_var_type$row_variables]){
@@ -74,7 +76,7 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
   # Remove variables wiyhout any use
   meltData$value <- NULL
   meltData$variable <- NULL
-   
+
   return(list(data=meltData, content_node = contentNode))
 
 }
