@@ -7,7 +7,7 @@
 # the size of the data.frame is test_dim, if missing values the dimension is not tested.
 # in test_dim. If NA in test_dim, the dimension is ignored.
 
-cat("\ntests_get_pxweb_data.R : ")
+context("get_pxweb_data.R")
 
 api_tests_get_pxweb_data <- list(
   list(
@@ -98,7 +98,7 @@ api_tests_get_pxweb_data <- list(
     test_dim = c(NA, NA)),
   
   list(
-    paste(base_url("pxwebapi2.stat.fi", lang = "fi", ...), 
+    url = paste(base_url("pxnet2.stat.fi", lang = "fi"), 
     	           "/asu/asas/010_asas_tau_101.px", sep = ""),
     dims = list("Alue" = c("*"),
                  "Asuntokunnan koko" = c("*"),

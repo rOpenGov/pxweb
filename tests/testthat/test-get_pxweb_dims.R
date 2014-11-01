@@ -1,6 +1,6 @@
 # Test suits for the examples in the documentation
 
-cat("\ntests_get_pxweb_dims.R : ")
+context("get_pxweb_dims.R")
 
 test_that(desc="Examples in get_pxweb()",{
   

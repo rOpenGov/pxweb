@@ -1,6 +1,6 @@
 # Test suite for get_pxweb_metadata()
 
-cat("\ntests_get_pxweb_metadata.R : ")
+context("get_pxweb_metadata.R")
 
 api_tests_get_pxweb_metadata_baseURL <- list(
   list(baseURL = base_url("api.scb.se", "v1", "sv"),

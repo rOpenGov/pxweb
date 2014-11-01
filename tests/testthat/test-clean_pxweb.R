@@ -1,6 +1,6 @@
 # Test suite for clean_pxweb()
 
-cat("\ntests_clean_pxweb.R : ")
+context("clean_pxweb.R")
 
 api_tests_clean_pxweb <- list(
   list(

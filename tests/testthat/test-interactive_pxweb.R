@@ -1,6 +1,6 @@
 # Test suite interactive_pxweb()
 
-cat("\ntests_interactive_pxweb.R : ")
+context("interactive_pxweb.R")
 
 test_that(desc="findData.inputBaseCat",{
   load("testFiles.Rdata")

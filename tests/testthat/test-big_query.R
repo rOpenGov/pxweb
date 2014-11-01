@@ -1,6 +1,6 @@
 # Test suite for big queries
 
-cat("\ntests_big_queries.R : ")
+context("big_queries.R")
 
 api_tests_big_query <- list(
   list(

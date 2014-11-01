@@ -1,6 +1,6 @@
 # Test suite for test_pxweb_api()
 
-cat("\ntests_test_pxweb_api.R : ")
+context("test_pxweb_api.R")
 
 api_tests_test_pxweb_api <- list(
   list(
