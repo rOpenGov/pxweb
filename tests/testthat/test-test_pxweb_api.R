@@ -22,7 +22,7 @@ test_that(desc="test_pxweb_api()",{
   for (test in api_tests_test_pxweb_api){
     for (seed in test_seeds){
       expect_that({
-        test_data <- test_pxweb_api(url=test$url, seed=seed)}, 
+        test_data <- suppressMessages(test_pxweb_api(url=test$url, seed=seed))}, 
         not(throws_error()),
         info = paste(test$url, ", seed ", seed, sep=""))
       

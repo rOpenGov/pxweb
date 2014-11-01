@@ -14,7 +14,7 @@ test_that(desc="Examples in get_pxweb()",{
   
   expect_that({ 
     sink(file=tempfile())
-    dims <- get_pxweb_dims(metadata)
+    dims <- suppressMessages(get_pxweb_dims(metadata))
     sink()
   }, not(throws_error()))
   
