@@ -117,7 +117,7 @@ test_that(desc="clean_pxweb",{
       
       expect_true(object=all(
         test_data_clean[[1]]$values == 
-          suppressWarnings(as.numeric(stringr::str_replace_all(test_data[,ncol(test_data)],"\\s",""))))
+          suppressWarnings(as.numeric(str_replace_all(test_data[,ncol(test_data)],"\\s",""))))
       )
   }
 })
