@@ -1,6 +1,6 @@
 {
   "jordbruksverket": {
-      "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]/",
+      "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]/Jordbruksverkets%20statistikdatabas",
       "version": ["v1"], 
       "lang": ["sv"],
       "calls_per_period": 10,
