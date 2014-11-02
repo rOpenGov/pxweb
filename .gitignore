@@ -2,7 +2,6 @@ inst/extras/*.tar.gz
 inst/extras/*.RData
 inst/extras/*~
 *~
-*.RData
 *.Rcheck
 *.Rout
 .Rproj.user
