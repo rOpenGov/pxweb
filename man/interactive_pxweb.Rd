@@ -24,6 +24,7 @@ Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to si
 api_parameters() # List apis
 \donttest{
  d <- interactive_pxweb("scb")
+ d <- interactive_pxweb(api = "jordbruksverket")
  d <- interactive_pxweb("scb", language = "sv")
 }
 }

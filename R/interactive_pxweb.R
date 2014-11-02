@@ -16,6 +16,7 @@
 #'  api_parameters() # List apis
 #' \donttest{
 #'  d <- interactive_pxweb("scb")
+#'  d <- interactive_pxweb(api = "jordbruksverket")
 #'  d <- interactive_pxweb("scb", language = "sv")
 #' }
 
@@ -76,7 +77,7 @@ interactive_pxweb <- function(api, version = NULL, language = NULL, history = FA
       # If not the bottom node, traverse to the next node (and save the current node)
       # to be able to traverse back up in the node tree
       allNodes[[length(allNodes) + 1]] <- Node
-      Node <- get_pxweb_metadata(Node$URL[as.numeric(inputValue)])
+      Node <- get_pxweb_metadata(path = Node$URL[as.numeric(inputValue)])
 
     }
   }
