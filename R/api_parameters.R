@@ -19,11 +19,9 @@ api_parameters <- function(url=NULL) {
       api.name <- url
     }
     api.list <- api.list[api.name]
-    class(api.list) <- "api_parameters"
   }
-
+  class(api.list) <- "api_parameters"
   return(api.list)
-
 }
 
 #' Print method for api_parameters.
