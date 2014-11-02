@@ -115,9 +115,14 @@ test_that(desc="clean_pxweb",{
                             dims=test$dims,
                             content_node=get_pxweb_metadata(path=test$url))
       
+      # Can be removed ----
+      cat("",suppressWarnings(as.numeric(stringr::str_replace_all(test_data[,ncol(test_data)],"\\s",""))),
+            "\n",test_data_clean[[1]]$values)
+      # Can be removed ----
+      
       expect_true(object=all(
         test_data_clean[[1]]$values == 
-          suppressWarnings(as.numeric(str_replace_all(test_data[,ncol(test_data)],"\\s",""))))
+          suppressWarnings(as.numeric(stringr::str_replace_all(test_data[,ncol(test_data)],"\\s",""))))
       )
   }
 })
