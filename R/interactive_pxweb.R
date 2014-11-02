@@ -12,7 +12,7 @@
 #' @export
 #' @examples
 #' api_parameters() # List options
-#' baseURL <- base_url("sweSCB", "v1", "sv")
+#' baseURL <- base_url("scb", "v1", "sv")
 #' \donttest{
 #' d <- interactive_pxweb(baseURL)
 #' }
