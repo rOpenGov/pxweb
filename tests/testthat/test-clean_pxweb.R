@@ -120,9 +120,10 @@ test_that(desc="clean_pxweb",{
             "\n",test_data_clean[[1]]$values)
       # Can be removed ----
       
-      expect_true(object=all(
-        test_data_clean[[1]]$values == 
-          suppressWarnings(as.numeric(stringr::str_replace_all(test_data[,ncol(test_data)],"\\s",""))))
-      )
+      clean_part <- test_data_clean[[1]]$values
+      original_part <- 
+        suppressWarnings(as.numeric(stringr::str_replace_all(test_data[,ncol(test_data)],"\\s","")))
+      expect_true(object=all(clean_part[!is.na(clean_part)] == original_part[!is.na(clean_part)]))
+      
   }
 })
