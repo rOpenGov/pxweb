@@ -3,28 +3,15 @@
 #' ...
 #' 
 #' @param api API provider ('api.scb.se' or 'pxwebapi2.stat.fi')
-#' @param version The version of PXWEB API to use. (Default: \code{v1})
-#' @param lang The language (two letters) to use in the fetched data. (Default: \code{en})
+#' @param version The version of PXWEB API to use.
+#' @param language The language (two letters) to use in the fetched data.
 #' @param ... Additional parameters. These are currently ignored.
 #' @export
 #' @examples
-#' a <- base_url("api.scb.se", "v1", "sv")
+#' a <- base_url("api.scb.se")
 #' print(a)
 #' 
-base_url <- function(api, version = "v1", lang = "en", ...) {
-
-  if (api %in% c("api.scb.se", "scb")) {
-
-    url <- paste(sprintf("http://api.scb.se/OV0104/%s/doris/%s/ssd",version,lang))
-
-  } else if (api %in% c("pxnet2.stat.fi", "statfi")) {
-
-    #Was: 
-    #url <- paste(sprintf("http://pxwebapi2.stat.fi/PXWeb/api/%s/%s/StatFin",version,lang))
-    url <- paste(sprintf("http://pxnet2.stat.fi/PXWeb/api/%s/%s/StatFin", version, lang))
-
-  } else {
-    stop("Unkown API: ", api)
-  }
-  return(url)
+base_url <- function(api, version = NULL, language = NULL) {
+  api_object <- pxweb_api$new(api_name = api)
+  api_object$base_url(version = version, language = language)
 }

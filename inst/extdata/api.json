@@ -38,7 +38,7 @@
   "scb": { 
       "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]/ssd",
       "version": ["v1"], 
-      "lang": ["sv", "en"],
+      "lang": ["en", "sv"],
       "calls_per_period": 30,
       "period_in_seconds": 10,
       "max_values_to_download" : 100000
@@ -47,7 +47,7 @@
   "api.scb.se": { 
       "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]/ssd",
       "version": ["v1"], 
-      "lang": ["sv", "en"],
+      "lang": ["en", "sv"],
       "calls_per_period": 30,
       "period_in_seconds": 10,
       "max_values_to_download" : 100000

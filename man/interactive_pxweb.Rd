@@ -3,10 +3,15 @@
 \alias{interactive_pxweb}
 \title{Find and download data interactively from PX-WEB API}
 \usage{
-interactive_pxweb(baseURL, history = FALSE, ...)
+interactive_pxweb(api, version = NULL, language = NULL, history = FALSE,
+  ...)
 }
 \arguments{
-\item{baseURL}{The base URL to use, depending on the web service.}
+\item{api}{The name of the pxweb api to connect to or an \link{pxweb_api} object.}
+
+\item{version}{The version of the pxweb api to use. Default is pxweb api default, see \link{api_parameters}.}
+
+\item{language}{The language of the pxweb api to use. Default is english.}
 
 \item{history}{keep the history when the function is running.}
 
@@ -16,10 +21,10 @@ interactive_pxweb(baseURL, history = FALSE, ...)
 Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session.
 }
 \examples{
-api_parameters() # List options
-baseURL <- base_url("scb", "v1", "sv")
+api_parameters() # List apis
 \donttest{
-d <- interactive_pxweb(baseURL)
+ d <- interactive_pxweb("scb")
+ d <- interactive_pxweb("scb", language = "sv")
 }
 }
 \seealso{
