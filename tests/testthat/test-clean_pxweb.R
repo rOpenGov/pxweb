@@ -1,6 +1,6 @@
 # Test suite for clean_pxweb()
 
-cat("\ntests_clean_pxweb.R : ")
+context("clean_pxweb.R")
 
 api_tests_clean_pxweb <- list(
   list(
@@ -100,6 +100,8 @@ api_tests_clean_pxweb_numbers <- list(
   )
 )
 
+# test <- api_tests_clean_pxweb_numbers[[1]]
+
 test_that(desc="clean_pxweb",{
   for (test in api_tests_clean_pxweb_numbers){
       test_data <-
@@ -113,9 +115,15 @@ test_that(desc="clean_pxweb",{
                             dims=test$dims,
                             content_node=get_pxweb_metadata(path=test$url))
       
-      expect_true(object=all(
-        test_data_clean[[1]]$values == 
-          suppressWarnings(as.numeric(str_replace_all(test_data[,ncol(test_data)],"\\s",""))))
-      )
+      # Can be removed ----
+      cat("",suppressWarnings(as.numeric(stringr::str_replace_all(test_data[,ncol(test_data)],"\\s",""))),
+            "\n",test_data_clean[[1]]$values)
+      # Can be removed ----
+      
+      clean_part <- test_data_clean[[1]]$values
+      original_part <- 
+        suppressWarnings(as.numeric(stringr::str_replace_all(test_data[,ncol(test_data)],"\\s","")))
+      expect_true(object=all(clean_part[!is.na(clean_part)] == original_part[!is.na(clean_part)]))
+      
   }
 })

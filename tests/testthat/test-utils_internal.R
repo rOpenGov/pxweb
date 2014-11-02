@@ -1,6 +1,6 @@
 # Test suite for utils functions
 
-cat("\ntests_utils_internal.R : ")
+context("utils_internal.R")
 
 
 api_file <- paste(tempdir(), "api_time_stamp.Rdata", sep="/")

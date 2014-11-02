@@ -1,7 +1,7 @@
 # Test suite for doing multiple downloads from the SCB api
 
 # Tests to run multiple queries (calls)
-cat("\ntests_multiple_queries_data.R : ")
+context("multiple_queries_data.R")
 
 api_tests_multiple_data <- list(
   list(

@@ -1,6 +1,6 @@
 # Test suits for the base_url in the documentation
 
-cat("\ntests_base_url.R : ")
+context("base_url.R")
 
 test_that(desc="base_url()",{
 

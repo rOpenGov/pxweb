@@ -1,6 +1,6 @@
 # Test suits for the examples in the documentation
 
-cat("\ntests_pxweb_examples.R : ")
+context("tests_pxweb_examples.R")
 
 test_that(desc="Examples in get_pxweb()",{
 
@@ -14,7 +14,7 @@ test_that(desc="Examples in get_pxweb()",{
   
   expect_that({ 
     sink(file=tempfile())
-    dims <- get_pxweb_dims(metadata)
+    dims <- suppressMessages(get_pxweb_dims(metadata))
     sink()
   }, not(throws_error()))
   

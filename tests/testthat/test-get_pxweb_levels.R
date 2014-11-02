@@ -1,6 +1,6 @@
 # Test suits for the examples in the documentation
 
-cat("\ntests_get_pxweb_levels.R : ")
+context("get_pxweb_levels.R")
 
 test_that(desc="Examples in get_pxweb()",{
   

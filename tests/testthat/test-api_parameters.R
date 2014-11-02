@@ -1,6 +1,6 @@
 # Test suite for utils functions
 
-cat("\ntests_api_parameters.R : ")
+context("api_parameters.R")
 
 api_tests_utils_api_parameters <- list(
   "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
