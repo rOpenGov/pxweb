@@ -24,13 +24,17 @@ api_tests_big_query <- list(
     clean=FALSE)
   )
 
+# test <- api_tests_big_query[[1]]
+
 test_that(desc="big queries",{  
   for (test in api_tests_big_query){
     expect_that({
       test_data <- suppressMessages(
         get_pxweb_data(url = test$url,
                        dims = test$dims,
-                       clean = test$clean))}, 
+                       clean = test$clean)
+        )
+      }, 
       not(throws_error()),
       info = test$url)
     

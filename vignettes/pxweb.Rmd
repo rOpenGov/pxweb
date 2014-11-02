@@ -62,23 +62,22 @@ Some examples on using the R tools to fetch px-web API data.
 
 ```{r apiparameters, message=FALSE, eval=TRUE}
 library(pxweb)
-print(api_parameters("statfi"))
+print(api_parameters())
 ```
 
-### Fetching data from [Statistics Finland](http://www.stat.fi/org/avoindata/api.html) PX-WEB API:
+### Fetching data from PX-WEB API:
 
 Interactive API query (not run):
 
 ```{r standardquery, message=FALSE, eval=FALSE}
-# Define the api-specific base URL:
-baseURL <- base_url(api = "api.scb.se", version = "v1", lang = "sv")
-d <- interactive_pxweb(baseURL)
+# Get data from SCB (Statistics Sweden)
+d <- interactive_pxweb(api = "scb")
 
-# Fetching data from SCB (Statistics Sweden)
+# Fetching data from the swedish SCB (Statistics Sweden) pxweb API:
 d <- interactive_pxweb(base_url(api = "scb", version = "v1", lang = "sv"))
 
 # Fetching data from statfi (Statistics Finland)
-d <- interactive_pxweb(base_url(api = "statfi", version = "v1", lang = "fi"))
+d <- interactive_pxweb(base_url(api = "statfi")
 ```
 
 

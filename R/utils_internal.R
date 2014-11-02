@@ -131,7 +131,7 @@ create_batch_list <- function(url, dims){
   node <- dim_size[[2]]
   
   # Get api parameters
-  api_param <- api_parameters(url)[[1]]
+  api_param <- api_parameters(url = url)[[1]]
   
   # Calculate current chunk size
   chunk_size <- prod(dim_length)
@@ -243,4 +243,11 @@ calculate_data_dim <- function(dim_length, clean){
   return(res)
 }
 
+
+#' Change text to url
+#' 
+#' @param x text to change to url
+text_to_url <- function(x){
+  stringr::str_replace_all(string = x, pattern = " ", replacement = "%20")
+}
 

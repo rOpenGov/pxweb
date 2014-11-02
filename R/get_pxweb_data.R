@@ -26,7 +26,7 @@
 get_pxweb_data <- function(url, dims, clean = FALSE) {
 
    dimNames <- names(dims)
-   batches <- create_batch_list(url, dims)
+   batches <- create_batch_list(url = url, dims = dims)
    content_node <- batches$content_node
    b_list <- list()
    

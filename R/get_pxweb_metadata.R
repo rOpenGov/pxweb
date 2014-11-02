@@ -28,7 +28,7 @@ get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet 
       }
 
       if (is.null(node)) {
-	 url <- baseURL
+	      url <- baseURL
       } else {
          url <- buildPath(node, topnodes, baseURL)
       }
@@ -62,7 +62,7 @@ get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet 
       df$id <- as.character(df$id)
       
       # Set the URL of each subnode
-      df$URL <- buildPath(df$id, baseURL = url)
+      df$URL <- buildPath(text_to_url(df$id), baseURL = url)
       
    } else {
       

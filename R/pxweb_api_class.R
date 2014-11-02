@@ -7,7 +7,8 @@
 #' @field period_in_seconds The length of the period with allowed calls.
 #' @field max_values_to_download Maximum number of values to download with each call.
 #' 
-#' @export
+#' @export pxweb_api
+#' 
 pxweb_api <- 
   setRefClass(
     Class = "pxweb_api", 
@@ -35,7 +36,8 @@ pxweb_api <-
       
       
       base_url = function(version = NULL, language = NULL){
-        'Create base url from the api for version and language.'
+        'Create a base url from the api for version and language.
+         The first element of versions and languages is used as standard.'
         if(is.null(version)) {
           version <- .self$versions[1]
         } else {
@@ -96,7 +98,7 @@ pxweb_api <-
       }, 
                   
       check_alt = function(version = NULL, language = NULL){
-        'Check if the alternative exist in the object.'
+        'Check if the version/language alternative exist in the object.'
         if(!is.null(version)) {
           stopifnot(version %in% .self$versions)
         }
