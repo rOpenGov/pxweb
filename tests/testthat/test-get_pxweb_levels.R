@@ -5,7 +5,8 @@ context("get_pxweb_levels.R")
 test_that(desc="Examples in get_pxweb()",{
   
   expect_that({ 
-    lev <- get_pxweb_levels(baseURL = base_url("api.scb.se", "v1", "sv"))
+    lev <- get_pxweb_levels(baseURL = 
+      paste0(pxweb_api$new("scb")$base_url(language = "sv"), "/ssd"))
   }, not(throws_error()))
   
 })  

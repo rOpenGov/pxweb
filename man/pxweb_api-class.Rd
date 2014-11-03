@@ -36,5 +36,12 @@ The first element of versions and languages is used as standard.}
 api_name.}
 
 \item{\code{initialize(api_name = NULL, ...)}}{Create a new pxweb_api object.}
+
+\item{\code{test_api()}}{Test to connect to the api and download "the first file"
+in each api version/language.}
 }}
+\examples{
+scb_pxweb_api <- pxweb_api$new(api_name="scb")
+ scb_pxweb_api$test_api()
+}
 

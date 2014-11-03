@@ -7,8 +7,12 @@
 #' @field period_in_seconds The length of the period with allowed calls.
 #' @field max_values_to_download Maximum number of values to download with each call.
 #' 
+#' @examples
+#'  scb_pxweb_api <- pxweb_api$new(api_name="scb")
+#'  scb_pxweb_api$test_api()
 #' @export pxweb_api
 #' 
+
 pxweb_api <- 
   setRefClass(
     Class = "pxweb_api", 
@@ -62,18 +66,11 @@ pxweb_api <-
         if(is.null(api_name)){
           check_input(...)
           .self$initFields(...)
-          # Check that all urls are working
-          for (v in to_check$versions){
-            for (l in to_check$languages){
-              http_ok <- httr::url_ok(.self$base_url())
-              if(!http_ok) warning(.self$base_url(), " is not working.", call. = FALSE)
-            }
-          }
+          .self$test_api()
         } else {
           .self$get_api(api_name)
         }
       },
-      
       
       check_input = function(...){
         'Check the input that it is ok.'
@@ -96,6 +93,33 @@ pxweb_api <-
           fields_in_class %in% names(to_check)
         if(!all(all_fields)) stop(paste0(paste(fields_in_class[!all_fields],collapse = ", "), " is missing."), call. = FALSE)
       }, 
+      
+      test_api = function(){
+        'Test to connect to the api and download "the first file"
+         in each api version/language.'
+        for (v in .self$versions){
+          for (l in .self$languages){
+            stopifnot(httr::url_success(.self$base_url(version = v, language = l)))
+            node <- get_pxweb_metadata(choose_pxweb_database_url(.self$base_url(version = v, language = l), pre_choice = 1))
+            while(node$type[1] == "l"){
+              node <- get_pxweb_metadata(path = node$URL[1])
+            }
+            
+            call_meta_data <- suppressMessages(get_pxweb_dims(get_pxweb_metadata(path = node$URL[1])))
+            test_dim_list <- vector("list", length(call_meta_data))
+            for(i in seq_along(call_meta_data)){
+              test_dim_list[[i]] <- call_meta_data[[i]]$values[1]
+              names(test_dim_list)[i] <- names(call_meta_data)[i]
+            }
+            res <- get_pxweb_data(url = node$URL[1], dims = test_dim_list, clean = FALSE)
+            if (!is.data.frame(res)) stop(paste0("Could not download data from ", 
+                                                 node$URL[1]),
+                                                 call = FALSE)
+          }
+        }
+        message("pxweb api ok.")
+        invisible(TRUE)
+      },
                   
       check_alt = function(version = NULL, language = NULL){
         'Check if the version/language alternative exist in the object.'
@@ -106,11 +130,9 @@ pxweb_api <-
           stopifnot(language %in% .self$languages)
         }
       }#,
-      #send_to_developers = function(){
-      #  'Print out as json object, constructing api and maintainer e-mail.'
-      #  # Se
-      #}      
+#      add_to_api_cataloge = function(){
+#        'Print out as json object, constructing api and maintainer e-mail.'
+#        # Se
+#      }      
       )
   )        
-
-

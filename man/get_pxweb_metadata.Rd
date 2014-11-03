@@ -23,7 +23,7 @@ get_pxweb_metadata(path = NULL, node = NULL, topnodes = NULL,
 Get data from the API. If at the lowest node, provide the user with a friendly message about this.
 }
 \examples{
-api_url <- base_url("api.scb.se", "v1", "sv")
+api_url <- base_url("scb", language = "sv")
 \donttest{
 top_node <- get_pxweb_metadata(api_url)
 
