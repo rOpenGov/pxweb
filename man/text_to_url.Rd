@@ -6,7 +6,7 @@
 text_to_url(x)
 }
 \arguments{
-\item{text}{to change to url}
+\item{x}{text to change to url}
 }
 \description{
 Change text to url
