@@ -57,6 +57,20 @@ We also recommend setting the UTF-8 encoding:
 Sys.setlocale(locale="UTF-8") 
 ```
 
+### Prerequisites for Fedora 20
+If you have problems with using pxweb using Fedora 20, run following Terminal commands before installing pxweb:
+```bash
+sudo yum update
+sudo yum install curl curl-devel
+```
+
+### Prerequisites for Ubuntu 14.04 LTS/Linux Mint
+If you have problems with using pxweb using Ubuntu 14.04 LTS/Linux Mint, run following Terminal commands before installing pxweb:
+```bash
+sudo apt-get update
+sudo apt-get install libcurl4-openssl-dev
+```
+
 ## <a name="examples"></a>Examples
 
 Some examples on using the R tools to fetch px-web API data.
