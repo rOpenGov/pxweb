@@ -12,7 +12,7 @@ test_that(desc="api_timer()",{
     res <-
       system.time(
         for(i in 1:4){
-          pxweb:::api_timer(api_url="http://foo.bar/")     
+          pxweb:::api_timer(api_url="http://httpbin.org/")     
         })}, 
     not(throws_error()))
   

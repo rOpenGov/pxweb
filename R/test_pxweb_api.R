@@ -24,7 +24,19 @@
 #'  
 test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time())){
 
-  nodes <- test_pxweb_api_get_nodes(url=url)
+  node0 <- get_pxweb_metadata(path=url)
+  if("dbid" %in% names(node0)){
+    nodes <- list()
+    for(dbid in node0$dbid){
+      message(paste0("\nPXWEB DATABASE: ", dbid, "\n"))
+      nodes[[length(nodes) + 1]] <- 
+        test_pxweb_api_get_nodes(url=paste0(url, "/", text_to_url(dbid)))
+    }
+    nodes <- do.call("rbind", nodes)
+  } else {
+    nodes <- test_pxweb_api_get_nodes(url=url)
+  }
+
   message("\n")
   nodes_list <- test_pxweb_api_get_node_metadata(nodes=nodes)
   message("\n")
@@ -34,3 +46,5 @@ test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time()))
   res_data <- rbind.fill(nodes[nodes$type == "l", ], res$data)
   return(list(data=res_data, calls=res$calls))
 }
+
+#test_pxweb_api(url = pxweb_api$new("orebro")$base_url())

@@ -30,9 +30,10 @@ interactive_pxweb <- function(api, version = NULL, language = NULL, history = FA
     stop("api is not an api name or pxweb_api object", call. = FALSE)
   }
   
-  # Get top node
+  # Choose DB and get top node
   baseURL <- api_obj$base_url(version = version, language = language)
-  Node <- get_pxweb_metadata(baseURL = baseURL) 
+  dbURL <- choose_pxweb_database_url(baseURL)
+  Node <- get_pxweb_metadata(baseURL = dbURL) 
   
   # List to store nodes
   allNodes <- list()

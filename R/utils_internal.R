@@ -243,11 +243,17 @@ calculate_data_dim <- function(dim_length, clean){
   return(res)
 }
 
-
 #' Change text to url
 #' 
-#' @param x text to change to url
+#' @param x text to change to url-unicode
 text_to_url <- function(x){
-  stringr::str_replace_all(string = x, pattern = " ", replacement = "%20")
+  x <- stringr::str_replace_all(string = x, pattern = " ", replacement = "%20")
+  x <- stringr::str_replace_all(string = x, pattern = "\u00E5", replacement = "%C3%A5")  
+  x <- stringr::str_replace_all(string = x, pattern = "\u00E4", replacement = "%C3%A4")  
+  x <- stringr::str_replace_all(string = x, pattern = "\u00F6", replacement = "%C3%B6")
+  x <- stringr::str_replace_all(string = x, pattern = "\u00C5", replacement = "%C3%85")
+  x <- stringr::str_replace_all(string = x, pattern = "\u00C4", replacement = "%C3%84")
+  x <- stringr::str_replace_all(string = x, pattern = "\u00D6", replacement = "%C3%96")
+  x
 }
 

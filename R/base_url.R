@@ -8,7 +8,7 @@
 #' @param ... Additional parameters. These are currently ignored.
 #' @export
 #' @examples
-#' a <- base_url("api.scb.se")
+#' a <- base_url("scb")
 #' print(a)
 #' 
 base_url <- function(api, version = NULL, language = NULL) {

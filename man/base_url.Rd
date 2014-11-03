@@ -18,7 +18,7 @@ base_url(api, version = NULL, language = NULL)
 ...
 }
 \examples{
-a <- base_url("api.scb.se")
+a <- base_url("scb")
 print(a)
 }
 
