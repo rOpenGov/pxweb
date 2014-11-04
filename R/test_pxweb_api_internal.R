@@ -8,6 +8,7 @@
 #' \code{checked} : The node has been checked
 #' \code{error} : Whether there were errors encountered with the call
 #' @import data.table 
+
 test_pxweb_api_get_nodes <- function(url){
 
   nodes <- as.data.table(get_pxweb_metadata(path=url))

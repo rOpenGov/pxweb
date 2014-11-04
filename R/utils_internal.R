@@ -82,7 +82,7 @@ api_timer <- function(api_url, calls = 1){
   api_timestamp_file <- paste(tempdir(), "api_time_stamp.Rdata", sep="/")
   
   if(!file.exists(api_timestamp_file)){ # File doesn't exist
-    api_timer <- list(config = pxweb::api_parameters(api_url), 
+    api_timer <- list(config = api_parameters(api_url)[[1]], 
                       calls = rep(Sys.time(), calls))
     save(api_timer, file=api_timestamp_file)
   } else { # File exist
@@ -113,14 +113,14 @@ api_timer <- function(api_url, calls = 1){
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
 #'             ContentsCode = c('*'), Tid = c('*'))
-#' \dontrun{
+#' \donttest{
 #' batches <- create_batch_list(url, dims)
 #' }
 #' 
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet"
 #' dims <- list(ContentsCode = c('*'),
 #'             Tid = c('*'))
-#' \dontrun{
+#' \donttest{
 #' batches <- create_batch_list(url, dims)
 #' }
 create_batch_list <- function(url, dims){
@@ -131,7 +131,7 @@ create_batch_list <- function(url, dims){
   node <- dim_size[[2]]
   
   # Get api parameters
-  api_param <- api_parameters(url)
+  api_param <- api_parameters(url = url)[[1]]
   
   # Calculate current chunk size
   chunk_size <- prod(dim_length)
@@ -176,7 +176,7 @@ create_batch_list <- function(url, dims){
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
 #'             ContentsCode = c('*'), Tid = c('*'))
-#' \dontrun{
+#' \donttest{
 #' get_dim_size(url, dims)
 #' }
 #' 
@@ -184,7 +184,7 @@ create_batch_list <- function(url, dims){
 #' dims <- list(Alder = c('0', '1', '2', '3', '4'),
 #'              Kon = c('1', '2'),ContentsCode = c('BE0401AW'),
 #'              Tid = c('2014', '2015', '2016', '2017', '2018'))
-#' \dontrun{
+#' \donttest{
 #' get_dim_size(url, dims)
 #' }
 
@@ -227,7 +227,7 @@ get_dim_size <- function(url, dims, content_node=NULL){
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
 #'             ContentsCode = c('*'), Tid = c('*'))
-#' \dontrun{
+#' \donttest{
 #' call_size <- get_dim_size(url, dims)
 #' calculate_data_dim(call_size[[1]], TRUE)
 #' calculate_data_dim(call_size[[1]], FALSE)
@@ -243,4 +243,17 @@ calculate_data_dim <- function(dim_length, clean){
   return(res)
 }
 
+#' Change text to url
+#' 
+#' @param x text to change to url-unicode
+text_to_url <- function(x){
+  x <- stringr::str_replace_all(string = x, pattern = " ", replacement = "%20")
+  x <- stringr::str_replace_all(string = x, pattern = "\u00E5", replacement = "%C3%A5")  
+  x <- stringr::str_replace_all(string = x, pattern = "\u00E4", replacement = "%C3%A4")  
+  x <- stringr::str_replace_all(string = x, pattern = "\u00F6", replacement = "%C3%B6")
+  x <- stringr::str_replace_all(string = x, pattern = "\u00C5", replacement = "%C3%85")
+  x <- stringr::str_replace_all(string = x, pattern = "\u00C4", replacement = "%C3%84")
+  x <- stringr::str_replace_all(string = x, pattern = "\u00D6", replacement = "%C3%96")
+  x
+}
 

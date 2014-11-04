@@ -1,7 +1,7 @@
 # Test suite for doing multiple downloads from the SCB api
 
 # Tests to run multiple queries (calls)
-cat("\ntests_multiple_queries_data.R : ")
+context("multiple_queries_data.R")
 
 api_tests_multiple_data <- list(
   list(
@@ -11,14 +11,14 @@ api_tests_multiple_data <- list(
     clean = FALSE)
 )
 
-api_config <- pxweb::api_parameters(url=api_tests_multiple_data[[1]]$url)
+api_config <- pxweb::api_parameters(url=api_tests_multiple_data[[1]]$url)[[1]]
 Sys.sleep(time=api_config$period_in_seconds)
 api_file <- paste(tempdir(), "api_time_stamp.Rdata", sep="/")
 if(file.exists(api_file)) file.remove(api_file)
 
 test_that(desc="multiple data calls",{  
   for (test in api_tests_multiple_data){
-    api_config <- pxweb::api_parameters(url=test$url)
+    api_config <- pxweb::api_parameters(url=test$url)[[1]]
     
     expect_that({
       for(i in 1:(api_config$calls_per_period + 10)){
@@ -32,12 +32,14 @@ test_that(desc="multiple data calls",{
 
 
 api_tests_multiple_metadata <- list(
-  pxweb::base_url("sweSCB", "v1", "sv")
+  pxweb::base_url("scb", version = "v1", language = "sv")
 )
+
+# test <- api_tests_multiple_metadata[[1]]
 
 test_that(desc="multiple metadata calls",{  
   for (test in api_tests_multiple_metadata){
-    api_config <- pxweb::api_parameters(url=test)
+    api_config <- pxweb::api_parameters(url=test)[[1]]
     
     expect_that({
       for(i in 1:(api_config$calls_per_period + 10)){

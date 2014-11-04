@@ -2,7 +2,9 @@
 #'
 #' @description Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session. 
 #' 
-#' @param baseURL The base URL to use, depending on the web service. 
+#' @param api The name of the pxweb api to connect to or an \link{pxweb_api} object.
+#' @param version The version of the pxweb api to use. Default is pxweb api default, see \link{api_parameters}.
+#' @param language The language of the pxweb api to use. Default is english.
 #' @param history keep the history when the function is running.
 #' @param ... further parameters. These are currently ignored.
 #' 
@@ -11,16 +13,27 @@
 #' \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_data}}
 #' @export
 #' @examples
-#' api_parameters() # List options
-#' baseURL <- base_url("sweSCB", "v1", "sv")
-#' \dontrun{
-#' d <- interactive_pxweb(baseURL)
+#'  api_parameters() # List apis
+#' \donttest{
+#'  d <- interactive_pxweb("scb")
+#'  d <- interactive_pxweb(api = "jordbruksverket")
+#'  d <- interactive_pxweb("scb", language = "sv")
 #' }
 
-interactive_pxweb <- function(baseURL, history = FALSE, ...){
+interactive_pxweb <- function(api, version = NULL, language = NULL, history = FALSE,...){
 
-  # Get top node
-  Node <- get_pxweb_metadata(baseURL = baseURL) 
+  if(is.character(api) && length(api) == 1) {
+    api_obj <- pxweb_api$new(api_name = api)
+  } else if (class(api) == "pxweb_api") {
+    api_obj <- api
+  } else {
+    stop("api is not an api name or pxweb_api object", call. = FALSE)
+  }
+  
+  # Choose DB and get top node
+  baseURL <- api_obj$base_url(version = version, language = language)
+  dbURL <- choose_pxweb_database_url(baseURL)
+  Node <- get_pxweb_metadata(baseURL = dbURL) 
   
   # List to store nodes
   allNodes <- list()
@@ -65,7 +78,7 @@ interactive_pxweb <- function(baseURL, history = FALSE, ...){
       # If not the bottom node, traverse to the next node (and save the current node)
       # to be able to traverse back up in the node tree
       allNodes[[length(allNodes) + 1]] <- Node
-      Node <- get_pxweb_metadata(Node$URL[as.numeric(inputValue)])
+      Node <- get_pxweb_metadata(path = Node$URL[as.numeric(inputValue)])
 
     }
   }

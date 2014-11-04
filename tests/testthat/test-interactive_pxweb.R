@@ -1,9 +1,9 @@
 # Test suite interactive_pxweb()
 
-cat("\ntests_interactive_pxweb.R : ")
+context("interactive_pxweb.R")
 
 test_that(desc="findData.inputBaseCat",{
-  load("testFiles.Rdata")
+  load(system.file("extdata/test_files/testFiles.Rdata", package = "pxweb"))
   expect_output(findData.inputBaseCat(1:2,test_codedAlt),
                 "('q' = Quit, 'b' = Back)")
   expect_output(findData.inputBaseCat(c(3,6),test_codedAlt),
@@ -52,13 +52,13 @@ test_that(desc="findData.inputConvert",{
 })
 
 test_that(desc="download_pxweb",{
-  load("testFiles.Rdata")
+  load(system.file("extdata/test_files/testFiles.Rdata", package = "pxweb"))
   expect_output(download_pxweb(dataNode = testNullNode, test_input = c("n", "n", "y")),
                 "To download the same data again, use the following code:")
 })
 
 test_that(desc="findData.input",{
-  load("testFiles.Rdata")
+  load(system.file("extdata/test_files/testFiles.Rdata", package = "pxweb"))
   
   expect_that(findData.input(type="yesno","Testing 'y'", test_input="y", silent=TRUE),is_equivalent_to("y"))
   expect_that(findData.input(type="yesno","Testing 'n'", test_input="n", silent=TRUE),is_equivalent_to("n"))

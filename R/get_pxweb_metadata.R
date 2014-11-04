@@ -10,8 +10,8 @@
 #' @param ... Further arguments passed to  \code{base_url()}.
 #' @export
 #' @examples
-#' api_url <- base_url("sweSCB", "v1", "sv")
-#' \dontrun{
+#' api_url <- base_url("scb", language = "sv")
+#' \donttest{
 #' top_node <- get_pxweb_metadata(api_url)
 #' 
 #' bottom_node <- get_pxweb_metadata("http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv")
@@ -28,7 +28,7 @@ get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet 
       }
 
       if (is.null(node)) {
-	 url <- baseURL
+	      url <- baseURL
       } else {
          url <- buildPath(node, topnodes, baseURL)
       }
@@ -62,7 +62,7 @@ get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet 
       df$id <- as.character(df$id)
       
       # Set the URL of each subnode
-      df$URL <- buildPath(df$id, baseURL = url)
+      df$URL <- buildPath(text_to_url(df$id), baseURL = url)
       
    } else {
       

@@ -2,26 +2,16 @@
 #' 
 #' ...
 #' 
-#' @param database API provider ('sweSCB' or 'statfi')
-#' @param version The version of SCB API to use. (Default: \code{v1})
-#' @param lang The language (two letters) to use in the fetched data. (Default: \code{en})
+#' @param api API provider ('api.scb.se' or 'pxwebapi2.stat.fi')
+#' @param version The version of PXWEB API to use.
+#' @param language The language (two letters) to use in the fetched data.
 #' @param ... Additional parameters. These are currently ignored.
 #' @export
 #' @examples
-#' a <- base_url("sweSCB", "v2", "en")
+#' a <- base_url("scb")
 #' print(a)
 #' 
-base_url <- function(database, version = "v1", lang = "en", ...) {
-
-  if (database == "sweSCB") {
-
-    url <- paste(sprintf("http://api.scb.se/OV0104/%s/doris/%s/ssd",version,lang))
-
-  } else if (database == "statfi") {
-
-    #Was: 
-    url <- paste(sprintf("http://pxwebapi2.stat.fi/PXWeb/api/%s/%s/StatFin",version,lang))
-
-  }
-  return(url)
+base_url <- function(api, version = NULL, language = NULL) {
+  api_object <- pxweb_api$new(api_name = api)
+  api_object$base_url(version = version, language = language)
 }

@@ -1,15 +1,24 @@
 {
-  "foo.bar": { 
-      "url" : "http://foo.bar/[version]/[lang]",
+  "jordbruksverket": {
+      "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]",
       "version": ["v1"], 
-      "lang": ["sv", "en"],
-      "calls_per_period": 1,
-      "period_in_seconds": 2,
+      "lang": ["sv"],
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
       "max_values_to_download" : 1000
-        },
+            },
 
-  "pxwebapi2.stat.fi": {
-      "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]/StatFin",
+  "orebro": {
+      "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
+      "version": ["v1"], 
+      "lang": ["en","sv"],
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
+            },
+
+  "statfi": {
+      "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
       "version": ["v1"], 
       "lang": ["fi"],
       "calls_per_period": 30,
@@ -17,13 +26,39 @@
       "max_values_to_download" : 100000
             },
 
-  "api.scb.se": { 
-      "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]/ssd",
+  "pxnet2.stat.fi": {
+      "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
       "version": ["v1"], 
-      "lang": ["sv", "en"],
+      "lang": ["fi"],
       "calls_per_period": 30,
       "period_in_seconds": 10,
       "max_values_to_download" : 100000
+            },
+
+  "pxwebapi2.stat.fi": {
+      "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
+      "version": ["v1"], 
+      "lang": ["fi"],
+      "calls_per_period": 30,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 100000
+            },
+
+  "scb": { 
+      "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]",
+      "version": ["v1"], 
+      "lang": ["en", "sv"],
+      "calls_per_period": 30,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 100000
+        },
+
+  "foo.bar": { 
+      "url" : "http://httpbin.org/status/404",
+      "version": ["v1"], 
+      "lang": ["sv", "en"],
+      "calls_per_period": 1,
+      "period_in_seconds": 2,
+      "max_values_to_download" : 1000
         }
 }
-

@@ -4,5 +4,5 @@
 #' 
 #' @name pxweb
 #' @docType package
-#' @import data.table httr RJSONIO stringr
+#' @import data.table httr RJSONIO stringr methods
 NULL

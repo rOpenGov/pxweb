@@ -13,6 +13,7 @@ reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
 
 
+
 ## Available data sources and tools
 
 [Installation](#installation) (Installation)  
@@ -21,10 +22,11 @@ welcome!
 [A number of organizations](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/) use to distribute hierarchical data. You can browse the available data sets at:
 
 * [SCB](Source: [SCB](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) (Statistics Sweden)
-* [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) (Statistics Finland)
+* [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](http://pxnet2.stat.fi/api1.html)
 * [Other organizations with PX-WEB API](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/)
 
 ## <a name="installation"></a>Installation
+
 
 Install the stable release version in R:
 
@@ -37,6 +39,14 @@ Test the installation by loading the library:
 ```{r test, message=FALSE, warning=FALSE, eval=TRUE}
 library(pxweb)
 ```
+
+A tutorial is included with the package with:
+```r
+vignette(topic="pxweb")
+```
+
+
+### Other issues
 
 We also recommend setting the UTF-8 encoding:
 
@@ -55,13 +65,19 @@ library(pxweb)
 print(api_parameters())
 ```
 
-### Fetching data from [Statistics Finland](http://www.stat.fi/org/avoindata/api.html) PX-WEB API:
+### Fetching data from PX-WEB API:
 
 Interactive API query (not run):
 
 ```{r standardquery, message=FALSE, eval=FALSE}
-baseURL <- base_url("statfi", "v1", "fi")
-d <- interactive_pxweb(baseURL)
+# Get data from SCB (Statistics Sweden)
+d <- interactive_pxweb(api = "scb")
+
+# Fetching data from the swedish SCB (Statistics Sweden) pxweb API:
+d <- interactive_pxweb(base_url(api = "scb", version = "v1", lang = "sv"))
+
+# Fetching data from statfi (Statistics Finland)
+d <- interactive_pxweb(base_url(api = "statfi")
 ```
 
 
@@ -74,6 +90,16 @@ Kindly cite the work as follows
 ```{r citation, message=FALSE, eval=TRUE}
 citation("pxweb")
 ```
+
+## About the API
+
+The data in this RESTful API consists of a metadata part and a data
+part. Metadata is structured in a hierarchical node tree, where each
+node contains information about subnodes that are below it in the tree
+or, if the nodes is at the bottom of the tree structure, the data
+referenced by the node as well as what dimensions are available for
+the data at that subnode.
+
 
 ## Session info
 

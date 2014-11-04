@@ -16,7 +16,7 @@
 #' 
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' test_data <- 
 #'   get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet", 
 #'                  dims = list(ContentsCode = c('PR0101A1'), Tid = c('*')),
@@ -26,7 +26,7 @@
 get_pxweb_data <- function(url, dims, clean = FALSE) {
 
    dimNames <- names(dims)
-   batches <- create_batch_list(url, dims)
+   batches <- create_batch_list(url = url, dims = dims)
    content_node <- batches$content_node
    b_list <- list()
    
@@ -34,7 +34,8 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
 
      queryBody <- list()
      
-     # print("Define the query list")
+     # print("Define the query list") 
+     # batch_no <- i <- 1
      for (i in 1:length(batches$dims[[batch_no]])) {
         if (length(batches$dims[[batch_no]] [[dimNames[i]]]) == 1) {
            filter = ifelse(batches$dims[[batch_no]] [[dimNames[i]]] == "*", "all", "item")

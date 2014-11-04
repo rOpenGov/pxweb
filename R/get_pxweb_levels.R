@@ -8,8 +8,8 @@
 #' @param ... further argument to send to \code{get_pxweb_metadata}
 #' @export
 #' @examples 
-#' \dontrun{
-#' topnode_levels <- get_pxweb_levels(baseURL = base_url("sweSCB", "v1", "sv"))
+#' \donttest{
+#' topnode_levels <- get_pxweb_levels(baseURL = base_url("api.scb.se", "v1", "sv"))
 #' }
 
 get_pxweb_levels <- function(

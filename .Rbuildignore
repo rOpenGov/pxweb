@@ -9,7 +9,8 @@
 ./inst/extras/*.RData
 inst/extras/*.RData
 inst/extras/.RData
-
+sandbox/*.R
+sandbox/
 
 # Git related
 ./.git*

@@ -1,11 +1,11 @@
 # Test suits for the examples in the documentation
 
-cat("\ntests_pxweb_examples.R : ")
+context("tests_pxweb_examples.R")
 
 test_that(desc="Examples in get_pxweb()",{
 
   expect_that({ 
-    url <- paste(c(base_url("sweSCB", version = "v1", lang = "sv"),"AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
+    url <- paste(c(pxweb_api$new("scb")$base_url(language = "sv"),"ssd","AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
   }, not(throws_error()))
   
   expect_that({   
@@ -14,7 +14,7 @@ test_that(desc="Examples in get_pxweb()",{
   
   expect_that({ 
     sink(file=tempfile())
-    dims <- get_pxweb_dims(metadata)
+    dims <- suppressMessages(get_pxweb_dims(metadata))
     sink()
   }, not(throws_error()))
   

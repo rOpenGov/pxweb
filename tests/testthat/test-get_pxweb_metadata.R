@@ -1,11 +1,11 @@
 # Test suite for get_pxweb_metadata()
 
-cat("\ntests_get_pxweb_metadata.R : ")
+context("get_pxweb_metadata.R")
 
 api_tests_get_pxweb_metadata_baseURL <- list(
-  list(baseURL = base_url("sweSCB", "v1", "sv"),
+  list(baseURL = paste0(pxweb_api$new("scb")$base_url(language = "sv"), "/ssd"),
        test_dims = c(21, 4)),
-  list(baseURL = base_url("sweSCB", "v1", "en"),
+  list(baseURL =   paste0(pxweb_api$new("scb")$base_url(), "/ssd"),
        test_dims = c(16, 4))
   )
 
