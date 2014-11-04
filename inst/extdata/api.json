@@ -11,7 +11,7 @@
   "orebro": {
       "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
       "version": ["v1"], 
-      "lang": ["en","sv"],
+      "lang": ["sv"],
       "calls_per_period": 10,
       "period_in_seconds": 10,
       "max_values_to_download" : 1000

@@ -35,7 +35,7 @@ api_tests_create_batch_list <- list(
 test_that(desc="create_batch_list()",{  
   for (test in api_tests_create_batch_list){
   expect_that({
-    res <- create_batch_list(url=test$url, dims=test$dims)
+    res <- pxweb:::create_batch_list(url=test$url, dims=test$dims)
       }, 
     not(throws_error()))
   }

@@ -116,8 +116,8 @@ test_that(desc="clean_pxweb",{
                             content_node=get_pxweb_metadata(path=test$url))
       
       # Can be removed ----
-      cat("",suppressWarnings(as.numeric(stringr::str_replace_all(test_data[,ncol(test_data)],"\\s",""))),
-            "\n",test_data_clean[[1]]$values)
+      # cat("",suppressWarnings(as.numeric(stringr::str_replace_all(test_data[,ncol(test_data)],"\\s",""))),
+      #       "\n",test_data_clean[[1]]$values)
       # Can be removed ----
       
       clean_part <- test_data_clean[[1]]$values

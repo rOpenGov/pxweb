@@ -42,6 +42,9 @@ in each api version/language.}
 }}
 \examples{
 scb_pxweb_api <- pxweb_api$new(api_name="scb")
+ scb_pxweb_api
+ \donttest{
  scb_pxweb_api$test_api()
+ }
 }
 
