@@ -42,10 +42,3 @@ print.api_parameters <- function(x, ...){
     cat("\n")
   }    
 }
-
-
-#' Get the api list
-get_api_list <- function(){
-  api.file <- system.file("extdata/api.json", package = "pxweb")
-  RJSONIO::fromJSON(api.file)
-}
