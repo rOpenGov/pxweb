@@ -22,7 +22,7 @@ check_new_pxweb_apis <- function(){
   if(!all(remote_in_local)){
     return(paste0("New PXWEB API(s):\n - ", 
             paste(api_remote_name[!remote_in_local], collapse = "\n - "),
-            "\n\nUse update_pxweb_apis() to update api catalogue."))
+            "\n\nUse update_pxweb_apis() to update the api catalogue."))
   }
 }
 
@@ -55,7 +55,7 @@ get_github_api_urls <- function(type){
 #' 
 get_api_list <- function(raw = FALSE){
   api_file <- system.file("extdata/api.json", package = "pxweb")
-  api_raw <- jsonlite::fromJSON(api_file)
+  api_raw <- RJSONIO::fromJSON(api_file)
   if(raw) return(api_raw)
   api_list <- c(api_raw$apis, api_raw$local_apis)
   api_list
@@ -85,7 +85,7 @@ get_api_list_remote <- function(raw = FALSE){
 #' @param api_list api list in raw format to write to json file.
 write_api_list <- function(api_list){
   dest <- system.file("extdata/api.json", package = "pxweb")
-  writeLines(jsonlite::toJSON(api_list), con = dest)
+  writeLines(RJSONIO::toJSON(api_list), con = dest)
 }
 
 

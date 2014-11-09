@@ -32,7 +32,7 @@ test_that(desc="multiple data calls",{
 
 
 api_tests_multiple_metadata <- list(
-  pxweb::base_url("scb", version = "v1", language = "sv")
+  pxweb::base_url("api.scb.se", version = "v1", language = "sv")
 )
 
 # test <- api_tests_multiple_metadata[[1]]
