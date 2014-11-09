@@ -1,8 +1,7 @@
 {
-  "sha": "c4ca301a6b8c7b4a55a180f1f42958764ecc1616",
   "apis": {
     "statistik.sjv.se": {
-        "desc" : "The Swedish agricultural authority",
+        "description" : "The Swedish agricultural authority",
         "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["sv"],
@@ -12,7 +11,7 @@
               },
   
     "pxweb.orebro.se": {
-        "desc" : "The municipality Orebro in Sweden.",
+        "description" : "Open data from the municipality Orebro in Sweden.",
         "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["sv"],
@@ -22,7 +21,7 @@
               },
   
     "statfi": {
-        "desc" : "Statistics Finland",
+        "description" : "Statistics Finland",
         "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
@@ -32,7 +31,7 @@
               },
   
     "pxnet2.stat.fi": {
-        "desc" : "Statistics Finland",
+        "description" : "Statistics Finland",
         "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
@@ -42,7 +41,7 @@
               },
   
     "pxwebapi2.stat.fi": {
-        "desc" : "Statistics Finland",
+        "description" : "Statistics Finland",
         "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
@@ -52,6 +51,7 @@
               },
   
     "api.scb.se": { 
+        "description" : "Statistics Sweden",
         "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]",
         "version": ["v1"], 
         "lang": ["en", "sv"],
@@ -61,7 +61,7 @@
           },
   
     "foo.bar": { 
-        "desc" : "Foo Bar",
+        "description" : "Foo Bar",
         "url" : "http://httpbin.org/status/404",
         "version": ["v1"], 
         "lang": ["sv", "en"],
