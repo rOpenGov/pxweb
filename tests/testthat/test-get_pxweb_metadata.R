@@ -3,9 +3,9 @@
 context("get_pxweb_metadata.R")
 
 api_tests_get_pxweb_metadata_baseURL <- list(
-  list(baseURL = paste0(pxweb_api$new("scb")$base_url(language = "sv"), "/ssd"),
+  list(baseURL = paste0(pxweb_api$new("api.scb.se")$base_url(language = "sv"), "/ssd"),
        test_dims = c(21, 4)),
-  list(baseURL =   paste0(pxweb_api$new("scb")$base_url(), "/ssd"),
+  list(baseURL =   paste0(pxweb_api$new("api.scb.se")$base_url(), "/ssd"),
        test_dims = c(16, 4))
   )
 

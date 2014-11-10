@@ -8,15 +8,19 @@
 #' @field max_values_to_download Maximum number of values to download with each call.
 #' 
 #' @examples
-#'  scb_pxweb_api <- pxweb_api$new(api_name="scb")
+#'  scb_pxweb_api <- pxweb_api$new(api_name="api.scb.se")
+#'  scb_pxweb_api
+#'  \donttest{
 #'  scb_pxweb_api$test_api()
+#'  }
+#'  
 #' @export pxweb_api
-#' 
-
 pxweb_api <- 
   setRefClass(
     Class = "pxweb_api", 
-    fields = list(url = "character",
+    fields = list(api_name = "character",
+                  description = "character",
+                  url = "character",
                   versions = "character",
                   languages = "character",
                   calls_per_period = "numeric",
@@ -30,6 +34,8 @@ pxweb_api <-
         api.list <- get_api_list()
         api_to_use <- api.list[[api_name]] 
         if(is.null(api_to_use)) stop("API do not exist in api catalogue.")
+        api_name <<- api_name
+        description <<- description
         url <<- api_to_use$url
         versions <<- api_to_use$version
         languages <<- api_to_use$lang
@@ -77,7 +83,7 @@ pxweb_api <-
         to_check <- list(...)
 
         # Check that single_element elemens only is of length one.
-        single_element <- c("url", "calls_per_period", "period_in_seconds", "max_values_to_download")
+        single_element <- c("api_name", "url", "calls_per_period", "period_in_seconds", "max_values_to_download")
         check <- unlist(lapply(X = to_check[single_element], function(X) length(X) == 1))
         if(!all(check)) stop(paste0(paste(single_element[!check], collapse = ", "), " contain(s) more than one element."), call. = FALSE)        
         
@@ -129,10 +135,6 @@ pxweb_api <-
         if(!is.null(language)) {
           stopifnot(language %in% .self$languages)
         }
-      }#,
-#      add_to_api_cataloge = function(){
-#        'Print out as json object, constructing api and maintainer e-mail.'
-#        # Se
-#      }      
+      }      
       )
   )        

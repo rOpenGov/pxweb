@@ -1,65 +1,75 @@
 {
-  "jordbruksverket": {
-      "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]",
-      "version": ["v1"], 
-      "lang": ["sv"],
-      "calls_per_period": 10,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 1000
-            },
+  "apis": {
+    "statistik.sjv.se": {
+        "description" : "The Swedish agricultural authority",
+        "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["sv"],
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000
+              },
+  
+    "pxweb.orebro.se": {
+        "description" : "Open data from the municipality Orebro in Sweden.",
+        "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["sv"],
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000
+              },
+  
+    "statfi": {
+        "description" : "Statistics Finland",
+        "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["fi"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
+  
+    "pxnet2.stat.fi": {
+        "description" : "Statistics Finland",
+        "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["fi"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
+  
+    "pxwebapi2.stat.fi": {
+        "description" : "Statistics Finland",
+        "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["fi"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
+  
+    "api.scb.se": { 
+        "description" : "Statistics Sweden",
+        "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]",
+        "version": ["v1"], 
+        "lang": ["en", "sv"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+          },
+  
+    "foo.bar": { 
+        "description" : "Foo Bar",
+        "url" : "http://httpbin.org/status/404",
+        "version": ["v1"], 
+        "lang": ["sv", "en"],
+        "calls_per_period": 1,
+        "period_in_seconds": 2,
+        "max_values_to_download" : 1000
+          }
+  },
 
-  "orebro": {
-      "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
-      "version": ["v1"], 
-      "lang": ["en","sv"],
-      "calls_per_period": 10,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 1000
-            },
-
-  "statfi": {
-      "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
-      "version": ["v1"], 
-      "lang": ["fi"],
-      "calls_per_period": 30,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 100000
-            },
-
-  "pxnet2.stat.fi": {
-      "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
-      "version": ["v1"], 
-      "lang": ["fi"],
-      "calls_per_period": 30,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 100000
-            },
-
-  "pxwebapi2.stat.fi": {
-      "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
-      "version": ["v1"], 
-      "lang": ["fi"],
-      "calls_per_period": 30,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 100000
-            },
-
-  "scb": { 
-      "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]",
-      "version": ["v1"], 
-      "lang": ["en", "sv"],
-      "calls_per_period": 30,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 100000
-        },
-
-  "foo.bar": { 
-      "url" : "http://httpbin.org/status/404",
-      "version": ["v1"], 
-      "lang": ["sv", "en"],
-      "calls_per_period": 1,
-      "period_in_seconds": 2,
-      "max_values_to_download" : 1000
-        }
-
+  "local_apis": {}
 }
