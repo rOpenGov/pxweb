@@ -70,5 +70,6 @@
         "max_values_to_download" : 1000
           }
   },
+
   "local_apis": {}
 }
