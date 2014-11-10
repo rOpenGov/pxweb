@@ -19,6 +19,7 @@ pxweb_api <-
   setRefClass(
     Class = "pxweb_api", 
     fields = list(api_name = "character",
+                  description = "character",
                   url = "character",
                   versions = "character",
                   languages = "character",
@@ -34,6 +35,7 @@ pxweb_api <-
         api_to_use <- api.list[[api_name]] 
         if(is.null(api_to_use)) stop("API do not exist in api catalogue.")
         api_name <<- api_name
+        description <<- description
         url <<- api_to_use$url
         versions <<- api_to_use$version
         languages <<- api_to_use$lang

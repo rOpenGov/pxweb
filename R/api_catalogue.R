@@ -33,15 +33,14 @@ check_new_pxweb_apis <- function(){
 #' 
 get_github_api_urls <- function(type){
   if(type == "github_api") {
-    warning("api_fix")
-#   return("https://api.github.com/repos/rOpenGov/pxweb/contents/inst/extdata/api.json?ref=master")
-    return("https://api.github.com/repos/rOpenGov/pxweb/contents/inst/extdata/api.json?ref=api_fix")
-
+    return("https://api.github.com/repos/rOpenGov/pxweb/contents/inst/extdata/api.json?ref=master")
+#    warning("api_fix")
+#    return("https://api.github.com/repos/rOpenGov/pxweb/contents/inst/extdata/api.json?ref=api_fix")
   }
   if(type == "github_raw"){
-    warning("api_fix")
-#   return("https://raw.githubusercontent.com/rOpenGov/pxweb/master/inst/extdata/api.json")  
-    return("https://raw.githubusercontent.com/rOpenGov/pxweb/api_fix/inst/extdata/api.json")
+    return("https://raw.githubusercontent.com/rOpenGov/pxweb/master/inst/extdata/api.json")  
+#    warning("api_fix")
+#    return("https://raw.githubusercontent.com/rOpenGov/pxweb/api_fix/inst/extdata/api.json")
   }
   stop("No correct type")
 }
