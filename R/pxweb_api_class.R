@@ -1,5 +1,7 @@
 #' A Reference Class to represent an pxweb_api
-#'
+#' 
+#' @field api_name The name of the api (api domain)
+#' @field description Short description of the pxweb api.
 #' @field url An url template for the pxweb api.
 #' @field versions A character vector with versions of the api.
 #' @field languages A character vector with languages of the api.
@@ -35,7 +37,7 @@ pxweb_api <-
         api_to_use <- api.list[[api_name]] 
         if(is.null(api_to_use)) stop("API do not exist in api catalogue.")
         api_name <<- api_name
-        description <<- description
+        description <<- api_to_use$description
         url <<- api_to_use$url
         versions <<- api_to_use$version
         languages <<- api_to_use$lang

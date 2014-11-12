@@ -10,6 +10,10 @@ A Reference Class to represent an pxweb_api
 \section{Fields}{
 
 \describe{
+\item{\code{api_name}}{The name of the api (api domain)}
+
+\item{\code{description}}{Short description of the pxweb api.}
+
 \item{\code{url}}{An url template for the pxweb api.}
 
 \item{\code{versions}}{A character vector with versions of the api.}
