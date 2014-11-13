@@ -41,8 +41,12 @@ api_name.}
 
 \item{\code{initialize(api_name = NULL, ...)}}{Create a new pxweb_api object.}
 
+\item{\code{pxweb_api_to_list()}}{Create a list of the current pxweb_api object}
+
 \item{\code{test_api()}}{Test to connect to the api and download "the first file"
 in each api version/language.}
+
+\item{\code{write_to_catalogue()}}{Save/overwrite the current api as a locally stored api.}
 }}
 \examples{
 scb_pxweb_api <- pxweb_api$new(api_name="api.scb.se")

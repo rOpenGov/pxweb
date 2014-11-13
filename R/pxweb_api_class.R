@@ -137,6 +137,36 @@ pxweb_api <-
         if(!is.null(language)) {
           stopifnot(language %in% .self$languages)
         }
-      }      
+      },
+      
+      pxweb_api_to_list = function(){
+        'Create a list of the current pxweb_api object'
+        api_list <- list(description = .self$description,
+                         url = .self$url,
+                         version = .self$versions,
+                         lang = .self$languages,
+                         calls_per_period = .self$calls_per_period,
+                         period_in_seconds = .self$period_in_seconds, 
+                         max_values_to_download = .self$max_values_to_download
+                         )
+        return(api_list)
+      },
+      
+      write_to_catalogue = function(){
+        'Save/overwrite the current api as a locally stored api.'
+        api_list_raw <- get_api_list(raw = TRUE)
+        api_list_raw$local_apis[[.self$api_name]] <-
+          .self$pxweb_api_to_list()
+        write_api_list(api_list = api_list_raw)
+      },
+      
+      show = function(){
+        'Print the pxweb api object.'
+        cat("Name:", .self$api_name, "\n")
+        cat("     ", .self$description, "\n")
+        cat("Version(s)   : ", paste(.self$versions, collapse = ", "), "\n")
+        cat("Language(s)  : ", paste(.self$languages, collapse = ", "), "\n")
+        cat("Url template :\n     ", .self$url, "\n")
+      }
       )
   )        
