@@ -16,7 +16,7 @@
 #'  api_parameters() # List apis
 #' \donttest{
 #'  d <- interactive_pxweb("scb")
-#'  d <- interactive_pxweb(api = "jordbruksverket")
+#'  d <- interactive_pxweb(api = "statistik.sjv.se")
 #'  d <- interactive_pxweb("scb", language = "sv")
 #' }
 
@@ -26,6 +26,8 @@ interactive_pxweb <- function(api, version = NULL, language = NULL, history = FA
     api_obj <- pxweb_api$new(api_name = api)
   } else if (class(api) == "pxweb_api") {
     api_obj <- api
+#  } else if (is.null(api)) {
+#    api_obj <- choose_api()
   } else {
     stop("api is not an api name or pxweb_api object", call. = FALSE)
   }

@@ -165,11 +165,13 @@ pxweb_api <-
       
       show = function(){
         'Print the pxweb api object.'
-        cat("Name:", .self$api_name, "\n")
-        cat("     ", .self$description, "\n")
-        cat("Version(s)   : ", paste(.self$versions, collapse = ", "), "\n")
-        cat("Language(s)  : ", paste(.self$languages, collapse = ", "), "\n")
-        cat("Url template :\n     ", .self$url, "\n")
+        cat("Api:", .self$api_name, "\n")
+        cat("    ", .self$description, "\n")
+        cat("Version(s)   :", paste(.self$versions, collapse = ", "), "\n")
+        cat("Language(s)  :", paste(.self$languages, collapse = ", "), "\n")
+        cat("Limit(s)     :", .self$calls_per_period ,"calls per", .self$period_in_seconds, "sec.\n")
+        cat("              ", .self$max_values_to_download ," values per call.\n")
+        cat("Url template :\n", .self$url, "\n")
       }
       )
   )        
