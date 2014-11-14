@@ -161,6 +161,8 @@ pxweb_api <-
         api_list_raw$local_apis[[.self$api_name]] <-
           .self$pxweb_api_to_list()
         write_api_list(api_list = api_list_raw)
+        message("If this is a public PXWEB api, it would be great to include it in the public api catalogue.")
+        message("If possible, please send the PXWEB api info to ", maintainer("pxweb"), ".")        
       },
       
       show = function(){
