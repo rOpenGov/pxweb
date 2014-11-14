@@ -28,14 +28,17 @@ pxweb_api <-
                   calls_per_period = "numeric",
                   period_in_seconds = "numeric",
                   max_values_to_download = "numeric"),
+    
     methods = list(
       get_api = function(api_name){
         'Get the api configuration from inst/extdata/api.json for the 
          api_name.'
         if(length(api_name) > 1) stop("Only one API can be chosen.", call. = FALSE)
         api.list <- get_api_list()
-        api_to_use <- api.list[[api_name]] 
-        if(is.null(api_to_use)) stop("API do not exist in api catalogue.")
+        api_index <- which(names(api.list) %in% api_name) # api_name <- "kalle"
+        if(length(api_index) == 0) stop("API do not exist in api catalogue.")
+        api_index <- api_index[length(api_index)]
+        api_to_use <- api.list[[api_index]]
         api_name <<- api_name
         description <<- api_to_use$description
         url <<- api_to_use$url
