@@ -58,16 +58,6 @@
         "calls_per_period": 30,
         "period_in_seconds": 10,
         "max_values_to_download" : 100000
-          },
-  
-    "foo.bar": { 
-        "description" : "Foo Bar",
-        "url" : "http://httpbin.org/status/404",
-        "version": ["v1"], 
-        "lang": ["sv", "en"],
-        "calls_per_period": 1,
-        "period_in_seconds": 2,
-        "max_values_to_download" : 1000
           }
   },
 

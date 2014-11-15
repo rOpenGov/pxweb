@@ -1,6 +1,6 @@
 #' A Reference Class to represent an pxweb_api
 #' 
-#' @field api_name The name of the api (api domain)
+#' @field api The name of the api (api domain)
 #' @field description Short description of the pxweb api.
 #' @field url An url template for the pxweb api.
 #' @field versions A character vector with versions of the api.
@@ -10,7 +10,7 @@
 #' @field max_values_to_download Maximum number of values to download with each call.
 #' 
 #' @examples
-#'  scb_pxweb_api <- pxweb_api$new(api_name="api.scb.se")
+#'  scb_pxweb_api <- pxweb_api$new(get_api = "api.scb.se")
 #'  scb_pxweb_api
 #'  \donttest{
 #'  scb_pxweb_api$test_api()
@@ -20,7 +20,7 @@
 pxweb_api <- 
   setRefClass(
     Class = "pxweb_api", 
-    fields = list(api_name = "character",
+    fields = list(api = "character",
                   description = "character",
                   url = "character",
                   versions = "character",
@@ -39,7 +39,7 @@ pxweb_api <-
         if(length(api_index) == 0) stop("API do not exist in api catalogue.")
         api_index <- api_index[length(api_index)]
         api_to_use <- api.list[[api_index]]
-        api_name <<- api_name
+        api <<- api_name
         description <<- api_to_use$description
         url <<- api_to_use$url
         versions <<- api_to_use$version
@@ -72,14 +72,13 @@ pxweb_api <-
       }, 
       
       
-      initialize = function(api_name = NULL, ...){
+      initialize = function(get_api = NULL, ...){
         'Create a new pxweb_api object.'
-        if(is.null(api_name)){
+        if(is.null(get_api)){
           check_input(...)
           .self$initFields(...)
-          .self$test_api()
         } else {
-          .self$get_api(api_name)
+          .self$get_api(api_name = get_api)
         }
       },
       
@@ -88,7 +87,7 @@ pxweb_api <-
         to_check <- list(...)
 
         # Check that single_element elemens only is of length one.
-        single_element <- c("api_name", "url", "calls_per_period", "period_in_seconds", "max_values_to_download")
+        single_element <- c("api", "url", "calls_per_period", "period_in_seconds", "max_values_to_download")
         check <- unlist(lapply(X = to_check[single_element], function(X) length(X) == 1))
         if(!all(check)) stop(paste0(paste(single_element[!check], collapse = ", "), " contain(s) more than one element."), call. = FALSE)        
         
@@ -158,7 +157,7 @@ pxweb_api <-
       write_to_catalogue = function(){
         'Save/overwrite the current api as a locally stored api.'
         api_list_raw <- get_api_list(raw = TRUE)
-        api_list_raw$local_apis[[.self$api_name]] <-
+        api_list_raw$local_apis[[.self$api]] <-
           .self$pxweb_api_to_list()
         write_api_list(api_list = api_list_raw)
         message("If this is a public PXWEB api, it would be great to include it in the public api catalogue.")
@@ -167,7 +166,7 @@ pxweb_api <-
       
       show = function(){
         'Print the pxweb api object.'
-        cat("Api:", .self$api_name, "\n")
+        cat("Api:", .self$api, "\n")
         cat("    ", .self$description, "\n")
         cat("Version(s)   :", paste(.self$versions, collapse = ", "), "\n")
         cat("Language(s)  :", paste(.self$languages, collapse = ", "), "\n")
