@@ -75,33 +75,34 @@ pxweb_api <-
       initialize = function(get_api = NULL, ...){
         'Create a new pxweb_api object.'
         if(is.null(get_api)){
-          check_input(...)
           .self$initFields(...)
+          if(length(list(...)) != 0) .self$check_input()
         } else {
           .self$get_api(api_name = get_api)
         }
       },
       
-      check_input = function(...){
-        'Check the input that it is ok.'
-        to_check <- list(...)
-
-        # Check that single_element elemens only is of length one.
-        single_element <- c("api", "url", "calls_per_period", "period_in_seconds", "max_values_to_download")
-        check <- unlist(lapply(X = to_check[single_element], function(X) length(X) == 1))
-        if(!all(check)) stop(paste0(paste(single_element[!check], collapse = ", "), " contain(s) more than one element."), call. = FALSE)        
+      check_input = function(){
+        'Check the consistency of the fields.'
         
-        # Check structure of url
-        has_lang <- grepl(x = to_check$url, pattern = "\\[lang\\]")
-        if(!has_lang) stop("[lang] is missing in url.", call. = FALSE)
-        has_version <- grepl(x = to_check$url, pattern = "\\[version\\]")
-        if(!has_version) stop("[version] is missing in url.", call. = FALSE)
+        # Check that single_element elemens only is of length one.
+        field_names <- names(getRefClass(class(.self))$fields())
+        single_elements <- c("api", "url", "calls_per_period", "period_in_seconds", "max_values_to_download")
+        for(fn in field_names){
+          if(length(.self$field(fn)) == 0){
+            stop(fn, " is of missing.", call. = FALSE)
+          }
+          if(length(.self$field(fn)) != 1 & fn %in% single_elements){
+            stop(fn, " is of not of length 1.", call. = FALSE)
+          }
+        }
+        
 
-        # Check that all fields are correct
-        fields_in_class <- names(getRefClass(as.character(class(.self)))$fields())
-        all_fields <- 
-          fields_in_class %in% names(to_check)
-        if(!all(all_fields)) stop(paste0(paste(fields_in_class[!all_fields],collapse = ", "), " is missing."), call. = FALSE)
+        # Check structure of url
+        has_lang <- grepl(x = .self$url, pattern = "\\[lang\\]")
+        if(!has_lang) stop("[lang] is missing in url.", call. = FALSE)
+        has_version <- grepl(x = .self$url, pattern = "\\[version\\]")
+        if(!has_version) stop("[version] is missing in url.", call. = FALSE)
       }, 
       
       test_api = function(){

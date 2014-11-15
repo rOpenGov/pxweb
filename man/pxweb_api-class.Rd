@@ -34,7 +34,7 @@ The first element of versions and languages is used as standard.}
 
 \item{\code{check_alt(version = NULL, language = NULL)}}{Check if the version/language alternative exist in the object.}
 
-\item{\code{check_input(...)}}{Check the input that it is ok.}
+\item{\code{check_input()}}{Check the consistency of the fields.}
 
 \item{\code{get_api(api_name)}}{Get the api configuration from inst/extdata/api.json for the 
 api_name.}
