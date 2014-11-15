@@ -3,6 +3,9 @@
 context("utils_internal.R")
 
 test_that(desc="api_timer()",{  
+  
+  skip_on_cran()
+  
   api_file <- paste(tempdir(), "api_time_stamp.Rdata", sep="/")
   if(file.exists(api_file)) file.remove(api_file)
   
