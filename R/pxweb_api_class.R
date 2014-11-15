@@ -1,5 +1,7 @@
 #' A Reference Class to represent an pxweb_api
-#'
+#' 
+#' @field api The name of the api (api domain)
+#' @field description Short description of the pxweb api.
 #' @field url An url template for the pxweb api.
 #' @field versions A character vector with versions of the api.
 #' @field languages A character vector with languages of the api.
@@ -8,7 +10,7 @@
 #' @field max_values_to_download Maximum number of values to download with each call.
 #' 
 #' @examples
-#'  scb_pxweb_api <- pxweb_api$new(api_name="api.scb.se")
+#'  scb_pxweb_api <- pxweb_api$new(get_api = "api.scb.se")
 #'  scb_pxweb_api
 #'  \donttest{
 #'  scb_pxweb_api$test_api()
@@ -18,7 +20,7 @@
 pxweb_api <- 
   setRefClass(
     Class = "pxweb_api", 
-    fields = list(api_name = "character",
+    fields = list(api = "character",
                   description = "character",
                   url = "character",
                   versions = "character",
@@ -26,16 +28,19 @@ pxweb_api <-
                   calls_per_period = "numeric",
                   period_in_seconds = "numeric",
                   max_values_to_download = "numeric"),
+    
     methods = list(
       get_api = function(api_name){
         'Get the api configuration from inst/extdata/api.json for the 
          api_name.'
         if(length(api_name) > 1) stop("Only one API can be chosen.", call. = FALSE)
         api.list <- get_api_list()
-        api_to_use <- api.list[[api_name]] 
-        if(is.null(api_to_use)) stop("API do not exist in api catalogue.")
-        api_name <<- api_name
-        description <<- description
+        api_index <- which(names(api.list) %in% api_name) # api_name <- "kalle"
+        if(length(api_index) == 0) stop("API do not exist in api catalogue.")
+        api_index <- api_index[length(api_index)]
+        api_to_use <- api.list[[api_index]]
+        api <<- api_name
+        description <<- api_to_use$description
         url <<- api_to_use$url
         versions <<- api_to_use$version
         languages <<- api_to_use$lang
@@ -67,37 +72,37 @@ pxweb_api <-
       }, 
       
       
-      initialize = function(api_name = NULL, ...){
+      initialize = function(get_api = NULL, ...){
         'Create a new pxweb_api object.'
-        if(is.null(api_name)){
-          check_input(...)
+        if(is.null(get_api)){
           .self$initFields(...)
-          .self$test_api()
+          if(length(list(...)) != 0) .self$check_input()
         } else {
-          .self$get_api(api_name)
+          .self$get_api(api_name = get_api)
         }
       },
       
-      check_input = function(...){
-        'Check the input that it is ok.'
-        to_check <- list(...)
-
-        # Check that single_element elemens only is of length one.
-        single_element <- c("api_name", "url", "calls_per_period", "period_in_seconds", "max_values_to_download")
-        check <- unlist(lapply(X = to_check[single_element], function(X) length(X) == 1))
-        if(!all(check)) stop(paste0(paste(single_element[!check], collapse = ", "), " contain(s) more than one element."), call. = FALSE)        
+      check_input = function(){
+        'Check the consistency of the fields.'
         
-        # Check structure of url
-        has_lang <- grepl(x = to_check$url, pattern = "\\[lang\\]")
-        if(!has_lang) stop("[lang] is missing in url.", call. = FALSE)
-        has_version <- grepl(x = to_check$url, pattern = "\\[version\\]")
-        if(!has_version) stop("[version] is missing in url.", call. = FALSE)
+        # Check that single_element elemens only is of length one.
+        field_names <- names(getRefClass(class(.self))$fields())
+        single_elements <- c("api", "url", "calls_per_period", "period_in_seconds", "max_values_to_download")
+        for(fn in field_names){
+          if(length(.self$field(fn)) == 0){
+            stop(fn, " is of missing.", call. = FALSE)
+          }
+          if(length(.self$field(fn)) != 1 & fn %in% single_elements){
+            stop(fn, " is of not of length 1.", call. = FALSE)
+          }
+        }
+        
 
-        # Check that all fields are correct
-        fields_in_class <- names(getRefClass(as.character(class(.self)))$fields())
-        all_fields <- 
-          fields_in_class %in% names(to_check)
-        if(!all(all_fields)) stop(paste0(paste(fields_in_class[!all_fields],collapse = ", "), " is missing."), call. = FALSE)
+        # Check structure of url
+        has_lang <- grepl(x = .self$url, pattern = "\\[lang\\]")
+        if(!has_lang) stop("[lang] is missing in url.", call. = FALSE)
+        has_version <- grepl(x = .self$url, pattern = "\\[version\\]")
+        if(!has_version) stop("[version] is missing in url.", call. = FALSE)
       }, 
       
       test_api = function(){
@@ -135,6 +140,40 @@ pxweb_api <-
         if(!is.null(language)) {
           stopifnot(language %in% .self$languages)
         }
-      }      
+      },
+      
+      pxweb_api_to_list = function(){
+        'Create a list of the current pxweb_api object'
+        api_list <- list(description = .self$description,
+                         url = .self$url,
+                         version = .self$versions,
+                         lang = .self$languages,
+                         calls_per_period = .self$calls_per_period,
+                         period_in_seconds = .self$period_in_seconds, 
+                         max_values_to_download = .self$max_values_to_download
+                         )
+        return(api_list)
+      },
+      
+      write_to_catalogue = function(){
+        'Save/overwrite the current api as a locally stored api.'
+        api_list_raw <- get_api_list(raw = TRUE)
+        api_list_raw$local_apis[[.self$api]] <-
+          .self$pxweb_api_to_list()
+        write_api_list(api_list = api_list_raw)
+        message("If this is a public PXWEB api, it would be great to include it in the public api catalogue.")
+        message("If possible, please send the PXWEB api info to ", maintainer("pxweb"), ".")        
+      },
+      
+      show = function(){
+        'Print the pxweb api object.'
+        cat("Api:", .self$api, "\n")
+        cat("    ", .self$description, "\n")
+        cat("Version(s)   :", paste(.self$versions, collapse = ", "), "\n")
+        cat("Language(s)  :", paste(.self$languages, collapse = ", "), "\n")
+        cat("Limit(s)     :", .self$calls_per_period ,"calls per", .self$period_in_seconds, "sec.\n")
+        cat("              ", .self$max_values_to_download ," values per call.\n")
+        cat("Url template :\n", .self$url, "\n")
+      }
       )
   )        

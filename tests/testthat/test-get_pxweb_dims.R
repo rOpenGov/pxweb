@@ -2,7 +2,9 @@
 
 context("get_pxweb_dims.R")
 
-test_that(desc="Examples in get_pxweb()",{
+test_that(desc="get_pxweb_dims()",{
+  
+  skip_on_cran()
   
   expect_that({ 
     bottom_node <- get_pxweb_metadata("http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv")
