@@ -43,10 +43,10 @@ test_that(desc="baseURL 2",{
 
   for (test in api_tests_get_pxweb_metadata_path){
     expect_that({
-      test_file <- get_pxweb_metadata(path = test)
+      api_test_file <- get_pxweb_metadata(path = test)
     }, not(throws_error()))
     
-    expect_is(object = test_file$variables$variables[[1]], "list")
+    expect_is(object = api_test_file$variables$variables[[1]], "list")
   }
 })
 
