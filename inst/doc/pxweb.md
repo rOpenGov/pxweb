@@ -12,19 +12,21 @@ API](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf). Your
 reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
 
-
-## Available data sources and tools
+## Table of contents
 
 [Installation](#installation) (Installation)  
 [Examples](#examples) (Examples)  
 
+## Available data sources and tools
+
 [A number of organizations](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/) use to distribute hierarchical data. You can browse the available data sets at:
 
-* [SCB](Source: [SCB](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) (Statistics Sweden)
-* [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) (Statistics Finland)
-* [Other organizations with PX-WEB API](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/)
+* [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf)
+* [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](http://pxnet2.stat.fi/api1.html)
+* [Other organizations using PX-WEB](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/)
 
 ## <a name="installation"></a>Installation
+
 
 Install the stable release version in R:
 
@@ -33,6 +35,13 @@ Install the stable release version in R:
 install.packages("pxweb")
 ```
 
+Install the latest version from github:
+
+
+```r
+install.packages("devtools")
+devtools::install_github("pxweb","rOpenGov")
+```
 
 Test the installation by loading the library:
 
@@ -41,58 +50,94 @@ Test the installation by loading the library:
 library(pxweb)
 ```
 
+A tutorial is included with the package with:
+```r
+vignette(topic="pxweb")
+```
+
+
+### Other issues
 
 We also recommend setting the UTF-8 encoding:
 
 
 ```r
-Sys.setlocale(locale = "UTF-8")
+Sys.setlocale(locale="UTF-8") 
 ```
-
 
 ## <a name="examples"></a>Examples
 
 Some examples on using the R tools to fetch px-web API data.
 
-### Listing available database parameters
+### Listing available pxweb apis
 
 
 ```r
 library(pxweb)
-print(api_parameters())
+print(api_catalogue()[1:2])
 ```
 
 ```
 ## [[1]]
-## api:         pxwebapi2.stat.fi
-## limit(s):    30 calls per 10 sec. 
-##              Max 100000 values per call.
-## version(s):  v1 
-## language(s): fi 
-## base url:
-##  http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]/StatFin 
+## Api: statistik.sjv.se 
+##      The Swedish agricultural authority 
+## Version(s)   : v1 
+## Language(s)  : sv 
+## Limit(s)     : 10 calls per 10 sec.
+##                1000  values per call.
+## Url template :
+##  http://statistik.sjv.se/PXWeb/api/[version]/[lang] 
 ## 
 ## [[2]]
-## api:         api.scb.se
-## limit(s):    30 calls per 10 sec. 
-##              Max 100000 values per call.
-## version(s):  v1 
-## language(s): sv, en 
-## base url:
-##  http://api.scb.se/OV0104/[version]/doris/[lang]/ssd
+## Api: pxweb.orebro.se 
+##      Open data from the municipality Orebro in Sweden. 
+## Version(s)   : v1 
+## Language(s)  : sv 
+## Limit(s)     : 10 calls per 10 sec.
+##                1000  values per call.
+## Url template :
+##  http://pxweb.orebro.se/api/[version]/[lang]
 ```
 
-
-### Fetching data from [Statistics Finland](http://www.stat.fi/org/avoindata/api.html) PX-WEB API:
+### Fetching data from PX-WEB API:
 
 Interactive API query (not run):
 
 
 ```r
-baseURL <- base_url("statfi", "v1", "fi")
-d <- interactive_pxweb(baseURL)
+# Get data from SCB (Statistics Sweden)
+d <- interactive_pxweb(api = "api.scb.se")
+
+# Fetching data from the swedish SCB (Statistics Sweden) pxweb API:
+d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
+
+# Fetching data from statfi (Statistics Finland)
+d <- interactive_pxweb(api = "pxwebapi2.stat.fi")
 ```
 
+### Create a new PX-WEB API:
+
+If a pxweb api is missing in the api catalogue, you can just add the api yourself in the following way.
+
+
+```r
+# Create a pxweb api object
+my_api <- 
+  pxweb_api$new(api = "foo.bar",
+                url = "http://api.foo.bar/[lang]/[version]",
+                description = "My own pxweb api",
+                languages = "en", # Languages
+                versions = "v1", # Versions         
+                calls_per_period = 1,
+                period_in_seconds = 2, 
+                max_values_to_download = 10)
+
+# Test that the api works
+my_api$test_api()
+
+# Add the api to the api catalogue
+my_api$write_to_catalogue()
+```
 
 
 ## Licensing and Citations
@@ -123,6 +168,15 @@ citation("pxweb")
 ##   }
 ```
 
+## About the API
+
+The data in this RESTful API consists of a metadata part and a data
+part. Metadata is structured in a hierarchical node tree, where each
+node contains information about subnodes that are below it in the tree
+or, if the nodes is at the bottom of the tree structure, the data
+referenced by the node as well as what dimensions are available for
+the data at that subnode.
+
 
 ## Session info
 
@@ -134,7 +188,7 @@ sessionInfo()
 ```
 
 ```
-## R version 3.1.0 (2014-04-10)
+## R version 3.1.1 (2014-07-10)
 ## Platform: x86_64-apple-darwin13.1.0 (64-bit)
 ## 
 ## locale:
@@ -144,14 +198,15 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.3.50 knitr_1.5   
+## [1] pxweb_0.5.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] data.table_1.9.2 evaluate_0.5.5   formatR_0.10     httr_0.3        
-##  [5] plyr_1.8.1       Rcpp_0.11.1      RCurl_1.95-4.1   reshape2_1.4    
-##  [9] RJSONIO_1.2-0.2  stringr_0.6.2    tools_3.1.0
+##  [1] data.table_1.9.2 digest_0.6.4     evaluate_0.5.5   formatR_0.10    
+##  [5] htmltools_0.2.4  httr_0.5         jsonlite_0.9.8   knitr_1.6       
+##  [9] plyr_1.8.1       Rcpp_0.11.1      RCurl_1.95-4.1   reshape2_1.4    
+## [13] RJSONIO_1.2-0.2  rmarkdown_0.2.64 stringr_0.6.2    tools_3.1.1     
+## [17] yaml_2.1.13
 ```
-
 
 
 
