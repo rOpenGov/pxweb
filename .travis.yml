@@ -4,9 +4,7 @@ env:
    global:
      - WARNINGS_ARE_ERRORS=1
      - R_BUILD_ARGS="--no-manual"
-   matrix:
      - R_CHECK_ARGS="--no-manual --as-cran"
-     - R_CHECK_ARGS="--no-manual"
 
 script: ./travis-tool.sh run_tests
 
@@ -15,3 +13,6 @@ before_script:
 - chmod 755 ./travis-tool.sh
 - ./travis-tool.sh bootstrap
 - ./travis-tool.sh install_deps
+
+on_failure:
+  - ./travis-tool.sh dump_logs
