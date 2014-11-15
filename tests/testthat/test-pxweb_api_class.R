@@ -16,6 +16,10 @@ test_that(desc="pxweb_api_class",{
                     max_values_to_download = 10)
   }, 
   not(throws_error()))
+  
+  expect_that({suppressMessages(test_api$write_to_catalogue())}, 
+              not(throws_error()))
+  expect_true("foo.bar" %in% unlist(lapply(api_catalogue(), function(X) X$api)))
 
   expect_that({
     test_api2 <- 
@@ -46,5 +50,20 @@ test_that(desc="pxweb_api_class",{
     }, 
     not(throws_error()))
   
+  expect_that({
+    test_api <- pxweb_api$new("api.scb.se")
+  }, 
+  not(throws_error()))
+  
+  expect_equal({
+    test_api$base_url()
+  }, "http://api.scb.se/OV0104/v1/doris/en")
+  
+  api_cat <- api_catalogue()
+  for(api in api_cat){
+    expect_that({api$check_input()}, not(throws_error()))
+    expect_is({api$pxweb_api_to_list()}, "list")
+  }
+
 })
 
