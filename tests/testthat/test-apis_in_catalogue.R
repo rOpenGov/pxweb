@@ -2,10 +2,11 @@
 
 context("apis_in_catalogue.R")
 
-names(api_parameters())
-
 test_that(desc="test connections to apis in catalogue",{  
-  apis <- names(api_parameters())[!names(api_parameters()) %in% "foo.bar"]
+  
+  skip_on_cran()
+  
+  apis <- names(api_parameters())
   
   for(api in apis){
     expect_true(suppressMessages(pxweb_api$new(api)$test_api()))

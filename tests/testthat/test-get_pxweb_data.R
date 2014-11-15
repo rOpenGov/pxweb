@@ -9,127 +9,131 @@
 
 context("get_pxweb_data.R")
 
-api_tests_get_pxweb_data <- list(
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
-    dims = list(ContentsCode = c('PR0101A1'),
-                Tid = c('*')),
-    clean = TRUE,
-    test_dim = c(NA, 3)),
-  
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
-    dims = list(Region = c('00', '01'),
-                Civilstand = c('*'),
-                Alder = c('0', 'tot'),
-                Kon = c('*'),
-                ContentsCode = c('BE0101N1'),
-                Tid = c('2010', '2011', '2012', '2013')),
-    clean = TRUE,
-    test_dim = c(128, 7)),
-  
-  list(
-    url="http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
-    dims = list(Region = c('00', '01'),
-                Civilstand = c('*'),
-                Alder = c('0', 'tot'),
-                Kon = c('*'),
-                ContentsCode = c('BE0101N1'),
-                Tid = c('2010', '2011', '2012', '2013')),
-    clean = FALSE,
-    test_dim = c(32, 8)), 
-  
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv",
-    dims = list(SNI2007 = c('*'),
-                ContentsCode = c('*'),
-                Tid = c('*')),
-    clean = FALSE,
-    test_dim = c(NA, NA)),
-  
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/en/ssd/UF/UF0536/Fullfoljt",
-    dims = list(Studresultat = c('3'),
-                Kon = c('1'),
-                UtlBakgrund = c('1'),
-                Program = c('31'),
-                ContentsCode = c('UF0536A1'),
-                Tid = c('2007')),
-    clean = FALSE,
-    test_dim = c(NA, NA)),
-
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/MI/MI0814/MarkanvTatortZonArea",
-    dims = list(Region = c('*'),
-                Kmzon = c('*'),
-                ArealStrandzon = c('*'),
-                ContentsCode = c('*'),
-                Tid = c('*')),
-    clean = FALSE,
-    test_dim = c(NA, NA)),
-  
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/UF/UF0539/Medb30",
-    dims = list(Svarsalternativ='*',
-                Kon='*',
-                Studievag='*',
-                ContentsCode='*',
-                Tid='*'),
-    clean = FALSE,
-    test_dim = c(NA, NA)),
-  
-  # Test swedish letters
-  list( 
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/ME/ME0104/ME0104C/ME0104T3",
-    dims = list(Region = c('*'),
-                Partimm = c('M','C','FP','KD','MP','S','V','SD','ÖVRIGA'),
-                ContentsCode = c('ME0104B7'),
-                Tid = c('2010')),
-    clean = TRUE,
-    test_dim = c(2907, 5)),
-    
-  list(
-    url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/asu/asas/010_asas_tau_101.px",
-    dims = list("Alue" = c("*"),
-                 "Asuntokunnan koko" = c("*"),
-                 "Talotyyppi" = c("S"),
-                 "Vuosi" = c("*")
-                 ),
-    clean = TRUE,
-    test_dim = c(2568, NA)
-  )  ,
-  
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK/TK1001/TK1001S/SnabbStatTK1001",
-    dims = list("ContentsCode" = c("TK1001AE"),
-                "Tid" = c("2014M02")
-    ),
-    clean = TRUE
-  ),
-  
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/MI/MI0814/MarkanvTatortZonArea",
-    dims = list(Region = c('*'), Kmzon = c('*'), ArealStrandzon = c('*'), ContentsCode = c('*'), Tid = c('*')
-    ),
-    clean = TRUE
-  ),
-  
-  list( 
-    url = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014",
-    dims = list(Alder = c('0', '1', '2', '3', '4'),
-                Kon = c('1', '2'),
-                ContentsCode = c('BE0401AW'),
-                Tid = c('2014', '2015', '2016', '2017', '2018')),
-    clean = FALSE,
-    test_dim = c(NA, NA))  
-
-)
-
 test_that(desc="get_pxweb_data()",{  
-  i <- 1
+  
+  skip_on_cran()
+
+  api_tests_get_pxweb_data <- list(
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
+      dims = list(ContentsCode = c('PR0101A1'),
+                  Tid = c('*')),
+      clean = TRUE,
+      test_dim = c(NA, 3)),
+    
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+      dims = list(Region = c('00', '01'),
+                  Civilstand = c('*'),
+                  Alder = c('0', 'tot'),
+                  Kon = c('*'),
+                  ContentsCode = c('BE0101N1'),
+                  Tid = c('2010', '2011', '2012', '2013')),
+      clean = TRUE,
+      test_dim = c(128, 7)),
+    
+    list(
+      url="http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+      dims = list(Region = c('00', '01'),
+                  Civilstand = c('*'),
+                  Alder = c('0', 'tot'),
+                  Kon = c('*'),
+                  ContentsCode = c('BE0101N1'),
+                  Tid = c('2010', '2011', '2012', '2013')),
+      clean = FALSE,
+      test_dim = c(32, 8)), 
+    
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv",
+      dims = list(SNI2007 = c('*'),
+                  ContentsCode = c('*'),
+                  Tid = c('*')),
+      clean = FALSE,
+      test_dim = c(NA, NA)),
+    
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/en/ssd/UF/UF0536/Fullfoljt",
+      dims = list(Studresultat = c('3'),
+                  Kon = c('1'),
+                  UtlBakgrund = c('1'),
+                  Program = c('31'),
+                  ContentsCode = c('UF0536A1'),
+                  Tid = c('2007')),
+      clean = FALSE,
+      test_dim = c(NA, NA)),
+    
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/MI/MI0814/MarkanvTatortZonArea",
+      dims = list(Region = c('*'),
+                  Kmzon = c('*'),
+                  ArealStrandzon = c('*'),
+                  ContentsCode = c('*'),
+                  Tid = c('*')),
+      clean = FALSE,
+      test_dim = c(NA, NA)),
+    
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/UF/UF0539/Medb30",
+      dims = list(Svarsalternativ='*',
+                  Kon='*',
+                  Studievag='*',
+                  ContentsCode='*',
+                  Tid='*'),
+      clean = FALSE,
+      test_dim = c(NA, NA)),
+    
+    # Test swedish letters
+    list( 
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/ME/ME0104/ME0104C/ME0104T3",
+      dims = list(Region = c('*'),
+                  Partimm = c('M','C','FP','KD','MP','S','V','SD','ÖVRIGA'),
+                  ContentsCode = c('ME0104B7'),
+                  Tid = c('2010')),
+      clean = TRUE,
+      test_dim = c(2907, 5)),
+    
+    list(
+      url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/asu/asas/010_asas_tau_101.px",
+      dims = list("Alue" = c("*"),
+                  "Asuntokunnan koko" = c("*"),
+                  "Talotyyppi" = c("S"),
+                  "Vuosi" = c("*")
+      ),
+      clean = TRUE,
+      test_dim = c(2568, NA)
+    )  ,
+    
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK/TK1001/TK1001S/SnabbStatTK1001",
+      dims = list("ContentsCode" = c("TK1001AE"),
+                  "Tid" = c("2014M02")
+      ),
+      clean = TRUE
+    ),
+    
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/MI/MI0814/MarkanvTatortZonArea",
+      dims = list(Region = c('*'), Kmzon = c('*'), ArealStrandzon = c('*'), ContentsCode = c('*'), Tid = c('*')
+      ),
+      clean = TRUE
+    ),
+    
+    list( 
+      url = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014",
+      dims = list(Alder = c('0', '1', '2', '3', '4'),
+                  Kon = c('1', '2'),
+                  ContentsCode = c('BE0401AW'),
+                  Tid = c('2014', '2015', '2016', '2017', '2018')),
+      clean = FALSE,
+      test_dim = c(NA, NA))  
+    
+  )
+  
+  
   for (test in api_tests_get_pxweb_data){
-    if(i == 12) skip("Known error: comma bug in csv files")
-    i <- i + 1
+    if(test$url == "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014") {
+      skip("Known error: comma bug in csv files")}
+
     expect_that({
       test_data <- 
         get_pxweb_data(url = test$url,

@@ -5,6 +5,8 @@ context("get_pxweb_metadata.R")
 
 test_that(desc="baseURL 1",{
   
+  skip_on_cran()
+  
   api_tests_get_pxweb_metadata_baseURL <- list(
     list(baseURL = paste0(pxweb_api$new("api.scb.se")$base_url(language = "sv"), "/ssd"),
          test_dims = c(21, 4)),
@@ -26,6 +28,9 @@ test_that(desc="baseURL 1",{
 
 
 test_that(desc="baseURL 2",{
+  
+  skip_on_cran()
+  
   api_tests_get_pxweb_metadata_path <- list(
     "http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv",
     "http://api.scb.se/OV0104/v1/doris/sv/ssd/NV/NV0119/IVPKNLonAr",
