@@ -2,8 +2,8 @@
 #'
 #' @description Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session. 
 #' 
-#' @param api The name of the pxweb api to connect to or an \link{pxweb_api} object.
-#' @param version The version of the pxweb api to use. Default is pxweb api default, see \link{api_parameters}.
+#' @param api The name of the pxweb api to connect to or an \link{pxweb_api} object. Use \link{api_catalogue} to get a list of apis.
+#' @param version The version of the pxweb api to use. Default is pxweb api default, see \link{api_catalogue}.
 #' @param language The language of the pxweb api to use. Default is english.
 #' @param history keep the history when the function is running.
 #' @param ... further parameters. These are currently ignored.
@@ -13,25 +13,29 @@
 #' \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_data}}
 #' @export
 #' @examples
-#'  api_parameters() # List apis
+#'  api_catalogue() # List apis
 #' \donttest{
-#'  d <- interactive_pxweb("scb")
+#'  d <- interactive_pxweb()
+#'  d <- interactive_pxweb("api.scb.se")
 #'  d <- interactive_pxweb(api = "statistik.sjv.se")
-#'  d <- interactive_pxweb("scb", language = "sv")
+#'  d <- interactive_pxweb("api.scb.se", language = "sv")
 #' }
 
-interactive_pxweb <- function(api, version = NULL, language = NULL, history = FALSE,...){
+interactive_pxweb <- function(api = NULL, version = NULL, language = NULL, history = FALSE,...){
 
-  if(is.character(api) && length(api) == 1) {
-    api_obj <- pxweb_api$new(api_name = api)
+  if (is.null(api)) {
+  choice <- choose_pxweb_api()
+  api_obj <- pxweb_api$new(get_api = choice[1])
+  language <- choice[2]
+  version <- version[3] 
+  } else if (is.character(api) && length(api) == 1) {
+    api_obj <- pxweb_api$new(get_api = api)
   } else if (class(api) == "pxweb_api") {
     api_obj <- api
-#  } else if (is.null(api)) {
-#    api_obj <- choose_api()
   } else {
     stop("api is not an api name or pxweb_api object", call. = FALSE)
   }
-  
+
   # Choose DB and get top node
   baseURL <- api_obj$base_url(version = version, language = language)
   dbURL <- choose_pxweb_database_url(baseURL)
