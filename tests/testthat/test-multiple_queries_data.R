@@ -38,6 +38,8 @@ test_that(desc="multiple data calls",{
 
 test_that(desc="multiple metadata calls",{  
   
+  skip_on_cran()
+  
   api_tests_multiple_metadata <- list(
     pxweb::base_url("api.scb.se", version = "v1", language = "sv")
   )
