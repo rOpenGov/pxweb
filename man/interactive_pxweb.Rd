@@ -3,13 +3,13 @@
 \alias{interactive_pxweb}
 \title{Find and download data interactively from PX-WEB API}
 \usage{
-interactive_pxweb(api, version = NULL, language = NULL, history = FALSE,
-  ...)
+interactive_pxweb(api = NULL, version = NULL, language = NULL,
+  history = FALSE, ...)
 }
 \arguments{
-\item{api}{The name of the pxweb api to connect to or an \link{pxweb_api} object.}
+\item{api}{The name of the pxweb api to connect to or an \link{pxweb_api} object. Use \link{api_catalogue} to get a list of apis.}
 
-\item{version}{The version of the pxweb api to use. Default is pxweb api default, see \link{api_parameters}.}
+\item{version}{The version of the pxweb api to use. Default is pxweb api default, see \link{api_catalogue}.}
 
 \item{language}{The language of the pxweb api to use. Default is english.}
 
@@ -21,11 +21,12 @@ interactive_pxweb(api, version = NULL, language = NULL, history = FALSE,
 Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session.
 }
 \examples{
-api_parameters() # List apis
+api_catalogue() # List apis
 \donttest{
- d <- interactive_pxweb("scb")
- d <- interactive_pxweb(api = "jordbruksverket")
- d <- interactive_pxweb("scb", language = "sv")
+ d <- interactive_pxweb()
+ d <- interactive_pxweb("api.scb.se")
+ d <- interactive_pxweb(api = "statistik.sjv.se")
+ d <- interactive_pxweb("api.scb.se", language = "sv")
 }
 }
 \seealso{

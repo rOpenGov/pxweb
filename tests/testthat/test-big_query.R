@@ -2,31 +2,31 @@
 
 context("big_queries.R")
 
-api_tests_big_query <- list(
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
-    dims = list(Region = c('*'), 
-                Civilstand = c('*'), 
-                Alder = c('*'), 
-                Kon = c('*'), 
-                ContentsCode = c('*'),
-                Tid = as.character(1970:1971)),
-    clean=TRUE),
-  
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
-    dims = list(Region = c('*'), 
-                Civilstand = c('*'), 
-                Alder = c('*'), 
-                Kon = c('*'), 
-                ContentsCode = c('*'),
-                Tid = as.character(1970)),
-    clean=FALSE)
-  )
-
-# test <- api_tests_big_query[[1]]
-
 test_that(desc="big queries",{  
+  skip_on_cran()
+  
+  api_tests_big_query <- list(
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+      dims = list(Region = c('*'), 
+                  Civilstand = c('*'), 
+                  Alder = c('*'), 
+                  Kon = c('*'), 
+                  ContentsCode = c('*'),
+                  Tid = as.character(1970:1971)),
+      clean=TRUE),
+    
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+      dims = list(Region = c('*'), 
+                  Civilstand = c('*'), 
+                  Alder = c('*'), 
+                  Kon = c('*'), 
+                  ContentsCode = c('*'),
+                  Tid = as.character(1970)),
+      clean=FALSE)
+  )
+  
   for (test in api_tests_big_query){
     expect_that({
       test_data <- suppressMessages(

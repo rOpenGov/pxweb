@@ -3,20 +3,25 @@
 # Tests to run multiple queries (calls)
 context("multiple_queries_data.R")
 
-api_tests_multiple_data <- list(
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
-    dims = list(ContentsCode = c('PR0101A1'),
-                Tid = c('2001')),
-    clean = FALSE)
-)
 
-api_config <- pxweb::api_parameters(url=api_tests_multiple_data[[1]]$url)[[1]]
-Sys.sleep(time=api_config$period_in_seconds)
-api_file <- paste(tempdir(), "api_time_stamp.Rdata", sep="/")
-if(file.exists(api_file)) file.remove(api_file)
 
 test_that(desc="multiple data calls",{  
+  
+  skip_on_cran()
+  
+  api_tests_multiple_data <- list(
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
+      dims = list(ContentsCode = c('PR0101A1'),
+                  Tid = c('2001')),
+      clean = FALSE)
+  )
+  
+  api_config <- pxweb::api_parameters(url=api_tests_multiple_data[[1]]$url)[[1]]
+  Sys.sleep(time=api_config$period_in_seconds)
+  api_file <- paste(tempdir(), "api_time_stamp.Rdata", sep="/")
+  if(file.exists(api_file)) file.remove(api_file)
+  
   for (test in api_tests_multiple_data){
     api_config <- pxweb::api_parameters(url=test$url)[[1]]
     
@@ -31,13 +36,12 @@ test_that(desc="multiple data calls",{
 })
 
 
-api_tests_multiple_metadata <- list(
-  pxweb::base_url("api.scb.se", version = "v1", language = "sv")
-)
-
-# test <- api_tests_multiple_metadata[[1]]
-
 test_that(desc="multiple metadata calls",{  
+  
+  api_tests_multiple_metadata <- list(
+    pxweb::base_url("api.scb.se", version = "v1", language = "sv")
+  )
+  
   for (test in api_tests_multiple_metadata){
     api_config <- pxweb::api_parameters(url=test)[[1]]
     

@@ -2,7 +2,7 @@
 
 context("get_pxweb_levels.R")
 
-test_that(desc="Examples in get_pxweb()",{
+test_that(desc="get_pxweb_levels",{
   
   expect_that({ 
     lev <- get_pxweb_levels(baseURL = 

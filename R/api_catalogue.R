@@ -1,3 +1,21 @@
+#' Get the api catalogue
+#' 
+#' @details
+#' Get the catalogue of api and stor it as a list.
+#' 
+#' @examples
+#' api_catalogue()
+#' 
+#' @export
+api_catalogue <- function(){
+  apis <- names(get_api_list())
+  api_catalogue <- list()
+  for(api in seq_along(apis)){
+    api_catalogue[[api]] <- pxweb_api$new(apis[api])
+  }
+  return(api_catalogue)
+}
+
 #' Download and update the PXWEB API catalogue
 #' 
 #' @details

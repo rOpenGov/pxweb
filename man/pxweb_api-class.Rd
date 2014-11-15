@@ -10,6 +10,10 @@ A Reference Class to represent an pxweb_api
 \section{Fields}{
 
 \describe{
+\item{\code{api}}{The name of the api (api domain)}
+
+\item{\code{description}}{Short description of the pxweb api.}
+
 \item{\code{url}}{An url template for the pxweb api.}
 
 \item{\code{versions}}{A character vector with versions of the api.}
@@ -30,18 +34,22 @@ The first element of versions and languages is used as standard.}
 
 \item{\code{check_alt(version = NULL, language = NULL)}}{Check if the version/language alternative exist in the object.}
 
-\item{\code{check_input(...)}}{Check the input that it is ok.}
+\item{\code{check_input()}}{Check the consistency of the fields.}
 
 \item{\code{get_api(api_name)}}{Get the api configuration from inst/extdata/api.json for the 
 api_name.}
 
-\item{\code{initialize(api_name = NULL, ...)}}{Create a new pxweb_api object.}
+\item{\code{initialize(get_api = NULL, ...)}}{Create a new pxweb_api object.}
+
+\item{\code{pxweb_api_to_list()}}{Create a list of the current pxweb_api object}
 
 \item{\code{test_api()}}{Test to connect to the api and download "the first file"
 in each api version/language.}
+
+\item{\code{write_to_catalogue()}}{Save/overwrite the current api as a locally stored api.}
 }}
 \examples{
-scb_pxweb_api <- pxweb_api$new(api_name="api.scb.se")
+scb_pxweb_api <- pxweb_api$new(get_api = "api.scb.se")
  scb_pxweb_api
  \donttest{
  scb_pxweb_api$test_api()

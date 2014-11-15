@@ -192,6 +192,20 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     textHead <-
       str_join("\nChoose database by number:", sep="")
   }
+
+  if (type == "api") {
+    baseCat <- c(1)    
+    toprint <- data.frame(id=input[,1], text = input[,2])
+    alt <- rownames(toprint)
+    max_cat <- 1
+    
+    textTitle <- str_join("\nCHOOSE API:\n",
+                          str_join(
+                            rep("=", round(getOption("width")*0.9)), collapse = ""), 
+                          "\n", sep="")
+    textHead <-
+      str_join("\nChoose api by number:", sep="")
+  }
   
 
   inputOK <- FALSE
@@ -209,7 +223,7 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
       }
       findData.printNode(xscb = toprint, print = TRUE)
     }
-    if (type == "db") {
+    if (type == "db" | type == "api") {
       findData.printNode(xscb = toprint, print = TRUE)
     }    
     cat(textHead)
@@ -415,5 +429,38 @@ choose_pxweb_database_url <- function(baseURL, pre_choice = NULL){
   } else if(!is.null(pre_choice)){
     return(paste0(baseURL, "/", text_to_url(data_bases$dbid[pre_choice])))
   }
+} 
+
+
+#' Choose an api from api_catalogue
+#' 
+#' @return base url to the specific data base
+#' 
+choose_pxweb_api <- function(){
+  res <- character(3)
+  apis <- api_catalogue()
+  api_df <- data.frame(api_names = unlist(lapply(apis, FUN=function(X) X$api)),
+                       text = unlist(lapply(apis, FUN=function(X) X$description)))
+
+  api_choice <- as.numeric(findData.input(type = "api", input = api_df))
+  res[1] <- apis[[api_choice]]$api
+  i <- 1
+  for(type in c("languages", "versions")){
+    i <- i + 1
+    if(type == "languages") vec <- apis[[api_choice]]$languages
+    if(type == "versions") vec <- apis[[api_choice]]$versions
+
+    if(length(vec) > 1) {
+      choice <- 
+        as.numeric(findData.input(type = "api",
+                                  input = data.frame(id = 1:length(vec),
+                                                     text = vec)))
+      choice <- vec[choice]
+    } else {
+      choice <- vec
+    }
+    res[i] <- choice
+  }
+  return(res)
 } 
 

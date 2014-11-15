@@ -2,23 +2,25 @@
 
 context("test_pxweb_api.R")
 
-api_tests_test_pxweb_api <- list(
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK",
-    test_dim = c(11, 8)
-    ),
-  
-  list(
-    url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/KU",
-    test_dim = c(16, 8)
-  )
-)
-
-test_seeds <- c(as.integer(Sys.time()), 1408310599)
-
-# test <- api_tests_test_pxweb_api[[1]]
 
 test_that(desc="test_pxweb_api()",{    
+  
+  skip_on_cran()
+  
+  api_tests_test_pxweb_api <- list(
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK",
+      test_dim = c(11, 8)
+    ),
+    
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/KU",
+      test_dim = c(16, 8)
+    )
+  )
+  
+  test_seeds <- c(as.integer(Sys.time()), 1408310599)
+  
   for (test in api_tests_test_pxweb_api){
     for (seed in test_seeds){
       expect_that({

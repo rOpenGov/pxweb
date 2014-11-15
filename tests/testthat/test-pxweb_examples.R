@@ -2,7 +2,7 @@
 
 context("tests_pxweb_examples.R")
 
-test_that(desc="Examples in get_pxweb()",{
+test_that(desc="Example tests",{
 
   expect_that({ 
     url <- paste(c(pxweb_api$new("api.scb.se")$base_url(language = "sv"),"ssd","AM","AM0102","AM0102A","KLStabell14LpMan"), collapse="/")
