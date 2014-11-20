@@ -15,7 +15,7 @@ welcome.
 The pxweb package is a part of the international R open government
 data and computation project [rOpenGov](http://ropengov.github.io/).
 
-For installation and usage, check the [tutorial page](https://github.com/rOpenGov/pxweb/blob/master/vignettes/pxweb.md).  
+For installation and usage, check the [tutorial page](https://github.com/rOpenGov/pxweb/blob/master/vignettes/pxweb.Rmd).  
 
 Authors: [Måns Magnusson](), [Love Hansson](), [Leo Lahti](https://github.com/antagomir)
   
