@@ -106,4 +106,18 @@ write_api_list <- function(api_list){
 }
 
 
-
+#' Get index of which api has the name or teh alias
+#'
+#' @param api_name pxweb api name or alias to lookup.
+#' @param api_list pxweb api list created with \code{get_api_list()}
+#' 
+get_api_index<- function(api_name, api_list){
+  list_to_check <- 
+    mapply(c, 
+           as.list(names(api_list)),  
+           lapply(api_list, function(X) unlist(X$alias)))  
+  in_list <- unlist(lapply(list_to_check, function(X) any(X %in% api_name)))
+  if(sum(in_list) > 1) warning("Alias exists in multiple pxweb apis.")
+  if(sum(in_list) == 0) stop("API do not exist in api catalogue.")
+  which(in_list)[1]
+}

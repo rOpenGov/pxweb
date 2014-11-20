@@ -21,6 +21,7 @@ pxweb_api <-
   setRefClass(
     Class = "pxweb_api", 
     fields = list(api = "character",
+                  alias = "character",
                   description = "character",
                   url = "character",
                   versions = "character",
@@ -34,12 +35,11 @@ pxweb_api <-
         'Get the api configuration from inst/extdata/api.json for the 
          api_name.'
         if(length(api_name) > 1) stop("Only one API can be chosen.", call. = FALSE)
-        api.list <- get_api_list()
-        api_index <- which(names(api.list) %in% api_name) # api_name <- "kalle"
-        if(length(api_index) == 0) stop("API do not exist in api catalogue.")
-        api_index <- api_index[length(api_index)]
-        api_to_use <- api.list[[api_index]]
+        api_list <- get_api_list()
+        api_index <- get_api_index(api_name, api_list) # api_name <- "kalle"
+        api_to_use <- api_list[[api_index]]
         api <<- api_name
+        alias <<- api_to_use$alias
         description <<- api_to_use$description
         url <<- api_to_use$url
         versions <<- api_to_use$version
@@ -168,6 +168,7 @@ pxweb_api <-
       show = function(){
         'Print the pxweb api object.'
         cat("Api:", .self$api, "\n")
+        if(length(.self$alias) > 0) cat("    ", paste(.self$alias, collapse = ", "), "\n")
         cat("    ", .self$description, "\n")
         cat("Version(s)   :", paste(.self$versions, collapse = ", "), "\n")
         cat("Language(s)  :", paste(.self$languages, collapse = ", "), "\n")
@@ -177,3 +178,5 @@ pxweb_api <-
       }
       )
   )        
+
+
