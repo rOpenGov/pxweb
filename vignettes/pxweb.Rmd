@@ -95,7 +95,7 @@ If a pxweb api is missing in the api catalogue, you can just add the api yoursel
 # Create a pxweb api object
 my_api <- 
   pxweb_api$new(api = "foo.bar",
-                url = "http://api.foo.bar/[lang]/[version]",
+                url = "http://api.foo.bar/[version]/[lang]",
                 description = "My own pxweb api",
                 languages = "en", # Languages
                 versions = "v1", # Versions         
