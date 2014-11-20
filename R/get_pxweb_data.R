@@ -55,7 +55,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      response <- try(POST(
         url = batches$url,
         body = toJSON(list(
-           query = queryBody,
+           query = rapply(queryBody, iconv, to = "UTF-8", how = "replace"),
   	 # NOTE: JSON might be more efficient for downloads (smaller file size)
      # NOTE: JSON includes comments/metadata
            response = list(format = "csv")
