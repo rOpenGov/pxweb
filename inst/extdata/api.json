@@ -12,7 +12,6 @@
               },
   
     "pxweb.orebro.se": {
-        "alias" : [],
         "description" : "Open data from the municipality Orebro in Sweden.",
         "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
         "version": ["v1"], 
@@ -34,7 +33,6 @@
               },
   
     "pxwebapi2.stat.fi": {
-        "alias" : [],
         "description" : "Statistics Finland (old version)",
         "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 

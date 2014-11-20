@@ -52,15 +52,6 @@ A tutorial is included with the package with:
 vignette(topic="pxweb")
 ```
 
-
-### Other issues
-
-We also recommend setting the UTF-8 encoding:
-
-```{r locale, eval=FALSE}
-Sys.setlocale(locale="UTF-8") 
-```
-
 ## <a name="examples"></a>Examples
 
 Some examples on using the R tools to fetch px-web API data.
@@ -80,11 +71,11 @@ Interactive API query (not run):
 # Get data from SCB (Statistics Sweden)
 d <- interactive_pxweb(api = "api.scb.se")
 
-# Fetching data from the swedish SCB (Statistics Sweden) pxweb API:
-d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
+# Fetching data from the swedish SCB (Statistics Sweden) pxweb API using the alias 'scb'
+d <- interactive_pxweb(api = "scb", version = "v1", lang = "sv")
 
-# Fetching data from statfi (Statistics Finland)
-d <- interactive_pxweb(api = "pxwebapi2.stat.fi")
+# Fetching data from statfi (Statistics Finland) using the alias 'statfi'
+d <- interactive_pxweb(api = "statfi")
 ```
 
 ### Create a new PX-WEB API:
@@ -94,7 +85,8 @@ If a pxweb api is missing in the api catalogue, you can just add the api yoursel
 ```{r add_api, message=FALSE, eval=FALSE}
 # Create a pxweb api object
 my_api <- 
-  pxweb_api$new(api = "foo.bar",
+  pxweb_api$new(api = "foo.bar", # PXWEB api name
+                alias = "foo", # Alias for the api, can be ignored
                 url = "http://api.foo.bar/[version]/[lang]",
                 description = "My own pxweb api",
                 languages = "en", # Languages

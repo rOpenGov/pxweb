@@ -55,6 +55,11 @@ test_that(desc="pxweb_api_class",{
   }, 
   not(throws_error()))
   
+  expect_that({
+    test_api <- pxweb_api$new("scb")
+  }, 
+  not(throws_error()))
+  
   expect_equal({
     test_api$base_url()
   }, "http://api.scb.se/OV0104/v1/doris/en")

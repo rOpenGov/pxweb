@@ -36,10 +36,10 @@ pxweb_api <-
          api_name.'
         if(length(api_name) > 1) stop("Only one API can be chosen.", call. = FALSE)
         api_list <- get_api_list()
-        api_index <- get_api_index(api_name, api_list) # api_name <- "kalle"
+        api_index <- get_api_index(api_name, api_list) # api_name <- "foo.bar"
         api_to_use <- api_list[[api_index]]
-        api <<- api_name
-        alias <<- api_to_use$alias
+        api <<- names(api_list)[api_index]
+        if("alias" %in% names(api_to_use)) alias <<- api_to_use$alias
         description <<- api_to_use$description
         url <<- api_to_use$url
         versions <<- api_to_use$version
@@ -87,6 +87,7 @@ pxweb_api <-
         
         # Check that single_element elemens only is of length one.
         field_names <- names(getRefClass(class(.self))$fields())
+        field_names <- field_names[!field_names %in% "alias"]
         single_elements <- c("api", "url", "calls_per_period", "period_in_seconds", "max_values_to_download")
         for(fn in field_names){
           if(length(.self$field(fn)) == 0){
@@ -95,8 +96,7 @@ pxweb_api <-
           if(length(.self$field(fn)) != 1 & fn %in% single_elements){
             stop(fn, " is of not of length 1.", call. = FALSE)
           }
-        }
-        
+        }        
 
         # Check structure of url
         has_lang <- grepl(x = .self$url, pattern = "\\[lang\\]")
@@ -167,9 +167,9 @@ pxweb_api <-
       
       show = function(){
         'Print the pxweb api object.'
-        cat("Api:", .self$api, "\n")
-        if(length(.self$alias) > 0) cat("    ", paste(.self$alias, collapse = ", "), "\n")
-        cat("    ", .self$description, "\n")
+        cat("Api:", .self$api)
+        if(length(.self$alias) > 0) cat(" ('", paste(.self$alias, collapse = "', '"), "')", sep="")
+        cat("\n    ", .self$description, "\n")
         cat("Version(s)   :", paste(.self$versions, collapse = ", "), "\n")
         cat("Language(s)  :", paste(.self$languages, collapse = ", "), "\n")
         cat("Limit(s)     :", .self$calls_per_period ,"calls per", .self$period_in_seconds, "sec.\n")
