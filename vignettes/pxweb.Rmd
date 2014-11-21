@@ -95,10 +95,7 @@ my_api <-
                 period_in_seconds = 2, 
                 max_values_to_download = 10)
 
-# Check if the fields are correct (in this case not)
-my_api$check_input()
-
-# Test that the api works (in this case not)
+# Test that the api works (in this case it does not)
 my_api$test_api()
 
 # Add the api to the api catalogue

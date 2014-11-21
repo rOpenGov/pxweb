@@ -76,6 +76,7 @@ pxweb_api <-
         'Create a new pxweb_api object.'
         if(is.null(get_api)){
           .self$initFields(...)
+          .self$check_input()
         } else {
           .self$get_api(api_name = get_api)
         }
@@ -83,9 +84,14 @@ pxweb_api <-
       
       check_input = function(){
         'Check the consistency of the fields.'
-        
-        # Check that single_element elemens only is of length one.
+        # Check that single_element elemens only is of length one.        
         field_names <- names(getRefClass(class(.self))$fields())
+        field_exist <- logical(length(field_names))
+        for (fn in seq_along(field_names)){
+          field_exist[fn] <- length(.self$field(field_names[fn])) != 0
+        }
+        if(all(!field_exist)) return(invisible(TRUE))
+        
         field_names <- field_names[!field_names %in% "alias"]
         single_elements <- c("api", "url", "calls_per_period", "period_in_seconds", "max_values_to_download")
         for(fn in field_names){
@@ -102,6 +108,8 @@ pxweb_api <-
         if(!has_lang) stop("[lang] is missing in url.", call. = FALSE)
         has_version <- grepl(x = .self$url, pattern = "\\[version\\]")
         if(!has_version) stop("[version] is missing in url.", call. = FALSE)
+        has_http <- grepl(x = .self$url, pattern = "^http://")
+        if(!has_http) stop("url is not a http adress", call. = FALSE)
       }, 
       
       test_api = function(test_type = "fast", seed = as.integer(Sys.time())){
