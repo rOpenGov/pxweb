@@ -31,6 +31,7 @@ test_that(desc="pxweb_api_class",{
                     calls_per_period = 1,
                     period_in_seconds = 2, 
                     max_values_to_download = 10)
+    test_api2$check_input()
   }, 
   throws_error())
 
@@ -42,6 +43,7 @@ test_that(desc="pxweb_api_class",{
                     calls_per_period = 1,
                     period_in_seconds = 2, 
                     max_values_to_download = 10)
+    test_api2$check_input()
   }, 
   throws_error())  
   
@@ -59,6 +61,13 @@ test_that(desc="pxweb_api_class",{
     test_api <- pxweb_api$new("scb")
   }, 
   not(throws_error()))
+  
+  expect_that({
+    test_api3 <- 
+      pxweb_api$new()
+    test_api3$check_input()
+  }, 
+  throws_error())  
   
   expect_equal({
     test_api$base_url()

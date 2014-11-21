@@ -76,7 +76,6 @@ pxweb_api <-
         'Create a new pxweb_api object.'
         if(is.null(get_api)){
           .self$initFields(...)
-          if(length(list(...)) != 0) .self$check_input()
         } else {
           .self$get_api(api_name = get_api)
         }
@@ -91,10 +90,10 @@ pxweb_api <-
         single_elements <- c("api", "url", "calls_per_period", "period_in_seconds", "max_values_to_download")
         for(fn in field_names){
           if(length(.self$field(fn)) == 0){
-            stop(fn, " is of missing.", call. = FALSE)
+            stop(fn, " is missing.", call. = FALSE)
           }
           if(length(.self$field(fn)) != 1 & fn %in% single_elements){
-            stop(fn, " is of not of length 1.", call. = FALSE)
+            stop(fn, " is not of length 1.", call. = FALSE)
           }
         }        
 
@@ -105,31 +104,54 @@ pxweb_api <-
         if(!has_version) stop("[version] is missing in url.", call. = FALSE)
       }, 
       
-      test_api = function(){
-        'Test to connect to the api and download "the first file"
-         in each api version/language.'
+      test_api = function(test_type = "fast", seed = as.integer(Sys.time())){
+        'Test to connect to the api and download for each api version/language.
+
+         :param test_type: c("fast", "sample", "full"). 
+
+                        "fast" check that one random datapoint can be downloaded from each api
+
+                        "sample" check that one random datapoint can be downloaded from each node
+
+                        "full" check that all datapoints can be downloaded
+
+         :param seed: seed to use for random choice of data points.
+         '
+        
         for (v in .self$versions){
           for (l in .self$languages){
             stopifnot(httr::url_success(.self$base_url(version = v, language = l)))
-            node <- get_pxweb_metadata(choose_pxweb_database_url(.self$base_url(version = v, language = l), pre_choice = 1))
-            while(node$type[1] == "l"){
-              node <- get_pxweb_metadata(path = node$URL[1])
+            if(test_type == "fast"){
+              node <- get_pxweb_metadata(.self$base_url(version = v, language = l))
+              choice <- sample(x = 1:nrow(node), size = 1)
+              message("Check node : ", node$text[choice])
+              node <- get_pxweb_metadata(choose_pxweb_database_url(.self$base_url(version = v, language = l), pre_choice = choice))
+              choice <- sample(x = 1:length(node$URL), size = 1)
+              while(node$type[choice] == "l"){
+                message("Check node : ", node$text[choice])
+                node <- get_pxweb_metadata(path = node$URL[choice])
+                choice <- sample(x = 1:length(node$URL), size = 1)
+              }
+        
+              call_meta_data <- suppressMessages(get_pxweb_dims(get_pxweb_metadata(path = node$URL[1])))
+              test_dim_list <- vector("list", length(call_meta_data))
+              for(i in seq_along(call_meta_data)){
+                test_dim_list[[i]] <- call_meta_data[[i]]$values[1]
+                names(test_dim_list)[i] <- names(call_meta_data)[i]
+              }
+              res <- get_pxweb_data(url = node$URL[1], dims = test_dim_list, clean = FALSE)
+              if (!is.data.frame(res)) stop(paste0("Could not download data from ", 
+                                                   node$URL[1]),
+                                                   call = FALSE)
+            } else if(test_type == "sample"){
+              res <- test_pxweb_api(url = .self$base_url(), download_all = FALSE, seed = seed)
+            } else if(test_type == "full"){
+              res <- test_pxweb_api(url = .self$base_url(), download_all = FALSE, seed = seed)
             }
-            
-            call_meta_data <- suppressMessages(get_pxweb_dims(get_pxweb_metadata(path = node$URL[1])))
-            test_dim_list <- vector("list", length(call_meta_data))
-            for(i in seq_along(call_meta_data)){
-              test_dim_list[[i]] <- call_meta_data[[i]]$values[1]
-              names(test_dim_list)[i] <- names(call_meta_data)[i]
-            }
-            res <- get_pxweb_data(url = node$URL[1], dims = test_dim_list, clean = FALSE)
-            if (!is.data.frame(res)) stop(paste0("Could not download data from ", 
-                                                 node$URL[1]),
-                                                 call = FALSE)
           }
         }
         message("pxweb api ok.")
-        invisible(TRUE)
+        invisible(res)
       },
                   
       check_alt = function(version = NULL, language = NULL){

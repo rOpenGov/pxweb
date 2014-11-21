@@ -43,8 +43,18 @@ api_name.}
 
 \item{\code{pxweb_api_to_list()}}{Create a list of the current pxweb_api object}
 
-\item{\code{test_api()}}{Test to connect to the api and download "the first file"
-in each api version/language.}
+\item{\code{test_api(test_type = "fast", seed = as.integer(Sys.time()))}}{Test to connect to the api and download for each api version/language.
+
+         :param test_type: c("fast", "sample", "full"). 
+
+                        "fast" check that one random datapoint can be downloaded from each api
+
+                        "sample" check that one random datapoint can be downloaded from each node
+
+                        "full" check that all datapoints can be downloaded
+
+         :param seed: seed to use for random choice of data points.
+         }
 
 \item{\code{write_to_catalogue()}}{Save/overwrite the current api as a locally stored api.}
 }}
