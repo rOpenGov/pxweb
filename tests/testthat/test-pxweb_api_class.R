@@ -44,9 +44,9 @@ test_that(desc="pxweb_api_class",{
                     max_values_to_download = 10)
   }, 
   throws_error())  
-  
+
   expect_that({
-    test_api2 <- test_api$copy()
+    test_api <- test_api$copy()
     }, 
     not(throws_error()))
   
@@ -54,6 +54,18 @@ test_that(desc="pxweb_api_class",{
     test_api <- pxweb_api$new("api.scb.se")
   }, 
   not(throws_error()))
+  
+  expect_that({
+    test_api <- pxweb_api$new("scb")
+  }, 
+  not(throws_error()))
+  
+  expect_that({
+    test_api3 <- 
+      pxweb_api$new()
+    test_api3$check_input()
+  }, 
+  not(throws_error()))  
   
   expect_equal({
     test_api$base_url()
