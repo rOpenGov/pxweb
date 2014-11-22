@@ -7,8 +7,6 @@
 #' @examples api_parameters()
 api_parameters <- function(url = NULL) {
 
-  warning("api_parameters() is depricated, please use api_catalogue()")
-  
   api.list <- get_api_list()
   
   # If API is specified, pick the parameters
