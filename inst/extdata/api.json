@@ -1,25 +1,15 @@
 {
   "apis": {
-    "statistik.sjv.se": {
-        "alias" : ["jordbruksverket"],
-        "description" : "The Swedish agricultural authority",
-        "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]",
+    "api.scb.se": { 
+        "alias" : ["scb"],
+        "description" : "Statistics Sweden",
+        "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]",
         "version": ["v1"], 
-        "lang": ["sv"],
-        "calls_per_period": 10,
+        "lang": ["en", "sv"],
+        "calls_per_period": 30,
         "period_in_seconds": 10,
-        "max_values_to_download" : 1000
-              },
-  
-    "pxweb.orebro.se": {
-        "description" : "Open data from the municipality Orebro in Sweden.",
-        "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
-        "version": ["v1"], 
-        "lang": ["sv"],
-        "calls_per_period": 10,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 1000
-              },
+        "max_values_to_download" : 100000
+          }, 
   
     "pxnet2.stat.fi": {
         "alias" : ["statfi"],
@@ -42,16 +32,26 @@
         "max_values_to_download" : 100000
               },
   
-    "api.scb.se": { 
-        "alias" : ["scb"],
-        "description" : "Statistics Sweden",
-        "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]",
+    "statistik.sjv.se": {
+        "alias" : ["jordbruksverket"],
+        "description" : "The Swedish agricultural authority",
+        "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["en", "sv"],
-        "calls_per_period": 30,
+        "lang": ["sv"],
+        "calls_per_period": 10,
         "period_in_seconds": 10,
-        "max_values_to_download" : 100000
-          }
+        "max_values_to_download" : 1000
+              },
+  
+    "pxweb.orebro.se": {
+        "description" : "Open data from the municipality Orebro in Sweden.",
+        "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["sv"],
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000
+              }
   },
 
   "local_apis": {}

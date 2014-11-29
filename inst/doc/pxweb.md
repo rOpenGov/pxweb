@@ -71,32 +71,34 @@ Some examples on using the R tools to fetch px-web API data.
 
 ### Listing available pxweb apis
 
+To list the available apis in the package, use `api_catalogue()`. 
+
 
 ```r
 library(pxweb)
-print(api_catalogue()[1:2])
+api_catalogue()[1:2]
 ```
 
 ```
 ## [[1]]
-## Api: statistik.sjv.se 
-##      The Swedish agricultural authority 
+## Api: api.scb.se ('scb')
+##      Statistics Sweden 
 ## Version(s)   : v1 
-## Language(s)  : sv 
-## Limit(s)     : 10 calls per 10 sec.
-##                1000  values per call.
+## Language(s)  : en, sv 
+## Limit(s)     : 30 calls per 10 sec.
+##                1e+05  values per call.
 ## Url template :
-##  http://statistik.sjv.se/PXWeb/api/[version]/[lang] 
+##  http://api.scb.se/OV0104/[version]/doris/[lang] 
 ## 
 ## [[2]]
-## Api: pxweb.orebro.se 
-##      Open data from the municipality Orebro in Sweden. 
+## Api: pxnet2.stat.fi ('statfi')
+##      Statistics Finland 
 ## Version(s)   : v1 
-## Language(s)  : sv 
-## Limit(s)     : 10 calls per 10 sec.
-##                1000  values per call.
+## Language(s)  : fi 
+## Limit(s)     : 30 calls per 10 sec.
+##                1e+05  values per call.
 ## Url template :
-##  http://pxweb.orebro.se/api/[version]/[lang]
+##  http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]
 ```
 
 ### Fetching data from PX-WEB API:
@@ -198,7 +200,7 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.5.0
+## [1] pxweb_0.5.3
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] data.table_1.9.2 digest_0.6.4     evaluate_0.5.5   formatR_0.10    

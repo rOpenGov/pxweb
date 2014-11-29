@@ -95,27 +95,28 @@ devtools::install_github(&quot;pxweb&quot;,&quot;rOpenGov&quot;)</code></pre>
 <p>Some examples on using the R tools to fetch px-web API data.</p>
 <div id="listing-available-pxweb-apis" class="section level3">
 <h3>Listing available pxweb apis</h3>
+<p>To list the available apis in the package, use <code>api_catalogue()</code>.</p>
 <pre class="r"><code>library(pxweb)
-print(api_catalogue()[1:2])</code></pre>
+api_catalogue()[1:2]</code></pre>
 <pre><code>## [[1]]
-## Api: statistik.sjv.se 
-##      The Swedish agricultural authority 
+## Api: api.scb.se ('scb')
+##      Statistics Sweden 
 ## Version(s)   : v1 
-## Language(s)  : sv 
-## Limit(s)     : 10 calls per 10 sec.
-##                1000  values per call.
+## Language(s)  : en, sv 
+## Limit(s)     : 30 calls per 10 sec.
+##                1e+05  values per call.
 ## Url template :
-##  http://statistik.sjv.se/PXWeb/api/[version]/[lang] 
+##  http://api.scb.se/OV0104/[version]/doris/[lang] 
 ## 
 ## [[2]]
-## Api: pxweb.orebro.se 
-##      Open data from the municipality Orebro in Sweden. 
+## Api: pxnet2.stat.fi ('statfi')
+##      Statistics Finland 
 ## Version(s)   : v1 
-## Language(s)  : sv 
-## Limit(s)     : 10 calls per 10 sec.
-##                1000  values per call.
+## Language(s)  : fi 
+## Limit(s)     : 30 calls per 10 sec.
+##                1e+05  values per call.
 ## Url template :
-##  http://pxweb.orebro.se/api/[version]/[lang]</code></pre>
+##  http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]</code></pre>
 </div>
 <div id="fetching-data-from-px-web-api" class="section level3">
 <h3>Fetching data from PX-WEB API:</h3>
@@ -188,7 +189,7 @@ my_api$write_to_catalogue()</code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.5.0
+## [1] pxweb_0.5.3
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] data.table_1.9.2 digest_0.6.4     evaluate_0.5.5   formatR_0.10    

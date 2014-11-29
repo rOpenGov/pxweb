@@ -60,7 +60,7 @@ Some examples on using the R tools to fetch px-web API data.
 
 ```{r apiparameters, message=FALSE, eval=TRUE}
 library(pxweb)
-print(api_catalogue()[1:2])
+api_catalogue()
 ```
 
 ### Fetching data from PX-WEB API:
