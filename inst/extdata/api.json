@@ -44,7 +44,7 @@
               },
   
     "pxweb.orebro.se": {
-        "description" : "Open data from the municipality Orebro in Sweden.",
+        "description" : "Orebro municipality in Sweden",
         "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["sv"],
@@ -55,14 +55,26 @@
 
     "fohm-app.folkhalsomyndigheten.se": {
         "alias" : ["fohm"],
-        "description" : "Open data from the Public Health Agency of Sweden",
+        "description" : "The Public Health Agency of Sweden",
         "url" : "http://fohm-app.folkhalsomyndigheten.se/Folkhalsodata/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en", "sv"],
         "calls_per_period": 10,
         "period_in_seconds": 10,
         "max_values_to_download" : 1000
+              },
+
+    "statistik.konj.se": {
+        "alias" : ["konj"],
+        "description" : "The Swedish national institute of economic research",
+        "url" : "http://statistik.konj.se/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["en", "sv"],
+        "calls_per_period": 30,
+        "period_in_seconds": 1,
+        "max_values_to_download" : 10000
               }
+
   },
 
   "local_apis": {}
