@@ -94,10 +94,10 @@ test_that(desc="get_pxweb_data()",{
     
     list(
       url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/asu/asas/010_asas_tau_101.px",
-      dims = list("Alue" = c("*"),
+      dims = list(Alue = c("*"),
                   "Asuntokunnan koko" = c("*"),
-                  "Talotyyppi" = c("S"),
-                  "Vuosi" = c("*")
+                  Talotyyppi = c("S"),
+                  Vuosi = c("*")
       ),
       clean = TRUE,
       test_dim = c(2568, NA)
