@@ -13,9 +13,11 @@ PX-WEB API Interface for R
 
 This R package provides tools to access [PX-WEB
 API](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf). Your
-[contributions](http://ropengov.github.com/contact.html) and [bug
+[contributions](http://ropengov.github.io/contribute/) and [bug
 reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
+
+More information on the PX-Web/PC-Axis API can be found [here](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf).
 
 ## Table of contents
 
@@ -70,20 +72,14 @@ Sys.setlocale(locale="UTF-8")
 
 Some examples on using the R tools to fetch px-web API data.
 
-### Listing available pxweb apis
-
-To list the available apis in the package, use `api_catalogue()`. 
-
-```{r apiparameters, message=FALSE, eval=TRUE}
-library(pxweb)
-api_catalogue()[1:2]
-```
-
 ### Fetching data from PX-WEB API:
 
-Interactive API query (not run):
+Interactive API query:
 
 ```{r standardquery, message=FALSE, eval=FALSE}
+# Navigate through all pxweb api:s installed.
+d <- interactive_pxweb()
+
 # Get data from SCB (Statistics Sweden)
 d <- interactive_pxweb(api = "api.scb.se")
 
@@ -93,31 +89,6 @@ d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
 # Fetching data from statfi (Statistics Finland)
 d <- interactive_pxweb(api = "pxwebapi2.stat.fi")
 ```
-
-### Create a new PX-WEB API:
-
-If a pxweb api is missing in the api catalogue, you can just add the api yourself in the following way.
-
-```{r add_api, message=FALSE, eval=FALSE}
-# Create a pxweb api object
-my_api <- 
-  pxweb_api$new(api = "foo.bar",
-                url = "http://api.foo.bar/[lang]/[version]",
-                description = "My own pxweb api",
-                languages = "en", # Languages
-                versions = "v1", # Versions         
-                calls_per_period = 1,
-                period_in_seconds = 2, 
-                max_values_to_download = 10)
-
-# Test that the api works
-my_api$test_api()
-
-# Add the api to the api catalogue
-my_api$write_to_catalogue()
-
-```
-
 
 ## Licensing and Citations
 

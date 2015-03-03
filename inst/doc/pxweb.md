@@ -8,9 +8,11 @@ PX-WEB API Interface for R
 
 This R package provides tools to access [PX-WEB
 API](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf). Your
-[contributions](http://ropengov.github.com/contact.html) and [bug
+[contributions](http://ropengov.github.io/contribute/) and [bug
 reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
+
+More information on the PX-Web/PC-Axis API can be found [here](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf).
 
 ## Table of contents
 
@@ -69,44 +71,15 @@ Sys.setlocale(locale="UTF-8")
 
 Some examples on using the R tools to fetch px-web API data.
 
-### Listing available pxweb apis
-
-To list the available apis in the package, use `api_catalogue()`. 
-
-
-```r
-library(pxweb)
-api_catalogue()[1:2]
-```
-
-```
-## [[1]]
-## Api: api.scb.se ('scb')
-##      Statistics Sweden 
-## Version(s)   : v1 
-## Language(s)  : en, sv 
-## Limit(s)     : 30 calls per 10 sec.
-##                1e+05  values per call.
-## Url template :
-##  http://api.scb.se/OV0104/[version]/doris/[lang] 
-## 
-## [[2]]
-## Api: pxnet2.stat.fi ('statfi')
-##      Statistics Finland 
-## Version(s)   : v1 
-## Language(s)  : fi 
-## Limit(s)     : 30 calls per 10 sec.
-##                1e+05  values per call.
-## Url template :
-##  http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]
-```
-
 ### Fetching data from PX-WEB API:
 
-Interactive API query (not run):
+Interactive API query:
 
 
 ```r
+# Navigate through all pxweb api:s installed.
+d <- interactive_pxweb()
+
 # Get data from SCB (Statistics Sweden)
 d <- interactive_pxweb(api = "api.scb.se")
 
@@ -116,31 +89,6 @@ d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
 # Fetching data from statfi (Statistics Finland)
 d <- interactive_pxweb(api = "pxwebapi2.stat.fi")
 ```
-
-### Create a new PX-WEB API:
-
-If a pxweb api is missing in the api catalogue, you can just add the api yourself in the following way.
-
-
-```r
-# Create a pxweb api object
-my_api <- 
-  pxweb_api$new(api = "foo.bar",
-                url = "http://api.foo.bar/[lang]/[version]",
-                description = "My own pxweb api",
-                languages = "en", # Languages
-                versions = "v1", # Versions         
-                calls_per_period = 1,
-                period_in_seconds = 2, 
-                max_values_to_download = 10)
-
-# Test that the api works
-my_api$test_api()
-
-# Add the api to the api catalogue
-my_api$write_to_catalogue()
-```
-
 
 ## Licensing and Citations
 
@@ -190,8 +138,8 @@ sessionInfo()
 ```
 
 ```
-## R version 3.1.1 (2014-07-10)
-## Platform: x86_64-apple-darwin13.1.0 (64-bit)
+## R version 3.1.2 (2014-10-31)
+## Platform: x86_64-apple-darwin13.4.0 (64-bit)
 ## 
 ## locale:
 ## [1] sv_SE.UTF-8/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
@@ -200,13 +148,13 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.5.3
+## [1] pxweb_0.5.4
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] data.table_1.9.2 digest_0.6.4     evaluate_0.5.5   formatR_0.10    
 ##  [5] htmltools_0.2.4  httr_0.5         jsonlite_0.9.8   knitr_1.6       
 ##  [9] plyr_1.8.1       Rcpp_0.11.1      RCurl_1.95-4.1   reshape2_1.4    
-## [13] RJSONIO_1.2-0.2  rmarkdown_0.2.64 stringr_0.6.2    tools_3.1.1     
+## [13] RJSONIO_1.2-0.2  rmarkdown_0.3.10 stringr_0.6.2    tools_3.1.2     
 ## [17] yaml_2.1.13
 ```
 
