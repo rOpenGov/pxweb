@@ -90,7 +90,6 @@ d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
 d <- interactive_pxweb(api = "pxwebapi2.stat.fi")
 ```
 
-
 Example of download data from the Statistics Sweden API using `get_pxweb_data()`:
 
 
@@ -101,7 +100,6 @@ pxweb_test_data <-
                              Tid = c('*')),
                  clean = FALSE)
 ```
-
 
 
 ## Licensing and Citations
