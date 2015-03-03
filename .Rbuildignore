@@ -12,6 +12,8 @@ inst/extras/.RData
 sandbox/*.R
 sandbox/
 
+README.md
+
 # Git related
 ./.git*
 

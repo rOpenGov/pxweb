@@ -59,7 +59,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <div id="px-web-api-interface-for-r" class="section level1">
 <h1>PX-WEB API Interface for R</h1>
-<p>This R package provides tools to access <a href="http://www.scb.se/Grupp/OmSCB/API/API-description.pdf">PX-WEB API</a>. Your <a href="http://ropengov.github.com/contact.html">contributions</a> and <a href="https://github.com/ropengov/pxweb">bug reports and other feedback</a> are welcome!</p>
+<p>This R package provides tools to access <a href="http://www.scb.se/Grupp/OmSCB/API/API-description.pdf">PX-WEB API</a>. Your <a href="http://ropengov.github.io/contribute/">contributions</a> and <a href="https://github.com/ropengov/pxweb">bug reports and other feedback</a> are welcome!</p>
+<p>More information on the PX-Web/PC-Axis API can be found <a href="http://www.scb.se/Grupp/OmSCB/API/API-description.pdf">here</a>.</p>
 <div id="table-of-contents" class="section level2">
 <h2>Table of contents</h2>
 <p><a href="#installation">Installation</a> (Installation)<br /><a href="#examples">Examples</a> (Examples)</p>
@@ -93,35 +94,13 @@ devtools::install_github(&quot;pxweb&quot;,&quot;rOpenGov&quot;)</code></pre>
 <div id="examples" class="section level2">
 <h2><a name="examples"></a>Examples</h2>
 <p>Some examples on using the R tools to fetch px-web API data.</p>
-<div id="listing-available-pxweb-apis" class="section level3">
-<h3>Listing available pxweb apis</h3>
-<p>To list the available apis in the package, use <code>api_catalogue()</code>.</p>
-<pre class="r"><code>library(pxweb)
-api_catalogue()[1:2]</code></pre>
-<pre><code>## [[1]]
-## Api: api.scb.se ('scb')
-##      Statistics Sweden 
-## Version(s)   : v1 
-## Language(s)  : en, sv 
-## Limit(s)     : 30 calls per 10 sec.
-##                1e+05  values per call.
-## Url template :
-##  http://api.scb.se/OV0104/[version]/doris/[lang] 
-## 
-## [[2]]
-## Api: pxnet2.stat.fi ('statfi')
-##      Statistics Finland 
-## Version(s)   : v1 
-## Language(s)  : fi 
-## Limit(s)     : 30 calls per 10 sec.
-##                1e+05  values per call.
-## Url template :
-##  http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]</code></pre>
-</div>
 <div id="fetching-data-from-px-web-api" class="section level3">
 <h3>Fetching data from PX-WEB API:</h3>
-<p>Interactive API query (not run):</p>
-<pre class="r"><code># Get data from SCB (Statistics Sweden)
+<p>Interactive API query:</p>
+<pre class="r"><code># Navigate through all pxweb api:s installed.
+d &lt;- interactive_pxweb()
+
+# Get data from SCB (Statistics Sweden)
 d &lt;- interactive_pxweb(api = &quot;api.scb.se&quot;)
 
 # Fetching data from the swedish SCB (Statistics Sweden) pxweb API:
@@ -129,26 +108,12 @@ d &lt;- interactive_pxweb(api = &quot;api.scb.se&quot;, version = &quot;v1&quot;
 
 # Fetching data from statfi (Statistics Finland)
 d &lt;- interactive_pxweb(api = &quot;pxwebapi2.stat.fi&quot;)</code></pre>
-</div>
-<div id="create-a-new-px-web-api" class="section level3">
-<h3>Create a new PX-WEB API:</h3>
-<p>If a pxweb api is missing in the api catalogue, you can just add the api yourself in the following way.</p>
-<pre class="r"><code># Create a pxweb api object
-my_api &lt;- 
-  pxweb_api$new(api = &quot;foo.bar&quot;,
-                url = &quot;http://api.foo.bar/[lang]/[version]&quot;,
-                description = &quot;My own pxweb api&quot;,
-                languages = &quot;en&quot;, # Languages
-                versions = &quot;v1&quot;, # Versions         
-                calls_per_period = 1,
-                period_in_seconds = 2, 
-                max_values_to_download = 10)
-
-# Test that the api works
-my_api$test_api()
-
-# Add the api to the api catalogue
-my_api$write_to_catalogue()</code></pre>
+<p>Example of download data from the Statistics Sweden API using <code>get_pxweb_data()</code>:</p>
+<pre class="r"><code>pxweb_test_data &lt;- 
+  get_pxweb_data(url = &quot;http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet&quot;, 
+                 dims = list(ContentsCode = c('PR0101A1'), 
+                             Tid = c('*')),
+                 clean = FALSE)</code></pre>
 </div>
 </div>
 <div id="licensing-and-citations" class="section level2">
@@ -179,8 +144,8 @@ my_api$write_to_catalogue()</code></pre>
 <h2>Session info</h2>
 <p>This vignette was created with</p>
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>## R version 3.1.1 (2014-07-10)
-## Platform: x86_64-apple-darwin13.1.0 (64-bit)
+<pre><code>## R version 3.1.2 (2014-10-31)
+## Platform: x86_64-apple-darwin13.4.0 (64-bit)
 ## 
 ## locale:
 ## [1] sv_SE.UTF-8/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
@@ -189,13 +154,13 @@ my_api$write_to_catalogue()</code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.5.3
+## [1] pxweb_0.5.5
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] data.table_1.9.2 digest_0.6.4     evaluate_0.5.5   formatR_0.10    
 ##  [5] htmltools_0.2.4  httr_0.5         jsonlite_0.9.8   knitr_1.6       
 ##  [9] plyr_1.8.1       Rcpp_0.11.1      RCurl_1.95-4.1   reshape2_1.4    
-## [13] RJSONIO_1.2-0.2  rmarkdown_0.2.64 stringr_0.6.2    tools_3.1.1     
+## [13] RJSONIO_1.2-0.2  rmarkdown_0.3.10 stringr_0.6.2    tools_3.1.2     
 ## [17] yaml_2.1.13</code></pre>
 </div>
 </div>
