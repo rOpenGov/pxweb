@@ -61,8 +61,5 @@ api_name.}
 \examples{
 scb_pxweb_api <- pxweb_api$new(get_api = "api.scb.se")
  scb_pxweb_api
- \donttest{
- scb_pxweb_api$test_api()
- }
 }
 

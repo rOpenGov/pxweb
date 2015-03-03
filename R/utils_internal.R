@@ -109,20 +109,6 @@ api_timer <- function(api_url, calls = 1){
 #' @param url The url to download from.
 #' @param dims The dimension object to use for downloading
 #' 
-#' @examples
-#' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-#' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
-#'             ContentsCode = c('*'), Tid = c('*'))
-#' \donttest{
-#' batches <- create_batch_list(url, dims)
-#' }
-#' 
-#' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet"
-#' dims <- list(ContentsCode = c('*'),
-#'             Tid = c('*'))
-#' \donttest{
-#' batches <- create_batch_list(url, dims)
-#' }
 create_batch_list <- function(url, dims){
   
   # Get dimension size of call
@@ -211,12 +197,6 @@ get_dim_size <- function(url, dims, content_node=NULL){
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
 #'             ContentsCode = c('*'), Tid = c('*'))
-#' \donttest{
-#' call_size <- get_dim_size(url, dims)
-#' calculate_data_dim(call_size[[1]], TRUE)
-#' calculate_data_dim(call_size[[1]], FALSE)
-#' }
-
 calculate_data_dim <- function(dim_length, clean){
   len <- length(dim_length)
   if(clean){

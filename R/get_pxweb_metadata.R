@@ -11,13 +11,6 @@
 #' @export
 #' @examples
 #' api_url <- base_url("api.scb.se", language = "sv")
-#' \donttest{
-#' top_node <- get_pxweb_metadata(api_url)
-#' 
-#' bottom_node <- get_pxweb_metadata("http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv")
-#' }
-
-
 get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TRUE, baseURL = NULL, ...) {
 
    # Build a URL if no path is supplied

@@ -15,10 +15,6 @@
 #' \code{error} : Whether there were errors encountered with the call
 #' \code{download_error} : Whether there were errors encountered during download
 #' 
-#' @examples
-#' \donttest{
-#' test_data <- test_pxweb_api(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK")
-#' }
 #' @importFrom plyr rbind.fill
 #'  
 test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time())){

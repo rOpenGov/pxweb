@@ -20,10 +20,5 @@ The function calculates the dimension of a data object
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'),
             ContentsCode = c('*'), Tid = c('*'))
-\donttest{
-call_size <- get_dim_size(url, dims)
-calculate_data_dim(call_size[[1]], TRUE)
-calculate_data_dim(call_size[[1]], FALSE)
-}
 }
 

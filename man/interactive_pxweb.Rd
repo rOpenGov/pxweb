@@ -25,7 +25,6 @@ api_catalogue() # List apis
 \donttest{
  d <- interactive_pxweb()
  d <- interactive_pxweb("api.scb.se")
- d <- interactive_pxweb(api = "statistik.sjv.se")
  d <- interactive_pxweb("api.scb.se", language = "sv")
 }
 }
