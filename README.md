@@ -17,7 +17,7 @@ data and computation project [rOpenGov](http://ropengov.github.io/).
 
 For installation and usage, check the [tutorial page](https://github.com/rOpenGov/pxweb/blob/master/vignettes/pxweb.Rmd).  
 
-Authors: [Måns Magnusson](), [Love Hansson](), [Leo Lahti](https://github.com/antagomir)
+Authors: [Måns Magnusson](https://github.com/MansMeg/), [Love Hansson](https://github.com/LCHansson/), [Leo Lahti](https://github.com/antagomir)
   
 You are welcome to contact us:
 
