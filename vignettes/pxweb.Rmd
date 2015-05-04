@@ -44,8 +44,8 @@ install.packages("pxweb")
 Install the latest version from github:
 
 ```{r install2, eval=FALSE}
-install.packages("devtools")
-devtools::install_github("pxweb","rOpenGov")
+library("devtools")
+devtools::install_github("ropengov/pxweb")
 ```
 
 Test the installation by loading the library:
