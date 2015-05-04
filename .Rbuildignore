@@ -20,6 +20,9 @@ README.md
 # Travis scripts
 .travis.yml
 
+# Extra Vignette materials
+vignettes/pxweb.md
+
 # Misc
 ./.*~
 ./*~
