@@ -1,21 +1,13 @@
-language: c
+language: r
 
-env:
-   global:
-     - WARNINGS_ARE_ERRORS=1
-     - R_BUILD_ARGS="--no-manual"
-     - R_CHECK_ARGS="--no-manual --as-cran"
-   matrix:
-     - NOT_CRAN="true"
-     - NOT_CRAN="false"
+warnings_are_errors: false
 
-script: ./travis-tool.sh run_tests
+notifications:
+  email:
+      - mons.magnusson@gmail.com
+      
 
-before_script:
-- curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-- chmod 755 ./travis-tool.sh
-- ./travis-tool.sh bootstrap
-- ./travis-tool.sh install_deps
 
-after_script:
-  - ./travis-tool.sh dump_logs
+	    
+	    
+
