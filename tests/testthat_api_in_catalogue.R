@@ -1,2 +1,2 @@
 library(testthat)
-test_check("pxweb", filter = "test-apis_in_catalogue")
+test_check("pxweb", filter = "apis_in_catalogue")
