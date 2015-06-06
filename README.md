@@ -3,6 +3,9 @@ pxweb
 
 [![Build Status](https://travis-ci.org/rOpenGov/pxweb.svg?branch=master)](https://travis-ci.org/rOpenGov/pxweb)
 [![Stories in Ready](https://badge.waffle.io/ropengov/pxweb.png?label=TODO)](http://waffle.io/ropengov/pxweb)
+[![Coverage Status](https://coveralls.io/repos/rOpenGov/sweidnumbr/badge.svg)](https://coveralls.io/r/rOpenGov/sweidnumbr) [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://github.com/metacran/cranlogs.app)
+[![cran version](http://www.r-pkg.org/badges/version/pxweb)](http://cran.rstudio.com/web/packages/pxweb)
+
 
 
 pxweb is an R package to interface with the PX-WEB API, and it offers
