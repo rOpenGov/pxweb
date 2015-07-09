@@ -129,11 +129,20 @@ create_batch_list <- function(url, dims){
     no_batch <- dim_length[arg_max] %/% batch_size
     if(dim_length[arg_max] %% batch_size != 0) no_batch <- no_batch + 1
     message("This is a large query. The data will be downloaded in ",no_batch," batches.")
+
+    # Find which levels we want to use
+    all_levels_arg_max <- node$variables$variables[[arg_max]]$values
+    levels_arg_max <-
+      if (length(dims[[arg_max]] == 1) && dims[[arg_max]] == "*") {
+        all_levels_arg_max
+      } else {
+        all_levels_arg_max[all_levels_arg_max %in% dims[[arg_max]]]
+      }
+
     # Create list with calls
     batch_list <- list(url=url, dims=list(), content_node=node)
     for (b in 1:no_batch){ # b <- 1
-      batch_values_index <- ((b-1)*batch_size+1):min((b*batch_size), dim_length[arg_max])
-      batch_values <- node$variables$variables[[arg_max]]$values[batch_values_index]
+      batch_values <- levels_arg_max[((b-1)*batch_size+1):min((b*batch_size), dim_length[arg_max])]
       batch_list$dims[[b]] <- dims
       batch_list$dims[[b]][[names(dim_length[arg_max])]] <- batch_values
     }
