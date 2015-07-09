@@ -117,13 +117,13 @@ test_that(desc="get_pxweb_data()",{
       ),
       clean = TRUE
     ),
-    
-    list( 
-      url = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014",
+
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2015",
       dims = list(Alder = c('0', '1', '2', '3', '4'),
                   Kon = c('1', '2'),
-                  ContentsCode = c('BE0401AW'),
-                  Tid = c('2014', '2015', '2016', '2017', '2018')),
+                  ContentsCode = c('0000008J'),
+                  Tid = c('2015', '2016', '2017', '2018', '2019')),
       clean = FALSE,
       test_dim = c(NA, NA))  
     
