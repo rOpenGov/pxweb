@@ -165,6 +165,8 @@ test_that(desc="Test warnings",{
 
 test_that(desc="Previous bug identified by Erik Bulow (#84 at github)",{  
   
+  skip_on_travis()
+  
   test_dims <-
     structure(
       list(
