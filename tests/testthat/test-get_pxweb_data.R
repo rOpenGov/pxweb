@@ -86,7 +86,7 @@ test_that(desc="get_pxweb_data()",{
     list( 
       url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/ME/ME0104/ME0104C/ME0104T3",
       dims = list(Region = c('*'),
-                  Partimm = c('M','C','FP','KD','MP','S','V','SD','ÖVRIGA'),
+                  Partimm = c('M','C','FP','KD','MP','S','V','SD','\u00D6VRIGA'),
                   ContentsCode = c('ME0104B7'),
                   Tid = c('2010')),
       clean = TRUE,
