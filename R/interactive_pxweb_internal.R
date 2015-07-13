@@ -106,15 +106,15 @@ findData.inputBaseCat <- function(alt, codedAlt) {
   output<-"\n("
   for (i in 1:length(alt)){
     if (i != 1){
-      output <- str_join(output, ", ", sep="")
+      output <- str_c(output, ", ", sep="")
     }
-    output <- str_join(output, 
+    output <- str_c(output, 
                        "'", 
                        codedAlt[alt[i], 1], 
                        "' = ",
                        codedAlt[alt[i],2], sep="")
   }
-  return(str_join(output,")", sep=""))
+  return(str_c(output,")", sep=""))
 }
 
 
@@ -170,14 +170,14 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     } else {
       varDFshort <- varDF }
 
-    textTitle <- str_join("\nALTERNATIVES FOR VARIABLE: ",
+    textTitle <- str_c("\nALTERNATIVES FOR VARIABLE: ",
                           toupper(input[[2]]),
                           " \n",
-                          str_join(
+                          str_c(
                             rep("=", round(getOption("width")*0.9)), collapse = ""), 
                           "\n", sep="")
     textHead <-
-      str_join("\nChoose your alternative(s) by number:",
+      str_c("\nChoose your alternative(s) by number:",
                "\nSeparate multiple choices by ',' and intervals by ':'", sep="")
   }
   
@@ -187,12 +187,12 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     alt <- rownames(toprint)
     max_cat <- 1
     
-    textTitle <- str_join("\nCHOOSE DATABASE:\n",
-                          str_join(
+    textTitle <- str_c("\nCHOOSE DATABASE:\n",
+                          str_c(
                             rep("=", round(getOption("width")*0.9)), collapse = ""), 
                           "\n", sep="")
     textHead <-
-      str_join("\nChoose database by number:", sep="")
+      str_c("\nChoose database by number:", sep="")
   }
 
   if (type == "api") {
@@ -201,12 +201,12 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     alt <- rownames(toprint)
     max_cat <- 1
     
-    textTitle <- str_join("\nCHOOSE API:\n",
-                          str_join(
+    textTitle <- str_c("\nCHOOSE API:\n",
+                          str_c(
                             rep("=", round(getOption("width")*0.9)), collapse = ""), 
                           "\n", sep="")
     textHead <-
-      str_join("\nChoose api by number:", sep="")
+      str_c("\nChoose api by number:", sep="")
   }
   
 
@@ -301,21 +301,21 @@ findData.printNode <- function(xscb, print=TRUE) {
   for (i in 1:nrow(xscb)) {
     # Corrections if there is an shortened list of alternatives
     if (rownames(xscb)[i] == "."){
-      finalText <- str_join(finalText,"\n")
+      finalText <- str_c(finalText,"\n")
       next()
     }
     
     # The text that should be printed
-    finalText <- str_join(
+    finalText <- str_c(
       finalText,
       rownames(xscb)[i],
       ".",
-      str_join(
+      str_c(
         rep(" ", nSCBpos - str_length(rownames(xscb)[i])), collapse=""),
       " [",
       xscb$id[i],
       "]",
-      str_join(rep(" ", nSCBidlen - str_length(as.character(xscb$id[i]))), collapse=""),
+      str_c(rep(" ", nSCBidlen - str_length(as.character(xscb$id[i]))), collapse=""),
       " ",collapse="")
     
     # Convert if there is console is too narrow for the text
@@ -332,8 +332,8 @@ findData.printNode <- function(xscb, print=TRUE) {
       }
             
       finalText <-
-        str_join(finalText,
-                 str_join(rep(" ", startPos*(1-as.numeric(first))), collapse=""),
+        str_c(finalText,
+                 str_c(rep(" ", startPos*(1-as.numeric(first))), collapse=""),
                  str_sub(tempText, 1, tempTextCut), "\n", collapse="")
       
       if (rerun) {

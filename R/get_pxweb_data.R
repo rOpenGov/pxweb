@@ -66,7 +66,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      
      # print("Print error message")
      if (class(response)=="try-error"){
-        stop(str_join("No internet connection to ",batches$url),
+        stop(str_c("No internet connection to ",batches$url),
              call.=FALSE)
      }
      if(httr::http_status(response)$category != "success") {

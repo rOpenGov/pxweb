@@ -46,7 +46,7 @@ get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet 
    )
    
    if (class(df)=="try-error") {
-      stop(str_join("No internet connection to ", url),
+      stop(str_c("No internet connection to ", url),
            call.=FALSE)
    }
    
