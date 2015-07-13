@@ -25,6 +25,7 @@
 
 get_pxweb_data <- function(url, dims, clean = FALSE) {
 
+   dims <- reorder_and_check_dims(url, dims)
    dimNames <- names(dims)
    batches <- create_batch_list(url = url, dims = dims)
    content_node <- batches$content_node

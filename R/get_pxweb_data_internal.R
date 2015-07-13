@@ -126,3 +126,19 @@ calc_dim_type <- function(dim_data2clean, dim_size){
   stop("Can't calculate row and col variables.\nPlease send you API-call to ", maintainer("pxweb"),".") 
 }
 
+
+
+#' Reorders the dimensions of a \code{get_pxweb_data()} call and checks that all dimensions are correct.
+#' 
+#' @param url Url to check against
+#' @param dims dims object to check
+#' 
+#' @return a correct (and checked) dims object
+#' 
+reorder_and_check_dims <- function(url, dims){
+  metadata <- get_pxweb_metadata(path = url)
+  dim_names <- unlist(lapply(X = metadata$variables$variables, FUN=function(X) X$code))
+  if(!all(names(dims) %in% dim_names)) stop("Wrong dims names in call!")
+  dims[dim_names]
+}
+
