@@ -75,9 +75,9 @@ download_pxweb <- function(dataNode, test_input = NULL, ...) {
     # Save the alternative to use to download data 
     varList[[listElem$code]] <- tempAlt    
     varListText <- c(varListText,
-                     str_c(ifelse(grepl(" ", listElem$code), 
-                                  str_c("\"", listElem$code, "\"", collapse=""), 
-                                  listElem$code),
+                     str_c(ifelse(make.names(listElem$code) == listElem$code, 
+                                  listElem$code,
+                                  str_c("\"", listElem$code, "\"", collapse="")),
                            " = c('",
                            str_c(tempAlt, collapse="', '"),
                            "')", 
