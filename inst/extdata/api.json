@@ -106,6 +106,50 @@
         "calls_per_period": 30,
         "period_in_seconds": 10,
         "max_values_to_download" : 100000
+              },
+              
+    "statistik.helsingborg.se": {
+        "alias" : ["helsingborg"],
+        "description" : "Helsingborg town in Sweden",
+        "url" : "http://statistik.helsingborg.se/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["sv"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
+              
+    "statistik.linkoping.se": {
+        "alias" : ["linkoping"],
+        "description" : "Linkoping municipality in Sweden",
+        "url" : "http://statistik.linkoping.se/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["sv","en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
+              
+    "pxwebb2014.vgregion.se": {
+        "alias" : ["vgregion"],
+        "description" : "Vastra Gotaland Region in Sweden",
+        "url" : "http://pxwebb2014.vgregion.se/pxweb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["sv","en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
+              
+    "bank.stat.gl": {
+        "alias" : ["greenland"],
+        "description" : "Statbank Greenland",
+        "url" : "http://bank.stat.gl/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["kl","da","en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
               }
 
   },
