@@ -100,7 +100,7 @@
     "px.hagstofa.is": {
         "alias" : ["statice"],
         "description" : "Statistics Iceland",
-        "url" : "http://px.hagstofa.is/pxis/api/[version]/[lang]",
+        "url" : "http://px.hagstofa.is/px[lang]/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["is", "en"],
         "calls_per_period": 30,
