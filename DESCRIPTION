@@ -12,7 +12,7 @@ Description: Generic interface for the PX-Web/PC-Axis API. The PX-Web/PC-Axis
     metadata and extract and parse statistics to R data.frame format. PX-Web is
     a solution to disseminate PC-Axis data files in dynamic tables on the web.
     Since 2013 PX-Web contains an API to disseminate PC-Axis files.
-VignetteBuilder: knitr
+VignetteBuilder: rmarkdown
 URL: https://github.com/rOpenGov/pxweb/
 BugReports: https://github.com/rOpenGov/pxweb/issues
 Depends:
