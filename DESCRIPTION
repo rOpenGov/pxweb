@@ -29,3 +29,4 @@ Suggests:
     ggplot2,
     knitr,
     rmarkdown
+RoxygenNote: 5.0.1
