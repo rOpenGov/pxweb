@@ -1,15 +1,13 @@
 ---
-output:
-  html_document:
-    keep_md: yes
+title: "PX-WEB API Interface for R"
+author: "Mans Magnusson and Leo Lahti"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{pxweb}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{pxweb}
--->
-
-PX-WEB API Interface for R
-===========
 
 This R package provides tools to access [PX-WEB
 API](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf). Your
