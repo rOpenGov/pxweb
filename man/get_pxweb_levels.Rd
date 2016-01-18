@@ -18,4 +18,5 @@ get_pxweb_levels(baseURL, descriptions = FALSE, quiet = FALSE, ...)
 \description{
 Get levels from a node in the API. If at the lowest node, return a warning.
 }
+\keyword{internal}
 

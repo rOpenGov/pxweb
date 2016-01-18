@@ -12,4 +12,5 @@ get_github_api_urls(type)
 \description{
 Get (hard coded) api catalogue github urls
 }
+\keyword{internal}
 

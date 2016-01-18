@@ -6,6 +6,9 @@
 #' @param topnodes A string or a list of strings containing the top nodes \emph{in top-to-bottom order}
 #' @param baseURL The base URL to use, depending on the web service.
 #' @param ... Further arguments passed to  \code{base_url()}.
+#' 
+#' @keywords internal 
+#' 
 
 buildPath <- function(varname, topnodes = NULL, baseURL, ...) {
 	
@@ -40,6 +43,8 @@ buildPath <- function(varname, topnodes = NULL, baseURL, ...) {
 #' 
 #' @param response response object
 #' @param type type format
+#' 
+#' @keywords internal 
 #' 
 getContent <- function(response, type = "csv") {
     
@@ -76,6 +81,8 @@ getContent <- function(response, type = "csv") {
 #' @param api_url The url to be passed to \link{api_parameters} to get api_configs.
 #' @param calls The number of calls that the functions should count per function call. Default is one.
 #' 
+#' @keywords internal 
+#' 
 
 api_timer <- function(api_url, calls = 1){
   
@@ -108,6 +115,8 @@ api_timer <- function(api_url, calls = 1){
 #' 
 #' @param url The url to download from.
 #' @param dims The dimension object to use for downloading
+#' 
+#' @keywords internal 
 #' 
 create_batch_list <- function(url, dims){
   
@@ -162,6 +171,8 @@ create_batch_list <- function(url, dims){
 #' @param dims The dimension object to use for downloading
 #' @param content_node Used if already a content node has been downloaded
 #' 
+#' @keywords internal 
+#' 
 #' @return
 #' list with two slots 
 #' [[1]] containes named vector with number of slots
@@ -202,6 +213,8 @@ get_dim_size <- function(url, dims, content_node=NULL){
 #' @return
 #' An integer vector of length 2
 #' 
+#' @keywords internal 
+#' 
 #' @examples
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
@@ -217,6 +230,8 @@ calculate_data_dim <- function(dim_length, clean){
 }
 
 #' Change text to url
+#' 
+#' @keywords internal 
 #' 
 #' @param x text to change to url-unicode
 text_to_url <- function(x){

@@ -15,6 +15,8 @@
 #' \code{error} : Whether there were errors encountered with the call
 #' \code{download_error} : Whether there were errors encountered during download
 #' 
+#' @keywords internal 
+#' 
 #' @importFrom plyr rbind.fill
 #'  
 test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time())){

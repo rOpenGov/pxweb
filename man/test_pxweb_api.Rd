@@ -24,4 +24,5 @@ Two variables are added:
 The function can be used to test a whole pxweb api by using the api base url.
 By using a branch in a tree the api is tested below this branch.
 }
+\keyword{internal}
 

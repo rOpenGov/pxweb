@@ -19,4 +19,5 @@ findData.input(type, input = NULL, test_input = character(0),
 \description{
 Get input that is consistent with
 }
+\keyword{internal}
 

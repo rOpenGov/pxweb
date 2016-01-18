@@ -15,4 +15,5 @@ api_list object
 \description{
 Get the api catalogue from json file
 }
+\keyword{internal}
 

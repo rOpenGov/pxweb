@@ -4,6 +4,9 @@
 #' 
 #' @param node Bottom node to deparse into object
 #' @param verbose Verbose output mode.
+#' 
+#' @keywords internal 
+#' 
 #' @seealso \link{get_pxweb_metadata}
 #' @export
 #' @examples

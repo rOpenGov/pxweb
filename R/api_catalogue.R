@@ -1,7 +1,7 @@
 #' Get the api catalogue
 #' 
 #' @details
-#' Get the catalogue of api and stor it as a list.
+#' Get the catalogue of api and store it as a list.
 #' 
 #' @examples
 #' api_catalogue()
@@ -31,6 +31,7 @@ update_pxweb_apis <- function(){
 }
 
 #' Check and compare differences between remote and local api catalogue
+#' @keywords internal 
 check_new_pxweb_apis <- function(){
   api_local_name <- names(get_api_list(raw = TRUE)$apis)
   api_remote_name <- try(names(get_api_list_remote(raw = TRUE)$apis), silent = TRUE)
@@ -48,6 +49,8 @@ check_new_pxweb_apis <- function(){
 #' Get (hard coded) api catalogue github urls
 #' 
 #' @param type which type of github url is needed ('github_api' or 'github_raw').
+#' 
+#' @keywords internal 
 #' 
 get_github_api_urls <- function(type){
   if(type == "github_api") {
@@ -68,6 +71,8 @@ get_github_api_urls <- function(type){
 #' 
 #' @param raw Get the raw list from the api json file. 
 #' 
+#' @keywords internal 
+#' 
 #' @return api_list object
 #' 
 get_api_list <- function(raw = FALSE){
@@ -81,6 +86,8 @@ get_api_list <- function(raw = FALSE){
 #' Get the api catalogue from github
 #' 
 #' @inheritParams get_api_list
+#' 
+#' @keywords internal 
 #' 
 #' @return api_list object
 #' 
@@ -99,6 +106,8 @@ get_api_list_remote <- function(raw = FALSE){
 
 #' Write api catalogue to json file
 #' 
+#' @keywords internal 
+#' 
 #' @param api_list api list in raw format to write to json file.
 write_api_list <- function(api_list){
   dest <- system.file("extdata/api.json", package = "pxweb")
@@ -110,6 +119,8 @@ write_api_list <- function(api_list){
 #'
 #' @param api_name pxweb api name or alias to lookup.
 #' @param api_list pxweb api list created with \code{get_api_list()}
+#' 
+#' @keywords internal 
 #' 
 get_api_index<- function(api_name, api_list){
   list_to_check <- 

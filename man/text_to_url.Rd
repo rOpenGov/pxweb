@@ -12,4 +12,5 @@ text_to_url(x)
 \description{
 Change text to url
 }
+\keyword{internal}
 

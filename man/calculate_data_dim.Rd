@@ -22,4 +22,5 @@ url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
             ContentsCode = c('*'), Tid = c('*'))
 }
+\keyword{internal}
 

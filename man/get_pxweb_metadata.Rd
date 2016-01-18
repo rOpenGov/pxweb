@@ -26,4 +26,5 @@ Get data from the API. If at the lowest node, provide the user with a friendly m
 \examples{
 api_url <- base_url("api.scb.se", language = "sv")
 }
+\keyword{internal}
 

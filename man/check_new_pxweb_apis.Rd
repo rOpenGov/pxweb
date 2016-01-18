@@ -9,4 +9,5 @@ check_new_pxweb_apis()
 \description{
 Check and compare differences between remote and local api catalogue
 }
+\keyword{internal}
 

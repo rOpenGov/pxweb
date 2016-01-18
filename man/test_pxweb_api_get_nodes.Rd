@@ -18,4 +18,5 @@ Two variables are added:
 \description{
 Get the whole node tree from a given pxweb api
 }
+\keyword{internal}
 

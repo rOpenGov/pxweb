@@ -16,4 +16,5 @@ api_timer(api_url, calls = 1)
 \description{
 Use this before function that uses api calls.
 }
+\keyword{internal}
 

@@ -14,4 +14,5 @@ get_api_index(api_name, api_list)
 \description{
 Get index of which api has the name or teh alias
 }
+\keyword{internal}
 

@@ -20,4 +20,5 @@ deparseLevels(place, returnDistance = FALSE, baseURL, ...)
 \description{
 This function is currently not used in the package.
 }
+\keyword{internal}
 

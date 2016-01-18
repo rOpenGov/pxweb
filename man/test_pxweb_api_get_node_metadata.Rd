@@ -15,4 +15,5 @@ List with one list per node object containing meta data
 \description{
 Get metadata from all bottom nodes identified with \link{test_pxweb_api_get_nodes}.
 }
+\keyword{internal}
 

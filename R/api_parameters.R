@@ -4,6 +4,9 @@
 #' 
 #' @param url Get parameters for the api with this url (NULL = get all API configs)
 #' @export
+#'
+#' @keywords internal 
+#' 
 #' @examples api_parameters()
 api_parameters <- function(url = NULL) {
 
@@ -27,6 +30,8 @@ api_parameters <- function(url = NULL) {
 #'
 #' @param x api_parameter object
 #' @param ... currently not in use
+#' 
+#' @keywords internal 
 #'
 #' @export
 print.api_parameters <- function(x, ...){

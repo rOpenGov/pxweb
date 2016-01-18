@@ -14,4 +14,5 @@ getContent(response, type = "csv")
 \description{
 Get the content from a response object
 }
+\keyword{internal}
 

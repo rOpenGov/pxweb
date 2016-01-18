@@ -18,4 +18,5 @@ buildPath(varname, topnodes = NULL, baseURL, ...)
 \description{
 This function takes a list of strings and builds a URL to the PX-web API \emph{in reverser order}.
 }
+\keyword{internal}
 
