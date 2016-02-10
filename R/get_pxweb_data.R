@@ -53,9 +53,9 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      
      # print("Get data")
      api_timer(batches$url) 
-     response <- try(POST(
+     response <- try(httr::POST(
         url = batches$url,
-        body = toJSON(list(
+        body = RJSONIO::toJSON(list(
            query = rapply(queryBody, enc2utf8, how = "replace"),
   	 # NOTE: JSON might be more efficient for downloads (smaller file size)
      # NOTE: JSON includes comments/metadata
@@ -69,7 +69,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
         stop(str_c("No internet connection to ",batches$url),
              call.=FALSE)
      }
-     if(httr::http_status(response)$category != "success") {
+     if(httr::http_error(response)) {
        stop(httr::http_status(response)$message,
             call.=FALSE)
      }
