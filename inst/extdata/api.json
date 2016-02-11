@@ -150,6 +150,17 @@
         "calls_per_period": 30,
         "period_in_seconds": 10,
         "max_values_to_download" : 100000
+              },
+
+    "px.rsv.is/": {
+        "alias" : ["rsv"],
+        "description" : "Icelandic Centre for Retail Studies",
+        "url" : "http://px.rsv.is/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["is","en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
               }
 
   },
