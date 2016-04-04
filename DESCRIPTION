@@ -25,7 +25,7 @@ Imports:
     httr (>= 1.1)
 License: BSD_2_clause + file LICENSE
 Suggests:
-    testthat (>= 0.12),
+    testthat (>= 0.11),
     ggplot2,
     knitr,
     rmarkdown
