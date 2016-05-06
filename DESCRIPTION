@@ -1,8 +1,8 @@
 Package: pxweb
 Type: Package
 Title: R Interface to the PX-Web/PC-Axis API
-Version: 0.6.2
-Date: 2016-02-09
+Version: 0.6.3
+Date: 2016-05-06
 Author: Mans Magnusson, Leo Lahti, Love Hansson
 Maintainer: Mans Magnusson <mons.magnusson@gmail.com>
 Description: Generic interface for the PX-Web/PC-Axis API. The PX-Web/PC-Axis

@@ -1,10 +1,8 @@
-# Sample .travis.yml for R projects.
-#
-# See README.md for instructions, or for more configuration options,
-# see the wiki:
-#   https://github.com/craigcitro/r-travis/wiki
-
 language: r
+r:
+  - oldrel
+  - release
+  - devel
 sudo: required
 
 # Be strict when checking our package
