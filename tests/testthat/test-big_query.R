@@ -3,6 +3,7 @@
 context("big_queries.R")
 
 test_that(desc="big queries",{  
+  skip("Skip temporarily (until new version)")
   skip_on_cran()
   
   api_tests_big_query <- list(
@@ -26,7 +27,7 @@ test_that(desc="big queries",{
                   Tid = as.character(1970)),
       clean=FALSE)
   )
-  
+  test <- api_tests_big_query[[1]]
   for (test in api_tests_big_query){
     expect_that({
       test_data <- suppressMessages(

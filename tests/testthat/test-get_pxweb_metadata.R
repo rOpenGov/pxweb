@@ -28,7 +28,7 @@ test_that(desc="baseURL 1",{
 
 
 test_that(desc="baseURL 2",{
-  
+  skip("Until next version")
   skip_on_cran()
   
   api_tests_get_pxweb_metadata_path <- list(
