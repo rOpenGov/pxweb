@@ -3,6 +3,16 @@ Type: Package
 Title: R Interface to the PX-Web/PC-Axis API
 Version: 0.6.32
 Author: Mans Magnusson, Leo Lahti, Love Hansson
+Authors@R: c(
+  	person("Mans", "Magnusson", email = "", role = c("aut", "cre")),
+	person("Love" , "Hansson", role = "aut"),
+	person("Leo", "Lahti", role = "aut"),
+	person("Janne", "Huovari", role = "ctb"),
+	person("Eydun", "Nielsen", role = "ctb"),
+	person("Bo", "Werth", role = "ctb"),
+	person("Thomas", "Runarsson", role = "ctb"),
+	person("Torbjörn", "Lindquist", role = "ctb"),
+	person("Palmar", "Thorsteinsson", role = "ctb"))
 Maintainer: Mans Magnusson <mons.magnusson@gmail.com>
 Description: Generic interface for the PX-Web/PC-Axis API. The PX-Web/PC-Axis
     API is used by organizations such as Statistics Sweden and Statistics
@@ -24,8 +34,9 @@ Imports:
     httr (>= 1.1)
 License: BSD_2_clause + file LICENSE
 Suggests:
-    testthat (>= 0.11),
     ggplot2,
     knitr,
-    rmarkdown
+    rmarkdown,    
+    roxygen2,
+    testthat (>= 0.11)
 RoxygenNote: 5.0.1
