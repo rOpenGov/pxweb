@@ -298,7 +298,7 @@ findData.printNode <- function(xscb, print=TRUE) {
   
   # Calculates where the different output should be printed
   startPos <- nSCBpos+nSCBidlen+5
-  scbTextSpace <- nSCBconsole-startPos
+  scbTextSpace <- max(nSCBconsole-startPos, 5)  # Minimum 5 to avoid endless loop
   finalText <- character(0) 
   
   for (i in 1:nrow(xscb)) {
@@ -328,7 +328,7 @@ findData.printNode <- function(xscb, print=TRUE) {
       # Cut upp the alternative text to pieces that fit the console width
       tempTextSpaces <- str_locate_all(tempText,pattern=" ")[[1]][ , 1]
       if (str_length(tempText) > scbTextSpace){
-        tempTextCut <- max(tempTextSpaces[tempTextSpaces < scbTextSpace]) - 1
+        tempTextCut <- max(tempTextSpaces, scbTextSpace) - 1
       } else {
         tempTextCut <- str_length(tempText)
         rerun <- FALSE

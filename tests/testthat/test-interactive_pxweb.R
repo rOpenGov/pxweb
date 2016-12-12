@@ -4,10 +4,10 @@ context("interactive_pxweb.R")
 
 test_that(desc="findData.inputBaseCat",{
   load(system.file("extdata/test_files/testFiles.Rdata", package = "pxweb"))
-  expect_output(pxweb:::findData.inputBaseCat(1:2,test_codedAlt),
-                "('q' = Quit, 'b' = Back)")
-  expect_output(pxweb:::findData.inputBaseCat(c(3,6),test_codedAlt),
-                "('*' = Select all, 'a' = Show all)")
+  expect_equal(pxweb:::findData.inputBaseCat(1:2,test_codedAlt),
+                "\n('q' = Quit, 'b' = Back)")
+  expect_equal(pxweb:::findData.inputBaseCat(c(3,6),test_codedAlt),
+                "\n('*' = Select all, 'a' = Show all)")
 
 })
 

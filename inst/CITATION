@@ -8,9 +8,9 @@ citEntry(entry="misc",
 	   person(given = "Love", family= "Hansson")
          ),
 	 journal = "",
-	 year = "2014",
+	 year = "2014-2016",
          textVersion =
-         paste("(C) Mans Magnusson, Leo Lahti and Love Hansson (rOpenGov 2014). ",
+         paste("(C) Mans Magnusson, Leo Lahti and Love Hansson (rOpenGov 2014-2016). ",
                "pxweb: R tools for PX-WEB API. ",
 	       "URL: http://github.com/ropengov/pxweb",
                sep=" ")
