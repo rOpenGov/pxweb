@@ -6,5 +6,5 @@
   # Sys.setlocale(locale = "WINDOWS-1252")
 
   packageStartupMessage("pxweb: R tools for PX-WEB API.\nCopyright (C) 2014-2016 Mans Magnusson, Leo Lahti, Love Hansson et al.\nhttps://github.com/ropengov/pxweb\n")
-  packageStartupMessage(check_new_pxweb_apis())
+
 }

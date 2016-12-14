@@ -2,7 +2,7 @@
 % Please edit documentation in R/api_catalogue.R
 \name{get_api_index}
 \alias{get_api_index}
-\title{Get index of which api has the name or teh alias}
+\title{Get index of which api has the name or the alias}
 \usage{
 get_api_index(api_name, api_list)
 }
@@ -12,7 +12,7 @@ get_api_index(api_name, api_list)
 \item{api_list}{pxweb api list created with \code{get_api_list()}}
 }
 \description{
-Get index of which api has the name or teh alias
+Get index of which api has the name or the alias
 }
 \keyword{internal}
 
