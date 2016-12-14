@@ -1,12 +1,12 @@
 ---
 title: "PX-WEB API Interface for R"
-author: "Mans Magnusson and Leo Lahti"
+author: "Mans Magnusson, Leo Lahti et al."
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{pxweb}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}  
 ---
 
 This R package provides tools to access [PX-WEB

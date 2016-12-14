@@ -1,19 +1,17 @@
 Package: pxweb
 Type: Package
 Title: R Interface to the PX-Web/PC-Axis API
-Version: 0.6.33
-Author: Mans Magnusson, Leo Lahti, Love Hansson
+Version: 0.6.34
 Authors@R: c(
-  	person("Mans", "Magnusson", email = "", role = c("aut", "cre")),
+  	person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),
 	person("Love" , "Hansson", role = "aut"),
-	person("Leo", "Lahti", role = "aut"),
+	person("Leo", "Lahti", role = "aut"),		
 	person("Janne", "Huovari", role = "ctb"),
 	person("Eydun", "Nielsen", role = "ctb"),
 	person("Bo", "Werth", role = "ctb"),
 	person("Thomas", "Runarsson", role = "ctb"),
 	person("Torbjörn", "Lindquist", role = "ctb"),
 	person("Palmar", "Thorsteinsson", role = "ctb"))
-Maintainer: Mans Magnusson <mons.magnusson@gmail.com>
 Description: Generic interface for the PX-Web/PC-Axis API. The PX-Web/PC-Axis
     API is used by organizations such as Statistics Sweden and Statistics
     Finland to disseminate data. The R package can interact with all
