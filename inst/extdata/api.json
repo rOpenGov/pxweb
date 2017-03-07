@@ -74,6 +74,17 @@
         "period_in_seconds": 1,
         "max_values_to_download" : 10000
               },
+ 
+    "prognos.konj.se": {
+                "alias" : ["konjforcast"],
+                "description" : "The Swedish national institute of economic research, forecast database",
+                "url" : "http://prognos.konj.se/PXWeb/api/[version]/[lang]",
+                "versions" : ["v1"], 
+                "languages" : ["sv"],
+                "calls_per_period" :  30,
+                "period_in_seconds" : 10,
+                "max_values_to_download" : 10000
+    },
     
     "statdb.luke.fi": {
         "alias" : ["luke"],
