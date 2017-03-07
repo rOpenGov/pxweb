@@ -7,6 +7,9 @@
 #' @param language The language (two letters) to use in the fetched data.
 #' @param ... Additional parameters. These are currently ignored.
 #' @export
+#' 
+#' @keywords internal 
+#' 
 #' @examples
 #' a <- base_url("api.scb.se")
 #' print(a)

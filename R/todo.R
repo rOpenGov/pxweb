@@ -9,6 +9,9 @@
 #' @param returnDistance Whether to return only the distance (in nodes) from top node to URL. (Default: \code{FALSE})
 #' @param baseURL The base URL to use, depending on the web service. 
 #' @param ... Further arguments passed to \code{base_url()}.
+#' 
+#' @keywords internal 
+#' 
 
 deparseLevels <- function(place, returnDistance=FALSE, baseURL, ...) {
 	placeLevels <- str_split(
@@ -29,6 +32,8 @@ deparseLevels <- function(place, returnDistance=FALSE, baseURL, ...) {
 }
 
 #' Function to silently test for existence of metadata and return TRUE or FALSE based on the result of that test.
+#' 
+#' @keywords internal 
 #' 
 #' @param url API url
 #' @export

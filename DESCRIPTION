@@ -1,10 +1,18 @@
 Package: pxweb
 Type: Package
 Title: R Interface to the PX-Web/PC-Axis API
-Version: 0.5.57
-Date: 2015-07-14
-Author: Mans Magnusson, Leo Lahti, Love Hansson
-Maintainer: Mans Magnusson <mons.magnusson@gmail.com>
+Version: 0.6.35
+Encoding: UTF-8
+Authors@R: c(
+  	person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),
+	person("Love" , "Hansson", role = "aut"),
+	person("Leo", "Lahti", role = "aut"),		
+	person("Janne", "Huovari", role = "ctb"),
+	person("Eydun", "Nielsen", role = "ctb"),
+	person("Bo", "Werth", role = "ctb"),
+	person("Thomas", "Runarsson", role = "ctb"),
+	person("Torbjörn", "Lindquist", role = "ctb"),
+	person("Palmar", "Thorsteinsson", role = "ctb"))
 Description: Generic interface for the PX-Web/PC-Axis API. The PX-Web/PC-Axis
     API is used by organizations such as Statistics Sweden and Statistics
     Finland to disseminate data. The R package can interact with all
@@ -22,9 +30,12 @@ Imports:
     plyr,
     stringr,
     RJSONIO,
-    httr
+    httr (>= 1.1)
 License: BSD_2_clause + file LICENSE
 Suggests:
-    testthat,
     ggplot2,
-    knitr
+    knitr,
+    rmarkdown,    
+    roxygen2,
+    testthat (>= 0.11)
+RoxygenNote: 5.0.1

@@ -1,21 +1,21 @@
 ---
-output:
-  html_document:
-    keep_md: yes
+title: "PX-WEB API Interface for R"
+author: "Mans Magnusson, Leo Lahti et al."
+date: "2016-12-14"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{pxweb}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}  
 ---
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{pxweb}
--->
 
-PX-WEB API Interface for R
-===========
 
 This R package provides tools to access [PX-WEB
 API](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf). Your
 [contributions](http://ropengov.github.io/contribute/) and [bug
 reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
+
 
 More information on the PX-Web/PC-Axis API can be found [here](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf).
 
@@ -28,9 +28,9 @@ More information on the PX-Web/PC-Axis API can be found [here](http://www.scb.se
 
 [A number of organizations](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/) use to distribute hierarchical data. You can browse the available data sets at:
 
-* [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf)
-* [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](http://pxnet2.stat.fi/api1.html)
-* [Other organizations using PX-WEB](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/)
+ * [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf)
+ * [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](http://pxnet2.stat.fi/api1.html)
+ * [Other organizations using PX-WEB](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/)
 
 ## <a name="installation"></a>Installation
 
@@ -41,6 +41,7 @@ Install the stable release version in R:
 ```r
 install.packages("pxweb")
 ```
+
 
 Install the latest version from github:
 
@@ -93,6 +94,9 @@ d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
 
 # Fetching data from statfi (Statistics Finland)
 d <- interactive_pxweb(api = "pxwebapi2.stat.fi")
+
+# Fetching data from StatBank (Statistics Norway)
+d <- interactive_pxweb(api = "data.ssb.no")
 ```
 
 Example of download data from the Statistics Sweden API using `get_pxweb_data()`:
@@ -103,6 +107,20 @@ pxweb_test_data <-
   get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet", 
                  dims = list(ContentsCode = c('PR0101A1'), 
                              Tid = c('*')),
+                 clean = FALSE)
+```
+
+Example of download data from the Statistics Norway API using `get_pxweb_data()`:
+
+
+```r
+pxweb_test_data_ssb <- 
+  get_pxweb_data(url = "http://data.ssb.no/api/v0/en/table/vf/vf01/aksjer/ASKapital",
+                 dims = list(
+                   NACE2007 = c('A_U'),
+                   ContentsCode = c('ASer'),
+                   Tid = c('*')
+                 ),
                  clean = FALSE)
 ```
 
@@ -122,8 +140,8 @@ citation("pxweb")
 ## 
 ## Kindly cite the pxweb R package as follows:
 ## 
-##   (C) Mans Magnusson, Leo Lahti and Love Hansson (rOpenGov 2014).
-##   pxweb: R tools for PX-WEB API.  URL:
+##   (C) Mans Magnusson, Leo Lahti and Love Hansson (rOpenGov
+##   2014-2016).  pxweb: R tools for PX-WEB API.  URL:
 ##   http://github.com/ropengov/pxweb
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -131,7 +149,7 @@ citation("pxweb")
 ##   @Misc{,
 ##     title = {pxweb: R tools for PX-WEB API},
 ##     author = {Mans Magnusson and Leo Lahti and Love Hansson},
-##     year = {2014},
+##     year = {2014-2016},
 ##   }
 ```
 
@@ -155,9 +173,9 @@ sessionInfo()
 ```
 
 ```
-## R version 3.2.0 (2015-04-16)
-## Platform: x86_64-unknown-linux-gnu (64-bit)
-## Running under: Ubuntu 14.10
+## R version 3.3.1 (2016-06-21)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 16.10
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -171,14 +189,12 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.5.53       knitr_1.10         devtools_1.7.0    
-## [4] scimapClient_0.2.1
+## [1] pxweb_0.6.35 knitr_1.15.1
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.11.5      bitops_1.0-6     chron_2.3-45     plyr_1.8.2      
-##  [5] jsonlite_0.9.16  formatR_1.2      magrittr_1.5     evaluate_0.7    
-##  [9] httr_0.6.1       stringi_0.4-1    reshape2_1.4.1   data.table_1.9.4
-## [13] RJSONIO_1.3-0    tools_3.2.0      stringr_1.0.0    RCurl_1.95-4.6
+##  [1] httr_1.2.1       plyr_1.8.4       R6_2.2.0         magrittr_1.5    
+##  [5] tools_3.3.1      Rcpp_0.12.8      RJSONIO_1.3-0    stringi_1.1.3   
+##  [9] data.table_1.9.6 stringr_1.1.0    chron_2.3-47     evaluate_0.10
 ```
 
 

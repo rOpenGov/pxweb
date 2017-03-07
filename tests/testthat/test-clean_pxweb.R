@@ -5,6 +5,7 @@ context("clean_pxweb.R")
 test_that(desc="clean_pxweb",{
   
   skip_on_cran()
+  skip("Skip temporarily (until new version)")
   
   api_tests_clean_pxweb <- list(
     list(
@@ -94,6 +95,7 @@ test_that(desc="clean_pxweb",{
 test_that(desc="clean_pxweb_numbers",{
   
   skip_on_cran()
+  skip("Skip temporarily (until new version)")
   
   api_tests_clean_pxweb_numbers <- list(
     list(

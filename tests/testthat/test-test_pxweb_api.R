@@ -6,6 +6,7 @@ context("test_pxweb_api.R")
 test_that(desc="test_pxweb_api()",{    
   
   skip_on_cran()
+  skip("Until next version")
   
   api_tests_test_pxweb_api <- list(
     list(

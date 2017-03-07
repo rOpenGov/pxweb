@@ -8,6 +8,8 @@
 #' @param content_node node with content downloaded with \link{get_pxweb_metadata}. 
 #' If NULL, meta data is downloaded with \link{get_pxweb_metadata}.
 #' 
+#' @keywords internal 
+#' 
 #' @return data frame melted and in R (numeric) format
 #' 
 
@@ -87,6 +89,8 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
 #' @param dim_data2clean The dimension of the data from PXWEB
 #' @param dim_size for the call from \link{get_dim_size}
 #' 
+#' @keywords internal 
+#' 
 #' @return list with index (row and col dim)
 #' 
 
@@ -132,6 +136,8 @@ calc_dim_type <- function(dim_data2clean, dim_size){
 #' 
 #' @param url Url to check against
 #' @param dims dims object to check
+#' 
+#' @keywords internal 
 #' 
 #' @return a correct (and checked) dims object
 #' 

@@ -7,6 +7,9 @@
 #' Two variables are added: 
 #' \code{checked} : The node has been checked
 #' \code{error} : Whether there were errors encountered with the call
+#' 
+#' @keywords internal 
+#' 
 #' @import data.table 
 
 test_pxweb_api_get_nodes <- function(url){
@@ -45,6 +48,8 @@ test_pxweb_api_get_nodes <- function(url){
 #' 
 #' @param nodes A data.frame returned by \link{test_pxweb_api_get_nodes}
 #' 
+#' @keywords internal 
+#' 
 #' @return 
 #' List with one list per node object containing meta data
 #' 
@@ -74,6 +79,8 @@ test_pxweb_api_get_node_metadata <- function(nodes){
 #' @param nodesList Node metadata downloaded with \link{test_pxweb_api_get_node_metadata}
 #' @param download_all Should all data be downloaded (TRUE) or sample (FALSE)
 #' @param seed Seed to use if download_all is FALSE and a sample is downloaded
+#' 
+#' @keywords internal 
 #' 
 #' @return 
 #' data.frame with information \code{download_error} containing download errors

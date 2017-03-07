@@ -100,14 +100,103 @@
     "px.hagstofa.is": {
         "alias" : ["statice"],
         "description" : "Statistics Iceland",
-        "url" : "http://px.hagstofa.is/pxis/api/[version]/[lang]",
+        "url" : "http://px.hagstofa.is/px[lang]/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["is", "en"],
         "calls_per_period": 30,
         "period_in_seconds": 10,
         "max_values_to_download" : 100000
-              }
+              },
+              
+    "statistik.helsingborg.se": {
+        "alias" : ["helsingborg"],
+        "description" : "Helsingborg town in Sweden",
+        "url" : "http://statistik.helsingborg.se/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["sv"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
+              
+    "statistik.linkoping.se": {
+        "alias" : ["linkoping"],
+        "description" : "Linkoping municipality in Sweden",
+        "url" : "http://statistik.linkoping.se/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["sv","en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
+              
+    "pxwebb2014.vgregion.se": {
+        "alias" : ["vgregion"],
+        "description" : "Vastra Gotaland Region in Sweden",
+        "url" : "http://pxwebb2014.vgregion.se/pxweb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["sv","en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
+              
+    "bank.stat.gl": {
+        "alias" : ["greenland"],
+        "description" : "Statbank Greenland",
+        "url" : "http://bank.stat.gl/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["kl","da","en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
 
+    "px.rsv.is/": {
+        "alias" : ["rsv"],
+        "description" : "Icelandic Centre for Retail Studies",
+        "url" : "http://px.rsv.is/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["is","en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+              },
+
+    "statbank.hagstova.fo": {
+        "alias" : ["hagstovan"],
+        "description" : "Statistics Faroe Islands",
+        "url" : "http://statbank.hagstova.fo/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["en","fo"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+    },
+    
+    "data.ssb.no": { 
+        "alias" : ["ssb"],
+        "description" : "Statistics Norway",
+        "url" : "http://data.ssb.no/api/[version]/[lang]",
+        "version": ["v0"], 
+        "lang": ["en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+    },
+
+    "pxweb.asub.ax": {
+        "alias" : ["asub"],
+        "description" : "Statistics Aland",
+        "url" : "http://pxweb.asub.ax/PXWeb/api/[version]/[lang]/",
+        "version": ["v1"], 
+        "lang": ["sv","en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+    }
+
+ 
   },
 
   "local_apis": {}

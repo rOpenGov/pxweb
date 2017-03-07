@@ -6,6 +6,9 @@
 #' @param descriptions Whether to include node descriptions with the list of node IDs. (default: \code{FALSE})
 #' @param quiet Quiet mode. Whether to stop with an error if the input node does not contain any subnodes. If set to \code{TRUE}, the function will quietly return FALSE without any errors. (default: \code{FALSE})
 #' @param ... further argument to send to \code{get_pxweb_metadata}
+#' 
+#' @keywords internal 
+#' 
 #' @export
 
 get_pxweb_levels <- function(

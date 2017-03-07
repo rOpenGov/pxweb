@@ -7,6 +7,7 @@
 #' @param test_input Vector of length 4 to test inputs to the first 4 questions in the query.
 #' @param ... further parameters. These are currently ignored.
 #' 
+#' @keywords internal 
 #' 
 download_pxweb <- function(dataNode, test_input = NULL, ...) {
   # Assertions
@@ -125,6 +126,8 @@ findData.inputBaseCat <- function(alt, codedAlt) {
 #' @param input data.frame with input data to use with 
 #' @param test_input input for test cases
 #' @param silent no output
+#' 
+#' @keywords internal 
 #'
 findData.input <- function(type, input = NULL, test_input = character(0), silent = FALSE){
   # If silent sink output
@@ -295,7 +298,7 @@ findData.printNode <- function(xscb, print=TRUE) {
   
   # Calculates where the different output should be printed
   startPos <- nSCBpos+nSCBidlen+5
-  scbTextSpace <- nSCBconsole-startPos
+  scbTextSpace <- max(nSCBconsole-startPos, 5)  # Minimum 5 to avoid endless loop
   finalText <- character(0) 
   
   for (i in 1:nrow(xscb)) {
@@ -325,7 +328,7 @@ findData.printNode <- function(xscb, print=TRUE) {
       # Cut upp the alternative text to pieces that fit the console width
       tempTextSpaces <- str_locate_all(tempText,pattern=" ")[[1]][ , 1]
       if (str_length(tempText) > scbTextSpace){
-        tempTextCut <- max(tempTextSpaces[tempTextSpaces < scbTextSpace]) - 1
+        tempTextCut <- max(tempTextSpaces, scbTextSpace) - 1
       } else {
         tempTextCut <- str_length(tempText)
         rerun <- FALSE
@@ -421,6 +424,8 @@ findData.inputConvert <- function(input, max_value=NA) {
 #' 
 #' @return base url to the specific data base
 #' 
+#' @keywords internal 
+#' 
 choose_pxweb_database_url <- function(baseURL, pre_choice = NULL){
   data_bases <- get_pxweb_metadata(baseURL = baseURL) 
   if(nrow(data_bases) == 1){
@@ -435,6 +440,8 @@ choose_pxweb_database_url <- function(baseURL, pre_choice = NULL){
 
 
 #' Choose an api from api_catalogue
+#' 
+#' @keywords internal 
 #' 
 #' @return base url to the specific data base
 #' 

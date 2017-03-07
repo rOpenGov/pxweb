@@ -8,6 +8,9 @@
 #' @param quiet Quiet mode (never return a message to the user)
 #' @param baseURL The base URL to use, depending on the web service. Needed if path argument is not provided.
 #' @param ... Further arguments passed to  \code{base_url()}.
+#' 
+#' @keywords internal 
+#' 
 #' @export
 #' @examples
 #' api_url <- base_url("api.scb.se", language = "sv")

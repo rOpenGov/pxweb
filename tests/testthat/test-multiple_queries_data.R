@@ -6,7 +6,7 @@ context("multiple_queries_data.R")
 
 
 test_that(desc="multiple data calls",{  
-  
+  skip("Until next version")
   skip_on_cran()
   
   api_tests_multiple_data <- list(
@@ -37,7 +37,7 @@ test_that(desc="multiple data calls",{
 
 
 test_that(desc="multiple metadata calls",{  
-  
+  skip("Until next version")
   skip_on_cran()
   
   api_tests_multiple_metadata <- list(
