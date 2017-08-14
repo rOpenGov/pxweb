@@ -88,7 +88,7 @@ d <- interactive_pxweb(api = "api.scb.se")
 d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
 
 # Fetching data from statfi (Statistics Finland)
-d <- interactive_pxweb(api = "pxwebapi2.stat.fi")
+d <- interactive_pxweb(api = "pxnet2.stat.fi")
 
 # Fetching data from StatBank (Statistics Norway)
 d <- interactive_pxweb(api = "data.ssb.no")
