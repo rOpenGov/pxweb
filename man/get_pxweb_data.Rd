@@ -32,4 +32,3 @@ test_data <-
 \seealso{
 \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_dims}}, \code{\link{get_pxweb_levels}}
 }
-

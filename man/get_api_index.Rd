@@ -15,4 +15,3 @@ get_api_index(api_name, api_list)
 Get index of which api has the name or the alias
 }
 \keyword{internal}
-

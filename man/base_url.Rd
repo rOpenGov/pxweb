@@ -7,7 +7,7 @@
 base_url(api, version = NULL, language = NULL)
 }
 \arguments{
-\item{api}{API provider ('api.scb.se' or 'pxwebapi2.stat.fi')}
+\item{api}{API provider ('api.scb.se' or 'pxnet2.stat.fi')}
 
 \item{version}{The version of PXWEB API to use.}
 
@@ -24,4 +24,3 @@ print(a)
 
 }
 \keyword{internal}
-

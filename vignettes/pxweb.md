@@ -1,8 +1,10 @@
 ---
 title: "PX-WEB API Interface for R"
 author: "Mans Magnusson, Leo Lahti et al."
-date: "2016-12-14"
-output: rmarkdown::html_vignette
+date: "2017-09-16"
+output:
+  - rmarkdown::html_vignette
+  - rmarkdown::md_vignette  
 vignette: >
   %\VignetteIndexEntry{pxweb}
   %\VignetteEngine{knitr::rmarkdown}
@@ -93,7 +95,7 @@ d <- interactive_pxweb(api = "api.scb.se")
 d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
 
 # Fetching data from statfi (Statistics Finland)
-d <- interactive_pxweb(api = "pxwebapi2.stat.fi")
+d <- interactive_pxweb(api = "pxnet2.stat.fi")
 
 # Fetching data from StatBank (Statistics Norway)
 d <- interactive_pxweb(api = "data.ssb.no")
@@ -173,9 +175,13 @@ sessionInfo()
 ```
 
 ```
-## R version 3.3.1 (2016-06-21)
+## R version 3.4.1 (2017-06-30)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 16.10
+## Running under: Ubuntu 17.04
+## 
+## Matrix products: default
+## BLAS: /usr/lib/openblas-base/libblas.so.3
+## LAPACK: /usr/lib/libopenblasp-r0.2.19.so
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -189,12 +195,15 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.6.35 knitr_1.15.1
+## [1] knitr_1.17           pxweb_0.6.36         rmarkdown_1.6.0.9001
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] httr_1.2.1       plyr_1.8.4       R6_2.2.0         magrittr_1.5    
-##  [5] tools_3.3.1      Rcpp_0.12.8      RJSONIO_1.3-0    stringi_1.1.3   
-##  [9] data.table_1.9.6 stringr_1.1.0    chron_2.3-47     evaluate_0.10
+##  [1] Rcpp_0.12.12      digest_0.6.12     rprojroot_1.2    
+##  [4] plyr_1.8.4        R6_2.2.2          backports_1.1.0  
+##  [7] magrittr_1.5      evaluate_0.10.1   httr_1.3.1       
+## [10] stringi_1.1.5     data.table_1.10.4 RJSONIO_1.3-0    
+## [13] tools_3.4.1       stringr_1.2.0     yaml_2.1.14      
+## [16] compiler_3.4.1    tcltk_3.4.1       htmltools_0.3.6
 ```
 
 

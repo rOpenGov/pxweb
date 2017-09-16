@@ -24,4 +24,3 @@ The function calculates the dimension of a query. That means the numberof
 categories for each variable downloaded
 }
 \keyword{internal}
-

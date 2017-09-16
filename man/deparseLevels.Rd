@@ -21,4 +21,3 @@ deparseLevels(place, returnDistance = FALSE, baseURL, ...)
 This function is currently not used in the package.
 }
 \keyword{internal}
-

@@ -13,4 +13,3 @@ text_to_url(x)
 Change text to url
 }
 \keyword{internal}
-

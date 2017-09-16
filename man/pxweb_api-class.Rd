@@ -2,8 +2,8 @@
 % Please edit documentation in R/pxweb_api_class.R
 \docType{class}
 \name{pxweb_api-class}
-\alias{pxweb_api}
 \alias{pxweb_api-class}
+\alias{pxweb_api}
 \title{A Reference Class to represent an pxweb_api}
 \description{
 A Reference Class to represent an pxweb_api
@@ -27,6 +27,7 @@ A Reference Class to represent an pxweb_api
 
 \item{\code{max_values_to_download}}{Maximum number of values to download with each call.}
 }}
+
 \section{Methods}{
 
 \describe{
@@ -59,10 +60,10 @@ api_name.}
 
 \item{\code{write_to_catalogue()}}{Save/overwrite the current api as a locally stored api.}
 }}
+
 \examples{
  scb_pxweb_api <- pxweb_api$new(get_api = "api.scb.se")
  scb_pxweb_api
  
  
 }
-

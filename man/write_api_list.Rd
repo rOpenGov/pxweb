@@ -13,4 +13,3 @@ write_api_list(api_list)
 Write api catalogue to json file
 }
 \keyword{internal}
-

@@ -18,4 +18,3 @@ base url to the specific data base
 Calculate a specific database to get data from
 }
 \keyword{internal}
-

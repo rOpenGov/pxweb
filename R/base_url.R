@@ -1,8 +1,8 @@
 #' Return base URL to API
 #' 
 #' ...
-#' 
-#' @param api API provider ('api.scb.se' or 'pxwebapi2.stat.fi')
+#'
+#' @param api API provider ('api.scb.se' or 'pxnet2.stat.fi')
 #' @param version The version of PXWEB API to use.
 #' @param language The language (two letters) to use in the fetched data.
 #' @param ... Additional parameters. These are currently ignored.

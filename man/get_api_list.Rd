@@ -16,4 +16,3 @@ api_list object
 Get the api catalogue from json file
 }
 \keyword{internal}
-

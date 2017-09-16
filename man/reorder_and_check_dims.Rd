@@ -18,4 +18,3 @@ a correct (and checked) dims object
 Reorders the dimensions of a \code{get_pxweb_data()} call and checks that all dimensions are correct.
 }
 \keyword{internal}
-

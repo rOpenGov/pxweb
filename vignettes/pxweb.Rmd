@@ -2,7 +2,9 @@
 title: "PX-WEB API Interface for R"
 author: "Mans Magnusson, Leo Lahti et al."
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  - rmarkdown::html_vignette
+  - rmarkdown::md_vignette  
 vignette: >
   %\VignetteIndexEntry{pxweb}
   %\VignetteEngine{knitr::rmarkdown}

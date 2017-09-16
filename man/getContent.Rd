@@ -15,4 +15,3 @@ getContent(response, type = "csv")
 Get the content from a response object
 }
 \keyword{internal}
-

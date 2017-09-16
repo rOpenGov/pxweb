@@ -23,4 +23,3 @@ data.frame with information \code{download_error} containing download errors
 Download data for each bottom node in the pxweb api
 }
 \keyword{internal}
-

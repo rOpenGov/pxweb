@@ -19,4 +19,3 @@ Two variables are added:
 Get the whole node tree from a given pxweb api
 }
 \keyword{internal}
-

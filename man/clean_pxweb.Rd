@@ -23,4 +23,3 @@ data frame melted and in R (numeric) format
 This function clean the raw data from PX-WEB to R tall format.
 }
 \keyword{internal}
-

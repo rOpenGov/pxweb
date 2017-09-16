@@ -27,4 +27,3 @@ dims <- get_pxweb_dims(bottom_node)
 \link{get_pxweb_metadata}
 }
 \keyword{internal}
-

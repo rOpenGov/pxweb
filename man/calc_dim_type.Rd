@@ -18,4 +18,3 @@ list with index (row and col dim)
 Calculates which dimensions that are used as row and col variables in data
 }
 \keyword{internal}
-

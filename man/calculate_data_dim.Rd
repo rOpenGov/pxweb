@@ -23,4 +23,3 @@ dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'),
             ContentsCode = c('*'), Tid = c('*'))
 }
 \keyword{internal}
-

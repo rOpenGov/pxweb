@@ -32,4 +32,3 @@ Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to si
 \seealso{
 \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_data}}
 }
-

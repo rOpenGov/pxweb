@@ -21,4 +21,3 @@ If '*' is used it will get the numberof values for this dimension using a
 get_pxweb_metadata call.
 }
 \keyword{internal}
-
