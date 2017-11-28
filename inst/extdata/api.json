@@ -227,6 +227,17 @@
       "calls_per_period": 10,
       "period_in_seconds": 10,
       "max_values_to_download" : 1000
+          }, 
+  
+    "pxweb.bfs.admin.ch": {
+        "alias" : ["switzerland"],
+        "description" : "Statistics Switzerland",
+        "url" : "https://www.pxweb.bfs.admin.ch/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["de", "fr", "it", "en"],
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000
     }
  
   },
