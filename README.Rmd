@@ -9,16 +9,14 @@ pxweb
 NOTE: The pxweb R package has been temporarily removed from CRAN. We are working on the issue (as of 5/2018), and wish to have it back in CRAN soon. Meanwhile, you can install the Github development version as follows:
 
 
-
-```r
+```{r install, eval=FALSE}
 library(devtools)
 install_github('ropengov/pxweb')
 ```
 
 In some cases, the organization requires manual proxy settings. This can be set as follows:
 
-
-```r
+```{r install2, eval=FALSE}
 library(devtools)
 library(httr)
 set_config(
