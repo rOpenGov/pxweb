@@ -13,12 +13,17 @@ sandbox/*.R
 sandbox
 
 README.md
+README.Rmd
+
 
 # Git related
 ./.git*
 
-# Travis scripts
+# Travis yml
 .travis.yml
+
+# Appveyor yml
+appveyor.yml
 
 # Extra Vignette materials
 vignettes/pxweb.md
