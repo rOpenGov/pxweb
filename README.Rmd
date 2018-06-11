@@ -1,7 +1,7 @@
 pxweb
 ====== 
 
-[![Build Status](https://travis-ci.org/rOpenGov/pxweb.svg?branch=master)](https://travis-ci.org/rOpenGov/pxweb)
+[![Build Status](https://travis-ci.org/rOpenGov/pxweb.svg?branch=master)](https://travis-ci.org/rOpenGov/pxweb) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/MansMeg/pxweb?branch=master&svg=true)](https://ci.appveyor.com/project/MansMeg/pxweb) 
 [![Stories in Ready](https://badge.waffle.io/ropengov/pxweb.png?label=TODO)](http://waffle.io/ropengov/pxweb)
 [![Coverage Status](https://coveralls.io/repos/rOpenGov/pxweb/badge.svg)](https://coveralls.io/r/rOpenGov/pxweb) [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://github.com/metacran/cranlogs.app)
 [![cran version](http://www.r-pkg.org/badges/version/pxweb)](http://cran.rstudio.com/web/packages/pxweb)
