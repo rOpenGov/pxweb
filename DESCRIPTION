@@ -30,7 +30,9 @@ Imports:
     plyr,
     stringr,
     RJSONIO,
-    httr (>= 1.1)
+    httr (>= 1.1),
+    rjstat, 
+    jsonlite
 License: BSD_2_clause + file LICENSE
 Suggests:
     ggplot2,
