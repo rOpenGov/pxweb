@@ -1,7 +1,7 @@
 Package: pxweb
 Type: Package
 Title: R Interface to the PX-Web/PC-Axis API
-Version: 0.6.37
+Version: 0.6.38
 Encoding: UTF-8
 Authors@R: c(
   	person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),
@@ -38,4 +38,4 @@ Suggests:
     rmarkdown,    
     roxygen2,
     testthat (>= 0.11)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
