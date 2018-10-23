@@ -4,7 +4,7 @@ Title: R Interface to the PX-Web/PC-Axis API
 Version: 0.6.37
 Encoding: UTF-8
 Authors@R: c(
-  	person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),
+  person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),
 	person("Love" , "Hansson", role = "aut"),
 	person("Leo", "Lahti", role = "aut"),		
 	person("Janne", "Huovari", role = "ctb"),
@@ -40,4 +40,4 @@ Suggests:
     rmarkdown,    
     roxygen2,
     testthat (>= 0.11)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0

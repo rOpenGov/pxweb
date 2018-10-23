@@ -30,7 +30,7 @@
 #' @return list of two data sets (label and id)
 #' @export
 #' 
-#' @importFrom jsonlite unbox toJSON read_json
+#' @importFrom jsonlite unbox read_json
 #' @importFrom rjstat fromJSONstat 
 #' @importFrom httr GET POST verbose content
 #' @importFrom utils head tail
