@@ -1,3 +1,10 @@
+# Version 0.7.0
+
+The PxWebApiData package has become a part of the pxweb package adding an additional approach to get data using pxweb.
+
+Added Statistics Moldova to the api catalogue.
+
+
 # Version 0.6.37
 
 ## New features
