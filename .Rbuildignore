@@ -1,3 +1,4 @@
+^DESIGN_PRINCIPLES\.md$
 # Extra material related but not to be included in the package
 ./inst/extras/eurostat.Rcheck/*
 ./inst/extras/..Rcheck/*
@@ -14,23 +15,16 @@ sandbox
 
 README.md
 README.Rmd
-
-
 # Git related
 ./.git*
-
 # Travis yml
 .travis.yml
-
 # Appveyor yml
 appveyor.yml
-
 # Extra Vignette materials
 vignettes/pxweb.md
-
 # Misc
 ./.*~
 ./*~
-
 ^.*\.Rproj$
 ^\.Rproj\.user$
