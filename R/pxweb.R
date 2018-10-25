@@ -32,7 +32,12 @@ pxweb <- function(url){
 
   # Add path to temp api storage and time_stamp slot
   obj$paths <- list(rda_file_path = build_pxweb_rda_file_path(obj))
-  obj$calls <- list(time_stamps = list())
+  if(file.exists(obj$paths$rda_file_path)){
+    obj$calls <- load_pxweb_calls(obj)
+  } else {
+    obj$calls <- list(time_stamps = list())
+  }
+
   
   # Add the config slot (require one call first construction of the session)
   obj <- pxweb_add_config(obj)
