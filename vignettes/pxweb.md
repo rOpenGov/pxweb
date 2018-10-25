@@ -1,7 +1,7 @@
 ---
 title: "PX-WEB API Interface for R"
 author: "Mans Magnusson, Leo Lahti et al."
-date: "2017-09-16"
+date: "2018-10-19"
 output:
   - rmarkdown::html_vignette
   - rmarkdown::md_vignette  
@@ -175,13 +175,13 @@ sessionInfo()
 ```
 
 ```
-## R version 3.4.1 (2017-06-30)
+## R version 3.5.1 (2018-07-02)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 17.04
+## Running under: Ubuntu 18.04.1 LTS
 ## 
 ## Matrix products: default
-## BLAS: /usr/lib/openblas-base/libblas.so.3
-## LAPACK: /usr/lib/libopenblasp-r0.2.19.so
+## BLAS: /home/lei/bin/R-3.5.1/lib/libRblas.so
+## LAPACK: /home/lei/bin/R-3.5.1/lib/libRlapack.so
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -195,15 +195,15 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] knitr_1.17           pxweb_0.6.36         rmarkdown_1.6.0.9001
+## [1] pxweb_0.6.38   rmarkdown_1.10 knitr_1.20    
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.12      digest_0.6.12     rprojroot_1.2    
-##  [4] plyr_1.8.4        R6_2.2.2          backports_1.1.0  
-##  [7] magrittr_1.5      evaluate_0.10.1   httr_1.3.1       
-## [10] stringi_1.1.5     data.table_1.10.4 RJSONIO_1.3-0    
-## [13] tools_3.4.1       stringr_1.2.0     yaml_2.1.14      
-## [16] compiler_3.4.1    tcltk_3.4.1       htmltools_0.3.6
+##  [1] Rcpp_0.12.19      digest_0.6.18     rprojroot_1.3-2  
+##  [4] plyr_1.8.4        R6_2.3.0          backports_1.1.2  
+##  [7] magrittr_1.5      evaluate_0.12     httr_1.3.1       
+## [10] stringi_1.2.4     data.table_1.11.8 RJSONIO_1.3-0    
+## [13] tools_3.5.1       stringr_1.3.1     yaml_2.2.0       
+## [16] compiler_3.5.1    htmltools_0.3.6
 ```
 
 
