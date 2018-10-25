@@ -30,7 +30,7 @@ pxweb_add_config <-function(obj){
   # Check that we get a config back
 
   if(!is_pxweb_config_response(r)){
-    stop(paste0("This is not a full PXWEB API url (version PX-Web 2014 Dec R1 or later): ", url), call. = FALSE)
+    stop(paste0("This is not a full PXWEB API url (version PX-Web 2014 Dec R1 or later): ", httr::build_url(obj$url)), call. = FALSE)
   } 
   cfg <- httr::content(r, "parsed")
   obj$config <- list(calls_per_period = cfg$maxCalls,
