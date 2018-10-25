@@ -47,6 +47,7 @@ pxweb_add_config <-function(obj){
 #' Check if a response is a pxweb config response
 #' 
 #' @param x a response object
+#' @keywords internal
 is_pxweb_config_response <- function(x){
   checkmate::assert_class(x, "response")
   if(httr::http_error(x)) return(FALSE)

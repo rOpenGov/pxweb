@@ -9,6 +9,7 @@
 #' 
 #' @param obj a \code{pxweb_api_s3} object
 #' 
+#' @keywords internal
 pxweb_add_call <- function(obj, time_stamp = Sys.time()){
   assert_pxweb_calls(obj)
   assert_pxweb_config(obj)
