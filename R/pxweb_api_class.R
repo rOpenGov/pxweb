@@ -106,7 +106,7 @@ pxweb_api <-
         if(!has_lang) stop("[lang] is missing in url.", call. = FALSE)
         has_version <- grepl(x = .self$url, pattern = "\\[version\\]")
         if(!has_version) stop("[version] is missing in url.", call. = FALSE)
-        has_http <- grepl(x = .self$url, pattern = "^http://")
+        has_http <- grepl(x = .self$url, pattern = "^http[s]?://")
         if(!has_http) stop("url is not a http adress", call. = FALSE)
       }, 
       
