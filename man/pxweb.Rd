@@ -9,6 +9,11 @@ pxweb(url)
 
 is.pxweb(x)
 }
+\arguments{
+\item{url}{an url to a pxweb api including language and version of the api. See examples.}
+
+\item{x}{an an object to test if it is a \code{pxweb} object.}
+}
 \value{
 A \code{pxweb} object with slots:
 FIX!

@@ -26,6 +26,7 @@ BugReports: https://github.com/rOpenGov/pxweb/issues
 Depends:
     methods
 Imports:
+    checkmate,
     data.table,
     plyr,
     stringr,

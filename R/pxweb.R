@@ -12,6 +12,9 @@
 #' The config has been captured from the API
 #' The url has been checked to be a pxweb api (through config)
 #'
+#' @param url an url to a pxweb api including language and version of the api. See examples.
+#' @param x an an object to test if it is a \code{pxweb} object.
+#' 
 #' @return 
 #' A \code{pxweb} object with slots:
 #' FIX!
