@@ -13,12 +13,16 @@ pxweb_add_api_subpath <- function(obj){
     return(obj)
   }
   
+  path_splt <- strsplit(obj$url$path, "/")[[1]]  
+  
   if(file.exists(obj$paths$rda_file_path)){
-    obj$paths$api_subpath <- load_pxweb_api_subpath(obj)
+    old_api_subpath <- load_pxweb_api_subpath(obj)
+    tmp_vec <- path_splt[1:length(old_api_subpath$vector)]
+    tmp_path <- paste(tmp_vec, collapse = "/")
+    obj$paths$api_subpath <- list(path = tmp_path, vector = tmp_vec)
     return(obj)
   }
   
-  path_splt <- strsplit(obj$url$path, "/")[[1]]  
   tmp_url <- obj$url
   
   # Split up url to api parts
@@ -31,7 +35,7 @@ pxweb_add_api_subpath <- function(obj){
   }
   
   # Add the subpath
-  obj$paths$api_subpath <- tmp_url$path
+  obj$paths$api_subpath <- list(path = tmp_url$path, vector = path_splt[1:p])
   
   obj
 }

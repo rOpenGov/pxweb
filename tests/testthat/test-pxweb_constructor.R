@@ -14,7 +14,13 @@ test_that(desc="Constructor works as it should with Statistics Sweden",{
   
   expect_silent(pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv?config"))
   expect_silent(pxweb(url = "http://api.scb.se/OV0104/v1/doris/sv?config")) # Cached
+  expect_silent(pxweb_clear_cache(pxapi1))  
   
+  # Handling of subpath
+  expect_silent(pxapi1 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
+  expect_equal(pxapi1$paths$api_subpath$path, "OV0104/v1/doris/sv")
+  expect_silent(pxapi1 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/en/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
+  expect_equal(pxapi1$paths$api_subpath$path, "OV0104/v1/doris/en")
 })  
 
 
