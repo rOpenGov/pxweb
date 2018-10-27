@@ -3,11 +3,14 @@
 \name{pxweb}
 \alias{pxweb}
 \alias{is.pxweb}
+\alias{print.pxweb}
 \title{S3 constructor for \code{pxweb} api object.}
 \usage{
 pxweb(url)
 
 is.pxweb(x)
+
+\method{print}{pxweb}(x, ...)
 }
 \arguments{
 \item{url}{an url to a pxweb api including language and version of the api. See examples.}

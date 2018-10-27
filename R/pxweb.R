@@ -60,3 +60,21 @@ pxweb <- function(url){
 #' @rdname pxweb
 #' @export
 is.pxweb <-function(x) inherits(x, "pxweb")
+
+#' @rdname pxweb
+#' @export
+print.pxweb <- function(x, ...){
+  cat("PXWEB API\n")
+  cat("url:", httr::build_url(x$url), "\n")
+  cat("config:\n")
+  for(i in seq_along(x$config)){
+    cat(paste0("  ", names(x$config)[i], ": ", x$config[i], "\n"))
+  }
+  cat("calls:\n")
+  for(i in seq_along(x$calls$time_stamps)){
+    cat(paste0("  ", x$calls$time_stamps[[i]], "\n"))
+  }
+  cat("paths:\n")  
+  cat(paste0("  ", names(x$paths)[1], ": ", x$paths[[1]], "\n"))
+  cat(paste0("  ", names(x$paths)[2], ": ", x$paths[[2]]$path, "\n"))
+}
