@@ -50,7 +50,7 @@ pxweb_query.list <- function(x){
     obj$query[[i]] <- list(code = names(x)[i],
                            selection = list(filter = "item",
                                             values = x[[i]]))
-    if(x[[i]] == "*") {
+    if(x[[i]][1] == "*") {
       obj$query[[i]]$selection$filter <- "all"
     }
   }
@@ -81,19 +81,18 @@ assert_pxweb_query <- function(x){
   }
   
   # Assert filter values
-  for(i in seq_along(x$query$selection$filter)){
+  for(i in seq_along(x$query)){
     filter_aggr <- FALSE
-    if(grepl(x = x$query$selection$filter[i], "^[Vv]s:.*")){
+    if(grepl(x = x$query[[i]]$selection$filter, "^[Vv]s:.*")){
       filter_aggr <- TRUE
     }
-    if(grepl(x = x$query$selection$filter[i], "^[Aa]gg:.*")){
+    if(grepl(x = x$query[[i]]$selection$filter, "^[Aa]gg:.*")){
       filter_aggr <- TRUE
     }
     if(!filter_aggr) {
-      checkmate::assert_choice(x$query$selection$filter[i], choices = c("item", "all", "top", "agg:[aggregated values]", "vs:[other value set]"))
-      if(x$query$selection$filter[i] %in% c("all", "top")){
-        checkmate::assert_character(x$query$selection$values[[i]], len = 1, .var.name = paste0("x$query$selection$values[[", i, "]]"))
-
+      checkmate::assert_choice(x$query[[i]]$selection$filter, choices = c("item", "all", "top", "agg:[aggregated values]", "vs:[other value set]"))
+      if(x$query[[i]]$selection$filter %in% c("all", "top")){
+        checkmate::assert_character(x$query[[i]]$selection$values, len = 1, .var.name = paste0("x$query[[", i, "]]$selection$values"))
       }
     }
   }

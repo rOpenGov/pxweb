@@ -16,6 +16,11 @@ test_that(desc="Cache cleaner and print",{
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_agg_example.json")
   expect_silent(pxq3 <- pxweb_query(json_query))
   
+  dims <- list(Alue = c("*", "*"))
+  expect_error(pxq1 <- pxweb_query(x = dims))
+  
+  #expect_output(print(pxq3), "PXWEB QUERY")
+  
 })  
 
 
