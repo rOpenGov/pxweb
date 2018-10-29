@@ -16,6 +16,8 @@ is.pxweb(x)
 \item{url}{an url to a pxweb api including language and version of the api. See examples.}
 
 \item{x}{an an object to test if it is a \code{pxweb} object.}
+
+\item{...}{further arguments supplied to \code{print()}.}
 }
 \value{
 A \code{pxweb} object with slots:
