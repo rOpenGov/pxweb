@@ -14,6 +14,7 @@
 #'
 #' @param url an url to a pxweb api including language and version of the api. See examples.
 #' @param x an an object to test if it is a \code{pxweb} object.
+#' @param ... further arguments supplied to \code{print()}.
 #' 
 #' @return 
 #' A \code{pxweb} object with slots:
