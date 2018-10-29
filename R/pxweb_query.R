@@ -14,7 +14,8 @@
 #' pxq1 <- pxweb_query(dims)
 #' json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
 #' pxq2 <- pxweb_query(json_query)
-#'
+#' 
+#' @keywords internal
 #' @export
 pxweb_query <- function(x){
   UseMethod("pxweb_query")
@@ -22,6 +23,7 @@ pxweb_query <- function(x){
 
 #' @rdname pxweb_query
 #' @keywords internal
+#' @export
 pxweb_query.character <- function(x){
   obj <- jsonlite::fromJSON(x, simplifyDataFrame = FALSE)
   class(obj) <- c("pxweb_query", "list")
@@ -32,12 +34,14 @@ pxweb_query.character <- function(x){
 
 #' @rdname pxweb_query
 #' @keywords internal
+#' @export
 pxweb_query.pxweb_query <- function(x){
   return(x)
 }
 
 #' @rdname pxweb_query
 #' @keywords internal
+#' @export
 pxweb_query.list <- function(x){
   checkmate::assert_named(x)
   obj <- list(query = list(),
@@ -94,10 +98,4 @@ assert_pxweb_query <- function(x){
     }
   }
 }
-
-
-#pxweb_query_toJSON <- function(x){
-#  checkmate::assert_class(x, "pxweb_query")
-#  jsonlite::toJSON(x, auto_unbox = TRUE)
-#}
 
