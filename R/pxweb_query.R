@@ -98,3 +98,14 @@ assert_pxweb_query <- function(x){
   }
 }
 
+
+
+#' @export
+print.pxweb_query <- function(x, ...){
+  cat("PXWEB API QUERY\n")
+  cat("query:\n")
+  for(i in seq_along(x$query)){
+    cat(" [[", i ,"]] ",  x$query[[i]]$code," (", x$query[[i]]$selection$filter, "):\n", sep = "")
+    cat("   ", paste(x$query[[i]]$selection$values, collapse = ", "), "\n", sep = "")    
+  }
+}
