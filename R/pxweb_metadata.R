@@ -10,7 +10,6 @@
 #' 
 #' @keywords internal
 pxweb_metadata <- function(x){
-  class(x) <- c("pxweb_metadata", "list")
   checkmate::assert_names(names(x), must.include = "variables")
   for(i in seq_along(x$variables)){
     checkmate::assert_names(names(x$variables[[i]]), must.include = c("values", "valueTexts"))
@@ -19,6 +18,7 @@ pxweb_metadata <- function(x){
     if(is.null(x$variables[[i]]$elimination)) x$variables[[i]]$elimination <- FALSE
     if(is.null(x$variables[[i]]$time)) x$variables[[i]]$time <- FALSE
   }
+  class(x) <- c("pxweb_metadata", "list")
   assert_pxweb_metadata(x)
   x
 }

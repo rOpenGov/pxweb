@@ -35,6 +35,6 @@ assert_pxweb_levels <- function(x){
 print.pxweb_levels <- function(x, ...){
   cat("PXWEB LEVELS\n")
   for(i in seq_along(x)){
-    cat("  ", x[[i]]$id, "(", x[[i]]$type,"): ", x[[i]]$text, "\n")
+    cat("  ", x[[i]]$id, " (", x[[i]]$type,"): ", x[[i]]$text, "\n", sep = "")
   }
 }
