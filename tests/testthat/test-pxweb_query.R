@@ -19,7 +19,7 @@ test_that(desc="Cache cleaner and print",{
   dims <- list(Alue = c("*", "*"))
   expect_error(pxq1 <- pxweb_query(x = dims))
   
-  #expect_output(print(pxq3), "PXWEB QUERY")
+  expect_output(print(pxq3), "PXWEB QUERY")
   
 })  
 
