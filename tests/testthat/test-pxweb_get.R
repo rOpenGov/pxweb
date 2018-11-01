@@ -12,7 +12,8 @@ test_that(desc="Constructor works as it should with Statistics Sweden",{
   expect_output(print(px_levels), regexp = "PXWEB LEVELS")
 
   url <- "http://api.scb.se/OV0104/v1/doris/sv"
-  expect_silent(px_levels <- pxweb_get(url))
+  expect_silent(px <- pxweb(url))
+  expect_silent(px_levels <- pxweb_get(px))
   expect_output(print(px_levels), regexp = "PXWEB LEVELS")
 
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
