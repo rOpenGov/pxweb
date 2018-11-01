@@ -129,7 +129,7 @@ pxweb_validate_query_with_metadata <- function(pxq, pxmd){
   pxweb_metadata_variables <- unlist(lapply(pxmd$variables, function(x) x$code))
   for(i in seq_along(pxq$query)){
     pxweb_query_variable_code <- pxq$query[[i]]$code
-    checkmate::assert_choice(pxweb_query_variable, choices = pxweb_metadata_variables)
+    checkmate::assert_choice(pxweb_query_variable_code, choices = pxweb_metadata_variables)
     if(tolower(pxq$query[[i]]$selection$filter) == "item"){
       pxweb_query_variable_values <- pxq$query[[i]]$selection$values
       meta_idx <- which(pxweb_metadata_variables %in% pxweb_query_variable_code)

@@ -25,7 +25,7 @@ pxweb_get <- function(url, query = NULL){
   if(!is.null(query)){
     pxq <- pxweb_query(query)
     pxmd <- pxweb_get(px)
-    if(!inherits(pxweb_table_metadata, "pxweb_metadata")) {
+    if(!inherits(pxmd, "pxweb_metadata")) {
       stop("The path is not a PXWEB API table endpoint with data:\n", build_pxweb_url(px), call. = FALSE)
     }
     pxq <- pxweb_add_metadata_to_query(pxq, pxmd)
