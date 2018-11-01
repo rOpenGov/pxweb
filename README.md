@@ -6,9 +6,13 @@ pxweb
 [![Coverage Status](https://coveralls.io/repos/rOpenGov/pxweb/badge.svg)](https://coveralls.io/r/rOpenGov/pxweb) [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://github.com/metacran/cranlogs.app)
 [![cran version](http://www.r-pkg.org/badges/version/pxweb)](http://cran.rstudio.com/web/packages/pxweb) [![Join the chat at https://gitter.im/rOpenGov/pxweb](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://gitter.im/rOpenGov/pxweb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-NOTE: The pxweb R package has been temporarily removed from CRAN. We are working on the issue (as of 5/2018), and wish to have it back in CRAN soon. Meanwhile, you can install the Github development version as follows:
+The easiest way to use pxweb is to simply install it from CRAN:
 
+```r
+install.packages('pxweb')
+```
 
+To get the latest stabile development version use:
 
 ```r
 library(devtools)
@@ -16,7 +20,6 @@ install_github('ropengov/pxweb')
 ```
 
 In some cases, the organization requires manual proxy settings. This can be set as follows:
-
 
 ```r
 library(devtools)
