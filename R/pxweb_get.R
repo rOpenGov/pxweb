@@ -1,6 +1,6 @@
 #' Do a GET call to PXWEB API url
 #'
-#' @param url an url that can be coherced to a \code{pxweb} object.
+#' @param url a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.
 #' @param query a json string, json file or list object that can be coherced to a \code{pxweb_query} object.
 #' 
 #' @examples 
@@ -24,7 +24,12 @@ pxweb_get <- function(url, query = NULL){
   px <- pxweb(url)
   if(!is.null(query)){
     pxq <- pxweb_query(query)
-#    pxq <- pxweb_validate_query_with_api(px, pxq)
+    pxmd <- pxweb_get(url = pxweb)
+    if(!inherits(pxweb_table_metadata, "pxweb_metadata")) {
+      stop("The path is not a PXWEB API table endpoint with data:\n", build_pxweb_url(px), call. = FALSE)
+    }
+    pxq <- pxweb_add_metadata_to_query(pxq, pxmd)
+    pxweb_validate_query_with_metadata(pxq, pxmd)
 #    pxqs <- pxweb_split_query(px, pxq)
   } else {
     pxq <- NULL
@@ -33,6 +38,7 @@ pxweb_get <- function(url, query = NULL){
   if(is.null(pxq)){
     px <- pxweb_add_call(px)  
     r <- httr::GET(build_pxweb_url(px))
+    httr::stop_for_status(r)
     pxr <- pxweb_parse_response(x = r)
   } else {
 #    pxr <- list()
@@ -40,7 +46,8 @@ pxweb_get <- function(url, query = NULL){
       px <- pxweb_add_call(px)  
       pxurl <- build_pxweb_url(px)
 #      r <- httr::POST(pxurl, body = pxqs[[i]], encode = "json")
-      r <- httr::POST(pxurl, body = pxq, encode = "json")      
+      r <- httr::POST(pxurl, body = pxq, encode = "json")    
+      httr::stop_for_status(r)
       pxr <- pxweb_parse_response(x = r)
 #    }
     # pxr <- pxweb_combine(pxr)

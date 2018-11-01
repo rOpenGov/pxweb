@@ -7,7 +7,7 @@
 pxweb_get(url, query = NULL)
 }
 \arguments{
-\item{url}{an url that can be coherced to a \code{pxweb} object.}
+\item{url}{a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.}
 
 \item{query}{a json string, json file or list object that can be coherced to a \code{pxweb_query} object.}
 }
