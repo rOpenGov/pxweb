@@ -25,7 +25,8 @@ url <- "http://api.scb.se/OV0104/v1/doris/sv"
 px_levels <- pxweb_get(url)
 
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
+json_query <- file.path(system.file(package = "pxweb"), 
+                        "extdata", "examples", "json_query_example.json")
 px_data <- pxweb_get(url = url, query = json_query)
 
 }

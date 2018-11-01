@@ -11,6 +11,7 @@ pxweb_clear_cache<- function(x = NULL){
     files <- dir(file.path(tempdir(), "pxweb", "apis"), full.names = TRUE)
     sleep_s <- numeric(length(files))
     for(f in seq_along(files)){
+      obj <- NULL # To capture a builde NOTE and safeguard for global variable handling
       load(files[f])
       time_diff_s <- as.numeric(Sys.time()) - as.numeric(obj$calls$time_stamps[[1]])
       sleep_s[f] <- max(obj$config$period_in_seconds - time_diff_s, 0)
