@@ -26,6 +26,7 @@
 #' 
 #' @export
 pxweb <- function(url){
+  if(is.pxweb(url)) return(url)
   checkmate::assert_string(url)
   url_parsed <- parse_url_or_fail(url)
   
