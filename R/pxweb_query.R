@@ -171,3 +171,25 @@ pxweb_add_metadata_to_query <- function(pxq, pxmd){
   assert_pxweb_query(pxq)
   pxq
 }
+
+
+#' Compue the dimension of the query
+#' 
+#' @param pxq a \code{pxweb_query} object.
+#' 
+#' @keywords internal
+pxweb_query_dim <- function(pxq){
+  checkmate::assert_class(pxq, "pxweb_query")
+  dim_res <- numeric(length(pxq$query))
+  for(i in seq_along(pxq$query)){
+    names(dim_res)[i] <- pxq$query[[i]]$code
+    if(tolower(pxq$query[[i]]$selection$filter) == "top"){
+      dim_res[i] <- as.numeric(pxq$query[[i]]$selection$values)
+    } else if(tolower(pxq$query[[i]]$selection$filter) == "all"){
+      stop("Cannot compute the dimension for a variable with filter 'all'.", call. = FALSE)
+    } else {
+      dim_res[i] <- length(pxq$query[[i]]$selection$values)
+    }
+  }
+  dim_res
+}
