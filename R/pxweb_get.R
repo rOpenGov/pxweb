@@ -24,13 +24,13 @@ pxweb_get <- function(url, query = NULL){
   px <- pxweb(url)
   if(!is.null(query)){
     pxq <- pxweb_query(query)
-    pxmd <- pxweb_get(url = pxweb)
+    pxmd <- pxweb_get(px)
     if(!inherits(pxweb_table_metadata, "pxweb_metadata")) {
       stop("The path is not a PXWEB API table endpoint with data:\n", build_pxweb_url(px), call. = FALSE)
     }
     pxq <- pxweb_add_metadata_to_query(pxq, pxmd)
     pxweb_validate_query_with_metadata(pxq, pxmd)
-#    pxqs <- pxweb_split_query(px, pxq)
+    # pxqs <- pxweb_split_query(px, pxq)
   } else {
     pxq <- NULL
   }
