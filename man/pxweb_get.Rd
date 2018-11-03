@@ -4,12 +4,14 @@
 \alias{pxweb_get}
 \title{Do a GET call to PXWEB API url}
 \usage{
-pxweb_get(url, query = NULL)
+pxweb_get(url, query = NULL, verbose = TRUE)
 }
 \arguments{
 \item{url}{a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.}
 
 \item{query}{a json string, json file or list object that can be coherced to a \code{pxweb_query} object.}
+
+\item{verbose}{should large queries print out progress.}
 }
 \description{
 Do a GET call to PXWEB API url
@@ -25,9 +27,14 @@ url <- "http://api.scb.se/OV0104/v1/doris/sv"
 px_levels <- pxweb_get(url)
 
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-json_query <- file.path(system.file(package = "pxweb"), 
-                        "extdata", "examples", "json_query_example.json")
-px_data <- pxweb_get(url = url, query = json_query)
+query <- file.path(system.file(package = "pxweb"), 
+                   "extdata", "examples", "json_query_example.json")
+px_data <- pxweb_get(url = url, query = query)
 
+\dontrun{
+big_query <- file.path(system.file(package = "pxweb"), 
+                       "extdata", "examples", "json_big_query_example.json")
+px_data <- pxweb_get(url = url, query = big_query)
+}
 }
 \keyword{internal}
