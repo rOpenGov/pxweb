@@ -4,7 +4,7 @@
 #' 
 #' @keywords internal
 pxweb_as_json <- function(x){
-  UseMethod(x, "as_json")
+  UseMethod("pxweb_as_json")
 }
 
 #' @rdname as_json
