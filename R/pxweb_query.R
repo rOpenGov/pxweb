@@ -193,3 +193,33 @@ pxweb_query_dim <- function(pxq){
   }
   dim_res
 }
+
+
+#' Get query filter
+#' 
+#' @param pxq a \code{pxweb_query} object.
+#' 
+#' @return query variable selection values as a named list of character vectors.
+#' 
+#' @keywords internal
+pxweb_query_values <- function(pxq){
+  checkmate::assert_class(pxq, "pxweb_query")
+  res <- lapply(pxq$query,function(x) x$selection$values)   
+  names(res) <- unlist(lapply(pxq$query,function(x) x$code))   
+  res
+}
+
+
+#' Get query values
+#' 
+#' @param pxq a \code{pxweb_query} object.
+#' 
+#' @return query variable selection filters as a named character vector.
+#' 
+#' @keywords internal
+pxweb_query_filter <- function(pxq){
+  checkmate::assert_class(pxq, "pxweb_query")
+  res <- unlist(lapply(pxq$query,function(x) x$selection$filter)) 
+  names(res) <- unlist(lapply(pxq$query,function(x) x$code))   
+  res
+}
