@@ -1,0 +1,34 @@
+{
+  "query": [
+    {
+      "code": "Kon",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "1"
+        ]
+      }
+    },
+    {
+      "code": "ContentsCode",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "BE0101N1"
+        ]
+      }
+    },
+    {
+      "code": "Tid",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "2017"
+        ]
+      }
+    }
+  ],
+  "response": {
+    "format": "json"
+  }
+}
