@@ -2,6 +2,7 @@
 #'
 #' @param url a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.
 #' @param query a json string, json file or list object that can be coherced to a \code{pxweb_query} object.
+#' @param verbose should large queries print out progress.
 #' 
 #' @examples 
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
@@ -14,13 +15,18 @@
 #' px_levels <- pxweb_get(url)
 #' 
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-#' json_query <- file.path(system.file(package = "pxweb"), 
-#'                         "extdata", "examples", "json_query_example.json")
-#' px_data <- pxweb_get(url = url, query = json_query)
+#' query <- file.path(system.file(package = "pxweb"), 
+#'                    "extdata", "examples", "json_query_example.json")
+#' px_data <- pxweb_get(url = url, query = query)
 #' 
+#' \dontrun{
+#' big_query <- file.path(system.file(package = "pxweb"), 
+#'                        "extdata", "examples", "json_big_query_example.json")
+#' px_data <- pxweb_get(url = url, query = big_query)
+#' }
 #' @keywords internal
 #' @export
-pxweb_get <- function(url, query = NULL){
+pxweb_get <- function(url, query = NULL, verbose = TRUE){
   px <- pxweb(url)
   if(!is.null(query)){
     pxq <- pxweb_query(query)
@@ -30,7 +36,7 @@ pxweb_get <- function(url, query = NULL){
     }
     pxq <- pxweb_add_metadata_to_query(pxq, pxmd)
     pxweb_validate_query_with_metadata(pxq, pxmd)
-    # pxqs <- pxweb_split_query(px, pxq)
+    pxqs <- pxweb_split_query(pxq, px, pxmd)
   } else {
     pxq <- NULL
   }
@@ -41,16 +47,25 @@ pxweb_get <- function(url, query = NULL){
     httr::stop_for_status(r)
     pxr <- pxweb_parse_response(x = r)
   } else {
-#    pxr <- list()
-#    for(i in seq_along(pxqs)){
+    pxr <- list()
+    if(length(pxqs) > 1 & verbose) {
+      cat("  Downloading large query (in", length(pxqs), "batches):\n")
+      pb <- utils::txtProgressBar(min = 0, max = length(pxqs), style = 3)
+    }
+    for(i in seq_along(pxqs)){
       px <- pxweb_add_call(px)  
       pxurl <- build_pxweb_url(px)
-#      r <- httr::POST(pxurl, body = pxqs[[i]], encode = "json")
-      r <- httr::POST(pxurl, body = pxq, encode = "json")    
+      r <- httr::POST(pxurl, body = pxweb_as_json(pxqs[[i]]))
       httr::stop_for_status(r)
-      pxr <- pxweb_parse_response(x = r)
-#    }
-    # pxr <- pxweb_combine(pxr)
+      pxr[[i]] <- pxweb_parse_response(x = r)
+      if(length(pxqs) > 1 & verbose) {
+        utils::setTxtProgressBar(pb, i)
+      }
+    }
+    if(length(pxqs) > 1 & verbose) {
+      close(pb)
+    }
+    pxr <- pxweb_c(pxr)
   }
   pxr
 }
