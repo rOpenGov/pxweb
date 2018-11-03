@@ -31,10 +31,10 @@ assert_pxweb_data <- function(x){
   }
   
   for(i in seq_along(x$comments)){
-    checkmate::assert_names(names(x$comments), must.include = c("variable", "value", "comment"))
-    checkmate::assert_string(x$columns[[i]]$variable)
-    checkmate::assert_string(x$columns[[i]]$value)
-    checkmate::assert_choice(x$columns[[i]]$comment)
+    checkmate::assert_names(names(x$comments[[i]]), must.include = c("variable", "value", "comment"))
+    checkmate::assert_string(x$comments[[i]]$variable)
+    checkmate::assert_string(x$comments[[i]]$value)
+    checkmate::assert_string(x$comments[[i]]$comment)
   }
   
   for(i in seq_along(x$data)){
