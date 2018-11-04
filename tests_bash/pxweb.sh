@@ -11,7 +11,7 @@ echo "PXWEB_ERROR=1" > "PXWEB_ERROR.sh"
 echo $(date +"%T")
 
 echo " " && echo -en "travis_fold:start:test-pxweb\n"
-Rscript --vanilla bash_tests/pxweb.R
+Rscript --vanilla tests_bash/pxweb.R
 r_exit=$?; echo $r_exit; if [[ $r_exit != 0 ]]; then exit $r_exit; fi
 echo $r_exit
 echo "travis_fold:end:test-pxweb"
