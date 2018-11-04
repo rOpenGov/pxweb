@@ -24,7 +24,7 @@
 #'                        "extdata", "examples", "json_big_query_example.json")
 #' px_data <- pxweb_get(url = url, query = big_query)
 #' }
-#' @keywords internal
+#' 
 #' @export
 pxweb_get <- function(url, query = NULL, verbose = TRUE){
   px <- pxweb(url)
