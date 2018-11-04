@@ -1,16 +1,24 @@
 language: r
 jobs:
   include:
-    stages:
-      - name: oldrel
-        if: branch = master OR branch = test
-        r: oldrel
-      - name: release
-        r: release 
-      - name: devel
-        if: branch = master OR branch = test
-        r: devel
-
+    - stage: oldrel
+      r: oldrel
+      env:
+        - CURRENT_STAGE=oldrel
+    - stage: release
+      r: release
+      env:
+        - CURRENT_STAGE=release
+    - stage: devel
+      r: devel
+      env:
+        - CURRENT_STAGE=devel
+stages:
+  - release
+  - oldrel
+    if: branch = master OR branch = test
+  - devel
+    if: branch = master OR branch = test
 sudo: required
 
 # Be strict when checking our package
