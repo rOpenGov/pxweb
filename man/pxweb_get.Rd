@@ -36,5 +36,5 @@ big_query <- file.path(system.file(package = "pxweb"),
                        "extdata", "examples", "json_big_query_example.json")
 px_data <- pxweb_get(url = url, query = big_query)
 }
+
 }
-\keyword{internal}

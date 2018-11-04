@@ -2,9 +2,12 @@
 % Please edit documentation in R/pxweb_as_json.R
 \name{pxweb_as_json}
 \alias{pxweb_as_json}
+\alias{pxweb_as_json.pxweb_query}
 \title{Convert object to json}
 \usage{
 pxweb_as_json(x)
+
+\method{pxweb_as_json}{pxweb_query}(x)
 }
 \arguments{
 \item{x}{an object to convert.}
