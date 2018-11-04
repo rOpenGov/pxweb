@@ -39,11 +39,11 @@ after_success:
   - Rscript -e 'covr::coveralls()'
   - echo $TRAVIS_BRANCH
   - echo $CURRENT_STAGE  
-  - if [[ $TRAVIS_BRANCH == "test" -a $CURRENT_STAGE == "release" ]]; then bash tests_bash/pxweb.sh ; fi
-  - if [[ $TRAVIS_BRANCH == "test" -a $CURRENT_STAGE == "release" ]]; then . PXWEB_ERROR.sh ; fi
-  - if [[ $TRAVIS_BRANCH == "test" -a $CURRENT_STAGE == "release" ]]; then cat PXWEB_ERROR.sh ; fi
-  - if [[ $TRAVIS_BRANCH == "test" -a $CURRENT_STAGE == "release" ]]; then echo $PXWEB_ERROR ; fi
-  - if [[ $TRAVIS_BRANCH == "test" -a $CURRENT_STAGE == "release" ]]; then exit $PXWEB_ERROR ; fi
+  - if [[ $TRAVIS_BRANCH == "test" ]] AND [[ $CURRENT_STAGE == "release" ]]; then bash tests_bash/pxweb.sh ; fi
+  - if [[ $TRAVIS_BRANCH == "test" ]] AND [[ $CURRENT_STAGE == "release" ]]; then . PXWEB_ERROR.sh ; fi
+  - if [[ $TRAVIS_BRANCH == "test" ]] AND [[ $CURRENT_STAGE == "release" ]]; then cat PXWEB_ERROR.sh ; fi
+  - if [[ $TRAVIS_BRANCH == "test" ]] AND [[ $CURRENT_STAGE == "release" ]]; then echo $PXWEB_ERROR ; fi
+  - if [[ $TRAVIS_BRANCH == "test" ]] AND [[ $CURRENT_STAGE == "release" ]]; then exit $PXWEB_ERROR ; fi
 
 notifications:
   email:
