@@ -12,10 +12,12 @@ jobs:
         - CURRENT_STAGE=release  
     - stage: oldrel
       r: oldrel
+      if: branch = master OR branch = test
       env:
         - CURRENT_STAGE=oldrel
     - stage: devel
       r: devel
+      if: branch = master OR branch = test
       env:
         - CURRENT_STAGE=devel
 #stages:
