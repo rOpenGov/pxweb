@@ -18,12 +18,12 @@ jobs:
       r: devel
       env:
         - CURRENT_STAGE=devel
-stages:
-  - release
-  - oldrel
-    if: branch = master OR branch = test
-  - devel
-    if: branch = master OR branch = test
+#stages:
+#  - release
+#  - oldrel
+#    if: branch = master OR branch = test
+#  - devel
+#    if: branch = master OR branch = test
 
 sudo: required
 
