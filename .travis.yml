@@ -4,6 +4,12 @@ r:
   - release
   - devel
 sudo: required
+stages:
+  - name: oldrel
+    if: branch = master OR branch = test
+  - release
+  - name: devel
+    if: branch = master OR branch = test
 
 # Be strict when checking our package
 warnings_are_errors: true
