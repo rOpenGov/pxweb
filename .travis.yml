@@ -1,17 +1,17 @@
 language: r
-r:
-  - oldrel
-  - release
-  - devel
-sudo: required
 jobs:
   include:
     stages:
       - name: oldrel
         if: branch = master OR branch = test
-      - release
+        r: oldrel
+      - name: release
+        r: release 
       - name: devel
         if: branch = master OR branch = test
+        r: devel
+
+sudo: required
 
 # Be strict when checking our package
 warnings_are_errors: true
