@@ -1,8 +1,9 @@
 language: r
-r:
-  - oldrel
-  - release
-  - devel
+#r:
+#  - oldrel
+#  - release
+#  - devel
+  
 jobs:
   include:
     - stage: oldrel
