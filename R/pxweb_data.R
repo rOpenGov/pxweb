@@ -47,5 +47,33 @@ assert_pxweb_data <- function(x){
 #' @export
 print.pxweb_data <- function(x, ...){
   cat("PXWEB DATA\n")
-  cat("With", length(x$columns), "variables and", length(x$data), "observations.")
+  pxdim <- pxweb_data_dim(x)
+  cat("With", pxdim[2], "variables and", pxdim[1], "observations.")
 }
+
+
+
+#' Compute the dimension of the query \code{pxweb_data} object
+#' 
+#' @param pxd a \code{pxweb_data} object.
+#' 
+#' @keywords internal
+pxweb_data_dim <- function(pxd){
+  checkmate::assert_class(pxd, "pxweb_data")
+  c(length(pxd$data), length(pxd$columns))
+}
+
+
+#' Get query filter
+#' 
+#' @param pxd a \code{pxweb_data} object.
+#' 
+#' @return character vector with column names.
+#' 
+#' @keywords internal
+pxweb_data_colnames <- function(pxd, type = "text"){
+  checkmate::assert_class(pxd, "pxweb_data")
+  checkmate::assert_choice(type, choices = c("text", "code"))
+  unlist(lapply(pxd$columns, function(x) x[[type]]))
+}
+
