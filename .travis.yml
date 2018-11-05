@@ -14,11 +14,16 @@ jobs:
       script: 
        - R CMD build .      
        - bash tests_bash/pxweb.sh 
+       - . PXWEB_ERROR.sh
+       - cat PXWEB_ERROR.sh
+       - echo $PXWEB_ERROR
+       - exit $PXWEB_ERROR
       if: branch = test
     - stage: release
       r: release
       env:
         - CURRENT_STAGE=release  
+      after_success: Rscript -e 'covr::coveralls()'
     - stage: oldrel
       r: oldrel
       if: branch = master OR branch = test
@@ -30,13 +35,6 @@ jobs:
       env:
         - CURRENT_STAGE=devel
 
-#stages:
-#  - release
-#  - oldrel
-#    if: branch = master OR branch = test
-#  - devel
-#    if: branch = master OR branch = test
-
 sudo: required
 
 # Be strict when checking our package
@@ -44,16 +42,6 @@ warnings_are_errors: true
 
 r_github_packages:
   -  jimhester/covr
-
-after_success:
-  - Rscript -e 'covr::coveralls()'
-  - echo $TRAVIS_BRANCH
-  - echo $CURRENT_STAGE  
-  - if [[ $TRAVIS_BRANCH == "test" ]] && [[ $CURRENT_STAGE == "release" ]]; then bash tests_bash/pxweb.sh ; fi
-  - if [[ $TRAVIS_BRANCH == "test" ]] && [[ $CURRENT_STAGE == "release" ]]; then . PXWEB_ERROR.sh ; fi
-  - if [[ $TRAVIS_BRANCH == "test" ]] && [[ $CURRENT_STAGE == "release" ]]; then cat PXWEB_ERROR.sh ; fi
-  - if [[ $TRAVIS_BRANCH == "test" ]] && [[ $CURRENT_STAGE == "release" ]]; then echo $PXWEB_ERROR ; fi
-  - if [[ $TRAVIS_BRANCH == "test" ]] && [[ $CURRENT_STAGE == "release" ]]; then exit $PXWEB_ERROR ; fi
 
 notifications:
   email:
