@@ -15,6 +15,7 @@ jobs:
     - stage: MacOS X
       os: osx
       r: release
+      if: branch = master OR branch = test      
     - stage: oldrel
       r: oldrel
       if: branch = master OR branch = test
