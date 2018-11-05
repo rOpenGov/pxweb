@@ -21,7 +21,7 @@ jobs:
       env:
         - CURRENT_STAGE=oldrel
     - stage: oldest
-      r: 3.2.1
+      r: 3.2
       if: branch = master OR branch = test
       env:
         - CURRENT_STAGE=oldest
