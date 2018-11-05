@@ -7,6 +7,26 @@ cache: packages
   
 jobs:
   include:
+    - stage: release
+      r: release
+      env:
+        - CURRENT_STAGE=release  
+      after_success: Rscript -e 'covr::coveralls()'
+    - stage: oldrel
+      r: oldrel
+      if: branch = master OR branch = test
+      env:
+        - CURRENT_STAGE=oldrel
+    - stage: oldest
+      r: 3.1.3
+      if: branch = master OR branch = test
+      env:
+        - CURRENT_STAGE=oldest
+    - stage: devel
+      r: devel
+      if: branch = master OR branch = test
+      env:
+        - CURRENT_STAGE=devel
     - stage: api_catalogue_tests
       r: release
       install: 
@@ -20,22 +40,7 @@ jobs:
        - cat PXWEB_ERROR.sh
        - echo $PXWEB_ERROR
        - exit $PXWEB_ERROR
-      if: branch = test
-    - stage: release
-      r: release
-      env:
-        - CURRENT_STAGE=release  
-      after_success: Rscript -e 'covr::coveralls()'
-    - stage: oldrel
-      r: oldrel
-      if: branch = master OR branch = test
-      env:
-        - CURRENT_STAGE=oldrel
-    - stage: devel
-      r: devel
-      if: branch = master OR branch = test
-      env:
-        - CURRENT_STAGE=devel
+      if: branch = test        
 
 sudo: required
 
