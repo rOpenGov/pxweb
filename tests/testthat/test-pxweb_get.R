@@ -20,11 +20,14 @@ test_that(desc="Constructor works as it should with Statistics Sweden",{
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
   expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query)))
   expect_output(print(px_data), regexp = "PXWEB DATA")
+  expect_length(pxweb_data_comments(x = px_data), 2)
+  
   
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "test_files", "json_queries", "json_single_query_test.json")
   expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query)))
   expect_output(print(px_data), regexp = "PXWEB DATA")
+  
   
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "test_files", "json_queries", "json_full_test_query.json")
@@ -45,8 +48,8 @@ test_that(desc="Constructor works as it should with Statistics Sweden",{
   expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query, verbose = FALSE)))
   expect_output(print(px_data), regexp = "PXWEB DATA")
   expect_output(print(px_data), regexp = "255200 observations")
+  expect_length(pxweb_data_comments(x = px_data), 2)
 
 })  
-
 
 
