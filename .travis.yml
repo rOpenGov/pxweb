@@ -6,6 +6,13 @@ language: r
   
 jobs:
   include:
+    - stage: api_catalogue_tests
+      r: release
+      install: R -e 'devtools::install_deps(dep = T)'
+      script: 
+       - R CMD build .      
+       - bash tests_bash/pxweb.sh 
+      if: branch = test
     - stage: release
       r: release
       env:
@@ -20,13 +27,6 @@ jobs:
       if: branch = master OR branch = test
       env:
         - CURRENT_STAGE=devel
-    - stage: api_catalogue_tests
-      r: release
-      install: R -e 'devtools::install_deps(dep = T)'
-      script: 
-       - R CMD build .      
-       - bash tests_bash/pxweb.sh 
-      if: branch = test
 
 #stages:
 #  - release
