@@ -35,10 +35,10 @@ pxweb_data_comments.pxweb_data <- function(x){
     obj[[length(obj) + 1]] <- pxweb_data_obs_comment(x, comment_idx[i])
   }
 
-  obj$pxweb_data_dims <- pxweb_data_dim(x)
-  
+  obj <- list(pxweb_data_comments = obj,
+              data_dim = pxweb_data_dim(x))
   class(obj) <- c("pxweb_data_comments", "list")
-  assert_pxweb_data_comments(obj)
+  assert_pxweb_data_comments(x = obj)
   obj
 }
 
@@ -108,12 +108,13 @@ pxweb_data_obs_comment <- function(x, obs_idx){
 #' @keywords internal
 assert_pxweb_data_comments <- function(x){
   checkmate::assert_class(x, c("pxweb_data_comments", "list"))
+  checkmate::assert_names(names(x), permutation.of = c("pxweb_data_comments", "data_dim"))
   
-  for(i in seq_along(x)){
-    checkmate::assert_class(x[[i]], "pxweb_data_comment")
-    checkmate::assert_choice(class(x[[i]])[1], choices = c("obs_comment", 
-                                                      "value_comment",
-                                                      "column_comment"))
+  for(i in seq_along(x$comments)){
+    checkmate::assert_class(x$comments[[i]], "pxweb_data_comment")
+    checkmate::assert_choice(class(x$comments[[i]])[1], choices = c("obs_comment", 
+                                                           "value_comment",
+                                                           "column_comment"))
   }
-  checkmate::assert_integerish(x$pxweb_data_dims, lower = 1)
+  checkmate::assert_integerish(x$data_dim, lower = 1)
 }
