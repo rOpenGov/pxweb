@@ -66,8 +66,8 @@ pxweb_data_value_comment <- function(x, comment_idx){
   checkmate::assert_class(x, "pxweb_data")
   checkmate::assert_int(comment_idx, lower = 1, upper = length(x$comments))
 
-  column_text <- pxweb:::pxweb_data_colnames(x, type = "text")
-  column_code <- pxweb:::pxweb_data_colnames(x, type = "code")
+  column_text <- pxweb_data_colnames(x, type = "text")
+  column_code <- pxweb_data_colnames(x, type = "code")
   comment_column_idx <- which(x$comments[[comment_idx]]$variable %in% column_code)
   
   obj <- list(code = x$comments[[comment_idx]]$variable, 
@@ -91,8 +91,8 @@ pxweb_data_obs_comment <- function(x, obs_idx){
   checkmate::assert_class(x, "pxweb_data")
   checkmate::assert_int(obs_idx, lower = 1, upper = length(x$data))
 
-  column_text <- pxweb:::pxweb_data_colnames(x, type = "text")
-  column_code <- pxweb:::pxweb_data_colnames(x, type = "code")
+  column_text <- pxweb_data_colnames(x, type = "text")
+  column_code <- pxweb_data_colnames(x, type = "code")
   
   obj <- list(code = column_code, 
               text = column_text, 
