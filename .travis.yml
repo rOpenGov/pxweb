@@ -12,6 +12,9 @@ jobs:
       env:
         - CURRENT_STAGE=release  
       after_success: Rscript -e 'covr::coveralls()'
+    - stage: MacOS X
+      os: osx
+      r: release
     - stage: oldrel
       r: oldrel
       if: branch = master OR branch = test
