@@ -6,7 +6,7 @@
 \alias{pxweb_as_data_frame.pxweb_data_comments}
 \alias{pxweb_as_data_frame.pxweb_data_comment}
 \alias{as.data.frame.pxweb_data}
-\title{Convert object to a \code{data.frame}}
+\title{Coerce to a \code{data.frame}}
 \usage{
 pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
   stringsAsFactors = default.stringsAsFactors(),
@@ -29,20 +29,20 @@ pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
 \arguments{
 \item{x}{an object to convert to \code{data.frame}.}
 
-\item{row.names}{See \code{\link{as.data.frame}}.}
+\item{row.names}{See \code{\link[base]{as.data.frame}}.}
 
-\item{optional}{See \code{\link{as.data.frame}}.}
+\item{optional}{See \code{\link[base]{as.data.frame}}.}
 
-\item{...}{See \link{\code{as.data.frame}}.}
+\item{...}{See \code{\link[base]{as.data.frame}}.}
 
-\item{stringsAsFactors}{See \link{\code{as.data.frame}}.}
+\item{stringsAsFactors}{See \code{\link[base]{as.data.frame}}.}
 
 \item{column.name.source}{character: should \code{code} or \code{text} be used as column names?}
 }
 \description{
-Convert object to a \code{data.frame}
+Coerce to a \code{data.frame}
 }
 \seealso{
-\link{\code{as.data.frame}}.
+\code{\link[base]{as.data.frame}}.
 }
 \keyword{internal}

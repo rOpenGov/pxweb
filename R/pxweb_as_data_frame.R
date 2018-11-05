@@ -1,13 +1,13 @@
-#' Convert object to a \code{data.frame}
+#' Coerce to a \code{data.frame}
 #' 
 #' @param x an object to convert to \code{data.frame}.
-#' @param row.names See \code{\link{as.data.frame}}.
-#' @param optional See \code{\link{as.data.frame}}.
-#' @param ... See \link{\code{as.data.frame}}.
-#' @param stringsAsFactors See \link{\code{as.data.frame}}.
+#' @param row.names See \code{\link[base]{as.data.frame}}.
+#' @param optional See \code{\link[base]{as.data.frame}}.
+#' @param ... See \code{\link[base]{as.data.frame}}.
+#' @param stringsAsFactors See \code{\link[base]{as.data.frame}}.
 #' @param column.name.source character: should \code{code} or \code{text} be used as column names?
 #' 
-#' @seealso \link{\code{as.data.frame}}.
+#' @seealso \code{\link[base]{as.data.frame}}.
 #' 
 #' @keywords internal
 pxweb_as_data_frame <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(), column.name.source = "text"){
