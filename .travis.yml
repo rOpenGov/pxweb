@@ -13,7 +13,8 @@ jobs:
        - R -e 'install.packages("devtools")'
        - R -e 'devtools::install_deps(dep = T)'
       script: 
-       - R CMD build .      
+       - R CMD build .     
+      after_success: 
        - bash tests_bash/pxweb.sh 
        - . PXWEB_ERROR.sh
        - cat PXWEB_ERROR.sh
