@@ -12,9 +12,9 @@ inst/extras/*.RData
 inst/extras/.RData
 sandbox/*.R
 sandbox
-bash_tests/*.R
-bash_tests/*.sh
-bash_tests
+tests_bash/*.R
+tests_bash/*.sh
+tests_bash
 
 README.md
 README.Rmd
