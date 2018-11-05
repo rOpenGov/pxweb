@@ -3,6 +3,7 @@
 \name{pxweb_as_data_frame}
 \alias{pxweb_as_data_frame}
 \alias{pxweb_as_data_frame.pxweb_data}
+\alias{pxweb_as_data_frame.pxweb_data_comments}
 \alias{pxweb_as_data_frame.pxweb_data_comment}
 \alias{as.data.frame.pxweb_data}
 \title{Convert object to a \code{data.frame}}
@@ -15,8 +16,11 @@ pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
   optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(),
   column.name.source = "text")
 
-\method{pxweb_as_data_frame}{pxweb_data_comment}(x, row.names = NULL,
-  optional = FALSE, ..., stringsAsFactors = FALSE)
+\method{pxweb_as_data_frame}{pxweb_data_comments}(x, optional = FALSE,
+  ..., stringsAsFactors = default.stringsAsFactors())
+
+\method{pxweb_as_data_frame}{pxweb_data_comment}(x, optional = FALSE,
+  ..., stringsAsFactors = default.stringsAsFactors())
 
 \method{as.data.frame}{pxweb_data}(x, row.names = NULL,
   optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(),
@@ -25,9 +29,9 @@ pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
 \arguments{
 \item{x}{an object to convert to \code{data.frame}.}
 
-\item{row.names}{See \link{\code{as.data.frame}}.}
+\item{row.names}{See \code{\link{as.data.frame}}.}
 
-\item{optional}{See \link{\code{as.data.frame}}.}
+\item{optional}{See \code{\link{as.data.frame}}.}
 
 \item{...}{See \link{\code{as.data.frame}}.}
 
