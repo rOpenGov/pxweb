@@ -118,3 +118,19 @@ assert_pxweb_data_comments <- function(x){
   }
   checkmate::assert_integerish(x$data_dim, lower = 1)
 }
+
+
+#' @export
+print.pxweb_data_comment <- function(x, ...){
+  cat(class(x)[[1]], " (", paste(x$text, collapse = ", "), " [", paste(x$code, collapse = ", "), "], ", paste(x$value, collapse = ", "), "):\n  ", x$comment, "\n", sep = "")
+}
+
+
+#' @export
+print.pxweb_data_comments <- function(x, ...){
+  cat("PXWEB DATA COMMENTS\n")
+  for(i in seq_along(x$comments)){
+    cat("$comments[[", i, "]]\n", sep = "")
+    print(x$comments[[i]])
+  }
+}
