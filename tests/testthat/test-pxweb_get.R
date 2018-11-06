@@ -51,9 +51,12 @@ test_that(desc="Constructor works as it should with Statistics Sweden",{
   expect_length(pxweb_data_comments(x = px_data), 2)
 })  
 
-test_that(desc="Mixed node levels object",{
+test_that(desc="Previous bugs",{
   # This is a bug in the previous implementation of pxweb
   url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
   expect_silent(px_meta_data <- pxweb_get(url))
   expect_output(print(px_meta_data), regexp = "PXWEB LEVELS")
+  
+  # Missing title
+  expect_silent(pxmd <- pxweb_get(url = "http://statistik.linkoping.se/PXWeb/api/v1/sv/Omsorg/Behandlingshem/ombeh01.px"))
 })  
