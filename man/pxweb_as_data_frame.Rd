@@ -5,7 +5,9 @@
 \alias{pxweb_as_data_frame.pxweb_data}
 \alias{pxweb_as_data_frame.pxweb_data_comments}
 \alias{pxweb_as_data_frame.pxweb_data_comment}
+\alias{pxweb_as_data_frame.pxweb_levels}
 \alias{as.data.frame.pxweb_data}
+\alias{as.data.frame.pxweb_levels}
 \title{Coerce to a \code{data.frame}}
 \usage{
 pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
@@ -22,9 +24,15 @@ pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
 \method{pxweb_as_data_frame}{pxweb_data_comment}(x, optional = FALSE,
   ..., stringsAsFactors = default.stringsAsFactors())
 
+\method{pxweb_as_data_frame}{pxweb_levels}(x, optional = FALSE, ...,
+  stringsAsFactors = default.stringsAsFactors())
+
 \method{as.data.frame}{pxweb_data}(x, row.names = NULL,
   optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(),
   column.name.source = "text")
+
+\method{as.data.frame}{pxweb_levels}(x, row.names = NULL,
+  optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors())
 }
 \arguments{
 \item{x}{an object to convert to \code{data.frame}.}
