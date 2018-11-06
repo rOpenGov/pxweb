@@ -55,5 +55,5 @@ test_that(desc="Mixed node meta data object",{
   # This is a bug in the previous implementation of pxweb
   url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
   expect_silent(px_meta_data <- pxweb_get(url))
-  expect_output(print(px_meta_data), regexp = "PXWEB METADATA")
+  expect_output(print(px_meta_data), regexp = "PXWEB LEVELS")
 })  
