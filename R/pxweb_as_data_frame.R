@@ -87,6 +87,30 @@ pxweb_as_data_frame.pxweb_data_comment <- function(x, optional = FALSE, ..., str
 }
 
 
+#' @rdname pxweb_as_data_frame
+#' @keywords internal
+pxweb_as_data_frame.pxweb_levels <- function(x, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors()){
+  checkmate::assert_flag(optional)
+  checkmate::assert_flag(stringsAsFactors)
+  
+  df <- list()
+  for(i in seq_along(x)){
+    df[[i]] <- as.data.frame(x[[i]], optional = optional, ..., stringsAsFactors = FALSE)
+    if(x[[i]]$type == "l") {
+      df[[i]]$updated <- NA
+    }
+  }
+  df <- do.call(rbind, df)
+
+  if(stringsAsFactors){
+    df$id <- as.factor(df$id)
+    df$type <- as.factor(df$type)
+    df$text <- as.factor(df$text)
+  }
+  df
+}
+
+
 
 #' @rdname pxweb_as_data_frame
 #' @export 
@@ -103,4 +127,20 @@ as.data.frame.pxweb_data <- function(x,
                       ...,
                       stringsAsFactors = stringsAsFactors,
                       column.name.source = column.name.source)
+}
+
+
+#' @rdname pxweb_as_data_frame
+#' @export 
+as.data.frame.pxweb_levels <- function(x, 
+                                       row.names = NULL, 
+                                       optional = FALSE, 
+                                       ..., 
+                                       stringsAsFactors = default.stringsAsFactors()){
+  
+  pxweb_as_data_frame(x, 
+                      row.names = row.names, 
+                      optional = optional,
+                      ...,
+                      stringsAsFactors = stringsAsFactors)
 }

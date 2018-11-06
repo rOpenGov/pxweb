@@ -67,3 +67,19 @@ pxweb_metadata_elimination <- function(pxmd){
   names(res) <- unlist(lapply(pxmd$variables,function(x) x$code))  
   res
 }
+
+
+#' Compue the dimension of a metadata object
+#' 
+#' @param pxmd a \code{pxweb_metadata} object.
+#' 
+#' @keywords internal
+pxweb_metadata_dim <- function(pxmd){
+  checkmate::assert_class(pxmd, "pxweb_metadata")
+  dim_res <- numeric(length(pxmd$variables))
+  for(i in seq_along(pxmd$variables)){
+    names(dim_res)[i] <- pxmd$variables[[i]]$code
+    dim_res[i] <- length(pxmd$variables[[i]]$values)
+  }
+  dim_res
+}
