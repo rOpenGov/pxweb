@@ -49,7 +49,7 @@ test_that(desc="Constructor works as it should with Statistics Sweden",{
   expect_output(print(px_data), regexp = "PXWEB DATA")
   expect_output(print(px_data), regexp = "255200 observations")
   expect_length(pxweb_data_comments(x = px_data), 2)
-
+})  
 
 test_that(desc="Mixed node meta data object",{
   # This is a bug in the previous implementation of pxweb
