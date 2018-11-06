@@ -60,7 +60,7 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
   if(verbose){
     cat("PXWEB API CONTAIN:\n")
     cat(sum(api_tree_df$type == "l"), "node(s) and", sum(api_tree_df$type == "t"), "table(s).\n")
-    cat("Download data...\n")
+    cat("Downloading data...\n")
     pb <- utils::txtProgressBar(min = 0, max = nrow(api_tree_df), style = 3)
   }
 
