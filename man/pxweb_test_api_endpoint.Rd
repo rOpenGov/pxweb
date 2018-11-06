@@ -16,6 +16,8 @@ A random \code{sample} of size \code{n}.
 Download all \code{full} tables.}
 
 \item{n}{sample size if \code{test_type} is \code{sample}.}
+
+\item{verbose}{The function will print information.}
 }
 \value{
 Function returns a data.frame with information on each node

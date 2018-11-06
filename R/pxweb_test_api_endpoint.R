@@ -10,6 +10,7 @@
 #'                  A random \code{sample} of size \code{n}.
 #'                  Download all \code{full} tables. 
 #' @param n sample size if \code{test_type} is \code{sample}.
+#' @param verbose The function will print information.
 #' 
 #' @return 
 #' Function returns a data.frame with information on each node
