@@ -10,6 +10,10 @@
 #' 
 #' @keywords internal
 pxweb_metadata <- function(x){
+  if(is.null(x$title)) {
+    x$title <- NA
+  }
+  
   checkmate::assert_names(names(x), must.include = "variables")
   for(i in seq_along(x$variables)){
     checkmate::assert_names(names(x$variables[[i]]), must.include = c("values", "valueTexts"))
@@ -31,7 +35,7 @@ pxweb_metadata <- function(x){
 assert_pxweb_metadata <- function(x){
   checkmate::assert_class(x, c("pxweb_metadata", "list"))
   checkmate::assert_names(names(x), must.include = c("title", "variables"))
-  checkmate::assert_string(x$title)
+  checkmate::assert_string(x$title, na.ok = TRUE)
   
   for(i in seq_along(x$variables)){
     checkmate::assert_names(names(x$variables[[i]]), must.include = c("code", "text", "values", "valueTexts", "elimination", "time"), .var.name = paste0("names(x$variables[[", i, "]])"))
@@ -48,6 +52,7 @@ assert_pxweb_metadata <- function(x){
 #' @export
 print.pxweb_metadata <- function(x, ...){
   cat("PXWEB METADATA\n")
+  cat(x$title, "\n")
   cat("variables:\n")
   for(i in seq_along(x$variables)){
     cat(" [[", i ,"]] ",  x$variables[[i]]$code,": ", x$variables[[i]]$text, "\n", sep = "")

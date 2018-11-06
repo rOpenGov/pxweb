@@ -32,6 +32,7 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
   checkmate::assert_int(n, lower = 1)
   
   # Build treestructure
+  # api_tree_df <- pxweb:::pxweb_get_api_test_data_frame(px)
   api_tree_df <- pxweb_get_api_test_data_frame(px)
   i <- 0
   while (i < nrow(api_tree_df)) {
@@ -55,10 +56,11 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
     api_tree_df <- rbind(api_tree_df, tmp_df)
     api_tree_df$checked[i] <- TRUE
   }
+  
   if(verbose){
     cat("PXWEB API CONTAIN:\n")
     cat(sum(api_tree_df$type == "l"), "node(s) and", sum(api_tree_df$type == "t"), "table(s).\n")
-    cat("Testing to download data...")
+    cat("Download data...\n")
     pb <- utils::txtProgressBar(min = 0, max = nrow(api_tree_df), style = 3)
   }
 
@@ -71,10 +73,12 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
     if(api_tree_df$checked[i]) {
       next
     }
-    px_obj <- try(pxweb_get(api_tree_df$path[i], verbose = FALSE))
+    px_obj <- try(pxweb_get(api_tree_df$path[i], verbose = FALSE), silent = TRUE)
     if(inherits(px_obj, "try-error")) {
       api_tree_df$error[i] <- TRUE
       api_tree_df$checked[i] <- TRUE
+      api_tree_df$obs[i] <- NA
+      next
     }
     
     api_tree_df$obs[i] <- prod(pxweb_metadata_dim(px_obj))
@@ -90,11 +94,12 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
       }
       pxq[[px_obj$variables[[j]]$code]] <- values
     }
-    px_dat <- try(pxweb_get(api_tree_df$path[i], pxweb_query(pxq), verbose = FALSE))
+    px_dat <- try(pxweb_get(api_tree_df$path[i], pxweb_query(pxq), verbose = FALSE), silent = TRUE)
     if(inherits(px_dat, "try-error")) {
       api_tree_df$error[i] <- TRUE
       api_tree_df$checked[i] <- TRUE
       api_tree_df$download_error[i] <- TRUE
+      next
     }
     api_tree_df$checked[i] <- TRUE    
   }
