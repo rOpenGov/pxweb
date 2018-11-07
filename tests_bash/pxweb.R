@@ -32,8 +32,17 @@ for(i in seq_along(api_paths)){
 if(any(errored)){
   cat("\n\nERRONEOUS PATHS:\n")
   for(i in seq_along(which(errored))){
-    cat(api_paths[which(errored)[i]], "\n")
+    cat("\n", api_paths[which(errored)[i]], "\n", sep ="")
     cat(res[[which(errored)[i]]][1])
   }
+
+}
+
+warns <- warnings()
+if(length(warns) > 0){
+  print(warns)
+}
+
+if(any(errored) | length(warns) > 0){
   quit(save = "no", status = 1)
 }
