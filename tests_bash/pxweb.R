@@ -18,17 +18,22 @@ for(i in seq_along(apis)){
   }
 }
 
-# Check all APIs
+# Check all APIs shallowly
 errored <- rep(FALSE, length(api_paths))
+res <- list()
 for(i in seq_along(api_paths)){
   cat(api_paths[i], "\n")
-  res <- try(pxweb(api_paths[i]), silent = TRUE)
-  if(inherits(res, "try-error")){
+  res[[i]] <- try(pxweb(api_paths[i]), silent = TRUE)
+  if(inherits(res[[i]], "try-error")){
     errored[i] <- TRUE
   }
 }
 
 if(any(errored)){
-  print(api_paths[which(errored)])
+  cat("\n\nERRONEOUS PATHS:\n")
+  for(i in seq_along(which(errored))){
+    cat(api_paths[which(errored)[i]], "\n")
+    cat(res[[which(errored)[i]]][1])
+  }
   quit(save = "no", status = 1)
 }
