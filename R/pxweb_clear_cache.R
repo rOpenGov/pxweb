@@ -9,7 +9,9 @@
 pxweb_clear_cache<- function(x = NULL){
   if(is.null(x)){
     files <- dir(file.path(tempdir(), "pxweb", "apis"), full.names = TRUE)
-    if(length(files) == 0) return(FALSE)
+    if(length(files) == 0) {
+      return(FALSE)
+    }
     sleep_s <- numeric(length(files))
     for(f in seq_along(files)){
       obj <- NULL # To capture a builde NOTE and safeguard for global variable handling
