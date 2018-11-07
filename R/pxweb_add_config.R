@@ -37,6 +37,12 @@ pxweb_add_config <-function(obj){
       stop(paste0("\nThis is not a PXWEB API: \n", httr::build_url(obj$url)), call. = FALSE)
     }
   } 
+  
+  httpdc <- http_domain_changed(r)
+  if(httpdc$domain_changed){
+    warning("PXWEB DOMAIN CHANGE:\n from: ", httpdc$redirected_from, "\n to: ", httpdc$redirected_to)
+  }
+  
   cfg <- httr::content(r, "parsed")
   obj$config <- list(calls_per_period = cfg$maxCalls,
                      period_in_seconds = cfg$timeWindow,
@@ -60,3 +66,39 @@ is_pxweb_config_response <- function(x){
   (all(c("maxValues", "maxCalls", "timeWindow", "CORS") %in% names(cfg))) & !inherits(cfg, "try-error")
 }
 
+
+
+#' http_domain_changed
+#'
+#' @param response an httr response object, e.g. from a call to httr::GET()
+#'
+#' @return list with slots \code{domain_changed}, \code{redirected_from} and  \code{redirected_to}
+#'
+#' @references 
+#' Function in large parts taken from \url{https://petermeissner.de/blog/2018/11/07/using-httr-to-detect-redirects/}.
+#'
+#' @keywords internal
+http_domain_changed <- function(r){
+    # get domain of origignal HTTP request
+    orig_domain <-   httr::parse_url(r$request$url)$hostname
+    
+    # extract location headers
+    location <- 
+      unlist(
+        lapply(
+          X   = r$all_headers, 
+          FUN = 
+            function(x){
+              x$headers$location
+            }
+        )
+      )
+    
+    # new domains
+    new_domain <- httr::parse_url(r$request$url)$hostname
+    
+    # check domains in location against original domain
+    list(domain_changed = any(!is.na(new_domain) & new_domain != orig_domain),
+         redirected_from = orig_domain,
+         redirected_to = new_domain)
+  }
