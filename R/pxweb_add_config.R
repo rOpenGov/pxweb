@@ -38,9 +38,9 @@ pxweb_add_config <-function(obj){
     }
   } 
   
-  httpdc <- http_domain_changed(r)
-  if(httpdc$domain_changed){
-    warning("PXWEB DOMAIN CHANGE:\n from: ", httpdc$redirected_from, "\n to: ", httpdc$redirected_to)
+  httpwr <- http_was_redirected(r)
+  if(httpwr$was_redirected){
+    warning("PXWEB URL CHANGE:\n from: ", httpwr$redirected_from, "\n to:   ", httpwr$redirected_to, call. = FALSE)
   }
   
   cfg <- httr::content(r, "parsed")
@@ -68,37 +68,49 @@ is_pxweb_config_response <- function(x){
 
 
 
-#' http_domain_changed
+#' http_was_redirected
 #'
 #' @param response an httr response object, e.g. from a call to httr::GET()
 #'
-#' @return list with slots \code{domain_changed}, \code{redirected_from} and  \code{redirected_to}
+#' @return list with slots \code{was_redirected}, \code{redirected_from} and  \code{redirected_to}
 #'
 #' @references 
 #' Function in large parts taken from \url{https://petermeissner.de/blog/2018/11/07/using-httr-to-detect-redirects/}.
 #'
+#' @examples 
+#' \dontrun{
+#'   r <- httr::GET("http://httpbin.org/redirect/2")
+#'   http_was_redirected(r)
+#' }
 #' @keywords internal
-http_domain_changed <- function(r){
-    # get domain of origignal HTTP request
-    orig_domain <-   httr::parse_url(r$request$url)$hostname
-    
-    # extract location headers
-    location <- 
-      unlist(
-        lapply(
-          X   = r$all_headers, 
-          FUN = 
-            function(x){
-              x$headers$location
-            }
-        )
+http_was_redirected <- function(r){
+  checkmate::assert_class(r, "response")
+
+    # extract status 
+    status <- 
+      vapply(
+        X         = r$all_headers, 
+        FUN       = `[[`, 
+        FUN.VALUE = integer(1),
+        "status"
       )
-    
-    # new domains
-    new_domain <- httr::parse_url(r$request$url)$hostname
+      
+    # Remove config etc
+    redirected_from <- httr::parse_url(r$request$url)
+    redirected_from$params <- NULL
+    redirected_from$query <- NULL
+    redirected_from$fragment <- NULL
+    redirected_from$username <- NULL
+    redirected_from$password <- NULL
+    redirected_to <- httr::parse_url(r$url)
+    redirected_to$params <- NULL
+    redirected_to$query <- NULL
+    redirected_to$fragment <- NULL
+    redirected_to$username <- NULL
+    redirected_to$password <- NULL
     
     # check domains in location against original domain
-    list(domain_changed = any(!is.na(new_domain) & new_domain != orig_domain),
-         redirected_from = orig_domain,
-         redirected_to = new_domain)
-  }
+    list(was_redirected = any(status >= 300 & status < 400),
+         redirected_from = httr::build_url(redirected_from),
+         redirected_to = httr::build_url(redirected_to))
+}

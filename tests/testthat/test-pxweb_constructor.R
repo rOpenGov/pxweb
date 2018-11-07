@@ -61,5 +61,16 @@ test_that(desc="pxweb_clear_cache() without any files",{
 })  
 
 
+test_that(desc="pxweb_clear_cache() without any files and WARNING for redirect.",{
+  
+  expect_silent(pxweb_clear_cache())
+  expect_silent(pxweb_clear_cache())
+  
+  expect_warning(pxweb("http://pxweb.asub.ax/PXWeb/api/v1/sv/"), regexp = "PXWEB URL CHANGE")
+  
+})  
+
+
+
 
 
