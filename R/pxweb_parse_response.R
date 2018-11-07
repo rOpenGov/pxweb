@@ -25,3 +25,9 @@ pxweb_parse_response <- function(x){
   
   stop("Incorrect return response from PXWEB API url: \n", x$url, call. = FALSE)
 }
+
+#' @rdname pxweb_parse_response
+#' @keywords internal
+is_pxweb_response <- function(x){
+  !inherits(try(pxweb_parse_response(x), silent = TRUE), "try-error")
+}

@@ -2,9 +2,12 @@
 % Please edit documentation in R/pxweb_parse_response.R
 \name{pxweb_parse_response}
 \alias{pxweb_parse_response}
+\alias{is_pxweb_response}
 \title{Parse the response from a PXWEB API}
 \usage{
 pxweb_parse_response(x)
+
+is_pxweb_response(x)
 }
 \arguments{
 \item{x}{a \code{httr} response object from a PXWEB call.}
