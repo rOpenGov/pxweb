@@ -18,13 +18,13 @@ for(i in seq_along(apis)){
   }
 }
 
-# Check all APIs shallowly
+# Ping all APIs shallowly
 errored <- rep(FALSE, length(api_paths))
-res <- list()
+ping_results <- list()
 for(i in seq_along(api_paths)){
   cat(api_paths[i], "\n")
-  res[[i]] <- try(pxweb(api_paths[i]), silent = TRUE)
-  if(inherits(res[[i]], "try-error")){
+  ping_results[[i]] <- try(pxweb(api_paths[i]), silent = TRUE)
+  if(inherits(ping_results[[i]], "try-error")){
     errored[i] <- TRUE
   }
 }
@@ -33,14 +33,34 @@ if(any(errored)){
   cat("\n\nERRONEOUS PATHS:\n")
   for(i in seq_along(which(errored))){
     cat("\n", api_paths[which(errored)[i]], "\n", sep ="")
-    cat(res[[which(errored)[i]]][1])
+    cat(ping_results[[which(errored)[i]]][1])
   }
-
 }
 
 warns <- warnings()
 if(length(warns) > 0){
   print(warns)
+}
+
+# Touch all APIs
+touch_results <- list()
+for(i in seq_along(api_paths)){
+  if(errored[i]) {
+    next
+  }
+  cat(api_paths[i], "\n")
+  touch_results[[i]] <- try(pxweb_test_api_endpoint(api_paths[i], test_type = "touch", verbose = FALSE), silent = TRUE)
+  if(inherits(touch_results[[i]], "try-error")){
+    errored[i] <- TRUE
+  }
+}
+
+if(any(errored)){
+  cat("\n\nERRORS:\n")
+  for(i in seq_along(which(errored))){
+    cat("\n", api_paths[which(errored)[i]], "\n", sep ="")
+    cat(touch_results[[which(errored)[i]]][1])
+  }
 }
 
 if(any(errored) | length(warns) > 0){
