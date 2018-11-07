@@ -17,20 +17,16 @@ for(i in seq_along(apis)){
 }
 
 # Check all APIs
+errored <- rep(FALSE, length(api_paths))
 for(i in seq_along(api_paths)){
   cat(api_paths[i], "\n")
-  res <- pxweb_test_api_endpoint(api_paths[i])
-  cat(api_paths[i], "\n\n")
-  if(any(res$error)){
-    cat("ERRONEOUS PATHS:\n")
-    cat(paste(paste(res$path[res$error], "\n"), collapse = ""))
-    cat("\n")
+  res <- try(pxweb(api_paths[i]), silent = TRUE)
+  if(inherits(res, "try-error")){
+    errored[i] <- TRUE
   }
 }
 
-# Signal errors to operating system
-if(FALSE){
+if(any(errored)){
+  print(api_paths[which(errored)])
   quit(save = "no", status = 1)
 }
-
-
