@@ -141,10 +141,10 @@
         "max_values_to_download" : 100000
               },
               
-    "pxwebb2014.vgregion.se": {
+    "pxwebb2017.vgregion.se": {
         "alias" : ["vgregion"],
         "description" : "Vastra Gotaland Region in Sweden",
-        "url" : "http://pxwebb2014.vgregion.se/pxweb/api/[version]/[lang]",
+        "url" : "http://pxwebb2017.vgregion.se/pxweb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["sv","en"],
         "calls_per_period": 30,
