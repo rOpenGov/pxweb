@@ -1,3 +1,5 @@
+install.packages("devtools")
+devtools::install_local(getwd())
 library(pxweb)
 
 print(sessionInfo())
