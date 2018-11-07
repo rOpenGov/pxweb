@@ -53,6 +53,12 @@ test_that(desc="Cache cleaner and print",{
   expect_output(print(pxapi1), "PXWEB API")
 })  
 
+test_that(desc="pxweb_clear_cache() without any files",{
+  
+  expect_silent(pxweb_clear_cache())
+  expect_silent(pxweb_clear_cache())
+  
+})  
 
 
 
