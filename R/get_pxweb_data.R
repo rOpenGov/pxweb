@@ -5,6 +5,7 @@
 #' @param url URL to get data from (usually sufficient to submit the base URL, supplied via the base_url() function, and the name of the variable).
 #' @param dims A list of dimensional parameters to filter data by. Note that values \emph{must} be submitted for all dimensions of the data. If you don't want to filter data, submit an asterisk in quotation marks ("*") instead of values for that dimension.
 #' @param clean Clean and melt the data to R format.
+#' @param encoding An encoding for data to get. Normally not requred. Will be supplied to \code{\link[httr]{content}}. 
 #' 
 #' @details
 #' There are five documented filter types in the PX-WEB API documentation; "Item", "All", "Top", "Agg" and "Vs". This function currently only supports the "Item" and "All" modes. 
@@ -23,7 +24,7 @@
 #'                  clean = FALSE)
 #' }
 
-get_pxweb_data <- function(url, dims, clean = FALSE) {
+get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
 
    dims <- reorder_and_check_dims(url, dims)
    dimNames <- names(dims)
@@ -77,7 +78,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      # print("Parse data into human-readable form")
      # (Due to a weird encoding issue on Windows this generates a warning
      # about faulty encoding. Hence the suppressMessages() encapsulation...)
-     suppressMessages(a <- content(response, as="text"))
+     suppressMessages(a <- httr::content(response, as="text", encoding = encoding))
      if(str_sub(a,1,1)==",") a <- str_sub(a,2,nchar(a)) # Correcting when the first element is , (few variables)
      b <- read.table(textConnection(a), sep=',', header=TRUE, stringsAsFactors=FALSE)
      head <- str_split(string=str_sub(a, start=1, end=str_locate(a,"\n")[[1]]),"\",\"")[[1]]
