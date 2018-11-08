@@ -9,6 +9,8 @@
 #'                  The \code{first} observation of each table.
 #'                  A random \code{sample} of size \code{n}.
 #'                  Download all \code{full} tables. 
+#'                  \code{touch} the api by downloading the first table. 
+#'                  This is minimal testing of the API.
 #' @param n sample size if \code{test_type} is \code{sample}.
 #' @param verbose The function will print information.
 #' 
@@ -23,12 +25,13 @@
 #' \dontrun{
 #'   url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
 #'   res <- pxweb_test_api_endpoint(url)
+#'   res <- pxweb_test_api_endpoint(url, test_type="touch")
 #' }
-#' 
+#' url <- "http://api.scb.se/OV0104/v1/doris/en"
 #' @export
 pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRUE){
   px <- pxweb(url)
-  checkmate::assert_choice(test_type, c("first", "sample", "full"))
+  checkmate::assert_choice(test_type, c("first", "sample", "full", "touch"))
   checkmate::assert_int(n, lower = 1)
   
   # Build treestructure
@@ -42,6 +45,17 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
   i <- 0
   while (i < nrow(api_tree_df)) {
     i <- i + 1
+    
+    types_idx_to_check <- i:nrow(api_tree_df)
+    is_table <- api_tree_df$type[types_idx_to_check] == "t"
+    if(test_type == "touch" && any(api_tree_df$type[i:nrow(api_tree_df)] == "t")){
+      if(verbose) {
+        cat("Table identified.\n")
+      }
+      touch_idx <- types_idx_to_check[is_table][1]
+      break
+    }
+    
     if(api_tree_df$type[i] == "t") {
       next
     }
@@ -56,17 +70,22 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
       api_tree_df$checked[i] <- TRUE
     }
     
-    tmp_df <- try(pxweb_get_api_test_data_frame(px), silent = TRUE)
+    tmp_df <- try(pxweb:::pxweb_get_api_test_data_frame(px), silent = TRUE)
     if(inherits(tmp_df, "try-error")) {
       api_tree_df$error[i] <- TRUE
       api_tree_df$checked[i] <- TRUE
+    }
+    
+    if(test_type == "touch"){
+      # Jump to next level
+      i <- nrow(api_tree_df) - 1
     }
     
     api_tree_df <- rbind(api_tree_df, tmp_df)
     api_tree_df$checked[i] <- TRUE
   }
   
-  if(verbose){
+  if(verbose & !test_type == "touch"){
     cat("PXWEB API CONTAIN:\n")
     cat(sum(api_tree_df$type == "l"), "node(s) and", sum(api_tree_df$type == "t"), "table(s) in total.\n")
     cat("Downloading data...\n")
@@ -76,12 +95,15 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
   # Get metadata and test download
   api_tree_df$obs <- 0
   for(i in 1:nrow(api_tree_df)){
-    if(verbose) {
+    if(verbose & !test_type == "touch") {
       utils::setTxtProgressBar(pb, i)
+    } else if (test_type == "touch") {
+      i <- touch_idx # Handle that only few idx has been checked in touch
     }
     if(api_tree_df$checked[i]) {
       next
     }
+  
     px_obj <- try(pxweb_get(api_tree_df$path[i], verbose = FALSE), silent = TRUE)
     if(inherits(px_obj, "try-error")) {
       api_tree_df$error[i] <- TRUE
@@ -90,12 +112,12 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
       next
     }
     
-    api_tree_df$obs[i] <- prod(pxweb_metadata_dim(px_obj))
+    api_tree_df$obs[i] <- prod(pxweb:::pxweb_metadata_dim(px_obj))
     
     pxq <- list()
     for(j in seq_along(px_obj$variables)){
       values <- px_obj$variables[[j]]$values
-      if(test_type == "first"){
+      if(test_type == "first" | test_type == "touch" ){
         values <- px_obj$variables[[j]]$values[1]
       }
       if(test_type == "sample"){
@@ -110,10 +132,16 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
       api_tree_df$download_error[i] <- TRUE
       next
     }
-    api_tree_df$checked[i] <- TRUE    
+    api_tree_df$checked[i] <- TRUE
+    if(test_type == "touch"){
+      if(verbose) {
+        cat("Table touched.\n")
+      }
+      break
+    }
   }
   
-  if(verbose) {
+  if(verbose & !test_type == "touch") {
     close(pb)
   }
   

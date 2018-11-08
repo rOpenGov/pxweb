@@ -13,7 +13,9 @@ pxweb_test_api_endpoint(url, test_type = "first", n = 1,
 \item{test_type}{What type of test should be done. 
 The \code{first} observation of each table.
 A random \code{sample} of size \code{n}.
-Download all \code{full} tables.}
+Download all \code{full} tables. 
+\code{touch} the api by downloading the first table. 
+This is minimal testing of the API.}
 
 \item{n}{sample size if \code{test_type} is \code{sample}.}
 
@@ -34,6 +36,7 @@ By using a branch in a tree the api is tested below this branch.
 \dontrun{
   url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
   res <- pxweb_test_api_endpoint(url)
+  res <- pxweb_test_api_endpoint(url, test_type="touch")
 }
-
+url <- "http://api.scb.se/OV0104/v1/doris/en"
 }
