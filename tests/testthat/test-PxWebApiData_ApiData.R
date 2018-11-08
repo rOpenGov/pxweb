@@ -32,13 +32,15 @@ test_that("ApiData - StatFin-data with special characters", {
 })
 
 
+
 test_that("ApiData - SSB-data advanced use", {
   urlSSB <- "http://data.ssb.no/api/v0/en/table/04861"
-  a1 <- ApiData(urlSSB, Region = list("039*"), ContentsCode = TRUE, Tid = 2i)
-  a2 <- ApiData(urlSSB, Region = "0399", ContentsCode = list("all", "*"), Tid = -(1:2))
-  a3 <- ApiData(urlSSB, Region = "Uoppgitt komm. Oslo", ContentsCode = c("Area of urban settlements (km²)", "Bosatte"), Tid = list("top", "2"))
+  a1  <- ApiData(urlSSB, Region = "0399", ContentsCode = TRUE, Tid = 2i) 
+  a1q <- ApiData(urlSSB, Region = "0399", ContentsCode = TRUE, Tid = 2i, returnApiQuery=TRUE)
+  a2  <- ApiData(urlSSB, Region = list("039*"), ContentsCode = c("Area of urban settlements (km²)", "Bosatte"), Tid = -(1:2))
+  a3q <- ApiData(urlSSB, Region = "Uoppgitt komm. Oslo", ContentsCode = list("all", "*"), Tid = list("top", "2"), returnApiQuery=TRUE)
   expect_equal(a1, a2)
-  expect_equal(a1, a3)
+  expect_equal(a1q, a3q)
 })
 
 
