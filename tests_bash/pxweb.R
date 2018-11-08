@@ -5,14 +5,14 @@ library(pxweb)
 print(sessionInfo())
 
 # Create list of API paths
-apis <- api_catalogue()
+apis <- pxweb_api_catalogue()
 api_paths <- character(0)
 for(i in seq_along(apis)){
-  for(j in seq_along(apis[[i]]$versions)){
-    for(k in seq_along(apis[[i]]$languages)){
+  for(j in seq_along(apis[[i]]$version)){
+    for(k in seq_along(apis[[i]]$lang)){
       base_url <- apis[[i]]$url
-      base_url <- gsub("\\[version\\]", base_url, replacement = apis[[i]]$versions[j])
-      base_url <- gsub("\\[lang\\]", base_url, replacement = apis[[i]]$languages[k])
+      base_url <- gsub("\\[version\\]", base_url, replacement = apis[[i]]$version[j])
+      base_url <- gsub("\\[lang\\]", base_url, replacement = apis[[i]]$lang[k])
       api_paths[length(api_paths) + 1] <- base_url
     }
   }
