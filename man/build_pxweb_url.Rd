@@ -3,6 +3,7 @@
 \name{build_pxweb_url}
 \alias{build_pxweb_url}
 \alias{build_pxweb_url.list}
+\alias{build_pxweb_url.character}
 \alias{build_pxweb_url.pxweb}
 \alias{build_pxweb_url.pxweb_api_catalogue_entry}
 \title{Build the url to a PXWEB api}
@@ -10,6 +11,8 @@
 build_pxweb_url(x)
 
 \method{build_pxweb_url}{list}(x)
+
+\method{build_pxweb_url}{character}(x)
 
 \method{build_pxweb_url}{pxweb}(x)
 

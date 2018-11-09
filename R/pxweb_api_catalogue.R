@@ -25,6 +25,7 @@ pxweb_api_catalogue_path <- function(){
   system.file(file.path("extdata", "api.json"), package = "pxweb")
 }
 
+#' Assert a \code{pxweb_api_catalogue} object
 #' @param x an object to assert is a \code{pxweb_api_catalogue_entry}.
 #' @keywords internal
 assert_pxweb_api_catalogue <- function(x){
@@ -36,6 +37,7 @@ assert_pxweb_api_catalogue <- function(x){
 }
 
 
+#' Constructor for \code{pxweb_api_catalogue_entry}.
 #' @param x an object to convert to a \code{pxweb_api_catalogue_entry} object.
 #' @export 
 pxweb_api_catalogue_entry <- function(x){
@@ -50,6 +52,7 @@ pxweb_api_catalogue_entry.list <- function(x){
   x
 }
 
+#' @rdname pxweb_api_catalogue_entry
 #' @param x an object to assert is a \code{pxweb_api_catalogue_entry}.
 #' @keywords internal
 assert_pxweb_api_catalogue_entry <- function(x){
@@ -76,7 +79,9 @@ assert_pxweb_api_catalogue_entry <- function(x){
 }
 
 
-#' @rdname print
+#' Print a catalogue entry
+#' @param x an object used to select a method.
+#' @param ... further arguments passed to or from other methods.
 #' @export
 print.pxweb_api_catalogue_entry <- function(x, ...){
   cat("Api:", httr::parse_url(x$url)$hostname)
@@ -92,4 +97,18 @@ print.pxweb_api_catalogue_entry <- function(x, ...){
     cat("              ", x$max_values_to_download ," values per call.\n")
   }
   cat("Url template :\n", x$url, "\n")
+}
+
+
+
+#' @keywords internal
+pxweb_api_catalogue_alias_table <- function(){
+  pxac <- pxweb_api_catalogue()
+  dfs <- list()
+  for(i in seq_along(pxac)){
+    dfs[[i]] <- data.frame(name = names(pxac)[i], 
+                           alias = c(names(pxac)[i], pxac[[i]]$alias),
+                           idx = i)
+  }
+  do.call(rbind, dfs)
 }
