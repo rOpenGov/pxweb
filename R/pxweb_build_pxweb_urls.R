@@ -15,8 +15,23 @@ build_pxweb_url.list <- function(x) {
 
 #' @rdname build_pxweb_url
 #' @keywords internal
+build_pxweb_url.character <- function(x) {
+  build_pxweb_url(httr::parse_url(x))
+}
+
+#' @rdname build_pxweb_url
+#' @keywords internal
 build_pxweb_url.pxweb <- function(x) {
   build_pxweb_url(x$url)
+}
+
+#' @rdname build_pxweb_url
+#' @keywords internal
+build_pxweb_url.pxweb_api_catalogue_entry <- function(x) {
+  base_url <- x$url
+  base_url <- gsub("\\[version\\]", base_url, replacement = x$version[1])
+  base_url <- gsub("\\[lang\\]", base_url, replacement = x$lang[1])
+  build_pxweb_url(base_url)
 }
 
 #' @rdname build_pxweb_config_url

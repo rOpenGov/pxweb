@@ -4,6 +4,7 @@
 \alias{build_pxweb_url}
 \alias{build_pxweb_url.list}
 \alias{build_pxweb_url.pxweb}
+\alias{build_pxweb_url.pxweb_api_catalogue_entry}
 \title{Build the url to a PXWEB api}
 \usage{
 build_pxweb_url(x)
@@ -11,6 +12,8 @@ build_pxweb_url(x)
 \method{build_pxweb_url}{list}(x)
 
 \method{build_pxweb_url}{pxweb}(x)
+
+\method{build_pxweb_url}{pxweb_api_catalogue_entry}(x)
 }
 \description{
 Build the url to a PXWEB api
