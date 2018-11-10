@@ -11,71 +11,24 @@
 #' @examples
 #'  pxweb_api_catalogue() # List apis
 #' \dontrun{
-#'  d <- pxweb_interactive()
-#'  d <- pxweb_interactive(x = "api.scb.se")
-#'  d <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+#'  x <- pxweb_interactive()
+#'  x <- pxweb_interactive(x = "api.scb.se")
+#'  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
 #' }
-
 pxweb_interactive <- function(x = NULL){
-  
+  # Setup structure
   pxexp <- pxweb_explorer(x)
   
-
-  
-  
-  
-
-  # Choose DB and get top node
-  baseURL <- api_obj$base_url(version = version, language = language)
-  dbURL <- choose_pxweb_database_url(baseURL)
-  Node <- get_pxweb_metadata(baseURL = dbURL) 
-  
-  # List to store nodes
-  allNodes <- list()
-  
-  # Parameter indicating when to jump out of while loop
-  quit <- FALSE 
-
   # The main program
-  while(!quit) { 
+  while(!pxexp$quit) { 
     # Generate header
-    if (!history) { cat("\014") }
-    cat("Content of '", str_split(baseURL,pattern="/")[[1]][3], "' at current (", length(allNodes)+1, ") node level:\n", sep="") 
-    cat(rep("=", round(getOption("width")*0.9)), "\n",sep="") 
-    
-    # Print information in node and ask for choice
-    findData.printNode(Node)
-    inputValue <- findData.input(type = "node", input = Node)
-
-    if (inputValue == "q") { quit <- TRUE; next() }
-
-    # Traverse to the previous node
-    if (inputValue == "b") {
-      if (length(allNodes) == 0) { next() }
-      Node <- allNodes[[length(allNodes)]]
-      allNodes[[length(allNodes)]] <- NULL
+    if (!pxexp$show_history) { 
+      cat("\014") 
     }
     
-    # If node choice is selected, download the next node  
-    if (str_detect(inputValue, pattern = "[0-9]+")) {
-       
-      # Check if it is the botton node and if so, ask to download data
-      if (Node$type[as.numeric(inputValue)] == "t") {
-        downloadedData<-
-          download_pxweb(dataNode=
-            list(get_pxweb_metadata(
-              Node$URL[as.numeric(inputValue)]),
-              Node$URL[as.numeric(inputValue)]
-            ))
-        return(downloadedData)
-      }
-
-      # If not the bottom node, traverse to the next node (and save the current node)
-      # to be able to traverse back up in the node tree
-      allNodes[[length(allNodes) + 1]] <- Node
-      Node <- get_pxweb_metadata(path = Node$URL[as.numeric(inputValue)])
-
-    }
+    print(pxexp)
+    pxexp <- pxweb_interactive_input(pxexp)
+    
   }
 }
 
@@ -83,32 +36,41 @@ pxweb_interactive <- function(x = NULL){
 #' Create a \code{pxweb_explorer} object.
 #' @param x a \code{pxweb} object, a PXWEB url, \code{NULL} or an api in the api catalogue.
 #' 
+#' @description 
+#' \code{position} the current position in the api, as a character vector from the root.
+#' Note position is not alway a correct url. Metadata and other choices are part of position
+#' 
+#' \code{root} is the bottom path (as position) that the user can go. If length 0, user can essentially go to hostname.
+#' 
+#' paste(root_path + position, collapse = "/")  is used to construct the path to the position
+#' in case of url.
+#' 
 #' \dontrun{
-#'  d <- pxweb_explorer()
-#'  d <- pxweb_explorer(x = "api.scb.se")
-#'  d <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+#'  x <- pxweb_explorer()
+#'  x <- pxweb_explorer(x = "api.scb.se")
+#'  x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
 #' }
 #' @keywords internal
 pxweb_explorer <- function(x = NULL){
   UseMethod("pxweb_explorer")
 }
 
-
 #' @rdname pxweb_explorer
 #' @keywords internal
 pxweb_explorer.NULL <- function(x){
   apis <- pxweb_api_catalogue()
   pxe <- list(pxweb = NULL,
-              root = "/")
-  pxe$position <- ""
+              root = character(0))
+  pxe$position <- character(0)
   pxalist <- list()
   txt <- unname(unlist(lapply(apis, function(x) x$description)))
   for(i in seq_along(names(apis))){
     pxalist[[i]] <- list(id=names(apis)[i], type = "l", text = txt[i])
   }
   pxl <- pxweb:::pxweb_levels(pxalist)
-  pxe$pxobjs <- list("apis" = list(pxobj = pxl))
+  pxe$pxobjs <- list("api_names" = list(pxobj = pxl))
   class(pxe) <- c("pxweb_explorer", "list")
+  pxe <- add_pxweb_explorer_defaults(pxe)
   assert_pxweb_explorer(pxe)
   pxe
 }
@@ -133,14 +95,12 @@ pxweb_explorer.character <- function(x){
 #' @keywords internal
 pxweb_explorer.pxweb <- function(x){
   pxe <- list(pxweb = x)
-  tot_pos <- strsplit(httr::parse_url(pxe$pxweb$url)$path, split = "/")[[1]]
-  pxe$root <- paste0("/", pxe$pxweb$paths$api_subpath$path)
-  pxe$position <- tot_pos[(length(pxe$pxweb$paths$api_subpath$vector)+1):length(tot_pos)]
-  
-  sub_path <- paste0("/", paste(pxe$position, collapse = "/"))
+  pxe$root <- pxweb_api_subpath(pxe$pxweb, as_vector = TRUE)
+  pxe$position <- pxweb_api_path(pxe$pxweb, as_vector = TRUE)
   pxe$pxobjs <- list(list(pxobj = pxweb_get(x)))
-  names(pxe$pxobjs) <- sub_path
+  names(pxe$pxobjs) <- pxweb_api_path(pxe$pxweb)
   class(pxe) <- c("pxweb_explorer", "list")
+  pxe <- add_pxweb_explorer_defaults(pxe)
   assert_pxweb_explorer(x = pxe)
   pxe
 }
@@ -149,9 +109,9 @@ pxweb_explorer.pxweb <- function(x){
 #' @keywords internal
 pxweb_explorer.pxweb_api_catalogue_entry <- function(x){
   pxe <- list(pxweb = pxweb(build_pxweb_url(x)))
-  tot_pos <- strsplit(httr::parse_url(pxe$pxweb$url)$path, split = "/")[[1]]
-  pxe$root <- "/"
-  pxe$position <- ""
+  tot_pos <- pxweb_api_path(pxe$pxweb, as_vector = TRUE)
+  pxe$root <- character(0)
+  pxe$position <- character(0)
   
   tot_pos <- strsplit(httr::parse_url(x$url)$path, split = "/")[[1]]
   ver_pos <- which(tot_pos == "[version]")
@@ -176,15 +136,33 @@ pxweb_explorer.pxweb_api_catalogue_entry <- function(x){
     pxe$pxobjs[[version_list[[i]]$id]] <- list(pxobj = pxweb:::pxweb_levels(language_list[[i]]), parent = "/")
   }
   class(pxe) <- c("pxweb_explorer", "list")
+  pxe <- add_pxweb_explorer_defaults(pxe)
   assert_pxweb_explorer(x = pxe)
   pxe
 }
+
+#' Add default values to pxe
+#' @param pxe a \code{pxweb_explorer} object
+#' @keywords internal
+add_pxweb_explorer_defaults <- function(pxe){
+  checkmate::assert_class(pxe, "pxweb_explorer")
+  pxe$show_history <- FALSE
+  pxe$quit <- FALSE
+  pxe$print_all_choices <- FALSE
+  pxe
+}
+
 
 #' @rdname pxweb_explorer
 #' @keywords internal
 assert_pxweb_explorer <- function(x){
   checkmate::assert_class(x, "pxweb_explorer")
-  checkmate::assert_string(x$root, pattern = "^/")
+  checkmate::assert_character(x$root)
+  checkmate::assert_character(x$position)
+  checkmate::assert_subset(x = x$root, x$position)
+  checkmate::assert_flag(x$show_history)
+  checkmate::assert_flag(x$print_all_choices)
+  checkmate::assert_flag(x$quit)
   for(i in seq_along(x$pxobjs)){
     checkmate::assert_names(names(x$pxobjs[[i]]), must.include = "pxobj")
     is_pxlev <- inherits(x$pxobjs[[i]]$pxobj, "pxweb_levels")
@@ -197,3 +175,101 @@ assert_pxweb_explorer <- function(x){
   }
 }
 
+
+print.pxweb_explorer <- function(x, ...){
+  print_bar()  
+  cat("R PXWEB: Content of '", pxweb_api_name(x), "'\n", sep="") 
+  sp <- pxweb_api_subpath(x)
+  if(nchar(sp) > 0) cat("         at '", sp, "'\n", sep="") 
+  print_bar()  
+  pxweb_explorer_print_choices(x)
+  print_bar()  
+}
+x
+print_bar <- function(){
+  cat(rep("=", round(getOption("width")*0.95)), "\n",sep="")
+}
+
+# stop(" Explan what position is")
+pxweb_explorer_position <- function(pxe){
+  checkmate::assert_class(pxe, "pxweb_explorer")
+  if(is.null(pxe$pxweb)){
+    "apis"
+  } else {
+    paste("/", paste(x$position, collapse = "/"), sep ="")
+  }
+}
+
+pxweb_explorer_print_choices <- function(x){
+  obj <- x$pxobjs[[pxweb_explorer_position(x)]]$pxobj
+  show_no <- 4
+  if(x$print_all_choices | length(obj) <= show_no * 2){
+    print_idx <- 1:length(obj) 
+  } else {
+    print_idx <- c(1:show_no, NA, (length(obj) - show_no + 1):length(obj))
+  }
+
+  print_idx_char <- as.character(print_idx)
+  print_idx_char_nmax <- max(nchar(print_idx_char), na.rm = TRUE)
+  print_idx_char <- str_pad(print_idx_char, print_idx_char_nmax )
+  
+  cat(str_pad(txt = " ", n = print_idx_char_nmax + 6), "DESCRIPTION\n")
+  
+  for(i in seq_along(print_idx)){
+    if(is.na(print_idx[i])) {
+      cat("\n")
+      next
+    }
+    cat(" [", print_idx_char[i], " ] : ", obj[[print_idx[i]]]$text, "\n", sep = "")
+  }
+}
+
+
+#' Pad a string to a fixed size
+#' @param x a character vector to pad
+#' @param n final char width
+#' @param pad pad symbol
+#' @param type pad from 'left' or 'right'.
+#' @keywords internal
+str_pad <- function(txt, n = 5, pad = " ", type = "left"){
+  checkmate::assert_character(txt)
+  checkmate::assert_string(pad)
+  checkmate::assert_true(nchar(pad)==1)
+  checkmate::assert_int(n)
+  checkmate::assert_choice(type, c("left", "right"))
+  
+  nch <- pmax((n - nchar(txt)), rep(0, length(txt)))
+  nch[is.na(nch)] <- 2
+  pads <- unlist(lapply(nch, function(x, pad) {paste(rep(pad, x), collapse="")}, pad))
+  if(type == "left"){
+    return(paste(pads, txt))
+  } else {
+    return(paste(txt, pads))
+  }
+}
+
+
+
+#' Get input from user
+pxweb_interactive_input <- function(pxe){
+  checkmate::assert_class(pxe, "pxweb_explorer")
+  user_input <- pxweb_explorer_get_input(pxe)
+  pxe <- pxweb_explorer_handle_input(user_input, pxe)
+  pxe
+}
+
+pxweb_explorer_get_input <- function(pxe){
+  checkmate::assert_class(pxe, "pxweb_explorer")
+  
+  input_ok <- FALSE
+  allowed_input <- pxweb_explorer_allowed_input(pxe)
+  
+  while(!input_ok){
+    user_input <- scan(what=character(), multi.line = FALSE, quiet=TRUE, nlines=1)
+    input_ok <- input_is_ok(user_input, all_inp)
+  }
+
+  class(user_input) <- c("pxweb_user_input", "list")
+  user_input
+}
+  
