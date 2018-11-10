@@ -84,7 +84,7 @@ assert_pxweb_api_catalogue_entry <- function(x){
 #' @param ... further arguments passed to or from other methods.
 #' @export
 print.pxweb_api_catalogue_entry <- function(x, ...){
-  cat("Api:", httr::parse_url(x$url)$hostname)
+  cat("Api:", pxweb_api_name(x))
   cat("\n    ", x$description, "\n")
   if(length(x$alias) > 0) {
     cat("     ('", paste(x$alias, collapse = "', '"), "')", sep="")

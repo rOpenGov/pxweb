@@ -26,7 +26,7 @@ build_pxweb_rda_file_path.url <- function(x){
   if(!dir.exists(tmp_dir)){
     dir.create(tmp_dir, recursive = TRUE)
   }
-  file.path(tmp_dir, paste0(make.names(x$hostname),".rda"))
+  file.path(tmp_dir, paste0(make.names(pxweb_api_name(x)),".rda"))
 }
 
 #' @rdname build_pxweb_rda_file_path
