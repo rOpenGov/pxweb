@@ -25,9 +25,9 @@ assert_pxweb_explorer(x)
 \item{x}{a \code{pxweb} object, a PXWEB url, \code{NULL} or an api in the api catalogue.
 
 \dontrun{
- d <- pxweb_explorer()
- d <- pxweb_explorer(x = "api.scb.se")
- d <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+ x <- pxweb_explorer()
+ x <- pxweb_explorer(x = "api.scb.se")
+ x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
 }}
 }
 \description{

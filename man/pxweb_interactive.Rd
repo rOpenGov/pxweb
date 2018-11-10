@@ -15,9 +15,9 @@ Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to si
 \examples{
  pxweb_api_catalogue() # List apis
 \dontrun{
- d <- pxweb_interactive()
- d <- pxweb_interactive(x = "api.scb.se")
- d <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+ x <- pxweb_interactive()
+ x <- pxweb_interactive(x = "api.scb.se")
+ x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
 }
 }
 \seealso{
