@@ -7,6 +7,9 @@
 \alias{pxweb_explorer.pxweb}
 \alias{pxweb_explorer.pxweb_api_catalogue_entry}
 \alias{assert_pxweb_explorer}
+\alias{print.pxweb_explorer}
+\alias{print_bar}
+\alias{pxweb_explorer_print_choices}
 \title{Create a \code{pxweb_explorer} object.}
 \usage{
 pxweb_explorer(x = NULL)
@@ -20,17 +23,29 @@ pxweb_explorer(x = NULL)
 \method{pxweb_explorer}{pxweb_api_catalogue_entry}(x)
 
 assert_pxweb_explorer(x)
+
+\method{print}{pxweb_explorer}(x, ...)
+
+print_bar()
+
+pxweb_explorer_print_choices(x)
 }
 \arguments{
-\item{x}{a \code{pxweb} object, a PXWEB url, \code{NULL} or an api in the api catalogue.
+\item{x}{a \code{pxweb} object, a PXWEB url, \code{NULL} or an api in the api catalogue.}
+}
+\description{
+\code{position} the current position in the api, as a character vector from the root.
+Note position is not alway a correct url. Metadata and other choices are part of position
+
+\code{root} is the bottom path (as position) that the user can go. If length 0, user can essentially go to hostname.
+
+paste(root_path + position, collapse = "/")  is used to construct the path to the position
+in case of url.
 
 \dontrun{
  x <- pxweb_explorer()
  x <- pxweb_explorer(x = "api.scb.se")
  x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
-}}
 }
-\description{
-Create a \code{pxweb_explorer} object.
 }
 \keyword{internal}

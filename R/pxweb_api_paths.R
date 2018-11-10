@@ -110,6 +110,7 @@ pxweb_api_subpath.pxweb <- function(x, init_slash = TRUE, as_vector = FALSE){
   } else {
     p <- x$paths$api_subpath$path
   }
+  p <- gsub(pattern = "/$", replacement = "", p)
   assert_path(p)
   p
 }
@@ -138,6 +139,7 @@ pxweb_api_path <- function(x, init_slash = TRUE, as_vector = FALSE){
 #' @keywords internal
 pxweb_api_path.url <- function(x, init_slash = TRUE, as_vector = FALSE){
   p <- x$path
+  p <- gsub(pattern = "/$", replacement = "", p)
   if(as_vector) {
     return(strsplit(p, "/")[[1]])
   } 
@@ -182,6 +184,7 @@ pxweb_api_dbpath.pxweb <- function(x, init_slash = TRUE, as_vector = FALSE){
     return(pv)
   } 
   p <- paste(pv, collapse = "/")
+  p <- gsub(pattern = "/$", replacement = "", p)
   if(init_slash) {
     p <- paste0("/", p)
   } 

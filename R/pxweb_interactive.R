@@ -68,7 +68,7 @@ pxweb_explorer.NULL <- function(x){
     pxalist[[i]] <- list(id=names(apis)[i], type = "l", text = txt[i])
   }
   pxl <- pxweb:::pxweb_levels(pxalist)
-  pxe$pxobjs <- list("api_names" = list(pxobj = pxl))
+  pxe$pxobjs <- list("/" = list(pxobj = pxl))
   class(pxe) <- c("pxweb_explorer", "list")
   pxe <- add_pxweb_explorer_defaults(pxe)
   assert_pxweb_explorer(pxe)
@@ -180,7 +180,7 @@ assert_pxweb_explorer <- function(x){
 #' @rdname pxweb_api_name
 #' @keywords internal
 pxweb_explorer_position_path <- function(x, init_slash = TRUE, as_vector = FALSE, include_rootpath = FALSE){
-  checkmate::assert_class(pxe, "pxweb_explorer")
+  checkmate::assert_class(x, "pxweb_explorer")
   if(is.null(x$pxweb)){
     if(init_slash){
       return("/")
@@ -220,13 +220,16 @@ print.pxweb_explorer <- function(x, ...){
   print_bar()  
 }
 
+#' @rdname pxweb_explorer
+#' @keywords internal
 print_bar <- function(){
   cat(rep("=", round(getOption("width")*0.95)), "\n",sep="")
 }
 
-
+#' @rdname pxweb_explorer
+#' @keywords internal
 pxweb_explorer_print_choices <- function(x){
-  obj <- x$pxobjs[[pxweb_explorer_position(x)]]$pxobj
+  obj <- x$pxobjs[[pxweb_explorer_position_path(x)]]$pxobj
   show_no <- 4
   if(x$print_all_choices | length(obj) <= show_no * 2){
     print_idx <- 1:length(obj) 
