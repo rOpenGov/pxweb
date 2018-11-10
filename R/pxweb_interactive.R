@@ -176,29 +176,54 @@ assert_pxweb_explorer <- function(x){
 }
 
 
+#' @param include_rootpath Should the rootpath be included? Default is FALSE
+#' @rdname pxweb_api_name
+#' @keywords internal
+pxweb_explorer_position_path <- function(x, init_slash = TRUE, as_vector = FALSE, include_rootpath = FALSE){
+  checkmate::assert_class(pxe, "pxweb_explorer")
+  if(is.null(x$pxweb)){
+    if(init_slash){
+      return("/")
+    } else {
+      return("")
+    }
+  } 
+  if(as_vector){
+    if(include_rootpath){
+      return(c(pxweb_api_rootpath(x), x$position))
+    } else {
+      return(x$position)
+    }
+  }
+  p <- paste(x$position, collapse = "/")
+  if(include_rootpath){
+    return(paste(pxweb_api_rootpath(x), p, sep = "/"))
+  } else {
+    if(init_slash){
+      return(paste("/", p, sep = ""))
+    }
+  }
+  return(p)
+}
+
+
+
+#' @rdname pxweb_explorer
+#' @keywords internal
 print.pxweb_explorer <- function(x, ...){
   print_bar()  
   cat("R PXWEB: Content of '", pxweb_api_name(x), "'\n", sep="") 
-  sp <- pxweb_api_subpath(x)
+  sp <- pxweb_explorer_position_path(x, init_slash = TRUE, include_rootpath = FALSE)
   if(nchar(sp) > 0) cat("         at '", sp, "'\n", sep="") 
   print_bar()  
   pxweb_explorer_print_choices(x)
   print_bar()  
 }
-x
+
 print_bar <- function(){
   cat(rep("=", round(getOption("width")*0.95)), "\n",sep="")
 }
 
-# stop(" Explan what position is")
-pxweb_explorer_position <- function(pxe){
-  checkmate::assert_class(pxe, "pxweb_explorer")
-  if(is.null(pxe$pxweb)){
-    "apis"
-  } else {
-    paste("/", paste(x$position, collapse = "/"), sep ="")
-  }
-}
 
 pxweb_explorer_print_choices <- function(x){
   obj <- x$pxobjs[[pxweb_explorer_position(x)]]$pxobj

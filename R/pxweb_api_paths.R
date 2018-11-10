@@ -1,4 +1,4 @@
-#' Get the api name, rootpath, subpath and path
+#' Get the api name, rootpath, subpath, path or dbpath
 #' 
 #' @details 
 #' The PXWEB API contain the following path:
@@ -70,6 +70,7 @@ pxweb_api_rootpath.url <- function(x){
   checkmate::assert_class(x, "url")
   x$path <- ""
   p <- build_pxweb_url(x)
+  p <- gsub(pattern = "/$", replacement = "", p)
   assert_path(p)
   p
 }
