@@ -38,14 +38,23 @@ pxweb_api_name.url <- function(x){
 #' @rdname pxweb_api_name
 #' @keywords internal
 pxweb_api_name.pxweb <- function(x){
-  checkmate::assert_class(x, "pxweb")
   pxweb_api_name(x$url)
 }
 
 #' @rdname pxweb_api_name
 #' @keywords internal
+pxweb_api_name.pxweb_api_catalogue_entry <- function(x){
+  pxweb_api_name(httr::parse_url(x$url))
+}
+
+
+
+#' @rdname pxweb_api_name
+#' @keywords internal
 pxweb_api_name.pxweb_explorer <- function(x){
-  checkmate::assert_class(x, "pxweb_explorer")
+  if(is.null(x$pxweb)){
+    return("")
+  }
   pxweb_api_name(x$pxweb)
 }
 
@@ -107,6 +116,9 @@ pxweb_api_subpath.pxweb <- function(x, init_slash = TRUE, as_vector = FALSE){
 #' @rdname pxweb_api_name
 #' @keywords internal
 pxweb_api_subpath.pxweb_explorer <- function(x, init_slash = TRUE, as_vector = FALSE){
+  if(is.null(x$pxweb)){
+    return("")
+  }
   pxweb_api_subpath(x$pxweb, init_slash, as_vector)
 }
 
