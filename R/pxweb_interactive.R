@@ -318,8 +318,10 @@ pxe_handle_input.numeric <- function(user_input, pxe){
     stop("not done yet")
   } else {
     new_pos <- obj[[user_input]]$id
-    pxe <- pxe_add_position(new_pos, pxe)
+    pxe <- pxe_add_position(pxe, new_pos)
   }
+  assert_pxweb_explorer(pxe)
+  pxe
 }
 
 pxe_handle_input.character <- function(user_input, pxe){
