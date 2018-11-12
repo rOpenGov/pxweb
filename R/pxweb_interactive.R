@@ -23,18 +23,25 @@
 #' }
 pxweb_interactive <- function(x = NULL){
   # Setup structure
-  pxexp <- pxweb_explorer(x)
+  pxe <- pxweb_explorer(x)
   
   # The main program
-  while(!pxexp$quit) { 
+  while(!pxe$quit) { 
     # Generate header
-    if (!pxexp$show_history) { 
+    if (!pxe$show_history) { 
       cat("\014") 
     }
     
-    print(pxexp)
-    pxexp <- pxweb_interactive_input(pxexp)
+    print(pxe)
+    pxe <- pxweb_interactive_input(pxe)
+  }
+  
+  
+  
+  if(pxe$get_data){
     
+  } else {
+    return(invisble(NULL))
   }
 }
 
@@ -158,7 +165,7 @@ add_pxe_defaults <- function(pxe){
   pxe$show_history <- FALSE
   pxe$quit <- FALSE
   pxe$print_all_choices <- FALSE
-  pxe$print_choices <- 4
+  pxe$print_no_of_choices <- 4
   pxe$show_id <- FALSE
   pxe
 }
@@ -176,7 +183,7 @@ assert_pxweb_explorer <- function(x){
   checkmate::assert_flag(x$print_all_choices)
   checkmate::assert_flag(x$quit)
   checkmate::assert_flag(x$show_id)
-  checkmate::assert_int(x$print_choices, lower = 1)
+  checkmate::assert_int(x$print_no_of_choices, lower = 1)
   for(i in seq_along(x$pxobjs)){
     checkmate::assert_names(names(x$pxobjs[[i]]), must.include = "pxobj")
     is_pxlev <- inherits(x$pxobjs[[i]]$pxobj, "pxweb_levels")
@@ -251,7 +258,7 @@ print_bar <- function(){
 #' @keywords internal
 pxe_print_choices <- function(x){
   obj <- pxe_pxobj_at_position(x)
-  show_no <- x$print_choices
+  show_no <- x$print_no_of_choices
   if(x$print_all_choices | length(obj) <= show_no * 2){
     print_idx <- 1:length(obj) 
   } else {
@@ -262,14 +269,18 @@ pxe_print_choices <- function(x){
   print_idx_char_nmax <- max(nchar(print_idx_char), na.rm = TRUE)
   print_idx_char <- str_pad(print_idx_char, print_idx_char_nmax )
   
-  cat(str_pad(txt = " ", n = print_idx_char_nmax + 6), "CHOICES\n")
+#  cat(str_pad(txt = " ", n = print_idx_char_nmax + 6), "CHOICES\n")
   
   for(i in seq_along(print_idx)){
     if(is.na(print_idx[i])) {
       cat("\n")
       next
     }
-    cat(" [", print_idx_char[i], " ] : ", obj[[print_idx[i]]]$text, " (", obj[[print_idx[i]]]$id ,")", "\n", sep = "")
+    if(x$show_id){
+      cat(" [", print_idx_char[i], " ] : ", obj[[print_idx[i]]]$text, " (", obj[[print_idx[i]]]$id ,")", "\n", sep = "")    
+    } else {
+      cat(" [", print_idx_char[i], " ] : ", obj[[print_idx[i]]]$text, " \n", sep = "")
+    }
   }
 }
 
@@ -315,6 +326,7 @@ pxe_handle_input <- function(user_input, pxe){
 pxe_handle_input.numeric <- function(user_input, pxe){
   obj <- pxe_pxobj_at_position(pxe)
   if(pxe_position_is_variable(pxe)){
+    pxe$print_all_choices <- FALSE
     stop("not done yet")
   } else {
     new_pos <- obj[[user_input]]$id
@@ -338,7 +350,7 @@ pxe_handle_input.character <- function(user_input, pxe){
   }
   
   if(user_input == "a"){
-    pxe$show_id <- !pxe$print_all_choices
+    pxe$print_all_choices <- !pxe$print_all_choices
     user_input_ok <- TRUE    
   }
   
@@ -362,6 +374,7 @@ pxe_back_position <- function(pxe){
     pxe_pxobj_at_position(pxe) <- 
       pxweb_get(pxe_position_path(pxe, include_rootpath = TRUE))
   }
+  pxe$print_all_choices <- FALSE
   assert_pxweb_explorer(pxe)
   pxe
 }
@@ -376,6 +389,7 @@ pxe_add_position <- function(pxe, new_pos){
     pxe_pxobj_at_position(pxe) <- 
       pxweb_get(pxe_position_path(pxe, include_rootpath = TRUE))
   }
+  pxe$print_all_choices <- FALSE
   assert_pxweb_explorer(pxe)
   pxe
 }
@@ -412,6 +426,9 @@ pxe_parse_input <- function(user_input, allowed_input){
   if(grepl(x = ui, pattern = "^[:,0-9 ]*$")){
     ui <- eval(parse(text=paste("c(", ui, ")")))
     ui <- ui[!duplicated(ui)]
+    if(!all(ui %in% 1:allowed_input$max_choice)){
+      return(list(ok = FALSE))
+    }
     if(allowed_input$multiple_choice | length(ui) == 1){
       return(list(ok = TRUE, input = ui))
     }
@@ -439,7 +456,7 @@ pxe_allowed_input <- function(pxe){
     }
   }
   
-  if(!pxe$print_all_choices & pxe_position_choice_size(pxe) > pxe$print_choices*2){
+  if(!pxe$print_all_choices & pxe_position_choice_size(pxe) > pxe$print_no_of_choices*2){
     input_df$allowed[input_df$code == "a"] <- TRUE
   }
   
