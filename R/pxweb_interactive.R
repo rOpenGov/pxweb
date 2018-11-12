@@ -1,7 +1,8 @@
-rm(list = ls())
-source("R/pxweb_api_catalogue.R")
-source("R/pxweb_build_pxweb_urls.R")
-source("R/pxweb_api_paths.R")
+#' DEBUG
+#' rm(list = ls())
+#' source("R/pxweb_api_catalogue.R")
+#' source("R/pxweb_build_pxweb_urls.R")
+#' source("R/pxweb_api_paths.R")
 
 #' @title Find and download data interactively from PX-WEB API
 #'
@@ -308,16 +309,16 @@ pxweb_interactive_input <- function(pxe){
 
 pxe_handle_input <- function(user_input, pxe){
   checkmate::assert_class(pxe, "pxweb_explorer")
-  UseMethod("pxweb_explorer_handle_input")
+  UseMethod("pxe_handle_input")
 }
 
 pxe_handle_input.numeric <- function(user_input, pxe){
   obj <- pxe_pxobj_at_position(pxe)
   if(pxe_position_is_variable(pxe)){
+    stop("not done yet")
+  } else {
     new_pos <- obj[[user_input]]$id
     pxe <- pxe_add_position(new_pos, pxe)
-  } else {
-    stop("not done yet")
   }
 }
 
