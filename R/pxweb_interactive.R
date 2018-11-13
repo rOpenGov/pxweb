@@ -20,6 +20,8 @@
 #'  x <- pxweb_interactive()
 #'  x <- pxweb_interactive(x = "api.scb.se")
 #'  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+#'  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+#'  
 #' }
 pxweb_interactive <- function(x = NULL){
   # Setup structure
@@ -61,7 +63,8 @@ pxweb_interactive <- function(x = NULL){
 #' \dontrun{
 #'  x <- pxweb_explorer()
 #'  x <- pxweb_explorer(x = "api.scb.se")
-#'  x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+#'  x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+#'  x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
 #' }
 #' @keywords internal
 pxweb_explorer <- function(x = NULL){
@@ -112,11 +115,11 @@ pxweb_explorer.pxweb <- function(x){
   pxe$root <- pxweb_api_subpath(pxe$pxweb, as_vector = TRUE)
   pxe$position <- pxweb_api_path(pxe$pxweb, as_vector = TRUE)
   pxe$variable_choice <- list()
-  pxe$pxobjs <- list(list(pxobj = pxweb_get(x)))
-  names(pxe$pxobjs) <- pxweb_api_path(pxe$pxweb)
   class(pxe) <- c("pxweb_explorer", "list")
   pxe <- add_pxe_defaults(pxe)
   assert_pxweb_explorer(x = pxe)
+  pxe_pxobj_at_position(pxe) <-
+    pxweb_get(pxe_position_path(pxe, include_rootpath = TRUE))
   pxe
 }
 
@@ -162,6 +165,8 @@ pxweb_explorer.pxweb_api_catalogue_entry <- function(x){
 #' @keywords internal
 add_pxe_defaults <- function(pxe){
   checkmate::assert_class(pxe, "pxweb_explorer")
+  pxe$metadata <- list(position = character(0),
+                       choices = list())
   pxe$show_history <- FALSE
   pxe$quit <- FALSE
   pxe$print_all_choices <- FALSE
@@ -178,6 +183,9 @@ assert_pxweb_explorer <- function(x){
   checkmate::assert_character(x$root)
   checkmate::assert_character(x$position)
   checkmate::assert_subset(x = x$root, x$position)
+  checkmate::assert_list(x$metadata)
+  checkmate::assert_character(x$metadata$position)
+  checkmate::assert_list(x$metadata$choices)
   checkmate::assert_list(x$variable_choice)
   checkmate::assert_flag(x$show_history)
   checkmate::assert_flag(x$print_all_choices)
@@ -202,6 +210,10 @@ assert_pxweb_explorer <- function(x){
 #' @keywords internal
 pxe_position_path <- function(x, init_slash = TRUE, as_vector = FALSE, include_rootpath = FALSE){
   checkmate::assert_class(x, "pxweb_explorer")
+  checkmate::assert_flag(init_slash)
+  checkmate::assert_flag(as_vector)
+  checkmate::assert_flag(include_rootpath)
+  
   if(is.null(x$pxweb)){
     if(init_slash){
       return("/")
@@ -228,6 +240,18 @@ pxe_position_path <- function(x, init_slash = TRUE, as_vector = FALSE, include_r
 }
 
 
+#' @rdname pxweb_api_name
+#' @keywords internal
+pxe_metadata_path <- function(x, as_vector = FALSE){
+  checkmate::assert_class(x, "pxweb_explorer")
+  checkmate::assert_flag(as_vector)
+  if(as_vector){
+    x$metadata$position
+  } else {
+    paste(x$metadata$position, collapse = "")
+  }
+}
+
 
 #' @rdname pxweb_explorer
 #' @keywords internal
@@ -236,6 +260,8 @@ print.pxweb_explorer <- function(x, ...){
   cat("R PXWEB: Content of '", pxweb_api_name(x), "'\n", sep="") 
   sp <- pxe_position_path(x, init_slash = TRUE, include_rootpath = FALSE)
   if(nchar(sp) > 1) cat("         at '", sp, "'\n", sep="") 
+  mp <- pxe_metadata_path(x)
+  if(nchar(mp) > 1) cat("         for '", mp, "'\n", sep="") 
   titl <- pxe_position_title(x)
   if(nchar(titl) > 1) cat("   INFO: ", titl, "\n", sep="") 
   print_bar()  
@@ -259,10 +285,19 @@ print_bar <- function(){
 pxe_print_choices <- function(x){
   obj <- pxe_pxobj_at_position(x)
   show_no <- x$print_no_of_choices
-  if(x$print_all_choices | length(obj) <= show_no * 2){
-    print_idx <- 1:length(obj) 
+  
+  if(pxe_position_is_metadata(x)){
+    mddims <- pxweb_metadata_dim(pxe_pxobj_at_position(x))
+    md_pos <- pxe_metadata_path(x, as_vector = TRUE)
+    no_choices <- unname(mddims[md_pos[length(md_pos)]])
   } else {
-    print_idx <- c(1:show_no, NA, (length(obj) - show_no + 1):length(obj))
+    no_choices <- length(obj)
+  }
+  
+  if(x$print_all_choices | no_choices <= show_no * 2){
+    print_idx <- 1:no_choices
+  } else {
+    print_idx <- c(1:show_no, NA, (no_choices - show_no + 1):no_choices)
   }
 
   print_idx_char <- as.character(print_idx)
@@ -276,10 +311,18 @@ pxe_print_choices <- function(x){
       cat("\n")
       next
     }
-    if(x$show_id){
-      cat(" [", print_idx_char[i], " ] : ", obj[[print_idx[i]]]$text, " (", obj[[print_idx[i]]]$id ,")", "\n", sep = "")    
+    if(pxe_position_is_metadata(x)){
+      if(x$show_id){
+        cat(" [", print_idx_char[i], " ] : ", obj$variables[[length(md_pos)]]$valueTexts[print_idx[i]], " (", obj$variables[[length(md_pos)]]$values[print_idx[i]] ,")", "\n", sep = "")    
+      } else {
+        cat(" [", print_idx_char[i], " ] : ", obj$variables[[length(md_pos)]]$valueTexts[print_idx[i]], "\n", sep = "")    
+      }
     } else {
-      cat(" [", print_idx_char[i], " ] : ", obj[[print_idx[i]]]$text, " \n", sep = "")
+      if(x$show_id){
+        cat(" [", print_idx_char[i], " ] : ", obj[[print_idx[i]]]$text, " (", obj[[print_idx[i]]]$id ,")", "\n", sep = "")    
+      } else {
+        cat(" [", print_idx_char[i], " ] : ", obj[[print_idx[i]]]$text, " \n", sep = "")
+      }
     }
   }
 }
@@ -427,12 +470,14 @@ pxe_parse_input <- function(user_input, allowed_input){
     ui <- eval(parse(text=paste("c(", ui, ")")))
     ui <- ui[!duplicated(ui)]
     if(!all(ui %in% 1:allowed_input$max_choice)){
+      cat("Incorrect choice.\n")
       return(list(ok = FALSE))
     }
     if(allowed_input$multiple_choice | length(ui) == 1){
       return(list(ok = TRUE, input = ui))
     }
   }
+  cat("Incorrect choice.\n")
   return(list(ok = FALSE))
 }
 
@@ -503,15 +548,24 @@ pxe_pxobj_at_position <- function(x){
 
 `pxe_pxobj_at_position<-` <- function(x, value){
   checkmate::assert_class(x, "pxweb_explorer")
-  checkmate::assert_true(inherits(value, "pxweb_levels") | inherits(value, "pxweb_levels"))
+  checkmate::assert_true(inherits(value, "pxweb_levels") | inherits(value, "pxweb_metadata"))
   x$pxobjs[[pxe_position_path(x)]]$pxobj <- value
+  if(inherits(value, "pxweb_metadata")){
+    x$metadata$position[1] <- value$variables[[1]]$code
+  }
   assert_pxweb_explorer(x)
   x
 }
 
 
+pxe_position_is_metadata <- function(x) {
+  inherits(pxe_pxobj_at_position(x), "pxweb_metadata")
+}
+
+
+# Remove this
 pxe_position_is_variable <- function(x) {
-  FALSE
+  pxe_position_is_metadata(x)
 }
 
 pxe_position_choice_size <- function(x) {
@@ -523,7 +577,7 @@ pxe_position_variable_can_be_eliminated <- function(x) {
 }
 
 pxe_position_multiple_choice_allowed <- function(x){
-  FALSE
+  pxe_position_is_variable(x)
 }
 
 #' Taken from \code{trimws} for reasons of compatibility with previous R versios.
