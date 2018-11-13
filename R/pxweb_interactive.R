@@ -3,6 +3,7 @@
 #' source("R/pxweb_api_catalogue.R")
 #' source("R/pxweb_build_pxweb_urls.R")
 #' source("R/pxweb_api_paths.R")
+#' source("R/pxweb_metadata.R")
 
 #' @title Find and download data interactively from PX-WEB API
 #'
@@ -368,9 +369,12 @@ pxe_handle_input <- function(user_input, pxe){
 
 pxe_handle_input.numeric <- function(user_input, pxe){
   obj <- pxe_pxobj_at_position(pxe)
-  if(pxe_position_is_variable(pxe)){
+  if(pxe_position_is_metadata(pxe)){
     pxe$print_all_choices <- FALSE
-    stop("not done yet")
+    mddims <- pxweb_metadata_dim(pxe_pxobj_at_position(pxe))
+    md_pos <- pxe_metadata_path(pxe, as_vector = TRUE)
+    pxe$metadata$choices[[length(md_pos)]] <- user_input
+    pxe$metadata$position <- names(mddims)[1:(length(md_pos)+1)]
   } else {
     new_pos <- obj[[user_input]]$id
     pxe <- pxe_add_position(pxe, new_pos)
@@ -411,6 +415,12 @@ pxe_handle_input.character <- function(user_input, pxe){
 #'
 pxe_back_position <- function(pxe){
   checkmate::assert_class(pxe, "pxweb_explorer")
+  if(pxe_position_is_metadata(pxe) & length(pxe$metadata$position) > 1){
+    pxe$metadata$position <- pxe$metadata$position[-length(pxe$metadata$position)]
+    pxe$print_all_choices <- FALSE
+    assert_pxweb_explorer(pxe)
+    return(pxe)
+  }
   pxe$position <- pxe$position[-length(pxe$position)]
   obj <- pxe_pxobj_at_position(pxe)
   if(is.null(obj)){
