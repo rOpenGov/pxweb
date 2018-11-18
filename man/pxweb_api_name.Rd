@@ -20,7 +20,8 @@
 \alias{pxweb_api_dbpath}
 \alias{pxweb_api_dbpath.pxweb}
 \alias{assert_path}
-\alias{pxweb_explorer_position_path}
+\alias{pxe_position_path}
+\alias{pxe_metadata_path}
 \title{Get the api name, rootpath, subpath, path or dbpath}
 \usage{
 pxweb_api_name(x)
@@ -68,8 +69,10 @@ pxweb_api_dbpath(x, init_slash = TRUE, as_vector = FALSE)
 
 assert_path(x)
 
-pxweb_explorer_position_path(x, init_slash = TRUE, as_vector = FALSE,
+pxe_position_path(x, init_slash = TRUE, as_vector = FALSE,
   include_rootpath = FALSE)
+
+pxe_metadata_path(x, as_vector = FALSE)
 }
 \arguments{
 \item{x}{object to get the name or path for}

@@ -9,7 +9,7 @@
 \alias{assert_pxweb_explorer}
 \alias{print.pxweb_explorer}
 \alias{print_bar}
-\alias{pxweb_explorer_print_choices}
+\alias{pxe_print_choices}
 \title{Create a \code{pxweb_explorer} object.}
 \usage{
 pxweb_explorer(x = NULL)
@@ -28,7 +28,7 @@ assert_pxweb_explorer(x)
 
 print_bar()
 
-pxweb_explorer_print_choices(x)
+pxe_print_choices(x)
 }
 \arguments{
 \item{x}{a \code{pxweb} object, a PXWEB url, \code{NULL} or an api in the api catalogue.}
@@ -45,7 +45,8 @@ in case of url.
 \dontrun{
  x <- pxweb_explorer()
  x <- pxweb_explorer(x = "api.scb.se")
- x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+ x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+ x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
 }
 }
 \keyword{internal}
