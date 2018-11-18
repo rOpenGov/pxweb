@@ -258,7 +258,13 @@ pxe_metadata_path <- function(x, as_vector = FALSE){
 #' @keywords internal
 print.pxweb_explorer <- function(x, ...){
   print_bar()  
-  cat(" R PXWEB: Content of '", pxweb_api_name(x), "'\n", sep="") 
+  pxnm <- pxweb_api_name(x)
+  if(pxnm == ""){
+    cat(" R PXWEB API CATALOGUE:\n") 
+  } else {
+    cat(" R PXWEB: Content of '", pxweb_api_name(x), "'\n", sep="") 
+  }
+
   sp <- pxe_position_path(x, init_slash = TRUE, include_rootpath = FALSE)
   if(nchar(sp) > 1) cat("          at '", sp, "'\n", sep="") 
   titl <- pxe_position_title(x)
