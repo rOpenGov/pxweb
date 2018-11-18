@@ -19,8 +19,7 @@ test_that(desc="Basic usage",{
   
   # Incorrect input
   expect_error(capture_output(pxe_error <- pxweb_interactive_input(pxe, test_input = "9999")), "incorrect")
-  
-  # expect_error(capture_output(pxe_error <- pxweb_interactive_input(pxe, test_input = "")), "incorrect")
+  expect_error(capture_output(pxe_error <- pxweb_interactive_input(pxe, test_input = character(0))), "incorrect")
   
 })  
 

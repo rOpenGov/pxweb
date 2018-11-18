@@ -518,8 +518,13 @@ pxe_input <- function(pxe, test_input = NULL){
 #' @rdname pxe_input
 #' @keywords internal
 pxe_parse_input <- function(user_input, allowed_input){
-  checkmate::assert_string(user_input)
+  checkmate::assert_character(user_input)
   checkmate::assert_class(allowed_input, "pxweb_input_allowed")
+  
+  if(length(user_input) == 0){
+    cat("Incorrect choice.\n")
+    return(list(ok = FALSE))
+  }
   
   ui <- str_trim(user_input)
   if(ui %in% allowed_input$keys$code[allowed_input$keys$allowed]){
