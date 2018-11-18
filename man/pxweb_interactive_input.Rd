@@ -12,3 +12,4 @@ pxweb_interactive_input(pxe)
 \description{
 Get input from user
 }
+\keyword{internal}

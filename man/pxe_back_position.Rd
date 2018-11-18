@@ -17,4 +17,8 @@ pxe_add_position(pxe, new_pos)
 \description{
 Move in the \code{pxweb_explorer} position
 }
+\details{
+\code{pxe_back_position} moves back one position and 
+\code{pxe_add_position} moves forward, based on user choice.
+}
 \keyword{internal}

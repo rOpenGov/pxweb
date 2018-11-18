@@ -2,14 +2,20 @@
 % Please edit documentation in R/pxweb_interactive.R
 \name{pxe_input}
 \alias{pxe_input}
+\alias{pxe_parse_input}
 \title{Get (allowed) inputs for a \code{pxweb_explorer} object.}
 \usage{
 pxe_input(pxe)
+
+pxe_parse_input(user_input, allowed_input)
 }
 \arguments{
 \item{pxe}{a \code{pxweb_explorer_object}}
 }
 \description{
 Get (allowed) inputs for a \code{pxweb_explorer} object.
+}
+\details{
+It handles input and checks if the input is allowed.
 }
 \keyword{internal}
