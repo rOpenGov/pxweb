@@ -45,5 +45,12 @@ test_that(desc="API catalogue usage",{
 })  
 
 
-# Test "e" and "*"
+test_that(desc="Select all and eliminate",{
+  expect_silent(pxe <- pxweb:::pxweb_explorer.character("http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
+  expect_output(pxweb:::print.pxweb_explorer(pxe), "/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
+  expect_output(pxe_star <- pxweb:::pxweb_interactive_input(pxe, test_input = "*"), "Separate multiple choices by")  
+  
+  expect_output(pxe_star_e <- pxweb:::pxweb_interactive_input(pxe_star, test_input = "e"), "Separate multiple choices by")  
 
+
+})  
