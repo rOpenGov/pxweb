@@ -59,6 +59,7 @@ pxweb_interactive <- function(x = NULL){
 #' paste(root_path + position, collapse = "/")  is used to construct the path to the position
 #' in case of url.
 #' 
+#' @examples 
 #' \dontrun{
 #'  x <- pxweb_explorer()
 #'  x <- pxweb_explorer(x = "api.scb.se")
@@ -642,15 +643,19 @@ pxe_position_choice_size <- function(x) {
 #' @param x a \code{pxweb_explorer} object to check.
 #' @keywords internal
 pxe_position_variable_can_be_eliminated <- function(x) {
-  warning("FIX THIS")
-  FALSE
+  res <- FALSE
+  if(pxe_position_is_metadata(x)){
+    md <- pxe_pxobj_at_position(x)
+    mdpos <- length(pxe_metadata_path(x, as_vector = TRUE))
+    res <- md$variables[[mdpos]]$elimination
+  }
+  res
 }
 
 #' Are multiple choices allowed?
 #' @param x a \code{pxweb_explorer} object to check.
 #' @keywords internal
 pxe_position_multiple_choice_allowed <- function(x){
-  warning("FIX THIS")
   pxe_position_is_metadata(x)
 }
 
