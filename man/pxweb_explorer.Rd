@@ -42,6 +42,9 @@ Note position is not alway a correct url. Metadata and other choices are part of
 paste(root_path + position, collapse = "/")  is used to construct the path to the position
 in case of url.
 
+print out a bar for separation purposes
+}
+\examples{
 \dontrun{
  x <- pxweb_explorer()
  x <- pxweb_explorer(x = "api.scb.se")
