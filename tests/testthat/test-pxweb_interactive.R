@@ -37,17 +37,13 @@ test_that(desc="API catalogue usage",{
   
   
   # Check APIS  
-#  expect_silent(pxe_null <- pxweb_explorer())
-#  expect_output(print(pxe_null), "R PXWEB API CATALOGUE")
-  
-#  expect_output(pxe_1 <- pxweb_interactive_input(pxe = pxe_null, test_input = "1"))  
-#  expect_output(print(pxe_1), "api.scb.se")
-#  expect_output(print(pxe_1), "sv")
-#  expect_output(print(pxe_1), "en")
-  
-  
-  
+  expect_silent(pxe_null <- pxweb:::pxweb_explorer.NULL())
+  expect_output(pxweb:::print.pxweb_explorer(pxe_null), "R PXWEB API CATALOGUE")
+  expect_output(pxe_1 <- pxweb:::pxweb_interactive_input(pxe = pxe_null, test_input = "1"))  
+  expect_output(pxweb:::print.pxweb_explorer(pxe_1), "api.scb.se")
+  expect_output(pxweb:::print.pxweb_explorer(pxe_1), "v1")
 })  
 
 
+# Test "e" and "*"
 

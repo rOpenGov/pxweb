@@ -406,7 +406,8 @@ pxe_handle_input.numeric <- function(user_input, pxe){
     } else {
       pxe$quit <- TRUE
     }
-
+  } else if(pxe_position_is_api_catalogue(pxe)) {
+    pxe <- pxweb_explorer(obj[[user_input]]$id)
   } else {
     new_pos <- obj[[user_input]]$id
     pxe <- pxe_add_position(pxe, new_pos)
@@ -647,6 +648,13 @@ pxe_pxobj_at_position <- function(x){
 #' @keywords internal
 pxe_position_is_metadata <- function(x) {
   inherits(pxe_pxobj_at_position(x), "pxweb_metadata")
+}
+
+#' Is the current position an api_catalogue position?
+#' @param x a \code{pxweb_explorer} object to check.
+#' @keywords internal
+pxe_position_is_api_catalogue <- function(x) {
+  is.null(x$pxweb)
 }
 
 #' How many choices has the current position?
