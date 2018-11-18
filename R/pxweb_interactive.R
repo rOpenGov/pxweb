@@ -4,6 +4,7 @@
 #' source("R/pxweb_build_pxweb_urls.R")
 #' source("R/pxweb_api_paths.R")
 #' source("R/pxweb_metadata.R")
+#' source("R/pxweb_levels.R")
 
 #' @title Find and download data interactively from PX-WEB API
 #'
@@ -82,7 +83,7 @@ pxweb_explorer.NULL <- function(x){
   for(i in seq_along(names(apis))){
     pxalist[[i]] <- list(id=names(apis)[i], type = "l", text = txt[i])
   }
-  pxl <- pxweb:::pxweb_levels(pxalist)
+  pxl <- pxweb_levels(pxalist)
   pxe$pxobjs <- list("/" = list(pxobj = pxl))
   class(pxe) <- c("pxweb_explorer", "list")
   pxe <- add_pxe_defaults(pxe)
@@ -139,7 +140,7 @@ pxweb_explorer.pxweb_api_catalogue_entry <- function(x){
                               type = "l", 
                               text = x$version[i])
   }
-  pxe$pxobjs <- list("/" = list(pxobj = pxweb:::pxweb_levels(version_list)))
+  pxe$pxobjs <- list("/" = list(pxobj = pxweb_levels(version_list)))
 
   language_list <- list()
   for(i in seq_along(x$version)){
@@ -150,7 +151,7 @@ pxweb_explorer.pxweb_api_catalogue_entry <- function(x){
                                       type = "l", 
                                       text = x$lang[j])
     }
-    pxe$pxobjs[[version_list[[i]]$id]] <- list(pxobj = pxweb:::pxweb_levels(language_list[[i]]), parent = "/")
+    pxe$pxobjs[[version_list[[i]]$id]] <- list(pxobj = pxweb_levels(language_list[[i]]), parent = "/")
   }
   class(pxe) <- c("pxweb_explorer", "list")
   pxe <- add_pxe_defaults(pxe)
@@ -362,6 +363,7 @@ str_pad <- function(txt, n = 5, pad = " ", type = "left"){
 
 
 #' Get input from user
+#' @param pxe a \code{pxweb_explorer} object to get user input for.
 pxweb_interactive_input <- function(pxe){
   checkmate::assert_class(pxe, "pxweb_explorer")
   user_input <- pxe_input(pxe)
