@@ -366,10 +366,11 @@ str_pad <- function(txt, n = 5, pad = " ", type = "left"){
 
 #' Get input from user
 #' @param pxe a \code{pxweb_explorer} object to get user input for.
+#' @param test_input supplying a test input (for testing only).
 #' @keywords internal
-pxweb_interactive_input <- function(pxe){
+pxweb_interactive_input <- function(pxe, test_input = NULL){
   checkmate::assert_class(pxe, "pxweb_explorer")
-  user_input <- pxe_input(pxe)
+  user_input <- pxe_input(pxe, test_input = test_input)
   pxe <- pxe_handle_input(user_input, pxe)
   pxe
 }
@@ -484,18 +485,30 @@ pxe_add_position <- function(pxe, new_pos){
 #' It handles input and checks if the input is allowed.
 #' 
 #' @param pxe a \code{pxweb_explorer_object}
+#' @param test_input supplying a test input (for testing only)
 #' @keywords internal
-pxe_input <- function(pxe){
+pxe_input <- function(pxe, test_input = NULL){
   checkmate::assert_class(pxe, "pxweb_explorer")
   
   input_ok <- FALSE
   allowed_input <- pxe_allowed_input(pxe)
+  incorrect_choice_no <- 0
   
   while(!input_ok){
     print(allowed_input)
-    user_input <- scan(what=character(), multi.line = FALSE, quiet=TRUE, nlines=1, sep = "\n")
+    if(is.null(test_input)){
+      user_input <- scan(what=character(), multi.line = FALSE, quiet=TRUE, nlines=1, sep = "\n")
+    } else {
+      user_input <- test_input
+    }
     user_input <- pxe_parse_input(user_input, allowed_input)
     input_ok <- user_input$ok
+    
+    # Handle too many incorrect choices
+    incorrect_choice_no <- incorrect_choice_no + 1
+    if(incorrect_choice_no > 10) {
+      stop("Too many incorrect choices!", call. = FALSE)
+    }
   }
   class(user_input) <- c("pxweb_user_input", "list")
   user_input$input
