@@ -70,7 +70,7 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
       api_tree_df$checked[i] <- TRUE
     }
     
-    tmp_df <- try(pxweb:::pxweb_get_api_test_data_frame(px), silent = TRUE)
+    tmp_df <- try(pxweb_get_api_test_data_frame(px), silent = TRUE)
     if(inherits(tmp_df, "try-error")) {
       api_tree_df$error[i] <- TRUE
       api_tree_df$checked[i] <- TRUE
@@ -112,7 +112,7 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
       next
     }
     
-    api_tree_df$obs[i] <- prod(pxweb:::pxweb_metadata_dim(px_obj))
+    api_tree_df$obs[i] <- prod(pxweb_metadata_dim(px_obj))
     
     pxq <- list()
     for(j in seq_along(px_obj$variables)){
