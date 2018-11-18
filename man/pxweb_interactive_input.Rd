@@ -4,10 +4,12 @@
 \alias{pxweb_interactive_input}
 \title{Get input from user}
 \usage{
-pxweb_interactive_input(pxe)
+pxweb_interactive_input(pxe, test_input = NULL)
 }
 \arguments{
 \item{pxe}{a \code{pxweb_explorer} object to get user input for.}
+
+\item{test_input}{supplying a test input (for testing only).}
 }
 \description{
 Get input from user

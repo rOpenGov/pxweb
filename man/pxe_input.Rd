@@ -5,12 +5,14 @@
 \alias{pxe_parse_input}
 \title{Get (allowed) inputs for a \code{pxweb_explorer} object.}
 \usage{
-pxe_input(pxe)
+pxe_input(pxe, test_input = NULL)
 
 pxe_parse_input(user_input, allowed_input)
 }
 \arguments{
 \item{pxe}{a \code{pxweb_explorer_object}}
+
+\item{test_input}{supplying a test input (for testing only)}
 }
 \description{
 Get (allowed) inputs for a \code{pxweb_explorer} object.
