@@ -6,6 +6,9 @@
 \usage{
 pxweb_interactive_input(pxe)
 }
+\arguments{
+\item{pxe}{a \code{pxweb_explorer} object to get user input for.}
+}
 \description{
 Get input from user
 }

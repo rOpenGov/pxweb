@@ -17,7 +17,7 @@
 #' \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_data}}
 #' @export
 #' @examples
-#'  pxweb_api_catalogue() # List apis
+#' pxweb_api_catalogue() # List apis
 #' \dontrun{
 #'  x <- pxweb_interactive()
 #'  x <- pxweb_interactive(x = "api.scb.se")
