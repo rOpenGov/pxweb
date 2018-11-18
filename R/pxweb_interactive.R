@@ -152,7 +152,8 @@ pxweb_explorer.pxweb_api_catalogue_entry <- function(x){
                                       type = "l", 
                                       text = x$lang[j])
     }
-    pxe$pxobjs[[version_list[[i]]$id]] <- list(pxobj = pxweb_levels(language_list[[i]]), parent = "/")
+    pxobj_nm <- paste0("/", version_list[[i]]$id)
+    pxe$pxobjs[[pxobj_nm]] <- list(pxobj = pxweb_levels(language_list[[i]]), parent = "/")
   }
   class(pxe) <- c("pxweb_explorer", "list")
   pxe <- add_pxe_defaults(pxe)
