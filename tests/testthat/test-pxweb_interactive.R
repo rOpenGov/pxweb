@@ -30,7 +30,11 @@ test_that(desc="API catalogue usage",{
   expect_output(pxweb:::print.pxweb_explorer(pxe_scb), "v1")
   expect_output(pxe_scb_1 <- pxweb:::pxweb_interactive_input(pxe = pxe_scb, test_input = "1")) 
   expect_output(pxweb:::print.pxweb_explorer(pxe_scb_1), "en")
-#  expect_output(pxe_scb_1_1 <- pxweb_interactive_input(pxe = pxe_scb, test_input = "1")) 
+  expect_output(pxe_scb_1_1 <- pxweb:::pxweb_interactive_input(pxe = pxe_scb_1, test_input = "1")) 
+  expect_output(pxweb:::print.pxweb_explorer(pxe_scb_1_1), "Statistics Sweden")
+  expect_output(pxe_scb_1_1_b <- pxweb:::pxweb_interactive_input(pxe = pxe_scb_1_1, test_input = "b")) 
+  expect_output(pxweb:::print.pxweb_explorer(pxe_scb_1_1_b), "en")
+  
   
   # Check APIS  
 #  expect_silent(pxe_null <- pxweb_explorer())
