@@ -397,15 +397,7 @@ pxe_handle_input <- function(user_input, pxe){
 pxe_handle_input.numeric <- function(user_input, pxe){
   obj <- pxe_pxobj_at_position(pxe)
   if(pxe_position_is_metadata(pxe)){
-    pxe$print_all_choices <- FALSE
-    mddims <- pxweb_metadata_dim(pxe_pxobj_at_position(pxe))
-    md_pos <- pxe_metadata_path(pxe, as_vector = TRUE)
-    pxe$metadata$choices[[length(md_pos)]] <- user_input
-    if(length(mddims) > length(md_pos)){
-      pxe$metadata$position <- names(mddims)[1:(length(md_pos)+1)]
-    } else {
-      pxe$quit <- TRUE
-    }
+    pxe_metadata_choices(pxe) <- user_input
   } else if(pxe_position_is_api_catalogue(pxe)) {
     pxe <- pxweb_explorer(obj[[user_input]]$id)
   } else {
@@ -436,10 +428,48 @@ pxe_handle_input.character <- function(user_input, pxe){
     user_input_ok <- TRUE    
   }
   
-  if(!user_input_ok) stop("Not implemented part!")
+  if(user_input == "*"){
+    user_input <- 1:pxe_position_choice_size(pxe)
+    return(pxe_handle_input(user_input, pxe))
+  }
+  
+  if(user_input == "e"){
+    pxe_metadata_choices(pxe) <- "eliminate"
+    user_input_ok <- TRUE    
+  }
+
+  if(!user_input_ok) stop("Not implemented choice!")
   
   assert_pxweb_explorer(pxe)
   pxe
+}
+
+
+#' Get and set pxe_metadata_coices
+#' @param x a \code{pxweb_explorer} object
+#' @param value an object to set as pxe_metadata_choice
+#' @keywords internal
+pxe_metadata_choices <- function(x){
+  checkmate::assert_class(x, "pxweb_explorer")
+  x$metadata$choices
+}
+
+
+#' @rdname pxe_metadata_choices
+#' @keywords internal
+`pxe_metadata_choices<-` <- function(x, value){
+  checkmate::assert_class(x, "pxweb_explorer")
+  checkmate::assert_true(pxe_position_is_metadata(x))
+  x$print_all_choices <- FALSE
+  mddims <- pxweb_metadata_dim(pxe_pxobj_at_position(x))
+  md_pos <- pxe_metadata_path(x, as_vector = TRUE)
+  x$metadata$choices[[length(md_pos)]] <- value
+  if(length(mddims) > length(md_pos)){
+    x$metadata$position <- names(mddims)[1:(length(md_pos)+1)]
+  } else {
+    x$quit <- TRUE
+  }
+  return(x)
 }
 
 
