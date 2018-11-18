@@ -22,32 +22,29 @@
 #'  x <- pxweb_interactive(x = "api.scb.se")
 #'  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
 #'  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
-#'  
 #' }
 pxweb_interactive <- function(x = NULL){
   # Setup structure
   pxe <- pxweb_explorer(x)
   
-  # The main program
+  if (!pxe$show_history) { 
+    cat("\014") 
+  }
+  
+  # The main program - build up a query
   while(!pxe$quit) { 
-    # Generate header
+    # Generate header    
+    print(pxe)
+    pxe <- pxweb_interactive_input(pxe)
+    
+
     if (!pxe$show_history) { 
       cat("\014") 
     }
-    
-    print(pxe)
-    pxe <- pxweb_interactive_input(pxe)
   }
   
-  
-  
-  if(pxe$get_data){
-    
-  } else {
-    return(invisble(NULL))
-  }
+  return(pxe)
 }
-
 
 #' Create a \code{pxweb_explorer} object.
 #' @param x a \code{pxweb} object, a PXWEB url, \code{NULL} or an api in the api catalogue.
@@ -166,13 +163,13 @@ pxweb_explorer.pxweb_api_catalogue_entry <- function(x){
 #' @keywords internal
 add_pxe_defaults <- function(pxe){
   checkmate::assert_class(pxe, "pxweb_explorer")
-  pxe$metadata <- list(position = character(0),
-                       choices = list())
   pxe$show_history <- FALSE
   pxe$quit <- FALSE
   pxe$print_all_choices <- FALSE
   pxe$print_no_of_choices <- 4
   pxe$show_id <- FALSE
+  pxe$metadata <- list(position = character(0),
+                       choices = list())
   pxe
 }
 
@@ -258,13 +255,18 @@ pxe_metadata_path <- function(x, as_vector = FALSE){
 #' @keywords internal
 print.pxweb_explorer <- function(x, ...){
   print_bar()  
-  cat("R PXWEB: Content of '", pxweb_api_name(x), "'\n", sep="") 
+  cat(" R PXWEB: Content of '", pxweb_api_name(x), "'\n", sep="") 
   sp <- pxe_position_path(x, init_slash = TRUE, include_rootpath = FALSE)
-  if(nchar(sp) > 1) cat("         at '", sp, "'\n", sep="") 
-  mp <- pxe_metadata_path(x)
-  if(nchar(mp) > 1) cat("         for '", mp, "'\n", sep="") 
+  if(nchar(sp) > 1) cat("          at '", sp, "'\n", sep="") 
   titl <- pxe_position_title(x)
-  if(nchar(titl) > 1) cat("   INFO: ", titl, "\n", sep="") 
+  if(pxe_position_is_metadata(x)) {
+    if(nchar(titl) > 1) cat("   TABLE: ", titl, "\n", sep="") 
+    meta_pos <- length(pxe_metadata_path(x, as_vector = TRUE))
+    mp <- pxe_metadata_variables(x)
+    mp[meta_pos] <- paste("[[", mp[meta_pos], "]]", sep = "")
+    mp <- paste(mp, collapse =", ")
+    cat("VARIABLE: ", mp, "\n", sep="") 
+  }
   print_bar()  
   pxe_print_choices(x)
   print_bar()  
@@ -272,7 +274,12 @@ print.pxweb_explorer <- function(x, ...){
 
 
 pxe_position_title <- function(x){
-  ""
+  if(pxe_position_is_metadata(x)){
+    obj <- pxe_pxobj_at_position(x)
+    return(obj$title)
+  } else {
+    return("")    
+  }
 }
 
 #' @rdname pxweb_explorer
@@ -374,7 +381,12 @@ pxe_handle_input.numeric <- function(user_input, pxe){
     mddims <- pxweb_metadata_dim(pxe_pxobj_at_position(pxe))
     md_pos <- pxe_metadata_path(pxe, as_vector = TRUE)
     pxe$metadata$choices[[length(md_pos)]] <- user_input
-    pxe$metadata$position <- names(mddims)[1:(length(md_pos)+1)]
+    if(length(mddims) > length(md_pos)){
+      pxe$metadata$position <- names(mddims)[1:(length(md_pos)+1)]
+    } else {
+      pxe$quit <- TRUE
+    }
+
   } else {
     new_pos <- obj[[user_input]]$id
     pxe <- pxe_add_position(pxe, new_pos)
@@ -604,4 +616,11 @@ str_trim <- function (x, which = c("both", "left", "right"))
   if (which == "right") 
     return(mysub("[ \t\r\n]+$", x))
   mysub("[ \t\r\n]+$", mysub("^[ \t\r\n]+", x))
+}
+
+
+pxe_metadata_variables <- function(pxe){
+  checkmate::assert_true(pxe_position_is_metadata(pxe))
+  md <- pxe_pxobj_at_position(pxe)
+  names(pxweb_metadata_dim(md))
 }
