@@ -263,7 +263,7 @@ print.pxweb_explorer <- function(x, ...){
   if(pxe_position_is_metadata(x)) {
     if(nchar(titl) > 1) cat("   TABLE: ", titl, "\n", sep="") 
     meta_pos <- length(pxe_metadata_path(x, as_vector = TRUE))
-    mp <- pxe_metadata_variables(x)
+    mp <- pxe_metadata_variable_names(x)
     mp[meta_pos] <- paste("[[", mp[meta_pos], "]]", sep = "")
     mp <- paste(mp, collapse =", ")
     cat("VARIABLE: ", mp, "\n", sep="") 
@@ -273,8 +273,11 @@ print.pxweb_explorer <- function(x, ...){
   print_bar()  
 }
 
-
+#' Get the table title for the current position
+#' @param x a \code{pxweb_explorer} object.
+#' @keywords internal
 pxe_position_title <- function(x){
+  checkmate::assert_class(x, "pxweb_explorer")
   if(pxe_position_is_metadata(x)){
     obj <- pxe_pxobj_at_position(x)
     return(obj$title)
@@ -284,6 +287,7 @@ pxe_position_title <- function(x){
 }
 
 #' @rdname pxweb_explorer
+#' @description print out a bar for separation purposes
 #' @keywords internal
 print_bar <- function(){
   cat(rep("=", round(getOption("width")*0.95)), "\n",sep="")
@@ -312,8 +316,6 @@ pxe_print_choices <- function(x){
   print_idx_char <- as.character(print_idx)
   print_idx_char_nmax <- max(nchar(print_idx_char), na.rm = TRUE)
   print_idx_char <- str_pad(print_idx_char, print_idx_char_nmax )
-  
-#  cat(str_pad(txt = " ", n = print_idx_char_nmax + 6), "CHOICES\n")
   
   for(i in seq_along(print_idx)){
     if(is.na(print_idx[i])) {
@@ -361,9 +363,9 @@ str_pad <- function(txt, n = 5, pad = " ", type = "left"){
 }
 
 
-
 #' Get input from user
 #' @param pxe a \code{pxweb_explorer} object to get user input for.
+#' @keywords internal
 pxweb_interactive_input <- function(pxe){
   checkmate::assert_class(pxe, "pxweb_explorer")
   user_input <- pxe_input(pxe)
@@ -371,11 +373,18 @@ pxweb_interactive_input <- function(pxe){
   pxe
 }
 
+#' Handle a user input for a \code{pxweb_explorer} object.
+#' @param pxe a \code{pxweb_explorer} object to get user input for.
+#' @param user_input an (allowed) user input to handle.
+#' @seealso pxe_allowed_input()
+#' @keywords internal
 pxe_handle_input <- function(user_input, pxe){
   checkmate::assert_class(pxe, "pxweb_explorer")
   UseMethod("pxe_handle_input")
 }
 
+#' @rdname pxe_handle_input
+#' @keywords internal
 pxe_handle_input.numeric <- function(user_input, pxe){
   obj <- pxe_pxobj_at_position(pxe)
   if(pxe_position_is_metadata(pxe)){
@@ -397,6 +406,8 @@ pxe_handle_input.numeric <- function(user_input, pxe){
   pxe
 }
 
+#' @rdname pxe_handle_input
+#' @keywords internal
 pxe_handle_input.character <- function(user_input, pxe){
   
   user_input_ok <- FALSE
@@ -424,9 +435,12 @@ pxe_handle_input.character <- function(user_input, pxe){
 
 #' Move in the \code{pxweb_explorer} position
 #' 
+#' @details \code{pxe_back_position} moves back one position and 
+#' \code{pxe_add_position} moves forward, based on user choice.
+#' 
 #' @param pxe a \code{pxweb_explorer} object.
 #' @param new_pos add a new position.
-#'
+#' @keywords internal
 pxe_back_position <- function(pxe){
   checkmate::assert_class(pxe, "pxweb_explorer")
   if(pxe_position_is_metadata(pxe) & length(pxe$metadata$position) > 1){
@@ -445,6 +459,7 @@ pxe_back_position <- function(pxe){
   assert_pxweb_explorer(pxe)
   pxe
 }
+
 #' @rdname pxe_back_position
 #' @keywords internal
 pxe_add_position <- function(pxe, new_pos){
@@ -464,6 +479,9 @@ pxe_add_position <- function(pxe, new_pos){
 
 #' Get (allowed) inputs for a \code{pxweb_explorer} object.
 #' 
+#' @details 
+#' It handles input and checks if the input is allowed.
+#' 
 #' @param pxe a \code{pxweb_explorer_object}
 #' @keywords internal
 pxe_input <- function(pxe){
@@ -482,6 +500,9 @@ pxe_input <- function(pxe){
   user_input$input
 }
   
+
+#' @rdname pxe_input
+#' @keywords internal
 pxe_parse_input <- function(user_input, allowed_input){
   checkmate::assert_string(user_input)
   checkmate::assert_class(allowed_input, "pxweb_input_allowed")
@@ -506,6 +527,10 @@ pxe_parse_input <- function(user_input, allowed_input){
 }
 
 
+#' Defines allowed input for a position in a \code{pxweb_explorer} object.
+#' 
+#' @param pxe a \code{pxweb_explorer} object to get allowed input for.
+#' @keywords internal
 pxe_allowed_input <- function(pxe){
   input_df <- data.frame(code=c("esc", "b", "*", "a", "e", "i", "i"),
                          text=c("Quit", "Back", "Select all", "Show all", "Eliminate", "Show id", "Hide id"),
@@ -518,7 +543,7 @@ pxe_allowed_input <- function(pxe){
     input_df$allowed[input_df$code == "b"] <- TRUE
   }
   
-  if(pxe_position_is_variable(pxe)){
+  if(pxe_position_is_metadata(pxe)){
     input_df$allowed[input_df$code == "*"] <- TRUE
     if(pxe_position_variable_can_be_eliminated(pxe)){
       input_df$allowed[input_df$code == "e"] <- TRUE
@@ -543,6 +568,9 @@ pxe_allowed_input <- function(pxe){
   res
 }
 
+#' Assert a \code{pxweb_input_allowed} object
+#' @param x an object to assert.
+#' @keywords internal
 assert_pxweb_input_allowed <- function(x){
   checkmate::assert_class(x, "pxweb_input_allowed")
   checkmate::assert_names(names(x), permutation.of = c("keys", "multiple_choice", "max_choice"))
@@ -554,6 +582,8 @@ assert_pxweb_input_allowed <- function(x){
   checkmate::assert_logical(x$key$allowed)
 }
 
+#' @rdname assert_pxweb_input_allowed
+#' @keywords internal
 print.pxweb_input_allowed <- function(x, ...){
   if(!x$multiple_choice){
     cat("Enter the number you want to choose:\n")
@@ -565,11 +595,16 @@ print.pxweb_input_allowed <- function(x, ...){
   cat(txt, "\n")
 }
 
+#' Return the pxweb object at the current position
+#' @param x a \code{pxweb_explorer} object.
+#' @keywords internal
 pxe_pxobj_at_position <- function(x){
   checkmate::assert_class(x, "pxweb_explorer")
   x$pxobjs[[pxe_position_path(x)]]$pxobj
 }
 
+#' @rdname pxe_pxobj_at_position
+#' @keywords internal
 `pxe_pxobj_at_position<-` <- function(x, value){
   checkmate::assert_class(x, "pxweb_explorer")
   checkmate::assert_true(inherits(value, "pxweb_levels") | inherits(value, "pxweb_metadata"))
@@ -581,27 +616,42 @@ pxe_pxobj_at_position <- function(x){
   x
 }
 
-
+#' Is the current position a metadata object?
+#' @param x a \code{pxweb_explorer} object to check.
+#' @keywords internal
 pxe_position_is_metadata <- function(x) {
   inherits(pxe_pxobj_at_position(x), "pxweb_metadata")
 }
 
-
-# Remove this
-pxe_position_is_variable <- function(x) {
-  pxe_position_is_metadata(x)
-}
-
+#' How many choices has the current position?
+#' @param x a \code{pxweb_explorer} object to check.
+#' @keywords internal
 pxe_position_choice_size <- function(x) {
-  length(pxe_pxobj_at_position(x))
+  if(pxe_position_is_metadata(x)){
+    md <- pxe_pxobj_at_position(x)
+    md <- pxweb_metadata_dim(md)
+    mdpos <- length(pxe_metadata_path(x, as_vector = TRUE))
+    cs <- unname(md[mdpos])
+  } else {
+    cs <-length(pxe_pxobj_at_position(x))
+  }
+  cs
 }
 
+#' Can the variable at the current position be eliminated?
+#' @param x a \code{pxweb_explorer} object to check.
+#' @keywords internal
 pxe_position_variable_can_be_eliminated <- function(x) {
+  warning("FIX THIS")
   FALSE
 }
 
+#' Are multiple choices allowed?
+#' @param x a \code{pxweb_explorer} object to check.
+#' @keywords internal
 pxe_position_multiple_choice_allowed <- function(x){
-  pxe_position_is_variable(x)
+  warning("FIX THIS")
+  pxe_position_is_metadata(x)
 }
 
 #' Taken from \code{trimws} for reasons of compatibility with previous R versios.
@@ -620,9 +670,11 @@ str_trim <- function (x, which = c("both", "left", "right"))
   mysub("[ \t\r\n]+$", mysub("^[ \t\r\n]+", x))
 }
 
-
-pxe_metadata_variables <- function(pxe){
-  checkmate::assert_true(pxe_position_is_metadata(pxe))
-  md <- pxe_pxobj_at_position(pxe)
+#' Get the meta data variable names from a \code{pxweb_explorer} object.
+#' @param x a \code{pxweb_explorer} object
+#' @keywords internal
+pxe_metadata_variable_names <- function(x){
+  checkmate::assert_true(pxe_position_is_metadata(x))
+  md <- pxe_pxobj_at_position(x)
   names(pxweb_metadata_dim(md))
 }
