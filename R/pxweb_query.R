@@ -60,6 +60,24 @@ pxweb_query.list <- function(x){
   obj
 }
 
+#' @rdname pxweb_query
+#' @keywords internal
+#' @export
+pxweb_query.pxweb_explorer <- function(x){
+  checkmate::assert_true(pxe_position_is_full_query(x))
+  md_ch <- pxe_metadata_choices(x)
+  mdo <- pxe_pxobj_at_position(x)
+  mdo_vnm <- pxweb_metadata_dim(mdo)
+  
+  obj <- list()
+  for(i in seq_along(mdo$variables)){
+    var_nm <- mdo$variables[[i]]$code
+    obj[[var_nm]] <- mdo$variables[[i]]$values[md_ch[[var_nm]]]
+  }
+  pxq <- pxweb_query(obj)
+  pxweb_validate_query_with_metadata(pxq, mdo)
+  pxq
+}
 
 #' Assert a pxweb_query object
 #' 
@@ -222,4 +240,19 @@ pxweb_query_filter <- function(pxq){
   res <- unlist(lapply(pxq$query,function(x) x$selection$filter)) 
   names(res) <- unlist(lapply(pxq$query,function(x) x$code))   
   res
+}
+
+
+#' Convert a \code{pxweb_query} object to a json object
+#' @param pxq a \code{pxweb_query} object.
+#' @param ... further argument to \code{jsonlite::toJSON()}.
+#' @export
+pxweb_query_as_json <- function(pxq, ...){
+  checkmate::assert_class(pxq, "pxweb_query")
+  pxq$response$format <- jsonlite::unbox(pxq$response$format)
+  for(i in seq_along(pxq$query)){
+    pxq$query[[i]]$code <- jsonlite::unbox(pxq$query[[i]]$code)
+    pxq$query[[i]]$selection$filter <- jsonlite::unbox(pxq$query[[i]]$selection$filter)
+  }
+  jsonlite::toJSON(pxq, ...)
 }
