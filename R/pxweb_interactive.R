@@ -1,11 +1,3 @@
-#' DEBUG
-#' rm(list = ls())
-#' source("R/pxweb_api_catalogue.R")
-#' source("R/pxweb_build_pxweb_urls.R")
-#' source("R/pxweb_api_paths.R")
-#' source("R/pxweb_metadata.R")
-#' source("R/pxweb_levels.R")
-
 #' @title Find and download data interactively from PX-WEB API
 #'
 #' @description Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session. 
@@ -39,12 +31,19 @@ pxweb_interactive <- function(x = NULL){
     pxe <- pxweb_interactive_input(pxe)
     
 
-    if (!pxe$show_history) { 
+    if (!pxe$show_history & !pxe$quit) { 
       cat("\014") 
     }
   }
   
-  return(pxe)
+  dat <- NULL
+# TODO: Fix this
+#  dat <- pxe_get_data(pxe)
+#  pxe_print_download_code(pxe)
+  results <- list(url = pxe_data_url(pxe),
+                  query = pxweb_query(pxe),
+                  data = dat)
+  return(invisible(results))
 }
 
 #' Create a \code{pxweb_explorer} object.
@@ -763,4 +762,13 @@ pxe_metadata_variable_names <- function(x){
   checkmate::assert_true(pxe_position_is_metadata(x))
   md <- pxe_pxobj_at_position(x)
   names(pxweb_metadata_dim(md))
+}
+
+
+#' Get the url to a table
+#' @param x a \code{pxweb_explorer} object
+#' @keywords internal
+pxe_data_url <- function(x){
+  checkmate::assert_true(pxe_position_is_metadata(x))
+  pxe_position_path(x, include_rootpath = TRUE, as_vector = FALSE)
 }

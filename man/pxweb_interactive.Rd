@@ -13,11 +13,12 @@ pxweb_interactive(x = NULL)
 Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session.
 }
 \examples{
- pxweb_api_catalogue() # List apis
+pxweb_api_catalogue() # List apis
 \dontrun{
  x <- pxweb_interactive()
  x <- pxweb_interactive(x = "api.scb.se")
  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+ x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
 }
 }
 \seealso{
