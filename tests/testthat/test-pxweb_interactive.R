@@ -42,6 +42,13 @@ test_that(desc="API catalogue usage",{
   expect_output(pxe_1 <- pxweb:::pxweb_interactive_input(pxe = pxe_null, test_input = "1"))  
   expect_output(pxweb:::print.pxweb_explorer(pxe_1), "api.scb.se")
   expect_output(pxweb:::print.pxweb_explorer(pxe_1), "v1")
+  
+  expect_silent(pxe_null <- pxweb:::pxweb_explorer.NULL())
+  expect_output(pxweb:::print.pxweb_explorer(pxe_null), "R PXWEB API CATALOGUE")
+  expect_output(pxe_1 <- pxweb:::pxweb_interactive_input(pxe = pxe_null, test_input = "16"))  
+  expect_output(pxweb:::print.pxweb_explorer(pxe_1), "px.rsv.is")
+  expect_output(pxweb:::print.pxweb_explorer(pxe_1), "v1")
+  
 })  
 
 
