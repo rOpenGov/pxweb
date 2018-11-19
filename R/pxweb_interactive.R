@@ -684,6 +684,20 @@ pxe_position_is_metadata <- function(x) {
   inherits(pxe_pxobj_at_position(x), "pxweb_metadata")
 }
 
+#' Is the current position a full query (i.e. choices for all metadata variables)?
+#' @param x a \code{pxweb_explorer} object to check.
+#' @keywords internal
+pxe_position_is_full_query <- function(x){
+  if(!pxe_position_is_metadata(x)) {
+    return(FALSE)
+  }
+  md_ch <- length(pxe_metadata_choices(x))
+  md_pos <- length(pxe_metadata_path(x, as_vector = TRUE))
+  md_vnm <- length(pxe_metadata_variable_names(x))
+  
+  md_vnm == md_ch && md_pos == md_ch
+}
+
 #' Is the current position an api_catalogue position?
 #' @param x a \code{pxweb_explorer} object to check.
 #' @keywords internal
