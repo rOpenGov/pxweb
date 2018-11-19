@@ -451,7 +451,11 @@ pxe_handle_input.character <- function(user_input, pxe){
 #' @keywords internal
 pxe_metadata_choices <- function(x){
   checkmate::assert_class(x, "pxweb_explorer")
-  x$metadata$choices
+  mdc <- x$metadata$choices
+  mdcnm <- pxe_metadata_path(x, as_vector = TRUE)
+  mdc <- mdc[1:length(mdcnm)]
+  names(mdc) <- mdcnm
+  mdc
 }
 
 
