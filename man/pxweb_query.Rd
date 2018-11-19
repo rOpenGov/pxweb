@@ -5,6 +5,7 @@
 \alias{pxweb_query.character}
 \alias{pxweb_query.pxweb_query}
 \alias{pxweb_query.list}
+\alias{pxweb_query.pxweb_explorer}
 \title{PXWEB query constructor}
 \usage{
 pxweb_query(x)
@@ -14,6 +15,8 @@ pxweb_query(x)
 \method{pxweb_query}{pxweb_query}(x)
 
 \method{pxweb_query}{list}(x)
+
+\method{pxweb_query}{pxweb_explorer}(x)
 }
 \arguments{
 \item{x}{an object to cast as a pxweb_query object.}
