@@ -99,7 +99,7 @@ pxweb_explorer.character <- function(x){
   api_alias_tbl <- pxweb_api_catalogue_alias_table()
   px <- try(pxweb(x), silent = TRUE)
   if(inherits(px, "try-error")){
-    pos_idx <- which(x %in% api_alias_tbl$alias)
+    pos_idx <- which(api_alias_tbl$alias %in% x)
     if(length(pos_idx) == 0){
       stop("'", x, "' is not a PXWEB API. See pxweb_api_catalogue() for available PXWEB APIs.", call. = FALSE)
     }
