@@ -2,14 +2,20 @@
 % Please edit documentation in R/pxweb_interactive.R
 \name{pxe_allowed_input}
 \alias{pxe_allowed_input}
-\title{Defines allowed input for a position in a \code{pxweb_explorer} object.}
+\alias{pxe_allowed_input_df}
+\alias{pxe_allowed_input.pxweb_explorer}
+\title{Defines allowed input for a position in a \code{pxweb_explorer} or character object.}
 \usage{
-pxe_allowed_input(pxe)
+pxe_allowed_input(x)
+
+pxe_allowed_input_df()
+
+\method{pxe_allowed_input}{pxweb_explorer}(x)
 }
 \arguments{
-\item{pxe}{a \code{pxweb_explorer} object to get allowed input for.}
+\item{x}{a object to get allowed input for.}
 }
 \description{
-Defines allowed input for a position in a \code{pxweb_explorer} object.
+Defines allowed input for a position in a \code{pxweb_explorer} or character object.
 }
 \keyword{internal}

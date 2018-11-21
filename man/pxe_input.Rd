@@ -3,19 +3,21 @@
 \name{pxe_input}
 \alias{pxe_input}
 \alias{pxe_parse_input}
-\title{Get (allowed) inputs for a \code{pxweb_explorer} object.}
+\title{Get (allowed) inputs for a \code{pxweb_input_allowed} object.}
 \usage{
-pxe_input(pxe, test_input = NULL)
+pxe_input(allowed_input, title = NULL, test_input = NULL)
 
 pxe_parse_input(user_input, allowed_input)
 }
 \arguments{
-\item{pxe}{a \code{pxweb_explorer_object}}
+\item{allowed_input}{a \code{pxweb_input_allowed}.}
+
+\item{title}{Print (using cat()) before ask for the allowed choices.}
 
 \item{test_input}{supplying a test input (for testing only)}
 }
 \description{
-Get (allowed) inputs for a \code{pxweb_explorer} object.
+Get (allowed) inputs for a \code{pxweb_input_allowed} object.
 }
 \details{
 It handles input and checks if the input is allowed.
