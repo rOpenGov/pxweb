@@ -376,7 +376,8 @@ str_pad <- function(txt, n = 5, pad = " ", type = "left"){
 #' @keywords internal
 pxweb_interactive_input <- function(pxe, test_input = NULL){
   checkmate::assert_class(pxe, "pxweb_explorer")
-  user_input <- pxe_input(pxe, test_input = test_input)
+  allowed_input <- pxe_allowed_input(pxe)
+  user_input <- pxe_input(allowed_input, test_input = test_input)
   pxe <- pxe_handle_input(user_input, pxe)
   pxe
 }
@@ -528,11 +529,10 @@ pxe_add_position <- function(pxe, new_pos){
 #' @param pxe a \code{pxweb_explorer_object}
 #' @param test_input supplying a test input (for testing only)
 #' @keywords internal
-pxe_input <- function(pxe, test_input = NULL){
-  checkmate::assert_class(pxe, "pxweb_explorer")
+pxe_input <- function(allowed_input, test_input = NULL){
+  checkmate::assert_class(allowed_input, "pxweb_input_allowed")
   
   input_ok <- FALSE
-  allowed_input <- pxe_allowed_input(pxe)
   incorrect_choice_no <- 0
   
   while(!input_ok){
@@ -587,42 +587,56 @@ pxe_parse_input <- function(user_input, allowed_input){
 }
 
 
-#' Defines allowed input for a position in a \code{pxweb_explorer} object.
+#' Defines allowed input for a position in a \code{pxweb_explorer} or character object.
 #' 
-#' @param pxe a \code{pxweb_explorer} object to get allowed input for.
+#' @param x a object to get allowed input for.
 #' @keywords internal
-pxe_allowed_input <- function(pxe){
+pxe_allowed_input <- function(x){
+  UseMethod("pxe_allowed_input")
+}
+
+#' @rdname pxe_allowed_input
+#' @keywords internal
+pxe_allowed_input_df <- function(){
   input_df <- data.frame(code=c("esc", "b", "*", "a", "e", "i", "i"),
                          text=c("Quit", "Back", "Select all", "Show all", "Eliminate", "Show id", "Hide id"),
                          stringsAsFactors = FALSE)
   input_df$allowed <- FALSE
+  input_df
+}
 
+#' @rdname pxe_allowed_input
+#' @keywords internal
+pxe_allowed_input.pxweb_explorer <- function(x){
+
+  input_df <- pxe_allowed_input_df()
+  
   input_df$allowed[input_df$code == "esc"] <- TRUE
     
-  if(length(pxe$position) > length(pxe$root)){
+  if(length(x$position) > length(x$root)){
     input_df$allowed[input_df$code == "b"] <- TRUE
   }
   
-  if(pxe_position_is_metadata(pxe)){
+  if(pxe_position_is_metadata(x)){
     input_df$allowed[input_df$code == "*"] <- TRUE
-    if(pxe_position_variable_can_be_eliminated(pxe)){
+    if(pxe_position_variable_can_be_eliminated(x)){
       input_df$allowed[input_df$code == "e"] <- TRUE
     }
   }
   
-  if(!pxe$print_all_choices & pxe_position_choice_size(pxe) > pxe$print_no_of_choices*2){
+  if(!x$print_all_choices & pxe_position_choice_size(x) > x$print_no_of_choices*2){
     input_df$allowed[input_df$code == "a"] <- TRUE
   }
   
-  if(pxe$show_id){
+  if(x$show_id){
     input_df$allowed[input_df$text == "Hide id"] <- TRUE
   } else {
     input_df$allowed[input_df$text == "Show id"] <- TRUE
   }
   
   res <- list(keys = input_df,
-              multiple_choice = pxe_position_multiple_choice_allowed(pxe),
-              max_choice = pxe_position_choice_size(pxe))
+              multiple_choice = pxe_position_multiple_choice_allowed(x),
+              max_choice = pxe_position_choice_size(x))
   class(res) <- c("pxweb_input_allowed", "list")
   assert_pxweb_input_allowed(res)
   res
