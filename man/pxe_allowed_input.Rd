@@ -4,11 +4,16 @@
 \alias{pxe_allowed_input}
 \alias{pxe_allowed_input_df}
 \alias{pxe_allowed_input.pxweb_explorer}
+\alias{pxe_allowed_input.character}
 \title{Defines allowed input for a position in a \code{pxweb_explorer} or character object.}
 \usage{
 pxe_allowed_input(x)
 
 pxe_allowed_input_df()
+
+\method{pxe_allowed_input}{pxweb_explorer}(x)
+
+\method{pxe_allowed_input}{character}(x)
 
 \method{pxe_allowed_input}{pxweb_explorer}(x)
 }
