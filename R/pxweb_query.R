@@ -256,3 +256,28 @@ pxweb_query_as_json <- function(pxq, ...){
   }
   jsonlite::toJSON(pxq, ...)
 }
+
+#' Convert a \code{pxweb_query} object to R code
+#' @details One element per row is returned.
+#' @param pxq a \code{pxweb_query} object.
+#' @keywords internal
+pxweb_query_as_rcode <- function(pxq){
+  checkmate::assert_class(pxq, "pxweb_query")
+  
+  res <- character(length(pxq$query))
+  for(i in seq_along(pxq$query)){
+    res[i] <- paste0("\"", pxq$query[[i]]$code, "\"=c(", paste(paste0("\"", pxq$query[[i]]$selection$values, "\""), collapse = ","), ")")
+    if(i == 1){
+      res[i] <- paste0("  list(", res[i])
+    } else {
+      res[i] <- paste0("       ", res[i])
+    }
+  }
+  res[length(res)] <- paste0(res[length(res)], ")")
+  if(length(res) > 1){
+    res[-length(res)] <- paste0(res[-length(res)], ",")
+  }
+  res <- c("pxweb_query_list <- ", res)
+
+  res
+}

@@ -36,13 +36,26 @@ pxweb_interactive <- function(x = NULL){
     }
   }
   
-  dat <- NULL
-# TODO: Fix this
-#  dat <- pxe_get_data(pxe)
-#  pxe_print_download_code(pxe)
+  print_code <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
+                          "Do you print code to download data?\n") == "y"
+  if(print_code){
+    print_json <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
+                            "Do you want to print query as json (otherwise query is printed as a list)?\n") == "y"
+  }
+
   results <- list(url = pxe_data_url(pxe),
-                  query = pxweb_query(pxe),
-                  data = dat)
+                  query = pxweb_query(pxe))
+  dat <- pxe_interactive_get_data(pxe)
+  if(!is.null(dat)){
+    results$data <- dat
+  }
+  if(print_code){
+    if(print_json) {
+      pxe_print_download_code(pxe, "json")
+    } else {
+      pxe_print_download_code(pxe, "r")
+    }
+  }
   return(invisible(results))
 }
 
@@ -538,7 +551,9 @@ pxe_input <- function(allowed_input, title = NULL, test_input = NULL){
   incorrect_choice_no <- 0
   
   while(!input_ok){
-    
+    if(!is.null(title)){
+      cat(title)
+    }
     print(allowed_input)
     if(is.null(test_input)){
       user_input <- scan(what=character(), multi.line = FALSE, quiet=TRUE, nlines=1, sep = "\n")
@@ -601,10 +616,11 @@ pxe_allowed_input <- function(x){
 #' @rdname pxe_allowed_input
 #' @keywords internal
 pxe_allowed_input_df <- function(){
-  input_df <- data.frame(code=c("esc", "b", "*", "a", "e", "i", "i"),
-                         text=c("Quit", "Back", "Select all", "Show all", "Eliminate", "Show id", "Hide id"),
+  input_df <- data.frame(code=c("esc", "b", "*", "a", "e", "i", "i", "y", "n"),
+                         text=c("Quit", "Back", "Select all", "Show all", "Eliminate", "Show id", "Hide id", "Yes", "No"),
                          stringsAsFactors = FALSE)
   input_df$allowed <- FALSE
+  input_df$allowed[1] <- TRUE
   input_df
 }
 
@@ -645,6 +661,62 @@ pxe_allowed_input.pxweb_explorer <- function(x){
   res
 }
 
+
+#' @rdname pxe_allowed_input
+#' @keywords internal
+pxe_allowed_input.character <- function(x){
+  input_df <- pxe_allowed_input_df()
+  checkmate::assert_character(x)
+  checkmate::assert_subset(x, input_df$code)
+  
+  input_df$allowed[input_df$code %in% x] <- TRUE
+  
+  res <- list(keys = input_df,
+              multiple_choice = FALSE,
+              max_choice = 0)
+  class(res) <- c("pxweb_input_allowed", "list")
+  assert_pxweb_input_allowed(res)
+  res
+}
+
+#' @rdname pxe_allowed_input
+#' @keywords internal
+pxe_allowed_input.pxweb_explorer <- function(x){
+  
+  input_df <- pxe_allowed_input_df()
+  
+  input_df$allowed[input_df$code == "esc"] <- TRUE
+  
+  if(length(x$position) > length(x$root)){
+    input_df$allowed[input_df$code == "b"] <- TRUE
+  }
+  
+  if(pxe_position_is_metadata(x)){
+    input_df$allowed[input_df$code == "*"] <- TRUE
+    if(pxe_position_variable_can_be_eliminated(x)){
+      input_df$allowed[input_df$code == "e"] <- TRUE
+    }
+  }
+  
+  if(!x$print_all_choices & pxe_position_choice_size(x) > x$print_no_of_choices*2){
+    input_df$allowed[input_df$code == "a"] <- TRUE
+  }
+  
+  if(x$show_id){
+    input_df$allowed[input_df$text == "Hide id"] <- TRUE
+  } else {
+    input_df$allowed[input_df$text == "Show id"] <- TRUE
+  }
+  
+  res <- list(keys = input_df,
+              multiple_choice = pxe_position_multiple_choice_allowed(x),
+              max_choice = pxe_position_choice_size(x))
+  class(res) <- c("pxweb_input_allowed", "list")
+  assert_pxweb_input_allowed(res)
+  res
+}
+
+
 #' Assert a \code{pxweb_input_allowed} object
 #' @param x an object to assert.
 #' @keywords internal
@@ -652,7 +724,7 @@ assert_pxweb_input_allowed <- function(x){
   checkmate::assert_class(x, "pxweb_input_allowed")
   checkmate::assert_names(names(x), permutation.of = c("keys", "multiple_choice", "max_choice"))
   checkmate::assert_flag(x$multiple_choice)
-  checkmate::assert_int(x$max_choice, lower = 1)
+  checkmate::assert_int(x$max_choice, lower = 0)
   checkmate::assert_class(x$key, "data.frame")
   checkmate::assert_character(x$key$text)
   checkmate::assert_character(x$key$code)
@@ -663,9 +735,9 @@ assert_pxweb_input_allowed <- function(x){
 #' @keywords internal
 print.pxweb_input_allowed <- function(x, ...){
   if(!x$multiple_choice){
-    cat("Enter the number you want to choose:\n")
+    cat("Enter your choice:\n")
   } else {
-    cat("Enter one or more number(s) to choose:\n")
+    cat("Enter one or more choices:\n")
     cat("Separate multiple choices by ',' and intervals of choices by ':'\n")
   }
   txt <- paste("(", paste(paste(paste("'", x$keys$code[x$keys$allowed], "'", sep = ""), "=", x$keys$text[x$keys$allowed]), collapse = ", "), ")", sep= "")
@@ -788,4 +860,60 @@ pxe_metadata_variable_names <- function(x){
 pxe_data_url <- function(x){
   checkmate::assert_true(pxe_position_is_metadata(x))
   pxe_position_path(x, include_rootpath = TRUE, as_vector = FALSE)
+}
+
+
+
+#' Ask to download and download data
+#' 
+#' @param pxe a \code{pxweb_explorer} object with full query
+#' @param test_input a test input for testing the function. 
+#' Since two question, supply a vector of length two.
+#' @keywords internal
+pxe_interactive_get_data <- function(pxe, test_input = NULL){
+  checkmate::assert_true(pxe_position_is_full_query(pxe))
+  download <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
+                        "Do you want to download the data?\n",
+                        test_input = test_input[1]) == "y"
+  if(!download){
+    return(NULL)
+  }
+  return_df <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
+                        "Do you want to return a the data as a data.frame?\n",
+                        test_input = test_input[2]) == "y"
+  
+  dat <- pxweb_get(url = pxe_data_url(pxe), query = pxweb_query(pxe))
+  if(return_df){
+    dat <- as.data.frame(dat)
+  }
+  dat
+}
+
+#' Print code to download query
+#' @param pxe a \code{pxweb_query} object.
+#' @param as \code{json} or \code{r}.
+#' @keywords internal
+pxe_print_download_code <- function(pxe, as){
+  checkmate::assert_class(pxe, "pxweb_explorer")
+  checkmate::assert_choice(as, choices = c("json", "r"))
+  q <- pxweb_query(pxe)
+  if(as == "json"){
+    q_path <- "\"[path to jsonfile]\""
+    cat("######## STORE AS JSON FILE ########\n")
+    print(pxweb_query_as_json(q, pretty = TRUE))
+    cat("######## STORE AS JSON FILE ########\n\n")
+  }
+  if(as == "r"){
+    cat("# PXWEB query \n")
+    q_path <- "pxweb_query_list"
+    cat(pxweb_query_as_rcode(q), sep ="\n")
+    cat("\n")
+  }
+  cat("# Download data \n",
+      "px_data <- \n",
+      "  pxweb_get(url = \"", pxe_data_url(pxe), "\",\n",
+      "            query = ",q_path,")\n\n", sep ="")
+  cat("# Convert to data.frame \n",
+      "px_data <- as.data.frame(px_data)\n", sep ="")
+  return(invisible(NULL))
 }
