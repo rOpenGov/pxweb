@@ -872,12 +872,16 @@ pxe_data_url <- function(x){
 #' @keywords internal
 pxe_interactive_get_data <- function(pxe, test_input = NULL){
   checkmate::assert_true(pxe_position_is_full_query(pxe))
+  checkmate::assert_character(test_input, null.ok = TRUE, min.len = 1)
+  
   download <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
                         "Do you want to download the data?\n",
                         test_input = test_input[1]) == "y"
   if(!download){
     return(NULL)
   }
+  
+  checkmate::assert_character(test_input, null.ok = TRUE, min.len = 2)
   return_df <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
                         "Do you want to return a the data as a data.frame?\n",
                         test_input = test_input[2]) == "y"

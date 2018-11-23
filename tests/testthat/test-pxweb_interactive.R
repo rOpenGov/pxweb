@@ -59,3 +59,22 @@ test_that(desc="Select all and eliminate",{
   expect_output(pxe_star_e <- pxweb:::pxweb_interactive_input(pxe_star, test_input = "e"), "Separate multiple choices by")  
   expect_equal(pxweb:::pxe_metadata_choices(pxe_star_e)[[2]], "eliminate")
 })  
+
+
+test_that(desc="Select all and eliminate",{
+  expect_silent(pxe <- pxweb:::pxweb_explorer.character("http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
+  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "e"))  
+  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))  
+  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))  
+  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))  
+  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1")) 
+  
+  expect_output(dat <- pxweb:::pxe_interactive_get_data(pxe, c("y", "n"))) 
+  expect_s3_class(dat, "pxweb_data")
+  expect_equal(ncol(pxweb:::as.data.frame.pxweb_data(dat)), 4)
+  expect_output(dat <- pxweb:::pxe_interactive_get_data(pxe, "n")) 
+  expect_null(dat)
+  
+  expect_error(dat <- capture.output(pxweb:::pxe_interactive_get_data(pxe, 1)))
+  expect_error(dat <- capture.output(pxweb:::pxe_interactive_get_data(pxe, 0)))
+})  
