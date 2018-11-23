@@ -6,7 +6,7 @@
 pxweb_parse_response <- function(x){
   checkmate::assert_class(x, "response")
   
-  obj <- httr::content(x, as = "parsed")
+  obj <- suppressWarnings(httr::content(x, as = "parsed"))
 
   try_obj <- try(pxweb_database_list(obj), silent = TRUE)
   if(!inherits(try_obj, "try-error")) {
