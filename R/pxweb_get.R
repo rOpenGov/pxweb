@@ -66,6 +66,9 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE){
       close(pb)
     }
     pxr <- pxweb_c(pxr)
+    if(inherits(pxr, "pxweb_data")){
+      pxr$pxweb_metadata <- pxmd
+    }
   }
   pxr
 }
