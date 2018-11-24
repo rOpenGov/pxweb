@@ -72,7 +72,7 @@ pxweb_query.pxweb_explorer <- function(x){
   obj <- list()
   for(i in seq_along(mdo$variables)){
     var_nm <- mdo$variables[[i]]$code
-    if(md_ch[[var_nm]] == "eliminate"){
+    if(md_ch[[var_nm]][1] == "eliminate"){
       next
     }
     obj[[var_nm]] <- mdo$variables[[i]]$values[md_ch[[var_nm]]]

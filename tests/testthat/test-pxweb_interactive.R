@@ -64,14 +64,17 @@ test_that(desc="Select all and eliminate",{
 test_that(desc="Select all and eliminate",{
   expect_silent(pxe <- pxweb:::pxweb_explorer.character("http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "e"))  
-  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))  
+  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1:2"))  
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))  
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))  
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1")) 
   
   expect_output(dat <- pxweb:::pxe_interactive_get_data(pxe, c("y", "n"))) 
   expect_s3_class(dat, "pxweb_data")
-  expect_equal(ncol(pxweb:::as.data.frame.pxweb_data(dat)), 4)
+  expect_silent(df <- pxweb:::as.data.frame.pxweb_data(dat))
+  expect_equal(ncol(df), 4)
+  expect_equal(nrow(df), 2)
+  expect_equal(as.character(df[, 1]), c("Moderaterna", "Centerpartiet"))
   expect_output(dat <- pxweb:::pxe_interactive_get_data(pxe, "n")) 
   expect_null(dat)
   

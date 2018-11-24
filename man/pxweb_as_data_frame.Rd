@@ -12,11 +12,11 @@
 \usage{
 pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
   stringsAsFactors = default.stringsAsFactors(),
-  column.name.source = "text")
+  column.name.type = "text", variable.value.type = "text")
 
 \method{pxweb_as_data_frame}{pxweb_data}(x, row.names = NULL,
   optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(),
-  column.name.source = "text")
+  column.name.type = "text", variable.value.type = "text")
 
 \method{pxweb_as_data_frame}{pxweb_data_comments}(x, optional = FALSE,
   ..., stringsAsFactors = default.stringsAsFactors())
@@ -29,7 +29,7 @@ pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
 
 \method{as.data.frame}{pxweb_data}(x, row.names = NULL,
   optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(),
-  column.name.source = "text")
+  column.name.type = "text")
 
 \method{as.data.frame}{pxweb_levels}(x, row.names = NULL,
   optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors())
@@ -45,7 +45,9 @@ pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
 
 \item{stringsAsFactors}{See \code{\link[base]{as.data.frame}}.}
 
-\item{column.name.source}{character: should \code{code} or \code{text} be used as column names?}
+\item{column.name.type}{character: should \code{code} or \code{text} be used as column names?}
+
+\item{variable.value.type}{character: should \code{code} or \code{text} be used as values in columns?}
 }
 \description{
 Coerce to a \code{data.frame}
