@@ -5,22 +5,25 @@
 #' @param optional See \code{\link[base]{as.data.frame}}.
 #' @param ... See \code{\link[base]{as.data.frame}}.
 #' @param stringsAsFactors See \code{\link[base]{as.data.frame}}.
-#' @param column.name.source character: should \code{code} or \code{text} be used as column names?
+#' @param column.name.type character: should \code{code} or \code{text} be used as column names?
+#' @param variable.value.type character: should \code{code} or \code{text} be used as values in columns?
 #' 
 #' @seealso \code{\link[base]{as.data.frame}}.
 #' 
 #' @keywords internal
-pxweb_as_data_frame <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(), column.name.source = "text"){
-  checkmate::assert_choice(column.name.source, c("code", "text"))
+pxweb_as_data_frame <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(), column.name.type = "text", variable.value.type = "text"){
+  checkmate::assert_choice(column.name.type, c("code", "text"))
+  checkmate::assert_choice(column.name.type, c("code", "text"))  
   UseMethod("pxweb_as_data_frame")
 }
 
 #' @rdname pxweb_as_data_frame
 #' @keywords internal
-pxweb_as_data_frame.pxweb_data <-  function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(), column.name.source = "text"){
+pxweb_as_data_frame.pxweb_data <-  function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(), column.name.type = "text", variable.value.type = "text"){
   pxdims <- pxweb_data_dim(x)
   checkmate::assert_character(row.names, len = pxdims[1], null.ok = TRUE)
-  checkmate::assert_choice(column.name.source, c("code", "text"))
+  checkmate::assert_choice(column.name.type, c("code", "text"))
+  checkmate::assert_choice(variable.value.type, c("code", "text"))
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
   
@@ -34,11 +37,16 @@ pxweb_as_data_frame.pxweb_data <-  function(x, row.names = NULL, optional = FALS
     }
   }
   df <- as.data.frame(df, stringsAsFactors = FALSE, optional = optional, ...)
-  colnames(df) <- pxweb_data_colnames(x, column.name.source)
+  colnames(df) <- pxweb_data_colnames(x, column.name.type)
+  dat_code_cn <- pxweb_data_colnames(x, "code")
   for(j in 1:pxdims[2]){
     if(slot_idx[j] == 1){
-      if(stringsAsFactors){
-        df[, j] <- as.factor(df[, j])
+      df[, j] <- as.factor(df[, j])
+      if(variable.value.type == "text"){
+        levels(df[, j]) <- pxd_values_to_valuetexts(x, dat_code_cn[j], levels(df[, j]))
+      }
+      if(!stringsAsFactors){
+        df[, j] <- as.character(df[, j])
       }
     } else {
       df[, j] <- as.numeric(df[, j])
@@ -49,7 +57,6 @@ pxweb_as_data_frame.pxweb_data <-  function(x, row.names = NULL, optional = FALS
   }
   df
 }
-
 
 #' @rdname pxweb_as_data_frame
 #' @keywords internal
@@ -119,14 +126,15 @@ as.data.frame.pxweb_data <- function(x,
                                      optional = FALSE, 
                                      ..., 
                                      stringsAsFactors = default.stringsAsFactors(), 
-                                     column.name.source = "text"){
+                                     column.name.type = "text"
+                                     ){
   
   pxweb_as_data_frame(x, 
                       row.names = row.names, 
                       optional = optional,
                       ...,
                       stringsAsFactors = stringsAsFactors,
-                      column.name.source = column.name.source)
+                      column.name.type = column.name.type)
 }
 
 

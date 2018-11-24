@@ -77,3 +77,25 @@ pxweb_data_colnames <- function(pxd, type = "text"){
   unlist(lapply(pxd$columns, function(x) x[[type]]))
 }
 
+
+
+
+#' Convert a pxweb data objects values to valuetext
+#' 
+#' @param x a \code{pxweb_data} object
+#' @param variable a variable to convert
+#' @param value_levels value_levels to convert
+#' @keywords internal
+pxd_values_to_valuetexts <- function(x, variable, value_levels){
+  checkmate::assert_class(x, classes = "pxweb_data")
+  pxmd_dim <- pxweb_metadata_dim(x$pxweb_metadata)
+  checkmate::assert_choice(variable, choices = names(pxmd_dim))
+  var_id <- which(names(pxmd_dim) %in% variable)
+  checkmate::assert_subset(value_levels, choices = x$pxweb_metadata$variables[[var_id]]$values)
+  new_value_levels <- value_levels
+  for(i in seq_along(value_levels)){
+    idx <- which(x$pxweb_metadata$variables[[var_id]]$values %in% value_levels[i])
+    new_value_levels[i] <- x$pxweb_metadata$variables[[var_id]]$valueTexts[idx]
+  }
+  new_value_levels
+}
