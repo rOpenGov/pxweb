@@ -42,16 +42,6 @@
         "period_in_seconds": 10,
         "max_values_to_download" : 1000
               },
-  
-    "pxweb.orebro.se": {
-        "description" : "Orebro municipality in Sweden",
-        "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
-        "version": ["v1"], 
-        "lang": ["sv"],
-        "calls_per_period": 10,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 1000
-              },
 
     "fohm-app.folkhalsomyndigheten.se": {
         "alias" : ["fohm"],
@@ -114,17 +104,6 @@
         "url" : "http://px.hagstofa.is/px[lang]/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["is", "en"],
-        "calls_per_period": 30,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 100000
-              },
-              
-    "statistik.helsingborg.se": {
-        "alias" : ["helsingborg"],
-        "description" : "Helsingborg town in Sweden",
-        "url" : "http://statistik.helsingborg.se/PXWeb/api/[version]/[lang]",
-        "version": ["v1"], 
-        "lang": ["sv"],
         "calls_per_period": 30,
         "period_in_seconds": 10,
         "max_values_to_download" : 100000
@@ -199,7 +178,7 @@
     "pxweb.asub.ax": {
         "alias" : ["asub"],
         "description" : "Statistics Aland",
-        "url" : "http://pxweb.asub.ax/PXWeb/api/[version]/[lang]/",
+        "url" : "https://pxweb.asub.ax/PXWeb/api/[version]/[lang]/",
         "version": ["v1"], 
         "lang": ["sv","en"],
         "calls_per_period": 30,
