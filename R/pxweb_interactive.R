@@ -918,6 +918,11 @@ pxe_print_download_code <- function(pxe, as){
       "  pxweb_get(url = \"", pxe_data_url(pxe), "\",\n",
       "            query = ",q_path,")\n\n", sep ="")
   cat("# Convert to data.frame \n",
-      "px_data <- as.data.frame(px_data)\n", sep ="")
+      "px_data <- as.data.frame(px_data, column.name.type = \"text\", variable.value.type = \"text\")\n", sep ="")
+  
+#  cat("# Get pxweb data comments \n",
+#      "px_data_comments <- pxweb_data_comments(px_data)\n",
+#      "px_data_comments_df <- as.data.frame(px_data_comments)\n", sep ="")
+  
   return(invisible(NULL))
 }
