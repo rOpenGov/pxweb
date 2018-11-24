@@ -48,7 +48,7 @@
         "description" : "The Public Health Agency of Sweden",
         "url" : "http://fohm-app.folkhalsomyndigheten.se/Folkhalsodata/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["en", "sv"],
+        "lang": ["sv"],
         "calls_per_period": 10,
         "period_in_seconds": 10,
         "max_values_to_download" : 1000
@@ -114,7 +114,7 @@
         "description" : "Linkoping municipality in Sweden",
         "url" : "http://statistik.linkoping.se/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["sv","en"],
+        "lang": ["sv"],
         "calls_per_period": 30,
         "period_in_seconds": 10,
         "max_values_to_download" : 100000
