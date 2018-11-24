@@ -88,3 +88,6 @@ test_that(desc="Jordbruksverkets bugg",{
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))  
 })  
 
+
+
+

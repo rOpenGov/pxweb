@@ -63,13 +63,13 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
       cat(sum(api_tree_df$type == "l"), "node(s) and", sum(api_tree_df$type == "t"), "table(s)...\n")
     }
     
-    px <- try(pxweb(api_tree_df$path[i]), silent = TRUE)
+    px <- try(pxweb(url = api_tree_df$path[i]), silent = TRUE)
     if(inherits(px, "try-error")) {
       api_tree_df$error[i] <- TRUE
       api_tree_df$checked[i] <- TRUE
     }
     
-    tmp_df <- try(pxweb_get_api_test_data_frame(px), silent = TRUE)
+    tmp_df <- try(pxweb_get_api_test_data_frame(x = px), silent = TRUE)
     if(inherits(tmp_df, "try-error")) {
       api_tree_df$error[i] <- TRUE
       api_tree_df$checked[i] <- TRUE

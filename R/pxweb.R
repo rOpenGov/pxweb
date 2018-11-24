@@ -28,7 +28,7 @@
 pxweb <- function(url){
   if(is.pxweb(url)) return(url)
   checkmate::assert_string(url)
-  url_parsed <- parse_url_or_fail(url)
+  url_parsed <- parse_url_or_fail(x = url)
   
   obj <- list(url = url_parsed,
               config = NULL,
@@ -86,6 +86,6 @@ print.pxweb <- function(x, ...){
 #' @keywords internal
 pxweb_fix_url <- function(x){
   checkmate::assert_string(x)
-  x <- gsub(x, pattern = " ", replacement = "%20")
+  x <- utils::URLencode(x)
   x
 }

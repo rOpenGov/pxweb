@@ -63,6 +63,11 @@ if(any(errored)){
   }
 }
 
+warns <- warnings()
+if(length(warns) > 0){
+  print(warns)
+}
+
 if(any(errored) | length(warns) > 0){
   quit(save = "no", status = 1)
 }
