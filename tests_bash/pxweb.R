@@ -49,7 +49,7 @@ for(i in seq_along(api_paths)){
     next
   }
   cat(api_paths[i], "\n")
-  touch_results[[i]] <- try(pxweb_test_api_endpoint(api_paths[i], test_type = "touch", verbose = FALSE), silent = TRUE)
+  touch_results[[i]] <- try(pxweb_test_api_endpoint(url = api_paths[i], test_type = "touch", verbose = FALSE), silent = TRUE)
   if(inherits(touch_results[[i]], "try-error")){
     errored[i] <- TRUE
   }

@@ -75,13 +75,13 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
       api_tree_df$checked[i] <- TRUE
     }
     
+    api_tree_df$checked[i] <- TRUE
+    
     if(test_type == "touch"){
       # Jump to next level
-      i <- nrow(api_tree_df) - 1
+      i <- nrow(api_tree_df)
     }
-    
     api_tree_df <- rbind(api_tree_df, tmp_df)
-    api_tree_df$checked[i] <- TRUE
   }
   
   if(verbose & !test_type == "touch"){
