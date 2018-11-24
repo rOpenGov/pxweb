@@ -154,6 +154,9 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
 pxweb_get_api_test_data_frame <- function(x){
   checkmate::assert_class(x, "pxweb")
   df <- as.data.frame(pxweb_get(x))
+  if(is.null(df$updated)){
+    df$updated <- NA
+  }
   df$path <- paste0(build_pxweb_url(x), "/", df$id)
   df$checked <- FALSE
   df$error <- FALSE
