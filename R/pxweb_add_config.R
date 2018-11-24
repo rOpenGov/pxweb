@@ -32,7 +32,7 @@ pxweb_add_config <-function(obj){
     base_url <- build_pxweb_url(obj)
     r2 <- httr::GET(base_url)
     if(is_pxweb_response(r2)){
-      stop(paste0("\nThis is an old PXWEB API not supported by pxweb R package\n(version PX-Web 2014 Dec R1 or later is needed): \n", httr::build_url(obj$url)), call. = FALSE)
+      stop(paste0("\nThis is an old PXWEB API not supported by pxweb R package\n(version PX-Web 2014 Dec R1 or later is supported): \n", httr::build_url(obj$url)), call. = FALSE)
     } else {
       stop(paste0("\nThis is not a PXWEB API: \n", httr::build_url(obj$url)), call. = FALSE)
     }
