@@ -80,3 +80,12 @@ print.pxweb <- function(x, ...){
   cat(paste0("  ", names(x$paths)[1], ": ", x$paths[[1]], "\n"))
   cat(paste0("  ", names(x$paths)[2], ": ", x$paths[[2]]$path, "\n"))
 }
+
+#' Fix url characters
+#' @param x a string to fix
+#' @keywords internal
+pxweb_fix_url <- function(x){
+  checkmate::assert_string(x)
+  x <- gsub(x, pattern = " ", replacement = "%20")
+  x
+}

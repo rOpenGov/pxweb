@@ -243,15 +243,14 @@ pxe_position_path <- function(x, init_slash = TRUE, as_vector = FALSE, include_r
   }
   p <- paste(x$position, collapse = "/")
   if(include_rootpath){
-    return(paste(pxweb_api_rootpath(x), p, sep = "/"))
+    return(pxweb_fix_url(paste(pxweb_api_rootpath(x), p, sep = "/")))
   } else {
     if(init_slash){
-      return(paste("/", p, sep = ""))
+      return(pxweb_fix_url(paste("/", p, sep = "")))
     }
   }
-  return(p)
+  return(pxweb_fix_url(p))
 }
-
 
 #' @rdname pxweb_api_name
 #' @keywords internal

@@ -27,7 +27,6 @@
 #'   res <- pxweb_test_api_endpoint(url)
 #'   res <- pxweb_test_api_endpoint(url, test_type="touch")
 #' }
-#' url <- "http://api.scb.se/OV0104/v1/doris/en"
 #' @export
 pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRUE){
   px <- pxweb(url)

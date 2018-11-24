@@ -38,5 +38,4 @@ By using a branch in a tree the api is tested below this branch.
   res <- pxweb_test_api_endpoint(url)
   res <- pxweb_test_api_endpoint(url, test_type="touch")
 }
-url <- "http://api.scb.se/OV0104/v1/doris/en"
 }
