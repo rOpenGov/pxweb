@@ -81,11 +81,13 @@ print.pxweb <- function(x, ...){
   cat(paste0("  ", names(x$paths)[2], ": ", x$paths[[2]]$path, "\n"))
 }
 
+
 #' Fix url characters
 #' @param x a string to fix
 #' @keywords internal
 pxweb_fix_url <- function(x){
   checkmate::assert_string(x)
-  x <- utils::URLencode(x)
+  # URLencode cannot handle partially encoded strings
+  x <- utils::URLencode(utils::URLdecode(x))
   x
 }
