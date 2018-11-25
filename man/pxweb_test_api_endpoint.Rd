@@ -5,7 +5,7 @@
 \title{Test a full or a part of an pxweb api.}
 \usage{
 pxweb_test_api_endpoint(url, test_type = "first", n = 1,
-  verbose = TRUE)
+  verbose = TRUE, time_limit = Inf)
 }
 \arguments{
 \item{url}{The base url to the pxweb api (or a branch of the metadata tree)}
@@ -14,12 +14,14 @@ pxweb_test_api_endpoint(url, test_type = "first", n = 1,
 The \code{first} observation of each table.
 A random \code{sample} of size \code{n}.
 Download all \code{full} tables. 
-\code{touch} the api by downloading the first table. 
+\code{touch} the api by only downloading the first table metadata. 
 This is minimal testing of the API.}
 
 \item{n}{sample size if \code{test_type} is \code{sample}.}
 
 \item{verbose}{The function will print information.}
+
+\item{time_limit}{Time limit in second the API is allowed to be tested.}
 }
 \value{
 Function returns a data.frame with information on each node

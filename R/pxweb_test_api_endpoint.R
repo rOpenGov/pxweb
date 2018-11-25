@@ -9,10 +9,11 @@
 #'                  The \code{first} observation of each table.
 #'                  A random \code{sample} of size \code{n}.
 #'                  Download all \code{full} tables. 
-#'                  \code{touch} the api by downloading the first table. 
+#'                  \code{touch} the api by only downloading the first table metadata. 
 #'                  This is minimal testing of the API.
 #' @param n sample size if \code{test_type} is \code{sample}.
 #' @param verbose The function will print information.
+#' @param time_limit Time limit in second the API is allowed to be tested.
 #' 
 #' @return 
 #' Function returns a data.frame with information on each node
@@ -21,6 +22,7 @@
 #' \code{error} : Whether there were errors encountered with the call
 #' \code{download_error} : Whether there were errors encountered during download
 #' 
+#' 
 #' @examples 
 #' \dontrun{
 #'   url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
@@ -28,10 +30,11 @@
 #'   res <- pxweb_test_api_endpoint(url, test_type="touch")
 #' }
 #' @export
-pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRUE){
+pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRUE, time_limit = Inf){
   px <- pxweb(url)
   checkmate::assert_choice(test_type, c("first", "sample", "full", "touch"))
   checkmate::assert_int(n, lower = 1)
+  time_limit_obj <- pxweb_test_time_limit(time_limit = time_limit)
   
   # Build treestructure
   # api_tree_df <- pxweb:::pxweb_get_api_test_data_frame(px)
@@ -44,6 +47,9 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
   i <- 0
   while (i < nrow(api_tree_df)) {
     i <- i + 1
+    if(is_test_time_limit_reached(time_limit_obj)){
+      break
+    }
     
     types_idx_to_check <- i:nrow(api_tree_df)
     is_table <- api_tree_df$type[types_idx_to_check] == "t"
@@ -94,6 +100,13 @@ pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRU
   # Get metadata and test download
   api_tree_df$obs <- 0
   for(i in 1:nrow(api_tree_df)){
+    if(is_test_time_limit_reached(time_limit_obj)){
+      if(verbose){
+        cat("\nTime limit reached. Aborting.\n")
+      }
+      break
+    }
+    
     if(verbose & !test_type == "touch") {
       utils::setTxtProgressBar(pb, i)
     } else if (test_type == "touch") {
@@ -162,5 +175,28 @@ pxweb_get_api_test_data_frame <- function(x){
   df$error <- FALSE
   df$download_error <- FALSE
   df
+}
+
+
+
+#' Test time limit object
+#' 
+#' @details 
+#' Used to limit testing of API:s.
+#' @param time_limit the number of seconds the API will be tested.
+#' @keywords internal
+pxweb_test_time_limit <- function(time_limit){
+  checkmate::assert_number(time_limit, lower = 1)
+  x <- list(start_time = Sys.time(), time_limit = time_limit)
+  class(x) <- c("pxweb_test_time_limit", "list")
+  return(x)
+}
+
+#' @rdname pxweb_test_time_limit
+#' @keywords internal
+is_test_time_limit_reached <- function(x){
+  checkmate::assert_class(x, "pxweb_test_time_limit")
+  time_diff <- as.numeric(Sys.time() - x$start_time, units = "secs")
+  time_diff > x$time_limit
 }
 

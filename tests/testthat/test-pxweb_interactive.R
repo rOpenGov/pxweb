@@ -83,11 +83,5 @@ test_that(desc="Select all and eliminate",{
 })  
 
 
-test_that(desc="Jordbruksverkets bugg",{
-  expect_silent(pxe <- pxweb:::pxweb_explorer.character("http://statistik.sjv.se/PXWeb/api/v1/sv"))
-  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))  
-})  
-
-
 
 
