@@ -24,6 +24,7 @@ cat("\n\nPING APIS:\n")
 
 # Ping all APIs shallowly
 errored <- rep(FALSE, length(api_paths))
+config_diff <- rep(FALSE, length(api_paths))
 ping_results <- list()
 for(i in seq_along(api_paths)){
   cat(api_paths[i], "\n")
@@ -34,16 +35,13 @@ for(i in seq_along(api_paths)){
   
   # Check if config and api cataloge has the same settings.
   if(ping_results[[i]]$config$calls_per_period != apis[[api_idx[i]]]$calls_per_period){
-    cat("Calls per period difference between R API catalogue (", apis[[api_idx[i]]]$calls_per_period ,") and API config (", ping_results[[i]]$config$calls_per_period,").\n",  sep = "")
-    errored[i] <- TRUE
+    config_diff[i] <- TRUE
   }
   if(ping_results[[i]]$config$period_in_seconds != apis[[api_idx[i]]]$period_in_seconds){
-    cat("Periods in seconds difference between R API catalogue (", apis[[api_idx[i]]]$period_in_seconds ,") and API config (", ping_results[[i]]$config$period_in_seconds,").\n",  sep = "")
-    errored[i] <- TRUE
+    config_diff[i] <- TRUE
   }
   if(ping_results[[i]]$config$max_values_to_download != apis[[api_idx[i]]]$max_values_to_download){
-    cat("Max values difference between R API catalogue (", apis[[api_idx[i]]]$max_values_to_download ,") and API config (", ping_results[[i]]$config$max_values_to_download,").\n",  sep = "")
-    errored[i] <- TRUE
+    config_diff[i] <- TRUE
   }
 }
 
@@ -54,6 +52,16 @@ if(any(errored)){
   for(i in seq_along(which(errored))){
     cat("\n", api_paths[which(errored)[i]], "\n", sep ="")
     cat(ping_results[[which(errored)[i]]][1])
+  }
+}
+
+if(any(config_diff)){
+  cat("\n\nAPI DIFF BETWEEN API CONFIG AND THE R API CATALOGUE:\n")
+  for(i in seq_along(which(config_diff))){
+    cat("\n", api_paths[which(config_diff)[i]], ":\n", sep ="")
+    cat("  Calls per period: R API catalogue (", apis[[api_idx[which(config_diff)[i]]]]$calls_per_period ,") and API config (", ping_results[[which(config_diff)[i]]]$config$calls_per_period,").\n",  sep = "")
+    cat("  Periods in seconds: R API catalogue (", apis[[api_idx[which(config_diff)[i]]]]$period_in_seconds ,") and API config (", ping_results[[which(config_diff)[i]]]$config$period_in_seconds,").\n",  sep = "")
+    cat("  Max values: R API catalogue (", apis[[api_idx[which(config_diff)[i]]]]$max_values_to_download ,") and API config (", ping_results[[which(config_diff)[i]]]$config$max_values_to_download,").\n",  sep = "")
   }
 }
 
