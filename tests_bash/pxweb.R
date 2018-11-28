@@ -97,8 +97,7 @@ if(length(warns) > 0){
 }
 
 
-
-if(any(errored) | length(warns) > 0){
+if(any(errored) | length(warns) > 0 | any(config_diff)){
   quit(save = "no", status = 1)
 }
 
