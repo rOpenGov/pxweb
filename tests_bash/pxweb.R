@@ -6,10 +6,12 @@ print(sessionInfo())
 
 # Create list of API paths
 apis <- pxweb_api_catalogue()
+api_idx <- numeric(0)
 api_paths <- character(0)
 for(i in seq_along(apis)){
   for(j in seq_along(apis[[i]]$version)){
     for(k in seq_along(apis[[i]]$lang)){
+      api_idx[length(api_idx) + 1] <- i
       base_url <- apis[[i]]$url
       base_url <- gsub("\\[version\\]", base_url, replacement = apis[[i]]$version[j])
       base_url <- gsub("\\[lang\\]", base_url, replacement = apis[[i]]$lang[k])
@@ -17,6 +19,8 @@ for(i in seq_along(apis)){
     }
   }
 }
+
+cat("\n\nPING APIS:\n")
 
 # Ping all APIs shallowly
 errored <- rep(FALSE, length(api_paths))
@@ -27,7 +31,23 @@ for(i in seq_along(api_paths)){
   if(inherits(ping_results[[i]], "try-error")){
     errored[i] <- TRUE
   }
+  
+  # Check if config and api cataloge has the same settings.
+  if(ping_results[[i]]$config$calls_per_period != apis[[api_idx[i]]]$calls_per_period){
+    cat("Calls per period difference between R API catalogue (", apis[[api_idx[i]]]$calls_per_period ,") and API config (", ping_results[[i]]$config$calls_per_period,").\n",  sep = "")
+    errored[i] <- TRUE
+  }
+  if(ping_results[[i]]$config$period_in_seconds != apis[[api_idx[i]]]$period_in_seconds){
+    cat("Periods in seconds difference between R API catalogue (", apis[[api_idx[i]]]$period_in_seconds ,") and API config (", ping_results[[i]]$config$period_in_seconds,").\n",  sep = "")
+    errored[i] <- TRUE
+  }
+  if(ping_results[[i]]$config$max_values_to_download != apis[[api_idx[i]]]$max_values_to_download){
+    cat("Max values difference between R API catalogue (", apis[[api_idx[i]]]$max_values_to_download ,") and API config (", ping_results[[i]]$config$max_values_to_download,").\n",  sep = "")
+    errored[i] <- TRUE
+  }
 }
+
+
 
 if(any(errored)){
   cat("\n\nERRONEOUS PATHS:\n")
@@ -68,6 +88,9 @@ if(length(warns) > 0){
   print(warns)
 }
 
+
+
 if(any(errored) | length(warns) > 0){
   quit(save = "no", status = 1)
 }
+
