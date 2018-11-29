@@ -16,7 +16,7 @@
         "description" : "Statistics Finland",
         "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["fi", "sv", "en"],
+        "lang": ["en","fi","sv"],
         "calls_per_period": 30,
         "period_in_seconds": 10,
         "max_values_to_download" : 110000
@@ -81,7 +81,7 @@
         "description" : "LUKE Natural Resources Institute Finland",
         "url" : "http://statdb.luke.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["fi", "sv", "en"],
+        "lang": ["en","fi","sv"],
         "calls_per_period": 30,
         "period_in_seconds": 1,
         "max_values_to_download" : 10000
@@ -92,7 +92,7 @@
         "description": "Verohallinto - Finnish Tax Administration",
         "url": "http://vero2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"],
-        "lang": [ "fi", "sv", "en" ],
+        "lang": ["en","fi","sv"],
         "calls_per_period":     100,
         "period_in_seconds":     10,
         "max_values_to_download":  1000 
@@ -103,7 +103,7 @@
         "description" : "Statistics Iceland",
         "url" : "http://px.hagstofa.is/px[lang]/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["is", "en"],
+        "lang": ["en","is"],
         "calls_per_period": 30,
         "period_in_seconds": 1,
         "max_values_to_download" : 1000
@@ -125,7 +125,7 @@
         "description" : "Vastra Gotaland Region in Sweden",
         "url" : "http://pxwebb2017.vgregion.se/pxweb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["sv","en"],
+        "lang": ["sv"],
         "calls_per_period": 10,
         "period_in_seconds": 10,
         "max_values_to_download" : 1000
@@ -136,7 +136,7 @@
         "description" : "Statbank Greenland",
         "url" : "http://bank.stat.gl/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["kl","da","en"],
+        "lang": ["en","kl","da"],
         "calls_per_period": 30,
         "period_in_seconds": 1,
         "max_values_to_download" : 10000
@@ -147,7 +147,7 @@
         "description" : "Icelandic Centre for Retail Studies",
         "url" : "http://px.rsv.is/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["is","en"],
+        "lang": ["en", "is"],
         "calls_per_period": 30,
         "period_in_seconds": 1,
         "max_values_to_download" : 10000
@@ -180,7 +180,7 @@
         "description" : "Statistics Aland",
         "url" : "https://pxweb.asub.ax/PXWeb/api/[version]/[lang]/",
         "version": ["v1"], 
-        "lang": ["sv","en"],
+        "lang": ["en","sv"],
         "calls_per_period": 10,
         "period_in_seconds": 10,
         "max_values_to_download" : 1000
@@ -228,6 +228,17 @@
         "calls_per_period": 10,
         "period_in_seconds": 10,
         "max_values_to_download" : 5000
+    },
+    
+    "askdata.rks-gov.net": {
+      "alias" : ["askdata"],
+      "description" : "Statistics Kosovo",
+      "url" : "http://askdata.rks-gov.net/PXWeb/api/[version]/[lang]/",
+      "version": ["v1"], 
+      "lang": ["en"],
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
     }
   },
 

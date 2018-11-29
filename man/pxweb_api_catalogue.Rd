@@ -2,10 +2,16 @@
 % Please edit documentation in R/pxweb_api_catalogue.R
 \name{pxweb_api_catalogue}
 \alias{pxweb_api_catalogue}
+\alias{pxweb_api_catalogue_from_json}
+\alias{pxweb_api_catalogue_from_github}
 \alias{pxweb_api_catalogue_path}
 \title{Get the PXWEB API catalogue}
 \usage{
 pxweb_api_catalogue()
+
+pxweb_api_catalogue_from_json(json)
+
+pxweb_api_catalogue_from_github(branch = "master")
 
 pxweb_api_catalogue_path()
 }

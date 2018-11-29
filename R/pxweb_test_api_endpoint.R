@@ -200,3 +200,29 @@ is_test_time_limit_reached <- function(x){
   time_diff > x$time_limit
 }
 
+
+#' Create all paths from a list of pxweb_api_catalogue entries
+#' @param apis a list of pxweb_api_catalogue_entry elements
+#' @keywords internal
+pxweb_test_create_api_paths <- function(apis){
+  checkmate::assert_class(apis, "list")
+  for(i in seq_along(apis)){
+    checkmate::assert_class(apis[[i]], "pxweb_api_catalogue_entry")
+  }
+  api_idx <- numeric(0)
+  api_paths <- character(0)
+  for(i in seq_along(apis)){
+    for(j in seq_along(apis[[i]]$version)){
+      for(k in seq_along(apis[[i]]$lang)){
+        api_idx[length(api_idx) + 1] <- i
+        base_url <- apis[[i]]$url
+        base_url <- gsub("\\[version\\]", base_url, replacement = apis[[i]]$version[j])
+        base_url <- gsub("\\[lang\\]", base_url, replacement = apis[[i]]$lang[k])
+        api_paths[length(api_paths) + 1] <- base_url
+      }
+    }
+  }
+  list(idx = api_idx, paths = api_paths)
+}
+
+

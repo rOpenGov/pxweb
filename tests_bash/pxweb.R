@@ -6,19 +6,9 @@ print(sessionInfo())
 
 # Create list of API paths
 apis <- pxweb_api_catalogue()
-api_idx <- numeric(0)
-api_paths <- character(0)
-for(i in seq_along(apis)){
-  for(j in seq_along(apis[[i]]$version)){
-    for(k in seq_along(apis[[i]]$lang)){
-      api_idx[length(api_idx) + 1] <- i
-      base_url <- apis[[i]]$url
-      base_url <- gsub("\\[version\\]", base_url, replacement = apis[[i]]$version[j])
-      base_url <- gsub("\\[lang\\]", base_url, replacement = apis[[i]]$lang[k])
-      api_paths[length(api_paths) + 1] <- base_url
-    }
-  }
-}
+api_paths <- pxweb:::pxweb_test_create_api_paths(apis)
+api_idx <- api_paths$idx
+api_paths <- api_paths$paths
 
 cat("\n\nPING APIS:\n")
 
@@ -97,7 +87,40 @@ if(length(warns) > 0){
 }
 
 
-if(any(errored) | length(warns) > 0 | any(config_diff)){
+# Check new APIs
+apis <- pxweb_api_catalogue()
+# Change to master branch later on
+gh_apis <- pxweb:::pxweb_api_catalogue_from_github(branch = "test")
+new_api_idx <- which(!names(apis) %in% names(gh_apis))
+new_api_errored <- FALSE
+
+if(length(new_api_idx) > 0){
+  new_api_paths <- pxweb:::pxweb_test_create_api_paths(apis[new_api_idx])
+  new_api_index <- new_api_paths$idx
+  new_api_paths <- new_api_paths$paths
+  first_results <- list()
+  new_api_errored <- rep(FALSE, length(new_api_paths))
+  
+  for(i in seq_along(new_api_idx)){
+    cat(new_api_paths[new_api_index[i]], "\n")
+    first_results[[i]] <- try(pxweb_test_api_endpoint(url = new_api_paths[new_api_index[i]], test_type = "first", verbose = TRUE, time_limit = 10*60), silent = TRUE)
+    if(inherits(first_results[[i]], "try-error")){
+      new_api_errored[i] <- TRUE
+    }
+  }
+}
+
+if(any(new_api_errored)){
+  cat("\n\nNEW API ERRORS:\n")
+  for(i in seq_along(which(new_api_errored))){
+    cat("\n", new_api_paths[which(new_api_errored)[i]], "\n", sep ="")
+    cat(first_results[[which(new_api_errored)[i]]][1])
+  }
+}
+
+
+
+if(any(errored) | length(warns) > 0 | any(config_diff) | any(new_api_errored)){
   quit(save = "no", status = 1)
 }
 
