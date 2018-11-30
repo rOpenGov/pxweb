@@ -4,7 +4,7 @@
 \alias{assert_pxweb_query}
 \title{Assert a pxweb_query object}
 \usage{
-assert_pxweb_query(x)
+assert_pxweb_query(x, check_response_format = TRUE)
 }
 \arguments{
 \item{x}{an object to assert conferms to the structure of an pxweb_query object.}
