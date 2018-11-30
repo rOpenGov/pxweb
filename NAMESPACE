@@ -2,6 +2,7 @@
 
 S3method(as.data.frame,pxweb_data)
 S3method(as.data.frame,pxweb_levels)
+S3method(as.matrix,pxweb_data)
 S3method(print,api_parameters)
 S3method(print,pxweb)
 S3method(print,pxweb_api_catalogue_entry)
