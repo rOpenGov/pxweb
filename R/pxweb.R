@@ -91,3 +91,23 @@ pxweb_fix_url <- function(x){
   x <- utils::URLencode(utils::URLdecode(x))
   x
 }
+
+#' Setup temorary directory for the pxweb
+#' @param to to what part of the temp folder (apis or logs)
+#' @keywords internal
+pxweb_tempdir <- function(to = "apis"){
+  checkmate::assert_choice(to, c("apis", "logs"))
+  tmp_dir_apis <- file.path(tempdir(), "pxweb", "apis")
+  tmp_dir_logs <- file.path(tempdir(), "pxweb", "logs")  
+  if(!dir.exists(tmp_dir_apis)){
+    dir.create(tmp_dir_apis, recursive = TRUE)
+  }
+  if(!dir.exists(tmp_dir_logs)){
+    dir.create(tmp_dir_logs, recursive = TRUE)
+  }
+  if(to == "apis"){
+    return(tmp_dir_apis)
+  } else {
+    return(tmp_dir_logs)    
+  }
+}

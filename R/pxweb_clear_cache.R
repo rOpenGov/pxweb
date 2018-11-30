@@ -8,7 +8,7 @@
 #' @keywords internal
 pxweb_clear_cache<- function(x = NULL){
   if(is.null(x)){
-    files <- dir(file.path(tempdir(), "pxweb", "apis"), full.names = TRUE)
+    files <- dir(pxweb_tempdir(), full.names = TRUE)
     if(length(files) == 0) {
       return(FALSE)
     }

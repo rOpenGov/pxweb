@@ -22,10 +22,7 @@ build_pxweb_rda_file_path.character <- function(x){
 #' @keywords internal
 build_pxweb_rda_file_path.url <- function(x){
   checkmate::assert_class(x, "url")
-  tmp_dir <- file.path(tempdir(), "pxweb", "apis")
-  if(!dir.exists(tmp_dir)){
-    dir.create(tmp_dir, recursive = TRUE)
-  }
+  tmp_dir <- pxweb_tempdir()
   file.path(tmp_dir, paste0(make.names(pxweb_api_name(x)),".rda"))
 }
 
