@@ -15,6 +15,7 @@
 #' print(a)
 #' 
 base_url <- function(api, version = NULL, language = NULL) {
+  .Deprecated("pxweb")
   api_object <- pxweb_api$new(get_api = api)
   api_object$base_url(version = version, language = language)
 }
