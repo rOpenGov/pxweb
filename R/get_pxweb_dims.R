@@ -18,7 +18,7 @@
 #' dims <- get_pxweb_dims(bottom_node)
 #' }
 get_pxweb_dims <- function(node, verbose=TRUE) {
-	
+	.Deprecated("pxweb_advanced_get")
 	## Deparse metadata object into elements
 	# Title
 	title <- node$title$title
