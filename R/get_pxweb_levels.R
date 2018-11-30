@@ -17,7 +17,7 @@ get_pxweb_levels <- function(
 	quiet = FALSE,
 	...
 ) {
-	
+	.Deprecated("pxweb_get")
 	nodeData <- get_pxweb_metadata(baseURL = baseURL, quiet = TRUE, ...)
 	
 	if(!("id" %in% names(nodeData))) {

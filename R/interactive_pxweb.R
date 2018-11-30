@@ -11,6 +11,7 @@
 #' 
 #' @seealso
 #' \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_data}}
+#' @keywords internal
 #' @export
 #' @examples
 #'  api_catalogue() # List apis
@@ -21,7 +22,7 @@
 #' }
 
 interactive_pxweb <- function(api = NULL, version = NULL, language = NULL, history = FALSE,...){
-
+  .Deprecated("pxweb_interactive")
   if (is.null(api)) {
   choice <- choose_pxweb_api()
   api_obj <- pxweb_api$new(get_api = choice[1])

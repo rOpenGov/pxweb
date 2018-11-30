@@ -16,6 +16,7 @@
 #' api_url <- base_url("api.scb.se", language = "sv")
 get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TRUE, baseURL = NULL, ...) {
 
+  .Deprecated("pxweb_get")
    # Build a URL if no path is supplied
    if (is.null(path)) {
 
