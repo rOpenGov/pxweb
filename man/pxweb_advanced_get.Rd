@@ -5,7 +5,7 @@
 \title{Do a GET call to PXWEB API url with more control for advanced users}
 \usage{
 pxweb_advanced_get(url, query = NULL, verbose = TRUE,
-  log_httr_calls = FALSE, pxweb_metadata = NULL, ...)
+  log_http_calls = FALSE, pxweb_metadata = NULL, ...)
 }
 \arguments{
 \item{url}{a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.}
@@ -14,8 +14,8 @@ pxweb_advanced_get(url, query = NULL, verbose = TRUE,
 
 \item{verbose}{should large queries print out progress.}
 
-\item{log_httr_calls}{Should the calls to the API be logged (for debugging reasons). 
-If TRUE, all calls and responses are logged and written to "log_pxweb_api_calls_[TIME].txt".}
+\item{log_http_calls}{Should the http calls to the API be logged (for debugging reasons). 
+If TRUE, all calls and responses are logged and written to "log_pxweb_api_http_calls.txt" in the working directory.}
 
 \item{pxweb_metadata}{A \code{pxweb_metadata} object to use for query.}
 

@@ -1,6 +1,7 @@
 #install.packages("devtools")
 devtools::install_local(getwd())
 library(pxweb)
+rm(list = ls())
 
 print(sessionInfo())
 

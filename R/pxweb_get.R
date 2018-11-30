@@ -40,16 +40,20 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE){
 #' \code{pxweb_get()} is a wrapper for standard use.
 #'
 #' @inheritParams pxweb_get
-#' @param log_httr_calls Should the calls to the API be logged (for debugging reasons). 
-#'                       If TRUE, all calls and responses are logged and written to "log_pxweb_api_calls_[TIME].txt".
+#' @param log_http_calls Should the http calls to the API be logged (for debugging reasons). 
+#'                       If TRUE, all calls and responses are logged and written to "log_pxweb_api_http_calls.txt" in the working directory.
 #' @param pxweb_metadata A \code{pxweb_metadata} object to use for query. 
 #' @param ... Further arguments sent to \code{httr::POST} (for queries) or \code{httr::GET} (for query = \code{NULL}). 
 #'            If used with query, also supply a \code{pxweb_metadata} object. Otherwise the same parameters are sent to
 #'            both \code{httr::POST} and \code{httr::GET}.
 #' @export
-pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_httr_calls = FALSE, pxweb_metadata = NULL, ...){
-  checkmate::assert_flag(log_httr_calls)
+pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls = FALSE, pxweb_metadata = NULL, ...){
+  checkmate::assert_flag(log_http_calls)
   checkmate::assert_class(pxweb_metadata, classes = "pxweb_metadata", null.ok = TRUE)
+  if(log_http_calls){
+    pxweb_setup_http_log()
+  }
+  
   px <- pxweb(url)
   if(!is.null(query)){
     pxq <- pxweb_query(query)

@@ -7,6 +7,20 @@ cache: packages
   
 jobs:
   include:
+      - stage: api_catalogue_tests
+      r: release
+      install: 
+       - R -e 'install.packages("devtools")'
+       - R -e 'devtools::install_deps(dep = T)'
+      script: 
+       - R CMD build .     
+      after_success: 
+       - bash tests_bash/pxweb.sh 
+       - . PXWEB_ERROR.sh
+       - cat PXWEB_ERROR.sh
+       - echo $PXWEB_ERROR
+       - exit $PXWEB_ERROR
+      if: branch = test     
     - stage: release
       r: release
       env:
@@ -31,21 +45,6 @@ jobs:
       if: branch = master OR branch = test
       env:
         - CURRENT_STAGE=devel
-    - stage: api_catalogue_tests
-      r: release
-      install: 
-       - R -e 'install.packages("devtools")'
-       - R -e 'devtools::install_deps(dep = T)'
-      script: 
-       - R CMD build .     
-      after_success: 
-       - bash tests_bash/pxweb.sh 
-       - . PXWEB_ERROR.sh
-       - cat PXWEB_ERROR.sh
-       - echo $PXWEB_ERROR
-       - exit $PXWEB_ERROR
-      if: branch = test     
-
 
 sudo: required
 
