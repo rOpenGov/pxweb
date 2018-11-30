@@ -13,7 +13,7 @@
 #'  scb_pxweb_api <- pxweb_api$new(get_api = "api.scb.se")
 #'  scb_pxweb_api
 #'  
-#'  
+#' @keywords internal
 #' @export pxweb_api
 pxweb_api <- 
   setRefClass(
@@ -72,6 +72,7 @@ pxweb_api <-
       
       initialize = function(get_api = NULL, ...){
         'Create a new pxweb_api object.'
+        .Deprecated("pxweb")
         if(is.null(get_api)){
           .self$initFields(...)
           .self$check_input()
