@@ -4,7 +4,9 @@
 \alias{pxweb_http_log_on}
 \alias{pxweb_http_log_off}
 \alias{pxweb_log_paths_path}
+\alias{pxweb_http_log_is_on}
 \alias{pxweb_log_http_response}
+\alias{pxweb_response_to_log_as_json}
 \title{Setup a structure to log all API calls}
 \usage{
 pxweb_http_log_on(fn = "log_pxweb_api_http_calls.txt")
@@ -13,7 +15,11 @@ pxweb_http_log_off()
 
 pxweb_log_paths_path()
 
+pxweb_http_log_is_on()
+
 pxweb_log_http_response(r)
+
+pxweb_response_to_log_as_json(r)
 }
 \arguments{
 \item{fn}{The file name of the log file.}
