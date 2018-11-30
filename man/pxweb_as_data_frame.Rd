@@ -8,7 +8,11 @@
 \alias{pxweb_as_data_frame.pxweb_levels}
 \alias{as.data.frame.pxweb_data}
 \alias{as.data.frame.pxweb_levels}
-\title{Coerce to a \code{data.frame}}
+\alias{pxweb_as_matrix}
+\alias{pxweb_as_matrix.pxweb_data}
+\alias{as.matrix.pxweb_data}
+\alias{pxweb_pxd_slot_idx_pos}
+\title{Coerce a \code{pxweb_data} object to a \code{data.frame}}
 \usage{
 pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
   stringsAsFactors = default.stringsAsFactors(),
@@ -29,10 +33,21 @@ pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
 
 \method{as.data.frame}{pxweb_data}(x, row.names = NULL,
   optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(),
-  column.name.type = "text")
+  column.name.type = "text", variable.value.type = "text")
 
 \method{as.data.frame}{pxweb_levels}(x, row.names = NULL,
   optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors())
+
+pxweb_as_matrix(x, row.names = NULL, column.name.type = "text",
+  variable.value.type = "text")
+
+\method{pxweb_as_matrix}{pxweb_data}(x, row.names = NULL,
+  column.name.type = "text", variable.value.type = "text")
+
+\method{as.matrix}{pxweb_data}(x, ..., row.names = NULL,
+  column.name.type = "text", variable.value.type = "text")
+
+pxweb_pxd_slot_idx_pos(x)
 }
 \arguments{
 \item{x}{an object to convert to \code{data.frame}.}
@@ -50,7 +65,7 @@ pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
 \item{variable.value.type}{character: should \code{code} or \code{text} be used as values in columns?}
 }
 \description{
-Coerce to a \code{data.frame}
+Coerce a \code{pxweb_data} object to a \code{data.frame}
 }
 \seealso{
 \code{\link[base]{as.data.frame}}.

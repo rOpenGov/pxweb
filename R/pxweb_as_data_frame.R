@@ -1,4 +1,4 @@
-#' Coerce to a \code{data.frame}
+#' Coerce a \code{pxweb_data} object to a \code{data.frame}
 #' 
 #' @param x an object to convert to \code{data.frame}.
 #' @param row.names See \code{\link[base]{as.data.frame}}.
@@ -28,19 +28,12 @@ pxweb_as_data_frame.pxweb_data <-  function(x, row.names = NULL, optional = FALS
   checkmate::assert_flag(stringsAsFactors)
   
   # Fill out
-  df <- matrix("", ncol = pxdims[2], nrow = pxdims[1])
-  slot_idx <- c(rep(1, length(x$data[[1]]$key)), rep(2, length(x$data[[1]]$values)))
-  slot_pos <- c(1:length(x$data[[1]]$key), 1:length(x$data[[1]]$values))
-  for(i in 1:pxdims[1]){
-    for(j in 1:pxdims[2]){
-      df[i, j] <- x$data[[i]][[slot_idx[j]]][[slot_pos[j]]]
-    }
-  }
+  df <- pxweb_as_matrix(x)
+  slot <- pxweb_pxd_slot_idx_pos(x)
   df <- as.data.frame(df, stringsAsFactors = FALSE, optional = optional, ...)
-  colnames(df) <- pxweb_data_colnames(x, column.name.type)
   dat_code_cn <- pxweb_data_colnames(x, "code")
   for(j in 1:pxdims[2]){
-    if(slot_idx[j] == 1){
+    if(slot$idx[j] == 1){
       df[, j] <- as.factor(df[, j])
       if(variable.value.type == "text"){
         levels(df[, j]) <- pxd_values_to_valuetexts(x, dat_code_cn[j], levels(df[, j]))
@@ -126,7 +119,8 @@ as.data.frame.pxweb_data <- function(x,
                                      optional = FALSE, 
                                      ..., 
                                      stringsAsFactors = default.stringsAsFactors(), 
-                                     column.name.type = "text"
+                                     column.name.type = "text",
+                                     variable.value.type = "text"
                                      ){
   
   pxweb_as_data_frame(x, 
@@ -134,7 +128,8 @@ as.data.frame.pxweb_data <- function(x,
                       optional = optional,
                       ...,
                       stringsAsFactors = stringsAsFactors,
-                      column.name.type = column.name.type)
+                      column.name.type = column.name.type,
+                      variable.value.type = variable.value.type)
 }
 
 
@@ -151,4 +146,55 @@ as.data.frame.pxweb_levels <- function(x,
                       optional = optional,
                       ...,
                       stringsAsFactors = stringsAsFactors)
+}
+
+
+#' @rdname pxweb_as_data_frame
+#' @keywords internal
+pxweb_as_matrix <- function(x, row.names = NULL, column.name.type = "text", variable.value.type = "text"){
+  checkmate::assert_choice(column.name.type, c("code", "text"))
+  checkmate::assert_choice(column.name.type, c("code", "text"))  
+  UseMethod("pxweb_as_matrix")
+}
+
+#' @rdname pxweb_as_data_frame
+#' @keywords internal
+pxweb_as_matrix.pxweb_data <-  function(x, row.names = NULL, column.name.type = "text", variable.value.type = "text"){
+  pxdims <- pxweb_data_dim(x)
+  checkmate::assert_character(row.names, len = pxdims[1], null.ok = TRUE)
+  checkmate::assert_choice(column.name.type, c("code", "text"))
+  checkmate::assert_choice(variable.value.type, c("code", "text"))
+  # Fill out
+  mat <- matrix("", ncol = pxdims[2], nrow = pxdims[1])
+  slot <- pxweb_pxd_slot_idx_pos(x)
+  for(i in 1:pxdims[1]){
+    for(j in 1:pxdims[2]){
+      mat[i, j] <- x$data[[i]][[slot$idx[j]]][[slot$pos[j]]]
+    }
+  }
+  colnames(mat) <- pxweb_data_colnames(x, column.name.type)
+  if(!is.null(row.names)) {
+    rownames(mat) <- row.names
+  }
+  mat
+}
+
+
+#' @rdname pxweb_as_data_frame
+#' @export 
+as.matrix.pxweb_data <- function(x, ..., row.names = NULL, column.name.type = "text", variable.value.type = "text"){
+  pxweb_as_matrix(x, 
+                  row.names = row.names,
+                  column.name.type = column.name.type,
+                  variable.value.type = variable.value.type)
+}
+
+
+#' @rdname pxweb_as_data_frame
+#' @keywords internal
+pxweb_pxd_slot_idx_pos <- function(x){
+  checkmate::assert_class(x, "pxweb_data")
+  slot_idx <- c(rep(1, length(x$data[[1]]$key)), rep(2, length(x$data[[1]]$values)))
+  slot_pos <- c(1:length(x$data[[1]]$key), 1:length(x$data[[1]]$values))
+  list(idx = slot_idx, pos = slot_pos)
 }

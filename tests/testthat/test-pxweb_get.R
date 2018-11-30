@@ -87,9 +87,17 @@ test_that(desc="Converting pxweb data to matrices and data.frames",{
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
   # save(px_data, file = "px_data_example.rda")
+  # load("px_data_example.rda")
   expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query)))
-  expect_silent(as.data.frame(px_data))
-  # expect_silent(as.matrix(px_data)) 
+
+  expect_silent(df <- as.data.frame(px_data))
+  expect_s3_class(df, "data.frame")
+  expect_equal(dim(df), expected = c(3,3))
+  
+  expect_silent(mat <- as.matrix(px_data))
+  expect_true(is.matrix(mat))
+  expect_true(is.character(mat))
+  expect_equal(dim(mat), expected = c(3,3))
 })  
 
 

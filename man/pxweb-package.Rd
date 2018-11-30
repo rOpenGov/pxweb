@@ -7,3 +7,8 @@
 \description{
 Interface to the PX-WEB API
 }
+\references{
+https://www.scb.se/en/About-us/about-the-website-and-terms-of-use/open-data-api/api-for-the-statistical-database/
+Documentation
+PXWEB home page
+}
