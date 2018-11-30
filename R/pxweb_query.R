@@ -148,7 +148,7 @@ print.pxweb_query <- function(x, ...){
     cat(" [[", i ,"]] ",  x$query[[i]]$code," (", x$query[[i]]$selection$filter, "):\n", sep = "")
     cat("   ", paste(x$query[[i]]$selection$values, collapse = ", "), "\n", sep = "")    
   }
-  if(pxq$response$format == "json-stat"){
+  if(x$response$format == "json-stat"){
     cat("return: json-stat\n")
   }
 }

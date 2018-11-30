@@ -27,7 +27,7 @@
 #' 
 #' @export
 pxweb_get <- function(url, query = NULL, verbose = TRUE){
-  pxweb_advanced_get(url = url, query = NULL, verbose = TRUE)
+  pxweb_advanced_get(url = url, query = query, verbose = verbose)
 }
 
 
