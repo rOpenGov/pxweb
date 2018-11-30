@@ -28,6 +28,7 @@
 #' Then filter is set to 'all'. See examples. 
 #'
 #' @return list of two data sets (label and id)
+#' @keywords internal
 #' @export
 #' 
 #' @importFrom jsonlite unbox read_json
@@ -112,6 +113,7 @@ ApiData <- function(urlToData, ..., getDataByGET = FALSE, returnMetaData = FALSE
                     returnMetaFrames = FALSE, returnApiQuery = FALSE, 
                     defaultJSONquery = c(1,-2, -1), verbosePrint = FALSE,
                     use_factors=FALSE, urlType="SSB") {
+  .Deprecated(new = "pxweb_advanced_get")
   integerUrl <- suppressWarnings(as.integer(urlToData))
   if (!is.na(integerUrl)) 
     urlToData <- MakeUrl(integerUrl, urlType = urlType, getDataByGET = getDataByGET) # SSBurl(integerUrl, getDataByGET)
@@ -354,6 +356,7 @@ SSBurlen <- function(id, readyMade = FALSE) {
 #' MakeUrl(1066, getDataByGET = TRUE)
 #' MakeUrl(1066, "SSBen", getDataByGET = TRUE)
 MakeUrl <- function(id,urlType="SSB",getDataByGET = FALSE){
+  .Deprecated(new = "pxweb")
   if(urlType=="SSB")
     return(SSBurl(id,getDataByGET))
   if(urlType=="SSBen")
