@@ -27,6 +27,29 @@
 #' 
 #' @export
 pxweb_get <- function(url, query = NULL, verbose = TRUE){
+  pxweb_advanced_get(url = url, query = NULL, verbose = TRUE)
+}
+
+
+#' Do a GET call to PXWEB API url with more control for advanced users
+#'
+#' @details 
+#' This function is intended for more advanced users that want to supply specific arguments in
+#' \code{httr} calls or what to debug \code{httr} calls. 
+#' 
+#' \code{pxweb_get()} is a wrapper for standard use.
+#'
+#' @inheritParams pxweb_get
+#' @param log_httr_calls Should the calls to the API be logged (for debugging reasons). 
+#'                       If TRUE, all calls and responses are logged and written to "log_pxweb_api_calls_[TIME].txt".
+#' @param pxweb_metadata A \code{pxweb_metadata} object to use for query. 
+#' @param ... Further arguments sent to \code{httr::POST} (for queries) or \code{httr::GET} (for query = \code{NULL}). 
+#'            If used with query, also supply a \code{pxweb_metadata} object. Otherwise the same parameters are sent to
+#'            both \code{httr::POST} and \code{httr::GET}.
+#' @export
+pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_httr_calls = FALSE, pxweb_metadata = NULL, ...){
+  checkmate::assert_flag(log_httr_calls)
+  checkmate::assert_class(pxweb_metadata, classes = "pxweb_metadata", null.ok = TRUE)
   px <- pxweb(url)
   if(!is.null(query)){
     pxq <- pxweb_query(query)
@@ -40,10 +63,10 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE){
   } else {
     pxq <- NULL
   }
-
+  
   if(is.null(pxq)){
     px <- pxweb_add_call(px)  
-    r <- httr::GET(build_pxweb_url(px))
+    r <- httr::GET(build_pxweb_url(px), ...)
     httr::stop_for_status(r)
     pxr <- pxweb_parse_response(x = r)
   } else {
@@ -55,7 +78,7 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE){
     for(i in seq_along(pxqs)){
       px <- pxweb_add_call(px)  
       pxurl <- build_pxweb_url(px)
-      r <- httr::POST(pxurl, body = pxweb_as_json(pxqs[[i]]))
+      r <- httr::POST(pxurl, body = pxweb_as_json(pxqs[[i]]), ...)
       httr::stop_for_status(r)
       pxr[[i]] <- pxweb_parse_response(x = r)
       if(length(pxqs) > 1 & verbose) {
