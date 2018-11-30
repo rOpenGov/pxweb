@@ -6,8 +6,10 @@
 #' @examples
 #' api_catalogue()
 #' 
+#' @keywords internal
 #' @export
 api_catalogue <- function(){
+  .Deprecated("pxweb_api_catalogue")
   apis <- names(get_api_list())
   api_catalogue <- list()
   for(api in seq_along(apis)){
@@ -21,8 +23,10 @@ api_catalogue <- function(){
 #' @details
 #' Downloads the latest api catalogue from github.
 #' 
+#' @keywords internal
 #' @export
 update_pxweb_apis <- function(){
+  .Deprecated("No longer allowed by CRAN. See vignette(\"pxweb\") on how to update your API catalogue.")
   api_list <- get_api_list(raw = TRUE)
   api_remote_list <- get_api_list_remote(raw = TRUE)
   api_list$apis <- api_remote_list$apis
