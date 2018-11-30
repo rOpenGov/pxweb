@@ -128,6 +128,14 @@ if(any(duplicated_alias)){
   print(api_alias_table[duplicated_alias,])
 }
 
+# Check for duplicates in names
+api_cat <- pxweb_api_catalogue()
+duplicated_names <- duplicated(names(api_cat))
+if(any(duplicated_names)){
+  cat("\nDUPLICATE NAMES IDENTIFIED:\n\n")
+  print(names(api_cat)[duplicated_names])
+}
+
 # Check API parameters has en as default
 apis <- pxweb_api_catalogue()
 parameter_error <- rep(FALSE, length(apis))
@@ -141,8 +149,7 @@ for (i in seq_along(apis)) {
 }
 
 
-
-if(any(errored) | length(warns) > 0 | any(config_diff) | any(new_api_errored) | any_duplicate_alias | any(parameter_error)){
+if(any(errored) | length(warns) > 0 | any(config_diff) | any(new_api_errored) | any_duplicate_alias | any(parameter_error) | any(duplicated_names)){
   quit(save = "no", status = 1)
 }
 
