@@ -119,8 +119,29 @@ if(any(new_api_errored)){
 }
 
 
+# Check for duplicates in Alias
+api_alias_table <- pxweb:::pxweb_api_catalogue_alias_table()
+duplicated_alias <- duplicated(api_alias_table$alias)
+if(any(duplicated_alias)){
+  cat("\nDUPLICATE ALIAS IDENTIFIED:\n\n")
+  print(api_alias_table[duplicated_alias,])
+}
 
-if(any(errored) | length(warns) > 0 | any(config_diff) | any(new_api_errored)){
+# Check API parameters has en as default
+apis <- pxweb_api_catalogue()
+parameter_error <- rep(FALSE, length(apis))
+for (i in seq_along(apis)) {
+  if("en" %in% apis[[i]]$lang) {
+    if(apis[[i]]$lang[1] != "en"){
+      cat("LANGUAGE PARAMETERS ERROR ('en' should be default):", names(apis[i]), "\n")
+      parameter_error[i] <- TRUE
+    }
+  }
+}
+
+
+
+if(any(errored) | length(warns) > 0 | any(config_diff) | any(new_api_errored) | any_duplicate_alias | any(parameter_error)){
   quit(save = "no", status = 1)
 }
 
