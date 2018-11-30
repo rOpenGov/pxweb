@@ -8,7 +8,14 @@
 #' 
 #' @export
 pxweb_api_catalogue <- function(){
-  apis <- jsonlite::fromJSON(pxweb_api_catalogue_path())
+  pxweb_api_catalogue_from_json(pxweb_api_catalogue_path())
+}
+
+#' @rdname pxweb_api_catalogue
+#' @keywords internal
+pxweb_api_catalogue_from_json <- function(json){
+  checkmate::assert_string(json)
+  apis <- jsonlite::fromJSON(json)
   pxweb_api_catalogue <- list()
   for(i in seq_along(apis$apis)){
     pxweb_api_catalogue[[names(apis$apis)[i]]] <- pxweb_api_catalogue_entry(apis$apis[[i]])
@@ -16,6 +23,17 @@ pxweb_api_catalogue <- function(){
   class(pxweb_api_catalogue) <- c("pxweb_api_catalogue", "list")
   assert_pxweb_api_catalogue(pxweb_api_catalogue)
   return(pxweb_api_catalogue)
+}
+
+#' @rdname pxweb_api_catalogue
+#' @keywords internal
+pxweb_api_catalogue_from_github <- function(branch = "master"){
+  checkmate::assert_string(branch)
+  url_raw <- paste0("https://raw.githubusercontent.com/rOpenGov/pxweb/", branch, "/inst/extdata/api.json")
+  request <- httr::GET(url_raw)
+  httr::stop_for_status(request)
+  api_json <- httr::content(request)
+  pxweb_api_catalogue_from_json(json = api_json)
 }
 
 #' @rdname pxweb_api_catalogue
