@@ -18,3 +18,4 @@ a \code{pxweb_data_comments} object
 \description{
 An object that contain the comments for a given PXWEB table.
 }
+\keyword{internal}

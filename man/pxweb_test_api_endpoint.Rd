@@ -2,7 +2,7 @@
 % Please edit documentation in R/pxweb_test_api_endpoint.R
 \name{pxweb_test_api_endpoint}
 \alias{pxweb_test_api_endpoint}
-\title{Test a full or a part of an pxweb api.}
+\title{Test a full or a part of a PXWEB api.}
 \usage{
 pxweb_test_api_endpoint(url, test_type = "first", n = 1,
   verbose = TRUE, time_limit = Inf)

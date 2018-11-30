@@ -1,8 +1,8 @@
-#' PXWEB query constructor
+#' Create a PXWEB query
 #'
 #' @description 
 #' Creates a pxweb query object from either a list with named values, 
-#' json query file or json query string. See examples.
+#' a json query file or json query string. See examples below.
 #'
 #' @param x an object to cast as a pxweb_query object.
 #' 
@@ -16,7 +16,6 @@
 #'                         "extdata", "examples", "json_query_example.json")
 #' pxq2 <- pxweb_query(json_query)
 #' 
-#' @keywords internal
 #' @export
 pxweb_query <- function(x){
   UseMethod("pxweb_query")
@@ -267,7 +266,7 @@ pxweb_query_filter <- function(pxq){
 }
 
 
-#' Convert a \code{pxweb_query} object to a json object
+#' Convert a \code{pxweb_query} object to a \code{json} string
 #' @param pxq a \code{pxweb_query} object.
 #' @param ... further argument to \code{jsonlite::toJSON()}.
 #' @export

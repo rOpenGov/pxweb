@@ -2,7 +2,7 @@
 % Please edit documentation in R/pxweb_interactive.R
 \name{pxweb_interactive}
 \alias{pxweb_interactive}
-\title{Find and download data interactively from PX-WEB API}
+\title{Find and download data interactively from a PXWEB API}
 \usage{
 pxweb_interactive(x = NULL)
 }

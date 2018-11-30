@@ -2,7 +2,7 @@
 % Please edit documentation in R/pxweb_query.R
 \name{pxweb_query_as_json}
 \alias{pxweb_query_as_json}
-\title{Convert a \code{pxweb_query} object to a json object}
+\title{Convert a \code{pxweb_query} object to a \code{json} string}
 \usage{
 pxweb_query_as_json(pxq, ...)
 }
@@ -12,5 +12,5 @@ pxweb_query_as_json(pxq, ...)
 \item{...}{further argument to \code{jsonlite::toJSON()}.}
 }
 \description{
-Convert a \code{pxweb_query} object to a json object
+Convert a \code{pxweb_query} object to a \code{json} string
 }

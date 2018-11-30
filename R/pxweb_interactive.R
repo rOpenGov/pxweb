@@ -1,4 +1,4 @@
-#' @title Find and download data interactively from PX-WEB API
+#' @title Find and download data interactively from a PXWEB API
 #'
 #' @description Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session. 
 #' 

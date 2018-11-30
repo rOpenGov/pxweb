@@ -1,4 +1,4 @@
-#' Test a full or a part of an pxweb api.
+#' Test a full or a part of a PXWEB api.
 #' 
 #' @description
 #' The function can be used to test a whole pxweb api by using the api base url.

@@ -7,7 +7,7 @@
 \alias{pxweb_query.pxweb_query}
 \alias{pxweb_query.list}
 \alias{pxweb_query.pxweb_explorer}
-\title{PXWEB query constructor}
+\title{Create a PXWEB query}
 \usage{
 pxweb_query(x)
 
@@ -26,7 +26,7 @@ pxweb_query(x)
 }
 \description{
 Creates a pxweb query object from either a list with named values, 
-json query file or json query string. See examples.
+a json query file or json query string. See examples below.
 }
 \examples{
 dims <- list(Alue = c("*"),

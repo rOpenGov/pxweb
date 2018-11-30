@@ -2,7 +2,7 @@
 % Please edit documentation in R/pxweb_get.R
 \name{pxweb_get}
 \alias{pxweb_get}
-\title{Do a GET call to PXWEB API url}
+\title{Do a GET call to PXWEB API}
 \usage{
 pxweb_get(url, query = NULL, verbose = TRUE)
 }
@@ -14,7 +14,7 @@ pxweb_get(url, query = NULL, verbose = TRUE)
 \item{verbose}{should large queries print out progress.}
 }
 \description{
-Do a GET call to PXWEB API url
+Do a GET call to PXWEB API
 }
 \examples{
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"

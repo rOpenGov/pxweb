@@ -1,4 +1,4 @@
-#' Do a GET call to PXWEB API url
+#' Do a GET call to PXWEB API
 #'
 #' @param url a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.
 #' @param query a json string, json file or list object that can be coherced to a \code{pxweb_query} object.
@@ -31,7 +31,7 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE){
 }
 
 
-#' Do a GET call to PXWEB API url with more control for advanced users
+#' Do a GET call to PXWEB API for advanced users
 #'
 #' @details 
 #' This function is intended for more advanced users that want to supply specific arguments in

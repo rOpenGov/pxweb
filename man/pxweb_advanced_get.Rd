@@ -2,7 +2,7 @@
 % Please edit documentation in R/pxweb_get.R
 \name{pxweb_advanced_get}
 \alias{pxweb_advanced_get}
-\title{Do a GET call to PXWEB API url with more control for advanced users}
+\title{Do a GET call to PXWEB API for advanced users}
 \usage{
 pxweb_advanced_get(url, query = NULL, verbose = TRUE,
   log_http_calls = FALSE, pxweb_metadata = NULL, ...)
@@ -24,7 +24,7 @@ If used with query, also supply a \code{pxweb_metadata} object. Otherwise the sa
 both \code{httr::POST} and \code{httr::GET}.}
 }
 \description{
-Do a GET call to PXWEB API url with more control for advanced users
+Do a GET call to PXWEB API for advanced users
 }
 \details{
 This function is intended for more advanced users that want to supply specific arguments in

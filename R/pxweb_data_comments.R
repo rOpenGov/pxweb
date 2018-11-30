@@ -14,6 +14,7 @@ pxweb_data_comments <- function(x){
 }
 
 #' @rdname pxweb_data_comments
+#' @keywords internal
 #' @export
 pxweb_data_comments.pxweb_data <- function(x){
   checkmate::assert_class(x, "pxweb_data")
