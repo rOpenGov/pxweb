@@ -27,9 +27,12 @@ pxweb_query <- function(x){
 #' @export
 pxweb_query.character <- function(x){
   obj <- jsonlite::fromJSON(x, simplifyDataFrame = FALSE)
+  if(is.character(obj)){
+    stop("jsonlite::fromJSON() cannot parse the PXWEB (JSON) query. Please check your (JSON) query.", call. = FALSE)
+  }
   class(obj) <- c("pxweb_query", "list")
-  obj$response$format <- "json"
   assert_pxweb_query(obj)
+  obj$response$format <- "json"
   obj
 }
 
@@ -37,7 +40,7 @@ pxweb_query.character <- function(x){
 #' @keywords internal
 #' @export
 pxweb_query.json <- function(x){
-  pxweb_query(as.character(x))
+  pxweb_query(x = as.character(x))
 }
 
 #' @rdname pxweb_query

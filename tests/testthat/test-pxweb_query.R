@@ -73,3 +73,10 @@ test_that(desc="split pxweb_query object",{
 })  
 
 
+
+test_that(desc="pxweb_query JSON parse error message",{
+  json_query <- file.path(system.file(package = "pxweb"), "extdata", "test_files", "json_queries", "json_single_query_test.json")
+  jq <- jsonlite::toJSON(paste(readLines(json_query), collapse = " "))
+  expect_error(pxq1 <- pxweb_query(x = jq), regexp = "cannot parse")
+})
+
