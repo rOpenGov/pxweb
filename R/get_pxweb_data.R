@@ -15,6 +15,7 @@
 #' @seealso
 #' \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_dims}}, \code{\link{get_pxweb_levels}}
 #' 
+#' @keywords internal
 #' @export
 #' @examples
 #' \dontrun{
@@ -23,9 +24,8 @@
 #'                  dims = list(ContentsCode = c('PR0101A1'), Tid = c('*')),
 #'                  clean = FALSE)
 #' }
-
 get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
-
+  .Deprecated("pxweb_get_data")
    dims <- reorder_and_check_dims(url, dims)
    dimNames <- names(dims)
    batches <- create_batch_list(url = url, dims = dims)
