@@ -31,8 +31,13 @@ pxweb_query.character <- function(x){
     stop("jsonlite::fromJSON() cannot parse the PXWEB (JSON) query. Please check your (JSON) query.", call. = FALSE)
   }
   class(obj) <- c("pxweb_query", "list")
+  assert_pxweb_query(obj, check_response_format = FALSE)
+  if(tolower(obj$response$format) %in% c("json-stat", "jsonstat")){
+    obj$response$format <- "json-stat"
+  } else {
+    obj$response$format <- "json"    
+  }
   assert_pxweb_query(obj)
-  obj$response$format <- "json"
   obj
 }
 
@@ -97,11 +102,14 @@ pxweb_query.pxweb_explorer <- function(x){
 #' @param x an object to assert conferms to the structure of an pxweb_query object.
 #' 
 #' @keywords internal
-assert_pxweb_query <- function(x){
+assert_pxweb_query <- function(x, check_response_format = TRUE){
   checkmate::assert_class(x, c("pxweb_query", "list"), .var.name = "pxweb_query")
   checkmate::assert_names(names(x), must.include = c("query", "response"), .var.name = "names(pxweb_query)")
   checkmate::assert_names(names(x$response), must.include = c("format"))
-  checkmate::assert_choice(x$response$format, c("json"))
+  if(check_response_format){
+    checkmate::assert_choice(x$response$format, c("json", "json-stat"))
+  }
+
 
   checkmate::assert_named(x$query, "unnamed")
   for(i in seq_along(x$query)){
@@ -139,6 +147,9 @@ print.pxweb_query <- function(x, ...){
   for(i in seq_along(x$query)){
     cat(" [[", i ,"]] ",  x$query[[i]]$code," (", x$query[[i]]$selection$filter, "):\n", sep = "")
     cat("   ", paste(x$query[[i]]$selection$values, collapse = ", "), "\n", sep = "")    
+  }
+  if(pxq$response$format == "json-stat"){
+    cat("return: json-stat\n")
   }
 }
 
