@@ -20,7 +20,7 @@
 #' @importFrom plyr rbind.fill
 #'  
 test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time())){
-
+  .Deprecated("pxweb_test_api_endpoint")
   node0 <- get_pxweb_metadata(path=url)
   if("dbid" %in% names(node0)){
     nodes <- list()
