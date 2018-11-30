@@ -3,6 +3,7 @@
 \name{pxweb_query}
 \alias{pxweb_query}
 \alias{pxweb_query.character}
+\alias{pxweb_query.json}
 \alias{pxweb_query.pxweb_query}
 \alias{pxweb_query.list}
 \alias{pxweb_query.pxweb_explorer}
@@ -11,6 +12,8 @@
 pxweb_query(x)
 
 \method{pxweb_query}{character}(x)
+
+\method{pxweb_query}{json}(x)
 
 \method{pxweb_query}{pxweb_query}(x)
 

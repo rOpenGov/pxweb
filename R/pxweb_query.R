@@ -36,6 +36,13 @@ pxweb_query.character <- function(x){
 #' @rdname pxweb_query
 #' @keywords internal
 #' @export
+pxweb_query.json <- function(x){
+  pxweb_query(as.character(x))
+}
+
+#' @rdname pxweb_query
+#' @keywords internal
+#' @export
 pxweb_query.pxweb_query <- function(x){
   return(x)
 }
