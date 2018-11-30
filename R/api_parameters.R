@@ -9,6 +9,7 @@
 #' 
 #' @examples api_parameters()
 api_parameters <- function(url = NULL) {
+  .Deprecated(new = "pxweb_api_catalogue")
 
   api.list <- get_api_list()
   
@@ -35,6 +36,7 @@ api_parameters <- function(url = NULL) {
 #'
 #' @export
 print.api_parameters <- function(x, ...){
+  .Deprecated(new = "pxweb_api_catalogue")
   api_names <- names(x)[names(x) != "foo.bar"]
   for (api in seq_along(api_names)){
     cat("[[", api ,"]]\napi:         ",api_names[api],"\n", sep="")
