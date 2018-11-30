@@ -60,3 +60,37 @@ test_that(desc="Previous bugs",{
   # Missing title
   expect_silent(pxmd <- pxweb_get(url = "http://statistik.linkoping.se/PXWeb/api/v1/sv/Omsorg/Behandlingshem/ombeh01.px"))
 })  
+
+
+
+test_that(desc="Test to download json-stat objects",{
+  # Test json-stat
+  url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  json_query <- file.path(system.file(package = "pxweb"), "extdata", "test_files", "json_queries", "json_single_query_test.json")
+  jqf <- paste(readLines(json_query), collapse = " "); class(jqf) <- "json"
+  
+  jq <- gsub("json", "json-stat", jqf)
+  pxq <- pxweb_query(x = jq)
+  expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = pxq)))
+  expect_s3_class(px_data, "json")
+
+  jq <- gsub("json", "jsonstat", jqf)
+  pxq <- pxweb_query(x = jq)
+  expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = pxq)))
+  expect_s3_class(px_data, "json")
+  
+})  
+
+
+test_that(desc="Converting pxweb data to matrices and data.frames",{
+  # Move to 
+  url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
+  # save(px_data, file = "px_data_example.rda")
+  expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query)))
+  expect_silent(as.data.frame(px_data))
+  # expect_silent(as.matrix(px_data)) 
+})  
+
+
+

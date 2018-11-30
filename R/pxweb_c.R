@@ -5,9 +5,17 @@
 #' @keywords internal
 pxweb_c <- function(x){
   checkmate::assert_class(x, "list")
-  if(length(x) == 1) return(x[[1]])
+  if(length(x) == 1) {
+    return(x[[1]])
+  }
   
-  if(inherits(x[[1]], "pxweb_data")) return(pxweb_data_c(x))
+  if(inherits(x[[1]], "pxweb_data")) {
+    return(pxweb_data_c(x))
+  }
+  
+  if(inherits(x[[1]], "json")) {
+    return(x)
+  }
   
   stop("pxweb_c() not implemented for class '", class(x[[1]])[1], "'.", call. = FALSE)
 }
