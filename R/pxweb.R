@@ -60,6 +60,7 @@ pxweb <- function(url){
 
 
 #' @rdname pxweb
+#' @keywords internal
 #' @export
 is.pxweb <-function(x) inherits(x, "pxweb")
 

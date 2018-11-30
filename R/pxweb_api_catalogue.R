@@ -100,6 +100,7 @@ assert_pxweb_api_catalogue_entry <- function(x){
 #' Print a catalogue entry
 #' @param x an object used to select a method.
 #' @param ... further arguments passed to or from other methods.
+#' @keywords internal
 #' @export
 print.pxweb_api_catalogue_entry <- function(x, ...){
   cat("Api:", pxweb_api_name(x))

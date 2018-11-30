@@ -127,6 +127,7 @@ print.pxweb_data_comment <- function(x, ...){
 
 
 #' @export
+#' @keywords internal
 print.pxweb_data_comments <- function(x, ...){
   if(length(x$comments) <= 0){
     cat("NO PXWEB DATA COMMENTS\n")
