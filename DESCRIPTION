@@ -28,15 +28,15 @@ Depends:
     methods
 Imports:
     checkmate,
+    httr (>= 1.1),
+    jsonlite
+License: BSD_2_clause + file LICENSE
+Suggests:
+    rjstat, 
     data.table,
     plyr,
     stringr,
     RJSONIO,
-    httr (>= 1.1),
-    rjstat, 
-    jsonlite
-License: BSD_2_clause + file LICENSE
-Suggests:
     ggplot2,
     knitr,
     rmarkdown,    
