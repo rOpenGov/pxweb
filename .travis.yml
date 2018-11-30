@@ -7,7 +7,7 @@ cache: packages
   
 jobs:
   include:
-      - stage: api_catalogue_tests
+    - stage: api_catalogue_tests
       r: release
       install: 
        - R -e 'install.packages("devtools")'
