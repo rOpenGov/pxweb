@@ -14,3 +14,4 @@
 \description{
 Print a catalogue entry
 }
+\keyword{internal}

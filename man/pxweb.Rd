@@ -40,3 +40,4 @@ pxapi_1 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/
 pxapi_2 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv")
 
 }
+\keyword{internal}
