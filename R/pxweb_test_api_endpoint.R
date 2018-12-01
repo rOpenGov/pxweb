@@ -26,11 +26,11 @@
 #' @examples 
 #' \dontrun{
 #'   url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
-#'   res <- pxweb_test_api_endpoint(url)
-#'   res <- pxweb_test_api_endpoint(url, test_type="touch")
+#'   res <- pxweb_test_api(url)
+#'   res <- pxweb_test_api(url, test_type="touch")
 #' }
 #' @export
-pxweb_test_api_endpoint <- function(url, test_type="first", n = 1, verbose = TRUE, time_limit = Inf){
+pxweb_test_api <- function(url, test_type="first", n = 1, verbose = TRUE, time_limit = Inf){
   px <- pxweb(url)
   checkmate::assert_choice(test_type, c("first", "sample", "full", "touch"))
   checkmate::assert_int(n, lower = 1)
