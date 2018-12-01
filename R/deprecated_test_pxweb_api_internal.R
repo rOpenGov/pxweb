@@ -10,10 +10,12 @@
 #' 
 #' @keywords internal 
 #' 
-#' @import data.table 
-
 test_pxweb_api_get_nodes <- function(url){
 
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("Package \"data.table\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
   nodes <- data.table::as.data.table(get_pxweb_metadata(path=url))
   nodes$level <- 1
   nodes$checked <- FALSE

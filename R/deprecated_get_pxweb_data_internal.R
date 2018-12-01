@@ -24,7 +24,11 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
   colnames(data2clean) <- str_replace_all(colnames(data2clean), pattern = ",", ";")
   head <- colnames(data2clean)
   #colnames(data2clean) <- as.character(1:length(head))
-  data2clean <- as.data.table(data2clean)
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("Package \"data.table\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+  data2clean <- data.table::as.data.table(data2clean)
     
   # Get metadata to use in creating factors of Tid and contentCode
   if(is.null(content_node)){
