@@ -102,6 +102,7 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
   if(is.null(pxq)){
     px <- pxweb_add_call(px)  
     r <- httr::GET(build_pxweb_url(px), ...)
+    pxweb_http_log_response(r)
     httr::stop_for_status(r)
     pxr <- pxweb_parse_response(x = r)
   } else {
@@ -114,6 +115,7 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
       px <- pxweb_add_call(px)  
       pxurl <- build_pxweb_url(px)
       r <- httr::POST(pxurl, body = pxweb_as_json(pxqs[[i]]), ...)
+      pxweb_http_log_response(r)
       httr::stop_for_status(r)
       pxr[[i]] <- pxweb_parse_response(x = r)
       if(length(pxqs) > 1 & verbose) {
@@ -127,6 +129,9 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
     if(inherits(pxr, "pxweb_data")){
       pxr$pxweb_metadata <- pxmd
     }
+  }
+  if(log_http_calls){
+    pxweb_http_log_off()
   }
   pxr
 }

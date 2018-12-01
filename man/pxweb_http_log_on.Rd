@@ -5,7 +5,7 @@
 \alias{pxweb_http_log_off}
 \alias{pxweb_log_paths_path}
 \alias{pxweb_http_log_is_on}
-\alias{pxweb_log_http_response}
+\alias{pxweb_http_log_response}
 \alias{pxweb_response_to_log_as_json}
 \title{Setup a structure to log all API calls}
 \usage{
@@ -17,7 +17,7 @@ pxweb_log_paths_path()
 
 pxweb_http_log_is_on()
 
-pxweb_log_http_response(r)
+pxweb_http_log_response(r)
 
 pxweb_response_to_log_as_json(r)
 }

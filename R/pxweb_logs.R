@@ -47,7 +47,7 @@ pxweb_http_log_is_on <- function(){
 
 #' @keywords internal
 #' @rdname pxweb_http_log_on
-pxweb_log_http_response <- function(r){
+pxweb_http_log_response <- function(r){
   checkmate::assert_class(r, "response")
   if(!pxweb_http_log_is_on()){
     return(invisible(NULL))
