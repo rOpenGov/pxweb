@@ -17,8 +17,6 @@
 #' 
 #' @keywords internal 
 #' 
-#' @importFrom plyr rbind.fill
-#'  
 test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time())){
   .Deprecated("pxweb_test_api_endpoint")
   node0 <- get_pxweb_metadata(path=url)
@@ -40,7 +38,12 @@ test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time()))
   res <- test_pxweb_api_get_data(nodes=nodes, seed=seed,
                                  nodesList=nodes_list, 
                                  download_all=download_all)
-  res_data <- rbind.fill(nodes[nodes$type == "l", ], res$data)
+  
+  if (!requireNamespace("plyr", quietly = TRUE)) {
+    stop("Package \"plyr\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+  res_data <- plyr::rbind.fill(nodes[nodes$type == "l", ], res$data)
   return(list(data=res_data, calls=res$calls))
 }
 

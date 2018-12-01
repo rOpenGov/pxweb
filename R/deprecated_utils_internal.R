@@ -201,6 +201,10 @@ calculate_data_dim <- function(dim_length, clean){
 #' 
 #' @param x text to change to url-unicode
 text_to_url <- function(x){
+  if (!requireNamespace("stringr", quietly = TRUE)) {
+    stop("Package \"stringr\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
   x <- stringr::str_replace_all(string = x, pattern = " ", replacement = "%20")
   x <- stringr::str_replace_all(string = x, pattern = "\u00E5", replacement = "%C3%A5")  
   x <- stringr::str_replace_all(string = x, pattern = "\u00E4", replacement = "%C3%A4")  

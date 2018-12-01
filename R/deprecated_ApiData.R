@@ -32,7 +32,6 @@
 #' @export
 #' 
 #' @importFrom jsonlite unbox read_json
-#' @importFrom rjstat fromJSONstat 
 #' @importFrom httr GET POST verbose content
 #' @importFrom utils head tail
 #'
@@ -139,9 +138,13 @@ ApiData <- function(urlToData, ..., getDataByGET = FALSE, returnMetaData = FALSE
       if (verbosePrint) 
         post <- POST(urlToData, body = sporr, encode = "json", verbose()) else post <- POST(urlToData, body = sporr, encode = "json")
     }
+  if (!requireNamespace("rjstat", quietly = TRUE)) {
+    stop("Package \"rjstat\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
   #c(fromJSONstat(content(post, "text"), naming = "label"), fromJSONstat(content(post, "text"), naming = "id"))
-  c(fromJSONstat(content(post, "text"), naming = "label",use_factors=use_factors), 
-    fromJSONstat(content(post, "text"), naming = "id",use_factors=use_factors))
+  c(rjstat::fromJSONstat(content(post, "text"), naming = "label",use_factors=use_factors), 
+    rjstat::fromJSONstat(content(post, "text"), naming = "id",use_factors=use_factors))
 }
 
 

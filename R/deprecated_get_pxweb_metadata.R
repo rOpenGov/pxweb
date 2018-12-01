@@ -17,6 +17,10 @@
 get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TRUE, baseURL = NULL, ...) {
 
   .Deprecated("pxweb_get")
+  if (!requireNamespace("RJSONIO", quietly = TRUE)) {
+    stop("Package \"RJSONIO\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
    # Build a URL if no path is supplied
    if (is.null(path)) {
 

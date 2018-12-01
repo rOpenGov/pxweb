@@ -51,8 +51,14 @@ sudo: required
 # Be strict when checking our package
 warnings_are_errors: true
 
+# All but devtools are deprecated dependencies
 r_package:
   - devtools
+  - RJSONIO
+  - rjstat
+  - data.table
+  - plyr
+  - stringr
 
 r_github_packages:
   -  jimhester/covr

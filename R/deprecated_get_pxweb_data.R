@@ -26,6 +26,12 @@
 #' }
 get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
   .Deprecated("pxweb_get_data")
+  
+  if (!requireNamespace("RJSONIO", quietly = TRUE)) {
+    stop("Package \"RJSONIO\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+  
    dims <- reorder_and_check_dims(url, dims)
    dimNames <- names(dims)
    batches <- create_batch_list(url = url, dims = dims)
