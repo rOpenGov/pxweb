@@ -84,7 +84,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
      # about faulty encoding. Hence the suppressMessages() encapsulation...)
      suppressMessages(a <- httr::content(response, as="text", encoding = encoding))
      if(stringr::str_sub(a,1,1)==",") a <- stringr::str_sub(a,2,nchar(a)) # Correcting when the first element is , (few variables)
-     b <- read.table(textConnection(a), sep=',', header=TRUE, stringsAsFactors=FALSE)
+     b <- utils::read.table(textConnection(a), sep=',', header=TRUE, stringsAsFactors=FALSE)
      head <- stringr::str_split(string=stringr::str_sub(a, start=1, end=stringr::str_locate(a,"\n")[[1]]),"\",\"")[[1]]
      head <- stringr::str_replace_all(string=head,pattern="\r|\n|\"","")
      colnames(b) <- head

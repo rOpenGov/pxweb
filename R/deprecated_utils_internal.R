@@ -56,7 +56,7 @@ getContent <- function(response, type = "csv") {
     content <- httr::content(response)
     
     if (type == "csv") {
-        content <- read.table(
+        content <- utils::read.table(
             textConnection(content), 
             sep = ",", 
             header = T, 

@@ -15,7 +15,7 @@
 
 clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {  
   depr_check_for_package("stringr")
-  require("data.table")
+  requireNamespace("data.table")
   
   # Assertions
   stopifnot(class(data2clean) == "data.frame")
@@ -44,6 +44,7 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
                           dim_size = dim_size)
 
   # Melt the data to long format idvars 
+  utils::globalVariables(c(".SD"))
   meltData <- data2clean[, list(variable = names(.SD), value = unlist(.SD, use.names = F)), 
                          by = eval(names(data2clean)[dim_var_type$row_variables])]
   meltData <- as.data.frame(meltData)
@@ -130,7 +131,7 @@ calc_dim_type <- function(dim_data2clean, dim_size){
                               "col_variables" = j:length(dim_size))        
     return(row_col_variables)
   }
-  stop("Can't calculate row and col variables.\nPlease send you API-call to ", maintainer("pxweb"),".") 
+  stop("Can't calculate row and col variables.\nPlease send you API-call to ", utils::maintainer("pxweb"),".") 
 }
 
 
