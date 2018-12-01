@@ -19,7 +19,23 @@
 #'                    "extdata", "examples", "json_query_example.json")
 #' px_data <- pxweb_get(url = url, query = query)
 #' 
+#' # Convert to data.frame
+#' as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
+#' 
+#' # Get raw data
+#' as.matrix(px_data, column.name.type = "code", variable.value.type = "code")
+#' 
+#' # Get data comments
+#' pxweb_data_comments(px_data)
+#' 
+#' # Get jsonstat data
+#' jstat <- query <- file.path(system.file(package = "pxweb"), 
+#'                             "extdata", "examples", "json-stat_query_example.json")
+#' jstat_data <- pxweb_get(url = url, query = query)
+#' 
+#' 
 #' \dontrun{
+#' # Get very large datasets (multiple downloads needed)
 #' big_query <- file.path(system.file(package = "pxweb"), 
 #'                        "extdata", "examples", "json_big_query_example.json")
 #' px_data <- pxweb_get(url = url, query = big_query)
