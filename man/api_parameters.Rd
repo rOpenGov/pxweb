@@ -13,6 +13,8 @@ api_parameters(url = NULL)
 ...
 }
 \examples{
+\dontrun{
 api_parameters()
+}
 }
 \keyword{internal}

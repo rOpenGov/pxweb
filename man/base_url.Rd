@@ -19,8 +19,10 @@ base_url(api, version = NULL, language = NULL)
 ...
 }
 \examples{
+\dontrun{
 a <- base_url("api.scb.se")
 print(a)
+}
 
 }
 \keyword{internal}

@@ -13,7 +13,9 @@ Get the api catalogue
 Get the catalogue of api and store it as a list.
 }
 \examples{
+\dontrun{
 api_catalogue()
+}
 
 }
 \keyword{internal}

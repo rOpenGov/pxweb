@@ -62,8 +62,10 @@ api_name.}
 }}
 
 \examples{
+\dontrun{
  scb_pxweb_api <- pxweb_api$new(get_api = "api.scb.se")
  scb_pxweb_api
+}
  
 }
 \keyword{internal}

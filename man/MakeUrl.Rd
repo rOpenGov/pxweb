@@ -21,9 +21,11 @@ url as string
 MakeUrl from id
 }
 \examples{
+\dontrun{
 MakeUrl(4861)
 MakeUrl(4861, "SSBen")
 MakeUrl(1066, getDataByGET = TRUE)
 MakeUrl(1066, "SSBen", getDataByGET = TRUE)
+}
 }
 \keyword{internal}

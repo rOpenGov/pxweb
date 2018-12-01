@@ -29,7 +29,7 @@ ApiData(urlToData, ..., getDataByGET = FALSE, returnMetaData = FALSE,
 
 \item{verbosePrint}{When TRUE, printing to console}
 
-\item{use_factors}{Parameter to \code{\link{fromJSONstat}} defining whether dimension categories should be factors or character objects.}
+\item{use_factors}{Parameter to \code{\link[rjstat]{fromJSONstat}} defining whether dimension categories should be factors or character objects.}
 
 \item{urlType}{Parameter defining how url is constructed from id number. Currently two Statistics Norway possibilities: "SSB" (Norwegian) or "SSBen" (English)}
 }

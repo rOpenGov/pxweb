@@ -22,8 +22,8 @@ interactive_pxweb(api = NULL, version = NULL, language = NULL,
 Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session.
 }
 \examples{
- api_catalogue() # List apis
 \dontrun{
+ api_catalogue() # List apis
  d <- interactive_pxweb()
  d <- interactive_pxweb("api.scb.se")
  d <- interactive_pxweb("api.scb.se", language = "sv")
