@@ -161,7 +161,7 @@ test_that(desc="Test warnings",{
       get_pxweb_data(url = test_url,
                      dims = test_dims,
                      clean = TRUE)}, 
-    not(gives_warning()))
+    gives_warning())
 })
 
 
