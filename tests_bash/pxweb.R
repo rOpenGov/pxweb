@@ -149,7 +149,7 @@ for (i in seq_along(apis)) {
 }
 
 
-if(any(errored) | length(warns) > 0 | any(config_diff) | any(new_api_errored) | any_duplicate_alias | any(parameter_error) | any(duplicated_names)){
+if(any(errored) | length(warns) > 0 | any(config_diff) | any(new_api_errored) | any(duplicated_alias) | any(parameter_error) | any(duplicated_names)){
   quit(save = "no", status = 1)
 }
 
