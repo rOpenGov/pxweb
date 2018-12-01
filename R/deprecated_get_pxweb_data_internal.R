@@ -15,6 +15,8 @@
 
 clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {  
   depr_check_for_package("stringr")
+  require("data.table")
+  
   # Assertions
   stopifnot(class(data2clean) == "data.frame")
   stopifnot(class(url) == "character")
