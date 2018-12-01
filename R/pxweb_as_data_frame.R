@@ -28,25 +28,18 @@ pxweb_as_data_frame.pxweb_data <-  function(x, row.names = NULL, optional = FALS
   checkmate::assert_flag(stringsAsFactors)
   
   # Fill out
-  df <- pxweb_as_matrix(x)
+  df <- pxweb_as_matrix(x, row.names = row.names, column.name.type = column.name.type, variable.value.type = variable.value.type)
   slot <- pxweb_pxd_slot_idx_pos(x)
   df <- as.data.frame(df, stringsAsFactors = FALSE, optional = optional, ...)
   dat_code_cn <- pxweb_data_colnames(x, "code")
   for(j in 1:pxdims[2]){
     if(slot$idx[j] == 1){
-      df[, j] <- as.factor(df[, j])
-      if(variable.value.type == "text"){
-        levels(df[, j]) <- pxd_values_to_valuetexts(x, dat_code_cn[j], levels(df[, j]))
-      }
-      if(!stringsAsFactors){
-        df[, j] <- as.character(df[, j])
+      if(stringsAsFactors){
+        df[, j] <- as.factor(df[, j])
       }
     } else {
       df[, j] <- as.numeric(df[, j])
     }
-  }
-  if(!is.null(row.names)) {
-    rownames(df) <- row.names
   }
   df
 }
@@ -132,6 +125,24 @@ as.data.frame.pxweb_data <- function(x,
                       variable.value.type = variable.value.type)
 }
 
+#' @rdname pxweb_as_data_frame
+#' @export 
+as.data.frame.pxweb_data_comment <- function(x, 
+                                     row.names = NULL, 
+                                     optional = FALSE, 
+                                     ..., 
+                                     stringsAsFactors = default.stringsAsFactors(), 
+                                     column.name.type = "text",
+                                     variable.value.type = "text"
+){
+  
+  pxweb_as_data_frame(x, 
+                      row.names = row.names, 
+                      optional = optional,
+                      ...,
+                      stringsAsFactors = stringsAsFactors)
+}
+
 
 #' @rdname pxweb_as_data_frame
 #' @export 
@@ -172,10 +183,22 @@ pxweb_as_matrix.pxweb_data <-  function(x, row.names = NULL, column.name.type = 
       mat[i, j] <- x$data[[i]][[slot$idx[j]]][[slot$pos[j]]]
     }
   }
+  if(variable.value.type == "text"){
+    col_codes <- pxweb_data_colnames(x, "code")
+  }
   colnames(mat) <- pxweb_data_colnames(x, column.name.type)
   if(!is.null(row.names)) {
     rownames(mat) <- row.names
   }
+  
+  for(j in 1:pxdims[2]){
+    if(slot$idx[j] == 1){
+      if(variable.value.type == "text"){
+        mat[, j] <- pxd_values_to_valuetexts(x, variable_code = col_codes[j], variable_vector =  mat[, j])
+      }
+    }
+  }
+  
   mat
 }
 

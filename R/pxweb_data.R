@@ -83,19 +83,32 @@ pxweb_data_colnames <- function(pxd, type = "text"){
 #' Convert a pxweb data objects values to valuetext
 #' 
 #' @param x a \code{pxweb_data} object
-#' @param variable a variable to convert
-#' @param value_levels value_levels to convert
+#' @param variable_code the variable name of the variable to convert. NOTE! Need to be the variable code.
+#' @param variable_vector the vector with the variables to convert.
 #' @keywords internal
-pxd_values_to_valuetexts <- function(x, variable, value_levels){
+pxd_values_to_valuetexts <- function(x, variable_code, variable_vector){
   checkmate::assert_class(x, classes = "pxweb_data")
   pxmd_dim <- pxweb_metadata_dim(x$pxweb_metadata)
-  checkmate::assert_choice(variable, choices = names(pxmd_dim))
-  var_id <- which(names(pxmd_dim) %in% variable)
-  checkmate::assert_subset(value_levels, choices = x$pxweb_metadata$variables[[var_id]]$values)
-  new_value_levels <- value_levels
-  for(i in seq_along(value_levels)){
-    idx <- which(x$pxweb_metadata$variables[[var_id]]$values %in% value_levels[i])
-    new_value_levels[i] <- x$pxweb_metadata$variables[[var_id]]$valueTexts[idx]
+  checkmate::assert_choice(variable_code, choices = names(pxmd_dim))
+  var_idx <- which(names(pxmd_dim) %in% variable_code)
+  var_labels <- x$pxweb_metadata$variables[[var_idx]]$values
+  checkmate::assert_subset(variable_vector, choices = var_labels)
+  checkmate::assert_true(is.character(variable_vector) | is.factor(variable_vector))  
+  
+  input_is_factor <- is.factor(variable_vector)
+  
+  if(!input_is_factor){
+    variable_vector <- as.factor(variable_vector)
   }
-  new_value_levels
+  new_variable_levels <- variable_levels <- levels(variable_vector)
+  
+  for(i in seq_along(variable_levels)){
+    idx <- which(x$pxweb_metadata$variables[[var_idx]]$values %in% variable_levels[i])
+    new_variable_levels[i] <- x$pxweb_metadata$variables[[var_idx]]$valueTexts[idx]
+  }
+  levels(variable_vector) <- new_variable_levels
+  if(!input_is_factor){
+    variable_vector <- as.character(variable_vector)
+  }
+  variable_vector
 }
