@@ -7,6 +7,11 @@ cache: packages
   
 jobs:
   include:
+    - stage: release
+      r: release
+      env:
+        - CURRENT_STAGE=release  
+      after_success: Rscript -e 'covr::coveralls()'  
     - stage: api_catalogue_tests
       r: release
       install: 
@@ -21,11 +26,6 @@ jobs:
        - echo $PXWEB_ERROR
        - exit $PXWEB_ERROR
       if: branch = test     
-    - stage: release
-      r: release
-      env:
-        - CURRENT_STAGE=release  
-      after_success: Rscript -e 'covr::coveralls()'
     - stage: MacOS X
       os: osx
       r: release
