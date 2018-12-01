@@ -46,6 +46,21 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE){
   pxweb_advanced_get(url = url, query = query, verbose = verbose)
 }
 
+#' Do a GET call to PXWEB API and return a data.frame
+#'
+#' @details 
+#' The functions use will do a \code{pxweb_query} to a PXWEB \code{url} and return a \code{data.frame}.
+#' This is a wrapper for the \code{pxweb_get} function.
+#' 
+#' @seealso See \code{\link{pxweb_get}} for mor general usage and \code{\link{pxweb_query}} for details on PXWEB queries. 
+#'
+#' @inheritParams pxweb_get
+#' @inheritParams pxweb_as_data_frame
+#' @export
+pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text", variable.value.type = "text"){
+  d <- pxweb_advanced_get(url = url, query = query, verbose = verbose)
+  as.data.frame(d, column.name.type = column.name.type, variable.value.type = variable.value.type)
+}
 
 #' Do a GET call to PXWEB API for advanced users
 #'
