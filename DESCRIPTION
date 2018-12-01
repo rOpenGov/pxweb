@@ -28,7 +28,6 @@ Depends:
     methods
 Imports:
     checkmate,
-    methods,
     httr (>= 1.1),
     jsonlite
 License: BSD_2_clause + file LICENSE
