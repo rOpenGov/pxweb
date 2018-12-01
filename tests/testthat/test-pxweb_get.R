@@ -91,3 +91,15 @@ test_that(desc="Test http logger",{
   expect_true(file.exists(file.path(getwd(), "log_pxweb_api_http_calls.txt")))
   expect_true(file.size(file.path(getwd(), "log_pxweb_api_http_calls.txt")) > 5000)
 })  
+
+
+test_that(desc="Test pxweb_get_data",{
+  url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
+  expect_silent(px_data1 <- pxweb_get(url = url, query = json_query))
+  expect_silent(px_data1_df <- as.data.frame(px_data1, column.name.type = "text", variable.value.type = "text"))
+  expect_silent(px_data2 <- pxweb_get_data(url = url, query = json_query, column.name.type = "text", variable.value.type = "text"))
+  expect_equal(px_data1_df, px_data2)
+}) 
+
+
