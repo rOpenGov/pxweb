@@ -82,6 +82,16 @@ test_that(desc="Select all and eliminate",{
   expect_error(dat <- capture.output(pxweb:::pxe_interactive_get_data(pxe, test_input = "0")))  
   expect_error(dat <- capture.output(pxweb:::pxe_interactive_get_data(pxe, 1)))
   expect_error(dat <- capture.output(pxweb:::pxe_interactive_get_data(pxe, 0)))
+  
+  
+  expect_output(pxweb:::pxe_print_download_code(pxe, "json"), "STORE AS JSON FILE")
+  expect_output(pxweb:::pxe_print_download_code(pxe, "json"), "# Download data")
+  expect_output(pxweb:::pxe_print_download_code(pxe, "json"), "# Convert to data.frame")
+  
+  expect_output(pxweb:::pxe_print_download_code(pxe, "r"), "# PXWEB query")
+  expect_output(pxweb:::pxe_print_download_code(pxe, "r"), "pxweb_query_list")
+  expect_output(pxweb:::pxe_print_download_code(pxe, "r"), "# Download data")
+  expect_output(pxweb:::pxe_print_download_code(pxe, "r"), "# Convert to data.frame")
 })  
 
 
