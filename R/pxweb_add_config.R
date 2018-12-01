@@ -25,12 +25,14 @@ pxweb_add_config <-function(obj){
   call_time_stamp <- Sys.time()
   cfg_url <- build_pxweb_config_url(obj)
   r <- httr::GET(cfg_url)
+  pxweb_http_log_response(r)
   
   # Check that we get a config back
 
   if(!is_pxweb_config_response(r)){
     base_url <- build_pxweb_url(obj)
     r2 <- httr::GET(base_url)
+    pxweb_http_log_response(r2)
     if(is_pxweb_response(r2)){
       stop(paste0("\nThis is an old PXWEB API not supported by pxweb R package\n(version PX-Web 2014 Dec R1 or later is supported): \n", httr::build_url(obj$url)), call. = FALSE)
     } else {

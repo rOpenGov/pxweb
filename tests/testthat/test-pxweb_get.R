@@ -101,4 +101,12 @@ test_that(desc="Converting pxweb data to matrices and data.frames",{
 })  
 
 
-
+test_that(desc="Test http logger",{
+  pxweb_clear_cache()
+  url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
+  expect_silent(px_data <- pxweb_advanced_get(url = url, query = json_query, log_http_calls = TRUE))
+  
+  expect_true(file.exists(file.path(getwd(), "log_pxweb_api_http_calls.txt")))
+  expect_true(file.size(file.path(getwd(), "log_pxweb_api_http_calls.txt")) > 5000)
+})  

@@ -56,7 +56,7 @@ pxweb_http_log_response <- function(r){
   load(pxweb_log_paths_path())
   
   txt <- pxweb_response_to_log_as_json(r)
-  write(c(paste0("CALL AND RESPONSE FROM PXWEB API ", Sys.time(), ": "), txt), append = TRUE, file = log_file_path)
+  write(c(paste0("\n\nCALL AND RESPONSE FROM PXWEB API ", Sys.time(), ": "), txt), append = TRUE, file = log_file_path)
   return(invisible(NULL))
 }
 

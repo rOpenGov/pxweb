@@ -31,6 +31,7 @@ pxweb_add_api_subpath <- function(obj){
     tmp_url$path <- paste(path_splt[1:p], collapse = "/")
     tmp_cfg_url <- build_pxweb_config_url(tmp_url)
     tmp_r <- httr::GET(tmp_cfg_url)
+    pxweb_http_log_response(tmp_r)
     if(is_pxweb_config_response(tmp_r)) break()
   }
   
