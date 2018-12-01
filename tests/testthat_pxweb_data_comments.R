@@ -1,2 +1,2 @@
 library(testthat)
-test_check("pxweb", filter = "pxweb_comments")
+test_check("pxweb", filter = "pxweb_data_comments")
