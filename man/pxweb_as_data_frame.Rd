@@ -7,7 +7,7 @@
 \alias{pxweb_as_data_frame.pxweb_data_comment}
 \alias{pxweb_as_data_frame.pxweb_levels}
 \alias{as.data.frame.pxweb_data}
-\alias{as.data.frame.pxweb_data_comment}
+\alias{as.data.frame.pxweb_data_comments}
 \alias{as.data.frame.pxweb_levels}
 \alias{pxweb_as_matrix}
 \alias{pxweb_as_matrix.pxweb_data}
@@ -36,9 +36,8 @@ pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
   optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(),
   column.name.type = "text", variable.value.type = "text")
 
-\method{as.data.frame}{pxweb_data_comment}(x, row.names = NULL,
-  optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(),
-  column.name.type = "text", variable.value.type = "text")
+\method{as.data.frame}{pxweb_data_comments}(x, row.names = NULL,
+  optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors())
 
 \method{as.data.frame}{pxweb_levels}(x, row.names = NULL,
   optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors())

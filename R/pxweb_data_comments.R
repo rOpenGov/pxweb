@@ -130,13 +130,13 @@ print.pxweb_data_comment <- function(x, ...){
 #' @export
 #' @keywords internal
 print.pxweb_data_comments <- function(x, ...){
-  if(length(x$comments) <= 0){
+  if(length(x$pxweb_data_comments) <= 0){
     cat("NO PXWEB DATA COMMENTS\n")
   } else {
     cat("PXWEB DATA COMMENTS\n")
-    for(i in seq_along(x$comments)){
-      cat("$comments[[", i, "]]\n", sep = "")
-      print(x$comments[[i]])
+    for(i in seq_along(x$pxweb_data_comments)){
+      cat("$pxweb_data_comments[[", i, "]]\n", sep = "")
+      print(x$pxweb_data_comments[[i]])
     }
   }
 }

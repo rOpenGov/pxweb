@@ -50,9 +50,18 @@ pxweb_as_data_frame.pxweb_data_comments <-  function(x, optional = FALSE, ..., s
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
   
+  if(length(x$pxweb_data_comments) == 0){
+    df <- data.frame(row_no = integer(0), col_no = integer(0), comment_type = character(0), comment = character(0), stringsAsFactors = FALSE)
+    if(stringsAsFactors){
+      df$comment_type <- as.factor(df$comment_type)
+      df$comment <- as.factor(df$comment)    
+    } 
+    return(df)
+  }
+
   dfs <- list()
-  for(i in seq_along(x$comments)){
-    dfs[[i]] <- pxweb_as_data_frame(x$comments[[i]], optional = optional, ..., stringsAsFactors = FALSE)
+  for(i in seq_along(x$pxweb_data_comments)){
+    dfs[[i]] <- pxweb_as_data_frame(x$pxweb_data_comments[[i]], optional = optional, ..., stringsAsFactors = FALSE)
   }
   df <- do.call(rbind, dfs)
   if(stringsAsFactors){
@@ -69,6 +78,8 @@ pxweb_as_data_frame.pxweb_data_comment <- function(x, optional = FALSE, ..., str
   checkmate::assert_flag(stringsAsFactors)
   
   df <- x$idx_data_frame
+  df$row_no <- as.integer(df$row_no)
+  df$col_no <- as.integer(df$col_no)
   if(stringsAsFactors){
     df$comment_type <- as.factor(class(x)[1])
     df$comment <- as.factor(x$comment)
@@ -127,13 +138,11 @@ as.data.frame.pxweb_data <- function(x,
 
 #' @rdname pxweb_as_data_frame
 #' @export 
-as.data.frame.pxweb_data_comment <- function(x, 
+as.data.frame.pxweb_data_comments <- function(x, 
                                      row.names = NULL, 
                                      optional = FALSE, 
                                      ..., 
-                                     stringsAsFactors = default.stringsAsFactors(), 
-                                     column.name.type = "text",
-                                     variable.value.type = "text"
+                                     stringsAsFactors = default.stringsAsFactors()
 ){
   
   pxweb_as_data_frame(x, 
