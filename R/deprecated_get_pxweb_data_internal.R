@@ -1,3 +1,6 @@
+# Variable use by data.table
+utils::globalVariables(c(".SD"))
+
 #' Clean raw data from PX-WEB
 #' 
 #' This function clean the raw data from PX-WEB to R tall format. 
@@ -12,7 +15,6 @@
 #' 
 #' @return data frame melted and in R (numeric) format
 #' 
-
 clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {  
   depr_check_for_package("stringr")
   requireNamespace("data.table")
@@ -44,7 +46,6 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
                           dim_size = dim_size)
 
   # Melt the data to long format idvars 
-  utils::globalVariables(c(".SD"))
   meltData <- data2clean[, list(variable = names(.SD), value = unlist(.SD, use.names = F)), 
                          by = eval(names(data2clean)[dim_var_type$row_variables])]
   meltData <- as.data.frame(meltData)
