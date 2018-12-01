@@ -4,14 +4,14 @@
 \alias{pxd_values_to_valuetexts}
 \title{Convert a pxweb data objects values to valuetext}
 \usage{
-pxd_values_to_valuetexts(x, variable, value_levels)
+pxd_values_to_valuetexts(x, variable_code, variable_vector)
 }
 \arguments{
 \item{x}{a \code{pxweb_data} object}
 
-\item{variable}{a variable to convert}
+\item{variable_code}{the variable name of the variable to convert. NOTE! Need to be the variable code.}
 
-\item{value_levels}{value_levels to convert}
+\item{variable_vector}{the vector with the variables to convert.}
 }
 \description{
 Convert a pxweb data objects values to valuetext
