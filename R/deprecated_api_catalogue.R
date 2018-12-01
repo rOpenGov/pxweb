@@ -81,10 +81,7 @@ get_github_api_urls <- function(type){
 #' 
 get_api_list <- function(raw = FALSE){
   api_file <- get_api_file_path()
-  if (!requireNamespace("RJSONIO", quietly = TRUE)) {
-    stop("Package \"RJSONIO\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
+  depr_check_for_package("RJSONIO")
   api_raw <- RJSONIO::fromJSON(api_file)
   if(raw) return(api_raw)
   api_list <- c(api_raw$apis, api_raw$local_apis)
@@ -119,10 +116,7 @@ get_api_list_remote <- function(raw = FALSE){
 #' @param api_list api list in raw format to write to json file.
 write_api_list <- function(api_list){
   dest <- get_api_file_path()
-  if (!requireNamespace("RJSONIO", quietly = TRUE)) {
-    stop("Package \"RJSONIO\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
+  depr_check_for_package("RJSONIO")
   writeLines(RJSONIO::toJSON(api_list), con = dest)
 }
 

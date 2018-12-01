@@ -12,6 +12,7 @@
 download_pxweb <- function(dataNode, test_input = NULL, ...) {
   # Assertions
   stopifnot(length(test_input) == 0 | length(test_input) == 3 )
+  depr_check_for_package("stringr")
   
   # Define tests
   if(length(test_input) == 0){
@@ -30,7 +31,7 @@ download_pxweb <- function(dataNode, test_input = NULL, ...) {
   # Ask if the file should be downloaded
   inputDown <- findData.input(
     type = "yesno",
-    input = str_c("Do you want to download '", dataNodeName, "'?", sep=""),
+    input = stringr::str_c("Do you want to download '", dataNodeName, "'?", sep=""),
     test_input = testInputDown)
   download <- inputDown == "y"
   
@@ -76,11 +77,11 @@ download_pxweb <- function(dataNode, test_input = NULL, ...) {
     # Save the alternative to use to download data 
     varList[[listElem$code]] <- tempAlt    
     varListText <- c(varListText,
-                     str_c(ifelse(make.names(listElem$code) == listElem$code, 
+                     stringr::str_c(ifelse(make.names(listElem$code) == listElem$code, 
                                   listElem$code,
-                                  str_c("\"", listElem$code, "\"", collapse="")),
+                                  stringr::str_c("\"", listElem$code, "\"", collapse="")),
                            " = c('",
-                           str_c(tempAlt, collapse="', '"),
+                           stringr::str_c(tempAlt, collapse="', '"),
                            "')", 
                            collapse=""))
   }
@@ -107,15 +108,15 @@ findData.inputBaseCat <- function(alt, codedAlt) {
   output<-"\n("
   for (i in 1:length(alt)){
     if (i != 1){
-      output <- str_c(output, ", ", sep="")
+      output <- stringr::str_c(output, ", ", sep="")
     }
-    output <- str_c(output, 
+    output <- stringr::str_c(output, 
                        "'", 
                        codedAlt[alt[i], 1], 
                        "' = ",
                        codedAlt[alt[i],2], sep="")
   }
-  return(str_c(output,")", sep=""))
+  return(stringr::str_c(output,")", sep=""))
 }
 
 
@@ -135,6 +136,7 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     temp <- tempfile()
     sink(file=temp)
   }
+  depr_check_for_package("stringr")
   
   # Define the possible alternatives that the user can do (except alternatives)
   codedAlt <- data.frame(abbr=c("esc", "b", "*", "y", "n", "a"),
@@ -173,14 +175,14 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     } else {
       varDFshort <- varDF }
 
-    textTitle <- str_c("\nALTERNATIVES FOR VARIABLE: ",
+    textTitle <- stringr::str_c("\nALTERNATIVES FOR VARIABLE: ",
                           toupper(input[[2]]),
                           " \n",
-                          str_c(
+                          stringr::str_c(
                             rep("=", round(getOption("width")*0.9)), collapse = ""), 
                           "\n", sep="")
     textHead <-
-      str_c("\nChoose your alternative(s) by number:",
+      stringr::str_c("\nChoose your alternative(s) by number:",
                "\nSeparate multiple choices by ',' and intervals by ':'", sep="")
   }
   
@@ -190,12 +192,12 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     alt <- rownames(toprint)
     max_cat <- 1
     
-    textTitle <- str_c("\nCHOOSE DATABASE:\n",
-                          str_c(
+    textTitle <- stringr::str_c("\nCHOOSE DATABASE:\n",
+                          stringr::str_c(
                             rep("=", round(getOption("width")*0.9)), collapse = ""), 
                           "\n", sep="")
     textHead <-
-      str_c("\nChoose database by number:", sep="")
+      stringr::str_c("\nChoose database by number:", sep="")
   }
 
   if (type == "api") {
@@ -204,12 +206,12 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     alt <- rownames(toprint)
     max_cat <- 1
     
-    textTitle <- str_c("\nCHOOSE API:\n",
-                          str_c(
+    textTitle <- stringr::str_c("\nCHOOSE API:\n",
+                          stringr::str_c(
                             rep("=", round(getOption("width")*0.9)), collapse = ""), 
                           "\n", sep="")
     textHead <-
-      str_c("\nChoose api by number:", sep="")
+      stringr::str_c("\nChoose api by number:", sep="")
   }
   
 
@@ -247,7 +249,7 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
     if (length(inputScanRaw) == 0) { next() }
     
     # Format the input data (to lowercase and without whitespaces) and as char vector
-    inputScan <- tolower(str_trim(inputScanRaw))
+    inputScan <- tolower(stringr::str_trim(inputScanRaw))
     # If a = "Show all", restart, but show all alternatives
     
     if (inputScan[1] == "a") { next() }
@@ -290,10 +292,12 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
 }
 
 findData.printNode <- function(xscb, print=TRUE) {
+  
+  depr_check_for_package("stringr")
   # Preparations of for printing the node
   xscb$text <- as.character(xscb$text) 
-  nSCBidlen <- max(str_length(as.character(xscb$id))) # Get max str length of id
-  nSCBpos <- max(str_length(rownames(xscb))) # Get max str length of row number 
+  nSCBidlen <- max(stringr::str_length(as.character(xscb$id))) # Get max str length of id
+  nSCBpos <- max(stringr::str_length(rownames(xscb))) # Get max str length of row number 
   nSCBconsole <- round(getOption("width")*0.9)
   
   # Calculates where the different output should be printed
@@ -304,21 +308,21 @@ findData.printNode <- function(xscb, print=TRUE) {
   for (i in 1:nrow(xscb)) {
     # Corrections if there is an shortened list of alternatives
     if (rownames(xscb)[i] == "."){
-      finalText <- str_c(finalText,"\n")
+      finalText <- stringr::str_c(finalText,"\n")
       next()
     }
     
     # The text that should be printed
-    finalText <- str_c(
+    finalText <- stringr::str_c(
       finalText,
       rownames(xscb)[i],
       ".",
-      str_c(
-        rep(" ", nSCBpos - str_length(rownames(xscb)[i])), collapse=""),
+      stringr::str_c(
+        rep(" ", nSCBpos - stringr::str_length(rownames(xscb)[i])), collapse=""),
       " [",
       xscb$id[i],
       "]",
-      str_c(rep(" ", nSCBidlen - str_length(as.character(xscb$id[i]))), collapse=""),
+      stringr::str_c(rep(" ", nSCBidlen - stringr::str_length(as.character(xscb$id[i]))), collapse=""),
       " ",collapse="")
     
     # Convert if there is console is too narrow for the text
@@ -326,21 +330,21 @@ findData.printNode <- function(xscb, print=TRUE) {
     tempText <- xscb$text[i]
     while(first | rerun){
       # Cut upp the alternative text to pieces that fit the console width
-      tempTextSpaces <- str_locate_all(tempText,pattern=" ")[[1]][ , 1]
-      if (str_length(tempText) > scbTextSpace){
+      tempTextSpaces <- stringr::str_locate_all(tempText,pattern=" ")[[1]][ , 1]
+      if (stringr::str_length(tempText) > scbTextSpace){
         tempTextCut <- max(tempTextSpaces, scbTextSpace) - 1
       } else {
-        tempTextCut <- str_length(tempText)
+        tempTextCut <- stringr::str_length(tempText)
         rerun <- FALSE
       }
             
       finalText <-
-        str_c(finalText,
-                 str_c(rep(" ", startPos*(1-as.numeric(first))), collapse=""),
-                 str_sub(tempText, 1, tempTextCut), "\n", collapse="")
+        stringr::str_c(finalText,
+                 stringr::str_c(rep(" ", startPos*(1-as.numeric(first))), collapse=""),
+                 stringr::str_sub(tempText, 1, tempTextCut), "\n", collapse="")
       
       if (rerun) {
-        tempText <- str_sub(tempText, tempTextCut + 2)
+        tempText <- stringr::str_sub(tempText, tempTextCut + 2)
       }
 
       first <- FALSE
@@ -389,14 +393,15 @@ findData.printCode <- function(url, varListText, clean) {
 findData.inputConvert <- function(input, max_value=NA) {
   # Set the output (for input of length == 1)
   output <- input  
-
+  depr_check_for_package("stringr")
+  
   # Do conversions for  i<-1
-  if (length(input) > 1 || str_detect(input, ":")) {
+  if (length(input) > 1 || stringr::str_detect(input, ":")) {
     output <- character(0)
     for(i in 1 : length(input)) { # i <- 2
       # Split input values on the format [0-9]+:[0-9]+
-      if (str_detect(input[i], ":")){
-        index <- as.numeric(unlist(str_split(input[i], pattern = ":")))
+      if (stringr::str_detect(input[i], ":")){
+        index <- as.numeric(unlist(stringr::str_split(input[i], pattern = ":")))
         if(is.na(index[1])) index[1] <- 1
         if(is.na(index[2])) {
           index[2] <- max_value
@@ -427,6 +432,7 @@ findData.inputConvert <- function(input, max_value=NA) {
 #' @keywords internal 
 #' 
 choose_pxweb_database_url <- function(baseURL, pre_choice = NULL){
+  depr_check_for_package("stringr")
   data_bases <- get_pxweb_metadata(baseURL = baseURL) 
   if(nrow(data_bases) == 1){
     return(paste0(baseURL, "/", text_to_url(data_bases$dbid)))
@@ -446,6 +452,7 @@ choose_pxweb_database_url <- function(baseURL, pre_choice = NULL){
 #' @return base url to the specific data base
 #' 
 choose_pxweb_api <- function(){
+  depr_check_for_package("stringr")
   res <- character(3)
   apis <- api_catalogue()
   api_df <- data.frame(api_names = unlist(lapply(apis, FUN=function(X) X$api)),

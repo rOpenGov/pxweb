@@ -11,7 +11,7 @@
 #' 
 
 buildPath <- function(varname, topnodes = NULL, baseURL, ...) {
-	
+  depr_check_for_package("stringr")
 	# Error handling
 	if (!is.null(topnodes)) {
 	   if (identical(topnodes, ""))
@@ -20,11 +20,11 @@ buildPath <- function(varname, topnodes = NULL, baseURL, ...) {
 	}
 	   
 	   # Clean URL string: remove trailing slash
-	base <- str_replace_all(baseURL,"/$","")
+	base <- stringr::str_replace_all(baseURL,"/$","")
 	
 	# Clean topnodes string: Remove whitespace and leading/trailing slashes
-	topnodes <- str_trim(topnodes)
-	topnodes <- str_replace_all(topnodes,"^/|/$","")
+	topnodes <- stringr::str_trim(topnodes)
+	topnodes <- stringr::str_replace_all(topnodes,"^/|/$","")
 	
 	# Build a vector, in the right order, for the URL elements
 	urlElements <- paste(c(base,topnodes), collapse="/")
@@ -47,7 +47,7 @@ buildPath <- function(varname, topnodes = NULL, baseURL, ...) {
 #' @keywords internal 
 #' 
 getContent <- function(response, type = "csv") {
-    
+  depr_check_for_package("stringr")
     if (!class(response) == "response") {
         stop("needs to be an response class object")
     }
@@ -85,7 +85,7 @@ getContent <- function(response, type = "csv") {
 #' @keywords internal 
 #' 
 create_batch_list <- function(url, dims){
-  
+  depr_check_for_package("stringr")
   # Get dimension size of call
   dim_size <- get_dim_size(url=url,dims=dims)
   dim_length <- dim_size[[1]]
@@ -146,12 +146,12 @@ create_batch_list <- function(url, dims){
 #' 
 get_dim_size <- function(url, dims, content_node=NULL){
   stopifnot(is.character(url), is.list(dims))
-  
+  depr_check_for_package("stringr")
   starred_dim <- logical(length(dims))
   dim_length <- integer(length(dims))
   names(dim_length) <- names(starred_dim) <- names(dims)
   for(d in seq_along(dims)){ # d <- 3
-    if(length(dims[[d]]) == 1 && str_detect(string=dims[[d]], "\\*")) starred_dim[d] <- TRUE
+    if(length(dims[[d]]) == 1 && stringr::str_detect(string=dims[[d]], "\\*")) starred_dim[d] <- TRUE
     dim_length[d] <- length(dims[[d]])
   }
   if(any(starred_dim)) {
@@ -201,10 +201,7 @@ calculate_data_dim <- function(dim_length, clean){
 #' 
 #' @param x text to change to url-unicode
 text_to_url <- function(x){
-  if (!requireNamespace("stringr", quietly = TRUE)) {
-    stop("Package \"stringr\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
+  depr_check_for_package("stringr")
   x <- stringr::str_replace_all(string = x, pattern = " ", replacement = "%20")
   x <- stringr::str_replace_all(string = x, pattern = "\u00E5", replacement = "%C3%A5")  
   x <- stringr::str_replace_all(string = x, pattern = "\u00E4", replacement = "%C3%A4")  
@@ -215,3 +212,10 @@ text_to_url <- function(x){
   x
 }
 
+#' @keywords internal
+depr_check_for_package <- function(pkg){
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    stop(paste0("Package \"", pkg, "\" needed for this function to work. Please install it."),
+         call. = FALSE)
+  }
+}

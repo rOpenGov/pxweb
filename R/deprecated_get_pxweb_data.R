@@ -27,11 +27,9 @@
 get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
   .Deprecated("pxweb_get_data")
   
-  if (!requireNamespace("RJSONIO", quietly = TRUE)) {
-    stop("Package \"RJSONIO\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-  
+  depr_check_for_package("RJSONIO")
+  depr_check_for_package("stringr")
+
    dims <- reorder_and_check_dims(url, dims)
    dimNames <- names(dims)
    batches <- create_batch_list(url = url, dims = dims)
@@ -73,7 +71,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
      
      # print("Print error message")
      if (class(response)=="try-error"){
-        stop(str_c("No internet connection to ",batches$url),
+        stop(stringr::str_c("No internet connection to ",batches$url),
              call.=FALSE)
      }
      if(httr::http_error(response)) {
@@ -85,10 +83,10 @@ get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
      # (Due to a weird encoding issue on Windows this generates a warning
      # about faulty encoding. Hence the suppressMessages() encapsulation...)
      suppressMessages(a <- httr::content(response, as="text", encoding = encoding))
-     if(str_sub(a,1,1)==",") a <- str_sub(a,2,nchar(a)) # Correcting when the first element is , (few variables)
+     if(stringr::str_sub(a,1,1)==",") a <- stringr::str_sub(a,2,nchar(a)) # Correcting when the first element is , (few variables)
      b <- read.table(textConnection(a), sep=',', header=TRUE, stringsAsFactors=FALSE)
-     head <- str_split(string=str_sub(a, start=1, end=str_locate(a,"\n")[[1]]),"\",\"")[[1]]
-     head <- str_replace_all(string=head,pattern="\r|\n|\"","")
+     head <- stringr::str_split(string=stringr::str_sub(a, start=1, end=stringr::str_locate(a,"\n")[[1]]),"\",\"")[[1]]
+     head <- stringr::str_replace_all(string=head,pattern="\r|\n|\"","")
      colnames(b) <- head
      rm(a)
      

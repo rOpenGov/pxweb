@@ -14,20 +14,17 @@
 #' 
 
 clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {  
-
+  depr_check_for_package("stringr")
   # Assertions
   stopifnot(class(data2clean) == "data.frame")
   stopifnot(class(url) == "character")
   
   # Convert to data table
   # Store and change name to fix bug with varnames in data.table (cant have comma in varname)
-  colnames(data2clean) <- str_replace_all(colnames(data2clean), pattern = ",", ";")
+  colnames(data2clean) <- stringr::str_replace_all(colnames(data2clean), pattern = ",", ";")
   head <- colnames(data2clean)
   #colnames(data2clean) <- as.character(1:length(head))
-  if (!requireNamespace("data.table", quietly = TRUE)) {
-    stop("Package \"data.table\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
+  depr_check_for_package("data.table")
   data2clean <- data.table::as.data.table(data2clean)
     
   # Get metadata to use in creating factors of Tid and contentCode
@@ -77,7 +74,7 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
     meltData[, contentNode$variables$variables[[j]]$text] <- 
       factor(rep(col_var_lab[[i]], each=each_no))
   }
-  meltData[, "values"] <- suppressWarnings(as.numeric(str_replace_all(meltData$value,"\\s","")))
+  meltData[, "values"] <- suppressWarnings(as.numeric(stringr::str_replace_all(meltData$value,"\\s","")))
    
   # Remove variables wiyhout any use
   meltData$value <- NULL

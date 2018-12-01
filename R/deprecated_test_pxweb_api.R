@@ -39,10 +39,7 @@ test_pxweb_api <- function(url, download_all=FALSE, seed=as.integer(Sys.time()))
                                  nodesList=nodes_list, 
                                  download_all=download_all)
   
-  if (!requireNamespace("plyr", quietly = TRUE)) {
-    stop("Package \"plyr\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
+  depr_check_for_package("plyr")
   res_data <- plyr::rbind.fill(nodes[nodes$type == "l", ], res$data)
   return(list(data=res_data, calls=res$calls))
 }

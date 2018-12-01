@@ -23,6 +23,7 @@
 
 interactive_pxweb <- function(api = NULL, version = NULL, language = NULL, history = FALSE,...){
   .Deprecated("pxweb_interactive")
+  depr_check_for_package("stringr")
   if (is.null(api)) {
   choice <- choose_pxweb_api()
   api_obj <- pxweb_api$new(get_api = choice[1])
@@ -51,7 +52,7 @@ interactive_pxweb <- function(api = NULL, version = NULL, language = NULL, histo
   while(!quit) { 
     # Generate header
     if (!history) { cat("\014") }
-    cat("Content of '", str_split(baseURL,pattern="/")[[1]][3], "' at current (", length(allNodes)+1, ") node level:\n", sep="") 
+    cat("Content of '", stringr::str_split(baseURL,pattern="/")[[1]][3], "' at current (", length(allNodes)+1, ") node level:\n", sep="") 
     cat(rep("=", round(getOption("width")*0.9)), "\n",sep="") 
     
     # Print information in node and ask for choice
@@ -68,7 +69,7 @@ interactive_pxweb <- function(api = NULL, version = NULL, language = NULL, histo
     }
     
     # If node choice is selected, download the next node  
-    if (str_detect(inputValue, pattern = "[0-9]+")) {
+    if (stringr::str_detect(inputValue, pattern = "[0-9]+")) {
        
       # Check if it is the botton node and if so, ask to download data
       if (Node$type[as.numeric(inputValue)] == "t") {

@@ -17,10 +17,8 @@
 get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet = TRUE, baseURL = NULL, ...) {
 
   .Deprecated("pxweb_get")
-  if (!requireNamespace("RJSONIO", quietly = TRUE)) {
-    stop("Package \"RJSONIO\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
+  depr_check_for_package("RJSONIO")
+  depr_check_for_package("stringr")
    # Build a URL if no path is supplied
    if (is.null(path)) {
 
@@ -54,7 +52,7 @@ get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet 
    )
    
    if (class(df)=="try-error") {
-      stop(str_c("No internet connection to ", url),
+      stop(stringr::str_c("No internet connection to ", url),
            call.=FALSE)
    }
    

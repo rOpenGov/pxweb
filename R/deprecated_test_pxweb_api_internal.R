@@ -12,22 +12,19 @@
 #' 
 test_pxweb_api_get_nodes <- function(url){
 
-  if (!requireNamespace("data.table", quietly = TRUE)) {
-    stop("Package \"data.table\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
+  depr_check_for_package("data.table")
   nodes <- data.table::as.data.table(get_pxweb_metadata(path=url))
   nodes$level <- 1
   nodes$checked <- FALSE
   nodes$error <- FALSE
-
+  depr_check_for_package("stringr")
   i <- 1 
   while(i <= nrow(nodes)){
     if(nodes$type[i]=="l" & !nodes$checked[i]){
       message("Check node (level ", nodes$level[i] ,") : ", nodes$id[i])
       tempDF <- suppressWarnings(try(get_pxweb_metadata(path=nodes$URL[i]), silent=TRUE))
       if(class(tempDF)=="try-error"){
-        if(str_detect(tempDF[1],pattern="Error : No internet connection to")){
+        if(stringr::str_detect(tempDF[1],pattern="Error : No internet connection to")){
           next()
         } else {
           nodes$error[i] <- TRUE        

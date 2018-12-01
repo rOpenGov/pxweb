@@ -138,10 +138,7 @@ ApiData <- function(urlToData, ..., getDataByGET = FALSE, returnMetaData = FALSE
       if (verbosePrint) 
         post <- POST(urlToData, body = sporr, encode = "json", verbose()) else post <- POST(urlToData, body = sporr, encode = "json")
     }
-  if (!requireNamespace("rjstat", quietly = TRUE)) {
-    stop("Package \"rjstat\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
+  depr_check_for_package("rjstat")
   #c(fromJSONstat(content(post, "text"), naming = "label"), fromJSONstat(content(post, "text"), naming = "id"))
   c(rjstat::fromJSONstat(content(post, "text"), naming = "label",use_factors=use_factors), 
     rjstat::fromJSONstat(content(post, "text"), naming = "id",use_factors=use_factors))
