@@ -181,10 +181,6 @@ get_dim_size <- function(url, dims, content_node=NULL){
 #' 
 #' @keywords internal 
 #' 
-#' @examples
-#' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-#' dims <- list(Region = c('*'), Civilstand = c('*'), Alder = '1', Kon = c('*'), 
-#'             ContentsCode = c('*'), Tid = c('*'))
 calculate_data_dim <- function(dim_length, clean){
   len <- length(dim_length)
   if(clean){

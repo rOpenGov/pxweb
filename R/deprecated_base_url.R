@@ -11,8 +11,10 @@
 #' @keywords internal 
 #' 
 #' @examples
+#' \dontrun{
 #' a <- base_url("api.scb.se")
 #' print(a)
+#' }
 #' 
 base_url <- function(api, version = NULL, language = NULL) {
   .Deprecated("pxweb")

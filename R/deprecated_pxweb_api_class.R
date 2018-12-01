@@ -9,9 +9,13 @@
 #' @field period_in_seconds The length of the period with allowed calls.
 #' @field max_values_to_download Maximum number of values to download with each call.
 #' 
+#' @importFrom methods new
+#' 
 #' @examples
+#' \dontrun{
 #'  scb_pxweb_api <- pxweb_api$new(get_api = "api.scb.se")
 #'  scb_pxweb_api
+#' }
 #'  
 #' @keywords internal
 #' @export pxweb_api

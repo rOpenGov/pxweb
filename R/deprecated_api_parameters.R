@@ -7,7 +7,10 @@
 #'
 #' @keywords internal 
 #' 
-#' @examples api_parameters()
+#' @examples 
+#' \dontrun{
+#' api_parameters()
+#' }
 api_parameters <- function(url = NULL) {
   .Deprecated(new = "pxweb_api_catalogue")
 

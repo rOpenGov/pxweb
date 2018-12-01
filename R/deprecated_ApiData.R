@@ -13,7 +13,7 @@
 #' @param returnApiQuery When TRUE, JSON query returned 
 #' @param defaultJSONquery specification for variables not included in ...
 #' @param verbosePrint When TRUE, printing to console
-#' @param use_factors Parameter to \code{\link{fromJSONstat}} defining whether dimension categories should be factors or character objects.
+#' @param use_factors Parameter to \code{\link[rjstat]{fromJSONstat}} defining whether dimension categories should be factors or character objects.
 #' @param urlType  Parameter defining how url is constructed from id number. Currently two Statistics Norway possibilities: "SSB" (Norwegian) or "SSBen" (English)
 #' 
 #' @details Each variable is specified by using the variable name as input parameter. The value can be specified as:  
@@ -351,10 +351,12 @@ SSBurlen <- function(id, readyMade = FALSE) {
 #' @keywords internal
 #'
 #' @examples
+#' \dontrun{
 #' MakeUrl(4861)
 #' MakeUrl(4861, "SSBen")
 #' MakeUrl(1066, getDataByGET = TRUE)
 #' MakeUrl(1066, "SSBen", getDataByGET = TRUE)
+#' }
 MakeUrl <- function(id,urlType="SSB",getDataByGET = FALSE){
   .Deprecated(new = "pxweb")
   if(urlType=="SSB")

@@ -51,7 +51,7 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
   checkmate::assert_flag(log_http_calls)
   checkmate::assert_class(pxweb_metadata, classes = "pxweb_metadata", null.ok = TRUE)
   if(log_http_calls){
-    pxweb_setup_http_log()
+    pxweb_http_log_on()
   }
   
   px <- pxweb(url)

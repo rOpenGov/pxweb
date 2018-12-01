@@ -4,7 +4,9 @@
 #' Get the catalogue of api and store it as a list.
 #' 
 #' @examples
+#' \dontrun{
 #' api_catalogue()
+#' }
 #' 
 #' @keywords internal
 #' @export

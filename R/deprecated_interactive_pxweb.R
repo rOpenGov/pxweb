@@ -14,8 +14,8 @@
 #' @keywords internal
 #' @export
 #' @examples
-#'  api_catalogue() # List apis
 #' \dontrun{
+#'  api_catalogue() # List apis
 #'  d <- interactive_pxweb()
 #'  d <- interactive_pxweb("api.scb.se")
 #'  d <- interactive_pxweb("api.scb.se", language = "sv")
