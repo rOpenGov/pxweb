@@ -589,6 +589,10 @@ pxe_parse_input <- function(user_input, allowed_input){
     return(list(ok = TRUE, input = ui))
   }
   if(grepl(x = ui, pattern = "^[:,0-9 ]*$")){
+    if(allowed_input$max_choice == 0){
+      cat("Incorrect choice.\n")
+      return(list(ok = FALSE))      
+    }
     ui <- eval(parse(text=paste("c(", ui, ")")))
     ui <- ui[!duplicated(ui)]
     if(!all(ui %in% 1:allowed_input$max_choice)){
@@ -874,7 +878,7 @@ pxe_interactive_get_data <- function(pxe, test_input = NULL){
   checkmate::assert_character(test_input, null.ok = TRUE, min.len = 1)
   
   download <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
-                        "Do you want to download the data?\n",
+                        title = "Do you want to download the data?\n",
                         test_input = test_input[1]) == "y"
   if(!download){
     return(NULL)

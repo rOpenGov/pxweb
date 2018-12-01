@@ -78,6 +78,8 @@ test_that(desc="Select all and eliminate",{
   expect_output(dat <- pxweb:::pxe_interactive_get_data(pxe, "n")) 
   expect_null(dat)
   
+  expect_error(dat <- capture.output(pxweb:::pxe_interactive_get_data(pxe, test_input = "1")))
+  expect_error(dat <- capture.output(pxweb:::pxe_interactive_get_data(pxe, test_input = "0")))  
   expect_error(dat <- capture.output(pxweb:::pxe_interactive_get_data(pxe, 1)))
   expect_error(dat <- capture.output(pxweb:::pxe_interactive_get_data(pxe, 0)))
 })  
