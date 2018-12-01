@@ -14,14 +14,15 @@
 #' 
 
 deparseLevels <- function(place, returnDistance=FALSE, baseURL, ...) {
-	placeLevels <- str_split(
-		str_replace(place, baseURL, ""),
+  depr_check_for_package("stringr")
+	placeLevels <- stringr::str_split(
+		stringr::str_replace(place, baseURL, ""),
 		"/"
 	)
 	
 	# Remove empty elements created by str_split (caused by leadning and/or 
 	# trailing slashes)
-	placeLevels <- placeLevels[[1]][sapply(placeLevels, str_length) > 0]
+	placeLevels <- placeLevels[[1]][sapply(placeLevels, stringr::str_length) > 0]
 		
 	if(returnDistance) {
 		levelsToTop <- length(placeLevels)		
