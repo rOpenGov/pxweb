@@ -96,4 +96,11 @@ test_that(desc="Select all and eliminate",{
 
 
 
+test_that(desc="Stat Iceland structure",{
+  expect_silent(pxe <- pxweb:::pxweb_explorer.NULL())
+  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "10")) 
+  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))
+  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))
+})  
+
 
