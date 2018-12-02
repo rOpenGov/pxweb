@@ -91,7 +91,7 @@ if(length(warns) > 0){
 # Check new APIs
 apis <- pxweb_api_catalogue()
 # Change to master branch later on
-gh_apis <- pxweb:::pxweb_api_catalogue_from_github(branch = "test")
+gh_apis <- pxweb:::pxweb_api_catalogue_from_github(branch = "master")
 new_api_idx <- which(!names(apis) %in% names(gh_apis))
 new_api_errored <- FALSE
 
