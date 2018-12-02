@@ -103,8 +103,8 @@ if(length(new_api_idx) > 0){
   new_api_errored <- rep(FALSE, length(new_api_paths))
   
   for(i in seq_along(new_api_paths)){
-    cat(new_api_paths[i], "\n")
-    first_results[[i]] <- try(pxweb_test_api(url = new_api_paths[new_api_index[i]], test_type = "first", verbose = TRUE, time_limit = 10*60), silent = TRUE)
+    # cat(new_api_paths[i], "\n")
+    first_results[[i]] <- try(pxweb_test_api(url = new_api_paths[i], test_type = "first", verbose = TRUE, time_limit = 10*60), silent = TRUE)
     if(inherits(first_results[[i]], "try-error")){
       new_api_errored[i] <- TRUE
     }
