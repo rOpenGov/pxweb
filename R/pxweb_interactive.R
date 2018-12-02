@@ -522,6 +522,11 @@ pxe_add_position <- function(pxe, new_pos){
   checkmate::assert_class(pxe, "pxweb_explorer")
   checkmate::assert_string(new_pos)
   pxe$position[length(pxe$position) + 1] <- new_pos
+  if(length(pxe$root) == 0 & length(pxe$position) == 2){
+    # Special handling of languages (see iceland for example)
+    # If lang is also before version, swap that to lang
+    pxe$position[1] <- gsub("\\[lang\\]", new_pos, x = pxe$position[1])
+  }
   obj <- pxe_pxobj_at_position(pxe)
   if(is.null(obj)){
     pxe_pxobj_at_position(pxe) <- 

@@ -40,7 +40,8 @@ pxweb_test_api <- function(url, test_type="first", n = 1, verbose = TRUE, time_l
   # api_tree_df <- pxweb:::pxweb_get_api_test_data_frame(px)
   api_tree_df <- pxweb_get_api_test_data_frame(px)
   if(verbose) {
-    cat("A PXWEB API IS IDENTIFIED:\n")
+    cat("\nA PXWEB API IS IDENTIFIED:\n")
+    cat(url, "\n")
     cat("Exploring nodes...\n")
   }
   

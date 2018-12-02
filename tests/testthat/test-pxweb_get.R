@@ -54,8 +54,11 @@ test_that(desc="Constructor works as it should with Statistics Sweden",{
 test_that(desc="Previous bugs",{
   # This is a bug in the previous implementation of pxweb
   url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
-  expect_silent(px_meta_data <- pxweb_get(url))
-  expect_output(print(px_meta_data), regexp = "PXWEB LEVELS")
+  tryr <- try(httr::GET(url), silent = TRUE)
+  if(!inherits(tryr, "try-error")){
+    expect_silent(px_meta_data <- pxweb_get(url))
+    expect_output(print(px_meta_data), regexp = "PXWEB LEVELS")
+  }
   
   # Missing title
   expect_silent(pxmd <- pxweb_get(url = "http://statistik.linkoping.se/PXWeb/api/v1/sv/Omsorg/Behandlingshem/ombeh01.px"))
@@ -91,7 +94,6 @@ test_that(desc="Test pxweb_get_data",{
   expect_equal(px_data1_df, px_data2)
 }) 
 
-
 test_that(desc="Test http logger",{
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   expect_silent(px <- pxweb(url))
@@ -104,4 +106,6 @@ test_that(desc="Test http logger",{
   expect_true(file.exists(file.path(getwd(), "log_pxweb_api_http_calls.txt")))
   expect_true(file.size(file.path(getwd(), "log_pxweb_api_http_calls.txt")) > 5000)
 })  
+
+
 

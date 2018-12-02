@@ -239,7 +239,41 @@
       "calls_per_period": 10,
       "period_in_seconds": 10,
       "max_values_to_download" : 1000
-    }
+    },
+    
+    "trafi2.stat.fi": {
+      "alias" : ["trafi2"],
+      "description" : "Finnish Transport Safety Agency",
+      "url" : "http://trafi2.stat.fi/PXWeb/api/[version]/[lang]/",
+      "version": ["v1"], 
+      "lang": ["en", "sv", "fi"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 110000
+    },
+    
+    "w3.unece.org": {
+      "alias" : ["unece"],
+      "description" : "United Nations Economic Commission for Europe",
+      "url" : "https://w3.unece.org/PXWeb2015/api/[version]/[lang]/",
+      "version": ["v1"], 
+      "lang": ["en"],
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
+    },
+
+    "www.grande-region.lu": {
+      "alias" : ["grande-region"],
+      "description" : "Portail statistique de la Grande Région",
+      "url" : "http://www.grande-region.lu/pxweb/api/[version]/[lang]",
+      "version": ["v1"], 
+      "lang": ["fr", "de"],
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
+    }    
+    
   },
 
   "local_apis": {}

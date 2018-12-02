@@ -9,7 +9,10 @@ test_that(desc="Mixed node levels object",{
   # expect_true(all(!res$error)) # FIXME this also fails
   
   url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
-  expect_output(res <- suppressWarnings(pxweb_test_api(url, test_type = "touch")), regexp = "Table touched")
+  tryr <- try(httr::GET(url), silent = TRUE)
+  if(!inherits(tryr, "try-error")){
+    expect_output(res <- suppressWarnings(pxweb_test_api(url, test_type = "touch")), regexp = "Table touched")
+  }
   
   expect_silent(api_paths <- pxweb:::pxweb_test_create_api_paths(apis = pxweb_api_catalogue()))
   expect_true(all(c("http://api.scb.se/OV0104/v1/doris/en", 
