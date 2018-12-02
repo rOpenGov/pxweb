@@ -1,0 +1,344 @@
+PXWEB API HTTP LOG 2018-12-02 14:48:56:
+
+
+CALL AND RESPONSE FROM PXWEB API 2018-12-02 14:48:57: 
+{
+  "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy?config",
+  "status_code": 200,
+  "headers": {
+    "cache-control": "private",
+    "content-type": "application/json; charset=utf-8",
+    "server": "Microsoft-IIS/10.0",
+    "access-control-allow-origin": "*",
+    "x-powered-by": "ASP.NET",
+    "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+    "content-length": "62"
+  },
+  "all_headers": [
+    {
+      "status": 200,
+      "version": "HTTP/1.1",
+      "headers": {
+        "cache-control": "private",
+        "content-type": "application/json; charset=utf-8",
+        "server": "Microsoft-IIS/10.0",
+        "access-control-allow-origin": "*",
+        "x-powered-by": "ASP.NET",
+        "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+        "content-length": "62"
+      }
+    }
+  ],
+  "cookies": [],
+  "content": "The content is removed to limit log file size.",
+  "date": "2018-12-02 12:48:56",
+  "times": [0, 0, 0, 0.0001, 0.0196, 0.0197],
+  "request": {
+    "method": "GET",
+    "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy?config",
+    "headers": "application/json, text/xml, application/xml, */*",
+    "fields": {},
+    "options": {
+      "useragent": "libcurl/7.58.0 r-curl/3.2 httr/1.3.1",
+      "httpget": true
+    },
+    "auth_token": {},
+    "output": []
+  }
+}
+
+
+CALL AND RESPONSE FROM PXWEB API 2018-12-02 14:48:57: 
+{
+  "url": "http://api.scb.se/OV0104/?config",
+  "status_code": 403,
+  "headers": {
+    "content-type": "text/html",
+    "server": "Microsoft-IIS/10.0",
+    "x-powered-by": "ASP.NET",
+    "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+    "content-length": "1233"
+  },
+  "all_headers": [
+    {
+      "status": 301,
+      "version": "HTTP/1.1",
+      "headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "location": "http://api.scb.se/OV0104/?config",
+        "server": "Microsoft-IIS/10.0",
+        "x-powered-by": "ASP.NET",
+        "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+        "content-length": "155"
+      }
+    },
+    {
+      "status": 403,
+      "version": "HTTP/1.1",
+      "headers": {
+        "content-type": "text/html",
+        "server": "Microsoft-IIS/10.0",
+        "x-powered-by": "ASP.NET",
+        "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+        "content-length": "1233"
+      }
+    }
+  ],
+  "cookies": [],
+  "content": "The content is removed to limit log file size.",
+  "date": "2018-12-02 12:48:56",
+  "times": [0.0184, 0, 0.0001, 0.0001, 0.0378, 0.038],
+  "request": {
+    "method": "GET",
+    "url": "http://api.scb.se/OV0104?config",
+    "headers": "application/json, text/xml, application/xml, */*",
+    "fields": {},
+    "options": {
+      "useragent": "libcurl/7.58.0 r-curl/3.2 httr/1.3.1",
+      "httpget": true
+    },
+    "auth_token": {},
+    "output": []
+  }
+}
+
+
+CALL AND RESPONSE FROM PXWEB API 2018-12-02 14:48:57: 
+{
+  "url": "http://api.scb.se/OV0104/v1/?config",
+  "status_code": 403,
+  "headers": {
+    "content-type": "text/html",
+    "server": "Microsoft-IIS/10.0",
+    "x-powered-by": "ASP.NET",
+    "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+    "content-length": "1233"
+  },
+  "all_headers": [
+    {
+      "status": 301,
+      "version": "HTTP/1.1",
+      "headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "location": "http://api.scb.se/OV0104/v1/?config",
+        "server": "Microsoft-IIS/10.0",
+        "x-powered-by": "ASP.NET",
+        "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+        "content-length": "158"
+      }
+    },
+    {
+      "status": 403,
+      "version": "HTTP/1.1",
+      "headers": {
+        "content-type": "text/html",
+        "server": "Microsoft-IIS/10.0",
+        "x-powered-by": "ASP.NET",
+        "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+        "content-length": "1233"
+      }
+    }
+  ],
+  "cookies": [],
+  "content": "The content is removed to limit log file size.",
+  "date": "2018-12-02 12:48:56",
+  "times": [0.0183, 0.0001, 0.0001, 0.0002, 0.0361, 0.0362],
+  "request": {
+    "method": "GET",
+    "url": "http://api.scb.se/OV0104/v1?config",
+    "headers": "application/json, text/xml, application/xml, */*",
+    "fields": {},
+    "options": {
+      "useragent": "libcurl/7.58.0 r-curl/3.2 httr/1.3.1",
+      "httpget": true
+    },
+    "auth_token": {},
+    "output": []
+  }
+}
+
+
+CALL AND RESPONSE FROM PXWEB API 2018-12-02 14:48:57: 
+{
+  "url": "http://api.scb.se/OV0104/v1/doris?config",
+  "status_code": 404,
+  "headers": {
+    "content-type": "text/html",
+    "server": "Microsoft-IIS/10.0",
+    "x-powered-by": "ASP.NET",
+    "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+    "content-length": "1245"
+  },
+  "all_headers": [
+    {
+      "status": 404,
+      "version": "HTTP/1.1",
+      "headers": {
+        "content-type": "text/html",
+        "server": "Microsoft-IIS/10.0",
+        "x-powered-by": "ASP.NET",
+        "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+        "content-length": "1245"
+      }
+    }
+  ],
+  "cookies": [],
+  "content": "The content is removed to limit log file size.",
+  "date": "2018-12-02 12:48:56",
+  "times": [0, 0.0001, 0.0001, 0.0001, 0.018, 0.0181],
+  "request": {
+    "method": "GET",
+    "url": "http://api.scb.se/OV0104/v1/doris?config",
+    "headers": "application/json, text/xml, application/xml, */*",
+    "fields": {},
+    "options": {
+      "useragent": "libcurl/7.58.0 r-curl/3.2 httr/1.3.1",
+      "httpget": true
+    },
+    "auth_token": {},
+    "output": []
+  }
+}
+
+
+CALL AND RESPONSE FROM PXWEB API 2018-12-02 14:48:57: 
+{
+  "url": "http://api.scb.se/OV0104/v1/doris/sv?config",
+  "status_code": 200,
+  "headers": {
+    "cache-control": "private",
+    "content-type": "application/json; charset=utf-8",
+    "server": "Microsoft-IIS/10.0",
+    "access-control-allow-origin": "*",
+    "x-powered-by": "ASP.NET",
+    "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+    "content-length": "62"
+  },
+  "all_headers": [
+    {
+      "status": 200,
+      "version": "HTTP/1.1",
+      "headers": {
+        "cache-control": "private",
+        "content-type": "application/json; charset=utf-8",
+        "server": "Microsoft-IIS/10.0",
+        "access-control-allow-origin": "*",
+        "x-powered-by": "ASP.NET",
+        "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+        "content-length": "62"
+      }
+    }
+  ],
+  "cookies": [],
+  "content": "The content is removed to limit log file size.",
+  "date": "2018-12-02 12:48:56",
+  "times": [0, 0.0001, 0.0001, 0.0001, 0.0179, 0.0179],
+  "request": {
+    "method": "GET",
+    "url": "http://api.scb.se/OV0104/v1/doris/sv?config",
+    "headers": "application/json, text/xml, application/xml, */*",
+    "fields": {},
+    "options": {
+      "useragent": "libcurl/7.58.0 r-curl/3.2 httr/1.3.1",
+      "httpget": true
+    },
+    "auth_token": {},
+    "output": []
+  }
+}
+
+
+CALL AND RESPONSE FROM PXWEB API 2018-12-02 14:48:57: 
+{
+  "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  "status_code": 200,
+  "headers": {
+    "cache-control": "private",
+    "content-type": "application/json; charset=utf-8",
+    "server": "Microsoft-IIS/10.0",
+    "access-control-allow-origin": "*",
+    "x-powered-by": "ASP.NET",
+    "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+    "content-length": "8547"
+  },
+  "all_headers": [
+    {
+      "status": 200,
+      "version": "HTTP/1.1",
+      "headers": {
+        "cache-control": "private",
+        "content-type": "application/json; charset=utf-8",
+        "server": "Microsoft-IIS/10.0",
+        "access-control-allow-origin": "*",
+        "x-powered-by": "ASP.NET",
+        "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+        "content-length": "8547"
+      }
+    }
+  ],
+  "cookies": [],
+  "content": "The content is removed to limit log file size.",
+  "date": "2018-12-02 12:48:56",
+  "times": [0, 0, 0, 0.0001, 0.0179, 0.0193],
+  "request": {
+    "method": "GET",
+    "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+    "headers": "application/json, text/xml, application/xml, */*",
+    "fields": {},
+    "options": {
+      "useragent": "libcurl/7.58.0 r-curl/3.2 httr/1.3.1",
+      "httpget": true
+    },
+    "auth_token": {},
+    "output": []
+  }
+}
+
+
+CALL AND RESPONSE FROM PXWEB API 2018-12-02 14:48:57: 
+{
+  "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  "status_code": 200,
+  "headers": {
+    "cache-control": "private",
+    "content-type": "application/json; charset=utf-8",
+    "server": "Microsoft-IIS/10.0",
+    "access-control-allow-origin": "*",
+    "x-powered-by": "ASP.NET",
+    "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+    "content-length": "587"
+  },
+  "all_headers": [
+    {
+      "status": 200,
+      "version": "HTTP/1.1",
+      "headers": {
+        "cache-control": "private",
+        "content-type": "application/json; charset=utf-8",
+        "server": "Microsoft-IIS/10.0",
+        "access-control-allow-origin": "*",
+        "x-powered-by": "ASP.NET",
+        "date": "Sun, 02 Dec 2018 12:48:56 GMT",
+        "content-length": "587"
+      }
+    }
+  ],
+  "cookies": [],
+  "content": "The content is removed to limit log file size.",
+  "date": "2018-12-02 12:48:56",
+  "times": [0, 0, 0, 0.0001, 0.0178, 0.0178],
+  "request": {
+    "method": "POST",
+    "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+    "headers": ["application/json, text/xml, application/xml, */*", ""],
+    "fields": {},
+    "options": {
+      "useragent": "libcurl/7.58.0 r-curl/3.2 httr/1.3.1",
+      "post": true,
+      "postfieldsize": 204,
+      "postfields": "eyJxdWVyeSI6W3siY29kZSI6IkNvbnRlbnRzQ29kZSIsInNlbGVjdGlvbiI6eyJmaWx0ZXIi\nOiJpdGVtIiwidmFsdWVzIjpbIkJFMDEwMU4xIiwiQkUwMTAxTjIiXX19LHsiY29kZSI6IlRp\nZCIsInNlbGVjdGlvbiI6eyJmaWx0ZXIiOiJpdGVtIiwidmFsdWVzIjpbIjIwMTAiLCIyMDEx\nIiwiMjAxMiJdfX1dLCJyZXNwb25zZSI6eyJmb3JtYXQiOiJqc29uIn19"
+    },
+    "auth_token": {},
+    "output": []
+  }
+}
