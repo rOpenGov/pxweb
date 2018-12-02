@@ -8,7 +8,7 @@
         "lang": ["en", "sv"],
         "calls_per_period": 30,
         "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "max_values_to_download" : 110000
           }, 
   
     "pxnet2.stat.fi": {
@@ -16,10 +16,10 @@
         "description" : "Statistics Finland",
         "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["fi", "sv", "en"],
+        "lang": ["en","fi","sv"],
         "calls_per_period": 30,
         "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "max_values_to_download" : 110000
               },
   
     "pxwebapi2.stat.fi": {
@@ -27,9 +27,9 @@
         "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
-        "calls_per_period": 30,
+        "calls_per_period": 100,
         "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "max_values_to_download" : 1000
               },
   
     "statistik.sjv.se": {
@@ -42,24 +42,14 @@
         "period_in_seconds": 10,
         "max_values_to_download" : 1000
               },
-  
-    "pxweb.orebro.se": {
-        "description" : "Orebro municipality in Sweden",
-        "url" : "http://pxweb.orebro.se/api/[version]/[lang]",
-        "version": ["v1"], 
-        "lang": ["sv"],
-        "calls_per_period": 10,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 1000
-              },
 
     "fohm-app.folkhalsomyndigheten.se": {
         "alias" : ["fohm"],
         "description" : "The Public Health Agency of Sweden",
         "url" : "http://fohm-app.folkhalsomyndigheten.se/Folkhalsodata/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["en", "sv"],
-        "calls_per_period": 10,
+        "lang": ["sv"],
+        "calls_per_period": 1000,
         "period_in_seconds": 10,
         "max_values_to_download" : 1000
               },
@@ -79,10 +69,10 @@
                 "alias" : ["konjforcast"],
                 "description" : "The Swedish national institute of economic research, forecast database",
                 "url" : "http://prognos.konj.se/PXWeb/api/[version]/[lang]",
-                "versions" : ["v1"], 
-                "languages" : ["sv"],
+                "version" : ["v1"], 
+                "lang" : ["sv"],
                 "calls_per_period" :  30,
-                "period_in_seconds" : 10,
+                "period_in_seconds" : 1,
                 "max_values_to_download" : 10000
     },
     
@@ -91,21 +81,21 @@
         "description" : "LUKE Natural Resources Institute Finland",
         "url" : "http://statdb.luke.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["fi", "sv", "en"],
+        "lang": ["en","fi","sv"],
         "calls_per_period": 30,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "period_in_seconds": 1,
+        "max_values_to_download" : 10000
               },
               
     "vero2.stat.fi": {
         "alias": "vero",
         "description": "Verohallinto - Finnish Tax Administration",
         "url": "http://vero2.stat.fi/PXWeb/api/[version]/[lang]",
-        "version": "v1",
-        "lang": [ "fi", "sv", "en" ],
-        "calls_per_period":     30,
+        "version": ["v1"],
+        "lang": ["en","fi","sv"],
+        "calls_per_period":     100,
         "period_in_seconds":     10,
-        "max_values_to_download":  1e+05 
+        "max_values_to_download":  1000 
               },
               
     "px.hagstofa.is": {
@@ -113,21 +103,10 @@
         "description" : "Statistics Iceland",
         "url" : "http://px.hagstofa.is/px[lang]/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["is", "en"],
+        "lang": ["en","is"],
         "calls_per_period": 30,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 100000
-              },
-              
-    "statistik.helsingborg.se": {
-        "alias" : ["helsingborg"],
-        "description" : "Helsingborg town in Sweden",
-        "url" : "http://statistik.helsingborg.se/PXWeb/api/[version]/[lang]",
-        "version": ["v1"], 
-        "lang": ["sv"],
-        "calls_per_period": 30,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "period_in_seconds": 1,
+        "max_values_to_download" : 1000
               },
               
     "statistik.linkoping.se": {
@@ -135,21 +114,21 @@
         "description" : "Linkoping municipality in Sweden",
         "url" : "http://statistik.linkoping.se/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["sv","en"],
+        "lang": ["sv"],
         "calls_per_period": 30,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "period_in_seconds": 1,
+        "max_values_to_download" : 10000
               },
               
-    "pxwebb2014.vgregion.se": {
+    "pxwebb2017.vgregion.se": {
         "alias" : ["vgregion"],
         "description" : "Vastra Gotaland Region in Sweden",
-        "url" : "http://pxwebb2014.vgregion.se/pxweb/api/[version]/[lang]",
+        "url" : "http://pxwebb2017.vgregion.se/pxweb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["sv","en"],
-        "calls_per_period": 30,
+        "lang": ["sv"],
+        "calls_per_period": 10,
         "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "max_values_to_download" : 1000
               },
               
     "bank.stat.gl": {
@@ -157,21 +136,21 @@
         "description" : "Statbank Greenland",
         "url" : "http://bank.stat.gl/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["kl","da","en"],
+        "lang": ["en","kl","da"],
         "calls_per_period": 30,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "period_in_seconds": 1,
+        "max_values_to_download" : 10000
               },
 
-    "px.rsv.is/": {
+    "px.rsv.is": {
         "alias" : ["rsv"],
         "description" : "Icelandic Centre for Retail Studies",
         "url" : "http://px.rsv.is/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
-        "lang": ["is","en"],
+        "lang": ["en", "is"],
         "calls_per_period": 30,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "period_in_seconds": 1,
+        "max_values_to_download" : 10000
               },
 
     "statbank.hagstova.fo": {
@@ -181,54 +160,10 @@
         "version": ["v1"], 
         "lang": ["en","fo"],
         "calls_per_period": 30,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "period_in_seconds": 1,
+        "max_values_to_download" : 10000
     },
     
-    "data.ssb.no": { 
-        "alias" : ["ssb"],
-        "description" : "Statistics Norway",
-        "url" : "http://data.ssb.no/api/[version]/[lang]",
-        "version": ["v0"], 
-        "lang": ["en"],
-        "calls_per_period": 30,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 100000
-    },
-
-    "pxweb.asub.ax": {
-        "alias" : ["asub"],
-        "description" : "Statistics Aland",
-        "url" : "http://pxweb.asub.ax/PXWeb/api/[version]/[lang]/",
-        "version": ["v1"], 
-        "lang": ["sv","en"],
-        "calls_per_period": 30,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 100000
-    },
-
-    "makstat.stat.gov.mk": {
-      "alias" : ["makstat"],
-      "description" : "State Statistical Office of the Republic of Macedonia",
-      "url" : "http://makstat.stat.gov.mk/PXWeb/api/[version]/[lang]/MakStat/",
-      "version": ["v1"], 
-      "lang": ["en", "mk"],
-      "calls_per_period": 10,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 1000
-    },
-    
-    "data.csb.gov.lv": {
-      "alias" : ["csb_lv"],
-      "description" : "Statistics Latvia",
-      "url" : "http://data.csb.gov.lv/api/[version]/[lang]/",
-      "version": ["v1"], 
-      "lang": ["en", "lv"],
-      "calls_per_period": 10,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 1000
-    },
-
     "data.ssb.no": { 
       "alias" : ["ssb"],
       "description" : "Statistics Norway",
@@ -237,10 +172,74 @@
       "lang": ["en","no"],
       "calls_per_period": 30,
       "period_in_seconds": 60,
-      "max_values_to_download" : 500000
+      "max_values_to_download" : 25000
+    },
+
+    "pxweb.asub.ax": {
+        "alias" : ["asub"],
+        "description" : "Statistics Aland",
+        "url" : "https://pxweb.asub.ax/PXWeb/api/[version]/[lang]/",
+        "version": ["v1"], 
+        "lang": ["en","sv"],
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000
+    },
+
+    "makstat.stat.gov.mk": {
+      "alias" : ["makstat"],
+      "description" : "State Statistical Office of the Republic of Macedonia",
+      "url" : "http://makstat.stat.gov.mk/PXWeb/api/[version]/[lang]/MakStat/",
+      "version": ["v1"], 
+      "lang": ["en", "mk"],
+      "calls_per_period": 30,
+      "period_in_seconds": 1,
+      "max_values_to_download" : 10000
+    },
+    
+    "data.csb.gov.lv": {
+      "alias" : ["csb_lv"],
+      "description" : "Statistics Latvia",
+      "url" : "http://data.csb.gov.lv/api/[version]/[lang]/",
+      "version": ["v1"], 
+      "lang": ["en", "lv"],
+      "calls_per_period": 2000,
+      "period_in_seconds": 60,
+      "max_values_to_download" : 23000
+    },
+
+    "statbank.statistica.md": {
+      "alias" : ["statistica_md"],
+      "description" : "Statistics Moldova",
+      "url" : "http://statbank.statistica.md/pxweb/api/[version]/[lang]/",
+      "version": ["v1"], 
+      "lang": ["en", "ro"],
+      "calls_per_period": 30,
+      "period_in_seconds": 1,
+      "max_values_to_download" : 10000
+    },
+    
+    "www.pxweb.bfs.admin.ch": {
+        "alias" : ["switzerland"],
+        "description" : "Statistics Switzerland",
+        "url" : "https://www.pxweb.bfs.admin.ch/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["en", "de", "fr", "it"],
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 5000
+    },
+    
+    "askdata.rks-gov.net": {
+      "alias" : ["askdata"],
+      "description" : "Statistics Kosovo",
+      "url" : "http://askdata.rks-gov.net/PXWeb/api/[version]/[lang]/",
+      "version": ["v1"], 
+      "lang": ["en"],
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
     }
-      
- 
   },
 
   "local_apis": {}

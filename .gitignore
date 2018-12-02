@@ -7,3 +7,5 @@ inst/extras/*~
 .Rproj.user
 .Rhistory
 *.Rproj
+sandbox/*
+todo.txt

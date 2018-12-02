@@ -1,0 +1,65 @@
+{
+  "query": [
+    {
+      "code": "Region",
+      "selection": {
+        "filter": "vs:RegionKommun07",
+        "values": [
+          "0114",
+          "2584"
+        ]
+      }
+    },
+    {
+      "code": "Civilstand",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "OG",
+          "G",
+          "ÄNKL"
+        ]
+      }
+    },
+    {
+      "code": "Alder",
+      "selection": {
+        "filter": "agg:Ålder10år",
+        "values": [
+          "-4",
+          "5-14",
+          "95+"
+        ]
+      }
+    },
+    {
+      "code": "Kon",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "1",
+          "2"
+        ]
+      }
+    },
+    {
+      "code": "ContentsCode",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "BE0101N1"
+        ]
+      }
+    },
+    {
+      "code": "Tid",
+      "selection": {
+        "filter": "top",
+        "values": "11"
+      }
+    }
+  ],
+  "response": {
+    "format": "json"
+  }
+}
