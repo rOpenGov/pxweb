@@ -10,7 +10,7 @@ pxweb_data_jsonstat(x)
 \item{x}{a list returned from a PXWEB API to convert to a \code{pxweb_data_jsonstat} object.}
 }
 \value{
-a \code{pxweb_data_jsonstat} object
+a \code{pxweb_data_jsonstat} object.
 }
 \description{
 An object that contain the data for a given PXWEB table.

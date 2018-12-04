@@ -56,6 +56,13 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE){
 #'
 #' @inheritParams pxweb_get
 #' @inheritParams pxweb_as_data_frame
+#' 
+#' @examples 
+#' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+#' query <- file.path(system.file(package = "pxweb"), 
+#'                    "extdata", "examples", "json_query_example.json")
+#' df <- pxweb_get_data(url = url, query = query)
+#' 
 #' @export
 pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text", variable.value.type = "text"){
   d <- pxweb_advanced_get(url = url, query = query, verbose = verbose)

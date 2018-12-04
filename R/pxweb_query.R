@@ -163,6 +163,13 @@ print.pxweb_query <- function(x, ...){
 #' @param pxq a \code{pxweb_query} object.
 #' @param pxmd a \code{pxweb_metadata} object.
 #' 
+#' @examples 
+#' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+#' json_query <- file.path(system.file(package = "pxweb"), 
+#'                         "extdata", "examples", "json_query_example.json")
+#' pxq <- pxweb_query(json_query)
+#' pxweb_validate_query_with_metadata(pxq, pxweb_get(url))
+#' 
 #' @export
 pxweb_validate_query_with_metadata <- function(pxq, pxmd){
   checkmate::assert_class(pxq, "pxweb_query")
@@ -268,8 +275,16 @@ pxweb_query_filter <- function(pxq){
 
 
 #' Convert a \code{pxweb_query} object to a \code{json} string
+#' 
 #' @param pxq a \code{pxweb_query} object.
 #' @param ... further argument to \code{jsonlite::toJSON()}.
+#' 
+#' @examples 
+#' json_query <- file.path(system.file(package = "pxweb"), 
+#'                         "extdata", "examples", "json_query_example.json")
+#' pxq <- pxweb_query(json_query)
+#' json <- pxweb_query_as_json(pxq, pretty = TRUE)
+#' 
 #' @export
 pxweb_query_as_json <- function(pxq, ...){
   checkmate::assert_class(pxq, "pxweb_query")

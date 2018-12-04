@@ -57,7 +57,6 @@ assert_pxweb_api_catalogue <- function(x){
 
 #' Constructor for \code{pxweb_api_catalogue_entry}.
 #' @param x an object to convert to a \code{pxweb_api_catalogue_entry} object.
-#' @export 
 pxweb_api_catalogue_entry <- function(x){
   UseMethod("pxweb_api_catalogue_entry")
 }

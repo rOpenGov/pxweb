@@ -25,6 +25,13 @@ Do a GET call to PXWEB API and return a data.frame
 The functions use will do a \code{pxweb_query} to a PXWEB \code{url} and return a \code{data.frame}.
 This is a wrapper for the \code{pxweb_get} function.
 }
+\examples{
+url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+query <- file.path(system.file(package = "pxweb"), 
+                   "extdata", "examples", "json_query_example.json")
+df <- pxweb_get_data(url = url, query = query)
+
+}
 \seealso{
 See \code{\link{pxweb_get}} for mor general usage and \code{\link{pxweb_query}} for details on PXWEB queries.
 }

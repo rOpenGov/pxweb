@@ -6,7 +6,7 @@
 #' @param x a list returned from a PXWEB API to convert to a \code{pxweb_data_jsonstat} object.
 #' 
 #' @return 
-#' a \code{pxweb_data_jsonstat} object
+#' a \code{pxweb_data_jsonstat} object.
 #' 
 #' @keywords internal
 pxweb_data_jsonstat <- function(x){
