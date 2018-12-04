@@ -95,7 +95,11 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
   px <- pxweb(url)
   if(!is.null(query)){
     pxq <- pxweb_query(query)
-    pxmd <- pxweb_get(px)
+    if(is.null(pxweb_metadata)){
+      pxmd <- pxweb_get(px)
+    } else {
+      pxmd <- pxweb_metadata
+    }
     if(!inherits(pxmd, "pxweb_metadata")) {
       stop("The path is not a PXWEB API table endpoint with data:\n", build_pxweb_url(px), call. = FALSE)
     }
@@ -112,6 +116,7 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
     pxweb_http_log_response(r)
     httr::stop_for_status(r)
     pxr <- pxweb_parse_response(x = r)
+    pxr <- pxweb_metadata_add_null_values(x = pxr, px)
   } else {
     pxr <- list()
     if(length(pxqs) > 1 & verbose) {
@@ -141,4 +146,58 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
     pxweb_http_log_off()
   }
   pxr
+}
+
+#' Add values to NULL value variables in PXWEB metadata objects
+#' 
+#' @details 
+#' Some metadata objects may have NULL values. In these cases the values are downloaded and added
+#' to the metadata object.
+#' 
+#' @param x an object to check if is a \code{pxweb_metadata} object to which we should add values.
+#' @param px a \code{pxweb} object
+#' 
+#' @keywords internal
+pxweb_metadata_add_null_values <- function(x, px){
+  if(!inherits(x, "pxweb_metadata")){
+    return(x)
+  }
+  # Create minimal query
+  # Check if any NULL values, if not just return the metadata
+  miss_values <- unlist(lapply(lapply(x$variables, names), function(x) !"values" %in% x))
+  if(!any(miss_values)){
+    return(x)
+  }
+  
+  # Create minimal query with all NULL values and 1 obs per non-elimination variables
+  qlist <- list()
+  null_variable <- rep(FALSE, length(x$variables))
+  code_variable <- character(length(x$variables))
+  for(i in seq_along(x$variables)){
+    code_variable[i] <- x$variables[[i]]$code
+    if(is.null(x$variables[[i]]$values)){
+      qlist[[x$variables[[i]]$code]] <- "*"
+      null_variable[i] <- TRUE
+      next
+    }
+    if(x$variables[[i]]$elimination){
+      next
+    }
+    qlist[[x$variables[[i]]$code]] <- x$variables[[i]]$values[1]
+  }
+  pxq <- pxweb_query(qlist)
+  
+  # download the values and add it to the meta-data object
+  pxd <- suppressWarnings(pxweb_advanced_get(url = build_pxweb_url(px), query = pxq, verbose = FALSE, pxweb_metadata = x))
+  pxd <- as.data.frame(pxd, column.name.type = "code", variable.value.type = "code", stringsAsFactors = FALSE)
+
+  # assert that the meta-data object is correct.
+  null_idx <- which(null_variable)
+  for(i in seq_along(null_idx)){
+    x$variables[[null_idx[i]]]$valueTexts <- 
+      x$variables[[null_idx[i]]]$values <- 
+      unique(pxd[[code_variable[null_idx[i]]]])
+  }
+  assert_pxweb_metadata(x)
+  x
 }
