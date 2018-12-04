@@ -154,15 +154,16 @@ print.pxweb_query <- function(x, ...){
 
 
 
-#' Validate a pxweb_query with pxweb_metadata
+#' Validate a \code{pxweb_query} with a \code{pxweb_metadata} object
 #' 
 #' @details 
-#' Assert that all query values exist in metadata.
+#' Validate a query with a metadata object to asses that the query can be used to 
+#' query the table.
 #' 
 #' @param pxq a \code{pxweb_query} object.
 #' @param pxmd a \code{pxweb_metadata} object.
 #' 
-#' @keywords internal
+#' @export
 pxweb_validate_query_with_metadata <- function(pxq, pxmd){
   checkmate::assert_class(pxq, "pxweb_query")
   checkmate::assert_class(pxmd, "pxweb_metadata")

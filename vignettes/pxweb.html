@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mans Magnusson, Leo Lahti et al." />
 
-<meta name="date" content="2018-10-19" />
+<meta name="date" content="2018-12-03" />
 
 <title>PX-WEB API Interface for R</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">PX-WEB API Interface for R</h1>
 <h4 class="author"><em>Mans Magnusson, Leo Lahti et al.</em></h4>
-<h4 class="date"><em>2018-10-19</em></h4>
+<h4 class="date"><em>2018-12-03</em></h4>
 
 
 
@@ -78,55 +78,174 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>More information on the PX-Web/PC-Axis API can be found <a href="http://www.scb.se/Grupp/OmSCB/API/API-description.pdf">here</a>.</p>
 <div id="table-of-contents" class="section level2">
 <h2>Table of contents</h2>
-<p><a href="#installation">Installation</a> (Installation)<br />
-<a href="#examples">Examples</a> (Examples)</p>
+<p><a href="#introduction">Introduction</a> (Introduction)<br />
+<a href="#installation">Installation</a> (Installation)<br />
+<a href="#usage">Using PXWEB from R</a> (Using PXWEB from R)</p>
 </div>
-<div id="available-data-sources-and-tools" class="section level2">
-<h2>Available data sources and tools</h2>
-<p><a href="http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/">A number of organizations</a> use to distribute hierarchical data. You can browse the available data sets at:</p>
+<div id="introduction" class="section level2">
+<h2><a name="introduction"></a>Introduction</h2>
+<p>PXWEB is an API structure developed by Statistics Sweden together with other national statistical institutions (NSI) to disseminate public statistics in a structured way. This enables downloading and usage of data from statistical agencies without using a web browser.</p>
+<p>The <code>pxweb</code> R package connects any PXWEB API to R and hence facilitate the access, use and referencing of data from PXWEB APIs.</p>
+<div id="available-data-sources-and-tools" class="section level3">
+<h3>Available data sources and tools</h3>
+<p><a href="http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/">A number of organizations</a> use PXWEB to distribute hierarchical data. You can browse the available data sets at:</p>
 <ul>
 <li><a href="http://www.statistikdatabasen.scb.se/pxweb/en/ssd/">Statistics Sweden</a> with <a href="http://www.scb.se/Grupp/OmSCB/API/API-description.pdf">API Description</a></li>
 <li><a href="http://tilastokeskus.fi/til/aihealuejako.html">Statistics Finland</a> <a href="http://pxnet2.stat.fi/api1.html">StatFi API Description</a></li>
 <li><a href="http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/">Other organizations using PX-WEB</a></li>
 </ul>
 </div>
+</div>
 <div id="installation" class="section level2">
 <h2><a name="installation"></a>Installation</h2>
-<p>Install the stable release version in R:</p>
+<p>To install the latest stable release version from CRAN, just use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;pxweb&quot;</span>)</code></pre></div>
-<p>Install the latest version from github:</p>
+<p>To install the latest stable release version from GitHub, just use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;devtools&quot;</span>)
 devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ropengov/pxweb&quot;</span>)</code></pre></div>
 <p>Test the installation by loading the library:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pxweb)</code></pre></div>
 <p>A tutorial is included with the package with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="dt">topic=</span><span class="st">&quot;pxweb&quot;</span>)</code></pre></div>
-<div id="other-issues" class="section level3">
-<h3>Other issues</h3>
+<div id="installation-issues" class="section level3">
+<h3>Installation issues</h3>
 <p>We also recommend setting the UTF-8 encoding:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.setlocale</span>(<span class="dt">locale=</span><span class="st">&quot;UTF-8&quot;</span>) </code></pre></div>
 </div>
 </div>
-<div id="examples" class="section level2">
-<h2><a name="examples"></a>Examples</h2>
-<p>Some examples on using the R tools to fetch px-web API data.</p>
-<div id="fetching-data-from-px-web-api" class="section level3">
-<h3>Fetching data from PX-WEB API:</h3>
-<p>Interactive API query:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Navigate through all pxweb api:s installed.</span>
-d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>()
+<div id="accessing-pxweb-from-r" class="section level2">
+<h2><a name="usage"></a>Accessing PXWEB from R</h2>
+<p>There are two ways of using the <code>pxweb</code> R package to access data, either interactively of using the core functions. To access data, two parts are needed, an url to the data table in the API and a query to the data table.</p>
+</div>
+<div id="interactive-use" class="section level2">
+<h2><a name="interactive"></a>Interactive use</h2>
+<p>The simples way of using <code>pxweb</code> is to use it interactively and just navigate to the data and setup the data query.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Navigate through all pxweb api:s in the R package API catalogue</span>
+d &lt;-<span class="st"> </span><span class="kw">pxweb_interactive</span>()
 
 <span class="co"># Get data from SCB (Statistics Sweden)</span>
-d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span class="dt">api =</span> <span class="st">&quot;api.scb.se&quot;</span>)
-
-<span class="co"># Fetching data from the swedish SCB (Statistics Sweden) pxweb API:</span>
-d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span class="dt">api =</span> <span class="st">&quot;api.scb.se&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;v1&quot;</span>, <span class="dt">lang =</span> <span class="st">&quot;sv&quot;</span>)
+d &lt;-<span class="st"> </span><span class="kw">pxweb_interactive</span>(<span class="dt">api =</span> <span class="st">&quot;api.scb.se&quot;</span>)
 
 <span class="co"># Fetching data from statfi (Statistics Finland)</span>
-d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span class="dt">api =</span> <span class="st">&quot;pxnet2.stat.fi&quot;</span>)
+d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span class="st">&quot;pxnet2.stat.fi&quot;</span>)
 
 <span class="co"># Fetching data from StatBank (Statistics Norway)</span>
-d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span class="dt">api =</span> <span class="st">&quot;data.ssb.no&quot;</span>)</code></pre></div>
+d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span class="st">&quot;data.ssb.no&quot;</span>)
+
+<span class="co"># To see all available PXWEB APIs use</span>
+pxweb_apis &lt;-<span class="st"> </span><span class="kw">pxweb_api_catalogue</span>()</code></pre></div>
+<p>In the example above we use the interactive functionality from the PXWEB API root, but we could use any path to the API.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Start with a specific path.</span>
+d &lt;-<span class="st"> </span><span class="kw">pxweb_interactive</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A&quot;</span>)</code></pre></div>
+<p>This also mean that we can navigate any PXWEB API, irrespectively of if they are a part of the R package API catlogue or not. Just supply an url to somewhere in the API and then navigate the API.</p>
+</div>
+<div id="direct-use" class="section level2">
+<h2><a name="direct"></a>Direct use</h2>
+<p>Under the hood, the pxweb package use the <code>pxweb_get()</code> function to access data from the PXWEB API. It also keep track of time limits of the API and split up to big queries into optimal downloadable chunks. If we use <code>pxweb_get()</code> without a query, the function eiterh retrun a PXWEB LEVELS object</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get PXWEB levels</span>
+px_levels &lt;-<span class="st"> </span><span class="kw">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/&quot;</span>)
+px_levels</code></pre></div>
+<pre><code>## PXWEB LEVELS
+##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2017
+##   BefolkningR1860 (t): Population by age and sex. Year 1860 - 2017
+##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2017
+##   FolkmangdSmaort (t): Population by smaller localities (places with 50-199 inhabitants). Every fifth year 1995 - 2010
+##   FolkmangdTatort (t): Population by localities. Every fifth year 1960 - 2017
+##   FolkmangdTatortH (t): Population by localities with older/changed names. Every fifth year 1960 - 1980
+##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2017</code></pre>
+<p>or, if we use <code>pxweb_get()</code> for a table, a PXWEB METADATA object is returned.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get PXWEB metadata about a table</span>
+px_meta &lt;-<span class="st"> </span><span class="kw">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)
+px_meta</code></pre></div>
+<pre><code>## PXWEB METADATA
+## Population by region, marital status, age, sex, observations and year 
+## variables:
+##  [[1]] Region: region
+##  [[2]] Civilstand: marital status
+##  [[3]] Alder: age
+##  [[4]] Kon: sex
+##  [[5]] ContentsCode: observations
+##  [[6]] Tid: year</code></pre>
+<div id="creating-data-queries" class="section level3">
+<h3>Creating data queries</h3>
+<p>To download data we need both the url to a table. A url to a table is a url that will return a metadata object if not a query is supplied. Creating a query can be done in many different ways. There are three main ways of specifying a query. The first one is to use pxweb_interactive() to explore a the table url and create a query interactively. This is probably the easiest way.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">pxweb_interactive</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</code></pre></div>
+<p>In addition we can specify the query either as an R list or a json object. Some Statistical Agencies, such as Statistics Sweden, supply queries direct as a json object if tables are browsed on their web pages. These queries can be used directly. Below is an example of a json query for the above table.</p>
+<pre><code>{
+  &quot;query&quot;: [
+    {
+      &quot;code&quot;: &quot;Civilstand&quot;,
+      &quot;selection&quot;: {
+        &quot;filter&quot;: &quot;item&quot;,
+        &quot;values&quot;: [&quot;OG&quot;, &quot;G&quot;, &quot;ÄNKL&quot;, &quot;SK&quot;]
+      }
+    },
+    {
+      &quot;code&quot;: &quot;Kon&quot;,
+      &quot;selection&quot;: {
+        &quot;filter&quot;: &quot;item&quot;,
+        &quot;values&quot;: [&quot;1&quot;, &quot;2&quot;]
+      }
+    },
+    {
+      &quot;code&quot;: &quot;ContentsCode&quot;,
+      &quot;selection&quot;: {
+        &quot;filter&quot;: &quot;item&quot;,
+        &quot;values&quot;: [&quot;BE0101N1&quot;]
+      }
+    },
+    {
+      &quot;code&quot;: &quot;Tid&quot;,
+      &quot;selection&quot;: {
+        &quot;filter&quot;: &quot;item&quot;,
+        &quot;values&quot;: [&quot;2015&quot;, &quot;2016&quot;, &quot;2017&quot;]
+      }
+    }
+  ],
+  &quot;response&quot;: {
+    &quot;format&quot;: &quot;json&quot;
+  }
+} </code></pre>
+<p>To use this json query we just store the json query as a file and supply the path to the file to the <code>pxweb_query()</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pxq &lt;-<span class="st"> </span><span class="kw">pxweb_query</span>(<span class="st">&quot;path/to/the/json/query.json&quot;</span>)</code></pre></div>
+<p>Finally we can</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pxweb_query_list &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">list</span>(<span class="st">&quot;Civilstand&quot;</span>=<span class="kw">c</span>(<span class="st">&quot;OG&quot;</span>,<span class="st">&quot;G&quot;</span>,<span class="st">&quot;ÄNKL&quot;</span>,<span class="st">&quot;SK&quot;</span>),
+       <span class="st">&quot;Kon&quot;</span>=<span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>),
+       <span class="st">&quot;ContentsCode&quot;</span>=<span class="kw">c</span>(<span class="st">&quot;BE0101N1&quot;</span>),
+       <span class="st">&quot;Tid&quot;</span>=<span class="kw">c</span>(<span class="st">&quot;2015&quot;</span>,<span class="st">&quot;2016&quot;</span>,<span class="st">&quot;2017&quot;</span>))
+pxq &lt;-<span class="st"> </span><span class="kw">pxweb_query</span>(pxweb_query_list)
+pxq</code></pre></div>
+<pre><code>## PXWEB QUERY
+## query:
+##  [[1]] Civilstand (item):
+##    OG, G, ÄNKL, SK
+##  [[2]] Kon (item):
+##    1, 2
+##  [[3]] ContentsCode (item):
+##    BE0101N1
+##  [[4]] Tid (item):
+##    2015, 2016, 2017</code></pre>
+<p>The query can be validated against the metadata object to asses that the query can be used. This is done autmatically when the data is fetched, but can also be done manually.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pxweb_validate_query_with_metadata</span>(pxq, px_meta)</code></pre></div>
+</div>
+<div id="downloading-data-with-query" class="section level3">
+<h3>Downloading data with query</h3>
+<p>downloading data with get get json-stat get big queries advanced usage with …</p>
+</div>
+<div id="convert-to-r-format" class="section level3">
+<h3>Convert to r format</h3>
+<p>as.data.fram as.matrix</p>
+</div>
+<div id="access-data-footnotescomments" class="section level3">
+<h3>Access data footnotes/comments</h3>
+</div>
+<div id="cite-data" class="section level3">
+<h3>Cite data</h3>
+</div>
+<div id="known-issues" class="section level3">
+<h3>Known issues</h3>
+<p>only one session per ip to keep track of connections.</p>
 <p>Example of download data from the Statistics Sweden API using <code>get_pxweb_data()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pxweb_test_data &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">get_pxweb_data</span>(<span class="dt">url =</span> <span class="st">&quot;http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet&quot;</span>, 
@@ -173,34 +292,32 @@ d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span 
 <p>This vignette was created with</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()</code></pre></div>
 <pre><code>## R version 3.5.1 (2018-07-02)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 18.04.1 LTS
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS High Sierra 10.13.6
 ## 
 ## Matrix products: default
-## BLAS: /home/lei/bin/R-3.5.1/lib/libRblas.so
-## LAPACK: /home/lei/bin/R-3.5.1/lib/libRlapack.so
+## BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## [1] C/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.6.38   rmarkdown_1.10
+## [1] pxweb_0.8.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.19      digest_0.6.18     rprojroot_1.3-2  
-##  [4] plyr_1.8.4        R6_2.3.0          backports_1.1.2  
-##  [7] magrittr_1.5      evaluate_0.12     httr_1.3.1       
-## [10] stringi_1.2.4     data.table_1.11.8 RJSONIO_1.3-0    
-## [13] tools_3.5.1       stringr_1.3.1     yaml_2.2.0       
-## [16] compiler_3.5.1    htmltools_0.3.6   knitr_1.20</code></pre>
+##  [1] Rcpp_0.12.18     rstudioapi_0.7   knitr_1.20       xml2_1.2.0      
+##  [5] magrittr_1.5     roxygen2_6.1.0   devtools_1.13.6  R6_2.2.2        
+##  [9] rlang_0.2.2      stringr_1.3.1    httr_1.3.1       tools_3.5.1     
+## [13] checkmate_1.8.5  withr_2.1.2      htmltools_0.3.6  commonmark_1.5  
+## [17] yaml_2.2.0       digest_0.6.16    assertthat_0.2.0 rprojroot_1.3-2 
+## [21] crayon_1.3.4     purrr_0.2.5      codetools_0.2-15 curl_3.2        
+## [25] testthat_2.0.0   evaluate_0.11    memoise_1.1.0    rmarkdown_1.10  
+## [29] stringi_1.2.4    compiler_3.5.1   desc_1.2.0       backports_1.1.2 
+## [33] jsonlite_1.5</code></pre>
 </div>
 
 

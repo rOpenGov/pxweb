@@ -2,7 +2,7 @@
 % Please edit documentation in R/pxweb_query.R
 \name{pxweb_validate_query_with_metadata}
 \alias{pxweb_validate_query_with_metadata}
-\title{Validate a pxweb_query with pxweb_metadata}
+\title{Validate a \code{pxweb_query} with a \code{pxweb_metadata} object}
 \usage{
 pxweb_validate_query_with_metadata(pxq, pxmd)
 }
@@ -12,9 +12,9 @@ pxweb_validate_query_with_metadata(pxq, pxmd)
 \item{pxmd}{a \code{pxweb_metadata} object.}
 }
 \description{
-Validate a pxweb_query with pxweb_metadata
+Validate a \code{pxweb_query} with a \code{pxweb_metadata} object
 }
 \details{
-Assert that all query values exist in metadata.
+Validate a query with a metadata object to asses that the query can be used to 
+query the table.
 }
-\keyword{internal}

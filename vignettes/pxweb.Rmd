@@ -23,12 +23,19 @@ More information on the PX-Web/PC-Axis API can be found [here](http://www.scb.se
 
 ## Table of contents
 
+[Introduction](#introduction) (Introduction)  
 [Installation](#installation) (Installation)  
-[Examples](#examples) (Examples)  
+[Using PXWEB from R](#usage) (Using PXWEB from R)  
 
-## Available data sources and tools
+## <a name="introduction"></a>Introduction
 
-[A number of organizations](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/) use to distribute hierarchical data. You can browse the available data sets at:
+PXWEB is an API structure developed by Statistics Sweden together with other national statistical institutions (NSI) to disseminate public statistics in a structured way. This enables downloading and usage of data from statistical agencies without using a web browser.
+
+The `pxweb` R package connects any PXWEB API to R and hence facilitate the access, use and referencing of data from PXWEB APIs.
+
+### Available data sources and tools
+
+[A number of organizations](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/) use PXWEB to distribute hierarchical data. You can browse the available data sets at:
 
  * [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf)
  * [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](http://pxnet2.stat.fi/api1.html)
@@ -36,15 +43,14 @@ More information on the PX-Web/PC-Axis API can be found [here](http://www.scb.se
 
 ## <a name="installation"></a>Installation
 
-
-Install the stable release version in R:
+To install the latest stable release version from CRAN, just use:
 
 ```{r install1, eval=FALSE}
 install.packages("pxweb")
 ```
 
 
-Install the latest version from github:
+To install the latest stable release version from GitHub, just use:
 
 ```{r install2, eval=FALSE}
 library("devtools")
@@ -63,7 +69,7 @@ vignette(topic="pxweb")
 ```
 
 
-### Other issues
+### Installation issues
 
 We also recommend setting the UTF-8 encoding:
 
@@ -71,64 +77,216 @@ We also recommend setting the UTF-8 encoding:
 Sys.setlocale(locale="UTF-8") 
 ```
 
-## <a name="examples"></a>Examples
 
-Some examples on using the R tools to fetch px-web API data.
+## <a name="usage"></a>Accessing PXWEB from R
 
-### Fetching data from PX-WEB API:
+There are two ways of using the `pxweb` R package to access data, either interactively of using the core functions. To access data, two parts are needed, an url to the data table in the API and a query to the data table. 
 
-Interactive API query:
+## <a name="interactive"></a>Interactive use
+
+The simples way of using `pxweb` is to use it interactively and just navigate to the data and setup the data query.
 
 ```{r standardquery, message=FALSE, eval=FALSE}
-# Navigate through all pxweb api:s installed.
-d <- interactive_pxweb()
+# Navigate through all pxweb api:s in the R package API catalogue
+d <- pxweb_interactive()
 
 # Get data from SCB (Statistics Sweden)
-d <- interactive_pxweb(api = "api.scb.se")
-
-# Fetching data from the swedish SCB (Statistics Sweden) pxweb API:
-d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
+d <- pxweb_interactive(api = "api.scb.se")
 
 # Fetching data from statfi (Statistics Finland)
-d <- interactive_pxweb(api = "pxnet2.stat.fi")
+d <- interactive_pxweb("pxnet2.stat.fi")
 
 # Fetching data from StatBank (Statistics Norway)
-d <- interactive_pxweb(api = "data.ssb.no")
+d <- interactive_pxweb("data.ssb.no")
+
+# To see all available PXWEB APIs use
+pxweb_apis <- pxweb_api_catalogue()
 ```
 
-Example of download data from the Statistics Sweden API using `get_pxweb_data()`:
+In the example above we use the interactive functionality from the PXWEB API root, but we could use any path to the API.
 
-```{r directquery, message=FALSE, eval=FALSE}
-pxweb_test_data <- 
-  get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet", 
-                 dims = list(ContentsCode = c('PR0101A1'), 
-                             Tid = c('*')),
-                 clean = FALSE)
+```{r inapi, message=FALSE, eval=FALSE}
+# Start with a specific path.
+d <- pxweb_interactive("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A")
 ```
 
-Example of download data from the Statistics Norway API using `get_pxweb_data()`:
+This also mean that we can navigate any PXWEB API, irrespectively of if they are a part of the R package API catlogue or not. Just supply an url to somewhere in the API and then navigate the API.
 
-```{r directquery-ssb, message=FALSE, eval=FALSE}
-pxweb_test_data_ssb <- 
-  get_pxweb_data(url = "http://data.ssb.no/api/v0/en/table/vf/vf01/aksjer/ASKapital",
-                 dims = list(
-                   NACE2007 = c('A_U'),
-                   ContentsCode = c('ASer'),
-                   Tid = c('*')
-                 ),
-                 clean = FALSE)
+## <a name="direct"></a>Direct use
+
+Under the hood, the pxweb package use the `pxweb_get()` function to access data from the PXWEB API. It also keep track of time limits of the API and split up to big queries into optimal downloadable chunks. If we use `pxweb_get()` without a query, the function eiterh retrun a PXWEB LEVELS object
+
+```{r levels, message=FALSE, eval=TRUE}
+# Get PXWEB levels
+px_levels <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+px_levels
+```
+
+or, if we use `pxweb_get()` for a table, a PXWEB METADATA object is returned.
+
+```{r meta, message=FALSE, eval=TRUE}
+# Get PXWEB metadata about a table
+px_meta <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+px_meta
+```
+
+### Creating data queries
+
+To download data we need both the url to a table. A url to a table is a url that will return a metadata object if not a query is supplied. Creating a query can be done in many different ways. There are three main ways of specifying a query. The first one is to use pxweb_interactive() to explore a the table url and create a query interactively. This is probably the easiest way.
+
+```{r interactive_query, message=FALSE, eval=FALSE}
+d <- pxweb_interactive("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+```
+
+In addition we can specify the query either as an R list or a json object. Some Statistical Agencies, such as Statistics Sweden, supply queries direct as a json object if tables are browsed on their web pages. These queries can be used directly. Below is an example of a json query for the above table. 
+
+```
+{
+  "query": [
+    {
+      "code": "Civilstand",
+      "selection": {
+        "filter": "item",
+        "values": ["OG", "G", "ÄNKL", "SK"]
+      }
+    },
+    {
+      "code": "Kon",
+      "selection": {
+        "filter": "item",
+        "values": ["1", "2"]
+      }
+    },
+    {
+      "code": "ContentsCode",
+      "selection": {
+        "filter": "item",
+        "values": ["BE0101N1"]
+      }
+    },
+    {
+      "code": "Tid",
+      "selection": {
+        "filter": "item",
+        "values": ["2015", "2016", "2017"]
+      }
+    }
+  ],
+  "response": {
+    "format": "json"
+  }
+} 
+```
+
+To use this json query we just store the json query as a file and supply the path to the file to the ```pxweb_query()``` function.
+
+```{r pxq, message=FALSE, eval=FALSE}
+pxq <- pxweb_query("path/to/the/json/query.json")
+```
+
+Finally we can 
+
+```{r rquery, message=FALSE, eval=TRUE}
+pxweb_query_list <- 
+  list("Civilstand"=c("OG","G","ÄNKL","SK"),
+       "Kon"=c("1","2"),
+       "ContentsCode"=c("BE0101N1"),
+       "Tid"=c("2015","2016","2017"))
+pxq <- pxweb_query(pxweb_query_list)
+pxq
+```
+
+The query can be validated against the metadata object to asses that the query can be used. This is done autmatically when the data is fetched with ```pxweb_get()```, but can also be done manually.
+
+```{r validate_query, message=FALSE, eval=TRUE}
+pxweb_validate_query_with_metadata(pxq, px_meta)
+```
+
+### Downloading data
+
+When we have the url to a data table and a query we can simply download the data with ```pxweb_get()```. The function returns a `pxweb_data` object that contain the downloaded data.
+
+```{r, message=FALSE, eval=TRUE}
+pxd <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+                 pxq)
+pxd
+```
+
+If we instead want a json-stat object, we just change the response format to json-stat and we will get a json-stat object returned.
+
+```{r, message=FALSE, eval=TRUE}
+pxq$response$format <- "json-stat"
+pxjstat <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+                     pxq)
+pxjstat
+```
+
+If the queries are large (contain more values than the PXWEB API maximum values), the query is chunked into optimal chunks and is then downloaded sequentially. PXWEB data objects are then combined to one large PXWEB data object, while json-stat objects are returned as a list of json-stat objects.
+
+For more advanced connections to the API, the `pxweb_advanced_get()` give more flexibility to access the underlying http calls using httr as well as logging the http calls for debugging.
+
+The downloaded PXWEB data objects can then be converted to either `data.frame`s or to a character matrix. The character matrix contain the "raw" data while the data.frame returns numeric values. This means that missing values (such as ".." are converted to `NA`). Using the arguments `variable.value.type` and `column.name.type` we can also choose if we want the code or the text column names and value types.
+
+```{r, message=FALSE, eval=TRUE}
+pxdf <- as.data.frame(pxd, column.name.type = "text", variable.value.type = "text")
+head(pxdf)
 ```
 
 
-## Licensing and Citations
+```{r, message=FALSE, eval=TRUE}
+pxdf <- as.data.frame(pxd, column.name.type = "code", variable.value.type = "code")
+head(pxdf)
+```
+
+In a similar way we can access the raw data as a character matrix with `as.matrix`.
+
+```{r, message=FALSE, eval=TRUE}
+pxmat <- as.matrix(pxd, column.name.type = "code", variable.value.type = "code")
+head(pxmat)
+```
+
+### Access data footnotes/comments
+
+In addition to the data, the pxweb data may also contain comments for the data. This can also be accessed using `pxweb_data_comments()`.
+
+```{r, message=FALSE, eval=TRUE}
+pxdc <- pxweb_data_comments(pxd)
+pxdc
+```
+
+In this case we did not have any comments. If we have comments we can turn the comments into a data.frame with one comment per row.
+
+```{r, message=FALSE, eval=FALSE}
+as.data.frame(pxdc)
+```
+
+## Citation
+
+Finally, if we use the data, we can easily create a citation for a `pxweb_data` object using the `pxweb_cite()` function. 
+
+```{r, message=FALSE, eval=FALSE}
+pxweb_cite(pxd)
+```
+
+In addition, please cite the package as for full reproducibility of the data access.
+
+```{r citation, message=FALSE, eval=TRUE}
+citation("pxweb")
+```
+
+
+### Known issues
+
+Currently the `pxweb` package is not thread-safe, and hence it is not safe to runt multiple get functions in parallel or in different R sessions.
+
+
+## Licensing
 
 This work can be freely used, modified and distributed under the open license specified in the [DESCRIPTION file](https://github.com/rOpenGov/pxweb/blob/master/DESCRIPTION).
 
 Kindly cite the work as follows
 
-```{r citation, message=FALSE, eval=TRUE}
-citation("pxweb")
-```
+
 
 ## About the API
 
