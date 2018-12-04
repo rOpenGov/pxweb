@@ -35,12 +35,12 @@ pxweb_interactive <- function(x = NULL){
       cat("\014") 
     }
   }
-  
+
   print_code <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
-                          "Do you print code to download data?\n") == "y"
+                          "Do you print code to query and download data?\n") == "y"
   if(print_code){
     print_json <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
-                            "Do you want to print query as json (otherwise query is printed as a list)?\n") == "y"
+                            "Do you want to print query in json format (otherwise query is printed as an R list)?\n") == "y"
   }
 
   results <- list(url = pxe_data_url(pxe),
