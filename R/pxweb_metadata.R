@@ -16,9 +16,11 @@ pxweb_metadata <- function(x){
   
   checkmate::assert_names(names(x), must.include = "variables")
   for(i in seq_along(x$variables)){
-    checkmate::assert_names(names(x$variables[[i]]), must.include = c("values", "valueTexts"))
-    x$variables[[i]]$values <- unlist(x$variables[[i]]$values)
-    x$variables[[i]]$valueTexts <- unlist(x$variables[[i]]$valueTexts)
+    if(all(c("values", "valueTexts") %in% names(x$variables[[i]]))){
+      checkmate::assert_names(names(x$variables[[i]]), must.include = c("values", "valueTexts"))
+      x$variables[[i]]$values <- unlist(x$variables[[i]]$values)
+      x$variables[[i]]$valueTexts <- unlist(x$variables[[i]]$valueTexts)
+    }
     if(is.null(x$variables[[i]]$elimination)) x$variables[[i]]$elimination <- FALSE
     if(is.null(x$variables[[i]]$time)) x$variables[[i]]$time <- FALSE
   }
@@ -38,11 +40,13 @@ assert_pxweb_metadata <- function(x){
   checkmate::assert_string(x$title, na.ok = TRUE)
   
   for(i in seq_along(x$variables)){
-    checkmate::assert_names(names(x$variables[[i]]), must.include = c("code", "text", "values", "valueTexts", "elimination", "time"), .var.name = paste0("names(x$variables[[", i, "]])"))
+    checkmate::assert_names(names(x$variables[[i]]), must.include = c("code", "text", "elimination", "time"), .var.name = paste0("names(x$variables[[", i, "]])"))
     checkmate::assert_string(x$variables[[i]]$code, .var.name = paste0("x$variables[[", i, "]]$code"))
     checkmate::assert_string(x$variables[[i]]$text, .var.name = paste0("x$variables[[", i, "]]$text"))
-    checkmate::assert_character(x$variables[[i]]$values, .var.name = paste0("x$variables[[", i, "]]$values"))
-    checkmate::assert_character(x$variables[[i]]$valueTexts, len = length(unlist(x$variables[[i]]$values)) , .var.name = paste0("x$variables[[", i, "]]$valueTexts"))
+    if(!is.null(x$variables[[i]]$values)){
+      checkmate::assert_character(x$variables[[i]]$values, .var.name = paste0("x$variables[[", i, "]]$values"))
+      checkmate::assert_character(x$variables[[i]]$valueTexts, len = length(unlist(x$variables[[i]]$values)) , .var.name = paste0("x$variables[[", i, "]]$valueTexts"))
+    }
     checkmate::assert_flag(x$variables[[i]]$time, .var.name = paste0("x$variables[[", i, "]]$time"))
     checkmate::assert_flag(x$variables[[i]]$elimination, .var.name = paste0("x$variables[[", i, "]]$elimination"))
   }
