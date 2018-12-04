@@ -135,5 +135,10 @@ test_that(desc="No value bug",{
 
 })  
 
+test_that(desc="h level",{
+  url <- "http://data.ssb.no/api/v0/en/table/pp/pp04/kpi"
+  expect_silent(px <- pxweb_get(url))
+})  
+
 
 
