@@ -29,14 +29,12 @@ test_that(desc="big queries",{
   )
   test <- api_tests_big_query[[1]]
   for (test in api_tests_big_query){
-    expect_that({
+    expect_warning(
       test_data <- suppressMessages(
         get_pxweb_data(url = test$url,
                        dims = test$dims,
                        clean = test$clean)
-        )
-      }, 
-      not(throws_error()),
+        ), regexp = "deprecated",
       info = test$url)
     
     test_dim_size <- 
