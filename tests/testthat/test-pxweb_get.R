@@ -108,4 +108,10 @@ test_that(desc="Test http logger",{
 })  
 
 
+test_that(desc="No value bug",{
+  url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
+  expect_silent(px <- pxweb_get(url))
+})  
+
+
 
