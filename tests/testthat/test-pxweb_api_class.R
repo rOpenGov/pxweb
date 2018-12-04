@@ -16,7 +16,7 @@ test_that(desc="pxweb_api_class",{
                     max_values_to_download = 10))
   
   expect_silent(suppressMessages(test_api$write_to_catalogue()))
-  expect_true("foo.bar" %in% unlist(lapply(api_catalogue(), function(X) X$api)))
+  expect_true("foo.bar" %in% unlist(lapply(suppressWarnings(api_catalogue()), function(X) X$api)))
 
   expect_error(suppressWarnings(
     test_api2 <- 

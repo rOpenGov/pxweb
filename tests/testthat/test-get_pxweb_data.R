@@ -136,12 +136,11 @@ test_that(desc="get_pxweb_data()",{
 
     skip("Skip temporarily (until new version)")
     
-    expect_that({
+    expect_warning(
       test_data <- 
         get_pxweb_data(url = test$url,
                        dims = test$dims,
-                       clean = test$clean)}, 
-      not(throws_error()),
+                       clean = test$clean),
       info = test$url)
 
     test_dim_size <- pxweb:::calculate_data_dim(pxweb:::get_dim_size(url = test$url, dims=test$dims)[[1]], test$clean)
@@ -198,12 +197,4 @@ test_that(desc="Previous bug identified by Erik Bulow (#84 at github)",{
                     "ContentsCode", "Alder", "Kon", "Tid", "Region")
     )  
   
-  #expect_that({
-  #  test_url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-  #  test_data <- 
-  #    get_pxweb_data(url = test_url,
-  #                   dims = test_dims,
-  #                   clean = TRUE)}, 
-  #  not(throws_error()))
-
 })

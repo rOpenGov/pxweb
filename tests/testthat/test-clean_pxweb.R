@@ -74,12 +74,12 @@ test_that(desc="clean_pxweb",{
                      dims = test$dims,
                      clean = FALSE)
     
-    expect_that({
+    expect_warning(
       test_clean <- pxweb:::clean_pxweb(data2clean=test_data, 
                                         url=test$url, 
                                         dims=test$dims,
-                                        content_node=get_pxweb_metadata(path=test$url))
-    }, not(throws_error()), info = test$url)
+                                        content_node=get_pxweb_metadata(path=test$url)), 
+      regexp = "deprecated")
     
     expect_is(object=test_clean[[1]][,ncol(test_clean[[1]])], "numeric", info = test$url)
     

@@ -24,9 +24,8 @@ test_that(desc="test_pxweb_api()",{
   
   for (test in api_tests_test_pxweb_api){
     for (seed in test_seeds){
-      expect_that({
-        test_data <- suppressMessages(test_pxweb_api(url=test$url, seed=seed))}, 
-        not(throws_error()),
+      expect_warning(
+        test_data <- suppressMessages(test_pxweb_api(url=test$url, seed=seed)),
         info = paste(test$url, ", seed ", seed, sep=""))
       
       expect_equal(object=dim(test_data[[1]]), test$test_dim, info=test$url)
