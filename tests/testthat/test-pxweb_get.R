@@ -111,6 +111,23 @@ test_that(desc="Test http logger",{
 test_that(desc="No value bug",{
   url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
   expect_silent(px <- pxweb_get(url))
+  # pxweb_interactive(url)
+  
+  pxweb_query_list <- 
+    list("HS-Number" = c("06012031"),
+         "Country"=c("AF"),
+         "Month"=c("2016M01"),
+         "Unit"=c("kg"))
+  
+  expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
+  
+  pxweb_query_list <- 
+    list("Country"=c("AF"),
+         "Month"=c("2016M01"),
+         "Unit"=c("kg"))
+  
+  expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
+  expect_silent(df <- as.data.frame(x = px_data))
 })  
 
 
