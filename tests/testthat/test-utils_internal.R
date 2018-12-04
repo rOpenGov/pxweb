@@ -20,15 +20,6 @@ test_that(desc="api_timer()",{
                   max_values_to_download = 10))
   suppressMessages(test_api$write_to_catalogue())
 
-  expect_silent(
-    res <-
-      system.time(
-        for(i in 1:4){
-          pxweb:::api_timer(api_url="http://httpbin.org/")     
-        }))
-  
-  # expect_gt(object=res[3],expected=4)
-  
   if(file.exists(api_file)) file.remove(api_file)
 })
 
