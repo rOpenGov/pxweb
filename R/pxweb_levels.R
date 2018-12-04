@@ -25,7 +25,7 @@ assert_pxweb_levels <- function(x){
   for(i in seq_along(x)){
     checkmate::assert_names(names(x[[i]]), must.include = c("id", "type", "text"), .var.name = paste0("names(x[[", i, "]])"))
     checkmate::assert_string(x[[i]]$id, .var.name = paste0("x[[", i, "]]$id"))
-    checkmate::assert_choice(x[[i]]$type, choices = c("l", "t"), .var.name = paste0("x[[", i, "]]$type"))
+    checkmate::assert_choice(x[[i]]$type, choices = c("l", "t", "h"), .var.name = paste0("x[[", i, "]]$type"))
     checkmate::assert_string(x[[i]]$text, .var.name = paste0("x[[", i, "]]$id"))    
   }
 }
