@@ -48,9 +48,13 @@ assert_pxweb_data <- function(x){
 print.pxweb_data <- function(x, ...){
   cat("PXWEB DATA\n")
   pxdim <- pxweb_data_dim(x)
-  cat("With", pxdim[2], "variables and", pxdim[1], "observations.")
+  no_comments <- length(pxweb_data_comments(x)$pxweb_data_comments)
+  if(no_comments > 0){
+    cat("With", pxdim[2], "variables,", pxdim[1], "observations and", no_comments, "comments/footnotes.")
+  } else {
+    cat("With", pxdim[2], "variables and", pxdim[1], "observations.")
+  }
 }
-
 
 
 #' Compute the dimension of the query \code{pxweb_data} object
