@@ -1,7 +1,7 @@
 ---
 title: "PX-WEB API Interface for R"
 author: "Mans Magnusson, Leo Lahti et al."
-date: "2018-10-19"
+date: "2018-12-02"
 output:
   - rmarkdown::html_vignette
   - rmarkdown::md_vignette  
@@ -195,15 +195,22 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.6.38   rmarkdown_1.10 knitr_1.20    
+## [1] pxweb_0.7.0    rmarkdown_1.10 knitr_1.20     usethis_1.4.0 
+## [5] devtools_2.0.1
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.19      digest_0.6.18     rprojroot_1.3-2  
-##  [4] plyr_1.8.4        R6_2.3.0          backports_1.1.2  
-##  [7] magrittr_1.5      evaluate_0.12     httr_1.3.1       
-## [10] stringi_1.2.4     data.table_1.11.8 RJSONIO_1.3-0    
-## [13] tools_3.5.1       stringr_1.3.1     yaml_2.2.0       
-## [16] compiler_3.5.1    htmltools_0.3.6
+##  [1] Rcpp_1.0.0        magrittr_1.5      pkgload_1.0.2    
+##  [4] R6_2.3.0          rlang_0.3.0.1     httr_1.3.1       
+##  [7] stringr_1.3.1     tools_3.5.1       pkgbuild_1.0.2   
+## [10] sessioninfo_1.1.0 cli_1.0.1         withr_2.1.2      
+## [13] htmltools_0.3.6   remotes_2.0.2     yaml_2.2.0       
+## [16] assertthat_0.2.0  digest_0.6.18     rprojroot_1.3-2  
+## [19] crayon_1.3.4      processx_3.2.0    callr_3.0.0      
+## [22] base64enc_0.1-3   fs_1.2.6          ps_1.2.0         
+## [25] testthat_2.0.1    evaluate_0.12     memoise_1.1.0    
+## [28] glue_1.3.0        stringi_1.2.4     compiler_3.5.1   
+## [31] desc_1.2.0        backports_1.1.2   prettyunits_1.0.2
+## [34] jsonlite_1.5
 ```
 
 
