@@ -1,0 +1,28 @@
+{
+  "query": [
+    {
+      "code": "Efternamn",
+      "selection": {
+        "filter": "all",
+        "values": ["*"]        
+      }
+    },
+    {
+      "code": "ContentsCode",
+      "selection": {
+        "filter": "item",
+        "values": ["BE0001AK"]
+      }
+    },
+    {
+      "code": "Tid",
+      "selection": {
+        "filter": "item",
+        "values": ["1999"]
+      }
+    }
+  ],
+  "response": {
+    "format": "json"
+  }
+} 

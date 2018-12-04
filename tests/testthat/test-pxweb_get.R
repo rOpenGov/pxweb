@@ -128,6 +128,11 @@ test_that(desc="No value bug",{
   
   expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
   expect_silent(df <- as.data.frame(x = px_data))
+  
+  url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0001/BE0001G/BE0001ENamn10"  
+  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_last_names.json")
+  expect_silent(px <- pxweb_get(url, query = pxweb_query(json_query)))
+
 })  
 
 
