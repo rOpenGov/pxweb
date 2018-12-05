@@ -202,7 +202,7 @@ pxweb_validate_query_with_metadata <- function(pxq, pxmd){
 }
 
 
-#' Add metadata to query
+#' Add and remove metadata to query
 #' 
 #' @details 
 #' Add metadata values to variables with a query with filter "all".
@@ -236,6 +236,26 @@ pxweb_add_metadata_to_query <- function(pxq, pxmd){
   pxq
 }
 
+#' @rdname pxweb_add_metadata_to_query
+#' @keywords internal
+pxweb_remove_metadata_from_query  <- function(pxq, pxmd){
+  checkmate::assert_class(pxq, "pxweb_query")
+  checkmate::assert_class(pxmd, "pxweb_metadata")
+
+  # set full queries to all *
+  pxweb_metadata_variables <- unlist(lapply(pxmd$variables, function(x) x$code))
+  for(i in seq_along(pxq$query)){
+    query_size <-length(pxq$query[[i]]$selection$values)
+    pxweb_query_variable_code <- pxq$query[[i]]$code
+    meta_data_size <- length(pxmd$variables[[which(pxweb_metadata_variables %in% pxweb_query_variable_code)]]$values)
+    if(query_size >= meta_data_size & query_size > 1){
+      pxq$query[[i]]$selection$filter <- "all"
+      pxq$query[[i]]$selection$values <- "*"
+    }
+  }
+  assert_pxweb_query(pxq)
+  pxq  
+}
 
 #' Compue the dimension of the query
 #' 

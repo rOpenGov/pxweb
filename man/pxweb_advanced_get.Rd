@@ -5,7 +5,7 @@
 \title{Do a GET call to PXWEB API for advanced users}
 \usage{
 pxweb_advanced_get(url, query = NULL, verbose = TRUE,
-  log_http_calls = FALSE, pxweb_metadata = NULL, ...)
+  log_http_calls = FALSE, pxmdo = NULL, ...)
 }
 \arguments{
 \item{url}{a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.}
@@ -17,7 +17,7 @@ pxweb_advanced_get(url, query = NULL, verbose = TRUE,
 \item{log_http_calls}{Should the http calls to the API be logged (for debugging reasons). 
 If TRUE, all calls and responses are logged and written to "log_pxweb_api_http_calls.txt" in the working directory.}
 
-\item{pxweb_metadata}{A \code{pxweb_metadata} object to use for query.}
+\item{pxmdo}{A \code{pxweb_metadata} object to use for query.}
 
 \item{...}{Further arguments sent to \code{httr::POST} (for queries) or \code{httr::GET} (for query = \code{NULL}). 
 If used with query, also supply a \code{pxweb_metadata} object. Otherwise the same parameters are sent to

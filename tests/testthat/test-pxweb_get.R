@@ -141,11 +141,6 @@ test_that(desc="No value bug",{
 
 })  
 
-test_that(desc="large variable call",{
-  url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0001/BE0001G/BE0001ENamn10"  
-  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_last_names.json")
-  expect_silent(px <- pxweb_get(url, query = pxweb_query(json_query)))
-})  
 
 
 test_that(desc="h level",{
@@ -155,6 +150,14 @@ test_that(desc="h level",{
   expect_silent(px2 <- pxweb_levels_remove_headers(px))
 
   expect_gt(length(px), length(px2))
+})  
+
+
+test_that(desc="large variable call",{
+  skip("Get 403")
+  url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0001/BE0001G/BE0001ENamn10"  
+  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_last_names.json")
+  expect_silent(px <- pxweb_get(url, query = pxweb_query(json_query)))
 })  
 
 

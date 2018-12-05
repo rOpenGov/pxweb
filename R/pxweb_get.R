@@ -80,14 +80,14 @@ pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text"
 #' @inheritParams pxweb_get
 #' @param log_http_calls Should the http calls to the API be logged (for debugging reasons). 
 #'                       If TRUE, all calls and responses are logged and written to "log_pxweb_api_http_calls.txt" in the working directory.
-#' @param pxweb_metadata A \code{pxweb_metadata} object to use for query. 
+#' @param pxmdo A \code{pxweb_metadata} object to use for query. 
 #' @param ... Further arguments sent to \code{httr::POST} (for queries) or \code{httr::GET} (for query = \code{NULL}). 
 #'            If used with query, also supply a \code{pxweb_metadata} object. Otherwise the same parameters are sent to
 #'            both \code{httr::POST} and \code{httr::GET}.
 #' @export
-pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls = FALSE, pxweb_metadata = NULL, ...){
+pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls = FALSE, pxmdo = NULL, ...){
   checkmate::assert_flag(log_http_calls)
-  checkmate::assert_class(pxweb_metadata, classes = "pxweb_metadata", null.ok = TRUE)
+  checkmate::assert_class(pxmdo, classes = "pxweb_metadata", null.ok = TRUE)
   if(log_http_calls){
     pxweb_http_log_on()
   }
@@ -95,10 +95,10 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
   px <- pxweb(url)
   if(!is.null(query)){
     pxq <- pxweb_query(query)
-    if(is.null(pxweb_metadata)){
+    if(is.null(pxmdo)){
       pxmd <- pxweb_get(px)
     } else {
-      pxmd <- pxweb_metadata
+      pxmd <- pxmdo
     }
     if(!inherits(pxmd, "pxweb_metadata")) {
       stop("The path is not a PXWEB API table endpoint with data:\n", build_pxweb_url(px), call. = FALSE)
@@ -126,7 +126,8 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
     for(i in seq_along(pxqs)){
       px <- pxweb_add_call(px)  
       pxurl <- build_pxweb_url(px)
-      r <- httr::POST(pxurl, body = pxweb_as_json(pxqs[[i]]), ...)
+      pxqs[[i]] <- pxweb_remove_metadata_from_query(pxqs[[i]], pxmd)
+      r <- httr::POST(pxurl, body = pxweb_as_json(x = pxqs[[i]]), ...)
       pxweb_http_log_response(r)
       httr::stop_for_status(r)
       pxr[[i]] <- pxweb_parse_response(x = r)
@@ -188,7 +189,7 @@ pxweb_metadata_add_null_values <- function(x, px){
   pxq <- pxweb_query(qlist)
   
   # download the values and add it to the meta-data object
-  pxd <- suppressWarnings(pxweb_advanced_get(url = build_pxweb_url(px), query = pxq, verbose = FALSE, pxweb_metadata = x))
+  pxd <- suppressWarnings(pxweb_advanced_get(url = build_pxweb_url(px), query = pxq, verbose = FALSE, pxmdo = x))
   pxd <- as.data.frame(pxd, column.name.type = "code", variable.value.type = "code", stringsAsFactors = FALSE)
 
   # assert that the meta-data object is correct.

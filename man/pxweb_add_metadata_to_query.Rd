@@ -2,9 +2,12 @@
 % Please edit documentation in R/pxweb_query.R
 \name{pxweb_add_metadata_to_query}
 \alias{pxweb_add_metadata_to_query}
-\title{Add metadata to query}
+\alias{pxweb_remove_metadata_from_query}
+\title{Add and remove metadata to query}
 \usage{
 pxweb_add_metadata_to_query(pxq, pxmd)
+
+pxweb_remove_metadata_from_query(pxq, pxmd)
 }
 \arguments{
 \item{pxq}{a \code{pxweb_query} object.}
@@ -12,7 +15,7 @@ pxweb_add_metadata_to_query(pxq, pxmd)
 \item{pxmd}{a \code{pxweb_metadata} object.}
 }
 \description{
-Add metadata to query
+Add and remove metadata to query
 }
 \details{
 Add metadata values to variables with a query with filter "all".
