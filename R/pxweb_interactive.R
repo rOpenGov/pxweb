@@ -36,26 +36,14 @@ pxweb_interactive <- function(x = NULL){
     }
   }
 
-  print_code <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
-                          "Do you print code to query and download data?\n") == "y"
-  if(print_code){
-    print_json <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
-                            "Do you want to print query in json format (otherwise query is printed as an R list)?\n") == "y"
-  }
-
   results <- list(url = pxe_data_url(pxe),
                   query = pxweb_query(pxe))
   dat <- pxe_interactive_get_data(pxe)
+
   if(!is.null(dat)){
     results$data <- dat
   }
-  if(print_code){
-    if(print_json) {
-      pxe_print_download_code(pxe, "json")
-    } else {
-      pxe_print_download_code(pxe, "r")
-    }
-  }
+
   return(invisible(results))
 }
 
@@ -885,6 +873,13 @@ pxe_interactive_get_data <- function(pxe, test_input = NULL){
   checkmate::assert_true(pxe_position_is_full_query(pxe))
   checkmate::assert_character(test_input, null.ok = TRUE, min.len = 1)
   
+  print_code <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
+                          "Do you want to print code to query and download data?\n") == "y"
+  if(print_code){
+    print_json <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
+                            "Do you want to print query in json format (otherwise query is printed as an R list)?\n") == "y"
+  }
+  
   download <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
                         title = "Do you want to download the data?\n",
                         test_input = test_input[1]) == "y"
@@ -892,12 +887,28 @@ pxe_interactive_get_data <- function(pxe, test_input = NULL){
     return(NULL)
   }
   
-  checkmate::assert_character(test_input, null.ok = TRUE, min.len = 2)
+  checkmate::assert_character(test_input, null.ok = TRUE, min.len = 3)
   return_df <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
                         "Do you want to return a the data as a data.frame?\n",
                         test_input = test_input[2]) == "y"
   
+  print_citation <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
+                              "Do you want to print citation for the data?\n") == "y"
+  
   dat <- pxweb_get(url = pxe_data_url(pxe), query = pxweb_query(pxe))
+  
+  if(print_code){
+    if(print_json) {
+      pxe_print_download_code(pxe, "json")
+    } else {
+      pxe_print_download_code(pxe, "r")
+    }
+  }
+  if(print_citation){
+    cat("############# CITATION #############")
+    pxweb_cite(dat)
+    cat("############# CITATION #############")
+  }
   if(return_df){
     dat <- as.data.frame(dat)
   }
@@ -929,11 +940,14 @@ pxe_print_download_code <- function(pxe, as){
       "  pxweb_get(url = \"", pxe_data_url(pxe), "\",\n",
       "            query = ",q_path,")\n\n", sep ="")
   cat("# Convert to data.frame \n",
-      "px_data <- as.data.frame(px_data, column.name.type = \"text\", variable.value.type = \"text\")\n", sep ="")
+      "px_data <- as.data.frame(px_data, column.name.type = \"text\", variable.value.type = \"text\")\n\n", sep ="")
   
-#  cat("# Get pxweb data comments \n",
-#      "px_data_comments <- pxweb_data_comments(px_data)\n",
-#      "px_data_comments_df <- as.data.frame(px_data_comments)\n", sep ="")
+  cat("# Get pxweb data comments \n",
+      "px_data_comments <- pxweb_data_comments(px_data)\n",
+      "px_data_comments_df <- as.data.frame(px_data_comments)\n\n", sep ="")
+  
+  cat("# Cite the data as \n",
+      "pxweb_cite(px_data)\n\n", sep ="")
   
   return(invisible(NULL))
 }
