@@ -136,9 +136,6 @@ test_that(desc="No value bug",{
          "Unit"=c("kg"))
   
   expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
-  expect_silent(df <- as.data.frame(x = px_data))
-  expect_gt(nrow(df), 1000)
-
 })  
 
 
