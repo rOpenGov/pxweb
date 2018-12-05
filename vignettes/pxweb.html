@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mans Magnusson, Leo Lahti et al." />
 
-<meta name="date" content="2018-12-04" />
+<meta name="date" content="2018-12-05" />
 
 <title>PX-WEB API Interface for R</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">PX-WEB API Interface for R</h1>
 <h4 class="author"><em>Mans Magnusson, Leo Lahti et al.</em></h4>
-<h4 class="date"><em>2018-12-04</em></h4>
+<h4 class="date"><em>2018-12-05</em></h4>
 
 
 
@@ -142,6 +142,9 @@ pxweb_apis &lt;-<span class="st"> </span><span class="kw">pxweb_api_catalogue</s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Start with a specific path.</span>
 d &lt;-<span class="st"> </span><span class="kw">pxweb_interactive</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A&quot;</span>)</code></pre></div>
 <p>This also means that we can navigate any PXWEB API, irrespectively of if they are a part of the R package API catalog or not. Just supply an URL to somewhere in the API and then navigate the API from there.</p>
+<p>Due to new CRAN policies, it is not possible to use an R function to edit the api catalogue of the R package, but editing the can be done easily from R using <code>file.edit()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.edit</span>(<span class="kw">pxweb_api_catalogue_path</span>())</code></pre></div>
+<p>Although, if the <code>pxweb</code> is installed again, it will overwrite the old api catalogue. So the easiest way is to do add a PXWEB API to the global catalogue. To do this, just do a pull request at the pxweb GitHub page <a href="https://github.com/rOpenGov/pxweb">here</a>.</p>
 </div>
 <div id="direct-use" class="section level2">
 <h2><a name="direct"></a>Direct use</h2>
@@ -334,7 +337,7 @@ pxjstat</code></pre></div>
 ##     },
 ##     &quot;label&quot;: [&quot;Population by marital status, sex, observations and year&quot;],
 ##     &quot;source&quot;: [&quot;Statistics Sweden&quot;],
-##     &quot;updated&quot;: [&quot;2018-12-05T04:27:00Z&quot;],
+##     &quot;updated&quot;: [&quot;2018-12-05T23:01:00Z&quot;],
 ##     &quot;value&quot;: [
 ##       [2762601],
 ##       [2820248],
@@ -411,8 +414,8 @@ pxdc</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pxweb_cite</span>(pxd)</code></pre></div>
 <pre><code>## 
 ## Statistics Sweden (2018). &quot;Population by region, marital status,
-## age, sex, observations and year.&quot; [Data accessed 2018-12-04
-## 23:27:01 using pxweb R package 0.8.1], &lt;URL:
+## age, sex, observations and year.&quot; [Data accessed 2018-12-05
+## 18:02:28 using pxweb R package 0.8.2], &lt;URL:
 ## http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -424,13 +427,13 @@ pxdc</code></pre></div>
 ##     address = {Stockholm, Sweden},
 ##     year = {2018},
 ##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2018-12-04 23:27:01 using pxweb R package 0.8.1]},
+##     note = {[Data accessed 2018-12-05 18:02:28 using pxweb R package 0.8.2]},
 ##   }</code></pre>
 <pre><code>## 
 ## Kindly cite the pxweb R package as follows:
 ## 
 ##   (C) Mans Magnusson, Leo Lahti and Love Hansson (rOpenGov
-##   2014-2016).  pxweb: R tools for PX-WEB API.  URL:
+##   2014-2016).  pxweb: R tools for PXWEB API.  URL:
 ##   http://github.com/ropengov/pxweb
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -438,7 +441,7 @@ pxdc</code></pre></div>
 ##   @Misc{,
 ##     title = {pxweb: R tools for PX-WEB API},
 ##     author = {Mans Magnusson and Leo Lahti and Love Hansson},
-##     year = {2014-2016},
+##     year = {2014-2018},
 ##   }</code></pre>
 <div id="known-issues" class="section level3">
 <h3>Known issues</h3>
@@ -468,7 +471,7 @@ pxdc</code></pre></div>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.8.1
+## [1] pxweb_0.8.2
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_0.12.18     rstudioapi_0.7   knitr_1.20       xml2_1.2.0      

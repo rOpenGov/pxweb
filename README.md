@@ -3,7 +3,7 @@ pxweb
 
 [![Build Status](https://travis-ci.org/rOpenGov/pxweb.svg?branch=master)](https://travis-ci.org/rOpenGov/pxweb) [![Build status](https://ci.appveyor.com/api/projects/status/40abe0fpxw2jftf3/branch/master?svg=true)](https://ci.appveyor.com/project/MansMeg/pxweb/branch/master)
 [![Stories in Ready](https://badge.waffle.io/ropengov/pxweb.png?label=TODO)](http://waffle.io/ropengov/pxweb)
-[![Coverage Status](https://coveralls.io/repos/rOpenGov/pxweb/badge.svg)](https://coveralls.io/r/rOpenGov/pxweb) [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://github.com/metacran/cranlogs.app)
+[![Coverage Status](https://coveralls.io/repos/github/rOpenGov/pxweb/badge.svg?branch=master)](https://coveralls.io/github/rOpenGov/pxweb?branch=master) [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://github.com/metacran/cranlogs.app)
 [![cran version](http://www.r-pkg.org/badges/version/pxweb)](http://cran.rstudio.com/web/packages/pxweb) [![Join the chat at https://gitter.im/rOpenGov/pxweb](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://gitter.im/rOpenGov/pxweb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 The easiest way to use pxweb is to simply install it from CRAN:

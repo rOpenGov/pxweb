@@ -121,6 +121,14 @@ d <- pxweb_interactive("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE010
 
 This also means that we can navigate any PXWEB API, irrespectively of if they are a part of the R package API catalog or not. Just supply an URL to somewhere in the API and then navigate the API from there.
 
+Due to new CRAN policies, it is not possible to use an R function to edit the api catalogue of the R package, but editing the can be done easily from R using `file.edit()`.
+
+```{r, message=FALSE, eval=FALSE}
+file.edit(pxweb_api_catalogue_path())
+```
+
+Although, if the `pxweb` is installed again, it will overwrite the old api catalogue. So the easiest way is to do add a PXWEB API to the global catalogue. To do this, just do a pull request at the pxweb GitHub page [here](https://github.com/rOpenGov/pxweb).
+
 ## <a name="direct"></a>Direct use
 
 Under the hood, the pxweb package uses the `pxweb_get()` function to access data from the PXWEB API. It also keeps track of the time limits of the API and split up to big queries into optimal downloadable chunks. If we use `pxweb_get()` without a query, the function either returns a PXWEB LEVELS object or a PXWEB METADATA object, depending if the URL points to a table in the API or not. Here is an example of a PXWEB LEVELS object.
