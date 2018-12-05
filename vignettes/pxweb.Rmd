@@ -271,17 +271,13 @@ as.data.frame(pxdc)
 
 ## Citation
 
-Finally, if we use the data, we can easily create a citation for a `pxweb_data` object using the `pxweb_cite()` function. 
+Finally, if we use the data, we can easily create a citation for a `pxweb_data` object using the `pxweb_cite()` function. For full reproducibility, please also cite the package.
 
-```{r, message=FALSE, eval=FALSE}
+```{r, message=FALSE, eval=TRUE}
 pxweb_cite(pxd)
 ```
 
-For full reproducibility, please also cite the package for full reproducibility of the data access.
 
-```{r citation, message=FALSE, eval=TRUE}
-citation("pxweb")
-```
 
 
 ### Known issues

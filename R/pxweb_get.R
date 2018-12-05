@@ -141,6 +141,8 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
     pxr <- pxweb_c(pxr)
     if(inherits(pxr, "pxweb_data")){
       pxr$pxweb_metadata <- pxmd
+      pxr$url <- pxurl
+      pxr$time_stamp <- Sys.time()
     }
   }
   if(log_http_calls){
