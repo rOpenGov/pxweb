@@ -101,16 +101,17 @@ test_that(desc="Stat Iceland structure",{
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "10")) 
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))
-  
+
   # Going back
-  expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "b"))
+  expect_error(capture.output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "b")))
+  expect_output(try_error <- try(pxweb:::pxweb_interactive_input(pxe, test_input = "b"), silent = TRUE))
+  expect_equal(as.character(try_error), expected = "Error : Too many incorrect choices. Aborting.\n")
 })  
 
 
 test_that(desc="No value bug",{
   url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
   expect_silent(pxe <- pxweb:::pxweb_explorer.character(url))
-  expect_output(pxweb:::print.pxweb_explorer(pxe), regexp = "\\[\\[Country\\]\\]")
-  
+  expect_output(pxweb:::print.pxweb_explorer(pxe), regexp = "\\[\\[HS-Number\\]\\]")
 })  
 
