@@ -69,13 +69,13 @@ test_that(desc="Select all and eliminate",{
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))  
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1")) 
   
-  expect_output(dat <- pxweb:::pxe_interactive_get_data(pxe, test_input = c("y", "n"))) 
+  expect_output(dat <- pxweb:::pxe_interactive_get_data(pxe, test_input = c("n", "y", "n", "n")))
   expect_s3_class(dat, "pxweb_data")
   expect_silent(df <- pxweb:::as.data.frame.pxweb_data(dat))
   expect_equal(ncol(df), 4)
   expect_equal(nrow(df), 2)
   expect_equal(as.character(df[, 1]), c("Moderaterna", "Centerpartiet"))
-  expect_output(dat <- pxweb:::pxe_interactive_get_data(pxe, "n")) 
+  expect_output(dat <- pxweb:::pxe_interactive_get_data(pxe, c("n", "n"))) 
   expect_null(dat)
   
   expect_error(dat <- capture.output(pxweb:::pxe_interactive_get_data(pxe, test_input = "1")))

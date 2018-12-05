@@ -873,27 +873,34 @@ pxe_interactive_get_data <- function(pxe, test_input = NULL){
   checkmate::assert_true(pxe_position_is_full_query(pxe))
   checkmate::assert_character(test_input, null.ok = TRUE, min.len = 1)
   
+  test_idx <- 1
   print_code <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
-                          "Do you want to print code to query and download data?\n") == "y"
+                          "Do you want to print code to query and download data?\n",
+                          test_input = test_input[test_idx]) == "y"
   if(print_code){
+    test_idx <- test_idx + 1
     print_json <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
-                            "Do you want to print query in json format (otherwise query is printed as an R list)?\n") == "y"
+                            "Do you want to print query in json format (otherwise query is printed as an R list)?\n",
+                            test_input = test_input[test_idx]) == "y"
   }
-  
+  test_idx <- test_idx + 1
   download <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
                         title = "Do you want to download the data?\n",
-                        test_input = test_input[1]) == "y"
+                        test_input = test_input[test_idx]) == "y"
   if(!download){
     return(NULL)
   }
   
   checkmate::assert_character(test_input, null.ok = TRUE, min.len = 3)
+  test_idx <- test_idx + 1
   return_df <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
                         "Do you want to return a the data as a data.frame?\n",
-                        test_input = test_input[2]) == "y"
+                        test_input = test_input[test_idx]) == "y"
   
+  test_idx <- test_idx + 1
   print_citation <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
-                              "Do you want to print citation for the data?\n") == "y"
+                              "Do you want to print citation for the data?\n",
+                              test_input = test_input[test_idx]) == "y"
   
   dat <- pxweb_get(url = pxe_data_url(pxe), query = pxweb_query(pxe))
   
