@@ -151,11 +151,30 @@ px_meta
 
 To download data we need both the URL to the table and a query specifying what parts of the table are of interest. An URL to a table is an URL that will return a metadata object if not a query is supplied. Creating a query can be done in three main ways. The first and simplest approach is to use `pxweb_interactive()` to explore the table URL and create a query interactively.
 
-```{r interactive_query, message=FALSE, eval=FALSE}
+```{r, message=FALSE, eval=FALSE}
 d <- pxweb_interactive("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
 ```
 
-The second approach is to specify the query either as an R list or a JSON object. Some Statistical Agencies, such as Statistics Sweden, supply queries directly as a JSON object on their web pages. These queries can be used directly. Below is an example of a JSON query for the table above. For details on how to set up a JSON query, see the API documentation. 
+The interactive function will return the query and the url, even if the data is not downloaded.
+
+```{r , message=FALSE, eval=TRUE, echo=FALSE}
+# save(d, file = "d_example.rda")
+load("d_example.rda")
+```
+
+```{r, message=FALSE, eval=TRUE}
+d$url
+d$query
+```
+
+We can also turn the query to a json query that can be used outside R.
+
+```{r interactive_query, message=FALSE, eval=TRUE}
+pxweb_query_as_json(d$query, pretty = TRUE)
+```
+
+
+The second approach is to specify the query either as an R list or a JSON object. Some Statistical Agencies, such as Statistics Sweden, supply queries directly as a JSON object on their web pages. These queries can be used directly. Below is another example of a JSON query for the table above. For details on how to set up a JSON query, see the PXWEB API documentation. 
 
 ```
 {
@@ -201,7 +220,7 @@ To use this JSON query we just store the JSON query as a file and supply the pat
 pxq <- pxweb_query("path/to/the/json/query.json")
 ```
 
-Finally, we can create a PxWEB query from an R list where each list element is a variable and selected observation.
+Finally, we can create a PXWEB query from an R list where each list element is a variable and selected observation.
 
 ```{r rquery, message=FALSE, eval=TRUE}
 pxweb_query_list <- 

@@ -177,7 +177,67 @@ px_meta</code></pre></div>
 <h3>Creating data queries</h3>
 <p>To download data we need both the URL to the table and a query specifying what parts of the table are of interest. An URL to a table is an URL that will return a metadata object if not a query is supplied. Creating a query can be done in three main ways. The first and simplest approach is to use <code>pxweb_interactive()</code> to explore the table URL and create a query interactively.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">pxweb_interactive</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</code></pre></div>
-<p>The second approach is to specify the query either as an R list or a JSON object. Some Statistical Agencies, such as Statistics Sweden, supply queries directly as a JSON object on their web pages. These queries can be used directly. Below is an example of a JSON query for the table above. For details on how to set up a JSON query, see the API documentation.</p>
+<p>The interactive function will return the query and the url, even if the data is not downloaded.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d<span class="op">$</span>url</code></pre></div>
+<pre><code>## [1] &quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d<span class="op">$</span>query</code></pre></div>
+<pre><code>## PXWEB QUERY
+## query:
+##  [[1]] Region (item):
+##    00
+##  [[2]] Civilstand (item):
+##    OG, G, ÄNKL, SK
+##  [[3]] Alder (item):
+##    tot
+##  [[4]] ContentsCode (item):
+##    BE0101N1
+##  [[5]] Tid (item):
+##    2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017</code></pre>
+<p>We can also turn the query to a json query that can be used outside R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pxweb_query_as_json</span>(d<span class="op">$</span>query, <span class="dt">pretty =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## {
+##   &quot;query&quot;: [
+##     {
+##       &quot;code&quot;: &quot;Region&quot;,
+##       &quot;selection&quot;: {
+##         &quot;filter&quot;: &quot;item&quot;,
+##         &quot;values&quot;: [&quot;00&quot;]
+##       }
+##     },
+##     {
+##       &quot;code&quot;: &quot;Civilstand&quot;,
+##       &quot;selection&quot;: {
+##         &quot;filter&quot;: &quot;item&quot;,
+##         &quot;values&quot;: [&quot;OG&quot;, &quot;G&quot;, &quot;ÄNKL&quot;, &quot;SK&quot;]
+##       }
+##     },
+##     {
+##       &quot;code&quot;: &quot;Alder&quot;,
+##       &quot;selection&quot;: {
+##         &quot;filter&quot;: &quot;item&quot;,
+##         &quot;values&quot;: [&quot;tot&quot;]
+##       }
+##     },
+##     {
+##       &quot;code&quot;: &quot;ContentsCode&quot;,
+##       &quot;selection&quot;: {
+##         &quot;filter&quot;: &quot;item&quot;,
+##         &quot;values&quot;: [&quot;BE0101N1&quot;]
+##       }
+##     },
+##     {
+##       &quot;code&quot;: &quot;Tid&quot;,
+##       &quot;selection&quot;: {
+##         &quot;filter&quot;: &quot;item&quot;,
+##         &quot;values&quot;: [&quot;2010&quot;, &quot;2011&quot;, &quot;2012&quot;, &quot;2013&quot;, &quot;2014&quot;, &quot;2015&quot;, &quot;2016&quot;, &quot;2017&quot;]
+##       }
+##     }
+##   ],
+##   &quot;response&quot;: {
+##     &quot;format&quot;: &quot;json&quot;
+##   }
+## }</code></pre>
+<p>The second approach is to specify the query either as an R list or a JSON object. Some Statistical Agencies, such as Statistics Sweden, supply queries directly as a JSON object on their web pages. These queries can be used directly. Below is another example of a JSON query for the table above. For details on how to set up a JSON query, see the PXWEB API documentation.</p>
 <pre><code>{
   &quot;query&quot;: [
     {
@@ -215,7 +275,7 @@ px_meta</code></pre></div>
 } </code></pre>
 <p>To use this JSON query we just store the JSON query as a file and supply the path to the file to the <code>pxweb_query()</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pxq &lt;-<span class="st"> </span><span class="kw">pxweb_query</span>(<span class="st">&quot;path/to/the/json/query.json&quot;</span>)</code></pre></div>
-<p>Finally, we can create a PxWEB query from an R list where each list element is a variable and selected observation.</p>
+<p>Finally, we can create a PXWEB query from an R list where each list element is a variable and selected observation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pxweb_query_list &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">list</span>(<span class="st">&quot;Civilstand&quot;</span>=<span class="kw">c</span>(<span class="st">&quot;*&quot;</span>), <span class="co"># Use &quot;*&quot; to select all</span>
        <span class="st">&quot;Kon&quot;</span>=<span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>),
@@ -337,7 +397,7 @@ pxjstat</code></pre></div>
 ##     },
 ##     &quot;label&quot;: [&quot;Population by marital status, sex, observations and year&quot;],
 ##     &quot;source&quot;: [&quot;Statistics Sweden&quot;],
-##     &quot;updated&quot;: [&quot;2018-12-05T23:01:00Z&quot;],
+##     &quot;updated&quot;: [&quot;2018-12-05T23:22:00Z&quot;],
 ##     &quot;value&quot;: [
 ##       [2762601],
 ##       [2820248],
@@ -415,7 +475,7 @@ pxdc</code></pre></div>
 <pre><code>## 
 ## Statistics Sweden (2018). &quot;Population by region, marital status,
 ## age, sex, observations and year.&quot; [Data accessed 2018-12-05
-## 18:02:28 using pxweb R package 0.8.2], &lt;URL:
+## 18:24:29 using pxweb R package 0.8.2], &lt;URL:
 ## http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -427,7 +487,7 @@ pxdc</code></pre></div>
 ##     address = {Stockholm, Sweden},
 ##     year = {2018},
 ##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2018-12-05 18:02:28 using pxweb R package 0.8.2]},
+##     note = {[Data accessed 2018-12-05 18:24:29 using pxweb R package 0.8.2]},
 ##   }</code></pre>
 <pre><code>## 
 ## Kindly cite the pxweb R package as follows:
