@@ -158,3 +158,11 @@ test_that(desc="large variable call",{
 })  
 
 
+test_that(desc="Cite data",{
+  url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
+  expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query)))
+  expect_output(pxweb_cite(px_data), regexp = "Population by region")
+  expect_output(pxweb_cite(px_data), regexp = "Stockholm, Sweden")
+})  
+
