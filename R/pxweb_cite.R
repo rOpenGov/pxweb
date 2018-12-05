@@ -14,14 +14,14 @@ pxweb_cite <- function(x, style =  "citation"){
   rref <- utils::bibentry(
     bibtype = "Misc",
     title = x$pxweb_metadata$title,
-    author = person(api_info$citation$organization),
+    author = utils::person(api_info$citation$organization),
     organization = api_info$citation$organization,
     address = api_info$citation$address,
     year = as.POSIXlt(x$time_stamp)$year + 1900L,
     url = x$url,
-    note = paste0("[Data accessed ", x$time_stamp, " using pxweb R package ", packageVersion("pxweb"), "]"))
+    note = paste0("[Data accessed ", x$time_stamp, " using pxweb R package ", utils::packageVersion("pxweb"), "]"))
   
   print(rref, style = style)
   
-  citation("pxweb")
+  utils::citation("pxweb")
 }
