@@ -757,7 +757,7 @@ print.pxweb_input_allowed <- function(x, ...){
 #' @keywords internal
 pxe_pxobj_at_position <- function(x){
   checkmate::assert_class(x, "pxweb_explorer")
-  x$pxobjs[[pxe_position_path(x)]]$pxobj
+  pxweb_levels_remove_headers(x$pxobjs[[pxe_position_path(x)]]$pxobj)
 }
 
 #' @rdname pxe_pxobj_at_position

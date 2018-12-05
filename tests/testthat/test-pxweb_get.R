@@ -112,7 +112,6 @@ test_that(desc="No value bug",{
   url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
   expect_silent(px <- pxweb_get(url))
   # pxweb_interactive(url)
-  
   pxweb_query_list <- 
     list("HS-Number" = c("06012031"),
          "Country"=c("AF"),
@@ -120,25 +119,42 @@ test_that(desc="No value bug",{
          "Unit"=c("kg"))
   
   expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
+  expect_silent(df <- as.data.frame(x = px_data))
+  expect_equal(nrow(df), 1)
   
   pxweb_query_list <- 
     list("Country"=c("AF"),
          "Month"=c("2016M01"),
          "Unit"=c("kg"))
   
-  expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
-  expect_silent(df <- as.data.frame(x = px_data))
+  expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
   
+  pxweb_query_list <- 
+    list("HS-Number" = "*",
+         "Country"=c("AF"),
+         "Month"=c("2016M01"),
+         "Unit"=c("kg"))
+  
+  expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
+  expect_silent(df <- as.data.frame(x = px_data))
+  expect_gt(nrow(df), 1000)
+
+})  
+
+test_that(desc="large variable call",{
   url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0001/BE0001G/BE0001ENamn10"  
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_last_names.json")
   expect_silent(px <- pxweb_get(url, query = pxweb_query(json_query)))
-
 })  
+
 
 test_that(desc="h level",{
   url <- "http://data.ssb.no/api/v0/en/table/pp/pp04/kpi"
   expect_silent(px <- pxweb_get(url))
-})  
+  
+  expect_silent(px2 <- pxweb_levels_remove_headers(px))
 
+  expect_gt(length(px), length(px2))
+})  
 
 

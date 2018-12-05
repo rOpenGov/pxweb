@@ -38,3 +38,22 @@ print.pxweb_levels <- function(x, ...){
     cat("  ", x[[i]]$id, " (", x[[i]]$type,"): ", x[[i]]$text, "\n", sep = "")
   }
 }
+
+
+#' Remove headers from PXWEB levels object
+#' @param x a \code{pxweb_levels} object
+#' @keywords internal
+pxweb_levels_remove_headers <- function(x){
+  if(!inherits(x, "pxweb_levels")){
+    return(x)
+  }
+  checkmate::assert_class(x, "pxweb_levels")
+  is_header <- logical(length(x))
+  for(i in seq_along(x)){
+    is_header[i] <- x[[i]]$type == "h"
+  }
+  x <- x[!is_header]
+  class(x) <- c("pxweb_levels", "list")
+  assert_pxweb_levels(x)
+  x
+}
