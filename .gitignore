@@ -9,3 +9,4 @@ inst/extras/*~
 *.Rproj
 sandbox/*
 todo.txt
+vignettes/pxweb.R
