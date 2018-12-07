@@ -888,7 +888,7 @@ pxe_interactive_get_data <- function(pxe, test_input = NULL){
                         title = "Do you want to download the data?\n",
                         test_input = test_input[test_idx]) == "y"
   
-  checkmate::assert_character(test_input, null.ok = TRUE, min.len = 3)
+  checkmate::assert_character(test_input, null.ok = TRUE, min.len = 2)
   return_df <- FALSE
   print_citation <- FALSE
   if(download){
