@@ -904,7 +904,7 @@ pxe_interactive_get_data <- function(pxe, test_input = NULL){
   
   }
   
-  if(!download){
+  if(download){
     dat <- pxweb_get(url = pxe_data_url(pxe), query = pxweb_query(pxe))
   } else {
     dat <- NULL
