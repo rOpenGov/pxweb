@@ -61,6 +61,8 @@ if(length(warns) > 0){
   print(warns)
 }
 
+cat("\n\nTOUCH APIS:\n")
+
 # Touch all APIs
 touch_results <- list()
 for(i in seq_along(api_paths)){
@@ -68,7 +70,7 @@ for(i in seq_along(api_paths)){
     next
   }
   cat(api_paths[i], "\n")
-  touch_results[[i]] <- try(pxweb_test_api(url = api_paths[i], test_type = "touch", verbose = FALSE), silent = TRUE)
+  touch_results[[i]] <- try(suppressWarnings(pxweb_test_api(url = api_paths[i], test_type = "touch", verbose = FALSE)), silent = TRUE)
   if(inherits(touch_results[[i]], "try-error")){
     errored[i] <- TRUE
   }
@@ -81,12 +83,6 @@ if(any(errored)){
     cat(touch_results[[which(errored)[i]]][1])
   }
 }
-
-warns <- warnings()
-if(length(warns) > 0){
-  print(warns)
-}
-
 
 # Check new APIs
 apis <- pxweb_api_catalogue()

@@ -887,22 +887,28 @@ pxe_interactive_get_data <- function(pxe, test_input = NULL){
   download <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
                         title = "Do you want to download the data?\n",
                         test_input = test_input[test_idx]) == "y"
-  if(!download){
-    return(NULL)
-  }
   
   checkmate::assert_character(test_input, null.ok = TRUE, min.len = 3)
-  test_idx <- test_idx + 1
-  return_df <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
-                        "Do you want to return a the data as a data.frame?\n",
-                        test_input = test_input[test_idx]) == "y"
+  return_df <- FALSE
+  print_citation <- FALSE
+  if(download){
+    test_idx <- test_idx + 1
+    return_df <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
+                           "Do you want to return a the data as a data.frame?\n",
+                           test_input = test_input[test_idx]) == "y"
   
-  test_idx <- test_idx + 1
-  print_citation <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
-                              "Do you want to print citation for the data?\n",
-                              test_input = test_input[test_idx]) == "y"
+    test_idx <- test_idx + 1
+    print_citation <- pxe_input(allowed_input = pxe_allowed_input(c("y", "n")), 
+                                "Do you want to print citation for the data?\n",
+                                test_input = test_input[test_idx]) == "y"
   
-  dat <- pxweb_get(url = pxe_data_url(pxe), query = pxweb_query(pxe))
+  }
+  
+  if(!download){
+    dat <- pxweb_get(url = pxe_data_url(pxe), query = pxweb_query(pxe))
+  } else {
+    dat <- NULL
+  }
   
   if(print_code){
     if(print_json) {
