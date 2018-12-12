@@ -15,6 +15,7 @@ sandbox
 tests_bash/*.R
 tests_bash/*.sh
 tests_bash
+todo.txt
 
 README.md
 README.Rmd
