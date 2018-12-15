@@ -3,6 +3,8 @@
 context("pxweb_interactive")
 
 test_that(desc="Basic usage",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   expect_silent(pxe <- pxweb:::pxweb_explorer.character("http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxweb:::print.pxweb_explorer(pxe), "/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
   expect_output(pxweb:::print.pxweb_explorer(pxe), "api.scb.se")
@@ -25,6 +27,7 @@ test_that(desc="Basic usage",{
 
 
 test_that(desc="API catalogue usage",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
 
   expect_silent(pxe_scb <- pxweb:::pxweb_explorer.character("api.scb.se"))
   expect_output(pxweb:::print.pxweb_explorer(pxe_scb), "v1")
@@ -52,6 +55,8 @@ test_that(desc="API catalogue usage",{
 
 
 test_that(desc="Select all and eliminate",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   expect_silent(pxe <- pxweb:::pxweb_explorer.character("http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxweb:::print.pxweb_explorer(pxe), "/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
   expect_output(pxe_star <- pxweb:::pxweb_interactive_input(pxe, test_input = "*"), "Separate multiple choices by")  
@@ -62,6 +67,8 @@ test_that(desc="Select all and eliminate",{
 
 
 test_that(desc="Select all and eliminate",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   expect_silent(pxe <- pxweb:::pxweb_explorer.character("http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "e"))  
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1:2"))  
@@ -97,6 +104,8 @@ test_that(desc="Select all and eliminate",{
 
 
 test_that(desc="Stat Iceland structure",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   expect_silent(pxe <- pxweb:::pxweb_explorer.NULL())
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "10")) 
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))
@@ -110,6 +119,8 @@ test_that(desc="Stat Iceland structure",{
 
 
 test_that(desc="No value bug",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
   expect_silent(pxe <- pxweb:::pxweb_explorer.character(url))
   expect_output(pxweb:::print.pxweb_explorer(pxe), regexp = "\\[\\[HS-Number\\]\\]")

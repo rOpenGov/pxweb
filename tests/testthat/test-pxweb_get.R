@@ -3,6 +3,8 @@
 context("pxweb_get")
 
 test_that(desc="Constructor works as it should with Statistics Sweden",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   expect_silent(px_meta_data <- pxweb_get(url))
   expect_output(print(px_meta_data), regexp = "PXWEB METADATA")
@@ -52,6 +54,8 @@ test_that(desc="Constructor works as it should with Statistics Sweden",{
 })  
 
 test_that(desc="Previous bugs",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   # This is a bug in the previous implementation of pxweb
   url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
   tryr <- try(httr::GET(url), silent = TRUE)
@@ -67,6 +71,8 @@ test_that(desc="Previous bugs",{
 
 
 test_that(desc="Test to download json-stat objects",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   # Test json-stat
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "test_files", "json_queries", "json_single_query_test.json")
@@ -86,6 +92,8 @@ test_that(desc="Test to download json-stat objects",{
 
 
 test_that(desc="Test pxweb_get_data",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
   expect_silent(px_data1 <- pxweb_get(url = url, query = json_query))
@@ -95,6 +103,8 @@ test_that(desc="Test pxweb_get_data",{
 }) 
 
 test_that(desc="Test http logger",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   expect_silent(px <- pxweb(url))
   pxweb:::pxweb_clear_cache()
@@ -109,6 +119,8 @@ test_that(desc="Test http logger",{
 
 
 test_that(desc="No value bug",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
   expect_silent(px <- pxweb_get(url))
   # pxweb_interactive(url)
@@ -141,6 +153,8 @@ test_that(desc="No value bug",{
 
 
 test_that(desc="h level",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   url <- "http://data.ssb.no/api/v0/en/table/pp/pp04/kpi"
   expect_silent(px <- pxweb_get(url))
   
@@ -151,7 +165,9 @@ test_that(desc="h level",{
 
 
 test_that(desc="large variable call",{
-  skip("Get 403")
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
+  skip("Get 403, bug reported to SCB in december 2018")
   url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0001/BE0001G/BE0001ENamn10"  
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_last_names.json")
   expect_silent(px <- pxweb_get(url, query = pxweb_query(json_query)))
@@ -159,6 +175,8 @@ test_that(desc="large variable call",{
 
 
 test_that(desc="Cite data",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
   expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query)))

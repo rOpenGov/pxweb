@@ -3,6 +3,7 @@
 context("pxweb_query")
 
 test_that(desc="pxweb_query object",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
 
   dims <- list(Alue = c("*"),
                "Asuntokunnan koko" = c("*"),

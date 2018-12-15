@@ -3,6 +3,8 @@
 context("pxweb conversions")
 
 test_that(desc="Converting pxweb data to matrices and data.frames",{
+  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  
   # Move to 
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_variables_example.json")

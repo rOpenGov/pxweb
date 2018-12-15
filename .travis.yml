@@ -12,6 +12,10 @@ jobs:
       env:
         - CURRENT_STAGE=release  
       after_success: Rscript -e 'covr::coveralls()'  
+    - stage: CRAN
+      r: release
+      env:
+        - NOT_CRAN=false      
     - stage: api_catalogue_tests
       r: release
       install: 
