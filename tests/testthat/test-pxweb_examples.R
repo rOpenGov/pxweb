@@ -3,7 +3,8 @@
 context("tests_pxweb_examples.R")
 
 test_that(desc="Example tests",{
-  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
   
   skip("Skip temporarily (until new version)")
 

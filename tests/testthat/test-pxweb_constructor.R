@@ -3,7 +3,8 @@
 context("pxweb")
 
 test_that(desc="Constructor works as it should with Statistics Sweden",{
-  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
   
   expect_silent(pxapi1 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_true(file.exists(pxapi1$paths$rda_file_path))
@@ -27,7 +28,8 @@ test_that(desc="Constructor works as it should with Statistics Sweden",{
 
 
 test_that(desc="Constructor works for erroneous urls",{
-  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
   
   expect_silent(pxapi1 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
 
@@ -47,7 +49,8 @@ test_that(desc="Constructor works for erroneous urls",{
 
 
 test_that(desc="Cache cleaner and print",{
-  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
 
   expect_silent(pxapi1 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_silent(pxapi2 <- pxweb("http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/tym/tyonv/statfin_tyonv_pxt_001.px"))
@@ -59,7 +62,8 @@ test_that(desc="Cache cleaner and print",{
 })  
 
 test_that(desc="pxweb_clear_cache() without any files",{
-  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
   
   expect_silent(pxweb_clear_cache())
   expect_silent(pxweb_clear_cache())
@@ -68,7 +72,8 @@ test_that(desc="pxweb_clear_cache() without any files",{
 
 
 test_that(desc="pxweb_clear_cache() without any files and WARNING for redirect.",{
-  skip_on_cran("CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.")
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
   
   expect_silent(pxweb_clear_cache())
   expect_silent(pxweb_clear_cache())
