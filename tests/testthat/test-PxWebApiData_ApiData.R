@@ -1,13 +1,19 @@
 context("ApiData")
 
 test_that("ApiData - Readymade SSB-data with urlType", {
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
   ssb1066 <- suppressWarnings(ApiData(1066, getDataByGET = TRUE, urlType = "SSB"))
   expect_equal(is.data.frame(ssb1066[[1]]), TRUE)
   expect_equal(names(ssb1066)[2], "dataset")
-  expect_equal(names(ssb1066)[1], "Detaljomsetningsindeksen, etter næring, måned og statistikkvariabel", "dataset")
+  expect_equal(names(ssb1066)[1], "07129: Detaljomsetningsindeksen, etter næring, måned og statistikkvariabel", "dataset")
 })
 
 test_that("ApiData - SCB-data using TRUE and FALSE", {
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
   urlSCB <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   a1 <- suppressWarnings(ApiData(urlSCB, Region = FALSE, Civilstand = "G", Alder = "19", Kon = "2", ContentsCode = c("Folkmängd", "Folkökning"), Tid = "1969"))
   a2 <- suppressWarnings(ApiData(urlSCB, Region = FALSE, Civilstand = "gifta", Alder = "19 år", Kon = "kvinnor", ContentsCode = c("BE0101N1", "BE0101N2"), Tid = "1969"))
@@ -22,6 +28,9 @@ test_that("ApiData - SCB-data using TRUE and FALSE", {
 
 
 test_that("ApiData - StatFin-data with special characters", {
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
   urlStatFin <- "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/tym/tyonv/statfin_tyonv_pxt_001.px"
   a1 <- suppressWarnings(ApiData(urlStatFin, Kuukausi = c("2006M02"), Alue2018 = c("005"), Muuttujat = c("TYOTTOMAT")))
   a2 <- suppressWarnings(ApiData(urlStatFin, Kuukausi = "2006M02", Alue2018 = "Alajärvi Kunta", Muuttujat = "Työttömät"))
@@ -34,6 +43,9 @@ test_that("ApiData - StatFin-data with special characters", {
 
 
 test_that("ApiData - SSB-data advanced use", {
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
   urlSSB <- "http://data.ssb.no/api/v0/en/table/04861"
   a1  <- suppressWarnings(ApiData(urlSSB, Region = "0399", ContentsCode = TRUE, Tid = 2i)) 
   a1q <- suppressWarnings(ApiData(urlSSB, Region = "0399", ContentsCode = TRUE, Tid = 2i, returnApiQuery=TRUE))
@@ -45,6 +57,9 @@ test_that("ApiData - SSB-data advanced use", {
 
 
 test_that("ApiData - SSB-data with returnMetaFrames", {
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
   urlSSB <- "http://data.ssb.no/api/v0/en/table/04861"
   mf <- suppressWarnings(ApiData(urlSSB, returnMetaFrames = TRUE))
   expect_equal(names(mf), c("Region", "ContentsCode", "Tid"))
