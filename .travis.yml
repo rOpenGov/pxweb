@@ -17,7 +17,7 @@ jobs:
       env:
         - NOT_CRAN=false
         - _R_CHECK_CRAN_INCOMING_=true
-      if: branch = master OR branch = test
+      # if: branch = master OR branch = test
     - stage: api_catalogue_tests
       r: release
       install: 
