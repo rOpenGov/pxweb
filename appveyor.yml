@@ -17,6 +17,7 @@ cache:
 
 environment:
   USE_RTOOLS: true
+  NOT_CRAN: true  
 
 build_script:
   - travis-tool.sh install_deps
