@@ -11,12 +11,17 @@ jobs:
       r: release
       env:
         - CURRENT_STAGE=release  
-      after_success: Rscript -e 'covr::coveralls()'  
+      after_success: 
+      - Rscript -e 'covr::coveralls()' 
+      - ls
     - stage: CRAN
       r: release
       env:
         - NOT_CRAN=false
         - _R_CHECK_CRAN_INCOMING_=true
+      after_success: 
+      - ls
+      - echo $NOT_CRAN
       # if: branch = master OR branch = test
     - stage: api_catalogue_tests
       r: release
