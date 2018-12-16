@@ -19,15 +19,14 @@ jobs:
     - stage: CRAN
       r: release
       env:
-        - NOT_CRAN=false # This is not working currently
         - _R_CHECK_CRAN_INCOMING_=true
       before_script: 
-        - export NOT_CRAN=false
+        - export NOT_CRAN=false # Currently this env variable needs to be set here.
       after_success: 
       - ls
       - cat pxweb.Rcheck/tests/testthat.Rout      
       - echo $NOT_CRAN
-      # if: branch = master OR branch = test
+      if: branch = master OR branch = test
     - stage: api_catalogue_tests
       r: release
       install: 
