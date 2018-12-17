@@ -34,6 +34,7 @@ pxweb_test_api <- function(url, test_type="first", n = 1, verbose = TRUE, time_l
   px <- pxweb(url)
   checkmate::assert_choice(test_type, c("first", "sample", "full", "touch"))
   checkmate::assert_int(n, lower = 1)
+  # time_limit_obj <- pxweb:::pxweb_test_time_limit(time_limit = time_limit)
   time_limit_obj <- pxweb_test_time_limit(time_limit = time_limit)
   
   # Build treestructure
