@@ -1,10 +1,42 @@
-pxweb
-====== 
+---
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+
+
+
+<br>
+
 
 [![Build Status](https://travis-ci.org/rOpenGov/pxweb.svg?branch=master)](https://travis-ci.org/rOpenGov/pxweb) [![Build status](https://ci.appveyor.com/api/projects/status/40abe0fpxw2jftf3/branch/master?svg=true)](https://ci.appveyor.com/project/MansMeg/pxweb/branch/master)
 [![Stories in Ready](https://badge.waffle.io/ropengov/pxweb.png?label=TODO)](http://waffle.io/ropengov/pxweb)
-[![Coverage Status](https://coveralls.io/repos/github/rOpenGov/pxweb/badge.svg?branch=master)](https://coveralls.io/github/rOpenGov/pxweb?branch=master) [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/pxweb)](http://cran.rstudio.com/web/packages/pxweb) [![Join the chat at https://gitter.im/rOpenGov/pxweb](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://gitter.im/rOpenGov/pxweb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Coverage Status](https://coveralls.io/repos/github/rOpenGov/pxweb/badge.svg?branch=master)](https://coveralls.io/github/rOpenGov/pxweb?branch=master)
+[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://cran.r-project.org/package=pxweb)
+[![Downloads](http://cranlogs.r-pkg.org/badges/pxweb)](https://cran.r-project.org/package=pxweb)
+[![Gitter](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://gitter.im/rOpenGov/pxweb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Watch on GitHub][github-watch-badge]][github-watch]
+[![Star on GitHub][github-star-badge]][github-star]
+[![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
+
+<br>
+
+# PC Axis R tools: pxweb package
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
+The pxweb R package provides tools to interface with the PX-WEB API
+for data search, download, manipulation and visualization
+purposes. This is used by a large number of statistical authorities
+world-wide.  It offers methods to utilize information about the data
+hierarchy stored behind the PXWEB API.
+
+Many API services are still in their early stages, and data quality is
+sometimes compromised. Issue reports are welcome.
+
+## Installation 
 
 The easiest way to use pxweb is to simply install it from CRAN:
 
@@ -12,7 +44,7 @@ The easiest way to use pxweb is to simply install it from CRAN:
 install.packages('pxweb')
 ```
 
-To get the latest stabile development version use:
+Alternatively, you can get the latest stable development version:
 
 ```r
 library(devtools)
@@ -30,25 +62,34 @@ set_config(
 install_github('ropengov/pxweb')
 ```
  
+## Using the package
+
+For examples, check the [tutorial/vignette](https://htmlpreview.github.io/?https://github.com/rOpenGov/pxweb/blob/test/vignettes/pxweb.html).  
 
 
-# Overview of pxweb R package
+# Contributing
 
-pxweb is an R package to interface with the PX-WEB API, and it offers
-methods to utilize information about the data hierarchy stored behind
-the PXWEB API used by many Statistics authorities. Many API services 
-are still in their early stages, and data quality is sometimes 
-compromised. Issue reports are welcome.
-
-For installation and usage, check the [tutorial/vignette](https://htmlpreview.github.io/?https://github.com/rOpenGov/pxweb/blob/test/vignettes/pxweb.html).  
-
-Authors: [Måns Magnusson](https://github.com/MansMeg/), [Leo Lahti](https://github.com/antagomir). Part of [rOpenGov](http://ropengov.github.io/).
-  
 You are welcome to contact us:
 
-  * [submit suggestions and bug reports](https://github.com/ropengov/pxweb/issues) (provide the output of `sessionInfo()` and `packageVersion("pxweb")`)
-  * [send a pull request](https://github.com/ropengov/pxweb/)
-  * public email list ropengov-forum@googlegroups.com
-  * join IRC at ropengov@Freenode
-  * [join or follow our community](http://ropengov.github.io/contribute/)  
+  * [Submit suggestions and bug reports](https://github.com/ropengov/pxweb/issues) (provide the output of `sessionInfo()` and `packageVersion("pxweb")`)
+  * [Send a pull request](https://github.com/ropengov/pxweb/)
+  * [Star us on the Github page](https://github.com/ropengov/pxweb)
+  * [Join the discussion in Gitter](https://gitter.im/rOpenGov/pxweb)  
+
+
+### Acknowledgements
+
+
+**Kindly cite this work** as follows: [Måns Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and [Leo Lahti](https://github.com/antagomir). Retrieval and analysis of PC Axis data with the pxweb package. R package version 0.8.32. URL: [http://ropengov.github.io/pxweb](http://ropengov.github.io/pxweb)
+
+We are gratetful to all [contributors](https://github.com/rOpenGov/pxweb/graphs/contributors)! This project is part of [rOpenGov](http://ropengov.github.io).
+
+
+
+
+[github-watch-badge]: https://img.shields.io/github/watchers/ropengov/pxweb.svg?style=social
+[github-watch]: https://github.com/ropengov/pxweb/watchers
+[github-star-badge]: https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social
+[github-star]: https://github.com/ropengov/pxweb/stargazers
+
 

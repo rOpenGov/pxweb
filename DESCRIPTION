@@ -1,13 +1,16 @@
 Package: pxweb
 Type: Package
 Title: R Interface to PXWEB APIs
-Version: 0.8.3
+Version: 0.8.32
 Encoding: UTF-8
 Authors@R: c(
   person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),
-	person("Love" , "Hansson", role = "aut"),
-	person("Leo", "Lahti", role = "aut"),		
-	person("Janne", "Huovari", role = "ctb"),
+	person("Markus", "Kainu", role = "aut"),
+	person("Janne", "Huovari", role = "aut"),  	
+	person("Leo", "Lahti", role = "aut"),
+	person("Jan", "Bruusgaard", role = "ctb"),
+	person("Øyvind", "Langsrud", role = "ctb"),	
+	person("Love" , "Hansson", role = "ctb"),	
 	person("Eydun", "Nielsen", role = "ctb"),
 	person("Bo", "Werth", role = "ctb"),
 	person("Thomas", "Runarsson", role = "ctb"),
