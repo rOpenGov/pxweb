@@ -1,3 +1,8 @@
+# Version 0.8
+
+- Package rewritten in order to enhance the efficiency and design
+
+
 # Version 0.6.37
 
 ## New features
