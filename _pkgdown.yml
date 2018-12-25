@@ -15,5 +15,4 @@ reference:
   desc: >
     Listing of interactive functions
   contents:
-  - '`pxweb_interactive`'
-  
+  - '`pxweb_interactive`'  
