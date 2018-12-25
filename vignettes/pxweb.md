@@ -8,7 +8,6 @@ output:
 vignette: >
   %\VignetteIndexEntry{pxweb tutorial}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteDepends{Cairo}  
   \usepackage[utf8]{inputenc}  
 ---
 
@@ -469,7 +468,7 @@ pxjstat
 ##     },
 ##     "label": ["Population by marital status, sex, observations and year"],
 ##     "source": ["Statistics Sweden"],
-##     "updated": ["2018-12-25T09:38:00Z"],
+##     "updated": ["2018-12-25T09:58:00Z"],
 ##     "value": [
 ##       [2762601],
 ##       [2820248],
@@ -591,7 +590,7 @@ pxweb_cite(pxd)
 ## 
 ## Statistics Sweden (2018). "Population by region, marital status,
 ## age, sex, observations and year." [Data accessed 2018-12-25
-## 11:38:56 using pxweb R package 0.8.32], <URL:
+## 11:58:53 using pxweb R package 0.8.32], <URL:
 ## http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy>.
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -603,7 +602,7 @@ pxweb_cite(pxd)
 ##     address = {Stockholm, Sweden},
 ##     year = {2018},
 ##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2018-12-25 11:38:56 using pxweb R package 0.8.32]},
+##     note = {[Data accessed 2018-12-25 11:58:53 using pxweb R package 0.8.32]},
 ##   }
 ```
 
