@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mans Magnusson, Leo Lahti et al." />
 
-<meta name="date" content="2018-12-05" />
+<meta name="date" content="2018-12-25" />
 
 <title>PX-WEB API Interface for R</title>
 
@@ -70,9 +70,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">PX-WEB API Interface for R</h1>
 <h4 class="author"><em>Mans Magnusson, Leo Lahti et al.</em></h4>
-<h4 class="date"><em>2018-12-05</em></h4>
+<h4 class="date"><em>2018-12-25</em></h4>
 
 
+<div id="TOC">
+<ul>
+<li><a href="#table-of-contents">Table of contents</a></li>
+<li><a href="#introduction"><a name="introduction"></a>Introduction</a><ul>
+<li><a href="#available-data-sources-and-tools">Available data sources and tools</a></li>
+<li><a href="#about-pxweb-apis">About PXWEB APIs</a></li>
+</ul></li>
+<li><a href="#installation"><a name="installation"></a>Installation</a><ul>
+<li><a href="#installation-issues">Installation issues</a></li>
+</ul></li>
+<li><a href="#accessing-pxweb-from-r"><a name="usage"></a>Accessing PXWEB from R</a></li>
+<li><a href="#interactive-use"><a name="interactive"></a>Interactive use</a></li>
+<li><a href="#direct-use"><a name="direct"></a>Direct use</a><ul>
+<li><a href="#creating-data-queries">Creating data queries</a></li>
+<li><a href="#downloading-data">Downloading data</a></li>
+<li><a href="#access-data-footnotescomments">Access data footnotes/comments</a></li>
+</ul></li>
+<li><a href="#citation">Citation</a><ul>
+<li><a href="#known-issues">Known issues</a></li>
+</ul></li>
+<li><a href="#licensing">Licensing</a></li>
+<li><a href="#session-info">Session info</a></li>
+</ul>
+</div>
 
 <p>This R package provides tools to access <a href="http://www.scb.se/Grupp/OmSCB/API/API-description.pdf">PX-WEB API</a>. Your <a href="http://ropengov.github.io/contribute/">contributions</a> and <a href="https://github.com/ropengov/pxweb">bug reports and other feedback</a> are welcome!</p>
 <p>More information on the PX-Web/PC-Axis API can be found <a href="http://www.scb.se/Grupp/OmSCB/API/API-description.pdf">here</a>.</p>
@@ -155,7 +179,7 @@ px_levels</code></pre></div>
 <pre><code>## PXWEB LEVELS
 ##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2017
 ##   BefolkningR1860 (t): Population by age and sex. Year 1860 - 2017
-##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2017
+##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2018
 ##   FolkmangdSmaort (t): Population by smaller localities (places with 50-199 inhabitants). Every fifth year 1995 - 2010
 ##   FolkmangdTatort (t): Population by localities. Every fifth year 1960 - 2017
 ##   FolkmangdTatortH (t): Population by localities with older/changed names. Every fifth year 1960 - 1980
@@ -397,7 +421,7 @@ pxjstat</code></pre></div>
 ##     },
 ##     &quot;label&quot;: [&quot;Population by marital status, sex, observations and year&quot;],
 ##     &quot;source&quot;: [&quot;Statistics Sweden&quot;],
-##     &quot;updated&quot;: [&quot;2018-12-05T23:22:00Z&quot;],
+##     &quot;updated&quot;: [&quot;2018-12-25T09:38:00Z&quot;],
 ##     &quot;value&quot;: [
 ##       [2762601],
 ##       [2820248],
@@ -474,8 +498,8 @@ pxdc</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pxweb_cite</span>(pxd)</code></pre></div>
 <pre><code>## 
 ## Statistics Sweden (2018). &quot;Population by region, marital status,
-## age, sex, observations and year.&quot; [Data accessed 2018-12-05
-## 18:24:29 using pxweb R package 0.8.2], &lt;URL:
+## age, sex, observations and year.&quot; [Data accessed 2018-12-25
+## 11:38:54 using pxweb R package 0.8.32], &lt;URL:
 ## http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -487,20 +511,20 @@ pxdc</code></pre></div>
 ##     address = {Stockholm, Sweden},
 ##     year = {2018},
 ##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2018-12-05 18:24:29 using pxweb R package 0.8.2]},
+##     note = {[Data accessed 2018-12-25 11:38:54 using pxweb R package 0.8.32]},
 ##   }</code></pre>
 <pre><code>## 
 ## Kindly cite the pxweb R package as follows:
 ## 
-##   (C) Mans Magnusson, Leo Lahti and Love Hansson (rOpenGov
-##   2014-2016).  pxweb: R tools for PXWEB API.  URL:
+##   (C) Mans Magnusson, Markus Kainu, Janne Huovari, and Leo Lahti
+##   (rOpenGov 2014-2016).  pxweb: R tools for PXWEB API.  URL:
 ##   http://github.com/ropengov/pxweb
 ## 
 ## A BibTeX entry for LaTeX users is
 ## 
 ##   @Misc{,
 ##     title = {pxweb: R tools for PX-WEB API},
-##     author = {Mans Magnusson and Leo Lahti and Love Hansson},
+##     author = {Mans Magnusson and Markus Kainu and Janne Huovari and Leo Lahti},
 ##     year = {2014-2018},
 ##   }</code></pre>
 <div id="known-issues" class="section level3">
@@ -517,32 +541,33 @@ pxdc</code></pre></div>
 <p>This vignette was created with</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()</code></pre></div>
 <pre><code>## R version 3.5.1 (2018-07-02)
-## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-## Running under: macOS High Sierra 10.13.6
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 18.04.1 LTS
 ## 
 ## Matrix products: default
-## BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
-## LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+## BLAS: /home/lei/bin/R-3.5.1/lib/libRblas.so
+## LAPACK: /home/lei/bin/R-3.5.1/lib/libRlapack.so
 ## 
 ## locale:
-## [1] C/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.8.2
+## [1] pxweb_0.8.32   rmarkdown_1.10 knitr_1.20    
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.18     rstudioapi_0.7   knitr_1.20       xml2_1.2.0      
-##  [5] magrittr_1.5     roxygen2_6.1.0   devtools_1.13.6  R6_2.2.2        
-##  [9] rlang_0.2.2      stringr_1.3.1    httr_1.3.1       tools_3.5.1     
-## [13] checkmate_1.8.5  withr_2.1.2      htmltools_0.3.6  commonmark_1.5  
-## [17] yaml_2.2.0       digest_0.6.16    assertthat_0.2.0 rprojroot_1.3-2 
-## [21] crayon_1.3.4     purrr_0.2.5      codetools_0.2-15 curl_3.2        
-## [25] testthat_2.0.0   evaluate_0.11    memoise_1.1.0    rmarkdown_1.10  
-## [29] stringi_1.2.4    compiler_3.5.1   desc_1.2.0       backports_1.1.2 
-## [33] jsonlite_1.5</code></pre>
+##  [1] Rcpp_1.0.0      digest_0.6.18   rprojroot_1.3-2 R6_2.3.0       
+##  [5] jsonlite_1.5    backports_1.1.2 magrittr_1.5    evaluate_0.12  
+##  [9] httr_1.3.1      stringi_1.2.4   curl_3.2        checkmate_1.8.5
+## [13] tools_3.5.1     stringr_1.3.1   yaml_2.2.0      compiler_3.5.1 
+## [17] htmltools_0.3.6</code></pre>
 </div>
 
 
