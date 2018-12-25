@@ -8,7 +8,6 @@ output:
 vignette: >
   %\VignetteIndexEntry{pxweb tutorial}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteDepends{Cairo}  
   \usepackage[utf8]{inputenc}  
 ---
 
