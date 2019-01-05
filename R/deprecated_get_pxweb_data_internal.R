@@ -14,10 +14,9 @@ utils::globalVariables(c(".SD"))
 #' @keywords internal 
 #' 
 #' @return data frame melted and in R (numeric) format
-#' 
 clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {  
   depr_check_for_package("stringr")
-  requireNamespace("data.table")
+  depr_check_for_package("data.table")
   
   # Assertions
   stopifnot(class(data2clean) == "data.frame")
@@ -28,7 +27,6 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
   colnames(data2clean) <- stringr::str_replace_all(colnames(data2clean), pattern = ",", ";")
   head <- colnames(data2clean)
   #colnames(data2clean) <- as.character(1:length(head))
-  depr_check_for_package("data.table")
   data2clean <- data.table::as.data.table(data2clean)
     
   # Get metadata to use in creating factors of Tid and contentCode
@@ -46,8 +44,9 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
                           dim_size = dim_size)
 
   # Melt the data to long format idvars 
-  meltData <- data2clean[, list(variable = names(.SD), value = unlist(.SD, use.names = F)), 
-                         by = eval(names(data2clean)[dim_var_type$row_variables])]
+  meltData <- data.table::melt(data2clean, id.vars = dim_var_type$row_variables)
+#  meltData <- data2clean[, list(variable = names(.SD), value = unlist(.SD, use.names = F)), 
+#                         by = eval(names(data2clean)[dim_var_type$row_variables])]
   meltData <- as.data.frame(meltData)
 
   # Convert to factors

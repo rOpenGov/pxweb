@@ -33,7 +33,7 @@ Imports:
 License: BSD_2_clause + file LICENSE
 Suggests:
     rjstat, 
-    data.table,
+    data.table (>= 1.9.6),
     plyr,
     stringr,
     RJSONIO,
