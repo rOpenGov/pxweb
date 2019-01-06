@@ -166,8 +166,8 @@ test_that(desc="get_pxweb_data()",{
   
   expect_equal(sum(pxd1$Population, na.rm = TRUE), 
                sum(pxd2$values, na.rm = TRUE))
-  expect_true(all(pxd1pop$Population >= 0 ))
-  expect_true(all(pxd2pop$values >= 0))
+  expect_true(all(pxd1$Population >= 0 ))
+  expect_true(all(pxd2$values >= 0))
   expect_true(all(table(pxd1$Population) == table(pxd2$values)))
   
 })
