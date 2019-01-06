@@ -100,3 +100,44 @@ test_that(desc="get_pxweb_data()",{
     expect_equal(object=class(test_data), "data.frame", info=test$url)     
   }
 })
+
+
+test_that(desc="get_pxweb_data()",{  
+  
+  skip_on_cran()
+  # PXWEB query 
+  pxweb_query_url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  pxweb_query_list <- 
+    list("Region"=c("00","01","0114","0115","0117","0120","0123"),
+         "Civilstand"=c("OG","G"),
+         "Alder"=c("0","1","2","3","4","5","6","7","8","9","10"),
+         "Kon"=c("1","2"),
+         "ContentsCode"=c("BE0101N1","BE0101N2"),
+         "Tid"=c("1968","1969","1970","1971","1972"))
+  
+  # Download data 
+  expect_silent(px_data <- 
+    pxweb_get(url = pxweb_query_url,
+              query = pxweb_query_list))
+  expect_warning(pxd1 <- as.data.frame(px_data))
+  
+  expect_warning(pxd2 <- get_pxweb_data(url = pxweb_query_url, dims = pxweb_query_list, clean = TRUE))
+  
+  expect_equal(dim(pxd2)[1], dim(pxd1)[1]*2)
+  expect_equal(dim(pxd2)[2], dim(pxd1)[2])  
+  
+  pxd2pop <- pxd2[pxd2$observations == "Population", ]
+  pxd1pop <- pxd1[, 1:6]
+  pxd2grw <- pxd2[pxd2$observations == "Population growth", -6]
+  pxd1grw <- pxd1[, c(1:5, 7)]
+
+  expect_equal(sum(pxd1pop$Population, na.rm = TRUE), 
+               sum(pxd2pop$values, na.rm = TRUE))
+  expect_equal(sum(pxd1grw$`Population growth`, na.rm = TRUE), 
+               sum(pxd2grw$values, na.rm = TRUE))
+  expect_true(all(pxd1pop$Population >= 0 ))
+  expect_true(all(pxd2pop$values >= 0))
+  
+})
+
+
