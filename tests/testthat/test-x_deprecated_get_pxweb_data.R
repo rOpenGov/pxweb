@@ -12,15 +12,16 @@ context("get_pxweb_data.R")
 test_that(desc="get_pxweb_data()",{  
   
   skip_on_cran()
-  expect_silent(pxweb_clear_cache())
+  pxweb:::pxweb_clear_cache()
 
   api_tests_get_pxweb_data <- list(
     list(
       url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
       dims = list(ContentsCode = c('PR0101A1'),
-                  Tid = c('*')),
+                  Tid = c('1995', '1996', '1997')),
       clean = TRUE,
-      test_dim = c(NA, 3)),
+      test_dim = c(NA, 3),
+      test_sum = 108200),
     
     list(
       url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
@@ -31,7 +32,8 @@ test_that(desc="get_pxweb_data()",{
                   ContentsCode = c('BE0101N1'),
                   Tid = c('2010', '2011', '2012', '2013')),
       clean = TRUE,
-      test_dim = c(128, 7)),
+      test_dim = c(128, 7),
+      test_sum = 47107124),
     
     list(
       url="http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
@@ -42,7 +44,8 @@ test_that(desc="get_pxweb_data()",{
                   ContentsCode = c('BE0101N1'),
                   Tid = c('2010', '2011', '2012', '2013')),
       clean = FALSE,
-      test_dim = c(32, 8)), 
+      test_dim = c(32, 8),
+      test_sum = NA), 
     
     list(
       url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/AM/AM0114/LCIArbKv",
@@ -50,7 +53,8 @@ test_that(desc="get_pxweb_data()",{
                   ContentsCode = c('*'),
                   Tid = c('*')),
       clean = FALSE,
-      test_dim = c(NA, NA)),
+      test_dim = c(NA, NA),
+      test_sum = NA),
     
     # Test swedish letters
     list( 
@@ -60,14 +64,16 @@ test_that(desc="get_pxweb_data()",{
                   ContentsCode = c('ME0104B7'),
                   Tid = c('2010')),
       clean = TRUE,
-      test_dim = c(2907, 5)),
+      test_dim = c(2907, 5),
+      test_sum = 31999.3),
     
     list(
       url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/TK/TK1001/TK1001S/SnabbStatTK1001",
       dims = list("ContentsCode" = c("TK1001AE"),
                   "Tid" = c("2014M02")
       ),
-      clean = TRUE
+      clean = TRUE,
+      test_sum = 18.3
     ),
     
     list(
@@ -78,8 +84,9 @@ test_that(desc="get_pxweb_data()",{
                   Kon = c('1'),
                   ContentsCode = c('BE0101N1'),
                   Tid = c('2017')),
-      clean = FALSE,
-      test_dim = c(NA, NA))  
+      clean = TRUE,
+      test_dim = c(NA, NA),
+      test_sum = 144)  
     
   )
   
@@ -99,6 +106,9 @@ test_that(desc="get_pxweb_data()",{
     test_dim_size <- suppressWarnings(pxweb:::calculate_data_dim(pxweb:::get_dim_size(url = test$url, dims=test$dims)[[1]], test$clean))
     expect_equal(object=dim(test_data), test_dim_size, info=test$url)
     expect_equal(object=class(test_data), "data.frame", info=test$url)     
+    if(!is.na(test$test_sum)){
+      expect_equal(sum(test_data$values, na.rm = TRUE), expected = test$test_sum, label = test$url)
+    }
   }
 })
 
@@ -125,7 +135,7 @@ test_that(desc="get_pxweb_data()",{
   expect_warning(pxd2 <- get_pxweb_data(url = pxweb_query_url, dims = pxweb_query_list, clean = TRUE, encoding = NULL))
   
   expect_equal(dim(pxd2)[1], dim(pxd1)[1]*2)
-  expect_equal(dim(pxd2)[2], dim(pxd1)[2])  
+  expect_equal(dim(pxd2)[2], dim(pxd1)[2])
   
   pxd2pop <- pxd2[pxd2$ContentsCode == "Population", ]
   pxd1pop <- pxd1[, 1:6]

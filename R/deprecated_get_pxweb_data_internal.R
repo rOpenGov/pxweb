@@ -74,7 +74,7 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
   
   # Add variables (assume concatenated by space)
   map$variable <- tolower(stringr::str_replace_all(map$variable, "[:punct:]", ""))
-  meltData$variable <- tolower(stringr::str_replace_all(map$variable, "[:punct:]", ""))
+  meltData$variable <- tolower(stringr::str_replace_all(meltData$variable, "[:punct:]", ""))
   meltData <- merge(meltData, map)
   
   meltData[, "values"] <- suppressWarnings(as.numeric(stringr::str_replace_all(meltData$value,"\\s","")))
