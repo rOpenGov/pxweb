@@ -84,11 +84,12 @@ test_that(desc="get_pxweb_data()",{
   )
   
   
-  for (test in api_tests_get_pxweb_data){
+  for (i in seq_along(api_tests_get_pxweb_data)){
 #    if(test$url == "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014") {
 #      skip("Known error: comma bug in csv files")}
 
 #    skip("Skip temporarily (until new version)")
+    test <- api_tests_get_pxweb_data[[i]]
     expect_warning(
       test_data <- 
         get_pxweb_data(url = test$url,

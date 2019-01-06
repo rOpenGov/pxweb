@@ -30,9 +30,11 @@ get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
   depr_check_for_package("RJSONIO")
   depr_check_for_package("stringr")
 
-   dims <- reorder_and_check_dims(url, dims)
+   dims <- suppressWarnings(reorder_and_check_dims(url, dims))
+   # dims <- pxweb:::reorder_and_check_dims(url, dims)
    dimNames <- names(dims)
-   batches <- create_batch_list(url = url, dims = dims)
+   batches <- suppressWarnings(create_batch_list(url = url, dims = dims))
+   # batches <- pxweb:::create_batch_list(url = url, dims = dims)
    content_node <- batches$content_node
    b_list <- list()
    
@@ -58,6 +60,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
      
      # print("Get data")
      api_timer(batches$url) 
+     # pxweb:::api_timer(batches$url) 
      response <- try(httr::POST(
         url = batches$url,
         body = RJSONIO::toJSON(list(
@@ -97,8 +100,8 @@ get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
      }
 
      if (clean) {
-       #message("Cleaning the data..")
-       #save(b, data2clean, url, dims, head, batches, content_node, file = "tmp.RData")
+       # message("Cleaning the data..")
+       # save(b, data2clean, url, dims, head, batches, content_node, file = "tmp2.RData")
        b <- clean_pxweb(data2clean=b, url=batches$url, dims = batches$dims[[batch_no]], content_node=content_node)
        content_node <- b[["content_node"]]
        if(batch_no == 1){
