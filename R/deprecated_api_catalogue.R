@@ -159,7 +159,7 @@ temp_api_folder_path <- function(){
 get_api_file_path <- function(){
   api_file <- temp_api_file_path()
   if(!file.exists(api_file)){
-    dir.create(temp_api_folder_path(), recursive = TRUE)
+    dir.create(temp_api_folder_path(), recursive = TRUE, showWarnings = FALSE)
     file.copy(system.file("extdata/api.json", package = "pxweb"), api_file)
   }
   api_file

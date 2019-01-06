@@ -98,7 +98,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
 
      if (clean) {
        #message("Cleaning the data..")
-       #save(b, head, batches, content_node, file = "tmp.RData")
+       #save(b, data2clean, url, dims, head, batches, content_node, file = "tmp.RData")
        b <- clean_pxweb(data2clean=b, url=batches$url, dims = batches$dims[[batch_no]], content_node=content_node)
        content_node <- b[["content_node"]]
        if(batch_no == 1){
