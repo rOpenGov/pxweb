@@ -31,7 +31,7 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
     
   # Get metadata to use in creating factors of Tid and contentCode
   if(is.null(content_node)){
-    contentNode <- get_pxweb_metadata(url)
+    contentNode <- suppressWarnings(get_pxweb_metadata(url))
   } else {
     contentNode <- content_node
   }
@@ -44,7 +44,8 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
                           dim_size = dim_size)
 
   # Melt the data to long format idvars 
-  meltData <- data.table::melt(data2clean, id.vars = dim_var_type$row_variables)
+  warning("data.table::melt() is now used with get_pxweb_data(..., clean = TRUE). The order of the data may be different, please check your results.", call. = FALSE)
+  meltData <- suppressWarnings(data.table::melt(data2clean, id.vars = dim_var_type$row_variables))  
 #  meltData <- data2clean[, list(variable = names(.SD), value = unlist(.SD, use.names = F)), 
 #                         by = eval(names(data2clean)[dim_var_type$row_variables])]
   meltData <- as.data.frame(meltData)
@@ -65,18 +66,13 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
       contentNode$variables$variables[[i]]$valueTexts[lab_index]
   }
   
-  # Calculate col_variables
-  for (k in seq_along(dim_var_type$col_variables)){
-    i <- rev(seq_along(dim_var_type$col_variables))[k] # Col variables reverse order
-    j <- dim_var_type$col_variables[i] # Col variable column index
-    if(k == 1) {
-      each_no <- 1
-    } else {
-      each_no <- prod(dim_size[(dim_var_type$col_variables[i]+1):length(dim_size)])
-    }
-    meltData[, contentNode$variables$variables[[j]]$text] <- 
-      factor(rep(col_var_lab[[i]], each=each_no))
-  }
+  # Create map
+  map <- expand.grid(col_var_lab)
+  map$variable <- apply(map, 1, FUN = paste, collapse = " ")
+  
+  # Add variables (assume concatenated by space)
+  meltData <- merge(meltData, map)
+  
   meltData[, "values"] <- suppressWarnings(as.numeric(stringr::str_replace_all(meltData$value,"\\s","")))
    
   # Remove variables wiyhout any use
