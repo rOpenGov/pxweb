@@ -14,10 +14,9 @@ utils::globalVariables(c(".SD"))
 #' @keywords internal 
 #' 
 #' @return data frame melted and in R (numeric) format
-#' 
 clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {  
   depr_check_for_package("stringr")
-  requireNamespace("data.table")
+  depr_check_for_package("data.table")
   
   # Assertions
   stopifnot(class(data2clean) == "data.frame")
@@ -28,12 +27,11 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
   colnames(data2clean) <- stringr::str_replace_all(colnames(data2clean), pattern = ",", ";")
   head <- colnames(data2clean)
   #colnames(data2clean) <- as.character(1:length(head))
-  depr_check_for_package("data.table")
   data2clean <- data.table::as.data.table(data2clean)
     
   # Get metadata to use in creating factors of Tid and contentCode
   if(is.null(content_node)){
-    contentNode <- get_pxweb_metadata(url)
+    contentNode <- suppressWarnings(get_pxweb_metadata(url))
   } else {
     contentNode <- content_node
   }
@@ -41,13 +39,17 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
   # Collect factor labels for tid and contentCode and convert
   # other variables to factor variables
   dim_size <- get_dim_size(url=url, dims=dims, content_node=contentNode)[[1]]
+  # dim_size <- pxweb:::get_dim_size(url=url, dims=dims, content_node=contentNode)[[1]]
   dim_var_type <- 
     calc_dim_type(dim_data2clean = dim(data2clean), 
                           dim_size = dim_size)
+  # dim_var_type <- pxweb:::calc_dim_type(dim_data2clean = dim(data2clean), dim_size = dim_size)
 
   # Melt the data to long format idvars 
-  meltData <- data2clean[, list(variable = names(.SD), value = unlist(.SD, use.names = F)), 
-                         by = eval(names(data2clean)[dim_var_type$row_variables])]
+  warning("data.table::melt() is now used with get_pxweb_data(..., clean = TRUE). The order of the data may be different, please check your results.", call. = FALSE)
+  meltData <- suppressWarnings(data.table::melt(data2clean, id.vars = dim_var_type$row_variables))  
+#  meltData <- data2clean[, list(variable = names(.SD), value = unlist(.SD, use.names = F)), 
+#                         by = eval(names(data2clean)[dim_var_type$row_variables])]
   meltData <- as.data.frame(meltData)
 
   # Convert to factors
@@ -66,18 +68,15 @@ clean_pxweb <- function(data2clean, url, dims, content_node=NULL) {
       contentNode$variables$variables[[i]]$valueTexts[lab_index]
   }
   
-  # Calculate col_variables
-  for (k in seq_along(dim_var_type$col_variables)){
-    i <- rev(seq_along(dim_var_type$col_variables))[k] # Col variables reverse order
-    j <- dim_var_type$col_variables[i] # Col variable column index
-    if(k == 1) {
-      each_no <- 1
-    } else {
-      each_no <- prod(dim_size[(dim_var_type$col_variables[i]+1):length(dim_size)])
-    }
-    meltData[, contentNode$variables$variables[[j]]$text] <- 
-      factor(rep(col_var_lab[[i]], each=each_no))
-  }
+  # Create map
+  map <- expand.grid(col_var_lab)
+  map$variable <- apply(map, 1, FUN = paste, collapse = " ")
+  
+  # Add variables (assume concatenated by space)
+  map$variable <- tolower(stringr::str_replace_all(map$variable, "[:punct:]", ""))
+  meltData$variable <- tolower(stringr::str_replace_all(meltData$variable, "[:punct:]", ""))
+  meltData <- merge(meltData, map)
+  
   meltData[, "values"] <- suppressWarnings(as.numeric(stringr::str_replace_all(meltData$value,"\\s","")))
    
   # Remove variables wiyhout any use

@@ -1,7 +1,7 @@
 Package: pxweb
 Type: Package
 Title: R Interface to PXWEB APIs
-Version: 0.8.32
+Version: 0.9.1
 Encoding: UTF-8
 Authors@R: c(
   person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),
@@ -36,7 +36,7 @@ Imports:
 License: BSD_2_clause + file LICENSE
 Suggests:
     rjstat, 
-    data.table,
+    data.table (>= 1.9.6),
     plyr,
     stringr,
     RJSONIO,
