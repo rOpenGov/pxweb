@@ -34,3 +34,6 @@ vignettes/pxweb.md
 ./*~
 ^.*\.Rproj$
 ^\.Rproj\.user$
+paper
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
