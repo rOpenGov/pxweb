@@ -1,4 +1,4 @@
-# Version 0.8.33
+# Version 0.9.2
 
 - Added API link to Visit Finland (Rudolf)
 

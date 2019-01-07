@@ -1,4 +1,5 @@
 {
+
   "apis": {
     "api.scb.se": { 
         "alias" : ["scb"],
@@ -34,19 +35,6 @@
           "organization" : "Statistics Finland",
           "address" : "Helsinki, Finland"},
         "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
-        "version": ["v1"], 
-        "lang": ["fi"],
-        "calls_per_period": 100,
-        "period_in_seconds": 10,
-        "max_values_to_download" : 1000
-              },
-
-    "visitfinland.stat.fi": {
-        "description" : "Visit Finland (Rudolf service)",
-        "citation" : {
-          "organization" : "Statistics Finland",
-          "address" : "Helsinki, Finland"},
-        "url" : "http://visitfinland.stat.fi/PXWeb/api/[version]/[lang]/VisitFinland",
         "version": ["v1"], 
         "lang": ["fi"],
         "calls_per_period": 100,
@@ -360,8 +348,23 @@
       "calls_per_period": 10,
       "period_in_seconds": 10,
       "max_values_to_download" : 1000
-    }   
-  },
+    },
 
+    "visitfinland.stat.fi": {
+        "description" : "Visit Finland (Rudolf service)",
+        "citation" : {
+          "organization" : "Business Finland / Statistics Finland",
+          "address" : "Helsinki, Finland"},
+        "url" : "http://visitfinland.stat.fi/PXWeb/api/[version]/[lang]/VisitFinland",
+        "version": ["v1"], 
+        "lang": ["fi"],
+        "calls_per_period": 100,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000
+    }
+
+  },
+    
   "local_apis": {}
+
 }
