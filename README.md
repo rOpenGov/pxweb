@@ -80,7 +80,7 @@ You are welcome to contact us:
 ### Acknowledgements
 
 
-**Kindly cite this work** as follows: [Måns Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and [Leo Lahti](https://github.com/antagomir). Retrieval and analysis of PC Axis data with the pxweb package. R package version 0.8.32. URL: [http://ropengov.github.io/pxweb](http://ropengov.github.io/pxweb)
+**Kindly cite this work** as follows: [Måns Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and [Leo Lahti](https://github.com/antagomir). Retrieval and analysis of PC Axis data with the pxweb package. R package version 0.9.13. URL: [http://ropengov.github.io/pxweb](http://ropengov.github.io/pxweb)
 
 We are gratetful to all [contributors](https://github.com/rOpenGov/pxweb/graphs/contributors)! This project is part of [rOpenGov](http://ropengov.github.io).
 
