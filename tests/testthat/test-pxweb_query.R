@@ -78,6 +78,25 @@ test_that(desc="split pxweb_query object",{
 })  
 
 
+test_that(desc="split pxweb_query bug",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
+  url <- "http://px.hagstofa.is/pxis/api/v1/is/Efnahagur/utanrikisverslun/1_voruvidskipti/03_inntollskra/UTA03801.px"
+  pxweb_query_list <- list("Tollskrárnúmer" = c("*"), # length(vars[[1]]$values) is equal to 4474
+                           "Land" = c("*"),           # length(vars[[2]]$values) is equal to 249
+                           "Mánuður" = c("*"),        # length(vars[[3]]$values) is equal to 36
+                           "Eining" = c("*"))         # length(vars[[4]]$values) is equal to 4
+  expect_silent(pxq <- pxweb_query(pxweb_query_list))
+  expect_silent(px <- pxweb(url))
+  expect_silent(pxmd <- pxweb_get(url))
+  
+  px$config$max_values_to_download <- 10000
+  expect_silent(pxqs <- pxweb:::pxweb_split_query(pxq, px, pxmd))
+  expect_length(pxqs, 2)
+})  
+
+
 
 test_that(desc="pxweb_query JSON parse error message",{
   
