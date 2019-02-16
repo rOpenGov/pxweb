@@ -23,5 +23,5 @@ pxweb_cite <- function(x, style =  "citation"){
   
   print(rref, style = style)
   
-  utils::citation("pxweb")
+  print(utils::citation("pxweb"))
 }
