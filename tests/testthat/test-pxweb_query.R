@@ -91,10 +91,13 @@ test_that(desc="split pxweb_query bug",{
   expect_silent(px <- pxweb(url))
   expect_silent(pxmd <- pxweb_get(url))
 
-  px$config$max_values_to_download <- 10000
   pxq <- pxweb:::pxweb_add_metadata_to_query(pxq, pxmd)
-  expect_error(pxqs <- pxweb:::pxweb_split_query(pxq, px, pxmd))
+  px$config$max_values_to_download <- 10000
+  expect_error(pxqs <- pxweb_split_query(pxq, px, pxmd))
 
+  px$config$max_values_to_download <- 20000
+  expect_silent(pxqs <- pxweb_split_query(pxq, px, pxmd))
+  expect_length(pxqs, 8964)
 })  
 
 

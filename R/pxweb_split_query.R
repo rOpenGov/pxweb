@@ -20,7 +20,7 @@ pxweb_split_query <- function(pxq, px, pxmd){
   checkmate::assert_class(px, "pxweb")
   checkmate::assert_class(pxmd, "pxweb_metadata")
   
-  pxqd <- pxweb:::pxweb_query_dim(pxq)
+  pxqd <- pxweb_query_dim(pxq)
   # Get variables that can be split
   pxqds <- pxweb_query_dim_splittable(pxq, pxmd)
   mxv <- px$config$max_values_to_download
@@ -129,7 +129,7 @@ split_dimensions_left_right <- function(x, bool, max_size){
     prod_value <- prod(call_dims[1:i])/max_size
     if(prod_value > 1){
       if(i == 1) {
-        stop("Too large query in variables: ", paste(names(x[!bool]), collapse = ", "), call. = FALSE)
+        stop("Too large query. Variable(s) ", paste(names(x[!bool]), collapse = ", "), " cannot be split into batches (eliminate is FALSE).", call. = FALSE)
       }
       for(j in 1:call_dims[i]){
         if(prod(call_dims[1:(i-1)]) * j > max_size) break
