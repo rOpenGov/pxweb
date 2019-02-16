@@ -114,8 +114,9 @@ test_that(desc="get_pxweb_data()",{
 
 
 test_that(desc="get_pxweb_data()",{  
-  
   skip_on_cran()
+  skip_on_os("windows") # Due to http error, this is solved in new version
+  
   # PXWEB query 
   pxweb_query_url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
   pxweb_query_list <- 
@@ -132,6 +133,7 @@ test_that(desc="get_pxweb_data()",{
               query = pxweb_query_list))
   expect_warning(pxd1 <- as.data.frame(px_data))
   
+
   expect_warning(pxd2 <- get_pxweb_data(url = pxweb_query_url, dims = pxweb_query_list, clean = TRUE, encoding = NULL))
   
   expect_equal(dim(pxd2)[1], dim(pxd1)[1]*2)
@@ -152,8 +154,9 @@ test_that(desc="get_pxweb_data()",{
 })
 
 test_that(desc="get_pxweb_data()",{  
-  
   skip_on_cran()
+  skip_on_os("windows") # Due to 429 error, this is solved in new version of pxweb
+  
   # PXWEB query 
   pxweb_query_url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
   pxweb_query_list <- 
