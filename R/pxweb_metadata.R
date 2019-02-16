@@ -77,6 +77,20 @@ pxweb_metadata_elimination <- function(pxmd){
   res
 }
 
+#' Get boolean vector
+#' 
+#' @param pxmd a \code{pxweb_metadata} object.
+#' 
+#' @return pxweb_metadata eliminations as a named boolean vector.
+#' 
+#' @keywords internal
+pxweb_metadata_time <- function(pxmd){
+  checkmate::assert_class(pxmd, "pxweb_metadata")
+  res <- unlist(lapply(pxmd$variables,function(x) x$time))  
+  names(res) <- unlist(lapply(pxmd$variables,function(x) x$code))  
+  res
+}
+
 
 #' Compue the dimension of a metadata object
 #' 

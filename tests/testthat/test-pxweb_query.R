@@ -93,8 +93,8 @@ test_that(desc="split pxweb_query bug",{
 
   px$config$max_values_to_download <- 10000
   pxq <- pxweb:::pxweb_add_metadata_to_query(pxq, pxmd)
-  expect_silent(pxqs <- pxweb:::pxweb_split_query(pxq, px, pxmd))
-  expect_length(pxqs, 2)
+  expect_error(pxqs <- pxweb:::pxweb_split_query(pxq, px, pxmd))
+
 })  
 
 

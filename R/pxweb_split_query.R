@@ -20,7 +20,7 @@ pxweb_split_query <- function(pxq, px, pxmd){
   checkmate::assert_class(px, "pxweb")
   checkmate::assert_class(pxmd, "pxweb_metadata")
   
-  pxqd <- pxweb_query_dim(pxq)
+  pxqd <- pxweb:::pxweb_query_dim(pxq)
   # Get variables that can be split
   pxqds <- pxweb_query_dim_splittable(pxq, pxmd)
   mxv <- px$config$max_values_to_download
@@ -79,7 +79,10 @@ pxweb_split_query <- function(pxq, px, pxmd){
 #' 
 #' @details 
 #' Splitable variables are variables that can be split. Content variables cannot be split,
-#' not variables with filter == "top"
+#' nor variables with filter == "top".
+#' 
+#' Currently, we can only be sure that time variables and eliminated variables can be split.
+#' Hopefully the next API makes this more clear.
 #' 
 #' @param pxq a \code{pxweb_query} object.
 #' 
@@ -91,6 +94,9 @@ pxweb_query_dim_splittable <- function(pxq, pxmd){
   checkmate::assert_class(pxq, "pxweb_query")
   
   can_be_eliminated <- pxweb_metadata_elimination(pxmd)
+  is_time_variable <- pxweb_metadata_time(pxmd)
+  can_be_eliminated[is_time_variable] <- TRUE
+  
   filter <- pxweb_query_filter(pxq)
   # can_be_eliminated <- can_be_eliminated[sample(1:length(can_be_eliminated))]
   spltable <- can_be_eliminated[names(filter)]
