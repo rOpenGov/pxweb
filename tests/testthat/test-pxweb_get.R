@@ -144,7 +144,7 @@ test_that(desc="No value bug",{
     list("Country"=c("AF"),
          "Month"=c("2016M01"),
          "Unit"=c("kg"))
-  
+  #  Error: Not all mandatory variables are included in the query. 
   expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
   
   pxweb_query_list <- 
@@ -153,7 +153,7 @@ test_that(desc="No value bug",{
          "Month"=c("2016M01"),
          "Unit"=c("kg"))
   
-  expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
+  expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
 })  
 
 
