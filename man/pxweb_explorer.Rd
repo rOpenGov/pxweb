@@ -14,7 +14,7 @@
 \usage{
 pxweb_explorer(x = NULL)
 
-\method{pxweb_explorer}{`NULL`}(x)
+\method{pxweb_explorer}{NULL}(x)
 
 \method{pxweb_explorer}{character}(x)
 

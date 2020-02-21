@@ -4,13 +4,8 @@
 \alias{pxweb_test_api}
 \title{Test a full or a part of a PXWEB api.}
 \usage{
-pxweb_test_api(
-  url,
-  test_type = "first",
-  n = 1,
-  verbose = TRUE,
-  time_limit = Inf
-)
+pxweb_test_api(url, test_type = "first", n = 1, verbose = TRUE,
+  time_limit = Inf)
 }
 \arguments{
 \item{url}{The base url to the pxweb api (or a branch of the metadata tree)}

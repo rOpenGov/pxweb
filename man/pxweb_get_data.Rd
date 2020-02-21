@@ -4,13 +4,8 @@
 \alias{pxweb_get_data}
 \title{Do a GET call to PXWEB API and return a data.frame}
 \usage{
-pxweb_get_data(
-  url,
-  query,
-  verbose = TRUE,
-  column.name.type = "text",
-  variable.value.type = "text"
-)
+pxweb_get_data(url, query, verbose = TRUE, column.name.type = "text",
+  variable.value.type = "text")
 }
 \arguments{
 \item{url}{a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.}
