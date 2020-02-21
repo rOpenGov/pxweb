@@ -17,6 +17,9 @@ Get vector indicating splittable variables
 }
 \details{
 Splitable variables are variables that can be split. Content variables cannot be split,
-not variables with filter == "top"
+nor variables with filter == "top".
+
+Currently, we can only be sure that time variables and eliminated variables can be split.
+Hopefully the next API makes this more clear.
 }
 \keyword{internal}

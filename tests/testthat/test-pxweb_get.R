@@ -144,7 +144,7 @@ test_that(desc="No value bug",{
     list("Country"=c("AF"),
          "Month"=c("2016M01"),
          "Unit"=c("kg"))
-  
+  #  Error: Not all mandatory variables are included in the query. 
   expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
   
   pxweb_query_list <- 
@@ -153,7 +153,7 @@ test_that(desc="No value bug",{
          "Month"=c("2016M01"),
          "Unit"=c("kg"))
   
-  expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
+  expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
 })  
 
 
@@ -161,6 +161,7 @@ test_that(desc="No value bug",{
 test_that(desc="h level",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip("h level has been removed. This is not part of any PXWEB API anymore.") 
   
   url <- "http://data.ssb.no/api/v0/en/table/pp/pp04/kpi"
   expect_silent(px <- pxweb_get(url))

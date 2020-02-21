@@ -79,7 +79,10 @@ pxweb_split_query <- function(pxq, px, pxmd){
 #' 
 #' @details 
 #' Splitable variables are variables that can be split. Content variables cannot be split,
-#' not variables with filter == "top"
+#' nor variables with filter == "top".
+#' 
+#' Currently, we can only be sure that time variables and eliminated variables can be split.
+#' Hopefully the next API makes this more clear.
 #' 
 #' @param pxq a \code{pxweb_query} object.
 #' 
@@ -91,6 +94,9 @@ pxweb_query_dim_splittable <- function(pxq, pxmd){
   checkmate::assert_class(pxq, "pxweb_query")
   
   can_be_eliminated <- pxweb_metadata_elimination(pxmd)
+  is_time_variable <- pxweb_metadata_time(pxmd)
+  can_be_eliminated[is_time_variable] <- TRUE
+  
   filter <- pxweb_query_filter(pxq)
   # can_be_eliminated <- can_be_eliminated[sample(1:length(can_be_eliminated))]
   spltable <- can_be_eliminated[names(filter)]
@@ -123,7 +129,7 @@ split_dimensions_left_right <- function(x, bool, max_size){
     prod_value <- prod(call_dims[1:i])/max_size
     if(prod_value > 1){
       if(i == 1) {
-        stop("Too large query in variables: ", paste(names(x[!bool]), collapse = ", "), call. = FALSE)
+        stop("Too large query. Variable(s) ", paste(names(x[!bool]), collapse = ", "), " cannot be split into batches (eliminate is FALSE).", call. = FALSE)
       }
       for(j in 1:call_dims[i]){
         if(prod(call_dims[1:(i-1)]) * j > max_size) break
