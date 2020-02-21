@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PX-WEB API Interface for R • pxweb</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="PX-WEB API Interface for R">
 <meta property="og:description" content="">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pxweb</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.14</span>
       </span>
     </div>
 
@@ -76,7 +76,7 @@
       <h1>PX-WEB API Interface for R</h1>
                         <h4 class="author">Mans Magnusson, Leo Lahti et al.</h4>
             
-            <h4 class="date">2019-10-03</h4>
+            <h4 class="date">2020-02-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/pxweb/blob/master/vignettes/pxweb.Rmd"><code>vignettes/pxweb.Rmd</code></a></small>
       <div class="hidden name"><code>pxweb.Rmd</code></div>
@@ -124,7 +124,7 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"pxweb"</span>)</a></code></pre></div>
 <p>To install the latest stable release version from GitHub, just use:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"devtools"</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"ropengov/pxweb"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb2-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"ropengov/pxweb"</span>)</a></code></pre></div>
 <p>Test the installation by loading the library:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(pxweb)</a></code></pre></div>
 <p>A tutorial is included with the package with:</p>
@@ -175,10 +175,11 @@
 <a class="sourceLine" id="cb9-2" title="2">px_levels &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pxweb_get.html">pxweb_get</a></span>(<span class="st">"http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/"</span>)</a>
 <a class="sourceLine" id="cb9-3" title="3">px_levels</a></code></pre></div>
 <pre><code>## PXWEB LEVELS
-##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2018
-##   BefolkningR1860 (t): Population by age and sex. Year 1860 - 2018
-##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2018
-##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2018</code></pre>
+##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2019
+##   BefolkningR1860 (t): Population by age and sex. Year 1860 - 2019
+##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2019
+##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2018
+##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2019M12</code></pre>
 <p>And if we use <code><a href="../reference/pxweb_get.html">pxweb_get()</a></code> for a table, a PXWEB METADATA object is returned.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Get PXWEB metadata about a table</span></a>
 <a class="sourceLine" id="cb11-2" title="2">px_meta &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pxweb_get.html">pxweb_get</a></span>(<span class="st">"http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>)</a>
@@ -427,7 +428,7 @@
 ##     },
 ##     "label": ["Population by marital status, sex, observations and year"],
 ##     "source": ["Statistics Sweden"],
-##     "updated": ["2019-10-03T17:25:00Z"],
+##     "updated": ["2020-02-21T09:44:00Z"],
 ##     "value": [
 ##       [2762601],
 ##       [2820248],
@@ -505,9 +506,9 @@
 <p>Finally, if we use the data, we can easily create a citation for a <code>pxweb_data</code> object using the <code><a href="../reference/pxweb_cite.html">pxweb_cite()</a></code> function. For full reproducibility, please also cite the package.</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw"><a href="../reference/pxweb_cite.html">pxweb_cite</a></span>(pxd)</a></code></pre></div>
 <pre><code>## 
-## Statistics Sweden (2019). "Population by region, marital status,
-## age, sex, observations and year." [Data accessed 2019-10-03
-## 20:25:35 using pxweb R package 0.9.14], &lt;URL:
+## Statistics Sweden (2020). "Population by region, marital status, age,
+## sex, observations and year." [Data accessed 2020-02-21 11:44:53 using
+## pxweb R package 0.9.14], &lt;URL:
 ## http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -517,9 +518,9 @@
 ##     author = {{Statistics Sweden}},
 ##     organization = {Statistics Sweden},
 ##     address = {Stockholm, Sweden},
-##     year = {2019},
+##     year = {2020},
 ##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2019-10-03 20:25:35 using pxweb R package 0.9.14]},
+##     note = {[Data accessed 2020-02-21 11:44:53 using pxweb R package 0.9.14]},
 ##   }</code></pre>
 <pre><code>## 
 ## Kindly cite the pxweb R package as follows:
@@ -551,13 +552,13 @@
 <a href="#session-info" class="anchor"></a>Session info</h2>
 <p>This vignette was created with</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</a></code></pre></div>
-<pre><code>## R version 3.5.2 (2018-12-20)
+<pre><code>## R version 3.6.2 (2019-12-12)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 19.04
+## Running under: Ubuntu 19.10
 ## 
 ## Matrix products: default
-## BLAS: /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.8.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.8.0
+## BLAS:   /home/lemila/bin/R-3.6.2/lib/libRblas.so
+## LAPACK: /home/lemila/bin/R-3.6.2/lib/libRlapack.so
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -574,21 +575,17 @@
 ## [1] pxweb_0.9.14
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.2         knitr_1.25         xml2_1.2.2        
-##  [4] magrittr_1.5       roxygen2_6.1.1     MASS_7.3-51.4     
-##  [7] R6_2.4.0           rlang_0.4.0        httr_1.4.1        
-## [10] stringr_1.4.0      tools_3.5.2        checkmate_1.9.4   
-## [13] xfun_0.9           htmltools_0.3.6    commonmark_1.7    
-## [16] yaml_2.2.0.9999    digest_0.6.21      assertthat_0.2.1  
-## [19] rprojroot_1.3-2    pkgdown_1.3.0.9100 crayon_1.3.4      
-## [22] fs_1.3.1           curl_4.2           memoise_1.1.0     
-## [25] evaluate_0.14      rmarkdown_1.14     stringi_1.4.3     
-## [28] compiler_3.5.2     desc_1.2.0         backports_1.1.5   
-## [31] jsonlite_1.6</code></pre>
+##  [1] Rcpp_1.0.3         knitr_1.26         magrittr_1.5       MASS_7.3-51.5     
+##  [5] R6_2.4.1           rlang_0.4.4        stringr_1.4.0      httr_1.4.1        
+##  [9] tools_3.6.2        checkmate_1.9.4    xfun_0.11          htmltools_0.4.0   
+## [13] yaml_2.2.0         assertthat_0.2.1   digest_0.6.23      rprojroot_1.3-2   
+## [17] pkgdown_1.4.1.9000 crayon_1.3.4       fs_1.3.1           curl_4.3          
+## [21] memoise_1.1.0      evaluate_0.14      rmarkdown_2.0      stringi_1.4.5     
+## [25] compiler_3.6.2     desc_1.2.0         backports_1.1.5    jsonlite_1.6</code></pre>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
         <div id="tocnav">
       <h2 class="hasAnchor">
@@ -621,7 +618,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
 </div>
 
       </footer>

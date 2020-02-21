@@ -4,8 +4,12 @@
 \alias{test_pxweb_api_get_data}
 \title{Download data for each bottom node in the pxweb api}
 \usage{
-test_pxweb_api_get_data(nodes, nodesList, download_all = FALSE,
-  seed = as.integer(Sys.time()))
+test_pxweb_api_get_data(
+  nodes,
+  nodesList,
+  download_all = FALSE,
+  seed = as.integer(Sys.time())
+)
 }
 \arguments{
 \item{nodes}{Nodes downloaded with \link{test_pxweb_api_get_nodes}}

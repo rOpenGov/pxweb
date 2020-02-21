@@ -5,10 +5,19 @@
 \alias{ApiData}
 \title{PX-Web Data by API}
 \usage{
-ApiData(urlToData, ..., getDataByGET = FALSE, returnMetaData = FALSE,
-  returnMetaValues = FALSE, returnMetaFrames = FALSE,
-  returnApiQuery = FALSE, defaultJSONquery = c(1, -2, -1),
-  verbosePrint = FALSE, use_factors = FALSE, urlType = "SSB")
+ApiData(
+  urlToData,
+  ...,
+  getDataByGET = FALSE,
+  returnMetaData = FALSE,
+  returnMetaValues = FALSE,
+  returnMetaFrames = FALSE,
+  returnApiQuery = FALSE,
+  defaultJSONquery = c(1, -2, -1),
+  verbosePrint = FALSE,
+  use_factors = FALSE,
+  urlType = "SSB"
+)
 }
 \arguments{
 \item{urlToData}{url to data or id of SSB data}

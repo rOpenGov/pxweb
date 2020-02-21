@@ -13,8 +13,6 @@ pxweb_api_catalogue_entry(x)
 assert_pxweb_api_catalogue_entry(x)
 }
 \arguments{
-\item{x}{an object to convert to a \code{pxweb_api_catalogue_entry} object.}
-
 \item{x}{an object to assert is a \code{pxweb_api_catalogue_entry}.}
 }
 \description{

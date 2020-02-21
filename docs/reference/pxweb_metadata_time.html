@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add an api call to a pxweb_api_s3 object — pxweb_add_call • pxweb</title>
+<title>Get boolean vector — pxweb_metadata_time • pxweb</title>
 
 
 <!-- jquery -->
@@ -35,11 +35,8 @@
 
 
 
-<meta property="og:title" content="Add an api call to a pxweb_api_s3 object — pxweb_add_call" />
-<meta property="og:description" content="The pxweb_add_call function add a call the the api in the call stack, then compute
-Promise: 
-The stored rda api object will always have the latest calls
-This is not thread safe so only one session at a time should call the api." />
+<meta property="og:title" content="Get boolean vector — pxweb_metadata_time" />
+<meta property="og:description" content="Get boolean vector" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,35 +111,36 @@ This is not thread safe so only one session at a time should call the api." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add an api call to a pxweb_api_s3 object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rOpenGov/pxweb/blob/master/R/pxweb_add_call.R'><code>R/pxweb_add_call.R</code></a></small>
-    <div class="hidden name"><code>pxweb_add_call.Rd</code></div>
+    <h1>Get boolean vector</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rOpenGov/pxweb/blob/master/R/pxweb_metadata.R'><code>R/pxweb_metadata.R</code></a></small>
+    <div class="hidden name"><code>pxweb_metadata_time.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The pxweb_add_call function add a call the the api in the call stack, then compute</p>
-<p>Promise: 
-The stored rda api object will always have the latest calls
-This is not thread safe so only one session at a time should call the api.</p>
+    <p>Get boolean vector</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pxweb_add_call</span>(<span class='no'>obj</span>, <span class='kw'>time_stamp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>())</pre>
+    <pre class="usage"><span class='fu'>pxweb_metadata_time</span>(<span class='no'>pxmd</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>obj</th>
-      <td><p>a <code>pxweb_api_s3</code> object</p></td>
+      <th>pxmd</th>
+      <td><p>a <code>pxweb_metadata</code> object.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>pxweb_metadata eliminations as a named boolean vector.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>

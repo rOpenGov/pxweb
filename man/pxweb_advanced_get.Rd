@@ -4,8 +4,14 @@
 \alias{pxweb_advanced_get}
 \title{Do a GET call to PXWEB API for advanced users}
 \usage{
-pxweb_advanced_get(url, query = NULL, verbose = TRUE,
-  log_http_calls = FALSE, pxmdo = NULL, ...)
+pxweb_advanced_get(
+  url,
+  query = NULL,
+  verbose = TRUE,
+  log_http_calls = FALSE,
+  pxmdo = NULL,
+  ...
+)
 }
 \arguments{
 \item{url}{a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.}

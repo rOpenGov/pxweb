@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add an api call to a pxweb_api_s3 object — pxweb_add_call • pxweb</title>
+<title>Troubleshooting pxweb R package • pxweb</title>
 
 
 <!-- jquery -->
@@ -29,18 +29,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="Add an api call to a pxweb_api_s3 object — pxweb_add_call" />
-<meta property="og:description" content="The pxweb_add_call function add a call the the api in the call stack, then compute
-Promise: 
-The stored rda api object will always have the latest calls
-This is not thread safe so only one session at a time should call the api." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Troubleshooting pxweb R package" />
 
 
 
@@ -59,7 +54,7 @@ This is not thread safe so only one session at a time should call the api." />
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -71,7 +66,7 @@ This is not thread safe so only one session at a time should call the api." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">pxweb</a>
+        <a class="navbar-link" href="index.html">pxweb</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.14</span>
       </span>
     </div>
@@ -79,19 +74,19 @@ This is not thread safe so only one session at a time should call the api." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../articles/pxweb.html">Get started</a>
+  <a href="articles/pxweb.html">Get started</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,41 +107,70 @@ This is not thread safe so only one session at a time should call the api." />
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Add an api call to a pxweb_api_s3 object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rOpenGov/pxweb/blob/master/R/pxweb_add_call.R'><code>R/pxweb_add_call.R</code></a></small>
-    <div class="hidden name"><code>pxweb_add_call.Rd</code></div>
+      <h1>Troubleshooting pxweb R package</h1>
     </div>
 
-    <div class="ref-description">
-    <p>The pxweb_add_call function add a call the the api in the call stack, then compute</p>
-<p>Promise: 
-The stored rda api object will always have the latest calls
-This is not thread safe so only one session at a time should call the api.</p>
-    </div>
+<div id="troubleshooting-pxweb-r-package" class="section level1">
 
-    <pre class="usage"><span class='fu'>pxweb_add_call</span>(<span class='no'>obj</span>, <span class='kw'>time_stamp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>())</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>obj</th>
-      <td><p>a <code>pxweb_api_s3</code> object</p></td>
-    </tr>
-    </table>
-
-
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-    </ul>
-
-  </div>
+<div id="error-too-large-query" class="section level2">
+<h2 class="hasAnchor">
+<a href="#error-too-large-query" class="anchor"></a>Error: Too large query</h2>
+<div id="date-added" class="section level3">
+<h3 class="hasAnchor">
+<a href="#date-added" class="anchor"></a>Date added:</h3>
+<p>2019-02-15</p>
 </div>
+<div id="versions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#versions" class="anchor"></a>Versions</h3>
+<p>This problem exist in pxweb version 0.8+.</p>
+</div>
+<div id="description" class="section level3">
+<h3 class="hasAnchor">
+<a href="#description" class="anchor"></a>Description</h3>
+<p>In some situation (some PXWEB APIS) it is possible to get an <code>Error: Too large query</code> error message (can look a little bit different for different pxweb versions) if a large query is done. The reason for this problem is that the pxweb R package cannot split the query into chunks/batches with a size smaller than the maximum values limit for the API.</p>
+<p>All PXWEB APIs table objects have dimension and/or content variables. Content variables are only one variable and indicate what contents to download (such as the number of inhabitants and the percentage change in inhabitants). It is not always so that content variables exist in a PXWEB table. To split up a large query, only dimension variables can be split into smaller chunks (they are the rows in the PX-DATA object). So the pxweb R package tries to identify what variables that are dimension variables by checking if the variable can be eliminated or if the variable is the time variable. So if a variable is not time and cannot be eliminated it is not possible to be sure that the variable is not a content variable, and then the variable cannot be used to split the query.</p>
+<p>This will hopefully be solved by the PXWEB API provider supplying information if the variable is a content variable or not in future releases.</p>
+</div>
+<div id="workaround" class="section level3">
+<h3 class="hasAnchor">
+<a href="#workaround" class="anchor"></a>Workaround</h3>
+<p>The only way to solve this currently is to manually specify variables that the pxweb package can use to split up the query by setting the variables elimination to <code>TRUE</code> that are not content variables. Below is a working example of a workaround.</p>
+<pre><code>url &lt;- "http://px.hagstofa.is/pxis/api/v1/is/Efnahagur/utanrikisverslun/1_voruvidskipti/03_inntollskra/UTA03801.px"
+pxweb_query_list &lt;- list("Tollskrárnúmer" = c("*"),
+                         "Land" = c("AF", "AL"),           
+                         "Mánuður" = c("2016M01"),
+                         "Eining" = c("*"))
+pxq &lt;- pxweb_query(pxweb_query_list)
+px_data &lt;- pxweb_get(url, pxq)
+Error: Too large query
+
+# Variable(s) Tollskrárnúmer, Eining cannot be split to batches (eliminate is FALSE).
+
+
+# We download the metadata object and set eliminate to TRUE (since Eining)
+pxmd &lt;- pxweb_get(url)
+pxmd$variables[[4]]$elimination &lt;- TRUE
+# We explicitly supply the meta data object to use for downloading
+px_data &lt;- pxweb_advanced_get(px, pxq, pxmdo = pxmd)
+
+Downloading large query (in 4 batches):
+  |======================================================================================| 100%
+
+px_data
+
+PXWEB DATA
+With 5 variables and 35792 observations.</code></pre>
+</div>
+</div>
+</div>
+
+  </div>
+
+</div>
+
 
 
       <footer>
