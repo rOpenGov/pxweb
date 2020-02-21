@@ -44,11 +44,9 @@ pxweb_api_rootpath(x)
 
 pxweb_api_subpath(x, init_slash = TRUE, as_vector = FALSE)
 
-\method{pxweb_api_subpath}{pxweb}(x, init_slash = TRUE,
-  as_vector = FALSE)
+\method{pxweb_api_subpath}{pxweb}(x, init_slash = TRUE, as_vector = FALSE)
 
-\method{pxweb_api_subpath}{pxweb_explorer}(x, init_slash = TRUE,
-  as_vector = FALSE)
+\method{pxweb_api_subpath}{pxweb_explorer}(x, init_slash = TRUE, as_vector = FALSE)
 
 pxweb_api_path(x, init_slash = TRUE, as_vector = FALSE)
 
@@ -56,21 +54,22 @@ pxweb_api_path(x, init_slash = TRUE, as_vector = FALSE)
 
 \method{pxweb_api_path}{pxweb}(x, init_slash = TRUE, as_vector = FALSE)
 
-\method{pxweb_api_path}{pxweb_explorer}(x, init_slash = TRUE,
-  as_vector = FALSE)
+\method{pxweb_api_path}{pxweb_explorer}(x, init_slash = TRUE, as_vector = FALSE)
 
 pxweb_api_dbpath(x, init_slash = TRUE, as_vector = FALSE)
 
-\method{pxweb_api_dbpath}{pxweb}(x, init_slash = TRUE,
-  as_vector = FALSE)
+\method{pxweb_api_dbpath}{pxweb}(x, init_slash = TRUE, as_vector = FALSE)
 
-\method{pxweb_api_path}{pxweb_explorer}(x, init_slash = TRUE,
-  as_vector = FALSE)
+\method{pxweb_api_path}{pxweb_explorer}(x, init_slash = TRUE, as_vector = FALSE)
 
 assert_path(x)
 
-pxe_position_path(x, init_slash = TRUE, as_vector = FALSE,
-  include_rootpath = FALSE)
+pxe_position_path(
+  x,
+  init_slash = TRUE,
+  as_vector = FALSE,
+  include_rootpath = FALSE
+)
 
 pxe_metadata_path(x, as_vector = FALSE)
 }

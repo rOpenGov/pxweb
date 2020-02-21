@@ -4,8 +4,13 @@
 \alias{interactive_pxweb}
 \title{Find and download data interactively from PX-WEB API}
 \usage{
-interactive_pxweb(api = NULL, version = NULL, language = NULL,
-  history = FALSE, ...)
+interactive_pxweb(
+  api = NULL,
+  version = NULL,
+  language = NULL,
+  history = FALSE,
+  ...
+)
 }
 \arguments{
 \item{api}{The name of the pxweb api to connect to or an \link{pxweb_api} object. Use \link{api_catalogue} to get a list of apis.}

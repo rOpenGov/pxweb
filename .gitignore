@@ -1,3 +1,4 @@
+tests/testthat/log*
 inst/extras/*.tar.gz
 inst/extras/*.RData
 inst/extras/*~

@@ -4,8 +4,14 @@
 \alias{get_pxweb_metadata}
 \title{Get data}
 \usage{
-get_pxweb_metadata(path = NULL, node = NULL, topnodes = NULL,
-  quiet = TRUE, baseURL = NULL, ...)
+get_pxweb_metadata(
+  path = NULL,
+  node = NULL,
+  topnodes = NULL,
+  quiet = TRUE,
+  baseURL = NULL,
+  ...
+)
 }
 \arguments{
 \item{path}{URL to fetch metadata from. If left empty, the function constructs a URL from the \code{node} and \code{topnodes} arguments}

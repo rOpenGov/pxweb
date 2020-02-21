@@ -45,4 +45,4 @@ Suggests:
     rmarkdown,    
     roxygen2,
     testthat (>= 0.11)
-RoxygenNote: 6.1.0
+RoxygenNote: 7.0.2

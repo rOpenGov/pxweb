@@ -4,8 +4,7 @@
 \alias{findData.input}
 \title{Get input that is consistent with}
 \usage{
-findData.input(type, input = NULL, test_input = character(0),
-  silent = FALSE)
+findData.input(type, input = NULL, test_input = character(0), silent = FALSE)
 }
 \arguments{
 \item{type}{type of input to get.}
