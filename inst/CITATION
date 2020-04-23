@@ -3,15 +3,16 @@ citHeader("Kindly cite the pxweb R package as follows:")
 citEntry(entry="misc",
          title = "pxweb: R tools for PX-WEB API",
          author = personList(
-	   person(given = "Mans", family= "Magnusson", email = "ropengov-forum@googlegroups.com"),
-	   person(given = "Leo", family= "Lahti"),
-	   person(given = "Love", family= "Hansson")
+	   person(given = "Mans", family= "Magnusson", email = "mons.magnusson@gmail.com"),
+	   person(given = "Markus", family= "Kainu"),
+	   person(given = "Janne", family= "Huovari"),
+	   person(given = "Leo", family= "Lahti")
          ),
 	 journal = "",
-	 year = "2014-2016",
+	 year = "2014-2018",
          textVersion =
-         paste("(C) Mans Magnusson, Leo Lahti and Love Hansson (rOpenGov 2014-2016). ",
-               "pxweb: R tools for PX-WEB API. ",
+         paste("(C) Mans Magnusson, Markus Kainu, Janne Huovari, and Leo Lahti (rOpenGov 2014-2016). ",
+               "pxweb: R tools for PXWEB API. ",
 	       "URL: http://github.com/ropengov/pxweb",
                sep=" ")
          )

@@ -1,3 +1,6 @@
+^docs$
+^_pkgdown\.yml$
+^DESIGN_PRINCIPLES\.md$
 # Extra material related but not to be included in the package
 ./inst/extras/eurostat.Rcheck/*
 ./inst/extras/..Rcheck/*
@@ -11,21 +14,27 @@ inst/extras/*.RData
 inst/extras/.RData
 sandbox/*.R
 sandbox
+tests_bash/*.R
+tests_bash/*.sh
+tests_bash
+todo.txt
 
 README.md
-
+README.Rmd
 # Git related
 ./.git*
-
-# Travis scripts
+# Travis yml
 .travis.yml
-
+# Appveyor yml
+appveyor.yml
 # Extra Vignette materials
 vignettes/pxweb.md
-
 # Misc
 ./.*~
 ./*~
-
 ^.*\.Rproj$
 ^\.Rproj\.user$
+paper
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+TROUBLESHOOTING.md

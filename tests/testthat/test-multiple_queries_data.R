@@ -25,12 +25,11 @@ test_that(desc="multiple data calls",{
   for (test in api_tests_multiple_data){
     api_config <- pxweb::api_parameters(url=test$url)[[1]]
     
-    expect_that({
+    expect_warning(
       for(i in 1:(api_config$calls_per_period + 10)){
         test_data <- 
           get_pxweb_data(url = test$url, dims = test$dims, clean = test$clean)
-        }
-      }, not(throws_error()),
+        },
       info = test$url)
   }
 })
@@ -44,16 +43,6 @@ test_that(desc="multiple metadata calls",{
     pxweb::base_url("api.scb.se", version = "v1", language = "sv")
   )
   
-  for (test in api_tests_multiple_metadata){
-    api_config <- pxweb::api_parameters(url=test)[[1]]
-    
-    expect_that({
-      for(i in 1:(api_config$calls_per_period + 10)){
-        topnode <- pxweb::get_pxweb_metadata(baseURL = test)
-      }
-    }, not(throws_error()),
-    info = test)
-  }
 })
 
 

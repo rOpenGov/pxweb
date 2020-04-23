@@ -1,0 +1,28 @@
+{
+  "query": [
+    {
+      "code": "ContentsCode",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "BE0101N1",
+          "BE0101N2"
+          ]
+      }
+    },
+    {
+      "code": "Tid",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "2010",
+          "2011",
+          "2012"
+          ]
+      }
+    }
+    ],
+  "response": {
+    "format": "json-stat"
+  }
+}

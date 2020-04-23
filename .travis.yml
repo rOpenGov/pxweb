@@ -1,18 +1,82 @@
 language: r
-r:
-  - oldrel
-  - release
-  - devel
+cache: packages
+#r:
+#  - oldrel
+#  - release
+#  - devel
+  
+jobs:
+  include:
+    - stage: release
+      r: release
+      env:
+        - CURRENT_STAGE=release  
+      after_success: 
+      - ls
+      - cat pxweb.Rcheck/tests/testthat.Rout  
+      - echo $NOT_CRAN
+      - Rscript -e 'covr::coveralls()' 
+    - stage: CRAN
+      r: release
+      env:
+        - _R_CHECK_CRAN_INCOMING_=true
+      before_script: 
+        - export NOT_CRAN=false # Currently this env variable needs to be set here.
+      after_success: 
+      - ls
+      - cat pxweb.Rcheck/tests/testthat.Rout      
+      - echo $NOT_CRAN
+      if: branch = master OR branch = test
+    - stage: api_catalogue_tests
+      r: release
+      install: 
+       - R -e 'install.packages("devtools")'
+       - R -e 'devtools::install_deps(dep = T)'
+      script: 
+       - R CMD build .     
+      after_success: 
+       - bash tests_bash/pxweb.sh 
+       - . PXWEB_ERROR.sh
+       - cat PXWEB_ERROR.sh
+       - echo $PXWEB_ERROR
+       - exit $PXWEB_ERROR
+      if: branch = test     
+    - stage: MacOS X
+      os: osx
+      r: release
+      if: branch = master OR branch = test      
+    - stage: oldrel
+      r: oldrel
+      if: branch = master OR branch = test
+      env:
+        - CURRENT_STAGE=oldrel
+    - stage: oldest
+      r: 3.2
+      if: branch = master OR branch = test
+      env:
+        - CURRENT_STAGE=oldest
+    - stage: devel
+      r: devel
+      if: branch = master OR branch = test
+      env:
+        - CURRENT_STAGE=devel
+
 sudo: required
 
 # Be strict when checking our package
 warnings_are_errors: true
 
+# All but devtools are deprecated dependencies
+r_package:
+  - devtools
+  - RJSONIO
+  - rjstat
+  - data.table
+  - plyr
+  - stringr
+
 r_github_packages:
   -  jimhester/covr
-
-after_success:
-  - Rscript -e 'covr::coveralls()'
 
 notifications:
   email:

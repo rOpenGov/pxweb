@@ -1,0 +1,48 @@
+{
+  "query": [
+    {
+      "code": "Region",
+      "selection": {
+        "filter": "agg:RegionA-region_2",
+        "values": [
+          "A-04"
+        ]
+      }
+    },
+    {
+      "code": "Alder",
+      "selection": {
+        "filter": "agg:Ålder5år",
+        "values": [
+          "-4",
+          "5-9",
+          "10-14",
+          "15-19"
+        ]
+      }
+    },
+    {
+      "code": "Kon",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "1",
+          "2"
+        ]
+      }
+    },
+    {
+      "code": "Tid",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "2015",
+          "2016"
+        ]
+      }
+    }
+  ],
+  "response": {
+    "format": "px"
+  }
+}

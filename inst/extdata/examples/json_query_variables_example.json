@@ -1,0 +1,29 @@
+{
+  "query": [
+    {
+      "code": "Civilstand",
+      "selection": {
+        "filter": "item",
+        "values": ["OG", "G", "SK", "ÄNKL"]
+      }
+    },
+    {
+      "code": "ContentsCode",
+      "selection": {
+        "filter": "item",
+        "values": ["BE0101N1"]
+      }
+    },
+    {
+      "code": "Tid",
+      "selection": {
+        "filter": "item",
+        "values": ["2015", "2016", "2017"]
+      }
+    }
+  ],
+  "response": {
+    "format": "json"
+  }
+} 
+

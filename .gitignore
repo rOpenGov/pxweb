@@ -1,3 +1,4 @@
+tests/testthat/log*
 inst/extras/*.tar.gz
 inst/extras/*.RData
 inst/extras/*~
@@ -7,3 +8,6 @@ inst/extras/*~
 .Rproj.user
 .Rhistory
 *.Rproj
+sandbox/*
+todo.txt
+vignettes/pxweb.R
