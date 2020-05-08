@@ -65,9 +65,7 @@ test_that(desc="Previous bugs",{
     expect_silent(px_meta_data <- pxweb_get(url))
     expect_output(print(px_meta_data), regexp = "PXWEB LEVELS")
   }
-  
-  # Missing title
-  expect_silent(pxmd <- pxweb_get(url = "http://statistik.linkoping.se/PXWeb/api/v1/sv/Omsorg/Behandlingshem/ombeh01.px"))
+
 })  
 
 
@@ -133,7 +131,7 @@ test_that(desc="No value bug",{
   pxweb_query_list <- 
     list("HS-Number" = c("06012031"),
          "Country"=c("AF"),
-         "Month"=c("2016M01"),
+         "Month"=c("2020M01"),
          "Unit"=c("kg"))
   
   expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
@@ -150,33 +148,16 @@ test_that(desc="No value bug",{
   pxweb_query_list <- 
     list("HS-Number" = "*",
          "Country"=c("AF"),
-         "Month"=c("2016M01"),
+         "Month"=c("2020M01"),
          "Unit"=c("kg"))
   
   expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
 })  
 
 
-
-test_that(desc="h level",{
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip("h level has been removed. This is not part of any PXWEB API anymore.") 
-  
-  url <- "http://data.ssb.no/api/v0/en/table/pp/pp04/kpi"
-  expect_silent(px <- pxweb_get(url))
-  
-  expect_silent(px2 <- pxweb_levels_remove_headers(px))
-
-  expect_gt(length(px), length(px2))
-})  
-
-
 test_that(desc="large variable call",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  
-  skip("Get 403, bug reported to SCB in december 2018")
   url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0001/BE0001G/BE0001ENamn10"  
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_last_names.json")
   expect_silent(px <- pxweb_get(url, query = pxweb_query(json_query)))
