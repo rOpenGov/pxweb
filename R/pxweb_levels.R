@@ -25,7 +25,7 @@ assert_pxweb_levels <- function(x){
   for(i in seq_along(x)){
     checkmate::assert_names(names(x[[i]]), must.include = c("id", "type", "text"), .var.name = paste0("names(x[[", i, "]])"))
     checkmate::assert_string(x[[i]]$id, .var.name = paste0("x[[", i, "]]$id"))
-    checkmate::assert_choice(x[[i]]$type, choices = c("l", "t", "h"), .var.name = paste0("x[[", i, "]]$type"))
+    checkmate::assert_choice(x[[i]]$type, choices = c("l", "t"), .var.name = paste0("x[[", i, "]]$type"))
     checkmate::assert_string(x[[i]]$text, .var.name = paste0("x[[", i, "]]$id"))    
   }
 }
@@ -39,21 +39,3 @@ print.pxweb_levels <- function(x, ...){
   }
 }
 
-
-#' Remove headers from PXWEB levels object
-#' @param x a \code{pxweb_levels} object
-#' @keywords internal
-pxweb_levels_remove_headers <- function(x){
-  if(!inherits(x, "pxweb_levels")){
-    return(x)
-  }
-  checkmate::assert_class(x, "pxweb_levels")
-  is_header <- logical(length(x))
-  for(i in seq_along(x)){
-    is_header[i] <- x[[i]]$type == "h"
-  }
-  x <- x[!is_header]
-  class(x) <- c("pxweb_levels", "list")
-  assert_pxweb_levels(x)
-  x
-}
