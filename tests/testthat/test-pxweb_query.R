@@ -97,7 +97,7 @@ test_that(desc="split pxweb_query bug",{
 
   px$config$max_values_to_download <- 20000
   expect_silent(pxqs <- pxweb_split_query(pxq, px, pxmd))
-  expect_length(pxqs, 8964)
+  expect_length(pxqs, 6777)
 })  
 
 
