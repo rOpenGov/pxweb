@@ -105,7 +105,7 @@ The simplest way of using `pxweb` is to use it interactively and navigate the AP
 d <- pxweb_interactive()
 
 # Get data from SCB (Statistics Sweden)
-d <- pxweb_interactive(api = "api.scb.se")
+d <- pxweb_interactive("api.scb.se")
 
 # Fetching data from statfi (Statistics Finland)
 d <- interactive_pxweb("pxnet2.stat.fi")

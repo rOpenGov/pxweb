@@ -7,10 +7,10 @@
 pxweb_interactive(x = NULL)
 }
 \arguments{
-\item{x}{The name or alias of the pxweb api to connect to, a \code{pxweb} object or an url. Use \link{api_catalogue} to get a list of apis.}
+\item{x}{The name or alias of the pxweb api to connect to, a \code{pxweb} object or an url.}
 }
 \description{
-Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session.
+Wrapper function (for \link{pxweb_get}) to simply find and download data to the current R session.
 }
 \examples{
 pxweb_api_catalogue() # List apis
@@ -22,5 +22,5 @@ pxweb_api_catalogue() # List apis
 }
 }
 \seealso{
-\code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_data}}
+\code{\link{pxweb_get}}
 }

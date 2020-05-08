@@ -112,7 +112,9 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
   
   if(is.null(pxq)){
     px <- pxweb_add_call(px)  
-    r <- httr::GET(build_pxweb_url(px), ...)
+    r <- httr::GET(build_pxweb_url(px), 
+                   pxweb_user_agent(), 
+                   ...)
     pxweb_http_log_response(r)
     httr::stop_for_status(r)
     pxr <- pxweb_parse_response(x = r)
@@ -127,7 +129,7 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
       px <- pxweb_add_call(px)  
       pxurl <- build_pxweb_url(px)
       pxqs[[i]] <- pxweb_remove_metadata_from_query(pxqs[[i]], pxmd)
-      r <- httr::POST(pxurl, body = pxweb_as_json(x = pxqs[[i]]), ...)
+      r <- httr::POST(pxurl, body = pxweb_as_json(x = pxqs[[i]]), pxweb_user_agent(), ...)
       pxweb_http_log_response(r)
       httr::stop_for_status(r)
       pxr[[i]] <- pxweb_parse_response(x = r)
@@ -204,3 +206,9 @@ pxweb_metadata_add_null_values <- function(x, px){
   assert_pxweb_metadata(x)
   x
 }
+
+
+pxweb_user_agent <- function(){
+  httr::user_agent("https://github.com/rOpenGov/pxweb")
+}
+

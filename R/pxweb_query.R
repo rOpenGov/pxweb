@@ -186,7 +186,7 @@ pxweb_validate_query_with_metadata <- function(pxq, pxmd){
       meta_idx <- which(pxweb_metadata_variables %in% pxweb_query_variable_code)
       pxweb_metadata_variable_values <- pxmd$variables[[meta_idx]]$values
       if(!is.null(pxweb_metadata_variable_values)){
-        checkmate::assert_subset(pxweb_query_variable_values, choices = pxweb_metadata_variable_values)
+        checkmate::assert_subset(pxweb_query_variable_values, choices = pxweb_metadata_variable_values, .var.name = pxq$query[[i]]$code)
       }
     }
   }

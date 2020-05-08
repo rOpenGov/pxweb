@@ -15,41 +15,94 @@
 \alias{pxweb_pxd_slot_idx_pos}
 \title{Coerce a \code{pxweb_data} object to a \code{data.frame}}
 \usage{
-pxweb_as_data_frame(x, row.names = NULL, optional = FALSE, ...,
+pxweb_as_data_frame(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
   stringsAsFactors = default.stringsAsFactors(),
-  column.name.type = "text", variable.value.type = "text")
+  column.name.type = "text",
+  variable.value.type = "text"
+)
 
-\method{pxweb_as_data_frame}{pxweb_data}(x, row.names = NULL,
-  optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(),
-  column.name.type = "text", variable.value.type = "text")
+\method{pxweb_as_data_frame}{pxweb_data}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = default.stringsAsFactors(),
+  column.name.type = "text",
+  variable.value.type = "text"
+)
 
-\method{pxweb_as_data_frame}{pxweb_data_comments}(x, optional = FALSE,
-  ..., stringsAsFactors = default.stringsAsFactors())
+\method{pxweb_as_data_frame}{pxweb_data_comments}(
+  x,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = default.stringsAsFactors()
+)
 
-\method{pxweb_as_data_frame}{pxweb_data_comment}(x, optional = FALSE,
-  ..., stringsAsFactors = default.stringsAsFactors())
+\method{pxweb_as_data_frame}{pxweb_data_comment}(
+  x,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = default.stringsAsFactors()
+)
 
-\method{pxweb_as_data_frame}{pxweb_levels}(x, optional = FALSE, ...,
-  stringsAsFactors = default.stringsAsFactors())
+\method{pxweb_as_data_frame}{pxweb_levels}(
+  x,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = default.stringsAsFactors()
+)
 
-\method{as.data.frame}{pxweb_data}(x, row.names = NULL,
-  optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(),
-  column.name.type = "text", variable.value.type = "text")
+\method{as.data.frame}{pxweb_data}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = default.stringsAsFactors(),
+  column.name.type = "text",
+  variable.value.type = "text"
+)
 
-\method{as.data.frame}{pxweb_data_comments}(x, row.names = NULL,
-  optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors())
+\method{as.data.frame}{pxweb_data_comments}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = default.stringsAsFactors()
+)
 
-\method{as.data.frame}{pxweb_levels}(x, row.names = NULL,
-  optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors())
+\method{as.data.frame}{pxweb_levels}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = default.stringsAsFactors()
+)
 
-pxweb_as_matrix(x, row.names = NULL, column.name.type = "text",
-  variable.value.type = "text")
+pxweb_as_matrix(
+  x,
+  row.names = NULL,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
 
-\method{pxweb_as_matrix}{pxweb_data}(x, row.names = NULL,
-  column.name.type = "text", variable.value.type = "text")
+\method{pxweb_as_matrix}{pxweb_data}(
+  x,
+  row.names = NULL,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
 
-\method{as.matrix}{pxweb_data}(x, ..., row.names = NULL,
-  column.name.type = "text", variable.value.type = "text")
+\method{as.matrix}{pxweb_data}(
+  x,
+  ...,
+  row.names = NULL,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
 
 pxweb_pxd_slot_idx_pos(x)
 }
