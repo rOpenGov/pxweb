@@ -1,12 +1,12 @@
 #' @title Find and download data interactively from a PXWEB API
 #'
-#' @description Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session. 
+#' @description Wrapper function (for \link{pxweb_get}) to simply find and download data to the current R session. 
 #' 
-#' @param x The name or alias of the pxweb api to connect to, a \code{pxweb} object or an url. Use \link{api_catalogue} to get a list of apis.
+#' @param x The name or alias of the pxweb api to connect to, a \code{pxweb} object or an url.
 #' 
 #' 
 #' @seealso
-#' \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_data}}
+#' \code{\link{pxweb_get}}
 #' @export
 #' @examples
 #' pxweb_api_catalogue() # List apis
