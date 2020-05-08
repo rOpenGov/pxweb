@@ -12,5 +12,4 @@
 #' 
 #' @name pxweb-package
 #' @docType package
-#' @import methods
 NULL

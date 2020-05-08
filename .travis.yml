@@ -41,10 +41,10 @@ jobs:
        - echo $PXWEB_ERROR
        - exit $PXWEB_ERROR
       if: branch = test     
-#    - stage: MacOS X
-#      os: osx
-#      r: release
-#      if: branch = master OR branch = test      
+    - stage: MacOS X
+      os: osx
+      r: release
+      if: branch = master OR branch = test      
     - stage: oldrel
       r: oldrel
       if: branch = master OR branch = test
@@ -64,15 +64,6 @@ jobs:
 
 # Be strict when checking our package
 warnings_are_errors: true
-
-# All but devtools are deprecated dependencies
-r_package:
-  - devtools
-  - RJSONIO
-  - rjstat
-  - data.table
-  - plyr
-  - stringr
 
 r_github_packages:
   -  jimhester/covr
