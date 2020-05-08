@@ -371,9 +371,9 @@
         "url" : "http://api.aluesarjat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
-        "calls_per_period": 30,
+        "calls_per_period": 1000,
         "period_in_seconds": 10,
-        "max_values_to_download" : 100000
+        "max_values_to_download" : 5000000
     }
   },
     
