@@ -361,8 +361,20 @@
         "calls_per_period": 20,
         "period_in_seconds": 10,
         "max_values_to_download" : 110000
+    },
+    
+    "api.aluesarjat.fi": {
+        "description" : "Helsingin seudun aluesarjat -tilastotietokanta",
+        "citation" : {
+          "organization" : "City of Helsinki",
+          "address" : "Helsinki, Finland"},
+        "url" : "http://api.aluesarjat.fi/PXWeb/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["fi"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
     }
-
   },
     
   "local_apis": {}
