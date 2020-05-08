@@ -41,10 +41,10 @@ jobs:
        - echo $PXWEB_ERROR
        - exit $PXWEB_ERROR
       if: branch = test     
-    - stage: MacOS X
-      os: osx
-      r: release
-      if: branch = master OR branch = test      
+#    - stage: MacOS X
+#      os: osx
+#      r: release
+#      if: branch = master OR branch = test      
     - stage: oldrel
       r: oldrel
       if: branch = master OR branch = test
@@ -61,7 +61,6 @@ jobs:
       env:
         - CURRENT_STAGE=devel
 
-sudo: required
 
 # Be strict when checking our package
 warnings_are_errors: true
