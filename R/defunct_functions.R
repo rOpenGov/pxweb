@@ -4,6 +4,33 @@
 #' These function has as from version 0.10.0 become defunct.
 #' Call the functions to get information on new functions to use.
 #' 
+#' @param url Defunct argument.
+#' @param urlToData Defunct argument.
+#' @param ... Defunct argument.
+#' @param getDataByGET Defunct argument.
+#' @param returnMetaData Defunct argument.
+#' @param returnMetaValues Defunct argument.
+#' @param returnMetaFrames Defunct argument.
+#' @param returnApiQuery Defunct argument.
+#' @param defaultJSONquery Defunct argument.
+#' @param verbosePrint Defunct argument.
+#' @param use_factors Defunct argument.
+#' @param urlType Defunct argument.
+#' @param id Defunct argument.
+#' @param api Defunct argument.
+#' @param version Defunct argument.
+#' @param language Defunct argument.
+#' @param dims Defunct argument.
+#' @param clean Defunct argument.
+#' @param encoding Defunct argument.
+#' @param node Defunct argument.
+#' @param verbose Defunct argument.
+#' @param baseURL Defunct argument.
+#' @param descriptions Defunct argument.
+#' @param quiet Defunct argument.
+#' @param path Defunct argument.
+#' @param topnodes Defunct argument.
+#' 
 #' @export
 api_catalogue <- function(){
   .Defunct("pxweb_api_catalogue")
@@ -68,25 +95,9 @@ get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet 
 
 #' @rdname api_catalogue
 #' @export pxweb_api
-pxweb_api <- 
-  setRefClass(
-    Class = "pxweb_api", 
-    fields = list(api = "character",
-                  alias = "character",
-                  description = "character",
-                  url = "character",
-                  versions = "character",
-                  languages = "character",
-                  calls_per_period = "numeric",
-                  period_in_seconds = "numeric",
-                  max_values_to_download = "numeric"),
-    
-    methods = list(
-      initialize = function(get_api = NULL, ...){
-        'Create a new pxweb_api object.'
-        .Defunct(msg = "'pxweb_api' class is defunct. \nUse 'pxweb' instead.\nSee help(\"Defunct\") ")
-      })
-)
+pxweb_api <- function(){
+  .Defunct(msg = "'pxweb_api' class is defunct. \nUse 'pxweb' instead.\nSee help(\"Defunct\") ")
+}
 
 #' @rdname api_catalogue
 #' @export
