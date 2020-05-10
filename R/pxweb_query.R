@@ -222,10 +222,10 @@ pxweb_add_metadata_to_query <- function(pxq, pxmd){
     checkmate::assert_choice(pxweb_query_variable_code, choices = pxweb_metadata_variables)
     if(tolower(pxq$query[[i]]$selection$filter) == "all"){
       px_pattern <- pxq$query[[i]]$selection$values
-      px_pattern <- gsub(pattern = "\\*", replacement = "\\.\\+", px_pattern)
+      px_pattern <- paste0("^", gsub(pattern = "\\*", replacement = "\\.\\+", px_pattern))
       meta_data_values <- pxmd$variables[[which(pxweb_metadata_variables %in% pxweb_query_variable_code)]]$values
       if(!is.null(meta_data_values)){
-        meta_data_values[grepl(x = meta_data_values, pattern = px_pattern)]
+        meta_data_values <- meta_data_values[grepl(x = meta_data_values, pattern = px_pattern)]
         pxq$query[[i]]$selection$values <- meta_data_values
         pxq$query[[i]]$selection$filter <- "item"
       }
