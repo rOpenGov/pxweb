@@ -175,3 +175,24 @@ test_that(desc="Cite data",{
   expect_output(pxweb_cite(px_data), regexp = "Stockholm, Sweden")
 })  
 
+
+test_that(desc="Filter query error bug",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
+  url <- "http://data.ssb.no/api/v0/en/table/04861"
+  json_query <- readLines(test_path("test_data/filter_query.json"))
+  expect_silent(px_data1 <- suppressWarnings(pxweb_get(url = url, query = json_query)))
+  df1 <- jsonlite::fromJSON(px_data1)
+  
+  expect_silent(x_httr <- httr::content(httr::POST(url, body = json_query, encode = "json"), "text"))
+  df2 <- jsonlite::fromJSON(x_httr)
+
+  expect_identical(df1$dataset$dimension$Region$category$index,
+                   df2$dataset$dimension$Region$category$index)
+  expect_identical(df1$dataset$dimension$Tid$category$index,
+                   df2$dataset$dimension$Tid$category$index)
+
+})  
+
+
