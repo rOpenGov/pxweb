@@ -2,12 +2,21 @@
 % Please edit documentation in R/pxweb_interactive.R
 \name{pxweb_interactive}
 \alias{pxweb_interactive}
+\alias{interactive_pxweb}
 \title{Find and download data interactively from a PXWEB API}
 \usage{
 pxweb_interactive(x = NULL)
+
+interactive_pxweb(x = NULL)
 }
 \arguments{
 \item{x}{The name or alias of the pxweb api to connect to, a \code{pxweb} object or an url.}
+}
+\value{
+The function returns a list with three slots:
+\code{url}: The URL to the data
+\code{query}: The query to access the data
+\code{data}: The downloaded data (if chosen to download data)
 }
 \description{
 Wrapper function (for \link{pxweb_get}) to simply find and download data to the current R session.
