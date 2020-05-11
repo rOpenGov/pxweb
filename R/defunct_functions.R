@@ -95,9 +95,9 @@ get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet 
 
 #' @rdname api_catalogue
 #' @export pxweb_api
-pxweb_api <- function(){
+pxweb_api <- list(new =function(){
   .Defunct(msg = "'pxweb_api' class is defunct. \nUse 'pxweb' instead.\nSee help(\"Defunct\") ")
-}
+})
 
 #' @rdname api_catalogue
 #' @export
