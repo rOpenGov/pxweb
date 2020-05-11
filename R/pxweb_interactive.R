@@ -4,6 +4,11 @@
 #' 
 #' @param x The name or alias of the pxweb api to connect to, a \code{pxweb} object or an url.
 #' 
+#' @return 
+#' The function returns a list with three slots:
+#' \code{url}: The URL to the data
+#' \code{query}: The query to access the data
+#' \code{data}: The downloaded data (if chosen to download data)
 #' 
 #' @seealso
 #' \code{\link{pxweb_get}}
@@ -45,6 +50,12 @@ pxweb_interactive <- function(x = NULL){
   }
 
   return(invisible(results))
+}
+
+#' @rdname pxweb_interactive
+#' @export
+interactive_pxweb <-function(x = NULL){
+  pxweb_interactive(x)
 }
 
 #' Create a \code{pxweb_explorer} object.
@@ -953,7 +964,7 @@ pxe_print_download_code <- function(pxe, as){
       "  pxweb_get(url = \"", pxe_data_url(pxe), "\",\n",
       "            query = ",q_path,")\n\n", sep ="")
   cat("# Convert to data.frame \n",
-      "px_data <- as.data.frame(px_data, column.name.type = \"text\", variable.value.type = \"text\")\n\n", sep ="")
+      "px_data_frame <- as.data.frame(px_data, column.name.type = \"text\", variable.value.type = \"text\")\n\n", sep ="")
   
   cat("# Get pxweb data comments \n",
       "px_data_comments <- pxweb_data_comments(px_data)\n",

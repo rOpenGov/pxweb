@@ -1,0 +1,28 @@
+{
+  "query": [
+    {
+      "code": "Region",
+      "selection": {
+        "filter": "all",
+        "values": ["039*"]
+      }
+    },
+    {
+      "code": "ContentsCode",
+      "selection": {
+        "filter": "all",
+        "values": ["*"]
+      }
+    },
+    {
+      "code": "Tid",
+      "selection": {
+        "filter": "top",
+        "values": ["4"]
+      }
+    }
+    ],
+  "response": {
+    "format": "json-stat"
+  }
+}

@@ -100,9 +100,6 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
     } else {
       pxmd <- pxmdo
     }
-    if(!inherits(pxmd, "pxweb_metadata")) {
-      stop("The path is not a PXWEB API table endpoint with data:\n", build_pxweb_url(px), call. = FALSE)
-    }
     pxq <- pxweb_add_metadata_to_query(pxq, pxmd)
     pxweb_validate_query_with_metadata(pxq, pxmd)
     pxqs <- pxweb_split_query(pxq, px, pxmd)

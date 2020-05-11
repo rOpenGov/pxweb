@@ -175,3 +175,70 @@ test_that(desc="Cite data",{
   expect_output(pxweb_cite(px_data), regexp = "Stockholm, Sweden")
 })  
 
+
+test_that(desc="Filter query error bug",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
+  url <- "http://data.ssb.no/api/v0/en/table/04861"
+  json_query <- readLines(test_path("test_data/filter_query.json"))
+  expect_silent(px_data1 <- suppressWarnings(pxweb_get(url = url, query = json_query)))
+  df1 <- jsonlite::fromJSON(px_data1)
+  
+  expect_silent(x_httr <- httr::content(httr::POST(url, body = json_query, encode = "json"), "text"))
+  df2 <- jsonlite::fromJSON(x_httr)
+
+  expect_identical(df1$dataset$dimension$Region$category$index,
+                   df2$dataset$dimension$Region$category$index)
+  expect_identical(df1$dataset$dimension$Tid$category$index,
+                   df2$dataset$dimension$Tid$category$index)
+
+})  
+
+
+test_that(desc="a small big query",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+
+  pxweb_query_list <- 
+    list("Region"=c("00"),
+         "Alder"=c("tot"),
+         "ContentsCode"=c("BE0101N1"),
+         "Tid"=c("2016","2017","2018","2019"))
+  
+  # Download data 
+  px <- pxweb("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+  px$config$max_values_to_download <- 2
+  
+  expect_output(px_data1 <- pxweb_get(url = px, query = pxweb_query_list), regexp = "2 batches")
+  
+  px$config$max_values_to_download <- 4
+  expect_silent(px_data2 <- pxweb_get(url = px, query = pxweb_query_list))
+  
+  expect_identical(px_data1$data, px_data2$data)
+})  
+
+
+
+
+test_that(desc="manually supplying a pxmdo",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
+  pxweb_query_list <- 
+    list("Region"=c("00"),
+         "Alder"=c("tot"),
+         "ContentsCode"=c("BE0101N1"),
+         "Tid"=c("2016","2017","2018","2019"))
+  
+  # Download data 
+  url_md <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  expect_silent(pxmo1 <- pxweb_get(url = url_md))
+  url_not_md <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A"
+  expect_silent(pxmo2 <- pxweb_get(url = url_not_md))  
+
+  expect_silent(px_data1 <- pxweb_get(url = url_md, query = pxweb_query_list))
+  expect_silent(px_data2 <- pxweb_advanced_get(url = url_md, query = pxweb_query_list, pxmdo = pxmo1))
+  expect_identical(px_data1$data, px_data2$data)
+  
+})  
