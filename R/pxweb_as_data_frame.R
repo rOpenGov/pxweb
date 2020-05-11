@@ -11,7 +11,7 @@
 #' @seealso \code{\link[base]{as.data.frame}}.
 #' 
 #' @keywords internal
-pxweb_as_data_frame <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(), column.name.type = "text", variable.value.type = "text"){
+pxweb_as_data_frame <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = FALSE, column.name.type = "text", variable.value.type = "text"){
   checkmate::assert_choice(column.name.type, c("code", "text"))
   checkmate::assert_choice(column.name.type, c("code", "text"))  
   UseMethod("pxweb_as_data_frame")
@@ -19,7 +19,7 @@ pxweb_as_data_frame <- function(x, row.names = NULL, optional = FALSE, ..., stri
 
 #' @rdname pxweb_as_data_frame
 #' @keywords internal
-pxweb_as_data_frame.pxweb_data <-  function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(), column.name.type = "text", variable.value.type = "text"){
+pxweb_as_data_frame.pxweb_data <-  function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = FALSE, column.name.type = "text", variable.value.type = "text"){
   pxdims <- pxweb_data_dim(x)
   checkmate::assert_character(row.names, len = pxdims[1], null.ok = TRUE)
   checkmate::assert_choice(column.name.type, c("code", "text"))
@@ -46,7 +46,7 @@ pxweb_as_data_frame.pxweb_data <-  function(x, row.names = NULL, optional = FALS
 
 #' @rdname pxweb_as_data_frame
 #' @keywords internal
-pxweb_as_data_frame.pxweb_data_comments <-  function(x, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors()){
+pxweb_as_data_frame.pxweb_data_comments <-  function(x, optional = FALSE, ..., stringsAsFactors = FALSE){
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
   
@@ -73,7 +73,7 @@ pxweb_as_data_frame.pxweb_data_comments <-  function(x, optional = FALSE, ..., s
 
 #' @rdname pxweb_as_data_frame
 #' @keywords internal
-pxweb_as_data_frame.pxweb_data_comment <- function(x, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors()){
+pxweb_as_data_frame.pxweb_data_comment <- function(x, optional = FALSE, ..., stringsAsFactors = FALSE){
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
   
@@ -93,7 +93,7 @@ pxweb_as_data_frame.pxweb_data_comment <- function(x, optional = FALSE, ..., str
 
 #' @rdname pxweb_as_data_frame
 #' @keywords internal
-pxweb_as_data_frame.pxweb_levels <- function(x, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors()){
+pxweb_as_data_frame.pxweb_levels <- function(x, optional = FALSE, ..., stringsAsFactors = FALSE){
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
   
@@ -122,7 +122,7 @@ as.data.frame.pxweb_data <- function(x,
                                      row.names = NULL, 
                                      optional = FALSE, 
                                      ..., 
-                                     stringsAsFactors = default.stringsAsFactors(), 
+                                     stringsAsFactors = FALSE, 
                                      column.name.type = "text",
                                      variable.value.type = "text"
                                      ){
@@ -142,7 +142,7 @@ as.data.frame.pxweb_data_comments <- function(x,
                                      row.names = NULL, 
                                      optional = FALSE, 
                                      ..., 
-                                     stringsAsFactors = default.stringsAsFactors()
+                                     stringsAsFactors = FALSE
 ){
   
   pxweb_as_data_frame(x, 
@@ -159,7 +159,7 @@ as.data.frame.pxweb_levels <- function(x,
                                        row.names = NULL, 
                                        optional = FALSE, 
                                        ..., 
-                                       stringsAsFactors = default.stringsAsFactors()){
+                                       stringsAsFactors = FALSE){
   
   pxweb_as_data_frame(x, 
                       row.names = row.names, 
