@@ -218,3 +218,27 @@ test_that(desc="a small big query",{
   expect_identical(px_data1$data, px_data2$data)
 })  
 
+
+
+
+test_that(desc="manually supplying a pxmdo",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
+  pxweb_query_list <- 
+    list("Region"=c("00"),
+         "Alder"=c("tot"),
+         "ContentsCode"=c("BE0101N1"),
+         "Tid"=c("2016","2017","2018","2019"))
+  
+  # Download data 
+  url_md <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  expect_silent(pxmo1 <- pxweb_get(url = url_md))
+  url_not_md <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A"
+  expect_silent(pxmo2 <- pxweb_get(url = url_not_md))  
+
+  expect_silent(px_data1 <- pxweb_get(url = url_md, query = pxweb_query_list))
+  expect_silent(px_data2 <- pxweb_advanced_get(url = url_md, query = pxweb_query_list, pxmdo = pxmo1))
+  expect_identical(px_data1$data, px_data2$data)
+  
+})  
