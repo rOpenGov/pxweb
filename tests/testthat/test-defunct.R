@@ -3,7 +3,12 @@
 context("defunct")
 
 test_that(desc="Assert defunct errors",{
-  expect_error(api_catalogue(), class = "defunctError")
+  # Skip tests before 3.6 since defuncterrors came with 3.6
+  rvma <- R.version$major
+  rvmi <- as.numeric(R.version$minor)
+  skip_if(rvma == "3" & rvmi < 6.0)
+  
+  expect_error(api_catalogue(), regexp = "defunctError")
   expect_error(update_pxweb_apis(), class = "defunctError")
   expect_error(api_parameters(), class = "defunctError")
   expect_error(ApiData(), class = "defunctError")  
