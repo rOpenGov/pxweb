@@ -196,3 +196,25 @@ test_that(desc="Filter query error bug",{
 })  
 
 
+test_that(desc="a small big query",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+
+  pxweb_query_list <- 
+    list("Region"=c("00"),
+         "Alder"=c("tot"),
+         "ContentsCode"=c("BE0101N1"),
+         "Tid"=c("2016","2017","2018","2019"))
+  
+  # Download data 
+  px <- pxweb("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+  px$config$max_values_to_download <- 2
+  
+  expect_output(px_data1 <- pxweb_get(url = px, query = pxweb_query_list), regexp = "2 batches")
+  
+  px$config$max_values_to_download <- 4
+  expect_silent(px_data2 <- pxweb_get(url = px, query = pxweb_query_list))
+  
+  expect_identical(px_data1$data, px_data2$data)
+})  
+
