@@ -20,7 +20,7 @@ pxweb_as_data_frame(
   row.names = NULL,
   optional = FALSE,
   ...,
-  stringsAsFactors = default.stringsAsFactors(),
+  stringsAsFactors = FALSE,
   column.name.type = "text",
   variable.value.type = "text"
 )
@@ -30,38 +30,23 @@ pxweb_as_data_frame(
   row.names = NULL,
   optional = FALSE,
   ...,
-  stringsAsFactors = default.stringsAsFactors(),
+  stringsAsFactors = FALSE,
   column.name.type = "text",
   variable.value.type = "text"
 )
 
-\method{pxweb_as_data_frame}{pxweb_data_comments}(
-  x,
-  optional = FALSE,
-  ...,
-  stringsAsFactors = default.stringsAsFactors()
-)
+\method{pxweb_as_data_frame}{pxweb_data_comments}(x, optional = FALSE, ..., stringsAsFactors = FALSE)
 
-\method{pxweb_as_data_frame}{pxweb_data_comment}(
-  x,
-  optional = FALSE,
-  ...,
-  stringsAsFactors = default.stringsAsFactors()
-)
+\method{pxweb_as_data_frame}{pxweb_data_comment}(x, optional = FALSE, ..., stringsAsFactors = FALSE)
 
-\method{pxweb_as_data_frame}{pxweb_levels}(
-  x,
-  optional = FALSE,
-  ...,
-  stringsAsFactors = default.stringsAsFactors()
-)
+\method{pxweb_as_data_frame}{pxweb_levels}(x, optional = FALSE, ..., stringsAsFactors = FALSE)
 
 \method{as.data.frame}{pxweb_data}(
   x,
   row.names = NULL,
   optional = FALSE,
   ...,
-  stringsAsFactors = default.stringsAsFactors(),
+  stringsAsFactors = FALSE,
   column.name.type = "text",
   variable.value.type = "text"
 )
@@ -71,7 +56,7 @@ pxweb_as_data_frame(
   row.names = NULL,
   optional = FALSE,
   ...,
-  stringsAsFactors = default.stringsAsFactors()
+  stringsAsFactors = FALSE
 )
 
 \method{as.data.frame}{pxweb_levels}(
@@ -79,7 +64,7 @@ pxweb_as_data_frame(
   row.names = NULL,
   optional = FALSE,
   ...,
-  stringsAsFactors = default.stringsAsFactors()
+  stringsAsFactors = FALSE
 )
 
 pxweb_as_matrix(
