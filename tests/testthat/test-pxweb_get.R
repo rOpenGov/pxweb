@@ -242,3 +242,17 @@ test_that(desc="manually supplying a pxmdo",{
   expect_identical(px_data1$data, px_data2$data)
   
 })  
+
+
+test_that(desc="return clear error message when missing values",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+
+  pql <- list("Tilltalsnamn"=c("20Agnes"),
+              "Tid"=c("2019"))
+  url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0001/BE0001D/BE0001T05AR"
+  expect_error(pd <- pxweb_get(url, query = pql), regexp = "ContentsCode")
+  
+})  
+
+
