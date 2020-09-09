@@ -252,9 +252,23 @@
       "max_values_to_download" : 10000
     },
     
+      "data.stat.gov.lv": {
+      "alias" : ["csb_lv"],
+      "description" : "Latvia - official statistics",
+      "citation" : {
+          "organization" : "Statistics Latvia",
+          "address" : "Riga, Latvia"},
+      "url" : "http://data.stat.gov.lv/api/[version]/[lang]/",
+      "version": ["v1"], 
+      "lang": ["en", "lv"],
+      "calls_per_period": 4000,
+      "period_in_seconds": 300,
+      "max_values_to_download" : 30000
+    },
+    
     "data.csb.gov.lv": {
       "alias" : ["csb_lv"],
-      "description" : "Statistics Latvia",
+      "description" : "Latvia - official statistics (old version)",
       "citation" : {
           "organization" : "Statistics Latvia",
           "address" : "Riga, Latvia"},
@@ -376,6 +390,7 @@
         "max_values_to_download" : 5000000
     }
   },
+  
     
   "local_apis": {}
 

@@ -81,6 +81,7 @@ test_that(desc="split pxweb_query object",{
 test_that(desc="split pxweb_query bug",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip("Statistics Iceland is currently not working (20200909)")
   
   url <- "http://px.hagstofa.is/pxis/api/v1/is/Efnahagur/utanrikisverslun/1_voruvidskipti/03_inntollskra/UTA03801.px"
   pxweb_query_list <- list("Tollskrárnúmer" = c("*"), # length(vars[[1]]$values) is equal to 4474

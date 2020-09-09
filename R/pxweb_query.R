@@ -197,7 +197,8 @@ pxweb_validate_query_with_metadata <- function(pxq, pxmd){
     }
   }
   if(!all(mandatory_variables %in% query_variables)){
-    stop("Not all mandatory variables are included in the query.", call. = FALSE)
+    mandatory_variables_missing <- mandatory_variables[!mandatory_variables %in% query_variables]
+    stop("Mandatory variable(s) '", paste0(mandatory_variables_missing, collapse = "', '"), "' is missing in the query.", call. = FALSE)
   }
 }
 
