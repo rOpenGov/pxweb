@@ -81,24 +81,27 @@ test_that(desc="split pxweb_query object",{
 test_that(desc="split pxweb_query bug",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip("Statistics Iceland is currently not working (20200909)")
   
   url <- "http://px.hagstofa.is/pxis/api/v1/is/Efnahagur/utanrikisverslun/1_voruvidskipti/03_inntollskra/UTA03801.px"
   pxweb_query_list <- list("Tollskrárnúmer" = c("*"), # length(vars[[1]]$values) is equal to 4474
                            "Land" = c("*"),           # length(vars[[2]]$values) is equal to 249
                            "Mánuður" = c("*"),        # length(vars[[3]]$values) is equal to 36
                            "Eining" = c("*"))         # length(vars[[4]]$values) is equal to 4
+  # pxq <- pxweb_add_metadata_to_query(pxq, pxmd)
+  # pxweb_validate_query_with_metadata(pxq, pxmd)
+  # pxweb_query_dim(pxq)
+  
   expect_silent(pxq <- pxweb_query(pxweb_query_list))
   expect_silent(px <- pxweb(url))
   expect_silent(pxmd <- pxweb_get(url))
-
+  
   pxq <- pxweb:::pxweb_add_metadata_to_query(pxq, pxmd)
   px$config$max_values_to_download <- 10000
   expect_error(pxqs <- pxweb_split_query(pxq, px, pxmd))
 
   px$config$max_values_to_download <- 20000
   expect_silent(pxqs <- pxweb_split_query(pxq, px, pxmd))
-  expect_length(pxqs, 6777)
+  expect_gt(length(pxqs), 1000)
 })  
 
 

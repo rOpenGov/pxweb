@@ -110,7 +110,6 @@ test_that(desc="Select all and eliminate",{
 test_that(desc="Stat Iceland structure",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip("Statistics Iceland is currently not working (20200909)")
   
   expect_silent(pxe <- pxweb:::pxweb_explorer.NULL())
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "10")) 
@@ -127,7 +126,6 @@ test_that(desc="Stat Iceland structure",{
 test_that(desc="No value bug",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip("Statistics Iceland is currently not working (20200909)")
   
   url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
   expect_silent(pxe <- pxweb:::pxweb_explorer.character(url))
