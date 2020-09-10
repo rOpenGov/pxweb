@@ -126,10 +126,11 @@ split_dimensions_left_right <- function(x, bool, max_size){
   
   call_dims <- c(prod(x[!bool]), x[bool])
   for(i in seq_along(call_dims)){
-    prod_value <- prod(call_dims[1:i])/max_size
+    batch_size <- prod(call_dims[1:i])
+    prod_value <- batch_size/max_size
     if(prod_value > 1){
       if(i == 1) {
-        stop("Too large query. Variable(s) ", paste(names(x[!bool]), collapse = ", "), " cannot be split into batches (eliminate is FALSE).", call. = FALSE)
+        stop("\nToo large query. \nVariable(s) '", paste(names(x[!bool]), collapse = "', '"), "' cannot be split into batches (eliminate is set to FALSE by the API). \nThe smallest batch size is ", batch_size," and the maximum number of values that can be downloaded through the API is ", mxv, ". \nFor details and workarounds, see:\nhttps://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md", call. = FALSE)
       }
       for(j in 1:call_dims[i]){
         if(prod(call_dims[1:(i-1)]) * j > max_size) break
