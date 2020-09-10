@@ -124,7 +124,6 @@ test_that(desc="Test http logger",{
 test_that(desc="No value bug",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip("Statistics Iceland is currently not working (20200909)")
   
   url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
   expect_silent(px <- pxweb_get(url))
