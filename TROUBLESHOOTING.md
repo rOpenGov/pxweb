@@ -30,15 +30,16 @@ Error: Too large query
 
 # Variable(s) Tollskrárnúmer, Eining cannot be split to batches (eliminate is FALSE).
 
-
-# We download the metadata object and set eliminate to TRUE (since Eining)
+# We download the metadata object and set eliminate to TRUE 
+# (since Eining is not a content variable)
 pxmd <- pxweb_get(url)
 pxmd$variables[[4]]$elimination <- TRUE
+
 # We explicitly supply the meta data object to use for downloading
-px_data <- pxweb_advanced_get(px, pxq, pxmdo = pxmd)
+px_data <- pxweb_advanced_get(url, pxq, pxmdo = pxmd)
 
 Downloading large query (in 4 batches):
-  |======================================================================================| 100%
+  |==================================================================| 100%
 
 px_data
 
@@ -46,5 +47,42 @@ PXWEB DATA
 With 5 variables and 35792 observations.
 ```
 
+Another example is:
+
+```
+library(pxweb)
+pxweb_query_list <- list("Typ av psykisk hälsa"=c("*"),
+                         "Andel och konfidensintervall"=c("2"),
+                         "Ålder"=c("16-29","30-44","45-64","65-84"),
+                         "Kön"=c("1","2"),
+                         "År"=c("2018","2016","2015",
+                                "2014","2013","2012",
+                                "2011","2010","2009",
+                                "2008","2007","2006",
+                                "2005","2004"))
+url <- "http://fohm-app.folkhalsomyndigheten.se/Folkhalsodata/api/v1/sv/B_HLV/dPsykhals/HLV_Psykisk_halsa_alder.px"
+
+# We get the error that no variables can be split up. 
+px_data <- pxweb_get(url = url,
+                     query = pxweb_query_list)
+
+# We download the metadata object and set eliminate to TRUE for 
+# one variable that is not a content variable.
+# Here variable 1 ('Typ av psykisk hälsa') is a variable we can 
+# split the batches on since (we know) it is not a content variable.
+pxmd <- pxweb_get(url)
+pxmd$variables[[1]]$elimination <- TRUE
+
+# We explicitly supply the meta data object to use for downloading
+px_data <- pxweb_advanced_get(url, pxweb_query_list, pxmdo = pxmd)
+
+##   Downloading large query (in 2 batches):
+## |========================================================| 100%
+
+px_data
+
+## PXWEB DATA
+## With 6 variables and 1792 observations.
+```
 
 
