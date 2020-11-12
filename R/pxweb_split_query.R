@@ -29,6 +29,7 @@ pxweb_split_query <- function(pxq, px, pxmd){
   if(prod(pxqd) <= mxv) return(list(pxq))
   
   # Search through optimal combination
+  assert_query_can_be_split_to_batches(pxq, pxmd, mxv)
   comb <- generate_permutations(which(pxqds))
   no_comb <- matrix(which(!pxqds), nrow = nrow(comb), ncol = sum(!pxqds), byrow = TRUE)
   comb <- cbind(comb, no_comb)
@@ -73,6 +74,8 @@ pxweb_split_query <- function(pxq, px, pxmd){
   }
   pxq_list
 }
+
+
 
 
 #' Get vector indicating splittable variables
@@ -233,4 +236,17 @@ permutations <- function (n, r, v = 1:n, set = TRUE, repeats.allowed = FALSE)
     }
   }
   sub(n, r, v[1:n])
+}
+
+
+#' Assert that a given pxweb query can be split
+#' 
+#' @param pxq a [pxweb_query] object
+#' @param pxmd a [pxweb_metadata] object
+#' @param mxv maximum batch size
+assert_query_can_be_split_to_batches <- function(pxq, pxmd, mxv){
+  pxqd <- pxweb_query_dim(pxq)
+  pxqds <- pxweb_query_dim_splittable(pxq, pxmd)
+  if(all(!pxqds)) stop("\nToo large query. \nNo Variable(s) can be split into batches (eliminate is set to FALSE by the API). \nThe smallest batch size is ", prod(pxqd)," and the maximum number of values that can be downloaded through the API is ", mxv, ". \nFor details and workarounds, see:\nhttps://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md", call. = FALSE)
+  
 }
