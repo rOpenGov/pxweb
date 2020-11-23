@@ -13,8 +13,8 @@ knitr::opts_chunk$set(
 
 <br>
 
-
-[![Build Status](https://travis-ci.org/rOpenGov/pxweb.svg?branch=master)](https://travis-ci.org/rOpenGov/pxweb) [![Build status](https://ci.appveyor.com/api/projects/status/40abe0fpxw2jftf3/branch/master?svg=true)](https://ci.appveyor.com/project/MansMeg/pxweb/branch/master)
+<!-- badges: start -->
+  [![R build status](https://github.com/rOpenGov/pxweb/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/pxweb/actions)
 [![Coverage Status](https://coveralls.io/repos/github/rOpenGov/pxweb/badge.svg?branch=master)](https://coveralls.io/github/rOpenGov/pxweb?branch=master)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://cran.r-project.org/package=pxweb)
 [![Downloads](http://cranlogs.r-pkg.org/badges/pxweb)](https://cran.r-project.org/package=pxweb)
@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
 [![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
+<!-- badges: end -->
 
 <br>
 

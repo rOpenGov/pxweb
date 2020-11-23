@@ -1,9 +1,9 @@
 <br>
 
-[![Build
-Status](https://travis-ci.org/rOpenGov/pxweb.svg?branch=master)](https://travis-ci.org/rOpenGov/pxweb)
-[![Build
-status](https://ci.appveyor.com/api/projects/status/40abe0fpxw2jftf3/branch/master?svg=true)](https://ci.appveyor.com/project/MansMeg/pxweb/branch/master)
+<!-- badges: start -->
+
+[![R build
+status](https://github.com/rOpenGov/pxweb/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/pxweb/actions)
 [![Coverage
 Status](https://coveralls.io/repos/github/rOpenGov/pxweb/badge.svg?branch=master)](https://coveralls.io/github/rOpenGov/pxweb?branch=master)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://cran.r-project.org/package=pxweb)
@@ -14,6 +14,7 @@ GitHub](https://img.shields.io/github/watchers/ropengov/pxweb.svg?style=social)]
 [![Star on
 GitHub](https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social)](https://github.com/ropengov/pxweb/stargazers)
 [![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
+<!-- badges: end -->
 
 <br>
 
@@ -21,6 +22,7 @@ PC Axis R tools: pxweb package
 ==============================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 The pxweb R package provides tools to interface with the PX-WEB API for
 data search, download, manipulation and visualization purposes. This is
 used by a large number of statistical authorities world-wide. It offers
@@ -78,15 +80,6 @@ Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and
 Axis data with the pxweb package. R package version . URL:
 <http://ropengov.github.io/pxweb>
 
-
-**Kindly cite this work** as follows: [Måns Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and [Leo Lahti](https://github.com/antagomir). Retrieval and analysis of PC Axis data with the pxweb package. URL: [http://ropengov.github.io/pxweb](http://ropengov.github.io/pxweb)
-
-We are grateful to all [contributors](https://github.com/rOpenGov/pxweb/graphs/contributors)! This project is part of [rOpenGov](http://ropengov.github.io).
-
-
-
-[github-watch-badge]: https://img.shields.io/github/watchers/ropengov/pxweb.svg?style=social
-[github-watch]: https://github.com/ropengov/pxweb/watchers
-[github-star-badge]: https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social
-[github-star]: https://github.com/ropengov/pxweb/stargazers
-
+We are gratetful to all
+[contributors](https://github.com/rOpenGov/pxweb/graphs/contributors)!
+This project is part of [rOpenGov](http://ropengov.github.io).
