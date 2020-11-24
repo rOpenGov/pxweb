@@ -59,7 +59,7 @@ test_that(desc="Previous bugs",{
   skip_on_cran()
   
   # This is a bug in the previous implementation of pxweb
-  url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
+  url <- "https://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
   tryr <- try(httr::GET(url), silent = TRUE)
   if(!inherits(tryr, "try-error")){
     expect_silent(px_meta_data <- pxweb_get(url))
