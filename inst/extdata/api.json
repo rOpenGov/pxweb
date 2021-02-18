@@ -21,7 +21,7 @@
         "citation" : {
           "organization" : "Statistics Finland",
           "address" : "Helsinki, Finland"},
-        "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
+        "url" : "https://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","fi","sv"],
         "calls_per_period": 30,
@@ -34,7 +34,7 @@
         "citation" : {
           "organization" : "Statistics Finland",
           "address" : "Helsinki, Finland"},
-        "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
+        "url" : "https://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
         "calls_per_period": 30,
@@ -174,7 +174,7 @@
         "citation" : {
           "organization" : "Statistics Greenland",
           "address" : "Nuuk, Denmark"},
-        "url" : "http://bank.stat.gl/api/[version]/[lang]",
+        "url" : "https://bank.stat.gl/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","kl","da"],
         "calls_per_period": 30,
@@ -328,7 +328,7 @@
       "citation" : {
           "organization" : "Finnish Transport Safety Agency",
           "address" : "Helsinki, Finland"},
-      "url" : "http://trafi2.stat.fi/PXWeb/api/[version]/[lang]/",
+      "url" : "https://trafi2.stat.fi/PXWeb/api/[version]/[lang]/",
       "version": ["v1"], 
       "lang": ["en", "sv", "fi"],
       "calls_per_period": 100,

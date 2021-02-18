@@ -11,3 +11,5 @@ inst/extras/*~
 sandbox/*
 todo.txt
 vignettes/pxweb.R
+.DS_Store
+.RData
