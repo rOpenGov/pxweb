@@ -25,7 +25,6 @@ pxweb_split_query <- function(pxq, px, pxmd){
   pxqds <- pxweb_query_dim_splittable(pxq, pxmd)
   
   mxv <- px$config$max_values_to_download
-  options("mxv"=mxv)
 
   # If able to download in one batch
   if(prod(pxqd) <= mxv) return(list(pxq))
@@ -132,7 +131,7 @@ split_dimensions_left_right <- function(x, bool, max_size){
     prod_value <- batch_size/max_size
     if(prod_value > 1){
       if(i == 1) {
-        stop("\nToo large query. \nVariable(s) '", paste(names(x[!bool]), collapse = "', '"), "' cannot be split into batches (eliminate is set to FALSE by the API). \nThe smallest batch size is ", batch_size," and the maximum number of values that can be downloaded through the API is ", getOption("mxv"), ". \nFor details and workarounds, see:\nhttps://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md", call. = FALSE)
+        stop("\nToo large query. \nVariable(s) '", paste(names(x[!bool]), collapse = "', '"), "' cannot be split into batches (eliminate is set to FALSE by the API). \nThe smallest batch size is ", batch_size," and the maximum number of values that can be downloaded through the API is ", mxv, ". \nFor details and workarounds, see:\nhttps://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md", call. = FALSE)
       }
       for(j in 1:call_dims[i]){
         if(prod(call_dims[1:(i-1)]) * j > max_size) break
