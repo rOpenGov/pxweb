@@ -47,12 +47,12 @@ Alternatively, you can get the latest stable development version:
 In some cases, the organization requires manual proxy settings. This can
 be set as follows:
 
-    library(devtools)
+    library(remotes)
     library(httr)
     set_config(
       use_proxy(url="organizationProxyURL", port=1234)
     )
-    install_github('ropengov/pxweb')
+    remotes::install_github('ropengov/pxweb')
 
 Using the package
 -----------------
