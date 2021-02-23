@@ -15,8 +15,8 @@ Authors@R: c(
 	person("Bo", "Werth", role = "ctb"),
 	person("Thomas", "Runarsson", role = "ctb"),
 	person("Torbjörn", "Lindquist", role = "ctb"),
-	person("Palmar", "Thorsteinsson", role = "ctb"))
-	person("Pyry", "Kantanen", role = "ctb")
+	person("Palmar", "Thorsteinsson", role = "ctb"),
+	person("Pyry", "Kantanen", role = "ctb"))
 Description: Generic interface for the PX-Web/PC-Axis API. The PX-Web/PC-Axis
     API is used by organizations such as Statistics Sweden and Statistics
     Finland to disseminate data. The R package can interact with all
