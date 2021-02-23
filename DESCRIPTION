@@ -1,7 +1,8 @@
 Package: pxweb
 Type: Package
 Title: R Interface to PXWEB APIs
-Version: 0.10.2
+Version: 0.10.3.1
+Date: 2021-02-23
 Encoding: UTF-8
 Authors@R: c(
   person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),
@@ -15,7 +16,8 @@ Authors@R: c(
 	person("Bo", "Werth", role = "ctb"),
 	person("Thomas", "Runarsson", role = "ctb"),
 	person("Torbjörn", "Lindquist", role = "ctb"),
-	person("Palmar", "Thorsteinsson", role = "ctb"))
+	person("Palmar", "Thorsteinsson", role = "ctb"),
+	person("Pyry", "Kantanen", role = "ctb"))
 Description: Generic interface for the PX-Web/PC-Axis API. The PX-Web/PC-Axis
     API is used by organizations such as Statistics Sweden and Statistics
     Finland to disseminate data. The R package can interact with all
@@ -36,4 +38,4 @@ License: BSD_2_clause + file LICENSE
 Suggests:
     knitr,
     testthat (>= 0.11)
-RoxygenNote: 7.0.1
+RoxygenNote: 7.1.1

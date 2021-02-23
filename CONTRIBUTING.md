@@ -11,4 +11,4 @@ You are welcome to contact us:
 
 **Kindly cite this work** as follows: [Måns Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and [Leo Lahti](https://github.com/antagomir). Retrieval and analysis of PC Axis data with the pxweb package. R package version `r sessionInfo()$otherPkgs$pxweb$Version`. URL: [http://ropengov.github.io/pxweb](http://ropengov.github.io/pxweb)
 
-We are gratetful to all [contributors](https://github.com/rOpenGov/pxweb/graphs/contributors)! This project is part of [rOpenGov](http://ropengov.github.io).
+We are grateful to all [contributors](https://github.com/rOpenGov/pxweb/graphs/contributors)! This project is part of [rOpenGov](http://ropengov.org).
