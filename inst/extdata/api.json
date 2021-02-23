@@ -356,7 +356,7 @@
       "citation" : {
           "organization" : "Portail statistique de la Grande Région",
           "address" : "Esch-sur-Alzette, Luxembourg"},
-      "url" : "http://www.grande-region.lu/pxweb/api/[version]/[lang]",
+      "url" : "https://www.grande-region.lu/pxweb/api/[version]/[lang]",
       "version": ["v1"], 
       "lang": ["fr", "de"],
       "calls_per_period": 10,
@@ -382,7 +382,7 @@
         "citation" : {
           "organization" : "City of Helsinki",
           "address" : "Helsinki, Finland"},
-        "url" : "http://api.aluesarjat.fi/PXWeb/api/[version]/[lang]",
+        "url" : "https://api.aluesarjat.fi/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
         "calls_per_period": 1000,
