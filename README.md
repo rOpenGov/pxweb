@@ -41,8 +41,8 @@ The easiest way to use pxweb is to simply install it from CRAN:
 
 Alternatively, you can get the latest stable development version:
 
-    library(devtools)
-    install_github('ropengov/pxweb')
+    library(remotes)
+    remotes::install_github('ropengov/pxweb')
 
 In some cases, the organization requires manual proxy settings. This can
 be set as follows:
