@@ -1,7 +1,8 @@
 Package: pxweb
 Type: Package
 Title: R Interface to PXWEB APIs
-Version: 0.10.2
+Version: 0.10.3.1
+Date: 2021-02-23
 Encoding: UTF-8
 Authors@R: c(
   person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),

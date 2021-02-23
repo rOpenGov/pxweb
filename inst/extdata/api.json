@@ -388,9 +388,22 @@
         "calls_per_period": 1000,
         "period_in_seconds": 10,
         "max_values_to_download" : 5000000
+    },
+    
+    "andmed.stat.ee": {
+        "alias" : ["stat_ee"],
+        "description" : "Estonia - official statistics",
+        "citation" : {
+          "organization" : "Statistics Estonia",
+          "address" : "Tallinn, Estonia"},
+        "url" : "https://andmed.stat.ee/api/[version]/[lang]/stat",
+        "version": ["v1"], 
+        "lang": ["en", "et"],
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000000
     }
   },
-  
     
   "local_apis": {}
 
