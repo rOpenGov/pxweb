@@ -20,8 +20,7 @@ is.pxweb(x)
 \item{...}{further arguments supplied to \code{print()}.}
 }
 \value{
-A \code{pxweb} object with slots:
-FIX!
+A \code{pxweb} object.
 }
 \description{
 The pxwebapi object contain all information to do calls to the pxweb api and keep count 
@@ -36,8 +35,10 @@ The config has been captured from the API
 The url has been checked to be a pxweb api (through config)
 }
 \examples{
+\dontrun{
 pxapi_1 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
 pxapi_2 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv")
+}
 
 }
 \keyword{internal}

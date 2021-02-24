@@ -45,11 +45,11 @@ in case of url.
 print out a bar for separation purposes
 }
 \examples{
-\dontrun{
- x <- pxweb_explorer()
- x <- pxweb_explorer(x = "api.scb.se")
- x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
- x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
-}
+## The functions below are internal generic functions
+## x <- pxweb_explorer()
+## x <- pxweb_explorer(x = "api.scb.se")
+## x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+## x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+
 }
 \keyword{internal}

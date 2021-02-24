@@ -82,7 +82,7 @@ is_pxweb_config_response <- function(x){
 #' @examples 
 #' \dontrun{
 #'   r <- httr::GET("http://httpbin.org/redirect/2")
-#'   http_was_redirected(r)
+#'   pxweb:::http_was_redirected(r)
 #' }
 #' @keywords internal
 http_was_redirected <- function(r){

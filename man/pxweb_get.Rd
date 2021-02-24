@@ -17,6 +17,7 @@ pxweb_get(url, query = NULL, verbose = TRUE)
 Do a GET call to PXWEB API
 }
 \examples{
+\dontrun{
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 px_meta_data <- pxweb_get(url)
 
@@ -45,8 +46,6 @@ jstat <- query <- file.path(system.file(package = "pxweb"),
                             "extdata", "examples", "json-stat_query_example.json")
 jstat_data <- pxweb_get(url = url, query = query)
 
-
-\dontrun{
 # Get very large datasets (multiple downloads needed)
 big_query <- file.path(system.file(package = "pxweb"), 
                        "extdata", "examples", "json_big_query_example.json")

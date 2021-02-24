@@ -15,12 +15,13 @@
 #' @export
 #' @examples
 #' pxweb_api_catalogue() # List apis
-#' \dontrun{
-#'  x <- pxweb_interactive()
-#'  x <- pxweb_interactive(x = "api.scb.se")
-#'  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
-#'  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
-#' }
+#' 
+#' ## The examples below can only be run in interactive mode
+#' ##  x <- pxweb_interactive()
+#' ##  x <- pxweb_interactive(x = "api.scb.se")
+#' ##  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+#' ##  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+#' 
 pxweb_interactive <- function(x = NULL){
   # Setup structure
   pxe <- pxweb_explorer(x)
@@ -71,12 +72,12 @@ interactive_pxweb <-function(x = NULL){
 #' in case of url.
 #' 
 #' @examples 
-#' \dontrun{
-#'  x <- pxweb_explorer()
-#'  x <- pxweb_explorer(x = "api.scb.se")
-#'  x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
-#'  x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
-#' }
+#' ## The functions below are internal generic functions
+#' ## x <- pxweb_explorer()
+#' ## x <- pxweb_explorer(x = "api.scb.se")
+#' ## x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+#' ## x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+#' 
 #' @keywords internal
 pxweb_explorer <- function(x = NULL){
   UseMethod("pxweb_explorer")

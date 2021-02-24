@@ -5,6 +5,7 @@
 #' @param verbose should large queries print out progress.
 #' 
 #' @examples 
+#' \dontrun{
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' px_meta_data <- pxweb_get(url)
 #' 
@@ -33,8 +34,6 @@
 #'                             "extdata", "examples", "json-stat_query_example.json")
 #' jstat_data <- pxweb_get(url = url, query = query)
 #' 
-#' 
-#' \dontrun{
 #' # Get very large datasets (multiple downloads needed)
 #' big_query <- file.path(system.file(package = "pxweb"), 
 #'                        "extdata", "examples", "json_big_query_example.json")
@@ -58,10 +57,12 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE){
 #' @inheritParams pxweb_as_data_frame
 #' 
 #' @examples 
+#' \dontrun{
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' query <- file.path(system.file(package = "pxweb"), 
 #'                    "extdata", "examples", "json_query_example.json")
 #' df <- pxweb_get_data(url = url, query = query)
+#' }
 #' 
 #' @export
 pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text", variable.value.type = "text"){

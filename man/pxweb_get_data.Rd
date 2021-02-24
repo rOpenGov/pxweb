@@ -31,10 +31,12 @@ The functions use will do a \code{pxweb_query} to a PXWEB \code{url} and return 
 This is a wrapper for the \code{pxweb_get} function.
 }
 \examples{
+\dontrun{
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 query <- file.path(system.file(package = "pxweb"), 
                    "extdata", "examples", "json_query_example.json")
 df <- pxweb_get_data(url = url, query = query)
+}
 
 }
 \seealso{

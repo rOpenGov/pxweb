@@ -11,7 +11,7 @@ test_that(desc="Mixed node levels object",{
   expect_true(all(res$checked))
   # expect_true(all(!res$error)) # FIXME this also fails
   
-  url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
+  url <- "https://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
   tryr <- try(httr::GET(url), silent = TRUE)
   if(!inherits(tryr, "try-error")){
     expect_output(res <- suppressWarnings(pxweb_test_api(url, test_type = "touch")), regexp = "Table touched")
