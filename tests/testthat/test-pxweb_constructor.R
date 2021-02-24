@@ -53,7 +53,7 @@ test_that(desc="Cache cleaner and print",{
   skip_on_cran()
 
   expect_silent(pxapi1 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
-  expect_silent(pxapi2 <- pxweb("http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/tym/tyonv/statfin_tyonv_pxt_001.px"))
+  expect_silent(pxapi2 <- pxweb("https://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/tym/tyonv/statfin_tyonv_pxt_001.px"))
   expect_true(file.exists(pxapi1$paths$rda_file_path))
   expect_silent(pxweb:::pxweb_clear_cache())
   expect_false(file.exists(pxapi1$paths$rda_file_path))

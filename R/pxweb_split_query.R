@@ -23,8 +23,9 @@ pxweb_split_query <- function(pxq, px, pxmd){
   pxqd <- pxweb_query_dim(pxq)
   # Get variables that can be split
   pxqds <- pxweb_query_dim_splittable(pxq, pxmd)
-  mxv <- px$config$max_values_to_download
   
+  mxv <- px$config$max_values_to_download
+
   # If able to download in one batch
   if(prod(pxqd) <= mxv) return(list(pxq))
   
