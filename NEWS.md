@@ -1,3 +1,8 @@
+# Version 0.10.4
+
+- Bug fixes
+- More informative error messages
+
 # Version 0.9.2
 
 - Added API link to Visit Finland (Rudolf)
