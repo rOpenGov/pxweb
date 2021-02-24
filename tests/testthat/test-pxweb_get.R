@@ -256,3 +256,20 @@ test_that(desc="return clear error message when missing values",{
 })  
 
 
+
+test_that(desc="Query with non-ascii characters work as well",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
+  pxweb_query_list <-
+    list("KOHEZIJSKA REGIJA"=c("0"),
+         "DRŽAVA ROJSTVA"=c("0"),
+         "SPOL"=c("0"),
+         "ČETRTLETJE"=c("2008Q1","2020Q3"),
+         "MERITVE"=c("2000"))
+
+  expect_silent(px_data <-
+    pxweb_get(url = "https://pxweb.stat.si:443/SiStatData/api/v1/en/Data/0762002S.px",
+              query = pxweb_query_list))
+
+})  
