@@ -50,7 +50,7 @@ be set as follows:
     library(remotes)
     library(httr)
     set_config(
-      use_proxy(url="organizationProxyURL", port=1234)
+      use_proxy("64.251.21.73", 8080) # Note! This is an example
     )
     remotes::install_github('ropengov/pxweb')
 
