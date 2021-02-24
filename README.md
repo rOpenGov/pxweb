@@ -18,8 +18,8 @@ GitHub](https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social)](ht
 
 <br>
 
-PC Axis R tools: pxweb package
-==============================
+R tools to access PX-WEB API - the pxweb R package
+==================================================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
