@@ -30,6 +30,7 @@ pxweb_split_query <- function(pxq, px, pxmd){
   if(prod(pxqd) <= mxv) return(list(pxq))
   
   # Search through optimal combination
+  assert_query_can_be_split_to_batches(pxq, pxmd, mxv)
   comb <- generate_permutations(which(pxqds))
   no_comb <- matrix(which(!pxqds), nrow = nrow(comb), ncol = sum(!pxqds), byrow = TRUE)
   comb <- cbind(comb, no_comb)
@@ -74,6 +75,8 @@ pxweb_split_query <- function(pxq, px, pxmd){
   }
   pxq_list
 }
+
+
 
 
 #' Get vector indicating splittable variables
@@ -131,7 +134,7 @@ split_dimensions_left_right <- function(x, bool, max_size){
     prod_value <- batch_size/max_size
     if(prod_value > 1){
       if(i == 1) {
-        stop("\nToo large query. \nVariable(s) '", paste(names(x[!bool]), collapse = "', '"), "' cannot be split into batches (eliminate is set to FALSE by the API). \nThe smallest batch size is ", batch_size," and the maximum number of values that can be downloaded through the API is ", mxv, ". \nFor details and workarounds, see:\nhttps://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md", call. = FALSE)
+        stop("\nToo large query. \nVariable(s) '", paste(names(x[!bool]), collapse = "', '"), "' cannot be split into batches (eliminate is set to FALSE by the API). \nThe smallest batch size is ", batch_size," and the maximum number of values that can be downloaded through the API is ", max_size, ". \nFor details and workarounds, see:\nhttps://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md", call. = FALSE)
       }
       for(j in 1:call_dims[i]){
         if(prod(call_dims[1:(i-1)]) * j > max_size) break
@@ -234,4 +237,17 @@ permutations <- function (n, r, v = 1:n, set = TRUE, repeats.allowed = FALSE)
     }
   }
   sub(n, r, v[1:n])
+}
+
+
+#' Assert that a given pxweb query can be split
+#' 
+#' @param pxq a [pxweb_query] object
+#' @param pxmd a [pxweb_metadata] object
+#' @param mxv maximum batch size
+assert_query_can_be_split_to_batches <- function(pxq, pxmd, mxv){
+  pxqd <- pxweb_query_dim(pxq)
+  pxqds <- pxweb_query_dim_splittable(pxq, pxmd)
+  if(all(!pxqds)) stop("\nToo large query. \nNo Variable(s) can be split into batches (eliminate is set to FALSE by the API). \nThe smallest batch size is ", prod(pxqd)," and the maximum number of values that can be downloaded through the API is ", mxv, ". \nFor details and workarounds, see:\nhttps://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md", call. = FALSE)
+  
 }

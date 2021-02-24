@@ -44,28 +44,34 @@ sometimes compromised. Issue reports are welcome.
 
 The easiest way to use pxweb is to simply install it from CRAN:
 
-```r
+```{r, eval=FALSE}
 install.packages('pxweb')
 ```
 
+
 Alternatively, you can get the latest stable development version:
 
-```r
-library(devtools)
-install_github('ropengov/pxweb')
+```{r, results='hide', message=FALSE}
+library(remotes)
+remotes::install_github('ropengov/pxweb')
 ```
 
 In some cases, the organization requires manual proxy settings. This can be set as follows:
 
-```r
-library(devtools)
+```{r, results='hide', message=FALSE}
+library(remotes)
 library(httr)
 set_config(
-  use_proxy(url="organizationProxyURL", port=1234)
+  use_proxy("64.251.21.73", 8080) # Note! This is an example
 )
-install_github('ropengov/pxweb')
+remotes::install_github('ropengov/pxweb')
 ```
- 
+
+```{r, results='hide', echo=FALSE}
+# This resets the config when the README is tested
+reset_config()
+```
+
 ## Using the package
 
 For examples, check the [tutorial/vignette](https://htmlpreview.github.io/?https://github.com/rOpenGov/pxweb/blob/test/vignettes/pxweb.html).  
@@ -82,7 +88,6 @@ You are welcome to contact us:
 
 
 ### Acknowledgements
-
 
 **Kindly cite this work** as follows: [Måns Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and [Leo Lahti](https://github.com/antagomir). Retrieval and analysis of PC Axis data with the pxweb package. R package version `r sessionInfo()$otherPkgs$pxweb$Version`. URL: [http://ropengov.github.io/pxweb](http://ropengov.github.io/pxweb)
 

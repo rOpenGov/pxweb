@@ -24,9 +24,9 @@
         "url" : "https://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","fi","sv"],
-        "calls_per_period": 30,
+        "calls_per_period": 20,
         "period_in_seconds": 10,
-        "max_values_to_download" : 150000
+        "max_values_to_download" : 100000
               },
   
     "pxwebapi2.stat.fi": {
@@ -37,7 +37,7 @@
         "url" : "https://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
-        "calls_per_period": 30,
+        "calls_per_period": 1000,
         "period_in_seconds": 10,
         "max_values_to_download" : 110000
               },
@@ -107,8 +107,8 @@
         "url" : "http://statdb.luke.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","fi","sv"],
-        "calls_per_period": 30,
-        "period_in_seconds": 1,
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
         "max_values_to_download" : 10000
               },
               
@@ -123,7 +123,7 @@
         "lang": ["en","fi","sv"],
         "calls_per_period":     100,
         "period_in_seconds":     10,
-        "max_values_to_download":  1000 
+        "max_values_to_download":  150000 
               },
               
     "px.hagstofa.is": {
@@ -177,9 +177,9 @@
         "url" : "https://bank.stat.gl/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","kl","da"],
-        "calls_per_period": 30,
-        "period_in_seconds": 1,
-        "max_values_to_download" : 10000
+        "calls_per_period": 10000,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000000
               },
 
     "px.rsv.is": {
@@ -261,9 +261,9 @@
       "url" : "http://data.stat.gov.lv/api/[version]/[lang]/",
       "version": ["v1"], 
       "lang": ["en", "lv"],
-      "calls_per_period": 4000,
-      "period_in_seconds": 300,
-      "max_values_to_download" : 30000
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
     },
     
     "data.csb.gov.lv": {
@@ -289,9 +289,9 @@
       "url" : "https://statbank.statistica.md/pxweb/api/[version]/[lang]/",
       "version": ["v1"], 
       "lang": ["en", "ro"],
-      "calls_per_period": 30,
-      "period_in_seconds": 1,
-      "max_values_to_download" : 10000
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
     },
     
     "www.pxweb.bfs.admin.ch": {
@@ -399,7 +399,7 @@
         "url" : "https://andmed.stat.ee/api/[version]/[lang]/stat",
         "version": ["v1"], 
         "lang": ["en", "et"],
-        "calls_per_period": 10,
+        "calls_per_period": 1000,
         "period_in_seconds": 10,
         "max_values_to_download" : 1000000
     }

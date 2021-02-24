@@ -1,7 +1,7 @@
 Package: pxweb
 Type: Package
 Title: R Interface to PXWEB APIs
-Version: 0.10.3.1
+Version: 0.10.4
 Date: 2021-02-23
 Encoding: UTF-8
 Authors@R: c(
@@ -37,5 +37,6 @@ Imports:
 License: BSD_2_clause + file LICENSE
 Suggests:
     knitr,
-    testthat (>= 0.11)
+    testthat (>= 0.11),
+    remotes
 RoxygenNote: 7.1.1

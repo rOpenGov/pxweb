@@ -18,7 +18,8 @@ GitHub](https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social)](ht
 
 <br>
 
-# PC Axis R tools: pxweb package
+PC Axis R tools: pxweb package
+==============================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -31,7 +32,8 @@ the PXWEB API.
 Many API services are still in their early stages, and data quality is
 sometimes compromised. Issue reports are welcome.
 
-## Installation
+Installation
+------------
 
 The easiest way to use pxweb is to simply install it from CRAN:
 
@@ -48,16 +50,18 @@ be set as follows:
     library(remotes)
     library(httr)
     set_config(
-      use_proxy(url="organizationProxyURL", port=1234)
+      use_proxy("64.251.21.73", 8080) # Note! This is an example
     )
     remotes::install_github('ropengov/pxweb')
 
-## Using the package
+Using the package
+-----------------
 
 For examples, check the
 [tutorial/vignette](https://htmlpreview.github.io/?https://github.com/rOpenGov/pxweb/blob/test/vignettes/pxweb.html).
 
-# Contributing
+Contributing
+============
 
 You are welcome to contact us:
 
