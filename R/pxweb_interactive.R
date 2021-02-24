@@ -74,9 +74,12 @@ interactive_pxweb <-function(x = NULL){
 #' @examples 
 #' ## The functions below are internal generic functions
 #' ## x <- pxweb_explorer()
-#' ## x <- pxweb_explorer(x = "api.scb.se")
-#' ## x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
-#' ## x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+#' ## url <- "api.scb.se"
+#' ## x <- pxweb_explorer(x = url)
+#' ## url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/"
+#' ## x <- pxweb_explorer(x = url)
+#' ## url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+#' ## x <- pxweb_explorer(x = url)
 #' 
 #' @keywords internal
 pxweb_explorer <- function(x = NULL){
