@@ -96,6 +96,7 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
   px <- pxweb(url)
   if(!is.null(query)){
     pxq <- pxweb_query(query)
+    pxq <- pxweb_add_mandatory_variables(url, pxq)
     if(is.null(pxmdo)){
       pxmd <- pxweb_get(px)
     } else {
@@ -208,5 +209,37 @@ pxweb_metadata_add_null_values <- function(x, px){
 
 pxweb_user_agent <- function(){
   httr::user_agent("https://github.com/rOpenGov/pxweb")
+}
+
+#' Add mandatory variables to query
+#' 
+#' @details 
+#' Complement queries that lack explicit requests for variables with requests for every value of these variables.
+#' 
+#' @param url a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.
+#' @param pxq a \code{pxweb} object
+#' 
+#' @keywords internal
+pxweb_add_mandatory_variables <- function(url, pxq) {  
+  checkmate::assert_class(pxq, "pxweb_query")
+  px <- pxweb(url)
+  metadata <- pxweb_get(px)
+  mandatory_variables <- vapply(metadata$variables, function(x) x$code, character(1))
+  provided_variables <- vapply(pxq$query, function(x) x$code, character(1))
+  missing_mandatory_variables <- setdiff(mandatory_variables, provided_variables)
+
+  if (length(missing_mandatory_variables) > 0) {
+    select_everything_template <- function(x) {
+      list(code = x,
+          selection = list(filter = "all",
+                            values = "*"))
+    }
+    
+    query_appendix <- lapply(missing_mandatory_variables, select_everything_template)
+    pxq$query <- append(pxq$query, query_appendix)
+    message(sprintf("Mandatory variables %s missing, all elements requested.", 
+                    paste(missing_mandatory_variables, collapse = ", ")))
+  } 
+  return(pxq)
 }
 
