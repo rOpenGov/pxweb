@@ -20,12 +20,12 @@ pxweb_advanced_get(
 
 \item{verbose}{should large queries print out progress.}
 
-\item{log_http_calls}{Should the http calls to the API be logged (for debugging reasons). 
+\item{log_http_calls}{Should the http calls to the API be logged (for debugging reasons).
 If TRUE, all calls and responses are logged and written to "log_pxweb_api_http_calls.txt" in the working directory.}
 
 \item{pxmdo}{A \code{pxweb_metadata} object to use for query.}
 
-\item{...}{Further arguments sent to \code{httr::POST} (for queries) or \code{httr::GET} (for query = \code{NULL}). 
+\item{...}{Further arguments sent to \code{httr::POST} (for queries) or \code{httr::GET} (for query = \code{NULL}).
 If used with query, also supply a \code{pxweb_metadata} object. Otherwise the same parameters are sent to
 both \code{httr::POST} and \code{httr::GET}.}
 }
@@ -34,7 +34,7 @@ Do a GET call to PXWEB API for advanced users
 }
 \details{
 This function is intended for more advanced users that want to supply specific arguments in
-\code{httr} calls or what to debug \code{httr} calls. 
+\code{httr} calls or what to debug \code{httr} calls.
 
 \code{pxweb_get()} is a wrapper for standard use.
 }
