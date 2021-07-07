@@ -48,7 +48,7 @@
         "citation" : {
           "organization" : "Swedish Board of Agriculture",
           "address" : "Jönköping, Sweden"},        
-        "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]",
+        "url" : "https://statistik.sjv.se/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["sv"],
         "calls_per_period": 1000,
@@ -79,9 +79,9 @@
         "url" : "http://statistik.konj.se/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en", "sv"],
-        "calls_per_period": 30,
-        "period_in_seconds": 1,
-        "max_values_to_download" : 10000
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000
               },
  
     "prognos.konj.se": {
@@ -205,8 +205,8 @@
         "url" : "https://statbank.hagstova.fo:443/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","fo"],
-        "calls_per_period": 9999999,
-        "period_in_seconds": 99999,
+        "calls_per_period": 1000000,
+        "period_in_seconds": 1000000,
         "max_values_to_download" : 100000
     },
     
@@ -258,7 +258,7 @@
       "citation" : {
           "organization" : "Statistics Latvia",
           "address" : "Riga, Latvia"},
-      "url" : "http://data.stat.gov.lv/api/[version]/[lang]/",
+      "url" : "https://data.stat.gov.lv/api/[version]/[lang]/",
       "version": ["v1"], 
       "lang": ["en", "lv"],
       "calls_per_period": 100,
