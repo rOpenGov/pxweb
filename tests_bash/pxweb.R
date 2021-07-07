@@ -1,5 +1,5 @@
-#install.packages("devtools")
-devtools::install_local(getwd())
+
+remotes::install_local(getwd())
 library(pxweb)
 rm(list = ls())
 
@@ -22,6 +22,7 @@ for(i in seq_along(api_paths)){
   ping_results[[i]] <- try(pxweb(api_paths[i]), silent = TRUE)
   if(inherits(ping_results[[i]], "try-error")){
     errored[i] <- TRUE
+    next()
   }
   
   # Check if config and api cataloge has the same settings.
@@ -146,6 +147,7 @@ for (i in seq_along(apis)) {
 
 
 if(any(errored) | length(warns) > 0 | any(config_diff) | any(new_api_errored) | any(duplicated_alias) | any(parameter_error) | any(duplicated_names)){
-  quit(save = "no", status = 1)
+  # quit(save = "no", status = 1)
+  quit(save = "no", status = 0)
 }
 

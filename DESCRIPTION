@@ -1,8 +1,8 @@
 Package: pxweb
 Type: Package
 Title: R Interface to PXWEB APIs
-Version: 0.10.4
-Date: 2021-02-23
+Version: 0.11.0
+Date: 2021-07-07
 Encoding: UTF-8
 Authors@R: c(
   person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),
@@ -29,7 +29,7 @@ VignetteBuilder: knitr
 URL: https://github.com/rOpenGov/pxweb/
 BugReports: https://github.com/rOpenGov/pxweb/issues
 Depends:
-    R (>= 3.2)
+    R (>= 3.5.0)
 Imports:
     checkmate,
     httr (>= 1.1),

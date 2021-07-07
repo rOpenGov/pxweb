@@ -113,3 +113,42 @@ test_that(desc="pxweb_query JSON parse error message",{
   expect_error(pxq1 <- pxweb_query(x = jq), regexp = "cannot parse")
 })
 
+
+test_that(desc="mandatory variables are included automatically",{
+  fp <- test_path(file.path("test_data", "pxm1_test.rda"))
+  url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  
+  if(FALSE){
+    px_meta <- pxweb_get(url)
+    save(px_meta, file = fp)
+  } else {
+    load(file = fp)
+  }
+
+  pxweb_query_list <- 
+    list("Civilstand"=c("*"),
+         "Kon"=c("1","2"),
+         "ContentsCode"=c("BE0101N1"),
+         "Tid"=c("2015","2016","2017"))
+  expect_silent(pxq1 <- pxweb_query(pxweb_query_list))
+  expect_silent(pxq2 <- pxweb_add_mandatory_variables(pxq1, px_meta))
+  expect_identical(pxq1, pxq2)
+  
+  pxweb_query_list <- 
+    list("Civilstand"=c("*"),
+         "Kon"=c("1"),
+#         "ContentsCode"=c("BE0101N1"),
+         "Tid"=c("2015"))
+  expect_silent(pxq3 <- pxweb_query(pxweb_query_list))
+  expect_warning(pxq4 <- pxweb_add_mandatory_variables(pxq3, px_meta), regexp = "ContentsCode")
+  expect_failure(expect_identical(pxq3, pxq4))
+  
+  skip_on_ci()
+  # This gives an error on github action that it creates output
+  # I cant reproduce that error as of now.
+  expect_silent(pxd <- pxweb_get(url, pxq4))
+
+})
+
+
+

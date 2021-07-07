@@ -120,41 +120,6 @@ test_that(desc="Test http logger",{
   expect_true(file.size(file.path(getwd(), "log_pxweb_api_http_calls.txt")) > 5000)
 })  
 
-
-test_that(desc="No value bug",{
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  
-  url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
-  expect_silent(px <- pxweb_get(url))
-  # pxweb_interactive(url)
-  pxweb_query_list <- 
-    list("HS-Number" = c("06012031"),
-         "Country"=c("AF"),
-         "Month"=c("2020M01"),
-         "Unit"=c("kg"))
-  
-  expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
-  expect_silent(df <- as.data.frame(x = px_data))
-  expect_equal(nrow(df), 1)
-  
-  pxweb_query_list <- 
-    list("Country"=c("AF"),
-         "Month"=c("2016M01"),
-         "Unit"=c("kg"))
-  #  Error: Not all mandatory variables are included in the query. 
-  expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
-  
-  pxweb_query_list <- 
-    list("HS-Number" = "*",
-         "Country"=c("AF"),
-         "Month"=c("2020M01"),
-         "Unit"=c("kg"))
-  
-  expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
-})  
-
-
 test_that(desc="large variable call",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
@@ -251,8 +216,31 @@ test_that(desc="return clear error message when missing values",{
   pql <- list("Tilltalsnamn"=c("20Agnes"),
               "Tid"=c("2019"))
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0001/BE0001D/BE0001T05AR"
-  expect_error(pd <- pxweb_get(url, query = pql), regexp = "ContentsCode")
+  expect_warning(pd <- pxweb_get(url, query = pql), regexp = "ContentsCode")
   
 })  
 
 
+
+test_that(desc="Query with non-ascii characters work as well",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
+  pxweb_query_list <-
+    list("KOHEZIJSKA REGIJA"=c("0"),
+#         "DRŽAVA ROJSTVA"=c("0"),
+         "SPOL"=c("0"),
+#         "ČETRTLETJE"=c("2008Q1","2020Q3"),
+         "MERITVE"=c("2000"))
+  
+  # Explicit encoding of ČETRTLETJE
+  fixed.name <- paste("\U010C", "ETRTLETJE", sep = "")
+  years <- c("2008Q1","2008Q2","2008Q3","2008Q4","2009Q1","2009Q2","2009Q3","2009Q4","2010Q1","2010Q2","2010Q3" ,"2010Q4","2011Q1","2011Q2","2011Q3","2011Q4","2012Q1","2012Q2","2012Q3","2012Q4","2013Q1","2013Q2","2013Q3","2013Q4","2014Q1","2014Q2","2014Q3","2014Q4","2015Q1","2015Q2","2015Q3","2015Q4","2016Q1","2016Q2","2016Q3","2016Q4","2017Q1","2017Q2","2017Q3","2017Q4","2018Q1","2018Q2","2018Q3","2018Q4","2019Q1","2019Q2","2019Q3","2019Q4","2020Q1","2020Q2","2020Q3")
+  pxweb_query_list[[fixed.name]] <- years
+  
+  expect_silent(px_data <-
+    pxd <- pxweb_get(url = "https://pxweb.stat.si:443/SiStatData/api/v1/en/Data/0762002S.px",
+              query = pxweb_query_list)
+  )
+
+})  
