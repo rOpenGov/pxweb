@@ -37,6 +37,7 @@ Imports:
 License: BSD_2_clause + file LICENSE
 Suggests:
     knitr,
-    testthat (>= 0.11),
-    remotes
+    remotes,
+    rmarkdown,
+    testthat (>= 0.11)
 RoxygenNote: 7.1.1

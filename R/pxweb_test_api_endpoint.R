@@ -25,7 +25,7 @@
 #' 
 #' @examples 
 #' \dontrun{
-#'   url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
+#'   url <- "https://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
 #'   res <- pxweb_test_api(url)
 #'   res <- pxweb_test_api(url, test_type="touch")
 #' }

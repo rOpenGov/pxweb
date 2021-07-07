@@ -23,12 +23,13 @@ Wrapper function (for \link{pxweb_get}) to simply find and download data to the 
 }
 \examples{
 pxweb_api_catalogue() # List apis
-\dontrun{
- x <- pxweb_interactive()
- x <- pxweb_interactive(x = "api.scb.se")
- x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
- x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
-}
+
+## The examples below can only be run in interactive mode
+##  x <- pxweb_interactive()
+##  x <- pxweb_interactive(x = "api.scb.se")
+##  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+##  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+
 }
 \seealso{
 \code{\link{pxweb_get}}

@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,7 +41,6 @@
 
 <meta property="og:title" content="Do a GET call to PXWEB API — pxweb_get" />
 <meta property="og:description" content="Do a GET call to PXWEB API" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -55,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -69,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pxweb</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.4</span>
       </span>
     </div>
 
@@ -93,7 +96,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/rOpenGov/pxweb">
+  <a href="https://github.com/rOpenGov/pxweb/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -120,7 +123,7 @@
     <p>Do a GET call to PXWEB API</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pxweb_get</span>(<span class='no'>url</span>, <span class='kw'>query</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>pxweb_get</span><span class='op'>(</span><span class='va'>url</span>, query <span class='op'>=</span> <span class='cn'>NULL</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,32 +144,35 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>url</span> <span class='kw'>&lt;-</span> <span class='st'>"http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>
-<span class='no'>px_meta_data</span> <span class='kw'>&lt;-</span> <span class='fu'>pxweb_get</span>(<span class='no'>url</span>)
+    <pre class="examples"><div class='input'><span class='va'>url</span> <span class='op'>&lt;-</span> <span class='st'>"http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>
+<span class='va'>px_meta_data</span> <span class='op'>&lt;-</span> <span class='fu'>pxweb_get</span><span class='op'>(</span><span class='va'>url</span><span class='op'>)</span>
 
-<span class='no'>url</span> <span class='kw'>&lt;-</span> <span class='st'>"http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101"</span>
-<span class='no'>px_levels</span> <span class='kw'>&lt;-</span> <span class='fu'>pxweb_get</span>(<span class='no'>url</span>)
+<span class='va'>url</span> <span class='op'>&lt;-</span> <span class='st'>"http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101"</span>
+<span class='va'>px_levels</span> <span class='op'>&lt;-</span> <span class='fu'>pxweb_get</span><span class='op'>(</span><span class='va'>url</span><span class='op'>)</span>
 
-<span class='no'>url</span> <span class='kw'>&lt;-</span> <span class='st'>"http://api.scb.se/OV0104/v1/doris/sv"</span>
-<span class='no'>px_levels</span> <span class='kw'>&lt;-</span> <span class='fu'>pxweb_get</span>(<span class='no'>url</span>)
+<span class='va'>url</span> <span class='op'>&lt;-</span> <span class='st'>"http://api.scb.se/OV0104/v1/doris/sv"</span>
+<span class='va'>px_levels</span> <span class='op'>&lt;-</span> <span class='fu'>pxweb_get</span><span class='op'>(</span><span class='va'>url</span><span class='op'>)</span>
 
-<span class='no'>url</span> <span class='kw'>&lt;-</span> <span class='st'>"http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>
-<span class='no'>query</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"pxweb"</span>),
-                   <span class='st'>"extdata"</span>, <span class='st'>"examples"</span>, <span class='st'>"json_query_example.json"</span>)
-<span class='no'>px_data</span> <span class='kw'>&lt;-</span> <span class='fu'>pxweb_get</span>(<span class='kw'>url</span> <span class='kw'>=</span> <span class='no'>url</span>, <span class='kw'>query</span> <span class='kw'>=</span> <span class='no'>query</span>)
+<span class='va'>url</span> <span class='op'>&lt;-</span> <span class='st'>"http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>
+<span class='va'>query</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span>package <span class='op'>=</span> <span class='st'>"pxweb"</span><span class='op'>)</span>, 
+                   <span class='st'>"extdata"</span>, <span class='st'>"examples"</span>, <span class='st'>"json_query_example.json"</span><span class='op'>)</span>
+<span class='va'>px_data</span> <span class='op'>&lt;-</span> <span class='fu'>pxweb_get</span><span class='op'>(</span>url <span class='op'>=</span> <span class='va'>url</span>, query <span class='op'>=</span> <span class='va'>query</span><span class='op'>)</span>
 
 <span class='co'># Convert to data.frame</span>
-<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>px_data</span>, <span class='kw'>column.name.type</span> <span class='kw'>=</span> <span class='st'>"text"</span>, <span class='kw'>variable.value.type</span> <span class='kw'>=</span> <span class='st'>"text"</span>)</div><div class='output co'>#&gt;     år Folkmängd Folkökning
+<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>px_data</span>, column.name.type <span class='op'>=</span> <span class='st'>"text"</span>, variable.value.type <span class='op'>=</span> <span class='st'>"text"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;     år Folkmängd Folkökning
 #&gt; 1 2010   9415570      74888
 #&gt; 2 2011   9482855      67285
 #&gt; 3 2012   9555893      73038</div><div class='input'>
 <span class='co'># Get raw data</span>
-<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>px_data</span>, <span class='kw'>column.name.type</span> <span class='kw'>=</span> <span class='st'>"code"</span>, <span class='kw'>variable.value.type</span> <span class='kw'>=</span> <span class='st'>"code"</span>)</div><div class='output co'>#&gt;      Tid    BE0101N1  BE0101N2
+<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>px_data</span>, column.name.type <span class='op'>=</span> <span class='st'>"code"</span>, variable.value.type <span class='op'>=</span> <span class='st'>"code"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      Tid    BE0101N1  BE0101N2
 #&gt; [1,] "2010" "9415570" "74888" 
 #&gt; [2,] "2011" "9482855" "67285" 
 #&gt; [3,] "2012" "9555893" "73038" </div><div class='input'>
 <span class='co'># Get data comments</span>
-<span class='fu'><a href='pxweb_data_comments.html'>pxweb_data_comments</a></span>(<span class='no'>px_data</span>)</div><div class='output co'>#&gt; PXWEB DATA COMMENTS
+<span class='fu'><a href='pxweb_data_comments.html'>pxweb_data_comments</a></span><span class='op'>(</span><span class='va'>px_data</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; PXWEB DATA COMMENTS
 #&gt; $pxweb_data_comments[[1]]
 #&gt; column_comment (Folkmängd [BE0101N1], ):
 #&gt;   Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter.
@@ -176,25 +182,24 @@
 #&gt;   Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut.
 #&gt; </div><div class='input'>
 <span class='co'># Get jsonstat data</span>
-<span class='no'>jstat</span> <span class='kw'>&lt;-</span> <span class='no'>query</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"pxweb"</span>),
-                            <span class='st'>"extdata"</span>, <span class='st'>"examples"</span>, <span class='st'>"json-stat_query_example.json"</span>)
-<span class='no'>jstat_data</span> <span class='kw'>&lt;-</span> <span class='fu'>pxweb_get</span>(<span class='kw'>url</span> <span class='kw'>=</span> <span class='no'>url</span>, <span class='kw'>query</span> <span class='kw'>=</span> <span class='no'>query</span>)
+<span class='va'>jstat</span> <span class='op'>&lt;-</span> <span class='va'>query</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span>package <span class='op'>=</span> <span class='st'>"pxweb"</span><span class='op'>)</span>, 
+                            <span class='st'>"extdata"</span>, <span class='st'>"examples"</span>, <span class='st'>"json-stat_query_example.json"</span><span class='op'>)</span>
+<span class='va'>jstat_data</span> <span class='op'>&lt;-</span> <span class='fu'>pxweb_get</span><span class='op'>(</span>url <span class='op'>=</span> <span class='va'>url</span>, query <span class='op'>=</span> <span class='va'>query</span><span class='op'>)</span>
 
 
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Get very large datasets (multiple downloads needed)</span>
-<span class='no'>big_query</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"pxweb"</span>),
-                       <span class='st'>"extdata"</span>, <span class='st'>"examples"</span>, <span class='st'>"json_big_query_example.json"</span>)
-<span class='no'>px_data</span> <span class='kw'>&lt;-</span> <span class='fu'>pxweb_get</span>(<span class='kw'>url</span> <span class='kw'>=</span> <span class='no'>url</span>, <span class='kw'>query</span> <span class='kw'>=</span> <span class='no'>big_query</span>)
-}</div></pre>
+<span class='va'>big_query</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span>package <span class='op'>=</span> <span class='st'>"pxweb"</span><span class='op'>)</span>, 
+                       <span class='st'>"extdata"</span>, <span class='st'>"examples"</span>, <span class='st'>"json_big_query_example.json"</span><span class='op'>)</span>
+<span class='va'>px_data</span> <span class='op'>&lt;-</span> <span class='fu'>pxweb_get</span><span class='op'>(</span>url <span class='op'>=</span> <span class='va'>url</span>, query <span class='op'>=</span> <span class='va'>big_query</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -205,7 +210,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -18,7 +18,7 @@ http_was_redirected
 \examples{
 \dontrun{
   r <- httr::GET("http://httpbin.org/redirect/2")
-  http_was_redirected(r)
+  pxweb:::http_was_redirected(r)
 }
 }
 \references{

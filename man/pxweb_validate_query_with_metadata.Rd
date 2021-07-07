@@ -19,10 +19,12 @@ Validate a query with a metadata object to asses that the query can be used to
 query the table.
 }
 \examples{
+\dontrun{
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 json_query <- file.path(system.file(package = "pxweb"), 
                         "extdata", "examples", "json_query_example.json")
 pxq <- pxweb_query(json_query)
 pxweb_validate_query_with_metadata(pxq, pxweb_get(url))
+}
 
 }
