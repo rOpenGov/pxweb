@@ -120,41 +120,6 @@ test_that(desc="Test http logger",{
   expect_true(file.size(file.path(getwd(), "log_pxweb_api_http_calls.txt")) > 5000)
 })  
 
-
-test_that(desc="No value bug",{
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  
-  url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
-  expect_silent(px <- pxweb_get(url))
-  # pxweb_interactive(url)
-  pxweb_query_list <- 
-    list("HS-Number" = c("06012031"),
-         "Country"=c("AF"),
-         "Month"=c("2020M01"),
-         "Unit"=c("kg"))
-  
-  expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
-  expect_silent(df <- as.data.frame(x = px_data))
-  expect_equal(nrow(df), 1)
-  
-  pxweb_query_list <- 
-    list("Country"=c("AF"),
-         "Month"=c("2016M01"),
-         "Unit"=c("kg"))
-  #  Error: Not all mandatory variables are included in the query. 
-  expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
-  
-  pxweb_query_list <- 
-    list("HS-Number" = "*",
-         "Country"=c("AF"),
-         "Month"=c("2020M01"),
-         "Unit"=c("kg"))
-  
-  expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
-})  
-
-
 test_that(desc="large variable call",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
@@ -251,7 +216,7 @@ test_that(desc="return clear error message when missing values",{
   pql <- list("Tilltalsnamn"=c("20Agnes"),
               "Tid"=c("2019"))
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0001/BE0001D/BE0001T05AR"
-  expect_error(pd <- pxweb_get(url, query = pql), regexp = "ContentsCode")
+  expect_warning(pd <- pxweb_get(url, query = pql), regexp = "ContentsCode")
   
 })  
 
