@@ -31,7 +31,7 @@ The `pxweb` R package connects any PXWEB API to R and hence facilitate the acces
 [A number of organizations](https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/pxweb-examples/) use PXWEB to distribute hierarchical data. You can browse the available data sets at:
 
  * [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](https://pxnet2.stat.fi/API-description_SCB.pdf)
- * [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](https://pxnet2.stat.fi/api1.html)
+ * [Statistics Finland](https://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](https://pxnet2.stat.fi/api1.html)
  * [Other organizations using PX-WEB](https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/pxweb-examples/)
 
 ### About PXWEB APIs
