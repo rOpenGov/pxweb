@@ -29,7 +29,7 @@ VignetteBuilder: knitr
 URL: https://github.com/rOpenGov/pxweb/
 BugReports: https://github.com/rOpenGov/pxweb/issues
 Depends:
-    R (>= 3.2)
+    R (>= 3.5.0)
 Imports:
     checkmate,
     httr (>= 1.1),

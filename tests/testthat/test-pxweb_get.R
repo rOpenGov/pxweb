@@ -232,7 +232,12 @@ test_that(desc="Query with non-ascii characters work as well",{
          "SPOL"=c("0"),
          "ČETRTLETJE"=c("2008Q1","2020Q3"),
          "MERITVE"=c("2000"))
-
+  
+  # Explicit encoding of ČETRTLETJE
+  fixed.name <- paste("\U010C", "ETRTLETJE", sep = "")
+  years <- c("2008Q1","2008Q2","2008Q3","2008Q4","2009Q1","2009Q2","2009Q3","2009Q4","2010Q1","2010Q2","2010Q3" ,"2010Q4","2011Q1","2011Q2","2011Q3","2011Q4","2012Q1","2012Q2","2012Q3","2012Q4","2013Q1","2013Q2","2013Q3","2013Q4","2014Q1","2014Q2","2014Q3","2014Q4","2015Q1","2015Q2","2015Q3","2015Q4","2016Q1","2016Q2","2016Q3","2016Q4","2017Q1","2017Q2","2017Q3","2017Q4","2018Q1","2018Q2","2018Q3","2018Q4","2019Q1","2019Q2","2019Q3","2019Q4","2020Q1","2020Q2","2020Q3")
+  pxweb_query_list[[fixed.name]] <- years
+  
   expect_silent(px_data <-
     pxweb_get(url = "https://pxweb.stat.si:443/SiStatData/api/v1/en/Data/0762002S.px",
               query = pxweb_query_list))
