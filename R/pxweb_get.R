@@ -242,7 +242,7 @@ pxweb_add_mandatory_variables <- function(pxq, pxmd) {
     query_appendix <- lapply(missing_mandatory_variables, select_everything_template)
     pxq$query <- append(pxq$query, query_appendix)
     warning(sprintf("Missing mandatory variable(s): %s. \nAll values are requested in query.",
-                    paste(paste0("'", missing_mandatory_variables,"'"), collapse = ", ")))
+                    paste(paste0("'", missing_mandatory_variables,"'"), collapse = ", ")), call. = FALSE)
   }
   return(pxq)
 }
