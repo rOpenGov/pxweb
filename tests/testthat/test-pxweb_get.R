@@ -228,9 +228,9 @@ test_that(desc="Query with non-ascii characters work as well",{
   
   pxweb_query_list <-
     list("KOHEZIJSKA REGIJA"=c("0"),
-         "DRŽAVA ROJSTVA"=c("0"),
+#         "DRŽAVA ROJSTVA"=c("0"),
          "SPOL"=c("0"),
-         "ČETRTLETJE"=c("2008Q1","2020Q3"),
+#         "ČETRTLETJE"=c("2008Q1","2020Q3"),
          "MERITVE"=c("2000"))
   
   # Explicit encoding of ČETRTLETJE
@@ -239,7 +239,8 @@ test_that(desc="Query with non-ascii characters work as well",{
   pxweb_query_list[[fixed.name]] <- years
   
   expect_silent(px_data <-
-    pxweb_get(url = "https://pxweb.stat.si:443/SiStatData/api/v1/en/Data/0762002S.px",
-              query = pxweb_query_list))
+    pxd <- pxweb_get(url = "https://pxweb.stat.si:443/SiStatData/api/v1/en/Data/0762002S.px",
+              query = pxweb_query_list)
+  )
 
 })  
