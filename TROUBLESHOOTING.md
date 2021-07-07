@@ -1,5 +1,52 @@
 # Troubleshooting pxweb R package
 
+## Encoding errors on Windows
+
+### Date added: 
+2021-07-07
+
+### Versions
+This problem exist in pxweb version 0.10 +. This is only a problem on Windows.
+
+### Description
+On windows, some letters are not encoded correctly. For example, in R or Rstudio the UTF-8 coding is not preserved during assignment. For instance:
+```
+x <- "ČETRTLETJE"
+x
+[1] "CETRTLETJE"
+```
+This means that when a UTF-8 encoding is used in a query explicitly, the package will not find the variable name and hence will return something like:
+```
+Assertion on 'pxweb_query_variable_code' failed: Must be element of set {'KOHEZIJSKA REGIJA','DRŽAVA ROJSTVA','SPOL','CETRTLETJE','MERITVE'}, but is 'CETRTLETJE'.
+```
+
+### Workaround
+
+To fix this, explicitly referenced the offending character using the escape sequence as:
+
+```
+pxweb_query_list <- 
+  list("KOHEZIJSKA REGIJA"=c("0"),
+       "DRŽAVA ROJSTVA"=c("0"),
+       "SPOL"=c("0"),
+       "MERITVE"=c("2000"))
+       
+# Explicit encoding ČETRTLETJE
+fixed_name <- paste("\U010C", "ETRTLETJE", sep = "")
+years <- c("2008Q1","2008Q2")
+pxweb_query_list[[fixed_name]] <- years
+
+pxdata <- pxweb_get(url, pxweb_query_list)
+```
+To find the specific encoding for your special letter, see:
+https://www.fileformat.info/info/unicode/char/search.htm
+
+### More info
+https://github.com/rOpenGov/pxweb/issues/217
+
+
+
+
 ## Error: Too large query 
 
 ### Date added: 
