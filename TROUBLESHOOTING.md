@@ -46,6 +46,20 @@ https://github.com/rOpenGov/pxweb/issues/217
 
 
 
+## Error: Running pxweb in parallel
+
+### Date added: 
+2021-07-07
+
+### Versions
+This problem exist in pxweb version 0.8+.
+
+### Description
+Currently, the `pxweb` package is not thread-safe, and hence it is not safe to runt multiple `pxweb_get` functions in parallel or in different R sessions from the same computer/IP adress.
+
+### Workaround
+Don't run pxweb in paralell.
+
 
 ## Error: Too large query 
 

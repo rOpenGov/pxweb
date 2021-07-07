@@ -324,24 +324,22 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <div id="TOC">
 <ul>
-<li><a href="#table-of-contents">Table of contents</a></li>
-<li><a href="#introduction"><a name="introduction"></a>Introduction</a><ul>
+<li><a href="#introduction">Introduction</a><ul>
 <li><a href="#available-data-sources-and-tools">Available data sources and tools</a></li>
 <li><a href="#about-pxweb-apis">About PXWEB APIs</a></li>
 </ul></li>
-<li><a href="#installation"><a name="installation"></a>Installation</a><ul>
+<li><a href="#installation">Installation</a><ul>
 <li><a href="#installation-issues">Installation issues</a></li>
 </ul></li>
-<li><a href="#accessing-pxweb-from-r"><a name="usage"></a>Accessing PXWEB from R</a></li>
-<li><a href="#interactive-use"><a name="interactive"></a>Interactive use</a></li>
-<li><a href="#direct-use"><a name="direct"></a>Direct use</a><ul>
+<li><a href="#accessing-pxweb-from-r">Accessing PXWEB from R</a></li>
+<li><a href="#interactive-use">Interactive use</a></li>
+<li><a href="#direct-use">Direct use</a><ul>
 <li><a href="#creating-data-queries">Creating data queries</a></li>
 <li><a href="#downloading-data">Downloading data</a></li>
 <li><a href="#access-data-footnotescomments">Access data footnotes/comments</a></li>
 </ul></li>
-<li><a href="#citation">Citation</a><ul>
-<li><a href="#known-issues">Known issues</a></li>
-</ul></li>
+<li><a href="#citation">Citation</a></li>
+<li><a href="#known-issues-and-troubleshooting">Known issues and troubleshooting</a></li>
 <li><a href="#licensing">Licensing</a></li>
 <li><a href="#session-info">Session info</a></li>
 </ul>
@@ -349,14 +347,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <p>This R package provides tools to access <a href="https://pxnet2.stat.fi/API-description_SCB.pdf">PX-WEB API</a>. Your <a href="http://ropengov.org/community/">contributions</a> and <a href="https://github.com/ropengov/pxweb">bug reports and other feedback</a> are welcome!</p>
 <p>More information on the PX-Web/PC-Axis API can be found <a href="https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/">here</a>.</p>
-<div id="table-of-contents" class="section level2">
-<h2>Table of contents</h2>
-<p><a href="#introduction">Introduction</a> (Introduction)<br />
-<a href="#installation">Installation</a> (Installation)<br />
-<a href="#usage">Using the PXWEB R package</a> (Using PXWEB from R)</p>
-</div>
 <div id="introduction" class="section level2">
-<h2><a name="introduction"></a>Introduction</h2>
+<h2>Introduction</h2>
 <p>PXWEB is an API structure developed by Statistics Sweden together with other national statistical institutions (NSI) to disseminate public statistics in a structured way. This enables downloading and usage of data from statistical agencies without using a web browser direct over HTTP/HTTPS.</p>
 <p>The <code>pxweb</code> R package connects any PXWEB API to R and hence facilitate the access, use and referencing of data from PXWEB APIs.</p>
 <div id="available-data-sources-and-tools" class="section level3">
@@ -374,7 +366,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 </div>
 <div id="installation" class="section level2">
-<h2><a name="installation"></a>Installation</h2>
+<h2>Installation</h2>
 <p>To install the latest stable release version from CRAN, just use:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;pxweb&quot;</span>)</span></code></pre></div>
 <p>To install the latest stable release version from GitHub, just use:</p>
@@ -391,11 +383,11 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 </div>
 <div id="accessing-pxweb-from-r" class="section level2">
-<h2><a name="usage"></a>Accessing PXWEB from R</h2>
+<h2>Accessing PXWEB from R</h2>
 <p>There are two ways of using the <code>pxweb</code> R package to access data, either interactively of using the core functions. To access data, two parts are needed, an URL to the data table in the API and a query specifying what data is of interest.</p>
 </div>
 <div id="interactive-use" class="section level2">
-<h2><a name="interactive"></a>Interactive use</h2>
+<h2>Interactive use</h2>
 <p>The simplest way of using <code>pxweb</code> is to use it interactively and navigate the API to the data of interest and then set up the data query of interest.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Navigate through all pxweb api:s in the R package API catalogue</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>d &lt;-<span class="st"> </span><span class="kw">pxweb_interactive</span>()</span>
@@ -420,7 +412,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Although, if the <code>pxweb</code> is installed again, it will overwrite the old api catalogue. So the easiest way is to do add a PXWEB API to the global catalogue. To do this, just do a pull request at the pxweb GitHub page <a href="https://github.com/rOpenGov/pxweb">here</a>.</p>
 </div>
 <div id="direct-use" class="section level2">
-<h2><a name="direct"></a>Direct use</h2>
+<h2>Direct use</h2>
 <p>Under the hood, the pxweb package uses the <code>pxweb_get()</code> function to access data from the PXWEB API. It also keeps track of the time limits of the API and split up to big queries into optimal downloadable chunks. If we use <code>pxweb_get()</code> without a query, the function either returns a PXWEB LEVELS object or a PXWEB METADATA object, depending if the URL points to a table in the API or not. Here is an example of a PXWEB LEVELS object.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Get PXWEB levels</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>px_levels &lt;-<span class="st"> </span><span class="kw">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/&quot;</span>)</span>
@@ -677,7 +669,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##     },
 ##     &quot;label&quot;: [&quot;Population by marital status, sex, observations and year&quot;],
 ##     &quot;source&quot;: [&quot;Statistics Sweden&quot;],
-##     &quot;updated&quot;: [&quot;2021-07-07T11:44:00Z&quot;],
+##     &quot;updated&quot;: [&quot;2021-07-07T15:37:00Z&quot;],
 ##     &quot;value&quot;: [
 ##       [2762601],
 ##       [2820248],
@@ -761,8 +753,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">pxweb_cite</span>(pxd)</span></code></pre></div>
 <pre><code>## 
 ## Statistics Sweden (2021). &quot;Population by region, marital status, age,
-## sex, observations and year.&quot; [Data accessed 2021-07-07 13:44:56 using
-## pxweb R package 0.10.4], &lt;URL:
+## sex, observations and year.&quot; [Data accessed 2021-07-07 17:40:19 using
+## pxweb R package 0.11.0], &lt;URL:
 ## http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -774,7 +766,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##     address = {Stockholm, Sweden},
 ##     year = {2021},
 ##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2021-07-07 13:44:56 using pxweb R package 0.10.4]},
+##     note = {[Data accessed 2021-07-07 17:40:19 using pxweb R package 0.11.0]},
 ##   }
 ## 
 ## 
@@ -791,10 +783,10 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##     author = {Mans Magnusson and Markus Kainu and Janne Huovari and Leo Lahti},
 ##     year = {2019},
 ##   }</code></pre>
-<div id="known-issues" class="section level3">
-<h3>Known issues</h3>
-<p>Currently, the <code>pxweb</code> package is not thread-safe, and hence it is not safe to runt multiple get functions in parallel or in different R sessions.</p>
 </div>
+<div id="known-issues-and-troubleshooting" class="section level2">
+<h2>Known issues and troubleshooting</h2>
+<p>See <a href="https://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md">TROUBLESHOOTING.md</a> for a list of current known issues.</p>
 </div>
 <div id="licensing" class="section level2">
 <h2>Licensing</h2>
@@ -819,7 +811,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.10.4
+## [1] pxweb_0.11.0
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_1.0.6           compiler_4.0.2       prettyunits_1.1.1   
@@ -827,7 +819,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##  [7] digest_0.6.27        pkgbuild_1.2.0       pkgload_1.1.0       
 ## [10] jsonlite_1.7.2       memoise_1.1.0        evaluate_0.14       
 ## [13] lifecycle_1.0.0      checkmate_2.0.0      rlang_0.4.10        
-## [16] cli_2.5.0            rstudioapi_0.13      curl_4.3            
+## [16] cli_2.5.0            rstudioapi_0.13      curl_4.3.2          
 ## [19] yaml_2.2.1           xfun_0.17            withr_2.4.0         
 ## [22] stringr_1.4.0        httr_1.4.2           roxygen2_7.1.1      
 ## [25] knitr_1.29           xml2_1.3.2           desc_1.2.0          
