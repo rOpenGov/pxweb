@@ -80,7 +80,7 @@ jobs:
         
       - name: Ping API catalogue
         if: matrix.config.r == 'release' && runner.os == 'Linux'
-        shell: test_bash/pxweb.sh
+        run: test_bash/pxweb.sh
 
       - name: Upload check results
         if: failure()
