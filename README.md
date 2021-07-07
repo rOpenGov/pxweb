@@ -58,7 +58,14 @@ Using the package
 -----------------
 
 For examples, check the
-[tutorial/vignette](https://htmlpreview.github.io/?https://github.com/rOpenGov/pxweb/blob/test/vignettes/pxweb.html).
+[tutorial/vignette](https://htmlpreview.github.io/?https://github.com/rOpenGov/pxweb/blob/master/vignettes/pxweb.html).
+
+Problems?
+---------
+
+See
+[TROUBLESHOOTING.md](https://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md)
+or [open an issue](https://github.com/ropengov/pxweb/issues).
 
 Contributing
 ============
