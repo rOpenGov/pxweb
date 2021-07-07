@@ -96,12 +96,12 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
   px <- pxweb(url)
   if(!is.null(query)){
     pxq <- pxweb_query(query)
-    pxq <- pxweb_add_mandatory_variables(url, pxq)
     if(is.null(pxmdo)){
       pxmd <- pxweb_get(px)
     } else {
       pxmd <- pxmdo
     }
+    pxq <- pxweb_add_mandatory_variables(pxq, pxmd)
     pxq <- pxweb_add_metadata_to_query(pxq, pxmd)
     pxweb_validate_query_with_metadata(pxq, pxmd)
     pxqs <- pxweb_split_query(pxq, px, pxmd)
@@ -216,18 +216,22 @@ pxweb_user_agent <- function(){
 #' @details
 #' Complement queries that lack explicit requests for variables with requests for every value of these variables.
 #'
-#' @param url a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.
-#' @param pxq a \code{pxweb} object
-#'
+#' @param pxq a \code{pxweb_query} object.
+#' @param pxmd a \code{pxweb_metadata} object.
+#' 
 #' @keywords internal
-pxweb_add_mandatory_variables <- function(url, pxq) {
+pxweb_add_mandatory_variables <- function(pxq, pxmd) {
   checkmate::assert_class(pxq, "pxweb_query")
-  px <- pxweb(url)
-  metadata <- pxweb_get(px)
-  mandatory_variables <- vapply(metadata$variables, function(x) x$code, character(1))
-  provided_variables <- vapply(pxq$query, function(x) x$code, character(1))
-  missing_mandatory_variables <- setdiff(mandatory_variables, provided_variables)
+  checkmate::assert_class(pxmd, "pxweb_metadata")
 
+  mandatory_variables <- vapply(pxmd$variables, function(x) x$code, character(1))
+  provided_variables <- vapply(pxq$query, function(x) x$code, character(1))
+  eliminationable_variables <- pxweb_metadata_elimination(pxmd)
+  non_eliminationable_variables <- names(eliminationable_variables)[!eliminationable_variables]
+
+  missing_variables <- setdiff(mandatory_variables, provided_variables)
+  missing_mandatory_variables <- intersect(missing_variables, non_eliminationable_variables)
+  
   if (length(missing_mandatory_variables) > 0) {
     select_everything_template <- function(x) {
       list(code = x,
@@ -237,8 +241,8 @@ pxweb_add_mandatory_variables <- function(url, pxq) {
 
     query_appendix <- lapply(missing_mandatory_variables, select_everything_template)
     pxq$query <- append(pxq$query, query_appendix)
-    message(sprintf("Mandatory variables %s missing, all elements requested.",
-                    paste(missing_mandatory_variables, collapse = ", ")))
+    warning(sprintf("Missing mandatory variable(s): %s. \nAll values are requested in query.",
+                    paste(paste0("'", missing_mandatory_variables,"'"), collapse = ", ")))
   }
   return(pxq)
 }
