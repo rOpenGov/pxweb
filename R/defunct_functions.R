@@ -48,20 +48,6 @@ api_parameters <- function(url = NULL) {
   .Defunct(new = "pxweb_api_catalogue")
 }
 
-#' @rdname api_catalogue
-#' @export
-ApiData <- function(urlToData, ..., getDataByGET = FALSE, returnMetaData = FALSE, returnMetaValues = FALSE, 
-                    returnMetaFrames = FALSE, returnApiQuery = FALSE, 
-                    defaultJSONquery = c(1,-2, -1), verbosePrint = FALSE,
-                    use_factors=FALSE, urlType="SSB") {
-  .Defunct(new = "pxweb_advanced_get")
-}
-
-#' @rdname api_catalogue
-#' @export
-MakeUrl <- function(id,urlType="SSB",getDataByGET = FALSE){
-  .Defunct(new = "pxweb")
-}
 
 #' @rdname api_catalogue
 #' @export
