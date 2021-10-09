@@ -5,8 +5,6 @@
 \alias{api_catalogue}
 \alias{update_pxweb_apis}
 \alias{api_parameters}
-\alias{ApiData}
-\alias{MakeUrl}
 \alias{base_url}
 \alias{get_pxweb_data}
 \alias{get_pxweb_dims}
@@ -24,22 +22,6 @@ api_catalogue()
 update_pxweb_apis()
 
 api_parameters(url = NULL)
-
-ApiData(
-  urlToData,
-  ...,
-  getDataByGET = FALSE,
-  returnMetaData = FALSE,
-  returnMetaValues = FALSE,
-  returnMetaFrames = FALSE,
-  returnApiQuery = FALSE,
-  defaultJSONquery = c(1, -2, -1),
-  verbosePrint = FALSE,
-  use_factors = FALSE,
-  urlType = "SSB"
-)
-
-MakeUrl(id, urlType = "SSB", getDataByGET = FALSE)
 
 base_url(api, version = NULL, language = NULL)
 
@@ -65,30 +47,6 @@ checkForLevels(url)
 \arguments{
 \item{url}{Defunct argument.}
 
-\item{urlToData}{Defunct argument.}
-
-\item{...}{Defunct argument.}
-
-\item{getDataByGET}{Defunct argument.}
-
-\item{returnMetaData}{Defunct argument.}
-
-\item{returnMetaValues}{Defunct argument.}
-
-\item{returnMetaFrames}{Defunct argument.}
-
-\item{returnApiQuery}{Defunct argument.}
-
-\item{defaultJSONquery}{Defunct argument.}
-
-\item{verbosePrint}{Defunct argument.}
-
-\item{use_factors}{Defunct argument.}
-
-\item{urlType}{Defunct argument.}
-
-\item{id}{Defunct argument.}
-
 \item{api}{Defunct argument.}
 
 \item{version}{Defunct argument.}
@@ -111,9 +69,33 @@ checkForLevels(url)
 
 \item{quiet}{Defunct argument.}
 
+\item{...}{Defunct argument.}
+
 \item{path}{Defunct argument.}
 
 \item{topnodes}{Defunct argument.}
+
+\item{urlToData}{Defunct argument.}
+
+\item{getDataByGET}{Defunct argument.}
+
+\item{returnMetaData}{Defunct argument.}
+
+\item{returnMetaValues}{Defunct argument.}
+
+\item{returnMetaFrames}{Defunct argument.}
+
+\item{returnApiQuery}{Defunct argument.}
+
+\item{defaultJSONquery}{Defunct argument.}
+
+\item{verbosePrint}{Defunct argument.}
+
+\item{use_factors}{Defunct argument.}
+
+\item{urlType}{Defunct argument.}
+
+\item{id}{Defunct argument.}
 }
 \description{
 These function has as from version 0.10.0 become defunct.
