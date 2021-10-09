@@ -2,9 +2,12 @@
 % Please edit documentation in R/pxweb_interactive.R
 \name{pxe_position_choice_size}
 \alias{pxe_position_choice_size}
+\alias{pxe_position_print_size}
 \title{How many choices has the current position?}
 \usage{
 pxe_position_choice_size(x)
+
+pxe_position_print_size(x)
 }
 \arguments{
 \item{x}{a \code{pxweb_explorer} object to check.}

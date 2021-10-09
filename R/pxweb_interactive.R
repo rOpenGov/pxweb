@@ -318,32 +318,38 @@ print_bar <- function(){
 #' @rdname pxweb_explorer
 #' @keywords internal
 pxe_print_choices <- function(x){
+  checkmate::assert_class(x, "pxweb_explorer")
   obj <- pxe_pxobj_at_position(x)
   show_no <- x$print_no_of_choices
   
   if(pxe_position_is_metadata(x)){
     mddims <- pxweb_metadata_dim(pxe_pxobj_at_position(x))
     md_pos <- pxe_metadata_path(x, as_vector = TRUE)
-    no_choices <- unname(mddims[md_pos[length(md_pos)]])
+    no_rows_to_print <- unname(mddims[md_pos[length(md_pos)]])
+    choices_idx <- 1:no_rows_to_print
   } else {
-    no_choices <- length(obj)
+    choices_df <- pxweb_levels_choices_df(obj)
+    no_rows_to_print <- nrow(choices_df)
+    choices_idx <- choices_df$choice_idx
   }
   
-  if(x$print_all_choices | no_choices <= show_no * 2){
-    print_idx <- 1:no_choices
+  if(x$print_all_choices | no_rows_to_print <= show_no * 2){
+    print_idx <- 1:no_rows_to_print
   } else {
-    print_idx <- c(1:show_no, NA, (no_choices - show_no + 1):no_choices)
+    print_idx <- c(1:show_no, NA, (no_rows_to_print - show_no + 1):no_rows_to_print)
   }
 
   print_idx_char <- as.character(print_idx)
-  print_idx_char_nmax <- max(nchar(print_idx_char), na.rm = TRUE)
-  print_idx_char <- str_pad(print_idx_char, print_idx_char_nmax )
+  choice_idx_char <- as.character(choices_idx)
+  choice_idx_char_nmax <- max(nchar(choice_idx_char), na.rm = TRUE)
+  choice_idx_char <- str_pad(choice_idx_char, choice_idx_char_nmax )
   
   for(i in seq_along(print_idx)){
     if(is.na(print_idx[i])) {
       cat("\n")
       next
     }
+    
     if(pxe_position_is_metadata(x)){
       if(x$show_id){
         cat(" [", print_idx_char[i], " ] : ", obj$variables[[length(md_pos)]]$valueTexts[print_idx[i]], " (", obj$variables[[length(md_pos)]]$values[print_idx[i]] ,")", "\n", sep = "")    
@@ -351,11 +357,15 @@ pxe_print_choices <- function(x){
         cat(" [", print_idx_char[i], " ] : ", obj$variables[[length(md_pos)]]$valueTexts[print_idx[i]], "\n", sep = "")    
       }
     } else {
-      if(x$show_id){
-        cat(" [", print_idx_char[i], " ] : ", obj[[print_idx[i]]]$text, " (", obj[[print_idx[i]]]$id ,")", "\n", sep = "")    
+      if(obj[[print_idx[i]]]$type == "h") {
+        txt <- paste("\n", paste(rep(" ", nchar(print_idx_char[i]) + 2 + 6), collapse = ""), collapse = "")
       } else {
-        cat(" [", print_idx_char[i], " ] : ", obj[[print_idx[i]]]$text, " \n", sep = "")
+        txt <- paste0(" [", choice_idx_char[print_idx[i]], " ] : ")
       }
+      txt <- paste0(txt, obj[[print_idx[i]]]$text)
+      if(x$show_id) txt <- paste0(txt, " (", obj[[print_idx[i]]]$id ,")")    
+      txt <- paste0(txt, "\n")
+      cat(txt)
     }
   }
 }
@@ -416,7 +426,9 @@ pxe_handle_input.numeric <- function(user_input, pxe){
   } else if(pxe_position_is_api_catalogue(pxe)) {
     pxe <- pxweb_explorer(obj[[user_input]]$id)
   } else {
-    new_pos <- obj[[user_input]]$id
+    cdf <- pxweb_levels_choices_df(obj)
+    choice_input <- which(cdf$choice_idx == user_input)
+    new_pos <- obj[[choice_input]]$id
     pxe <- pxe_add_position(pxe, new_pos)
   }
   assert_pxweb_explorer(pxe)
@@ -657,7 +669,7 @@ pxe_allowed_input.pxweb_explorer <- function(x){
     }
   }
   
-  if(!x$print_all_choices & pxe_position_choice_size(x) > x$print_no_of_choices*2){
+  if(!x$print_all_choices & pxe_position_print_size(x) > x$print_no_of_choices*2){
     input_df$allowed[input_df$code == "a"] <- TRUE
   }
   
@@ -812,12 +824,25 @@ pxe_position_is_api_catalogue <- function(x) {
 #' @keywords internal
 pxe_position_choice_size <- function(x) {
   if(pxe_position_is_metadata(x)){
+    cs <- pxe_position_print_size(x)
+  } else {
+    obj <- pxe_pxobj_at_position(x)
+    choices_df <- pxweb_levels_choices_df(obj)
+    cs <- max(choices_df$choice_idx, na.rm = TRUE)
+  }
+  cs
+}
+
+#' @rdname pxe_position_choice_size
+#' @keywords internal
+pxe_position_print_size <- function(x) {
+  if(pxe_position_is_metadata(x)){
     md <- pxe_pxobj_at_position(x)
     md <- pxweb_metadata_dim(md)
     mdpos <- length(pxe_metadata_path(x, as_vector = TRUE))
     cs <- unname(md[mdpos])
   } else {
-    cs <-length(pxe_pxobj_at_position(x))
+    cs <- length(pxe_pxobj_at_position(x))
   }
   cs
 }

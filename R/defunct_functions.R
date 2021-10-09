@@ -5,18 +5,7 @@
 #' Call the functions to get information on new functions to use.
 #' 
 #' @param url Defunct argument.
-#' @param urlToData Defunct argument.
 #' @param ... Defunct argument.
-#' @param getDataByGET Defunct argument.
-#' @param returnMetaData Defunct argument.
-#' @param returnMetaValues Defunct argument.
-#' @param returnMetaFrames Defunct argument.
-#' @param returnApiQuery Defunct argument.
-#' @param defaultJSONquery Defunct argument.
-#' @param verbosePrint Defunct argument.
-#' @param use_factors Defunct argument.
-#' @param urlType Defunct argument.
-#' @param id Defunct argument.
 #' @param api Defunct argument.
 #' @param version Defunct argument.
 #' @param language Defunct argument.
@@ -48,20 +37,6 @@ api_parameters <- function(url = NULL) {
   .Defunct(new = "pxweb_api_catalogue")
 }
 
-#' @rdname api_catalogue
-#' @export
-ApiData <- function(urlToData, ..., getDataByGET = FALSE, returnMetaData = FALSE, returnMetaValues = FALSE, 
-                    returnMetaFrames = FALSE, returnApiQuery = FALSE, 
-                    defaultJSONquery = c(1,-2, -1), verbosePrint = FALSE,
-                    use_factors=FALSE, urlType="SSB") {
-  .Defunct(new = "pxweb_advanced_get")
-}
-
-#' @rdname api_catalogue
-#' @export
-MakeUrl <- function(id,urlType="SSB",getDataByGET = FALSE){
-  .Defunct(new = "pxweb")
-}
 
 #' @rdname api_catalogue
 #' @export

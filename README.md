@@ -75,7 +75,7 @@ You are welcome to contact us:
 -   [Submit suggestions and bug
     reports](https://github.com/ropengov/pxweb/issues) (provide the
     output of `sessionInfo()` and `packageVersion("pxweb")`)
--   [Send a pull request](https://github.com/ropengov/pxweb/)
+-   [Send a pull request](https://github.com/ropengov/pxweb)
 -   [Star us on the Github page](https://github.com/ropengov/pxweb)
 -   [Join the discussion in Gitter](https://gitter.im/rOpenGov/pxweb)
 
