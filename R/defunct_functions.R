@@ -5,18 +5,7 @@
 #' Call the functions to get information on new functions to use.
 #' 
 #' @param url Defunct argument.
-#' @param urlToData Defunct argument.
 #' @param ... Defunct argument.
-#' @param getDataByGET Defunct argument.
-#' @param returnMetaData Defunct argument.
-#' @param returnMetaValues Defunct argument.
-#' @param returnMetaFrames Defunct argument.
-#' @param returnApiQuery Defunct argument.
-#' @param defaultJSONquery Defunct argument.
-#' @param verbosePrint Defunct argument.
-#' @param use_factors Defunct argument.
-#' @param urlType Defunct argument.
-#' @param id Defunct argument.
 #' @param api Defunct argument.
 #' @param version Defunct argument.
 #' @param language Defunct argument.

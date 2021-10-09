@@ -74,28 +74,6 @@ checkForLevels(url)
 \item{path}{Defunct argument.}
 
 \item{topnodes}{Defunct argument.}
-
-\item{urlToData}{Defunct argument.}
-
-\item{getDataByGET}{Defunct argument.}
-
-\item{returnMetaData}{Defunct argument.}
-
-\item{returnMetaValues}{Defunct argument.}
-
-\item{returnMetaFrames}{Defunct argument.}
-
-\item{returnApiQuery}{Defunct argument.}
-
-\item{defaultJSONquery}{Defunct argument.}
-
-\item{verbosePrint}{Defunct argument.}
-
-\item{use_factors}{Defunct argument.}
-
-\item{urlType}{Defunct argument.}
-
-\item{id}{Defunct argument.}
 }
 \description{
 These function has as from version 0.10.0 become defunct.
