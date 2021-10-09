@@ -244,7 +244,7 @@
       "citation" : {
           "organization" : "State Statistical Office of the Republic of Macedonia",
           "address" : "Skopje, Macedonia"},
-      "url" : "http://makstat.stat.gov.mk/PXWeb/api/[version]/[lang]/MakStat/",
+      "url" : "https://makstat.stat.gov.mk/PXWeb/api/[version]/[lang]/MakStat/",
       "version": ["v1"], 
       "lang": ["en", "mk"],
       "calls_per_period": 30,
@@ -333,7 +333,7 @@
       "lang": ["en"],
       "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 1000
+      "max_values_to_download" : 100000
     },
 
     "www.grande-region.lu": {
