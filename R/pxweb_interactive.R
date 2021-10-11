@@ -960,7 +960,7 @@ pxe_interactive_get_data <- function(pxe, test_input = NULL){
   if(print_citation){
     cat("############# CITATION #############")
     pxweb_cite(dat)
-    cat("############# CITATION #############")
+    cat("############# CITATION #############\n")
   }
   if(return_df){
     dat <- as.data.frame(dat)
