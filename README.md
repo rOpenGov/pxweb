@@ -17,7 +17,7 @@ GitHub](https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social)](ht
 
 <br>
 
-# R tools to access PX-WEB API - the pxweb R package <a href='https://ropengov.github.io/rogtemplate/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# R tools to access PX-WEB API - the pxweb R package <a href='https://ropengov.github.io/pxweb/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
