@@ -11,9 +11,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-<br>
 
 <!-- badges: start -->
+[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
   [![R build status](https://github.com/rOpenGov/pxweb/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/pxweb/actions)
 [![Coverage Status](https://coveralls.io/repos/github/rOpenGov/pxweb/badge.svg?branch=master)](https://coveralls.io/github/rOpenGov/pxweb?branch=master)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://cran.r-project.org/package=pxweb)
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 <br>
 
-# R tools to access PX-WEB API - the pxweb R package
+# R tools to access PX-WEB API - the pxweb R package <a href='https://ropengov.github.io/rogtemplate/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -51,14 +51,14 @@ install.packages('pxweb')
 
 Alternatively, you can get the latest stable development version:
 
-```{r, results='hide', message=FALSE}
+```{r, results='hide', message=FALSE, eval=FALSE}
 library(remotes)
 remotes::install_github('ropengov/pxweb')
 ```
 
 In some cases, the organization requires manual proxy settings. This can be set as follows:
 
-```{r, results='hide', message=FALSE}
+```{r, results='hide', message=FALSE, eval=FALSE}
 library(remotes)
 library(httr)
 set_config(
@@ -69,12 +69,12 @@ remotes::install_github('ropengov/pxweb')
 
 ```{r, results='hide', echo=FALSE}
 # This resets the config when the README is tested
-reset_config()
+httr::reset_config()
 ```
 
 ## Using the package
 
-For examples, check the [tutorial/vignette](https://htmlpreview.github.io/?https://github.com/rOpenGov/pxweb/blob/master/vignettes/pxweb.html).  
+For examples, check the [tutorial/vignette](https://ropengov.github.io/pxweb/articles/pxweb.html).  
 
 ## Problems?
 
@@ -92,7 +92,7 @@ You are welcome to contact us:
 
 ### Acknowledgements
 
-**Kindly cite this work** as follows: [Måns Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and [Leo Lahti](https://github.com/antagomir). Retrieval and analysis of PC Axis data with the pxweb package. R package version `r sessionInfo()$otherPkgs$pxweb$Version`. URL: [http://ropengov.github.io/pxweb](http://ropengov.github.io/pxweb)
+**Kindly cite this work** as follows: [Måns Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and [Leo Lahti](https://github.com/antagomir). Retrieval and analysis of PC Axis data with the pxweb package. R package version `r sessionInfo()$otherPkgs$pxweb$Version`. URL: <https://ropengov.github.io/pxweb/>
 
 We are grateful to all [contributors](https://github.com/rOpenGov/pxweb/graphs/contributors)! This project is part of [rOpenGov](http://ropengov.github.io).
 

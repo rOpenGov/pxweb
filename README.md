@@ -1,7 +1,6 @@
-<br>
-
 <!-- badges: start -->
 
+[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
 [![R build
 status](https://github.com/rOpenGov/pxweb/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/pxweb/actions)
 [![Coverage
@@ -18,8 +17,7 @@ GitHub](https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social)](ht
 
 <br>
 
-R tools to access PX-WEB API - the pxweb R package
-==================================================
+# R tools to access PX-WEB API - the pxweb R package <a href='https://ropengov.github.io/rogtemplate/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -32,8 +30,7 @@ the PXWEB API.
 Many API services are still in their early stages, and data quality is
 sometimes compromised. Issue reports are welcome.
 
-Installation
-------------
+## Installation
 
 The easiest way to use pxweb is to simply install it from CRAN:
 
@@ -54,21 +51,18 @@ be set as follows:
     )
     remotes::install_github('ropengov/pxweb')
 
-Using the package
------------------
+## Using the package
 
 For examples, check the
-[tutorial/vignette](https://htmlpreview.github.io/?https://github.com/rOpenGov/pxweb/blob/master/vignettes/pxweb.html).
+[tutorial/vignette](https://ropengov.github.io/pxweb/articles/pxweb.html).
 
-Problems?
----------
+## Problems?
 
 See
 [TROUBLESHOOTING.md](https://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md)
 or [open an issue](https://github.com/ropengov/pxweb/issues).
 
-Contributing
-============
+# Contributing
 
 You are welcome to contact us:
 
@@ -85,7 +79,7 @@ You are welcome to contact us:
 Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and
 [Leo Lahti](https://github.com/antagomir). Retrieval and analysis of PC
 Axis data with the pxweb package. R package version . URL:
-<http://ropengov.github.io/pxweb>
+<https://ropengov.github.io/pxweb/>
 
 We are grateful to all
 [contributors](https://github.com/rOpenGov/pxweb/graphs/contributors)!
