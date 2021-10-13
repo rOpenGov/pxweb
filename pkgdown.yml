@@ -1,0 +1,10 @@
+pandoc: 2.7.3
+pkgdown: 1.9000.9000.9000
+pkgdown_sha: c2e834cae269bd0332c62392350b0748a406c939
+articles:
+  pxweb: pxweb.html
+last_built: 2021-10-13T18:25Z
+urls:
+  reference: https://ropengov.github.io/pxweb/reference
+  article: https://ropengov.github.io/pxweb/articles
+
