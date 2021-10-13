@@ -1,6 +1,6 @@
 reference:
 - title: All functions
-  desc: >
+  desc: |
     Listing of functions in the pxweb package
   contents:
   - '`pxweb-package`'
@@ -12,7 +12,12 @@ reference:
   - '`pxweb_test_api`'
   - '`pxweb_validate_query_with_metadata`'
 - title: Interactive functions
-  desc: >
+  desc: |
     Listing of interactive functions
-  contents:
-  - '`pxweb_interactive`'
+  contents: '`pxweb_interactive`'
+url: https://ropengov.github.io/pxweb/
+template:
+  package: rogtemplate
+  opengraph:
+    twitter:
+      site: '@rOpenGov'
