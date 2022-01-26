@@ -41,3 +41,5 @@ TROUBLESHOOTING.md
 ^\.github$
 ^doc$
 ^Meta$
+^pkgdown$
+^\._pkgdown\.yml$
