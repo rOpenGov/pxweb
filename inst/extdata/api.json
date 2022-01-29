@@ -373,7 +373,7 @@
         "lang": ["fi"],
         "calls_per_period": 1000,
         "period_in_seconds": 10,
-        "max_values_to_download" : 5000000
+        "max_values_to_download": 10000000
     },
     
     "andmed.stat.ee": {

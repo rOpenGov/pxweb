@@ -63,13 +63,13 @@ pxweb_test_api <- function(url, test_type="first", n = 1, verbose = TRUE, time_l
       break
     }
     
+    if(verbose) {
+      cat(sum(api_tree_df$type == "l"), "node(s) and", sum(api_tree_df$type == "t"), "table(s). Checking entry", i, "of", nrow(api_tree_df), "...\n")
+    }
+
     if(api_tree_df$type[i] == "t") {
       next
-    }
-    
-    if(verbose) {
-      cat(sum(api_tree_df$type == "l"), "node(s) and", sum(api_tree_df$type == "t"), "table(s)...\n")
-    }
+    }    
     
     px <- try(pxweb(url = api_tree_df$path[i]), silent = TRUE)
     if(inherits(px, "try-error")) {
@@ -89,7 +89,10 @@ pxweb_test_api <- function(url, test_type="first", n = 1, verbose = TRUE, time_l
       # Jump to next level
       i <- nrow(api_tree_df)
     }
-    api_tree_df <- rbind(api_tree_df, tmp_df)
+    
+    if(!inherits(tmp_df, "try-error")){
+      api_tree_df <- rbind(api_tree_df, tmp_df)
+    }
   }
   
   if(verbose & !test_type == "touch"){
