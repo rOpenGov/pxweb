@@ -33,19 +33,21 @@
 <!-- rogtemplate style sheet --><link href="../BS5/rogtemplate.css" rel="stylesheet">
 </head>
 <body>
-    <a href="#container" class="visually-hidden-focusable">Skip to content</a>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
     <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark"><div class="container">
+    
     <a class="navbar-brand me-2" href="../index.html">pxweb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0</small>
 
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="active nav-item">
   <a class="nav-link" href="../articles/pxweb.html">Get started</a>
@@ -58,7 +60,7 @@
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Search" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search..." autocomplete="off">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
       <ul class="navbar-nav">
@@ -70,17 +72,21 @@
 </li>
       </ul>
 </div>
+
+    
   </div>
-</nav><div class="container template-article" id="container">
+</nav><div class="container template-article">
+
+
+
 <script src="pxweb_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1 data-toc-skip>PX-WEB API Interface for R</h1>
+  <main id="main"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>PX-WEB API Interface for R</h1>
                         <h4 data-toc-skip class="author">Mans Magnusson, Leo Lahti et al.</h4>
             
-            <h4 data-toc-skip class="date">2021-10-27</h4>
+            <h4 data-toc-skip class="date">2022-01-29</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/rOpenGov/pxweb/blob/master/vignettes/pxweb.Rmd" class="external-link"><code>vignettes/pxweb.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rOpenGov/pxweb/blob/HEAD/vignettes/pxweb.Rmd" class="external-link"><code>vignettes/pxweb.Rmd</code></a></small>
       <div class="d-none name"><code>pxweb.Rmd</code></div>
     </div>
 
@@ -121,7 +127,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pxweb"</span><span class="op">)</span></code></pre></div>
 <p>To install the latest stable release version from GitHub, just use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://devtools.r-lib.org/" class="external-link">"devtools"</a></span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ropengov/pxweb"</span><span class="op">)</span></code></pre></div>
 <p>Test the installation by loading the library:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -179,26 +185,26 @@
 <code class="sourceCode R"><span class="co"># Get PXWEB levels</span>
 <span class="va">px_levels</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="st">"http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/"</span><span class="op">)</span>
 <span class="va">px_levels</span></code></pre></div>
-<pre><code>## PXWEB LEVELS
-##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2020
-##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2020
-##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2020
-##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2021M08
-##   BefolkningR1860N (t): Population by age and sex. Year 1860 - 2020</code></pre>
+<pre><code><span class="co">## PXWEB LEVELS</span>
+<span class="co">##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2020</span>
+<span class="co">##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2021</span>
+<span class="co">##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2020</span>
+<span class="co">##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2021M11</span>
+<span class="co">##   BefolkningR1860N (t): Population by age and sex. Year 1860 - 2020</span></code></pre>
 <p>And if we use <code><a href="../reference/pxweb_get.html">pxweb_get()</a></code> for a table, a PXWEB METADATA object is returned.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get PXWEB metadata about a table</span>
 <span class="va">px_meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="st">"http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span><span class="op">)</span>
 <span class="va">px_meta</span></code></pre></div>
-<pre><code>## PXWEB METADATA
-## Population by region, marital status, age, sex, observations and year 
-## variables:
-##  [[1]] Region: region
-##  [[2]] Civilstand: marital status
-##  [[3]] Alder: age
-##  [[4]] Kon: sex
-##  [[5]] ContentsCode: observations
-##  [[6]] Tid: year</code></pre>
+<pre><code><span class="co">## PXWEB METADATA</span>
+<span class="co">## Population by region, marital status, age, sex, observations and year </span>
+<span class="co">## variables:</span>
+<span class="co">##  [[1]] Region: region</span>
+<span class="co">##  [[2]] Civilstand: marital status</span>
+<span class="co">##  [[3]] Alder: age</span>
+<span class="co">##  [[4]] Kon: sex</span>
+<span class="co">##  [[5]] ContentsCode: observations</span>
+<span class="co">##  [[6]] Tid: year</span></code></pre>
 <div class="section level3">
 <h3 id="creating-data-queries">Creating data queries<a class="anchor" aria-label="anchor" href="#creating-data-queries"></a>
 </h3>
@@ -208,66 +214,66 @@
 <p>The interactive function will return the query and the url, even if the data is not downloaded.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">d</span><span class="op">$</span><span class="va">url</span></code></pre></div>
-<pre><code>## [1] "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</code></pre>
+<pre><code><span class="co">## [1] "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">d</span><span class="op">$</span><span class="va">query</span></code></pre></div>
-<pre><code>## PXWEB QUERY
-## query:
-##  [[1]] Region (item):
-##    00
-##  [[2]] Civilstand (item):
-##    OG, G, ÄNKL, SK
-##  [[3]] Alder (item):
-##    tot
-##  [[4]] ContentsCode (item):
-##    BE0101N1
-##  [[5]] Tid (item):
-##    2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017</code></pre>
+<pre><code><span class="co">## PXWEB QUERY</span>
+<span class="co">## query:</span>
+<span class="co">##  [[1]] Region (item):</span>
+<span class="co">##    00</span>
+<span class="co">##  [[2]] Civilstand (item):</span>
+<span class="co">##    OG, G, ÄNKL, SK</span>
+<span class="co">##  [[3]] Alder (item):</span>
+<span class="co">##    tot</span>
+<span class="co">##  [[4]] ContentsCode (item):</span>
+<span class="co">##    BE0101N1</span>
+<span class="co">##  [[5]] Tid (item):</span>
+<span class="co">##    2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017</span></code></pre>
 <p>We can also turn the query to a json query that can be used outside R.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pxweb_query_as_json.html">pxweb_query_as_json</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">query</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## {
-##   "query": [
-##     {
-##       "code": "Region",
-##       "selection": {
-##         "filter": "item",
-##         "values": ["00"]
-##       }
-##     },
-##     {
-##       "code": "Civilstand",
-##       "selection": {
-##         "filter": "item",
-##         "values": ["OG", "G", "ÄNKL", "SK"]
-##       }
-##     },
-##     {
-##       "code": "Alder",
-##       "selection": {
-##         "filter": "item",
-##         "values": ["tot"]
-##       }
-##     },
-##     {
-##       "code": "ContentsCode",
-##       "selection": {
-##         "filter": "item",
-##         "values": ["BE0101N1"]
-##       }
-##     },
-##     {
-##       "code": "Tid",
-##       "selection": {
-##         "filter": "item",
-##         "values": ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"]
-##       }
-##     }
-##   ],
-##   "response": {
-##     "format": "json"
-##   }
-## }</code></pre>
+<pre><code><span class="co">## {</span>
+<span class="co">##   "query": [</span>
+<span class="co">##     {</span>
+<span class="co">##       "code": "Region",</span>
+<span class="co">##       "selection": {</span>
+<span class="co">##         "filter": "item",</span>
+<span class="co">##         "values": ["00"]</span>
+<span class="co">##       }</span>
+<span class="co">##     },</span>
+<span class="co">##     {</span>
+<span class="co">##       "code": "Civilstand",</span>
+<span class="co">##       "selection": {</span>
+<span class="co">##         "filter": "item",</span>
+<span class="co">##         "values": ["OG", "G", "ÄNKL", "SK"]</span>
+<span class="co">##       }</span>
+<span class="co">##     },</span>
+<span class="co">##     {</span>
+<span class="co">##       "code": "Alder",</span>
+<span class="co">##       "selection": {</span>
+<span class="co">##         "filter": "item",</span>
+<span class="co">##         "values": ["tot"]</span>
+<span class="co">##       }</span>
+<span class="co">##     },</span>
+<span class="co">##     {</span>
+<span class="co">##       "code": "ContentsCode",</span>
+<span class="co">##       "selection": {</span>
+<span class="co">##         "filter": "item",</span>
+<span class="co">##         "values": ["BE0101N1"]</span>
+<span class="co">##       }</span>
+<span class="co">##     },</span>
+<span class="co">##     {</span>
+<span class="co">##       "code": "Tid",</span>
+<span class="co">##       "selection": {</span>
+<span class="co">##         "filter": "item",</span>
+<span class="co">##         "values": ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"]</span>
+<span class="co">##       }</span>
+<span class="co">##     }</span>
+<span class="co">##   ],</span>
+<span class="co">##   "response": {</span>
+<span class="co">##     "format": "json"</span>
+<span class="co">##   }</span>
+<span class="co">## }</span></code></pre>
 <p>The second approach is to specify the query either as an R list or a JSON object. Some Statistical Agencies, such as Statistics Sweden, supply queries directly as a JSON object on their web pages. These queries can be used directly. Below is another example of a JSON query for the table above. For details on how to set up a JSON query, see the PXWEB API documentation.</p>
 <pre><code>{
   "query": [
@@ -316,16 +322,16 @@
        <span class="st">"Tid"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2015"</span>,<span class="st">"2016"</span>,<span class="st">"2017"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">pxq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_query.html">pxweb_query</a></span><span class="op">(</span><span class="va">pxweb_query_list</span><span class="op">)</span>
 <span class="va">pxq</span></code></pre></div>
-<pre><code>## PXWEB QUERY
-## query:
-##  [[1]] Civilstand (all):
-##    *
-##  [[2]] Kon (item):
-##    1, 2
-##  [[3]] ContentsCode (item):
-##    BE0101N1
-##  [[4]] Tid (item):
-##    2015, 2016, 2017</code></pre>
+<pre><code><span class="co">## PXWEB QUERY</span>
+<span class="co">## query:</span>
+<span class="co">##  [[1]] Civilstand (all):</span>
+<span class="co">##    *</span>
+<span class="co">##  [[2]] Kon (item):</span>
+<span class="co">##    1, 2</span>
+<span class="co">##  [[3]] ContentsCode (item):</span>
+<span class="co">##    BE0101N1</span>
+<span class="co">##  [[4]] Tid (item):</span>
+<span class="co">##    2015, 2016, 2017</span></code></pre>
 <p>The query can be validated against the metadata object to asses that the query can be used. This is done automatically when the data is fetched with <code><a href="../reference/pxweb_get.html">pxweb_get()</a></code>, but can also be done manually.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pxweb_validate_query_with_metadata.html">pxweb_validate_query_with_metadata</a></span><span class="op">(</span><span class="va">pxq</span>, <span class="va">px_meta</span><span class="op">)</span></code></pre></div>
@@ -338,181 +344,181 @@
 <code class="sourceCode R"><span class="va">pxd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="st">"http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,
                  <span class="va">pxq</span><span class="op">)</span>
 <span class="va">pxd</span></code></pre></div>
-<pre><code>## PXWEB DATA
-## With 4 variables and 24 observations.</code></pre>
+<pre><code><span class="co">## PXWEB DATA</span>
+<span class="co">## With 4 variables and 24 observations.</span></code></pre>
 <p>If we instead want a JSON-stat object, we just change the response format to JSON-stat and we will get a JSON-stat object returned. Only JSON and JSON-stat formats are implemented in the PXWEB API.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pxq</span><span class="op">$</span><span class="va">response</span><span class="op">$</span><span class="va">format</span> <span class="op">&lt;-</span> <span class="st">"json-stat"</span>
 <span class="va">pxjstat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="st">"http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,
                      <span class="va">pxq</span><span class="op">)</span>
 <span class="va">pxjstat</span></code></pre></div>
-<pre><code>## {
-##   "dataset": {
-##     "dimension": {
-##       "Civilstand": {
-##         "label": ["marital status"],
-##         "category": {
-##           "index": {
-##             "OG": [0],
-##             "G": [1],
-##             "ÄNKL": [2],
-##             "SK": [3]
-##           },
-##           "label": {
-##             "OG": ["single"],
-##             "G": ["married"],
-##             "ÄNKL": ["widowers/widows"],
-##             "SK": ["divorced"]
-##           }
-##         }
-##       },
-##       "Kon": {
-##         "label": ["sex"],
-##         "category": {
-##           "index": {
-##             "1": [0],
-##             "2": [1]
-##           },
-##           "label": {
-##             "1": ["men"],
-##             "2": ["women"]
-##           }
-##         },
-##         "link": {
-##           "describedby": [
-##             {
-##               "extension": {
-##                 "Kon": ["Kön"]
-##               }
-##             }
-##           ]
-##         }
-##       },
-##       "ContentsCode": {
-##         "label": ["observations"],
-##         "category": {
-##           "index": {
-##             "BE0101N1": [0]
-##           },
-##           "label": {
-##             "BE0101N1": ["Population"]
-##           },
-##           "unit": {
-##             "BE0101N1": {
-##               "base": ["number"],
-##               "decimals": [0]
-##             }
-##           }
-##         }
-##       },
-##       "Tid": {
-##         "label": ["year"],
-##         "category": {
-##           "index": {
-##             "2015": [0],
-##             "2016": [1],
-##             "2017": [2]
-##           },
-##           "label": {
-##             "2015": ["2015"],
-##             "2016": ["2016"],
-##             "2017": ["2017"]
-##           }
-##         }
-##       },
-##       "id": [
-##         ["Civilstand"],
-##         ["Kon"],
-##         ["ContentsCode"],
-##         ["Tid"]
-##       ],
-##       "size": [
-##         [4],
-##         [2],
-##         [1],
-##         [3]
-##       ],
-##       "role": {
-##         "metric": [
-##           ["ContentsCode"]
-##         ],
-##         "time": [
-##           ["Tid"]
-##         ]
-##       }
-##     },
-##     "label": ["Population by marital status, sex, observations and year"],
-##     "source": ["Statistics Sweden"],
-##     "updated": ["2021-10-27T15:50:00Z"],
-##     "value": [
-##       [2762601],
-##       [2820248],
-##       [2870477],
-##       [2394842],
-##       [2437315],
-##       [2477012],
-##       [1651482],
-##       [1672460],
-##       [1687016],
-##       [1639519],
-##       [1657129],
-##       [1671381],
-##       [99751],
-##       [99654],
-##       [99682],
-##       [345008],
-##       [340709],
-##       [335961],
-##       [417132],
-##       [420985],
-##       [425487],
-##       [540682],
-##       [546653],
-##       [553226]
-##     ],
-##     "extension": {
-##       "px": {
-##         "infofile": ["BE0101"],
-##         "tableid": ["TAB638"],
-##         "decimals": [0]
-##       }
-##     }
-##   }
-## }</code></pre>
+<pre><code><span class="co">## {</span>
+<span class="co">##   "dataset": {</span>
+<span class="co">##     "dimension": {</span>
+<span class="co">##       "Civilstand": {</span>
+<span class="co">##         "label": ["marital status"],</span>
+<span class="co">##         "category": {</span>
+<span class="co">##           "index": {</span>
+<span class="co">##             "OG": [0],</span>
+<span class="co">##             "G": [1],</span>
+<span class="co">##             "ÄNKL": [2],</span>
+<span class="co">##             "SK": [3]</span>
+<span class="co">##           },</span>
+<span class="co">##           "label": {</span>
+<span class="co">##             "OG": ["single"],</span>
+<span class="co">##             "G": ["married"],</span>
+<span class="co">##             "ÄNKL": ["widowers/widows"],</span>
+<span class="co">##             "SK": ["divorced"]</span>
+<span class="co">##           }</span>
+<span class="co">##         }</span>
+<span class="co">##       },</span>
+<span class="co">##       "Kon": {</span>
+<span class="co">##         "label": ["sex"],</span>
+<span class="co">##         "category": {</span>
+<span class="co">##           "index": {</span>
+<span class="co">##             "1": [0],</span>
+<span class="co">##             "2": [1]</span>
+<span class="co">##           },</span>
+<span class="co">##           "label": {</span>
+<span class="co">##             "1": ["men"],</span>
+<span class="co">##             "2": ["women"]</span>
+<span class="co">##           }</span>
+<span class="co">##         },</span>
+<span class="co">##         "link": {</span>
+<span class="co">##           "describedby": [</span>
+<span class="co">##             {</span>
+<span class="co">##               "extension": {</span>
+<span class="co">##                 "Kon": ["Kön"]</span>
+<span class="co">##               }</span>
+<span class="co">##             }</span>
+<span class="co">##           ]</span>
+<span class="co">##         }</span>
+<span class="co">##       },</span>
+<span class="co">##       "ContentsCode": {</span>
+<span class="co">##         "label": ["observations"],</span>
+<span class="co">##         "category": {</span>
+<span class="co">##           "index": {</span>
+<span class="co">##             "BE0101N1": [0]</span>
+<span class="co">##           },</span>
+<span class="co">##           "label": {</span>
+<span class="co">##             "BE0101N1": ["Population"]</span>
+<span class="co">##           },</span>
+<span class="co">##           "unit": {</span>
+<span class="co">##             "BE0101N1": {</span>
+<span class="co">##               "base": ["number"],</span>
+<span class="co">##               "decimals": [0]</span>
+<span class="co">##             }</span>
+<span class="co">##           }</span>
+<span class="co">##         }</span>
+<span class="co">##       },</span>
+<span class="co">##       "Tid": {</span>
+<span class="co">##         "label": ["year"],</span>
+<span class="co">##         "category": {</span>
+<span class="co">##           "index": {</span>
+<span class="co">##             "2015": [0],</span>
+<span class="co">##             "2016": [1],</span>
+<span class="co">##             "2017": [2]</span>
+<span class="co">##           },</span>
+<span class="co">##           "label": {</span>
+<span class="co">##             "2015": ["2015"],</span>
+<span class="co">##             "2016": ["2016"],</span>
+<span class="co">##             "2017": ["2017"]</span>
+<span class="co">##           }</span>
+<span class="co">##         }</span>
+<span class="co">##       },</span>
+<span class="co">##       "id": [</span>
+<span class="co">##         ["Civilstand"],</span>
+<span class="co">##         ["Kon"],</span>
+<span class="co">##         ["ContentsCode"],</span>
+<span class="co">##         ["Tid"]</span>
+<span class="co">##       ],</span>
+<span class="co">##       "size": [</span>
+<span class="co">##         [4],</span>
+<span class="co">##         [2],</span>
+<span class="co">##         [1],</span>
+<span class="co">##         [3]</span>
+<span class="co">##       ],</span>
+<span class="co">##       "role": {</span>
+<span class="co">##         "metric": [</span>
+<span class="co">##           ["ContentsCode"]</span>
+<span class="co">##         ],</span>
+<span class="co">##         "time": [</span>
+<span class="co">##           ["Tid"]</span>
+<span class="co">##         ]</span>
+<span class="co">##       }</span>
+<span class="co">##     },</span>
+<span class="co">##     "label": ["Population by marital status, sex, observations and year"],</span>
+<span class="co">##     "source": ["Statistics Sweden"],</span>
+<span class="co">##     "updated": ["2022-01-29T21:38:00Z"],</span>
+<span class="co">##     "value": [</span>
+<span class="co">##       [2762601],</span>
+<span class="co">##       [2820248],</span>
+<span class="co">##       [2870477],</span>
+<span class="co">##       [2394842],</span>
+<span class="co">##       [2437315],</span>
+<span class="co">##       [2477012],</span>
+<span class="co">##       [1651482],</span>
+<span class="co">##       [1672460],</span>
+<span class="co">##       [1687016],</span>
+<span class="co">##       [1639519],</span>
+<span class="co">##       [1657129],</span>
+<span class="co">##       [1671381],</span>
+<span class="co">##       [99751],</span>
+<span class="co">##       [99654],</span>
+<span class="co">##       [99682],</span>
+<span class="co">##       [345008],</span>
+<span class="co">##       [340709],</span>
+<span class="co">##       [335961],</span>
+<span class="co">##       [417132],</span>
+<span class="co">##       [420985],</span>
+<span class="co">##       [425487],</span>
+<span class="co">##       [540682],</span>
+<span class="co">##       [546653],</span>
+<span class="co">##       [553226]</span>
+<span class="co">##     ],</span>
+<span class="co">##     "extension": {</span>
+<span class="co">##       "px": {</span>
+<span class="co">##         "infofile": ["BE0101"],</span>
+<span class="co">##         "tableid": ["TAB638"],</span>
+<span class="co">##         "decimals": [0]</span>
+<span class="co">##       }</span>
+<span class="co">##     }</span>
+<span class="co">##   }</span>
+<span class="co">## }</span></code></pre>
 <p>If the queries are large (contain more values than the PXWEB API maximum allowed values), the query is chunked into optimal chunks and is then downloaded sequentially. PXWEB data objects are then combined to one large PXWEB data object, while JSON-stat objects are returned as a list of JSON-stat objects.</p>
 <p>For more advanced connections to the API, the <code><a href="../reference/pxweb_advanced_get.html">pxweb_advanced_get()</a></code> gives the flexibility to access the underlying HTTP calls using <code>httr</code> as well as logging the HTTP calls for debugging.</p>
 <p>The downloaded PXWEB data objects can then be converted to either <code>data.frame</code>s or to a character matrix. The character matrix contains the “raw” data while the data.frame returns a data.frame for analysis in a tidy format. This means that missing values (such as “..” are converted to <code>NA</code>) in a data.frame. Using the arguments <code>variable.value.type</code> and <code>column.name.type</code> we can also choose if we want the code or the text column names and value types.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">pxd</span>, column.name.type <span class="op">=</span> <span class="st">"text"</span>, variable.value.type <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pxdf</span><span class="op">)</span></code></pre></div>
-<pre><code>##   marital status   sex year Population
-## 1         single   men 2015    2762601
-## 2         single   men 2016    2820248
-## 3         single   men 2017    2870477
-## 4         single women 2015    2394842
-## 5         single women 2016    2437315
-## 6         single women 2017    2477012</code></pre>
+<pre><code><span class="co">##   marital status   sex year Population</span>
+<span class="co">## 1         single   men 2015    2762601</span>
+<span class="co">## 2         single   men 2016    2820248</span>
+<span class="co">## 3         single   men 2017    2870477</span>
+<span class="co">## 4         single women 2015    2394842</span>
+<span class="co">## 5         single women 2016    2437315</span>
+<span class="co">## 6         single women 2017    2477012</span></code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">pxd</span>, column.name.type <span class="op">=</span> <span class="st">"code"</span>, variable.value.type <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pxdf</span><span class="op">)</span></code></pre></div>
-<pre><code>##   Civilstand Kon  Tid BE0101N1
-## 1         OG   1 2015  2762601
-## 2         OG   1 2016  2820248
-## 3         OG   1 2017  2870477
-## 4         OG   2 2015  2394842
-## 5         OG   2 2016  2437315
-## 6         OG   2 2017  2477012</code></pre>
+<pre><code><span class="co">##   Civilstand Kon  Tid BE0101N1</span>
+<span class="co">## 1         OG   1 2015  2762601</span>
+<span class="co">## 2         OG   1 2016  2820248</span>
+<span class="co">## 3         OG   1 2017  2870477</span>
+<span class="co">## 4         OG   2 2015  2394842</span>
+<span class="co">## 5         OG   2 2016  2437315</span>
+<span class="co">## 6         OG   2 2017  2477012</span></code></pre>
 <p>In a similar way, we can access the raw data as a character matrix with <code>as.matrix</code>.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pxmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">pxd</span>, column.name.type <span class="op">=</span> <span class="st">"code"</span>, variable.value.type <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pxmat</span><span class="op">)</span></code></pre></div>
-<pre><code>##      Civilstand Kon Tid    BE0101N1 
-## [1,] "OG"       "1" "2015" "2762601"
-## [2,] "OG"       "1" "2016" "2820248"
-## [3,] "OG"       "1" "2017" "2870477"
-## [4,] "OG"       "2" "2015" "2394842"
-## [5,] "OG"       "2" "2016" "2437315"
-## [6,] "OG"       "2" "2017" "2477012"</code></pre>
+<pre><code><span class="co">##      Civilstand Kon Tid    BE0101N1 </span>
+<span class="co">## [1,] "OG"       "1" "2015" "2762601"</span>
+<span class="co">## [2,] "OG"       "1" "2016" "2820248"</span>
+<span class="co">## [3,] "OG"       "1" "2017" "2870477"</span>
+<span class="co">## [4,] "OG"       "2" "2015" "2394842"</span>
+<span class="co">## [5,] "OG"       "2" "2016" "2437315"</span>
+<span class="co">## [6,] "OG"       "2" "2017" "2477012"</span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="access-data-footnotescomments">Access data footnotes/comments<a class="anchor" aria-label="anchor" href="#access-data-footnotescomments"></a>
@@ -521,7 +527,7 @@
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pxdc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_data_comments.html">pxweb_data_comments</a></span><span class="op">(</span><span class="va">pxd</span><span class="op">)</span>
 <span class="va">pxdc</span></code></pre></div>
-<pre><code>## NO PXWEB DATA COMMENTS</code></pre>
+<pre><code><span class="co">## NO PXWEB DATA COMMENTS</span></code></pre>
 <p>In this case, we did not have any comments. If we have comments we can turn the comments into a data.frame with one comment per row.</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">pxdc</span><span class="op">)</span></code></pre></div>
@@ -533,38 +539,38 @@
 <p>Finally, if we use the data, we can easily create a citation for a <code>pxweb_data</code> object using the <code><a href="../reference/pxweb_cite.html">pxweb_cite()</a></code> function. For full reproducibility, please also cite the package.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pxweb_cite.html">pxweb_cite</a></span><span class="op">(</span><span class="va">pxd</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Statistics Sweden (2021). "Population by region, marital status, age,
-## sex, observations and year." [Data accessed 2021-10-27 15:50:13 using
-## pxweb R package 0.12.0], &lt;URL:
-## http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
-## 
-## A BibTeX entry for LaTeX users is
-## 
-##   @Misc{,
-##     title = {Population by region, marital status, age, sex, observations and year},
-##     author = {{Statistics Sweden}},
-##     organization = {Statistics Sweden},
-##     address = {Stockholm, Sweden},
-##     year = {2021},
-##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2021-10-27 15:50:13 using pxweb R package 0.12.0]},
-##   }
-## 
-## 
-## Kindly cite the pxweb R package as follows:
-## 
-##   Mans Magnusson, Markus Kainu, Janne Huovari, and Leo Lahti
-##   (rOpenGov).  pxweb: R tools for PXWEB API.  URL:
-##   http://github.com/ropengov/pxweb
-## 
-## A BibTeX entry for LaTeX users is
-## 
-##   @Misc{,
-##     title = {pxweb: R tools for PX-WEB API},
-##     author = {Mans Magnusson and Markus Kainu and Janne Huovari and Leo Lahti},
-##     year = {2019},
-##   }</code></pre>
+<pre><code><span class="co">## </span>
+<span class="co">## Statistics Sweden (2022). "Population by region, marital status, age,</span>
+<span class="co">## sex, observations and year." [Data accessed 2022-01-29 21:38:54 using</span>
+<span class="co">## pxweb R package 0.13.0], &lt;URL:</span>
+<span class="co">## http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.</span>
+<span class="co">## </span>
+<span class="co">## A BibTeX entry for LaTeX users is</span>
+<span class="co">## </span>
+<span class="co">##   @Misc{,</span>
+<span class="co">##     title = {Population by region, marital status, age, sex, observations and year},</span>
+<span class="co">##     author = {{Statistics Sweden}},</span>
+<span class="co">##     organization = {Statistics Sweden},</span>
+<span class="co">##     address = {Stockholm, Sweden},</span>
+<span class="co">##     year = {2022},</span>
+<span class="co">##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},</span>
+<span class="co">##     note = {[Data accessed 2022-01-29 21:38:54 using pxweb R package 0.13.0]},</span>
+<span class="co">##   }</span>
+<span class="co">## </span>
+<span class="co">## </span>
+<span class="co">## Kindly cite the pxweb R package as follows:</span>
+<span class="co">## </span>
+<span class="co">##   Mans Magnusson, Markus Kainu, Janne Huovari, and Leo Lahti</span>
+<span class="co">##   (rOpenGov).  pxweb: R tools for PXWEB API.  URL:</span>
+<span class="co">##   http://github.com/ropengov/pxweb</span>
+<span class="co">## </span>
+<span class="co">## A BibTeX entry for LaTeX users is</span>
+<span class="co">## </span>
+<span class="co">##   @Misc{,</span>
+<span class="co">##     title = {pxweb: R tools for PX-WEB API},</span>
+<span class="co">##     author = {Mans Magnusson and Markus Kainu and Janne Huovari and Leo Lahti},</span>
+<span class="co">##     year = {2019},</span>
+<span class="co">##   }</span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="known-issues-and-troubleshooting">Known issues and troubleshooting<a class="anchor" aria-label="anchor" href="#known-issues-and-troubleshooting"></a>
@@ -582,45 +588,39 @@
 <p>This vignette was created with</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## R version 4.1.1 (2021-08-10)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 20.04.3 LTS
-## 
-## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
-## 
-## locale:
-##  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
-##  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
-##  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
-## [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
-## 
-## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
-## 
-## other attached packages:
-## [1] pxweb_0.12.0
-## 
-## loaded via a namespace (and not attached):
-##  [1] knitr_1.36               magrittr_2.0.1           R6_2.5.1                
-##  [4] ragg_1.1.3               rlang_0.4.12             fastmap_1.1.0           
-##  [7] httr_1.4.2               stringr_1.4.0            tools_4.1.1             
-## [10] checkmate_2.0.0          xfun_0.27                jquerylib_0.1.4         
-## [13] htmltools_0.5.2          systemfonts_1.0.3        yaml_2.2.1              
-## [16] digest_0.6.28            rprojroot_2.0.2          pkgdown_1.9000.9000.9000
-## [19] crayon_1.4.1             textshaping_0.3.6        sass_0.4.0              
-## [22] fs_1.5.0                 curl_4.3.2               memoise_2.0.0           
-## [25] cachem_1.0.6             evaluate_0.14            rmarkdown_2.11          
-## [28] stringi_1.7.5            compiler_4.1.1           bslib_0.3.1             
-## [31] backports_1.3.0          desc_1.4.0               jsonlite_1.7.2</code></pre>
+<pre><code><span class="co">## R version 4.1.2 (2021-11-01)</span>
+<span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span>
+<span class="co">## Running under: Ubuntu 20.04.3 LTS</span>
+<span class="co">## </span>
+<span class="co">## Matrix products: default</span>
+<span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0</span>
+<span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0</span>
+<span class="co">## </span>
+<span class="co">## locale:</span>
+<span class="co">##  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span>
+<span class="co">##  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   </span>
+<span class="co">##  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          </span>
+<span class="co">## [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   </span>
+<span class="co">## </span>
+<span class="co">## attached base packages:</span>
+<span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
+<span class="co">## </span>
+<span class="co">## other attached packages:</span>
+<span class="co">## [1] pxweb_0.13.0</span>
+<span class="co">## </span>
+<span class="co">## loaded via a namespace (and not attached):</span>
+<span class="co">##  [1] knitr_1.37        magrittr_2.0.2    R6_2.5.1          ragg_1.2.1       </span>
+<span class="co">##  [5] rlang_1.0.0       fastmap_1.1.0     httr_1.4.2        stringr_1.4.0    </span>
+<span class="co">##  [9] tools_4.1.2       checkmate_2.0.0   xfun_0.29         cli_3.1.1        </span>
+<span class="co">## [13] jquerylib_0.1.4   htmltools_0.5.2   systemfonts_1.0.3 yaml_2.2.2       </span>
+<span class="co">## [17] digest_0.6.29     rprojroot_2.0.2   pkgdown_2.0.2     crayon_1.4.2     </span>
+<span class="co">## [21] textshaping_0.3.6 purrr_0.3.4       sass_0.4.0        fs_1.5.2         </span>
+<span class="co">## [25] curl_4.3.2        memoise_2.0.1     cachem_1.0.6      evaluate_0.14    </span>
+<span class="co">## [29] rmarkdown_2.11    stringi_1.7.6     compiler_4.1.2    bslib_0.3.1      </span>
+<span class="co">## [33] backports_1.4.1   desc_1.4.0        jsonlite_1.7.3</span></code></pre>
 </div>
-  </div>
- <div class="col-md-3" id="pkgdown-sidebar">
-        <nav id="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
@@ -632,7 +632,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>
