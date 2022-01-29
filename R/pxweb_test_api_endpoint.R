@@ -85,7 +85,7 @@ pxweb_test_api <- function(url, test_type="first", n = 1, verbose = TRUE, time_l
     
     api_tree_df$checked[i] <- TRUE
     
-    if(test_type == "touch"){
+    if(test_type == "touch" & !inherits(tmp_df, "try-error")){
       # Jump to next level
       i <- nrow(api_tree_df)
     }

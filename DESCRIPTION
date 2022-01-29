@@ -40,7 +40,8 @@ Suggests:
     knitr,
     remotes,
     rmarkdown,
-    testthat (>= 0.11)
+    testthat (>= 0.11),
+    xml2
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
