@@ -100,9 +100,7 @@ pxweb_as_data_frame.pxweb_levels <- function(x, optional = FALSE, ..., stringsAs
   df <- list()
   for(i in seq_along(x)){
     df[[i]] <- as.data.frame(x[[i]], optional = optional, stringsAsFactors = FALSE)
-    if(x[[i]]$type %in% c("l", "h")) {
-      df[[i]]$updated <- NA
-    }
+    if(is.null(df[[i]]$updated)) df[[i]]$updated <- NA
   }
   df <- do.call(rbind, df)
 
