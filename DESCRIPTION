@@ -1,31 +1,34 @@
-Package: pxweb
 Type: Package
+Package: pxweb
 Title: R Interface to PXWEB APIs
 Version: 0.12.0
 Date: 2021-10-09
-Encoding: UTF-8
 Authors@R: c(
-  person("Mans", "Magnusson", email = "mons.magnusson@gmail.com", role = c("aut", "cre")),
-	person("Markus", "Kainu", role = "aut"),
-	person("Janne", "Huovari", role = "aut"),  	
-	person("Leo", "Lahti", role = "aut", comment = c(ORCID = "0000-0001-5537-637X")),
-	person("Love" , "Hansson", role = "ctb"),	
-	person("Eydun", "Nielsen", role = "ctb"),
-	person("Bo", "Werth", role = "ctb"),
-	person("Thomas", "Runarsson", role = "ctb"),
-	person("Torbjörn", "Lindquist", role = "ctb"),
-	person("Palmar", "Thorsteinsson", role = "ctb"),
-	person("Pyry", "Kantanen", role = "ctb"),
-	person("Sebastian", "Ankargren", role = "ctb"))
-Description: Generic interface for the PX-Web/PC-Axis API. The PX-Web/PC-Axis
-    API is used by organizations such as Statistics Sweden and Statistics
-    Finland to disseminate data. The R package can interact with all
-    PX-Web/PC-Axis APIs to fetch information about the data hierarchy, extract
-    metadata and extract and parse statistics to R data.frame format. PX-Web is
-    a solution to disseminate PC-Axis data files in dynamic tables on the web.
-    Since 2013 PX-Web contains an API to disseminate PC-Axis files.
-VignetteBuilder: knitr
-URL: https://github.com/rOpenGov/pxweb/
+    person("Mans", "Magnusson", , "mons.magnusson@gmail.com", role = c("aut", "cre")),
+    person("Markus", "Kainu", role = "aut"),
+    person("Janne", "Huovari", role = "aut"),
+    person("Leo", "Lahti", role = "aut",
+           comment = c(ORCID = "0000-0001-5537-637X")),
+    person("Love", "Hansson", role = "ctb"),
+    person("Eydun", "Nielsen", role = "ctb"),
+    person("Bo", "Werth", role = "ctb"),
+    person("Thomas", "Runarsson", role = "ctb"),
+    person("Torbjörn", "Lindquist", role = "ctb"),
+    person("Palmar", "Thorsteinsson", role = "ctb"),
+    person("Pyry", "Kantanen", role = "ctb"),
+    person("Sebastian", "Ankargren", role = "ctb")
+  )
+Description: Generic interface for the PX-Web/PC-Axis API. The
+    PX-Web/PC-Axis API is used by organizations such as Statistics Sweden
+    and Statistics Finland to disseminate data. The R package can interact
+    with all PX-Web/PC-Axis APIs to fetch information about the data
+    hierarchy, extract metadata and extract and parse statistics to R
+    data.frame format. PX-Web is a solution to disseminate PC-Axis data
+    files in dynamic tables on the web.  Since 2013 PX-Web contains an API
+    to disseminate PC-Axis files.
+License: BSD_2_clause + file LICENSE
+URL: https://github.com/rOpenGov/pxweb/,
+    https://ropengov.github.io/pxweb/, https://github.com/rOpenGov/pxweb
 BugReports: https://github.com/rOpenGov/pxweb/issues
 Depends:
     R (>= 3.5.0)
@@ -33,10 +36,14 @@ Imports:
     checkmate,
     httr (>= 1.1),
     jsonlite
-License: BSD_2_clause + file LICENSE
 Suggests:
     knitr,
     remotes,
     rmarkdown,
     testthat (>= 0.11)
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
 RoxygenNote: 7.1.1
+X-schema.org-isPartOf: http://ropengov.org/
+X-schema.org-keywords: ropengov

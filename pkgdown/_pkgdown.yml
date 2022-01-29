@@ -1,0 +1,25 @@
+reference:
+- title: All functions
+  desc: |
+    Listing of functions in the pxweb package
+  contents:
+  - pxweb-package
+  - pxweb_advanced_get
+  - pxweb_cite
+  - pxweb_get
+  - pxweb_get_data
+  - pxweb_query_as_json
+  - pxweb_test_api
+  - pxweb_validate_query_with_metadata
+  - api_catalogue
+  - assert_query_can_be_split_to_batches
+- title: Interactive functions
+  desc: |
+    Listing of interactive functions
+  contents: pxweb_interactive
+url: https://ropengov.github.io/pxweb/
+template:
+  package: rogtemplate
+  opengraph:
+    twitter:
+      site: '@rOpenGov'
