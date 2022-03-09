@@ -15,13 +15,13 @@
         "max_values_to_download" : 110000
           }, 
   
-    "pxnet2.stat.fi": {
-        "alias" : ["statfi"],
+    "statfin.stat.fi": {
+        "alias" : ["statfi", "statfin"],
         "description" : "Statistics Finland",
         "citation" : {
           "organization" : "Statistics Finland",
           "address" : "Helsinki, Finland"},
-        "url" : "https://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
+        "url" : "https://statfin.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","fi","sv"],
         "calls_per_period": 20,
