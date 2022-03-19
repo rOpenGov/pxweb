@@ -1,3 +1,7 @@
+# Version 0.14.0
+
+- Added feature to print pxweb_query objects to R code
+
 # Version 0.10.4
 
 - Bug fixes

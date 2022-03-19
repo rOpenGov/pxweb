@@ -6,15 +6,19 @@
 #'
 #' @param x an object to cast as a pxweb_query object.
 #' 
+#' @seealso \code{\link{pxweb_query_as_json}}, \code{\link{pxweb_query_as_rcode}}
+#' 
 #' @examples 
 #' dims <- list(Alue = c("*"),
 #'              "Asuntokunnan koko" = c("*"),
 #'              Talotyyppi = c("S"),
 #'              Vuosi = c("*"))
 #' pxq1 <- pxweb_query(dims)
+#' 
 #' json_query <- file.path(system.file(package = "pxweb"), 
 #'                         "extdata", "examples", "json_query_example.json")
 #' pxq2 <- pxweb_query(json_query)
+#' 
 #' 
 #' @export
 pxweb_query <- function(x){
@@ -318,6 +322,8 @@ pxweb_query_filter <- function(pxq){
 #' @param pxq a \code{pxweb_query} object.
 #' @param ... further argument to \code{jsonlite::toJSON()}.
 #' 
+#' @seealso \code{\link{pxweb_query}}, \code{\link{pxweb_query_as_rcode}}
+#' 
 #' @examples 
 #' json_query <- file.path(system.file(package = "pxweb"), 
 #'                         "extdata", "examples", "json_query_example.json")
@@ -335,10 +341,13 @@ pxweb_query_as_json <- function(pxq, ...){
   jsonlite::toJSON(pxq, ...)
 }
 
-#' Convert a \code{pxweb_query} object to R code
-#' @details One element per row is returned.
+#' Print a \code{pxweb_query} object as R code
+#' 
 #' @param pxq a \code{pxweb_query} object.
-#' @keywords internal
+#' 
+#' @seealso \code{\link{pxweb_query_as_json}}, \code{\link{pxweb_query}}
+#' 
+#' @export
 pxweb_query_as_rcode <- function(pxq){
   checkmate::assert_class(pxq, "pxweb_query")
   
@@ -356,6 +365,6 @@ pxweb_query_as_rcode <- function(pxq){
     res[-length(res)] <- paste0(res[-length(res)], ",")
   }
   res <- c("pxweb_query_list <- ", res)
-
-  res
+  cat(res, sep ="\n")
+  invisible(res)
 }

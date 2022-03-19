@@ -2,7 +2,7 @@
 % Please edit documentation in R/pxweb_query.R
 \name{pxweb_query_as_rcode}
 \alias{pxweb_query_as_rcode}
-\title{Convert a \code{pxweb_query} object to R code}
+\title{Print a \code{pxweb_query} object as R code}
 \usage{
 pxweb_query_as_rcode(pxq)
 }
@@ -10,9 +10,8 @@ pxweb_query_as_rcode(pxq)
 \item{pxq}{a \code{pxweb_query} object.}
 }
 \description{
-Convert a \code{pxweb_query} object to R code
+Print a \code{pxweb_query} object as R code
 }
-\details{
-One element per row is returned.
+\seealso{
+\code{\link{pxweb_query_as_json}}, \code{\link{pxweb_query}}
 }
-\keyword{internal}
