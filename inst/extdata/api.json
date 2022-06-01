@@ -401,6 +401,21 @@
         "calls_per_period": 100,
         "period_in_seconds": 10,
         "max_values_to_download" : 1000000
+    },
+  },
+
+    "pxweb.stat.si": {
+        "description" : "SiStat Database",
+        "citation" : {
+          "organization" : "Statistical Office of the Republic of Slovenia",
+          "address" : "Ljubljana, Slovenia"
+          },
+        "url" : "https://pxweb.stat.si/SiStatData/api/[version]/[lang]/Data",
+        "version": ["v1"],
+        "lang": ["sl"],
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000000
     }
   },
   "local_apis": {}
