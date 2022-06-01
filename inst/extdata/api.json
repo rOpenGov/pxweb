@@ -402,7 +402,6 @@
         "period_in_seconds": 10,
         "max_values_to_download" : 1000000
     },
-  },
 
     "pxweb.stat.si": {
         "description" : "SiStat Database",
