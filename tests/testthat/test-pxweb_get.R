@@ -2,6 +2,35 @@
 
 context("pxweb_get")
 
+test_that(desc="Test to download px and sdmx",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  json_px_query <- readLines(test_path("test_data/test_query_px.json"))
+  
+  expect_silent(px_file_path1 <- 
+                  pxweb_get(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+                            query = json_px_query)
+  )
+  checkmate::expect_file_exists(px_file_path1)
+  
+  # data <- pxR::read.px(px_file_path1)
+  
+  json_sdmx_query <- readLines(test_path("test_data/test_query_sdmx.json"))
+  expect_silent(px_file_path2 <- 
+                  pxweb_get(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+                            query = json_sdmx_query)
+  )
+  checkmate::expect_file_exists(px_file_path2)
+  expect_true(px_file_path1 != px_file_path2)
+  
+  pxq <- pxweb_query(json_px_query) 
+  pxq$response$format <- "sdmx"
+  pxfp <- pxweb_get(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+                    pxq)
+  expect_true(px_file_path2 == pxfp)
+  
+})  
+
 test_that(desc="Constructor works as it should with Statistics Sweden",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
@@ -246,31 +275,4 @@ test_that(desc="Query with non-ascii characters work as well",{
 })  
 
 
-test_that(desc="Test to download px and sdmx",{
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  json_px_query <- readLines(test_path("test_data/test_query_px.json"))
-  
-  expect_silent(px_file_path1 <- 
-                  pxweb_get(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
-                            query = json_px_query)
-  )
-  checkmate::expect_file_exists(px_file_path1)
-  
-  # data <- pxR::read.px(px_file_path1)
-  
-  json_sdmx_query <- readLines(test_path("test_data/test_query_sdmx.json"))
-  expect_silent(px_file_path2 <- 
-                  pxweb_get(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
-                            query = json_sdmx_query)
-  )
-  checkmate::expect_file_exists(px_file_path2)
-  expect_true(px_file_path1 != px_file_path2)
 
-  pxq <- pxweb_query(json_px_query) 
-  pxq$response$format <- "sdmx"
-  pxfp <- pxweb_get(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
-                       pxq)
-  expect_true(px_file_path2 == pxfp)
-  
-})  
