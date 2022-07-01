@@ -266,5 +266,11 @@ test_that(desc="Test to download px and sdmx",{
   )
   checkmate::expect_file_exists(px_file_path2)
   expect_true(px_file_path1 != px_file_path2)
+
+  pxq <- pxweb_query(json_px_query) 
+  pxq$response$format <- "sdmx"
+  pxfp <- pxweb_get(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
+                       pxq)
+  expect_true(px_file_path2 == pxfp)
   
 })  

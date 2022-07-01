@@ -20,7 +20,7 @@ pxweb_c <- function(x){
   if(inherits(x[[1]], "character")) {
     fp <- unlist(x)
     fe <- file.exists(fp)
-    if(all(file.exists(x))){
+    if(all(fe)){
       message("PXWEB API did not return JSON. Files has been stored locally (tempdir) and paths has been returned.")
       return(x)
     } else {
