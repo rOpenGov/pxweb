@@ -6,6 +6,7 @@
 \alias{pxweb_query.json}
 \alias{pxweb_query.pxweb_query}
 \alias{pxweb_query.list}
+\alias{pxweb_query.response}
 \alias{pxweb_query.pxweb_explorer}
 \title{Create a PXWEB query}
 \usage{
@@ -18,6 +19,8 @@ pxweb_query(x)
 \method{pxweb_query}{pxweb_query}(x)
 
 \method{pxweb_query}{list}(x)
+
+\method{pxweb_query}{response}(x)
 
 \method{pxweb_query}{pxweb_explorer}(x)
 }
