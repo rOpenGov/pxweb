@@ -14,7 +14,7 @@ vignette: >
 
 This R package provides tools to access [PX-WEB
 API](https://pxnet2.stat.fi/API-description_SCB.pdf). Your
-[contributions](http://ropengov.org/community/) and [bug reports and other feedback](https://github.com/ropengov/pxweb) are
+[contributions](https://ropengov.org/community/) and [bug reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
 
 

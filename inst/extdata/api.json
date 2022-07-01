@@ -24,7 +24,7 @@
         "url" : "https://statfin.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","fi","sv"],
-        "calls_per_period": 20,
+        "calls_per_period": 30,
         "period_in_seconds": 10,
         "max_values_to_download" : 120000
               },
@@ -398,7 +398,7 @@
         "url" : "https://pxweb.nordicstatistics.org/api/[version]/[lang]/",
         "version": ["v1"], 
         "lang": ["en"],
-        "calls_per_period": 100,
+        "calls_per_period": 10,
         "period_in_seconds": 10,
         "max_values_to_download" : 1000
     },
@@ -414,7 +414,7 @@
         "lang": ["sl"],
         "calls_per_period": 10,
         "period_in_seconds": 10,
-        "max_values_to_download" : 1000000
+        "max_values_to_download" : 10000000
     }
   },
   "local_apis": {}
