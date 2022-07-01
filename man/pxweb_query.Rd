@@ -6,6 +6,7 @@
 \alias{pxweb_query.json}
 \alias{pxweb_query.pxweb_query}
 \alias{pxweb_query.list}
+\alias{pxweb_query.response}
 \alias{pxweb_query.pxweb_explorer}
 \title{Create a PXWEB query}
 \usage{
@@ -18,6 +19,8 @@ pxweb_query(x)
 \method{pxweb_query}{pxweb_query}(x)
 
 \method{pxweb_query}{list}(x)
+
+\method{pxweb_query}{response}(x)
 
 \method{pxweb_query}{pxweb_explorer}(x)
 }
@@ -34,9 +37,14 @@ dims <- list(Alue = c("*"),
              Talotyyppi = c("S"),
              Vuosi = c("*"))
 pxq1 <- pxweb_query(dims)
+
 json_query <- file.path(system.file(package = "pxweb"), 
                         "extdata", "examples", "json_query_example.json")
 pxq2 <- pxweb_query(json_query)
 
+
+}
+\seealso{
+\code{\link{pxweb_query_as_json}}, \code{\link{pxweb_query_as_rcode}}
 }
 \keyword{internal}

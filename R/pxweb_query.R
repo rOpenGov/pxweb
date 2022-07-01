@@ -6,15 +6,19 @@
 #'
 #' @param x an object to cast as a pxweb_query object.
 #' 
+#' @seealso \code{\link{pxweb_query_as_json}}, \code{\link{pxweb_query_as_rcode}}
+#' 
 #' @examples 
 #' dims <- list(Alue = c("*"),
 #'              "Asuntokunnan koko" = c("*"),
 #'              Talotyyppi = c("S"),
 #'              Vuosi = c("*"))
 #' pxq1 <- pxweb_query(dims)
+#' 
 #' json_query <- file.path(system.file(package = "pxweb"), 
 #'                         "extdata", "examples", "json_query_example.json")
 #' pxq2 <- pxweb_query(json_query)
+#' 
 #' 
 #' @export
 pxweb_query <- function(x){
@@ -31,14 +35,21 @@ pxweb_query.character <- function(x){
   }
   class(obj) <- c("pxweb_query", "list")
   assert_pxweb_query(obj, check_response_format = FALSE)
-  if(tolower(obj$response$format) %in% c("json-stat", "jsonstat")){
-    obj$response$format <- "json-stat"
+  if(tolower(obj$response$format) == "json"){
+    obj$response$format <- "json"
+  } else if (tolower(obj$response$format) %in% c("json-stat", "jsonstat")){
+    obj$response$format <- "json-stat"    
+  } else if (tolower(obj$response$format) %in% pxweb_file_response_formats()){
+
   } else {
-    obj$response$format <- "json"    
+    warning(paste0("'", obj$response$format, "' is not a valid query response format, set to 'json'."))
+    obj$response$format <- "json"
   }
   assert_pxweb_query(obj)
   obj
 }
+
+pxweb_file_response_formats <- function() c("px", "sdmx")
 
 #' @rdname pxweb_query
 #' @keywords internal
@@ -77,6 +88,15 @@ pxweb_query.list <- function(x){
 #' @rdname pxweb_query
 #' @keywords internal
 #' @export
+pxweb_query.response <- function(x){
+  if(is.null(x$request$options$postfields)) return(NULL)
+  pxweb_query(x = readBin(x$request$options$postfields, what = "character"))
+}
+
+
+#' @rdname pxweb_query
+#' @keywords internal
+#' @export
 pxweb_query.pxweb_explorer <- function(x){
   checkmate::assert_true(pxe_position_is_full_query(x))
   md_ch <- pxe_metadata_choices(x)
@@ -106,9 +126,9 @@ assert_pxweb_query <- function(x, check_response_format = TRUE){
   checkmate::assert_names(names(x), must.include = c("query", "response"), .var.name = "names(pxweb_query)")
   checkmate::assert_names(names(x$response), must.include = c("format"))
   if(check_response_format){
-    checkmate::assert_choice(x$response$format, c("json", "json-stat"))
+    checkmate::assert_choice(x$response$format, c("json", "json-stat", pxweb_file_response_formats()))
   }
-
+  
 
   checkmate::assert_named(x$query, "unnamed")
   for(i in seq_along(x$query)){
@@ -318,6 +338,8 @@ pxweb_query_filter <- function(pxq){
 #' @param pxq a \code{pxweb_query} object.
 #' @param ... further argument to \code{jsonlite::toJSON()}.
 #' 
+#' @seealso \code{\link{pxweb_query}}, \code{\link{pxweb_query_as_rcode}}
+#' 
 #' @examples 
 #' json_query <- file.path(system.file(package = "pxweb"), 
 #'                         "extdata", "examples", "json_query_example.json")
@@ -335,10 +357,13 @@ pxweb_query_as_json <- function(pxq, ...){
   jsonlite::toJSON(pxq, ...)
 }
 
-#' Convert a \code{pxweb_query} object to R code
-#' @details One element per row is returned.
+#' Print a \code{pxweb_query} object as R code
+#' 
 #' @param pxq a \code{pxweb_query} object.
-#' @keywords internal
+#' 
+#' @seealso \code{\link{pxweb_query_as_json}}, \code{\link{pxweb_query}}
+#' 
+#' @export
 pxweb_query_as_rcode <- function(pxq){
   checkmate::assert_class(pxq, "pxweb_query")
   
@@ -356,6 +381,6 @@ pxweb_query_as_rcode <- function(pxq){
     res[-length(res)] <- paste0(res[-length(res)], ",")
   }
   res <- c("pxweb_query_list <- ", res)
-
-  res
+  cat(res, sep ="\n")
+  invisible(res)
 }

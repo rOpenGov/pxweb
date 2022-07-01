@@ -17,6 +17,17 @@ pxweb_c <- function(x){
     return(x)
   }
   
+  if(inherits(x[[1]], "character")) {
+    fp <- unlist(x)
+    fe <- file.exists(fp)
+    if(all(fe)){
+      message("PXWEB API did not return JSON. Files has been stored locally (tempdir) and paths has been returned.")
+      return(x)
+    } else {
+      stop("Files doesn't exist:\n", paste(fp[!fe], collapse = "\n"), call. = FALSE)
+    }
+  }
+  
   stop("pxweb_c() not implemented for class '", class(x[[1]])[1], "'.", call. = FALSE)
 }
 

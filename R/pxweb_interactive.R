@@ -985,7 +985,7 @@ pxe_print_download_code <- function(pxe, as){
   if(as == "r"){
     cat("# PXWEB query \n")
     q_path <- "pxweb_query_list"
-    cat(pxweb_query_as_rcode(q), sep ="\n")
+    pxweb_query_as_rcode(q)
     cat("\n")
   }
   cat("# Download data \n",

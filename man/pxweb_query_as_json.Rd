@@ -21,3 +21,6 @@ pxq <- pxweb_query(json_query)
 json <- pxweb_query_as_json(pxq, pretty = TRUE)
 
 }
+\seealso{
+\code{\link{pxweb_query}}, \code{\link{pxweb_query_as_rcode}}
+}

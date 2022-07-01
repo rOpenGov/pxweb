@@ -6,7 +6,15 @@
 pxweb_parse_response <- function(x){
   checkmate::assert_class(x, "response")
   
-  obj <- suppressWarnings(httr::content(x, as = "parsed"))
+  pxq <- pxweb_query(x)
+  if(is.null(pxq) || pxq$response %in% c("json", "json-stat")){
+    obj <- suppressWarnings(httr::content(x, as = "parsed"))
+  } else if (pxq$response %in% pxweb_file_response_formats()){
+    obj <- suppressWarnings(httr::content(x, as = "raw"))
+    obj_path <- file.path(tempdir(), paste0(digest::sha1(obj), ".", pxq$response))
+    writeBin(con = obj_path, object = obj)
+    return(obj_path)
+  }
 
   try_obj <- try(pxweb_database_list(obj), silent = TRUE)
   if(!inherits(try_obj, "try-error")) {
