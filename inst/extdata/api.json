@@ -363,7 +363,7 @@
         "max_values_to_download" : 110000
     },
     
-    "api.aluesarjat.fi": {
+    "stat.hel.fi": {
         "description" : "Helsingin seudun aluesarjat -tilastotietokanta",
         "citation" : {
           "organization" : "City of Helsinki",
