@@ -368,7 +368,7 @@
         "citation" : {
           "organization" : "City of Helsinki",
           "address" : "Helsinki, Finland"},
-        "url" : "https://api.aluesarjat.fi/api/[version]/[lang]",
+        "url" : "https://stat.hel.fi/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
         "calls_per_period": 1000,
