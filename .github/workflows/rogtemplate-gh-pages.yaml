@@ -30,6 +30,8 @@ jobs:
             any::pkgdown
             ropengov/rogtemplate
             any::magick
+            any::devtools
+            any::remotes
 
       - name: Build logo if not present and prepare template
         run: |
