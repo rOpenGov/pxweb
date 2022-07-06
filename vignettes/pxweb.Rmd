@@ -52,8 +52,8 @@ install.packages("pxweb")
 To install the latest stable release version from GitHub, just use:
 
 ```{r install2, eval=FALSE}
-library("devtools")
-devtools::install_github("ropengov/pxweb")
+library("remotes")
+remotes::install_github("ropengov/pxweb")
 ```
 
 Test the installation by loading the library:
