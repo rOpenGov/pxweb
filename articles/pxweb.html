@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Roboto%20Mono-0.4.1/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Roboto_Mono-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="PX-WEB API Interface for R">
@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">pxweb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>PX-WEB API Interface for R</h1>
                         <h4 data-toc-skip class="author">Mans Magnusson, Leo Lahti et al.</h4>
             
-            <h4 data-toc-skip class="date">2022-07-06</h4>
+            <h4 data-toc-skip class="date">2022-07-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/pxweb/blob/HEAD/vignettes/pxweb.Rmd" class="external-link"><code>vignettes/pxweb.Rmd</code></a></small>
       <div class="d-none name"><code>pxweb.Rmd</code></div>
@@ -190,7 +190,7 @@
 <span><span class="co">##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2021</span></span>
 <span><span class="co">##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2021</span></span>
 <span><span class="co">##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2021</span></span>
-<span><span class="co">##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2022M04</span></span>
+<span><span class="co">##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2022M05</span></span>
 <span><span class="co">##   BefolkningR1860N (t): Population by age and sex. Year 1860 - 2021</span></span></code></pre>
 <p>And if we use <code><a href="../reference/pxweb_get.html">pxweb_get()</a></code> for a table, a PXWEB METADATA object is returned.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -450,7 +450,7 @@
 <span><span class="co">##     },</span></span>
 <span><span class="co">##     "label": ["Population by marital status, sex, observations and year"],</span></span>
 <span><span class="co">##     "source": ["Statistics Sweden"],</span></span>
-<span><span class="co">##     "updated": ["2022-07-06T08:35:00Z"],</span></span>
+<span><span class="co">##     "updated": ["2022-07-19T19:54:00Z"],</span></span>
 <span><span class="co">##     "value": [</span></span>
 <span><span class="co">##       [2762601],</span></span>
 <span><span class="co">##       [2820248],</span></span>
@@ -492,7 +492,7 @@
 <span><span class="va">pxfp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="st">"http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
 <span>                     <span class="va">pxq</span><span class="op">)</span></span>
 <span><span class="va">pxfp</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "/tmp/RtmpFv8dwG/551a710fae99541a86a04cc3d7e243114aa0e19e.px"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "/tmp/RtmpeGypZY/761afbbd208b3315c87066e132868e95cc11cfdc.px"</span></span></code></pre>
 <p>If the queries are large (contain more values than the PXWEB API maximum allowed values), the query is chunked into optimal chunks and is then downloaded sequentially. PXWEB data objects are then combined into one large PXWEB data object, while JSON-stat objects are returned as a list of JSON-stat objects, and other files are stored in <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> as separate files.</p>
 <p>For more advanced connections to the API, the <code><a href="../reference/pxweb_advanced_get.html">pxweb_advanced_get()</a></code> gives the flexibility to access the underlying HTTP calls using <code>httr</code> and log the HTTP calls for debugging.</p>
 <p>We can then convert the downloaded PXWEB data objects to a <code>data. frame</code> or to a character matrix. The character matrix contains the “raw” data while <code>data. frame</code> returns an R <code>data.frame</code> in a tidy format. This conversion means missing values (such as “..” are converted to <code>NA</code>) in a <code>data. frame</code>. Using the arguments <code>variable.value.type</code> and <code>column.name.type</code>, we can choose if we want the code or the text column names and value types.</p>
@@ -549,8 +549,8 @@
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pxweb_cite.html">pxweb_cite</a></span><span class="op">(</span><span class="va">pxd</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Statistics Sweden (2022). "Population by region, marital status, age,</span></span>
-<span><span class="co">## sex, observations and year." [Data accessed 2022-07-06 08:35:14 using</span></span>
-<span><span class="co">## pxweb R package 0.15.1],</span></span>
+<span><span class="co">## sex, observations and year." [Data accessed 2022-07-19 19:56:56 using</span></span>
+<span><span class="co">## pxweb R package 0.16.0],</span></span>
 <span><span class="co">## &lt;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## A BibTeX entry for LaTeX users is</span></span>
@@ -562,7 +562,7 @@
 <span><span class="co">##     address = {Stockholm, Sweden},</span></span>
 <span><span class="co">##     year = {2022},</span></span>
 <span><span class="co">##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},</span></span>
-<span><span class="co">##     note = {[Data accessed 2022-07-06 08:35:14 using pxweb R package 0.15.1]},</span></span>
+<span><span class="co">##     note = {[Data accessed 2022-07-19 19:56:56 using pxweb R package 0.16.0]},</span></span>
 <span><span class="co">##   }</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## </span></span>
@@ -616,17 +616,17 @@
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] pxweb_0.15.1</span></span>
+<span><span class="co">## [1] pxweb_0.16.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span></span>
-<span><span class="co">##  [5] rlang_1.0.3       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span></span>
+<span><span class="co">##  [5] rlang_1.0.4       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span></span>
 <span><span class="co">##  [9] tools_4.2.0       checkmate_2.1.0   xfun_0.31         cli_3.3.0        </span></span>
-<span><span class="co">## [13] jquerylib_0.1.4   htmltools_0.5.2   systemfonts_1.0.4 yaml_2.3.5       </span></span>
-<span><span class="co">## [17] digest_0.6.29     rprojroot_2.0.3   pkgdown_2.0.5     textshaping_0.3.6</span></span>
-<span><span class="co">## [21] purrr_0.3.4       sass_0.4.1        fs_1.5.2          curl_4.3.2       </span></span>
+<span><span class="co">## [13] jquerylib_0.1.4   htmltools_0.5.3   systemfonts_1.0.4 yaml_2.3.5       </span></span>
+<span><span class="co">## [17] digest_0.6.29     rprojroot_2.0.3   pkgdown_2.0.6     textshaping_0.3.6</span></span>
+<span><span class="co">## [21] purrr_0.3.4       sass_0.4.2        fs_1.5.2          curl_4.3.2       </span></span>
 <span><span class="co">## [25] memoise_2.0.1     cachem_1.0.6      evaluate_0.15     rmarkdown_2.14   </span></span>
-<span><span class="co">## [29] stringi_1.7.6     compiler_4.2.0    bslib_0.3.1       backports_1.4.1  </span></span>
+<span><span class="co">## [29] stringi_1.7.8     compiler_4.2.0    bslib_0.4.0       backports_1.4.1  </span></span>
 <span><span class="co">## [33] desc_1.4.1        jsonlite_1.8.0</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -642,7 +642,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
