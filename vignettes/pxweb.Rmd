@@ -14,7 +14,7 @@ vignette: >
 
 This R package provides tools to access [PX-WEB
 API](https://pxnet2.stat.fi/API-description_SCB.pdf). Your
-[contributions](http://ropengov.org/community/) and [bug reports and other feedback](https://github.com/ropengov/pxweb) are
+[contributions](https://ropengov.org/community/) and [bug reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
 
 
@@ -52,8 +52,8 @@ install.packages("pxweb")
 To install the latest stable release version from GitHub, just use:
 
 ```{r install2, eval=FALSE}
-library("devtools")
-devtools::install_github("ropengov/pxweb")
+library("remotes")
+remotes::install_github("ropengov/pxweb")
 ```
 
 Test the installation by loading the library:

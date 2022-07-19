@@ -6,6 +6,7 @@ status](https://github.com/rOpenGov/pxweb/workflows/R-CMD-check/badge.svg)](http
 [![codecov](https://codecov.io/gh/rOpenGov/pxweb/branch/master/graph/badge.svg?token=zYtxsus27g)](https://codecov.io/gh/rOpenGov/pxweb)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://cran.r-project.org/package=pxweb)
 [![Downloads](http://cranlogs.r-pkg.org/badges/pxweb)](https://cran.r-project.org/package=pxweb)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/pxweb)](https://cran.r-project.org/package=pxweb)
 [![Gitter](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://gitter.im/rOpenGov/pxweb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Watch on
 GitHub](https://img.shields.io/github/watchers/ropengov/pxweb.svg?style=social)](https://github.com/ropengov/pxweb/watchers)
