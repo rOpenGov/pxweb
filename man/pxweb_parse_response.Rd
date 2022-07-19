@@ -3,7 +3,7 @@
 \name{pxweb_parse_response}
 \alias{pxweb_parse_response}
 \alias{is_pxweb_response}
-\title{Parse the response from a PXWEB API}
+\title{Parse the response from a PXWEB API (advanced)}
 \usage{
 pxweb_parse_response(x)
 
@@ -13,6 +13,7 @@ is_pxweb_response(x)
 \item{x}{a \code{httr} response object from a PXWEB call.}
 }
 \description{
-Parse the response from a PXWEB API
+The function parses the response from a call made to a PXWEB API
+using the \code{httr} R package. In this way it is possible to parse the 
+content of calls made outside the pxweb R package.
 }
-\keyword{internal}

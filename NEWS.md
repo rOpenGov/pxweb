@@ -1,3 +1,7 @@
+# Version 0.16.0
+
+- exposed pxweb_parse_response() and is_pxweb_response() to the package API for more advanced users that want to make their own `httr` calls to a PXWEB API.
+
 # Version 0.15.0
 
 - Added possibility to download px and sdmx response formats as files
