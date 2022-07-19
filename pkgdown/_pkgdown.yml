@@ -8,6 +8,7 @@ reference:
   - pxweb_cite
   - pxweb_get
   - pxweb_get_data
+  - pxweb_parse_response  
   - pxweb_query_as_json
   - pxweb_test_api
   - pxweb_validate_query_with_metadata

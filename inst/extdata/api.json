@@ -373,7 +373,7 @@
         "lang": ["fi"],
         "calls_per_period": 1000,
         "period_in_seconds": 10,
-        "max_values_to_download": 10000000
+        "max_values_to_download": 100000
     },
     
     "andmed.stat.ee": {
@@ -412,7 +412,7 @@
         "url" : "https://pxweb.stat.si/SiStatData/api/[version]/[lang]/Data",
         "version": ["v1"],
         "lang": ["sl"],
-        "calls_per_period": 10,
+        "calls_per_period": 100,
         "period_in_seconds": 10,
         "max_values_to_download" : 10000000
     }
