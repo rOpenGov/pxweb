@@ -1,8 +1,13 @@
-#' Parse the response from a PXWEB API
+#' Parse the response from a PXWEB API (advanced)
+#' 
+#' @description  
+#' The function parses the response from a call made to a PXWEB API
+#' using the \code{httr} R package. In this way it is possible to parse the 
+#' content of calls made outside the pxweb R package.
 #' 
 #' @param x a \code{httr} response object from a PXWEB call.
 #' 
-#' @keywords internal
+#' @export
 pxweb_parse_response <- function(x){
   checkmate::assert_class(x, "response")
   
@@ -37,8 +42,9 @@ pxweb_parse_response <- function(x){
   stop("Incorrect return response from PXWEB API url: \n", x$url, call. = FALSE)
 }
 
+
 #' @rdname pxweb_parse_response
-#' @keywords internal
+#' @export
 is_pxweb_response <- function(x){
   !inherits(try(pxweb_parse_response(x), silent = TRUE), "try-error")
 }
