@@ -14,6 +14,7 @@ reference:
   - pxweb_validate_query_with_metadata
   - api_catalogue
   - assert_query_can_be_split_to_batches
+  - pxweb_query_as_rcode
 - title: Interactive functions
   desc: |
     Listing of interactive functions
