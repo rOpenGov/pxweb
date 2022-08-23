@@ -24,9 +24,9 @@ jobs:
       max-parallel: 2
       matrix:
         config:
+          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", locale: 'en_US.iso885915'}
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", locale: 'en_US.iso885915'}
           - {os: windows-latest, r: 'release'}
           - {os: macOS-latest, r: 'release'}
 
@@ -40,8 +40,8 @@ jobs:
       - name: Set locale
         if: matrix.config.locale == 'en_US.iso885915'
         run: |
-          sudo locale-gen en_US.iso885915
-          echo "LC_ALL=en_US" >> $GITHUB_ENV  
+          sudo locale-gen en_US-ISO.8859-15
+          echo "LC_ALL=en_US.iso885915" >> $GITHUB_ENV  
 
       - uses: actions/checkout@v2
 
