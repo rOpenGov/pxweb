@@ -492,7 +492,7 @@
 <span><span class="va">pxfp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="st">"http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
 <span>                     <span class="va">pxq</span><span class="op">)</span></span>
 <span><span class="va">pxfp</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "/tmp/RtmpM90Poe/321aec71c7ed0d1462078c8a88253d6a3c54f62b.px"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "/tmp/RtmpqaXxwH/321aec71c7ed0d1462078c8a88253d6a3c54f62b.px"</span></span></code></pre>
 <p>If the queries are large (contain more values than the PXWEB API maximum allowed values), the query is chunked into optimal chunks and is then downloaded sequentially. PXWEB data objects are then combined into one large PXWEB data object, while JSON-stat objects are returned as a list of JSON-stat objects, and other files are stored in <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> as separate files.</p>
 <p>For more advanced connections to the API, the <code><a href="../reference/pxweb_advanced_get.html">pxweb_advanced_get()</a></code> gives the flexibility to access the underlying HTTP calls using <code>httr</code> and log the HTTP calls for debugging.</p>
 <p>We can then convert the downloaded PXWEB data objects to a <code>data. frame</code> or to a character matrix. The character matrix contains the “raw” data while <code>data. frame</code> returns an R <code>data.frame</code> in a tidy format. This conversion means missing values (such as “..” are converted to <code>NA</code>) in a <code>data. frame</code>. Using the arguments <code>variable.value.type</code> and <code>column.name.type</code>, we can choose if we want the code or the text column names and value types.</p>
@@ -549,7 +549,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pxweb_cite.html">pxweb_cite</a></span><span class="op">(</span><span class="va">pxd</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Statistics Sweden (2022). "Population by region, marital status, age,</span></span>
-<span><span class="co">## sex, observations and year." [Data accessed 2022-08-23 15:54:25 using</span></span>
+<span><span class="co">## sex, observations and year." [Data accessed 2022-08-23 15:55:20 using</span></span>
 <span><span class="co">## pxweb R package 0.16.1],</span></span>
 <span><span class="co">## &lt;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.</span></span>
 <span><span class="co">## </span></span>
@@ -562,7 +562,7 @@
 <span><span class="co">##     address = {Stockholm, Sweden},</span></span>
 <span><span class="co">##     year = {2022},</span></span>
 <span><span class="co">##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},</span></span>
-<span><span class="co">##     note = {[Data accessed 2022-08-23 15:54:25 using pxweb R package 0.16.1]},</span></span>
+<span><span class="co">##     note = {[Data accessed 2022-08-23 15:55:20 using pxweb R package 0.16.1]},</span></span>
 <span><span class="co">##   }</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## </span></span>
