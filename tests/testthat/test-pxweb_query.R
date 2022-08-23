@@ -151,4 +151,21 @@ test_that(desc="mandatory variables are included automatically",{
 })
 
 
+test_that(desc="pxweb_query object",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
+  dims <- list(Alue = c("*"),
+               "Asuntokunnan koko" = c("*"),
+               Talotyyppi = c("S"),
+               Vuosi = c("*"))
+  expect_silent(pxq1 <- pxweb_query(dims))
+  
+  expect_silent(dims2 <- as.list(pxq1)) 
+  
+  expect_equal(dims, dims2)
+  
+})  
+
+
 
