@@ -43,7 +43,7 @@ jobs:
           locale -a
           localedef --list-archive
           localectl list-locales
-          sudo locale-gen en_US.ISO8859-15
+          sudo locale-gen en_US.iso885915
           echo "LC_ALL=en_US.iso885915" >> $GITHUB_ENV  
 
       - uses: actions/checkout@v2
