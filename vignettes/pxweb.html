@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mans Magnusson, Leo Lahti et al." />
 
-<meta name="date" content="2022-07-01" />
+<meta name="date" content="2022-08-23" />
 
 <title>PX-WEB API Interface for R</title>
 
@@ -334,7 +334,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">PX-WEB API Interface for R</h1>
 <h4 class="author">Mans Magnusson, Leo Lahti et al.</h4>
-<h4 class="date">2022-07-01</h4>
+<h4 class="date">2022-08-23</h4>
 
 
 <div id="TOC">
@@ -369,17 +369,16 @@ troubleshooting</a></li>
 <p>This R package provides tools to access <a href="https://pxnet2.stat.fi/API-description_SCB.pdf">PX-WEB API</a>.
 Your <a href="https://ropengov.org/community/">contributions</a> and <a href="https://github.com/ropengov/pxweb">bug reports and other
 feedback</a> are welcome!</p>
-<p>More information on the PX-Web/PC-Axis API can be found <a href="https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/">here</a>.</p>
+<p>We can find more information on the PX-Web/PC-Axis API <a href="https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/">here</a>.</p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>PXWEB is an API structure developed by Statistics Sweden together
-with other national statistical institutions (NSI) to disseminate public
-statistics in a structured way. This enables downloading and usage of
-data from statistical agencies without using a web browser direct over
+<p>PXWEB is an API structure developed by Statistics Sweden and other
+national statistical institutions (NSI) to disseminate public statistics
+in a structured way. This API enables downloading and using data from
+statistical agencies without using a web browser direct over
 HTTP/HTTPS.</p>
 <p>The <code>pxweb</code> R package connects any PXWEB API to R and
-hence facilitate the access, use and referencing of data from PXWEB
-APIs.</p>
+facilitates the access, use and referencing of data from PXWEB APIs.</p>
 <div id="available-data-sources-and-tools" class="section level3">
 <h3>Available data sources and tools</h3>
 <p><a href="https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/pxweb-examples/">A
@@ -398,12 +397,10 @@ organizations using PX-WEB</a></li>
 </div>
 <div id="about-pxweb-apis" class="section level3">
 <h3>About PXWEB APIs</h3>
-<p>The data in PXWEB APIs consists of a metadata part and a data part.
-Metadata is structured in a hierarchical node tree, where each node
-contains information about subnodes that are below it in the tree or, if
-the nodes are at the bottom of the tree structure, the data referenced
-by the node as well as what dimensions are available for the data at
-that subnode.</p>
+<p>The data in PXWEB APIs consists of metadata and data parts. Metadata
+is structured in a hierarchical node tree, where each node contains
+information about subnodes. The leaf nodes have information on which the
+dimensions are available for the data at that leaf node.</p>
 </div>
 </div>
 <div id="installation" class="section level2">
@@ -412,31 +409,31 @@ that subnode.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pxweb&quot;</span>)</span></code></pre></div>
 <p>To install the latest stable release version from GitHub, just
 use:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ropengov/pxweb&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ropengov/pxweb&quot;</span>)</span></code></pre></div>
 <p>Test the installation by loading the library:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pxweb)</span></code></pre></div>
 <p>A tutorial is included with the package with:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vignette</span>(<span class="at">topic=</span><span class="st">&quot;pxweb&quot;</span>)</span></code></pre></div>
 <div id="installation-issues" class="section level3">
 <h3>Installation issues</h3>
-<p>We also recommend setting the UTF-8 encoding since each individual
-API may have local specificl letters:</p>
+<p>We also recommend setting the UTF-8 encoding since each API may have
+local specific letters:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">locale=</span><span class="st">&quot;UTF-8&quot;</span>) </span></code></pre></div>
 </div>
 </div>
 <div id="accessing-pxweb-from-r" class="section level2">
 <h2>Accessing PXWEB from R</h2>
 <p>There are two ways of using the <code>pxweb</code> R package to
-access data, either interactively of using the core functions. To access
+access data, either interactively or using the core functions. To access
 data, two parts are needed, an URL to the data table in the API and a
 query specifying what data is of interest.</p>
 </div>
 <div id="interactive-use" class="section level2">
 <h2>Interactive use</h2>
 <p>The simplest way of using <code>pxweb</code> is to use it
-interactively and navigate the API to the data of interest and then set
-up the data query of interest.</p>
+interactively, navigate the API to the data of interest, and then set up
+the query of interest.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Navigate through all pxweb api:s in the R package API catalogue</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -451,30 +448,31 @@ up the data query of interest.</p>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># To see all available PXWEB APIs use</span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>pxweb_apis <span class="ot">&lt;-</span> <span class="fu">pxweb_api_catalogue</span>()</span></code></pre></div>
-<p>In the example above we use the interactive functionality from the
+<p>In the example above, we use the interactive functionality from the
 PXWEB API root, but we could use any path to the API.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start with a specific path.</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A&quot;</span>)</span></code></pre></div>
-<p>This also means that we can navigate any PXWEB API, irrespectively of
-if they are a part of the R package API catalog or not. Just supply an
-URL to somewhere in the API and then navigate the API from there.</p>
+<p>This functionality also means that we can navigate any PXWEB API,
+irrespectively of if they are a part of the R package API catalogue or
+not. Just supply an URL to somewhere in the API and then navigate the
+API from there.</p>
 <p>Due to new CRAN policies, it is not possible to use an R function to
-edit the api catalogue of the R package, but editing the can be done
-easily from R using <code>file.edit()</code>.</p>
+edit the API catalogue of the R package, but editing them can be done
+quickly from R using <code>file.edit()</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(<span class="fu">pxweb_api_catalogue_path</span>())</span></code></pre></div>
 <p>Although, if the <code>pxweb</code> is installed again, it will
-overwrite the old api catalogue. So the easiest way is to do add a PXWEB
-API to the global catalogue. To do this, just do a pull request at the
-pxweb GitHub page <a href="https://github.com/rOpenGov/pxweb">here</a>.</p>
+overwrite the old API catalogue. So the easiest way is to add a PXWEB
+API to the global catalogue. To do this, do a pull request at the pxweb
+GitHub page <a href="https://github.com/rOpenGov/pxweb">here</a>.</p>
 </div>
 <div id="direct-use" class="section level2">
 <h2>Direct use</h2>
 <p>Under the hood, the pxweb package uses the <code>pxweb_get()</code>
 function to access data from the PXWEB API. It also keeps track of the
-time limits of the API and split up to big queries into optimal
-downloadable chunks. If we use <code>pxweb_get()</code> without a query,
-the function either returns a PXWEB LEVELS object or a PXWEB METADATA
-object, depending if the URL points to a table in the API or not. Here
+API’s time limits and splits big queries into optimal downloadable
+chunks. If we use <code>pxweb_get()</code> without a query, the function
+either returns a PXWEB LEVELS object or a PXWEB METADATA object. What is
+returned depends on if the URL points to a table in the API or not. Here
 is an example of a PXWEB LEVELS object.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get PXWEB levels</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>px_levels <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/&quot;</span>)</span>
@@ -483,7 +481,7 @@ is an example of a PXWEB LEVELS object.</p>
 ##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2021
 ##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2021
 ##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2021
-##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2022M04
+##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2022M06
 ##   BefolkningR1860N (t): Population by age and sex. Year 1860 - 2021</code></pre>
 <p>And if we use <code>pxweb_get()</code> for a table, a PXWEB METADATA
 object is returned.</p>
@@ -501,14 +499,14 @@ object is returned.</p>
 ##  [[6]] Tid: year</code></pre>
 <div id="creating-data-queries" class="section level3">
 <h3>Creating data queries</h3>
-<p>To download data we need both the URL to the table and a query
+<p>To download data, we need both the URL to the table and a query
 specifying what parts of the table are of interest. An URL to a table is
 an URL that will return a metadata object if not a query is supplied.
-Creating a query can be done in three main ways. The first and simplest
-approach is to use <code>pxweb_interactive()</code> to explore the table
-URL and create a query interactively.</p>
+Creating a query can be done in three main ways. The first and most
+straightforward approach is to use <code>pxweb_interactive()</code> to
+explore the table URL and create a query interactively.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</span></code></pre></div>
-<p>The interactive function will return the query and the url, even if
+<p>The interactive function will return the query and the URL, even if
 the data is not downloaded.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>url</span></code></pre></div>
 <pre><code>## [1] &quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</code></pre>
@@ -525,7 +523,7 @@ the data is not downloaded.</p>
 ##    BE0101N1
 ##  [[5]] Tid (item):
 ##    2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017</code></pre>
-<p>We can also turn the query to a json query that can be used outside
+<p>We can also turn the query into a JSON query that we can use outside
 R.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxweb_query_as_json</span>(d<span class="sc">$</span>query, <span class="at">pretty =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## {
@@ -572,10 +570,10 @@ R.</p>
 ## }</code></pre>
 <p>The second approach is to specify the query either as an R list or a
 JSON object. Some Statistical Agencies, such as Statistics Sweden,
-supply queries directly as a JSON object on their web pages. These
-queries can be used directly. Below is another example of a JSON query
-for the table above. For details on how to set up a JSON query, see the
-PXWEB API documentation.</p>
+supply queries directly as a JSON object on their web pages. We can use
+these queries directly. Below is another example of a JSON query for the
+table above. For details on setting up a JSON query, see the PXWEB API
+documentation.</p>
 <pre><code>{
   &quot;query&quot;: [
     {
@@ -611,9 +609,8 @@ PXWEB API documentation.</p>
     &quot;format&quot;: &quot;json&quot;
   }
 } </code></pre>
-<p>To use this JSON query we just store the JSON query as a file and
-supply the path to the file to the <code>pxweb_query()</code>
-function.</p>
+<p>To use this JSON query, we store the JSON query as a file and supply
+the path to the file to the “<code>pxweb_query()</code>”function.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pxq <span class="ot">&lt;-</span> <span class="fu">pxweb_query</span>(<span class="st">&quot;path/to/the/json/query.json&quot;</span>)</span></code></pre></div>
 <p>Finally, we can create a PXWEB query from an R list where each list
 element is a variable and selected observation.</p>
@@ -634,24 +631,24 @@ element is a variable and selected observation.</p>
 ##    BE0101N1
 ##  [[4]] Tid (item):
 ##    2015, 2016, 2017</code></pre>
-<p>The query can be validated against the metadata object to asses that
-the query can be used. This is done automatically when the data is
-fetched with <code>pxweb_get()</code>, but can also be done
+<p>We can validate the query against the metadata object to asses that
+we can use the query. This validation is done automatically when the
+data is fetched with <code>pxweb_get()</code> but can also be done
 manually.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxweb_validate_query_with_metadata</span>(pxq, px_meta)</span></code></pre></div>
 </div>
 <div id="downloading-data" class="section level3">
 <h3>Downloading data</h3>
-<p>When we have the URL to a data table and a query we can simply
-download the data with <code>pxweb_get()</code>. The function returns a
+<p>When we have the URL to a data table and a query, we can download the
+data with “<code>pxweb_get()</code>”. The function returns a
 <code>pxweb_data</code> object that contains the downloaded data.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pxd <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                 pxq)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>pxd</span></code></pre></div>
 <pre><code>## PXWEB DATA
 ## With 4 variables and 24 observations.</code></pre>
-<p>If we instead want a JSON-stat object, we just change the response
-format to JSON-stat and we will get a JSON-stat object returned.</p>
+<p>If we instead want a JSON-stat object, we change the response format
+to JSON-stat, and we will get a JSON-stat object returned.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pxq<span class="sc">$</span>response<span class="sc">$</span>format <span class="ot">&lt;-</span> <span class="st">&quot;json-stat&quot;</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pxjstat <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                     pxq)</span>
@@ -753,7 +750,7 @@ format to JSON-stat and we will get a JSON-stat object returned.</p>
 ##     },
 ##     &quot;label&quot;: [&quot;Population by marital status, sex, observations and year&quot;],
 ##     &quot;source&quot;: [&quot;Statistics Sweden&quot;],
-##     &quot;updated&quot;: [&quot;2022-07-01T12:39:00Z&quot;],
+##     &quot;updated&quot;: [&quot;2022-08-23T15:51:00Z&quot;],
 ##     &quot;value&quot;: [
 ##       [2762601],
 ##       [2820248],
@@ -789,32 +786,34 @@ format to JSON-stat and we will get a JSON-stat object returned.</p>
 ##     }
 ##   }
 ## }</code></pre>
-<p>Some return format cannot be easily directly read into R. Then the
-responses are stored in the R <code>tempdir()</code> folded and the file
-paths are returned. In this way <code>px</code> and <code>sdmx</code>
-formats can be downloaded as files from the PXWEB API.</p>
+<p>Some return formats return files. Then, these responses are stored in
+the R <code>tempdir()</code> folded, and the file paths are returned by
+<code>pxweb_get()</code>. Currently, <code>px</code> and
+<code>sdmx</code> formats can be downloaded as files, but file an issue
+if you need other response formats.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pxq<span class="sc">$</span>response<span class="sc">$</span>format <span class="ot">&lt;-</span> <span class="st">&quot;px&quot;</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pxfp <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                     pxq)</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>pxfp</span></code></pre></div>
-<pre><code>## [1] &quot;/var/folders/8x/bgssdq5n6dx1_ydrhq1zgrym0000gn/T//RtmpHsaiz7/8e0f7d74ce9b8c2da02148f226c0367789d6076f.px&quot;</code></pre>
+<pre><code>## [1] &quot;/var/folders/8x/bgssdq5n6dx1_ydrhq1zgrym0000gn/T//RtmpuB4lga/3a2c247ec2da714e43aab403133bba2f863c15b3.px&quot;</code></pre>
 <p>If the queries are large (contain more values than the PXWEB API
 maximum allowed values), the query is chunked into optimal chunks and is
-then downloaded sequentially. PXWEB data objects are then combined to
+then downloaded sequentially. PXWEB data objects are then combined into
 one large PXWEB data object, while JSON-stat objects are returned as a
 list of JSON-stat objects, and other files are stored in
 <code>tempdir()</code> as separate files.</p>
 <p>For more advanced connections to the API, the
 <code>pxweb_advanced_get()</code> gives the flexibility to access the
-underlying HTTP calls using <code>httr</code> as well as logging the
-HTTP calls for debugging.</p>
-<p>The downloaded PXWEB data objects can then be converted to either
-<code>data.frame</code>s or to a character matrix. The character matrix
-contains the “raw” data while the data.frame returns a data.frame for
-analysis in a tidy format. This means that missing values (such as “..”
-are converted to <code>NA</code>) in a data.frame. Using the arguments
-<code>variable.value.type</code> and <code>column.name.type</code> we
-can also choose if we want the code or the text column names and value
+underlying HTTP calls using <code>httr</code> and log the HTTP calls for
+debugging.</p>
+<p>We can then convert the downloaded PXWEB data objects to a
+<code>data. frame</code> or to a character matrix. The character matrix
+contains the “raw” data while <code>data. frame</code> returns an R
+<code>data.frame</code> in a tidy format. This conversion means missing
+values (such as “..” are converted to <code>NA</code>) in a
+<code>data. frame</code>. Using the arguments
+<code>variable.value.type</code> and <code>column.name.type</code>, we
+can choose if we want the code or the text column names and value
 types.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pxdf <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pxd, <span class="at">column.name.type =</span> <span class="st">&quot;text&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;text&quot;</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pxdf)</span></code></pre></div>
@@ -834,8 +833,8 @@ types.</p>
 ## 4         OG   2 2015  2394842
 ## 5         OG   2 2016  2437315
 ## 6         OG   2 2017  2477012</code></pre>
-<p>In a similar way, we can access the raw data as a character matrix
-with <code>as.matrix</code>.</p>
+<p>Similarly, we can access the raw data as a character matrix with
+<code>as.matrix</code>.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>pxmat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(pxd, <span class="at">column.name.type =</span> <span class="st">&quot;code&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;code&quot;</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pxmat)</span></code></pre></div>
 <pre><code>##      Civilstand Kon Tid    BE0101N1 
@@ -854,8 +853,9 @@ comments for the data. This can be accessed using
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>pxdc <span class="ot">&lt;-</span> <span class="fu">pxweb_data_comments</span>(pxd)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>pxdc</span></code></pre></div>
 <pre><code>## NO PXWEB DATA COMMENTS</code></pre>
-<p>In this case, we did not have any comments. If we have comments we
-can turn the comments into a data.frame with one comment per row.</p>
+<p>In this case, we did not have any comments. If we have comments, we
+can turn the comments into a <code>data. frame</code> with one comment
+per row.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(pxdc)</span></code></pre></div>
 </div>
 </div>
@@ -867,8 +867,8 @@ function. For full reproducibility, please also cite the package.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxweb_cite</span>(pxd)</span></code></pre></div>
 <pre><code>## 
 ## Statistics Sweden (2022). &quot;Population by region, marital status, age,
-## sex, observations and year.&quot; [Data accessed 2022-07-01 14:41:00 using
-## pxweb R package 0.14.0],
+## sex, observations and year.&quot; [Data accessed 2022-08-23 17:51:24 using
+## pxweb R package 0.16.1],
 ## &lt;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -880,7 +880,7 @@ function. For full reproducibility, please also cite the package.</p>
 ##     address = {Stockholm, Sweden},
 ##     year = {2022},
 ##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2022-07-01 14:41:00 using pxweb R package 0.14.0]},
+##     note = {[Data accessed 2022-08-23 17:51:24 using pxweb R package 0.16.1]},
 ##   }
 ## 
 ## 
@@ -913,7 +913,7 @@ file</a>.</p>
 </div>
 <div id="session-info" class="section level2">
 <h2>Session info</h2>
-<p>This vignette was created with</p>
+<p>We created this vignette with</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.2.1 (2022-06-23)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
@@ -930,7 +930,7 @@ file</a>.</p>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.14.0
+## [1] pxweb_0.16.1
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] jquerylib_0.1.4   bslib_0.3.1       pillar_1.7.0      compiler_4.2.1   
