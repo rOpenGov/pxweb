@@ -87,21 +87,17 @@ test_that(desc="split pxweb_query bug",{
                            "Land" = c("*"),           # length(vars[[2]]$values) is equal to 249
                            "Mánuður" = c("*"),        # length(vars[[3]]$values) is equal to 36
                            "Eining" = c("*"))         # length(vars[[4]]$values) is equal to 4
-  # pxq <- pxweb_add_metadata_to_query(pxq, pxmd)
-  # pxweb_validate_query_with_metadata(pxq, pxmd)
-  # pxweb_query_dim(pxq)
-  
   expect_silent(pxq <- pxweb_query(pxweb_query_list))
   expect_silent(px <- pxweb(url))
   expect_silent(pxmd <- pxweb_get(url))
-  
+
   pxq <- pxweb:::pxweb_add_metadata_to_query(pxq, pxmd)
   px$config$max_values_to_download <- 10000
   expect_error(pxqs <- pxweb_split_query(pxq, px, pxmd))
 
   px$config$max_values_to_download <- 20000
   expect_silent(pxqs <- pxweb_split_query(pxq, px, pxmd))
-  expect_gt(length(pxqs), 1000)
+  expect_length(pxqs, 8964)
 })  
 
 
@@ -112,43 +108,4 @@ test_that(desc="pxweb_query JSON parse error message",{
   jq <- jsonlite::toJSON(paste(readLines(json_query), collapse = " "))
   expect_error(pxq1 <- pxweb_query(x = jq), regexp = "cannot parse")
 })
-
-
-test_that(desc="mandatory variables are included automatically",{
-  fp <- test_path(file.path("test_data", "pxm1_test.rda"))
-  url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
-  
-  if(FALSE){
-    px_meta <- pxweb_get(url)
-    save(px_meta, file = fp)
-  } else {
-    load(file = fp)
-  }
-
-  pxweb_query_list <- 
-    list("Civilstand"=c("*"),
-         "Kon"=c("1","2"),
-         "ContentsCode"=c("BE0101N1"),
-         "Tid"=c("2015","2016","2017"))
-  expect_silent(pxq1 <- pxweb_query(pxweb_query_list))
-  expect_silent(pxq2 <- pxweb_add_mandatory_variables(pxq1, px_meta))
-  expect_identical(pxq1, pxq2)
-  
-  pxweb_query_list <- 
-    list("Civilstand"=c("*"),
-         "Kon"=c("1"),
-#         "ContentsCode"=c("BE0101N1"),
-         "Tid"=c("2015"))
-  expect_silent(pxq3 <- pxweb_query(pxweb_query_list))
-  expect_warning(pxq4 <- pxweb_add_mandatory_variables(pxq3, px_meta), regexp = "ContentsCode")
-  expect_failure(expect_identical(pxq3, pxq4))
-  
-  skip_on_ci()
-  # This gives an error on github action that it creates output
-  # I cant reproduce that error as of now.
-  expect_silent(pxd <- pxweb_get(url, pxq4))
-
-})
-
-
 
