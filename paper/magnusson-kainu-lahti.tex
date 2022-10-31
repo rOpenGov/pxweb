@@ -1,34 +1,105 @@
-\title{Opening Official Statistics with the \CRANpkg{pxweb} Package}
-\author{by Måns Magnusson, Markus Kainu, Leo Lahti}
+\title{Opening Up Official Statistics with the \CRANpkg{pxweb} Package}
+\author{by Måns Magnusson, Leo Lahti}
+
+% Other authors?
+% Janne Huovari, many commits
+% Markus Kainu, possibly figures & cheat sheet
+% Pyry Kantanen, R-universe, technical & submission support, other
 
 \maketitle
 
 %An abstract of less than 150 words.
 \abstract{Abstract \CRANpkg{pxweb} R package here.}
 
-\begin{itemize}
-    \item Motivation here. Why do we need this package? We want to use the open data pipeline, access, use and cite.
-    \item More and more data is available from National Statistical Agencies (see commented out text below).
-    \item We need tools to access the data that is simple and efficient to use (see commented out text below).
-    \item Citing data is a problem in itself, but important. It should be simplifed as much as possible.
-\end{itemize}
-
-%% Potential text to use
-% Various statistical authorities are increasingly sharing open data resources \cite{xxx}. For instance, international agencies such as Eurostat\footnote{\url{http://ec.europa.eu/eurostat/data/database}} \cite{xxx}, ILO\footnote{\url{https://www.ilo.org/ilostat}} \cite{xxx} , FAO\footnote{\url{http://www.fao.org/faostat}} \cite{xxx} and World Bank\footnote{\url{https://data.worldbank.org}} \cite{xxx} have released popular open data services. Altogether, national and international statistical authorities are now sharing massive amounts of open data on national and international aspects of politics, economics, demography, health, infrastructure, climate, and other areas. Such statistical data sets can be available with a great geographical resolution, with time series spanning several years to decades or even centuries \cite{xxx}.
+%\begin{itemize}
+%    \item Motivation here. Why do we need this package? We want to use the open data pipeline, access, use and cite.
+%    \item More and more data is available from National Statistical Agencies (see commented out text below).
+%    \item We need tools to access the data that is simple and efficient to use (see commented out text below).
+%    \item Citing data is a problem in itself, but important. It should be simplifed as much as possible.
+%\end{itemize}
 
 
-% Opening statistical data collections is, however, only the first step towards realizing their full potential and value. Algorithmic tools for data access and analysis can greatly increase the value of such data resources and benefit reproducible research \citep{Gandrud13, Boettiger2015}. Dedicated software packages can be used to simplify, standardize, and automate analysis workflows, taking into account variations in raw data formats, access details, and typical use cases so that the end users can avoid  repetitive programming tasks, avoid potential misinterpretations and coding errors, and save time. 
+% Motivation here. Why do we need this package?
 
-% Consequently, various developers have released software tools to facilitate the use of statistical data resources. Instead of merely providing tools for data browsing and standard retrieval, we emphasize the need for algorithms that provide the seamless bridge between original data sources and downstream analysis tasks in statistical software languages. For instance in R, various packages have been recently released for generic open data retrieval, including for instance quandl \cite{quandl} and pdfetch \cite{pdfetch}, and for more dedicated access to specific data sources such as open data from Eurostat \cite{Lahti17eurostat}, World Bank (\CRANpkg{WDI}; \citealt{WDI}), Open Street Map (\CRANpkg{osmar}; \citealt{osmar}) and other sources.
+Open data science workflows rely heavily on algorithmic tools for data
+retrieval and analysis. Automating major parts of the data science
+workflow, such as finding, accessing, integrating, citing, and
+reporting data, is helping the end users to dedicate more time on the
+actual statistical analysis and interpretation. This can greatly
+increase the value of the available data sources and facilitate
+reproducible research \citep{Gandrud13, Boettiger2015} and the sharing
+of findable, accessible, interoperable, and reusable (FAIR) data
+\cite{xxx}. However, the tools often remain missing even when
+the data is made available. For instance, whereas dozens of
+statistical authorities have started to share data through the PX-WEB
+API, a dedicated R package that provides a unified access to these
+data collections has been missing. We introduce here the \CRANpkg{pxweb} R
+package that has been designed to facilitate seamless access to open
+data collections through the PC-Axis API \cite{xxx}, which is widely
+adopted by national and international statistical organizations.
 
+% More and more data is available from National Statistical Agencies
 
-% som relevant initial references for citing data
-%https://www.openoffice.org/bibliographic/bibtex-defs.pdf
-%https://tex.stackexchange.com/questions/109127/how-would-i-cite-a-dataset-with-bibtex
+Statistical authorities are now sharing steadily increasing
+collections of official statistics and other open data
+resources \cite{xxx}. For instance, international agencies such as
+Eurostat\footnote{\url{http://ec.europa.eu/eurostat/data/database}} \cite{xxx},
+ILO\footnote{\url{https://www.ilo.org/ilostat}} \cite{xxx} ,
+FAO\footnote{\url{http://www.fao.org/faostat}} \cite{xxx} and World
+Bank\footnote{\url{https://data.worldbank.org}} \cite{xxx} have
+released popular open data services. Altogether, national and
+international statistical authorities are now sharing massive amounts
+of open data on national and international aspects of politics,
+economics, demography, health, infrastructure, climate, and other
+areas. Such statistical data sets can be available with a great
+geographical resolution, with time series spanning several years to
+decades or even centuries \cite{xxx}.
+
+% We need tools to access the data that is simple and efficient to use
+
+Opening up official statistics is, however, only the first step
+towards realizing their full potential and value. There is a clear
+need for automated tools to access these data resources that are
+simple and efficient to use. Dedicated software packages help to
+simplify, standardize, and automate analysis workflows, taking into
+account variations in raw data formats, access details, and typical
+use cases so that the end users can avoid repetitive programming
+tasks, avoid potential misinterpretations and coding errors, and save
+time. Consequently, various developers have released software tools to
+facilitate the use of statistical data resources. Instead of merely
+providing tools for data browsing and standard retrieval, we emphasize
+the need for algorithms that provide the seamless bridge between
+original data sources and downstream analysis tasks in statistical
+software languages. In R, various packages have been recently released
+for generic open data retrieval, including for instance
+quandl \cite{quandl} and pdfetch \cite{pdfetch}, and for more
+dedicated access to specific data sources such as open data from
+Eurostat \cite{Lahti17eurostat}, World Bank
+(\CRANpkg{WDI}; \citealt{WDI}), Open Street Map
+(\CRANpkg{osmar}; \citealt{osmar}) and other sources.
+
+% Citing data is a problem in itself, but important. It should be
+% simplifed as much as possible.
+
+Data citations are an important but often neglected aspect of data
+reuse. Guidelines for data sharing have emphasized the need to
+document the specific data versions, access times, and
+sources. Ideally, this information should be cited in a standardized
+format. This process should be simplifed as much as possible.
+
+% TODO
+% some relevant initial references for citing data
+% https://www.openoffice.org/bibliographic/bibtex-defs.pdf
+% https://tex.stackexchange.com/questions/109127/how-would-i-cite-a-dataset-with-bibtex
 % http://www.dcc.ac.uk/resources/how-guides/cite-datasets#fn11
 % https://libguides.ub.uu.se/referensguiden/harvard\_exempel
 % https://www.scb.se/Upload/PC-Axis/Download/PX-Web/2017v1/Release-notes-pxweb-2017-v1.pdf
 % https://www.scb.se/sv\_/PC-Axis/Documentation/Error-codes-PC-Axis/
+
+The \CRANpkg{pxweb} R package is addressing these needs and provides
+mature and tested tools to find, access, and cite official statistics
+and other information shared in the widely adopted PC-Axis format.
+
 
 \subsection[PXWEB and PC-Axis]{PXWEB and PC-Axis}
 
@@ -39,10 +110,10 @@
 \end{itemize}
 
 
-\subsection{Our contribution: the \CRANpkg{pxweb} package }
+\subsection{The \CRANpkg{pxweb} package}
 
 \begin{itemize}
-    \item History fo the package
+    \item History of the package
     \item Design principles
     \item (See comment out text below)
     \item Extendibility of the package with new APIS
@@ -54,19 +125,47 @@
 % Whereas dozens of statistical authorities have started to share data through the PX-WEB API,  a dedicated R package that provides a unified access to these data collections has been missing. 
 
 % The \CRANpkg{pxweb} package is now filling this gap [CLOSELY RELATED PKGS SHOULD BE CITED HERE?]. Following its first CRAN release in 2014, the \CRANpkg{pxweb}, several contributors and feedback from the user community have supported the package development. 
-% [HAS THE PKG BEEN APPLIED IN PUBLICATIONS. THIS WOULD BE A GOOD PLACE TO CITE THOSE?].  SOME brief WORDS ABOUT DATA STANDARDS AND POSSIBLE VARIATIONS BETWEEN DATA PROVIDERS; further details will be in the later section. The pxweb depends on further R packages including \pkg{checkmate} \citep{checkmate}, \pkg{httr} \citep{httr}, \pkg{jsonlite} \citep{jsonlite}. The \pkg{pxweb} package is part of the rOpenGov open data science project \citep{Lahti13icml}. 
+% [HAS THE PKG BEEN APPLIED IN PUBLICATIONS. THIS WOULD BE A GOOD PLACE TO CITE THOSE? -> OR in DISCUSSION?].  SOME brief WORDS ABOUT DATA STANDARDS AND POSSIBLE VARIATIONS BETWEEN DATA PROVIDERS; further details will be in the later section. The pxweb depends on further R packages including \pkg{checkmate} \citep{checkmate}, \pkg{httr} \citep{httr}, \pkg{jsonlite} \citep{jsonlite}. The \CRANpkg{pxweb} package is part of the rOpenGov open data science project \citep{Lahti13icml}. 
 
 % In summary, the \CRANpkg{pxweb} package provides custom tools for open statistical data resources provided through the PX-WEB API. Currently, the pxweb package provides seamless algorithmic access from the R environment to dozens of data collections from national authorities in countries such as Estonia, Iceland, Finland, Norway, Sweden, The Netherlands, and elsewhere. Seamless integration with other data analysis tools is facilitated by support for features such as cache, date formatting, tidy data principles \citep{wickham2014}, and the \Cpkg{tibble} \citep{tibble} data format. In this article, we provide an overview of the functionality and use cases based on the current CRAN release version (0.8). The comprehensive on-line documentation, which is available via the package homepage\footnote{\url{http://ropengov.github.io/pxweb}}, includes simple examples for individual functions, generic tutorials, and links to more advanced case studies. Moreover, the package is following best practices in open source software development such as version control, automated unit tests, continuous integration, and collaborative development \citep{PerezRiverol2016}.
 
-% The introduced tools can benefit researchers and data analysts in academia, government, and industry. Complete analytical workflow from raw data to statistical summaries and final publication can be greatly facilitated by combining programmatic data access with downstream data analysis and visualization tools. The pxweb package supports automated, transparent, reproducible, and well-documented data retrieval from statistical authorities. Utilities such as search, subsetting and cache support efficient data processing and analysis. Further custom tools and functionality can be built around this package. 
+
+%The work has been released as open source under the permissive
+%modified BSD-2-clause
+%license\footnote{\url{https://opensource.org/licenses/BSD-2-Clause}},
+%which is permissive license and suited for research
+%use \cite{Morin2012}. We appreciate feedback from the users through
+%the Github issue
+%tracker\footnote{\url{https://github.com/rOpenGov/pxweb/issues}}, or
+%contributions through pull requests.
+
+The package facilitates algorithmic access to data from national and
+regional authorities in 18 countries, territories, and international
+organizations, mainly from Europe. The current data catalogue provides
+integrated access to 30 readily accessible databases
+(Table~\ref{tab:databases}), and support for specifying additional
+sources is available\footnote{Further organizations using PX-WEB are
+listed in
+https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/pxweb-examples} %
+It would be very good to systematically add in the API catalog these
+and others we can find now, should be straightfwd.
+
+\begin{table}
+\include{api}
+\caption{\label{tab:databases}PX-Web databases that are integrated in the pxweb R package API catalog. The online sources are listed in the pxweb R package. The language codes refer to the ISO 2 Letter Language Codes.}
+\end{table}
 
 
-\section[Usage]{Usage}
+\section[Usage]{Example case studies}
 
 \begin{itemize}
-    \item Short version of the vignette.
-    \item A nice figure and table should be the result.
+    \item Short version of the vignette.  \item A nice figure and
+    table should be the result.  \item Cover all relevant
+    functionality, at least by mentioning it and citing the package
+    documentation/website/vignette, if not all can be included here
 \end{itemize}
+
+
 
 
 \subsection{Citing data using pxweb}
@@ -76,27 +175,166 @@
 
 \section[summary]{Discussion}
 
-% The pxweb R package provides a seamless programmatic access to statistical data resources that are shared via the PX-WEB API. This popular interface has been adopted by dozens of official statistical authorities world-wide, and hence the pxweb package can facilitate the access and analysis of a remarkable vast collection of curated data collections. 
+%\begin{itemize}
+%    \item Reiterate the gap that this package fills: data access for open workflows; summary of the functionality
+%    \item The present version of the package is mature and stable; information on the userbase and downloads?
+%    \item Quality control: CI, unit tests, open development/issues, CRAN checks etc
+%    \item Justification for design choices that are potentially interesting or controversial
+%    \item Examples of known case studies etc. that the package has enabled
+%    \item Future extensions: additional data sources, additional functionality(?)..? 
+%\end{itemize}
 
-% The available tools include utilities for data query, download, manipulation and visualization, and they can utilize information about the incorporated data hierarchies. The combination of algorithms provides a smooth, automated, reproducible and well-documented access to continuously evolving statistical data streams. The online documentation provides detailed examples on how the package can be used to investigate spatial, temporal, demographic, and other phenomena.
 
-% Algorithmic tools, such as the ones provided by the pxweb package, can help to realize the full potential of open statistical data collections. We have introduced a set of targeted tools for the PX-WEB API, which is a widely used data sharing platforms among national and other statistical authorities. Research and citizen science can benefit from the increasing availability of open statistical data resources. 
+% Summary of the package and motivation
 
-% Whereas the pxweb tools can be used with any PX-WEB API that is locally accessible, an increasing number of the official statistical resources are being shared openly. For instance, the statistical authorities in many nordic countries have invested in open data sharing, which has supported various use cases by governmental authorities, companies, and citizen scientists \cite{xxx}. More about connections to the overall open data framework...
+The \CRANpkg{pxweb} package provides a seamless programmatic access to
+statistical data resources that are shared via the PX-WEB API. This is
+helping to bridge the gap between the providers and end users of
+official statistics. Whereas specialized web applications typically
+focus on a particular data source or task \cite{xxx}, \CRANpkg{pxweb}
+facilitates general programmatic access to open APIs that share data
+in the PC-Axis format, which has been widely adopted by national and
+international statistical organizations. A user gets a seamless and
+standardized access to original online data sources, which allows the
+implementation of open and reproducible data science workflows on
+official statistics \citep{Gandrud13, Boettiger2015} and supports FAIR
+data sharing \cite{xxx}. As such, the package solves a timely
+bottleneck in governmental data analytics as the availability of open
+data from National Statistical Agencies has been steadily increasing
+\cite{xxx}.
 
-% Our work is also advancing data citation practices. In particular, our implementations provide automatically collected citation information and details for the accessed data sets and version numbers, thus facilitating transparent and reproducible research in the ever-changing digital landscape. Automation of the citation data collection  is not only saving time by increased efficiency but also improving the reliability and accuracy of the citation data. Data citation practices have been recently discussed \cite{xxx}, with recommended best practices \cite{xxx}. By providing these tools we hope to promote more wide-spread adoption of data citation guidelines.
+% Summary of the functionality
 
-% Future developments of the package will include improved query options, analytical, and visualization capabilities. The pxweb package provides the core functionality. This can be, and has been complemented by other packages that provide additional utilities built around it.. here discuss the new pkg by our collaborators.
+The package facilitates algorithmic access and analysis of a
+remarkable vast collection of curated data collections from the R
+environment to data from national authorities in over a dozen
+countries or international organizations, mainly from Europe. The data
+catalogue integrated with the package lists 30 readily accessible
+databases, and the methods allow the users to specify additional API
+sources when necessary. The package automates major parts of the data
+science workflow, such as finding, accessing, integrating, citing, and
+reporting data. The available tools include utilities for data query,
+download, manipulation and visualization, and they can utilize
+information about the incorporated data hierarchies. The combination
+of algorithms provides a smooth, automated, reproducible and
+well-documented access to continuously evolving statistical data
+sources. The online documentation provides detailed examples on how
+the package can be used to investigate spatial, temporal, demographic,
+and other phenomena. The implemented methods take into account
+variations in raw data formats, access details, tidy data
+principles \citep{wickham2014}, and typical use cases so that the end
+users can avoid repetitive programming tasks, avoid potential
+misinterpretations and coding errors. This facilitates integration
+with other data analysis tools, and helps the end users to dedicate
+more time on the statistical analysis and interpretation. In addition
+to helping to identify and access data, the package simplifies and
+standardizes the process of data citations with specific data
+versions, access times, and sources. Our implementations provide
+automatically collected citation information and details for the
+accessed data sets and version numbers, thus facilitating transparent
+and reproducible research in the ever-changing digital
+landscape. Automation of the citation data collection is not only
+saving time by increased efficiency but also improving the reliability
+and accuracy of the citation data. By providing these tools we hope to
+promote more wide-spread adoption of data citation
+guidelines \cite{xxx}.
 
-% As such, our work contributes to the rapidly growing field of open data science \cite{Lahti2018IDA}, helping to bring state-of-art and up-to-date data sets from dozens of statistical authorities more accessible for the statistical community. This work provides substantial improvements over the previously available tools, and has been extensively tested by an active user community. Open access to data resources facilitates opening of the complete data analytical workflows. Example data sets for statistical methods development. Encourages further data sharing. Unexpected use cases by integration with external sources.
+The current, mature version is a result of active development and
+testing by the user community since its first CRAN release in 2014 and
+a major revision in 2018. The introduced tools can benefit researchers
+and data analysts particularly in academia, government, and industry,
+but also citizen scientists and NGOs. We expect that the package has
+been adopted especially by who are analysing official statistical data
+in R and implementing their own data science workflows. The package
+has a stable and thoroughly tested functionality. Following the major
+rewrite of the package in 2018, the number of downloads has tripled
+from 3000 downloads in 2017 to 11000 downloads in 2021. The package is
+currently the second most downloaded package of the rOpenGov project
+after the eurostat \CRANpkg{pxweb} package \cite{Lahti17eurostat}, and
+has roughly the same number of downloads with the \CRANpkg{osmar}
+package for the Open Street Map \cite{osmar}.
 
-% The work has been released as open source under the permissive modified BSD-2-clause license\footnote{\url{https://opensource.org/licenses/BSD-2-Clause}}, which is permissive license and suited for research use \cite{Morin2012}. We appreciate feedback from the users through the Github issue tracker\footnote{\url{https://github.com/rOpenGov/pxweb/issues}}, or contributions through pull requests. We hope that our active commitment to the project maintenance and development of the package will encourage further feedback and contributions from the user community.
+%Quality control: CI, unit tests, open development/issues, CRAN checks etc
+
+The package follows best practices in open source software development
+such as version control, automated unit tests, continuous integration,
+and collaborative development \citep{PerezRiverol2016}. Release
+through CRAN ensures compatibility with the broader R ecosystem. We
+hope that our active commitment to the project maintenance and
+development of the package will encourage further feedback and
+contributions from the user community.
+
+%Justification for design choices that are potentially interesting or controversial
+
+Whereas \CRANpkg{pxweb} has been designed to access the PX-Web API,
+this should not be confused with the related PC-Axis file format
+(typically abbreviated as '.px'). We anticipate that the more flexible
+PC Axis API is gradually taking over the PC-Axis file format as the
+data sharing platform for official statistics. Those who need to
+access and parse legacy px files can have a look at the independently
+developed pxR package, which is currently maintained in
+Github \url{https://github.com/cjgb/pxR}.
+
+%Examples of known case studies etc. that the package has enabled
+
+Whereas the methods can be used with any PX-WEB API that is locally
+accessible, an increasing number of the official statistical resources
+are open access. The statistical authorities in many nordic countries
+have invested in open data sharing, which supports use cases by
+governmental authorities, companies, and citizen scientists. The
+package has been used, for instance, in independent studies on
+electronic gambling machines and socioeconomic
+status \cite{Raisamo2019}. % Didn't find other citations.
+
+% Future extensions: additional data sources, additional functionality(?)..? 
+% Currently unclear to me what is the added value in PxWebApiData / LL
+% here discuss the new pkg by our collaborators -> does this refer to PxWebApiData?
+% Unexpected use cases by integration with external sources -> Any ideas?
+
+The \CRANpkg{pxweb} package has been designed to provide the core
+functionality for API access, around which further custom tools and
+functionality can be built. Future developments of the package will
+include improved query options, analytical, and visualization
+capabilities. Examples include the independently
+developed \CRANpkg{PxWebApiData}, which adds specific functionality in
+the nordic countries (Norway, Sweden, Finland), and the
+\CRANpkg{geofi} package combines statistical information with tools for
+geospatial visualization. Besides research use, official statistics
+provide ample material for training in statistics as well as in
+computational humanities and social sciences and other fields. Thus,
+adding interactive features or specialized tools targeting selected
+data sources could support pedagogical case studies.
+
+% Concluding
+
+Transparency and reproducibility of statistical workflows from raw
+data to statistical summaries and final publication can be greatly
+facilitated by combining programmatic data access with downstream data
+analysis and visualization tools. The pxweb package supports
+automated, transparent, reproducible, and well-documented data
+retrieval from statistical authorities. Programmatic access to data
+resources and the availability of well-tested downstream analysis
+methods facilitates the implementation of open and reproducible data
+science workflows. The \CRANpkg{pxweb} package provides improvements
+over the previously available methods, and it has been extensively
+tested and refined by an active user community. The work contributes
+to the rapidly growing field of open data science \cite{Lahti2018IDA,
+xxx} and helps to make up-to-date historical and contemporary data
+collections from dozens of statistical authorities more easily
+accessible by the statistical analysis research and education. This
+could be anticipated to encourage further data sharing by the
+authorities as the value of the data is increasing together with the
+user base and the number of complementary methods, workflows, and
+applications.
+
+
 
 \section*{Acknowledgments}
 
-We are grateful to all package contributors, including ... 
-
-The work has been partially funded by Academy of Finland (decisions 295741, 307127 to LL), and is part of rOpenGov\footnote{\url{https://github.ropengov.io}}.
+We are grateful to all package contributors. The work has been
+partially funded by Academy of Finland (decisions 295741, 345630 to
+LL), and is part of
+rOpenGov\footnote{\url{https://github.ropengov.io}}.
 
 
 \bibliography{magnusson-kainu-lahti}
@@ -109,14 +347,14 @@ The work has been partially funded by Academy of Finland (decisions 295741, 3071
   Finland\\}
 \email{mons.magnusson@gmail.com}
 
-\address{Markus Kainu\\
-  %Research Department, The Social Insurance Institution of Finland\\
-  %PO Box 450, 00101 Helsinki\\
-  Finland\\}
-\email{markus.kainu@kela.fi}
+%\address{Markus Kainu\\
+%  %Research Department, The Social Insurance Institution of Finland\\
+%  %PO Box 450, 00101 Helsinki\\
+%  Finland\\}
+%\email{markus.kainu@kela.fi}
 
 \address{Leo Lahti\\
-  Department of Future Technologies\\
+  Department of Computing\\
   PO Box 20014 University of Turku\\
   Finland\\}
 \email{leo.lahti@iki.fi}
