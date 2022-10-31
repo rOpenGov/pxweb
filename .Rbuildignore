@@ -18,6 +18,7 @@ tests_bash/*.R
 tests_bash/*.sh
 tests_bash
 todo.txt
+TODO.tdl
 
 README.md
 README.Rmd
