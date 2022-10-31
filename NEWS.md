@@ -1,3 +1,14 @@
+# Version 0.16.2
+
+- Return better error messages when using as.data.frame() for pxweb metadata objects.
+- Fix Statistics Swedens new https API.
+
+
+# Version 0.16.1
+
+- Remove tests that are failing on CRAN.
+
+
 # Version 0.16.0
 
 - exposed pxweb_parse_response() and is_pxweb_response() to the package API for more advanced users that want to make their own `httr` calls to a PXWEB API.
