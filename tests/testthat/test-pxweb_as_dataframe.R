@@ -7,7 +7,7 @@ test_that(desc="Converting pxweb data to matrices and data.frames",{
   skip_on_cran()
   
   # Move to 
-  url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_variables_example.json")
   # save(px_data, file = "px_data_example.rda")
   # load("px_data_example.rda")
