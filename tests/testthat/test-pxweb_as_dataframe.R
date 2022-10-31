@@ -13,6 +13,9 @@ test_that(desc="Converting pxweb data to matrices and data.frames",{
   # load("px_data_example.rda")
   expect_silent(pxq <- pxweb_query(json_query))
   expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query)))
+  expect_silent(px_metadata <- suppressWarnings(pxweb_get(url = url)))
+  
+  expect_error(df <- as.data.frame(px_metadata), regexp = "pxweb_metadata")
 
   expect_silent(df <- as.data.frame(px_data, stringsAsFactors = TRUE, column.name.type = "text", variable.value.type = "text"))
   expect_s3_class(df, "data.frame")

@@ -37,13 +37,13 @@ test_that(desc="Constructor works for erroneous urls",{
   expect_silent(pxweb(url = "https://api.scb.se/OV0104/v1/dosasasasas"))
   expect_error(pxweb(url = "http://www.statistikdatabasen.scb.se/pxweb/sv/ssd/"))
   expect_error(pxweb(url = "https://sv.wikipedia.org/wiki/ISO_639"))
-  expect_silent(pxweb(url = "http://api.scb.se"))
+  expect_silent(pxweb(url = "https://api.scb.se"))
   
   expect_silent(pxweb:::pxweb_clear_cache(pxapi1))
   
   expect_error(pxweb(url = "api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
-  expect_error(pxweb(url = "http://api.scb.se/OV0104/v1/dosasasasas"))
-  expect_error(pxweb(url = "http://api.scb.se"))
+  expect_error(pxweb(url = "https://api.scb.se/OV0104/v1/dosasasasas"))
+  expect_error(pxweb(url = "https://api.scb.se"))
   
 })  
 

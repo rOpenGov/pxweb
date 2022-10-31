@@ -6,7 +6,7 @@ test_that(desc="Basic usage",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
   
-  expect_silent(pxe <- pxweb:::pxweb_explorer.character("http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
+  expect_silent(pxe <- pxweb:::pxweb_explorer.character("https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxweb:::print.pxweb_explorer(pxe), "/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
   expect_output(pxweb:::print.pxweb_explorer(pxe), "api.scb.se")
   expect_output(pxweb:::print.pxweb_explorer(pxe), "\\[\\[Region\\]\\]")  
@@ -60,7 +60,7 @@ test_that(desc="Select all and eliminate",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
   
-  expect_silent(pxe <- pxweb:::pxweb_explorer.character("http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
+  expect_silent(pxe <- pxweb:::pxweb_explorer.character("https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxweb:::print.pxweb_explorer(pxe), "/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
   expect_output(pxe_star <- pxweb:::pxweb_interactive_input(pxe, test_input = "*"), "Separate multiple choices by")  
   expect_equal(pxweb:::pxe_metadata_choices(pxe_star)[[1]], 1:32)
@@ -73,7 +73,7 @@ test_that(desc="Select all and eliminate",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
   
-  expect_silent(pxe <- pxweb:::pxweb_explorer.character("http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
+  expect_silent(pxe <- pxweb:::pxweb_explorer.character("https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "e"))  
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1:2"))  
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "1"))  
