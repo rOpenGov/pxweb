@@ -166,6 +166,17 @@ as.data.frame.pxweb_levels <- function(x,
                       stringsAsFactors = stringsAsFactors)
 }
 
+#' @rdname pxweb_as_data_frame
+#' @export 
+as.data.frame.pxweb_metadata <- function(x, 
+                                       row.names = NULL, 
+                                       optional = FALSE, 
+                                       ..., 
+                                       stringsAsFactors = FALSE){
+  
+  stop("A pxweb_metadata object cannot be turned into a data.frame.", call. = FALSE)
+}
+
 
 #' @rdname pxweb_as_data_frame
 #' @keywords internal

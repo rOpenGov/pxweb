@@ -20,7 +20,7 @@ An object that contain the comments for a given PXWEB table.
 }
 \examples{
 \dontrun{
-url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+url <- "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
 json_query <- 
   file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
 pxd <- pxweb_get(url = url, query = json_query)

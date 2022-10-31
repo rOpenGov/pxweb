@@ -27,8 +27,8 @@ pxweb_api_catalogue() # List apis
 ## The examples below can only be run in interactive mode
 ##  x <- pxweb_interactive()
 ##  x <- pxweb_interactive(x = "api.scb.se")
-##  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
-##  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+##  x <- pxweb_interactive(x = "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+##  x <- pxweb_interactive(x = "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
 
 }
 \seealso{

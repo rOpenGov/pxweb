@@ -10,6 +10,7 @@ inst/extras/*~
 *.Rproj
 sandbox/*
 todo.txt
+TODO.tdl
 vignettes/pxweb.R
 .DS_Store
 .RData

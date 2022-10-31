@@ -21,8 +21,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' pxapi_1 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
-#' pxapi_2 <- pxweb(url ="http://api.scb.se/OV0104/v1/doris/sv")
+#' pxapi_1 <- pxweb(url ="https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
+#' pxapi_2 <- pxweb(url ="https://api.scb.se/OV0104/v1/doris/sv")
 #' }
 #' 
 #' @export

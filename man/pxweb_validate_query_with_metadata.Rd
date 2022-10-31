@@ -20,7 +20,7 @@ query the table.
 }
 \examples{
 \dontrun{
-url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 json_query <- file.path(system.file(package = "pxweb"), 
                         "extdata", "examples", "json_query_example.json")
 pxq <- pxweb_query(json_query)

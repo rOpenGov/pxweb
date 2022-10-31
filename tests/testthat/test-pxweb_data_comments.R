@@ -6,7 +6,7 @@ test_that(desc="test data comment structure",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
   
-  url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
   expect_silent(px_data1 <- pxweb_get(url = url, query = json_query))
   expect_silent(pxdcs <- pxweb_data_comments(x = px_data1))
@@ -20,7 +20,7 @@ test_that(desc="test data comment structure",{
   expect_equal(unname(unlist(lapply(pxdc_df, class))), c("integer", "integer", "character", "character"))
   
   
-  url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_variables_example.json")
   expect_silent(px_data2 <- suppressWarnings(pxweb_get(url = url, query = json_query)))
   expect_silent(pxdcs <- pxweb_data_comments(x = px_data2))
