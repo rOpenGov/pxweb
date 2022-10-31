@@ -5,7 +5,7 @@ on:
     branches: [main, master]
     tags: ['*']
     paths-ignore: 
-      - 'paper/**'    
+      - 'paper/**'
   workflow_dispatch:
 
 name: rogtemplate-gh-pages
