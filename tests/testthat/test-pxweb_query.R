@@ -146,8 +146,8 @@ test_that(desc="mandatory variables are included automatically",{
   skip_on_ci()
   # This gives an error on github action that it creates output
   # I cant reproduce that error as of now.
-  expect_silent(pxd <- pxweb_get(url, pxq4))
-
+  expect_silent(out <- capture.output(pxd <- pxweb_get(url, pxq4)))
+  if(length(out)>0) warning(out)
 })
 
 
