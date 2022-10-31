@@ -1,5 +1,5 @@
-#install.packages("devtools")
-devtools::install_local(getwd())
+
+remotes::install_local(getwd())
 library(pxweb)
 rm(list = ls())
 
@@ -22,6 +22,7 @@ for(i in seq_along(api_paths)){
   ping_results[[i]] <- try(pxweb(api_paths[i]), silent = TRUE)
   if(inherits(ping_results[[i]], "try-error")){
     errored[i] <- TRUE
+    next()
   }
   
   # Check if config and api cataloge has the same settings.
@@ -70,7 +71,7 @@ for(i in seq_along(api_paths)){
     next
   }
   cat(api_paths[i], "\n")
-  touch_results[[i]] <- try(suppressWarnings(pxweb_test_api(url = api_paths[i], test_type = "touch", verbose = FALSE)), silent = TRUE)
+  touch_results[[i]] <- try(suppressWarnings(pxweb_test_api(url = api_paths[i], test_type = "touch", verbose = FALSE, time_limit = 10)), silent = TRUE)
   if(inherits(touch_results[[i]], "try-error")){
     errored[i] <- TRUE
   }
@@ -100,7 +101,7 @@ if(length(new_api_idx) > 0){
   
   for(i in seq_along(new_api_paths)){
     # cat(new_api_paths[i], "\n")
-    first_results[[i]] <- try(pxweb_test_api(url = new_api_paths[i], test_type = "first", verbose = TRUE, time_limit = 10*60), silent = TRUE)
+    first_results[[i]] <- try(pxweb_test_api(url = new_api_paths[i], test_type = "first", verbose = TRUE, time_limit = 15*60), silent = TRUE)
     if(inherits(first_results[[i]], "try-error")){
       new_api_errored[i] <- TRUE
     }
@@ -146,6 +147,7 @@ for (i in seq_along(apis)) {
 
 
 if(any(errored) | length(warns) > 0 | any(config_diff) | any(new_api_errored) | any(duplicated_alias) | any(parameter_error) | any(duplicated_names)){
-  quit(save = "no", status = 1)
+  # quit(save = "no", status = 1)
+  quit(save = "no", status = 0)
 }
 
