@@ -49,9 +49,9 @@ print out a bar for separation purposes
 ## x <- pxweb_explorer()
 ## url <- "api.scb.se"
 ## x <- pxweb_explorer(x = url)
-## url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/"
+## url <- "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/"
 ## x <- pxweb_explorer(x = url)
-## url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+## url <- "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
 ## x <- pxweb_explorer(x = url)
 
 }

@@ -7,7 +7,7 @@
         "citation" : {
           "organization" : "Statistics Sweden",
           "address" : "Stockholm, Sweden"},
-        "url" : "http://api.scb.se/OV0104/[version]/doris/[lang]",
+        "url" : "https://api.scb.se/OV0104/[version]/doris/[lang]",
         "version": ["v1"], 
         "lang": ["en", "sv"],
         "calls_per_period": 30,

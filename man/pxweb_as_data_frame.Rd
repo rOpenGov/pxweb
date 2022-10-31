@@ -9,6 +9,7 @@
 \alias{as.data.frame.pxweb_data}
 \alias{as.data.frame.pxweb_data_comments}
 \alias{as.data.frame.pxweb_levels}
+\alias{as.data.frame.pxweb_metadata}
 \alias{pxweb_as_matrix}
 \alias{pxweb_as_matrix.pxweb_data}
 \alias{as.matrix.pxweb_data}
@@ -60,6 +61,14 @@ pxweb_as_data_frame(
 )
 
 \method{as.data.frame}{pxweb_levels}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = FALSE
+)
+
+\method{as.data.frame}{pxweb_metadata}(
   x,
   row.names = NULL,
   optional = FALSE,

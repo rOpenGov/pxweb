@@ -19,8 +19,8 @@
 #' ## The examples below can only be run in interactive mode
 #' ##  x <- pxweb_interactive()
 #' ##  x <- pxweb_interactive(x = "api.scb.se")
-#' ##  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
-#' ##  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+#' ##  x <- pxweb_interactive(x = "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+#' ##  x <- pxweb_interactive(x = "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
 #' 
 pxweb_interactive <- function(x = NULL){
   # Setup structure
@@ -76,9 +76,9 @@ interactive_pxweb <-function(x = NULL){
 #' ## x <- pxweb_explorer()
 #' ## url <- "api.scb.se"
 #' ## x <- pxweb_explorer(x = url)
-#' ## url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/"
+#' ## url <- "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/"
 #' ## x <- pxweb_explorer(x = url)
-#' ## url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+#' ## url <- "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' ## x <- pxweb_explorer(x = url)
 #' 
 #' @keywords internal

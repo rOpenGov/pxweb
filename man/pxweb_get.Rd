@@ -18,16 +18,16 @@ Do a GET call to PXWEB API
 }
 \examples{
 \dontrun{
-url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 px_meta_data <- pxweb_get(url)
 
-url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101"
+url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101"
 px_levels <- pxweb_get(url)
 
-url <- "http://api.scb.se/OV0104/v1/doris/sv"
+url <- "https://api.scb.se/OV0104/v1/doris/sv"
 px_levels <- pxweb_get(url)
 
-url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 query <- file.path(system.file(package = "pxweb"),
                    "extdata", "examples", "json_query_example.json")
 px_data <- pxweb_get(url = url, query = query)
