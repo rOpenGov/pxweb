@@ -3,8 +3,12 @@
 on:
   push:
     branches: [main, master, development, dev]
+    paths-ignore: 
+      - 'paper/**'
   pull_request:
     branches: [main, master]
+    paths-ignore: 
+      - 'paper/**'    
 
 name: test-coverage
 

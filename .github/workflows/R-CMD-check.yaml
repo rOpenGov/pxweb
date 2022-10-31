@@ -7,12 +7,16 @@ on:
       - master
       - development
       - dev
+    paths-ignore: 
+      - 'paper/**'
   pull_request:
     branches:
       - main
       - master
       - development
       - dev      
+    paths-ignore: 
+      - 'paper/**'
 
 name: R-CMD-check
 

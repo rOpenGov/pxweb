@@ -263,7 +263,7 @@
       "lang": ["en", "lv"],
       "calls_per_period": 100,
       "period_in_seconds": 10,
-      "max_values_to_download" : 1000
+      "max_values_to_download" : 3800
     },
 
     "statbank.statistica.md": {
