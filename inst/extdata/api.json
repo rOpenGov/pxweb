@@ -415,7 +415,232 @@
         "calls_per_period": 100,
         "period_in_seconds": 10,
         "max_values_to_download" : 10000000
+    },
+    
+  "web.dzs.hr": {
+      "description" : "Croatian Bureau of Statistics",
+      "citation" : {
+        "organization" : "Croatian Bureau of Statistics",
+        "address" : "Zagreb, Croatia"
+      },
+      "url" : "https://web.dzs.hr/PXWeb/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["en", "hr"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+      },
+      
+    "www.eustat.eus": {
+      "description" : "Euskal Estatistika Erakundea",
+      "citation" : {
+        "organization" : "Eustat - Euskal Estatistika Erakundea - Instituto Vasco de Estadística",
+        "address" : "Donostia / San Sebastian, Spain"
+      },
+      "url" : "https://www.eustat.eus/bankupx/api/[version]/[lang]/DB",
+      "version": ["v1"],
+      "lang": ["en", "eu", "es"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+      },
+      
+    "pxweb.karlstad.se": {
+      "description" : "Karlstads kommuns statistikdatabas",
+      "citation" : {
+        "organization" : "Karlstads kommuns statistikdatabas",
+        "address" : "Karlstad, Sweden"
+      },
+      "url" : "http://pxweb.karlstad.se/api/[version]/[lang]/Karlstads_kommun/",
+      "version": ["v1"],
+      "lang": ["sv", "en"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+      },
+      
+    "pxweb.instat-mali.com": {
+      "description" : "INSTAT Mali",
+      "citation" : {
+        "organization" : "Institut National de la Statistique du Mali - INSTAT",
+        "address" : "Bamako, Mali"
+      },
+      "url" : "https://pxweb.instat-mali.com/PXWeb/api/[version]/[lang]/BaseDeDonnees/",
+      "version": ["v1"],
+      "lang": ["fr", "bm"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+      },
+      
+    "statistik.csn.se": {
+      "description" : "CSN: Officiell statistik inom området studiestöd",
+      "citation" : {
+        "organization" : "Centrala studiestödsnämnden (CSN)",
+        "address" : "Stockholm, Sweden"
+      },
+      "url" : "https://statistik.csn.se:443/PXWeb/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["sv"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+      },
+      
+    "pxexternal.energimyndigheten.se": {
+      "description" : "Energimyndigheten statistikdatabas",
+      "citation" : {
+        "organization" : "Energimyndigheten - The Swedish Energy Agency",
+        "address" : "Eskilstuna, Sweden"
+      },
+      "url" : "http://pxexternal.energimyndigheten.se/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["sv"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+      },
+      
+    "m02-http-pxwebb.login.sundsvall.se": {
+      "description" : "Sundsvalls kommuns statistikdatabas",
+      "citation" : {
+        "organization" : "Sundsvalls kommun",
+        "address" : "Sundsvall, Sweden"
+      },
+      "url" : "https://m02-http-pxwebb.login.sundsvall.se/PXWeb_Ext/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["sv"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+      },
+      
+    "statistik.vasteras.se": {
+      "description" : "Västerås stads statistikdatabas",
+      "citation" : {
+        "organization" : "Västerås stad",
+        "address" : "Västerås, Sweden"
+      },
+      "url" : "https://statistik.vasteras.se:443/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["sv"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+      },
+      
+    "px.web.ined.fr": {
+      "description" : "The Generations & Gender Contextual Database",
+      "citation" : {
+        "organization" : "Netherlands Interdisciplinary Demographic Institute",
+        "address" : "Den Haag, Netherlands"
+      },
+      "url" : "https://px.web.ined.fr:443/GGP/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["en"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+      },
+      
+    "openstat.psa.gov.ph": {
+      "description" : "Philippine Statistics Authority OpenSTAT",
+      "citation" : {
+        "organization" : "Philippine Statistics Authority OpenSTAT",
+        "address" : "Quezon City, Philippines"
+      },
+      "url" : "https://openstat.psa.gov.ph:443/PXWeb/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["en"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+    },
+    
+  "statistika.spkc.gov.lv": {
+      "description" : "Latvian Health Care Statistics Reports Database",
+      "citation" : {
+        "organization" : "Centre for Disease Prevention and Control of Latvia",
+        "address" : "Riga, Latvia"
+      },
+      "url" : "https://statistika.spkc.gov.lv:443/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["en", "lv"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+    },
+    
+  "pxweb.irena.org": {
+      "description" : "IRENA Renewable Energy Statistics database",
+      "citation" : {
+        "organization" : "IRENA - International Renewable Energy Agency",
+        "address" : "Abu Dhabi, United Arab Emirates"
+      },
+      "url" : "https://pxweb.irena.org:443/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["en", "fr", "es"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+    },
+    
+  "tilastot.etk.fi": {
+      "description" : "Finnish Centre for Pensions",
+      "citation" : {
+        "organization" : "ETK - Finnish Centre for Pensions",
+        "address" : "Helsinki, Finland"
+      },
+      "url" : "https://tilastot.etk.fi:443/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["en", "fi", "sv"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+    },
+    
+  "41.94.86.11": {
+      "description" : "Instituto Nacional de Estatistica, Moçambique",
+      "citation" : {
+        "organization" : "Instituto Nacional de Estatistica",
+        "address" : "Maputo, Moçambique"
+      },
+      "url" : "http://41.94.86.11/Censo2017/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["en", "pt-PT"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+    },
+    
+  "pc-axis.geostat.ge": {
+      "description" : "National Statistics Office of Georgia (Geostat)",
+      "citation" : {
+        "organization" : "National Statistics Office of Georgia (Geostat)",
+        "address" : "Tbilisi, Georgia"
+      },
+      "url" : "http://pc-axis.geostat.ge/PXweb/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["en", "ka"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
+    },
+    
+  "statistika.tai.ee": {
+      "description" : "Estonian Health Statistics and Health Research Database",
+      "citation" : {
+        "organization" : "National Institute for Health Development - Tervise Arengu Instituut",
+        "address" : "Tallinn, Estonia"
+      },
+      "url" : "https://statistika.tai.ee/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["en", "et"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 10000000
     }
+    
   },
   "local_apis": {}
 
