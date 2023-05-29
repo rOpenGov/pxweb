@@ -385,9 +385,9 @@
         "url" : "https://andmed.stat.ee/api/[version]/[lang]/stat",
         "version": ["v1"], 
         "lang": ["en", "et"],
-        "calls_per_period": 1000,
+        "calls_per_period": 100,
         "period_in_seconds": 10,
-        "max_values_to_download" : 1000000
+        "max_values_to_download" : 25000000
     },
     
     "pxweb.nordicstatistics.org": {
@@ -398,7 +398,7 @@
         "url" : "https://pxweb.nordicstatistics.org/api/[version]/[lang]/",
         "version": ["v1"], 
         "lang": ["en"],
-        "calls_per_period": 10,
+        "calls_per_period": 100,
         "period_in_seconds": 10,
         "max_values_to_download" : 1000
     },
@@ -426,9 +426,9 @@
       "url" : "https://web.dzs.hr/PXWeb/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["en", "hr"],
-      "calls_per_period": 100,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "calls_per_period": 30,
+      "period_in_seconds": 1,
+      "max_values_to_download" : 10000
       },
       
     "www.eustat.eus": {
@@ -440,9 +440,9 @@
       "url" : "https://www.eustat.eus/bankupx/api/[version]/[lang]/DB",
       "version": ["v1"],
       "lang": ["en", "eu", "es"],
-      "calls_per_period": 100,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "calls_per_period": 400,
+      "period_in_seconds": 400,
+      "max_values_to_download" : 1000
       },
       
     "pxweb.karlstad.se": {
@@ -454,9 +454,9 @@
       "url" : "http://pxweb.karlstad.se/api/[version]/[lang]/Karlstads_kommun/",
       "version": ["v1"],
       "lang": ["sv", "en"],
-      "calls_per_period": 100,
+      "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "max_values_to_download" : 1000
       },
       
     "pxweb.instat-mali.com": {
@@ -468,9 +468,9 @@
       "url" : "https://pxweb.instat-mali.com/PXWeb/api/[version]/[lang]/BaseDeDonnees/",
       "version": ["v1"],
       "lang": ["fr", "bm"],
-      "calls_per_period": 100,
+      "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "max_values_to_download" : 1000
       },
       
     "statistik.csn.se": {
@@ -482,9 +482,9 @@
       "url" : "https://statistik.csn.se:443/PXWeb/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["sv"],
-      "calls_per_period": 100,
+      "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "max_values_to_download" : 1000
       },
       
     "pxexternal.energimyndigheten.se": {
@@ -496,9 +496,9 @@
       "url" : "http://pxexternal.energimyndigheten.se/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["sv"],
-      "calls_per_period": 100,
+      "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "max_values_to_download" : 1000
       },
       
     "m02-http-pxwebb.login.sundsvall.se": {
@@ -510,9 +510,9 @@
       "url" : "https://m02-http-pxwebb.login.sundsvall.se/PXWeb_Ext/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["sv"],
-      "calls_per_period": 100,
+      "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "max_values_to_download" : 1000
       },
       
     "statistik.vasteras.se": {
@@ -524,9 +524,9 @@
       "url" : "https://statistik.vasteras.se:443/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["sv"],
-      "calls_per_period": 100,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "calls_per_period": 30,
+      "period_in_seconds": 1,
+      "max_values_to_download" : 10000
       },
       
     "px.web.ined.fr": {
@@ -538,9 +538,9 @@
       "url" : "https://px.web.ined.fr:443/GGP/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["en"],
-      "calls_per_period": 100,
+      "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "max_values_to_download" : 1000
       },
       
     "openstat.psa.gov.ph": {
@@ -552,9 +552,9 @@
       "url" : "https://openstat.psa.gov.ph:443/PXWeb/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["en"],
-      "calls_per_period": 100,
+      "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "max_values_to_download" : 1000
     },
     
   "statistika.spkc.gov.lv": {
@@ -566,9 +566,9 @@
       "url" : "https://statistika.spkc.gov.lv:443/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["en", "lv"],
-      "calls_per_period": 100,
+      "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "max_values_to_download" : 1000
     },
     
   "pxweb.irena.org": {
@@ -580,9 +580,9 @@
       "url" : "https://pxweb.irena.org:443/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["en", "fr", "es"],
-      "calls_per_period": 100,
+      "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "max_values_to_download" : 1000
     },
     
   "tilastot.etk.fi": {
@@ -594,9 +594,9 @@
       "url" : "https://tilastot.etk.fi:443/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["en", "fi", "sv"],
-      "calls_per_period": 100,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "calls_per_period": 20,
+      "period_in_seconds": 5,
+      "max_values_to_download" : 1000
     },
     
   "41.94.86.11": {
@@ -608,9 +608,9 @@
       "url" : "http://41.94.86.11/Censo2017/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["en", "pt-PT"],
-      "calls_per_period": 100,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "calls_per_period": 30,
+      "period_in_seconds": 1,
+      "max_values_to_download" : 10000
     },
     
   "pc-axis.geostat.ge": {
@@ -622,9 +622,9 @@
       "url" : "http://pc-axis.geostat.ge/PXweb/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["en", "ka"],
-      "calls_per_period": 100,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "calls_per_period": 30,
+      "period_in_seconds": 1,
+      "max_values_to_download" : 10000
     },
     
   "statistika.tai.ee": {
@@ -636,9 +636,9 @@
       "url" : "https://statistika.tai.ee/api/[version]/[lang]/",
       "version": ["v1"],
       "lang": ["en", "et"],
-      "calls_per_period": 100,
+      "calls_per_period": 10,
       "period_in_seconds": 10,
-      "max_values_to_download" : 10000000
+      "max_values_to_download" : 1000
     }
     
   },
