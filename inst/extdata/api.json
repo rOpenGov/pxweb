@@ -24,7 +24,7 @@
         "url" : "https://statfin.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","fi","sv"],
-        "calls_per_period": 30,
+        "calls_per_period": 3000,
         "period_in_seconds": 10,
         "max_values_to_download" : 120000
               },
@@ -37,9 +37,9 @@
         "url" : "https://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
-        "calls_per_period": 1000,
+        "calls_per_period": 10,
         "period_in_seconds": 10,
-        "max_values_to_download" : 110000
+        "max_values_to_download" : 1000
               },
       
     "statistik.sjv.se": {
@@ -135,9 +135,9 @@
         "url" : "http://px.hagstofa.is/px[lang]/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","is"],
-        "calls_per_period": 30,
-        "period_in_seconds": 1,
-        "max_values_to_download" : 10000
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 5000
               },
               
     "statistik.linkoping.se": {
@@ -247,9 +247,9 @@
       "url" : "https://makstat.stat.gov.mk/PXWeb/api/[version]/[lang]/MakStat/",
       "version": ["v1"], 
       "lang": ["en", "mk"],
-      "calls_per_period": 30,
-      "period_in_seconds": 1,
-      "max_values_to_download" : 10000
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
     },
     
     "data.stat.gov.lv": {
@@ -300,9 +300,9 @@
       "citation" : {
           "organization" : "Kosovo Agency of Statistics",
           "address" : "Pristina, Kosovo"},
-      "url" : "https://askdata.rks-gov.net/PXWeb/api/[version]/[lang]/",
+      "url" : "https://askdata.rks-gov.net/api/[version]/[lang]/",
       "version": ["v1"], 
-      "lang": ["en"],
+      "lang": ["en", "sq"],
       "calls_per_period": 10,
       "period_in_seconds": 10,
       "max_values_to_download" : 1000
@@ -400,7 +400,7 @@
         "lang": ["en"],
         "calls_per_period": 100,
         "period_in_seconds": 10,
-        "max_values_to_download" : 1000
+        "max_values_to_download" : 1000000
     },
 
     "pxweb.stat.si": {
