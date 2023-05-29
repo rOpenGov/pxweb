@@ -182,20 +182,6 @@
         "max_values_to_download" : 1000000
               },
 
-    "px.rsv.is": {
-        "alias" : ["rsv"],
-        "description" : "Icelandic Centre for Retail Studies",
-        "citation" : {
-          "organization" : "Icelandic Centre for Retail Studies",
-          "address" : "Reykjavík, Iceland"},
-        "url" : "http://px.rsv.is/PXWeb/api/[version]/[lang]",
-        "version": ["v1"], 
-        "lang": ["en", "is"],
-        "calls_per_period": 30,
-        "period_in_seconds": 1,
-        "max_values_to_download" : 10000
-              },
-
     "statbank.hagstova.fo": {
         "alias" : ["hagstovan"],
         "description" : "Statistics Faroe Islands",
