@@ -28,8 +28,7 @@ Description: Generic interface for the PX-Web/PC-Axis API. The
     files in dynamic tables on the web.  Since 2013 PX-Web contains an API
     to disseminate PC-Axis files.
 License: BSD_2_clause + file LICENSE
-URL: https://github.com/rOpenGov/pxweb/,
-    https://ropengov.github.io/pxweb/, https://github.com/rOpenGov/pxweb
+URL: https://github.com/rOpenGov/pxweb/, https://ropengov.github.io/pxweb/ 
 BugReports: https://github.com/rOpenGov/pxweb/issues
 Depends:
     R (>= 3.5.0)
@@ -47,6 +46,6 @@ Suggests:
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 X-schema.org-isPartOf: http://ropengov.org/
 X-schema.org-keywords: ropengov
