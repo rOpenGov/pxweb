@@ -15,7 +15,7 @@ test_that(desc="pxweb_api_catalogue",{
   expect_silent(pxacgh <- pxweb:::pxweb_api_catalogue_from_github("master"))
   expect_output(print(pxac), regexp = "Api:")
       
-  expect_equal(pxac[[2]], pxacgh[[2]])
+  expect_equal(pxac[[1]], pxacgh[[1]])
   
 })  
 
