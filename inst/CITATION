@@ -1,24 +1,25 @@
-citHeader("Kindly cite the pxweb R package as follows:")
+citHeader("To cite pxweb in publications use:")
 
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
 vers <- paste("R package version", meta$Version)
 
-citEntry(entry="misc",
-         title = "pxweb: R tools for PX-WEB API",
-         author = personList(
-	   person(given = "Mans", family= "Magnusson", email = "mons.magnusson@gmail.com"),
-	   person(given = "Markus", family= "Kainu"),
-	   person(given = "Janne", family= "Huovari"),
-	   person(given = "Leo", family= "Lahti")
-         ),
-	 year = year,
-	 note = vers,
-         textVersion =
-         paste("Mans Magnusson, Markus Kainu, Janne Huovari, and Leo Lahti (",year,"). ",
+bibentry(
+  bibtype  = "misc",
+  key      = "pxweb",
+  title    = "pxweb: R tools for PX-WEB API",
+  author   = c(
+    person(given = "Mans", family= "Magnusson", email = "mons.magnusson@gmail.com"),
+    person(given = "Markus", family= "Kainu"),
+    person(given = "Janne", family= "Huovari"),
+    person(given = "Leo", family= "Lahti")
+  ),
+  year     = year,
+  note     = vers,
+  url      = "https://github.com/rOpenGov/pxweb",
+  textVersion = paste("Mans Magnusson, Markus Kainu, Janne Huovari, and Leo Lahti (",year,"). ",
                "pxweb: R tools for PXWEB API. ",
                vers,
-	       " URL: http://github.com/ropengov/pxweb",
-               sep="")
-         )
-
-
+	             " URL: https://github.com/rOpenGov/pxweb",
+               sep=""
+  )
+)
