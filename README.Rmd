@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
 [![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
+[![R-CMD-check](https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 <br>
