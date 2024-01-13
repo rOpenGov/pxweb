@@ -46,10 +46,16 @@ pxweb_add_config <- function(obj) {
   }
 
   cfg <- httr::content(r, "parsed")
+  if(!is.null(cfg$maxCells)){
+    mvtd <- cfg$maxCells
+  } else {
+    mvtd <- cfg$maxValues
+  }
+
   obj$config <- list(
     calls_per_period = cfg$maxCalls,
     period_in_seconds = cfg$timeWindow,
-    max_values_to_download = cfg$maxValues,
+    max_values_to_download = mvtd,
     CORS = cfg$CORS
   )
 
