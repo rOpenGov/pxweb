@@ -94,8 +94,8 @@ Leo Lahti et al.</h4>
 
     
     
-<p>This R package provides tools to access <a href="https://pxnet2.stat.fi/API-description_SCB.pdf" class="external-link">PX-WEB API</a>.
-Your <a href="https://ropengov.org/community/" class="external-link">contributions</a> and <a href="https://github.com/ropengov/pxweb" class="external-link">bug reports and other
+<p>This R package provides tools to access <a href="https://www.scb.se/en/services/open-data-api/api-for-the-statistical-database/" class="external-link">PX-WEB
+API</a>. Your <a href="https://ropengov.org/community/" class="external-link">contributions</a> and <a href="https://github.com/ropengov/pxweb" class="external-link">bug reports and other
 feedback</a> are welcome!</p>
 <p>We can find more information on the PX-Web/PC-Axis API <a href="https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/" class="external-link">here</a>.</p>
 <div class="section level2">
@@ -117,12 +117,12 @@ You can browse the available data sets at:</p>
 <ul>
 <li>
 <a href="http://www.statistikdatabasen.scb.se/pxweb/en/ssd/" class="external-link">Statistics
-Sweden</a> with <a href="https://pxnet2.stat.fi/API-description_SCB.pdf" class="external-link">API
+Sweden</a> with <a href="https://www.scb.se/en/services/open-data-api/api-for-the-statistical-database/" class="external-link">API
 Description</a>
 </li>
 <li>
 <a href="https://tilastokeskus.fi/til/aihealuejako.html" class="external-link">Statistics
-Finland</a> <a href="https://pxnet2.stat.fi/api1.html" class="external-link">StatFi API
+Finland</a> <a href="https://statfin.stat.fi/api1.html" class="external-link">StatFi API
 Description</a>
 </li>
 <li><a href="https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/pxweb-examples/" class="external-link">Other
@@ -577,7 +577,7 @@ if you need other response formats.</p>
 <span>  <span class="va">pxq</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">pxfp</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "/tmp/RtmpbGlzpF/246e31c8d25b32de69a67d4622c86021f41767df.px"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "/tmp/RtmpBwqHrW/1c223cfe6dcd69367de1a78ddac8f0e0b69ea67e.px"</span></span></code></pre>
 <p>If the queries are large (contain more values than the PXWEB API
 maximum allowed values), the query is chunked into optimal chunks and is
 then downloaded sequentially. PXWEB data objects are then combined into
@@ -656,7 +656,7 @@ function. For full reproducibility, please also cite the package.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pxweb_cite.html">pxweb_cite</a></span><span class="op">(</span><span class="va">pxd</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Statistics Sweden (2024). "Population by region, marital status, age,</span></span>
-<span><span class="co">## sex, observations and year." [Data accessed 2024-01-13 17:00:15.742971</span></span>
+<span><span class="co">## sex, observations and year." [Data accessed 2024-01-13 19:55:05.170401</span></span>
 <span><span class="co">## using pxweb R package 0.16.3],</span></span>
 <span><span class="co">## &lt;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.</span></span>
 <span><span class="co">## </span></span>
@@ -669,7 +669,7 @@ function. For full reproducibility, please also cite the package.</p>
 <span><span class="co">##     address = {Stockholm, Sweden},</span></span>
 <span><span class="co">##     year = {2024},</span></span>
 <span><span class="co">##     url = {https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},</span></span>
-<span><span class="co">##     note = {[Data accessed 2024-01-13 17:00:15.742971 using pxweb R package 0.16.3]},</span></span>
+<span><span class="co">##     note = {[Data accessed 2024-01-13 19:55:05.170401 using pxweb R package 0.16.3]},</span></span>
 <span><span class="co">##   }</span></span>
 <span><span class="co">## Kindly cite the pxweb R package as follows:</span></span>
 <span><span class="co">## </span></span>
