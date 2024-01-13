@@ -173,7 +173,7 @@
         "description" : "Statbank Greenland",
         "citation" : {
           "organization" : "Statistics Greenland",
-          "address" : "Nuuk, Denmark"},
+          "address" : "Nuuk, Greenland"},
         "url" : "https://bank.stat.gl/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","kl","da"],
