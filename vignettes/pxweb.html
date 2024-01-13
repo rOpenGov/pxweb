@@ -240,7 +240,7 @@ pre, code {
 background-color: #f7f7f7;
 border-radius: 3px;
 color: #333;
-white-space: pre-wrap; 
+white-space: pre-wrap;
 }
 pre {
 border-radius: 3px;
@@ -308,18 +308,18 @@ text-decoration: underline; }
 a[href^="https:"] {
 text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; } 
-code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.kw { color: #555; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #d14; }
+code > span.fl { color: #d14; }
+code > span.ch { color: #d14; }
+code > span.st { color: #d14; }
+code > span.co { color: #888888; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #900; font-weight: bold; }
+code > span.er { color: #a61717; background-color: #e3d2d2; }
 </style>
 
 
@@ -369,7 +369,7 @@ troubleshooting</a></li>
 </ul>
 </div>
 
-<p>This R package provides tools to access <a href="https://pxnet2.stat.fi/API-description_SCB.pdf">PX-WEB API</a>.
+<p>This R package provides tools to access <a href="https://www.scb.se/en/services/open-data-api/api-for-the-statistical-database/">PX-WEB API</a>.
 Your <a href="https://ropengov.org/community/">contributions</a> and <a href="https://github.com/ropengov/pxweb">bug reports and other
 feedback</a> are welcome!</p>
 <p>We can find more information on the PX-Web/PC-Axis API <a href="https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/">here</a>.</p>
@@ -389,10 +389,10 @@ number of organizations</a> use PXWEB to distribute hierarchical data.
 You can browse the available data sets at:</p>
 <ul>
 <li><a href="http://www.statistikdatabasen.scb.se/pxweb/en/ssd/">Statistics
-Sweden</a> with <a href="https://pxnet2.stat.fi/API-description_SCB.pdf">API
+Sweden</a> with <a href="https://www.scb.se/en/services/open-data-api/api-for-the-statistical-database/">API
 Description</a></li>
 <li><a href="https://tilastokeskus.fi/til/aihealuejako.html">Statistics
-Finland</a> <a href="https://pxnet2.stat.fi/api1.html">StatFi API
+Finland</a> <a href="https://statfin.stat.fi/api1.html">StatFi API
 Description</a></li>
 <li><a href="https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/pxweb-examples/">Other
 organizations using PX-WEB</a></li>
@@ -492,7 +492,7 @@ object is returned.</p>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>px_meta <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>px_meta</span></code></pre></div>
 <pre><code>## PXWEB METADATA
-## Population by region, marital status, age, sex, observations and year 
+## Population by region, marital status, age, sex, observations and year
 ## variables:
 ##  [[1]] Region: region
 ##  [[2]] Civilstand: marital status
@@ -840,7 +840,7 @@ types.</p>
 <code>as.matrix</code>.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>pxmat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(pxd, <span class="at">column.name.type =</span> <span class="st">&quot;code&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;code&quot;</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pxmat)</span></code></pre></div>
-<pre><code>##      Civilstand Kon Tid    BE0101N1 
+<pre><code>##      Civilstand Kon Tid    BE0101N1
 ## [1,] &quot;OG&quot;       &quot;1&quot; &quot;2015&quot; &quot;2762601&quot;
 ## [2,] &quot;OG&quot;       &quot;1&quot; &quot;2016&quot; &quot;2820248&quot;
 ## [3,] &quot;OG&quot;       &quot;1&quot; &quot;2017&quot; &quot;2870477&quot;
@@ -868,14 +868,14 @@ per row.</p>
 <code>pxweb_data</code> object using the <code>pxweb_cite()</code>
 function. For full reproducibility, please also cite the package.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxweb_cite</span>(pxd)</span></code></pre></div>
-<pre><code>## 
+<pre><code>##
 ## Statistics Sweden (2022). &quot;Population by region, marital status, age,
 ## sex, observations and year.&quot; [Data accessed 2022-10-31 10:01:52 using
 ## pxweb R package 0.16.2],
 ## &lt;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
-## 
+##
 ## A BibTeX entry for LaTeX users is
-## 
+##
 ##   @Misc{,
 ##     title = {Population by region, marital status, age, sex, observations and year},
 ##     author = {{Statistics Sweden}},
@@ -885,18 +885,18 @@ function. For full reproducibility, please also cite the package.</p>
 ##     url = {https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
 ##     note = {[Data accessed 2022-10-31 10:01:52 using pxweb R package 0.16.2]},
 ##   }
-## 
-## 
-## 
-## 
+##
+##
+##
+##
 ## Kindly cite the pxweb R package as follows:
-## 
+##
 ##   Mans Magnusson, Markus Kainu, Janne Huovari, and Leo Lahti
 ##   (rOpenGov).  pxweb: R tools for PXWEB API.  URL:
 ##   http://github.com/ropengov/pxweb
-## 
+##
 ## A BibTeX entry for LaTeX users is
-## 
+##
 ##   @Misc{,
 ##     title = {pxweb: R tools for PX-WEB API},
 ##     author = {Mans Magnusson and Markus Kainu and Janne Huovari and Leo Lahti},
@@ -921,34 +921,34 @@ file</a>.</p>
 <pre><code>## R version 4.2.1 (2022-06-23)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
 ## Running under: macOS Big Sur ... 10.16
-## 
+##
 ## Matrix products: default
 ## BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
 ## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
-## 
+##
 ## locale:
 ## [1] C/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
-## 
+##
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
-## 
+## [1] stats     graphics  grDevices utils     datasets  methods   base
+##
 ## other attached packages:
 ## [1] pxweb_0.16.2
-## 
+##
 ## loaded via a namespace (and not attached):
-##  [1] jquerylib_0.1.4   bslib_0.3.1       pillar_1.7.0      compiler_4.2.1   
-##  [5] prettyunits_1.1.1 remotes_2.4.2     tools_4.2.1       digest_0.6.29    
-##  [9] pkgbuild_1.3.1    pkgload_1.3.0     evaluate_0.15     jsonlite_1.8.0   
-## [13] memoise_2.0.1     lifecycle_1.0.1   tibble_3.1.7      checkmate_2.1.0  
-## [17] pkgconfig_2.0.3   rlang_1.0.3       cli_3.3.0         rstudioapi_0.13  
-## [21] curl_4.3.2        yaml_2.3.5        xfun_0.31         fastmap_1.1.0    
-## [25] httr_1.4.3        withr_2.5.0       stringr_1.4.0     roxygen2_7.2.0   
-## [29] knitr_1.39        xml2_1.3.3        sass_0.4.1        desc_1.4.1       
-## [33] fs_1.5.2          vctrs_0.4.1       devtools_2.4.3    rprojroot_2.0.3  
-## [37] glue_1.6.2        R6_2.5.1          processx_3.6.1    fansi_1.0.3      
-## [41] rmarkdown_2.14    sessioninfo_1.2.2 callr_3.7.0       purrr_0.3.4      
-## [45] magrittr_2.0.3    htmltools_0.5.2   backports_1.4.1   ps_1.7.1         
-## [49] ellipsis_0.3.2    usethis_2.1.6     utf8_1.2.2        stringi_1.7.6    
+##  [1] jquerylib_0.1.4   bslib_0.3.1       pillar_1.7.0      compiler_4.2.1
+##  [5] prettyunits_1.1.1 remotes_2.4.2     tools_4.2.1       digest_0.6.29
+##  [9] pkgbuild_1.3.1    pkgload_1.3.0     evaluate_0.15     jsonlite_1.8.0
+## [13] memoise_2.0.1     lifecycle_1.0.1   tibble_3.1.7      checkmate_2.1.0
+## [17] pkgconfig_2.0.3   rlang_1.0.3       cli_3.3.0         rstudioapi_0.13
+## [21] curl_4.3.2        yaml_2.3.5        xfun_0.31         fastmap_1.1.0
+## [25] httr_1.4.3        withr_2.5.0       stringr_1.4.0     roxygen2_7.2.0
+## [29] knitr_1.39        xml2_1.3.3        sass_0.4.1        desc_1.4.1
+## [33] fs_1.5.2          vctrs_0.4.1       devtools_2.4.3    rprojroot_2.0.3
+## [37] glue_1.6.2        R6_2.5.1          processx_3.6.1    fansi_1.0.3
+## [41] rmarkdown_2.14    sessioninfo_1.2.2 callr_3.7.0       purrr_0.3.4
+## [45] magrittr_2.0.3    htmltools_0.5.2   backports_1.4.1   ps_1.7.1
+## [49] ellipsis_0.3.2    usethis_2.1.6     utf8_1.2.2        stringi_1.7.6
 ## [53] cachem_1.0.6      crayon_1.5.1</code></pre>
 </div>
 
