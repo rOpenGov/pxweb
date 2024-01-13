@@ -7,7 +7,7 @@
 http_was_redirected(r)
 }
 \arguments{
-\item{response}{an httr response object, e.g. from a call to httr::GET()}
+\item{r}{an httr response object, e.g. from a call to httr::GET()}
 }
 \value{
 list with slots \code{was_redirected}, \code{redirected_from} and  \code{redirected_to}
@@ -17,8 +17,8 @@ http_was_redirected
 }
 \examples{
 \dontrun{
-  r <- httr::GET("http://httpbin.org/redirect/2")
-  pxweb:::http_was_redirected(r)
+r <- httr::GET("http://httpbin.org/redirect/2")
+pxweb:::http_was_redirected(r)
 }
 }
 \references{

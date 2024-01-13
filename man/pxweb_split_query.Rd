@@ -11,7 +11,7 @@ pxweb_split_query(pxq, px, pxmd)
 
 \item{px}{a \code{pxweb} object.}
 
-\item{pxweb_metadata}{a \code{pxweb_metadata} object.}
+\item{pxmd}{a \code{pxweb_metadata} object.}
 }
 \value{
 a list with \code{pxweb_query} objects.
@@ -21,10 +21,10 @@ Split query in optimal sub-queries
 }
 \details{
 Computes (brute-force) the optimal split of a query to
-match the api maximum value limit. It also take into account 
+match the api maximum value limit. It also take into account
 that time variables and content variables should not be split.
 Also variables with filter "top" should not be split, since
-the top filter does not supply the individual levels, just a 
+the top filter does not supply the individual levels, just a
 number. This can probably be improved further.
 }
 \keyword{internal}

@@ -10,9 +10,9 @@ pxweb_add_call(obj, time_stamp = Sys.time())
 \item{obj}{a \code{pxweb_api_s3} object}
 }
 \description{
-The pxweb_add_call function add a call the the api in the call stack, then compute 
+The pxweb_add_call function add a call the the api in the call stack, then compute
 
-Promise: 
+Promise:
 The stored rda api object will always have the latest calls
 This is not thread safe so only one session at a time should call the api.
 }

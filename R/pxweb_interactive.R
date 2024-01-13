@@ -382,7 +382,7 @@ pxe_print_choices <- function(x) {
 
 
 #' Pad a string to a fixed size
-#' @param x a character vector to pad
+#' @param txt a character vector to pad
 #' @param n final char width
 #' @param pad pad symbol
 #' @param type pad from 'left' or 'right'.

@@ -28,8 +28,10 @@ url <- "https://api.scb.se/OV0104/v1/doris/sv"
 px_levels <- pxweb_get(url)
 
 url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-query <- file.path(system.file(package = "pxweb"),
-                   "extdata", "examples", "json_query_example.json")
+query <- file.path(
+  system.file(package = "pxweb"),
+  "extdata", "examples", "json_query_example.json"
+)
 px_data <- pxweb_get(url = url, query = query)
 
 # Convert to data.frame
@@ -42,13 +44,17 @@ as.matrix(px_data, column.name.type = "code", variable.value.type = "code")
 pxweb_data_comments(px_data)
 
 # Get jsonstat data
-jstat <- query <- file.path(system.file(package = "pxweb"),
-                            "extdata", "examples", "json-stat_query_example.json")
+jstat <- query <- file.path(
+  system.file(package = "pxweb"),
+  "extdata", "examples", "json-stat_query_example.json"
+)
 jstat_data <- pxweb_get(url = url, query = query)
 
 # Get very large datasets (multiple downloads needed)
-big_query <- file.path(system.file(package = "pxweb"),
-                       "extdata", "examples", "json_big_query_example.json")
+big_query <- file.path(
+  system.file(package = "pxweb"),
+  "extdata", "examples", "json_big_query_example.json"
+)
 px_data <- pxweb_get(url = url, query = big_query)
 }
 

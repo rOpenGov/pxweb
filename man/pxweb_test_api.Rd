@@ -15,11 +15,11 @@ pxweb_test_api(
 \arguments{
 \item{url}{The base url to the pxweb api (or a branch of the metadata tree)}
 
-\item{test_type}{What type of test should be done. 
+\item{test_type}{What type of test should be done.
 The \code{first} observation of each table.
 A random \code{sample} of size \code{n}.
-Download all \code{full} tables. 
-\code{touch} the api by only downloading the first table metadata. 
+Download all \code{full} tables.
+\code{touch} the api by only downloading the first table metadata.
 This is minimal testing of the API.}
 
 \item{n}{sample size if \code{test_type} is \code{sample}.}
@@ -30,7 +30,7 @@ This is minimal testing of the API.}
 }
 \value{
 Function returns a data.frame with information on each node
-Two variables are added: 
+Two variables are added:
 \code{checked} : The node has been checked
 \code{error} : Whether there were errors encountered with the call
 \code{download_error} : Whether there were errors encountered during download
@@ -41,8 +41,8 @@ By using a branch in a tree the api is tested below this branch.
 }
 \examples{
 \dontrun{
-  url <- "https://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
-  res <- pxweb_test_api(url)
-  res <- pxweb_test_api(url, test_type="touch")
+url <- "https://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
+res <- pxweb_test_api(url)
+res <- pxweb_test_api(url, test_type = "touch")
 }
 }

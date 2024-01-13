@@ -15,8 +15,10 @@ pxweb_query_as_json(pxq, ...)
 Convert a \code{pxweb_query} object to a \code{json} string
 }
 \examples{
-json_query <- file.path(system.file(package = "pxweb"), 
-                        "extdata", "examples", "json_query_example.json")
+json_query <- file.path(
+  system.file(package = "pxweb"),
+  "extdata", "examples", "json_query_example.json"
+)
 pxq <- pxweb_query(json_query)
 json <- pxweb_query_as_json(pxq, pretty = TRUE)
 

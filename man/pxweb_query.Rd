@@ -28,20 +28,23 @@ pxweb_query(x)
 \item{x}{an object to cast as a pxweb_query object.}
 }
 \description{
-Creates a pxweb query object from either a list with named values, 
+Creates a pxweb query object from either a list with named values,
 a json query file or json query string. See examples below.
 }
 \examples{
-dims <- list(Alue = c("*"),
-             "Asuntokunnan koko" = c("*"),
-             Talotyyppi = c("S"),
-             Vuosi = c("*"))
+dims <- list(
+  Alue = c("*"),
+  "Asuntokunnan koko" = c("*"),
+  Talotyyppi = c("S"),
+  Vuosi = c("*")
+)
 pxq1 <- pxweb_query(dims)
 
-json_query <- file.path(system.file(package = "pxweb"), 
-                        "extdata", "examples", "json_query_example.json")
+json_query <- file.path(
+  system.file(package = "pxweb"),
+  "extdata", "examples", "json_query_example.json"
+)
 pxq2 <- pxweb_query(json_query)
-
 
 }
 \seealso{

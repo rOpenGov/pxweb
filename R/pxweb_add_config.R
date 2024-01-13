@@ -76,7 +76,7 @@ is_pxweb_config_response <- function(x) {
 
 #' http_was_redirected
 #'
-#' @param response an httr response object, e.g. from a call to httr::GET()
+#' @param r an httr response object, e.g. from a call to httr::GET()
 #'
 #' @return list with slots \code{was_redirected}, \code{redirected_from} and  \code{redirected_to}
 #'

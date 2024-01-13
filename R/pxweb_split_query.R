@@ -10,7 +10,7 @@
 #'
 #' @param pxq a \code{pxweb_query} object.
 #' @param px a \code{pxweb} object.
-#' @param pxweb_metadata a \code{pxweb_metadata} object.
+#' @param pxmd a \code{pxweb_metadata} object.
 #'
 #' @return a list with \code{pxweb_query} objects.
 #'
@@ -118,8 +118,6 @@ pxweb_query_dim_splittable <- function(pxq, pxmd) {
 #' Splitable variables are variables that can be split. Content variables cannot be split,
 #' not variables with filter == "top"
 #'
-#' @param pxq a \code{pxweb_query} object.
-#'
 #' @return a \code{pxweb_split_dimensions}
 #'
 #' @keywords internal
@@ -193,7 +191,7 @@ generate_permutations <- function(x) {
 #' @param n See \code{gtools::permutations}.
 #' @param r See \code{gtools::permutations}.
 #' @param v See \code{gtools::permutations}.
-#' @param nset See \code{gtools::permutations}.
+#' @param set See \code{gtools::permutations}.
 #' @param repeats.allowed See \code{gtools::permutations}.
 #'
 #' @keywords internal

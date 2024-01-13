@@ -9,7 +9,7 @@ pxe_interactive_get_data(pxe, test_input = NULL)
 \arguments{
 \item{pxe}{a \code{pxweb_explorer} object with full query}
 
-\item{test_input}{a test input for testing the function. 
+\item{test_input}{a test input for testing the function.
 Since two question, supply a vector of length two.}
 }
 \description{

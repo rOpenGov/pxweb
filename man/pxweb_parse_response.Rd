@@ -14,6 +14,6 @@ is_pxweb_response(x)
 }
 \description{
 The function parses the response from a call made to a PXWEB API
-using the \code{httr} R package. In this way it is possible to parse the 
+using the \code{httr} R package. In this way it is possible to parse the
 content of calls made outside the pxweb R package.
 }

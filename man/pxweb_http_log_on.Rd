@@ -29,7 +29,7 @@ Setup a structure to log all API calls
 }
 \details{
 Set up internal structure to handle http PXWEB API calls. http calls are stored in a log file.
-To access the path to this log file, the path is stored in the pxweb folder in the tempdir(). 
+To access the path to this log file, the path is stored in the pxweb folder in the tempdir().
 The path is given by \code{pxweb_log_paths_path()}.
 If the file exists, the http calls should be logged (appended) to the log file where the object contains the path.
 }
