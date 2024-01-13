@@ -46,7 +46,7 @@ pxweb_as_data_frame.pxweb_data <- function(x, row.names = NULL, optional = FALSE
 
 #' @rdname pxweb_as_data_frame
 #' @export
-pxweb_as_data_frame.pxweb_data_comments <- function(x, optional = FALSE, ..., stringsAsFactors = FALSE) {
+pxweb_as_data_frame.pxweb_data_comments <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = FALSE) {
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
 
@@ -73,7 +73,7 @@ pxweb_as_data_frame.pxweb_data_comments <- function(x, optional = FALSE, ..., st
 
 #' @rdname pxweb_as_data_frame
 #' @export
-pxweb_as_data_frame.pxweb_data_comment <- function(x, optional = FALSE, ..., stringsAsFactors = FALSE) {
+pxweb_as_data_frame.pxweb_data_comment <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = FALSE) {
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
 
@@ -93,7 +93,7 @@ pxweb_as_data_frame.pxweb_data_comment <- function(x, optional = FALSE, ..., str
 
 #' @rdname pxweb_as_data_frame
 #' @export
-pxweb_as_data_frame.pxweb_levels <- function(x, optional = FALSE, ..., stringsAsFactors = FALSE) {
+pxweb_as_data_frame.pxweb_levels <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = FALSE) {
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
 

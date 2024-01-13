@@ -36,11 +36,29 @@ pxweb_as_data_frame(
   variable.value.type = "text"
 )
 
-\method{pxweb_as_data_frame}{pxweb_data_comments}(x, optional = FALSE, ..., stringsAsFactors = FALSE)
+\method{pxweb_as_data_frame}{pxweb_data_comments}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = FALSE
+)
 
-\method{pxweb_as_data_frame}{pxweb_data_comment}(x, optional = FALSE, ..., stringsAsFactors = FALSE)
+\method{pxweb_as_data_frame}{pxweb_data_comment}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = FALSE
+)
 
-\method{pxweb_as_data_frame}{pxweb_levels}(x, optional = FALSE, ..., stringsAsFactors = FALSE)
+\method{pxweb_as_data_frame}{pxweb_levels}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = FALSE
+)
 
 \method{as.data.frame}{pxweb_data}(
   x,
