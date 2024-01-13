@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Roboto_Mono-0.4.6/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto_Mono-0.4.8/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="PX-WEB API Interface for R">
@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">pxweb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +86,7 @@
                         <h4 data-toc-skip class="author">Mans Magnusson,
 Leo Lahti et al.</h4>
             
-            <h4 data-toc-skip class="date">2023-07-13</h4>
+            <h4 data-toc-skip class="date">2024-01-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/pxweb/blob/HEAD/vignettes/pxweb.Rmd" class="external-link"><code>vignettes/pxweb.Rmd</code></a></small>
       <div class="d-none name"><code>pxweb.Rmd</code></div>
@@ -161,7 +161,7 @@ use:</p>
 <p>We also recommend setting the UTF-8 encoding since each API may have
 local specific letters:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/locales.html" class="external-link">Sys.setlocale</a></span><span class="op">(</span>locale<span class="op">=</span><span class="st">"UTF-8"</span><span class="op">)</span> </span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/locales.html" class="external-link">Sys.setlocale</a></span><span class="op">(</span>locale <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -228,9 +228,9 @@ is an example of a PXWEB LEVELS object.</p>
 <span><span class="va">px_levels</span></span></code></pre></div>
 <pre><code><span><span class="co">## PXWEB LEVELS</span></span>
 <span><span class="co">##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2022</span></span>
-<span><span class="co">##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2022</span></span>
+<span><span class="co">##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2023</span></span>
 <span><span class="co">##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2022</span></span>
-<span><span class="co">##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2023M05</span></span>
+<span><span class="co">##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2023M11</span></span>
 <span><span class="co">##   BefolkningR1860N (t): Population by age and sex. Year 1860 - 2022</span></span></code></pre>
 <p>And if we use <code><a href="../reference/pxweb_get.html">pxweb_get()</a></code> for a table, a PXWEB METADATA
 object is returned.</p>
@@ -371,11 +371,13 @@ the path to the file to the “<code><a href="../reference/pxweb_query.html">pxw
 <p>Finally, we can create a PXWEB query from an R list where each list
 element is a variable and selected observation.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pxweb_query_list</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Civilstand"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>, <span class="co"># Use "*" to select all</span></span>
-<span>       <span class="st">"Kon"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>,<span class="st">"2"</span><span class="op">)</span>,</span>
-<span>       <span class="st">"ContentsCode"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BE0101N1"</span><span class="op">)</span>,</span>
-<span>       <span class="st">"Tid"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2015"</span>,<span class="st">"2016"</span>,<span class="st">"2017"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">pxweb_query_list</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Civilstand"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>, <span class="co"># Use "*" to select all</span></span>
+<span>    <span class="st">"Kon"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span><span class="op">)</span>,</span>
+<span>    <span class="st">"ContentsCode"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BE0101N1"</span><span class="op">)</span>,</span>
+<span>    <span class="st">"Tid"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2015"</span>, <span class="st">"2016"</span>, <span class="st">"2017"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="va">pxq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_query.html">pxweb_query</a></span><span class="op">(</span><span class="va">pxweb_query_list</span><span class="op">)</span></span>
 <span><span class="va">pxq</span></span></code></pre></div>
 <pre><code><span><span class="co">## PXWEB QUERY</span></span>
@@ -402,8 +404,10 @@ manually.</p>
 data with “<code><a href="../reference/pxweb_get.html">pxweb_get()</a></code>”. The function returns a
 <code>pxweb_data</code> object that contains the downloaded data.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pxd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
-<span>                 <span class="va">pxq</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">pxd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
+<span>  <span class="va">pxq</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">pxd</span></span></code></pre></div>
 <pre><code><span><span class="co">## PXWEB DATA</span></span>
 <span><span class="co">## With 4 variables and 24 observations.</span></span></code></pre>
@@ -411,8 +415,10 @@ data with “<code><a href="../reference/pxweb_get.html">pxweb_get()</a></code>�
 to JSON-stat, and we will get a JSON-stat object returned.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxq</span><span class="op">$</span><span class="va">response</span><span class="op">$</span><span class="va">format</span> <span class="op">&lt;-</span> <span class="st">"json-stat"</span></span>
-<span><span class="va">pxjstat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
-<span>                     <span class="va">pxq</span><span class="op">)</span></span>
+<span><span class="va">pxjstat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
+<span>  <span class="va">pxq</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">pxjstat</span></span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "dataset": {</span></span>
@@ -566,10 +572,12 @@ the R <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link"
 if you need other response formats.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxq</span><span class="op">$</span><span class="va">response</span><span class="op">$</span><span class="va">format</span> <span class="op">&lt;-</span> <span class="st">"px"</span></span>
-<span><span class="va">pxfp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
-<span>                     <span class="va">pxq</span><span class="op">)</span></span>
+<span><span class="va">pxfp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
+<span>  <span class="va">pxq</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">pxfp</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "/tmp/Rtmpb8B31P/1c68fd3080ae1fc197dba65c2c9ce93c8be1c844.px"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "/tmp/RtmpM4aiby/b16bccfba477a415f0decc6bdcf02ada884a9335.px"</span></span></code></pre>
 <p>If the queries are large (contain more values than the PXWEB API
 maximum allowed values), the query is chunked into optimal chunks and is
 then downloaded sequentially. PXWEB data objects are then combined into
@@ -647,9 +655,9 @@ per row.</p>
 function. For full reproducibility, please also cite the package.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pxweb_cite.html">pxweb_cite</a></span><span class="op">(</span><span class="va">pxd</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Statistics Sweden (2023). "Population by region, marital status, age,</span></span>
-<span><span class="co">## sex, observations and year." [Data accessed 2023-07-13 13:17:58.385492</span></span>
-<span><span class="co">## using pxweb R package 0.16.2],</span></span>
+<pre><code><span><span class="co">## Statistics Sweden (2024). "Population by region, marital status, age,</span></span>
+<span><span class="co">## sex, observations and year." [Data accessed 2024-01-13 16:15:43.343486</span></span>
+<span><span class="co">## using pxweb R package 0.16.3],</span></span>
 <span><span class="co">## &lt;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## A BibTeX entry for LaTeX users is</span></span>
@@ -659,9 +667,9 @@ function. For full reproducibility, please also cite the package.</p>
 <span><span class="co">##     author = {{Statistics Sweden}},</span></span>
 <span><span class="co">##     organization = {Statistics Sweden},</span></span>
 <span><span class="co">##     address = {Stockholm, Sweden},</span></span>
-<span><span class="co">##     year = {2023},</span></span>
+<span><span class="co">##     year = {2024},</span></span>
 <span><span class="co">##     url = {https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},</span></span>
-<span><span class="co">##     note = {[Data accessed 2023-07-13 13:17:58.385492 using pxweb R package 0.16.2]},</span></span>
+<span><span class="co">##     note = {[Data accessed 2024-01-13 16:15:43.343486 using pxweb R package 0.16.3]},</span></span>
 <span><span class="co">##   }</span></span>
 <span><span class="co">## Kindly cite the pxweb R package as follows:</span></span>
 <span><span class="co">## </span></span>
@@ -696,9 +704,9 @@ file</a>.</p>
 <p>We created this vignette with</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R version 4.3.1 (2023-06-16)</span></span>
+<pre><code><span><span class="co">## R version 4.3.2 (2023-10-31)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">## Running under: Ubuntu 22.04.2 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 22.04.3 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
@@ -717,19 +725,19 @@ file</a>.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] pxweb_0.16.2</span></span>
+<span><span class="co">## [1] pxweb_0.16.3</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] vctrs_0.6.3       httr_1.4.6        cli_3.6.1         knitr_1.43       </span></span>
-<span><span class="co">##  [5] rlang_1.1.1       xfun_0.39         stringi_1.7.12    purrr_1.0.1      </span></span>
-<span><span class="co">##  [9] textshaping_0.3.6 jsonlite_1.8.7    glue_1.6.2        backports_1.4.1  </span></span>
-<span><span class="co">## [13] rprojroot_2.0.3   htmltools_0.5.5   ragg_1.2.5        sass_0.4.6       </span></span>
-<span><span class="co">## [17] rmarkdown_2.23    evaluate_0.21     jquerylib_0.1.4   fastmap_1.1.1    </span></span>
-<span><span class="co">## [21] yaml_2.3.7        lifecycle_1.0.3   memoise_2.0.1     stringr_1.5.0    </span></span>
-<span><span class="co">## [25] compiler_4.3.1    fs_1.6.2          systemfonts_1.0.4 digest_0.6.33    </span></span>
-<span><span class="co">## [29] R6_2.5.1          curl_5.0.1        magrittr_2.0.3    checkmate_2.2.0  </span></span>
-<span><span class="co">## [33] bslib_0.5.0       tools_4.3.1       mime_0.12         pkgdown_2.0.7    </span></span>
-<span><span class="co">## [37] cachem_1.0.8      desc_1.4.2</span></span></code></pre>
+<span><span class="co">##  [1] vctrs_0.6.5       httr_1.4.7        cli_3.6.2         knitr_1.45       </span></span>
+<span><span class="co">##  [5] rlang_1.1.3       xfun_0.41         stringi_1.8.3     purrr_1.0.2      </span></span>
+<span><span class="co">##  [9] textshaping_0.3.7 jsonlite_1.8.8    glue_1.7.0        backports_1.4.1  </span></span>
+<span><span class="co">## [13] htmltools_0.5.7   ragg_1.2.7        sass_0.4.8        rmarkdown_2.25   </span></span>
+<span><span class="co">## [17] evaluate_0.23     jquerylib_0.1.4   fastmap_1.1.1     yaml_2.3.8       </span></span>
+<span><span class="co">## [21] lifecycle_1.0.4   memoise_2.0.1     stringr_1.5.1     compiler_4.3.2   </span></span>
+<span><span class="co">## [25] fs_1.6.3          systemfonts_1.0.5 digest_0.6.34     R6_2.5.1         </span></span>
+<span><span class="co">## [29] curl_5.2.0        magrittr_2.0.3    checkmate_2.3.1   bslib_0.6.1      </span></span>
+<span><span class="co">## [33] tools_4.3.2       mime_0.12         pkgdown_2.0.7     cachem_1.0.8     </span></span>
+<span><span class="co">## [37] desc_1.4.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
