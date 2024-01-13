@@ -1,8 +1,8 @@
 citHeader("Kindly cite the pxweb R package as follows:")
 
-citEntry(entry="misc",
+bibentry(bibtype="misc",
          title = "pxweb: R tools for PX-WEB API",
-         author = personList(
+         author = c(
 	   person(given = "Mans", family= "Magnusson", email = "mons.magnusson@gmail.com"),
 	   person(given = "Markus", family= "Kainu"),
 	   person(given = "Janne", family= "Huovari"),

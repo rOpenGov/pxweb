@@ -10,7 +10,7 @@
 #'
 #' @seealso \code{\link[base]{as.data.frame}}.
 #'
-#' @keywords internal
+#' @export
 pxweb_as_data_frame <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = FALSE, column.name.type = "text", variable.value.type = "text") {
   checkmate::assert_choice(column.name.type, c("code", "text"))
   checkmate::assert_choice(column.name.type, c("code", "text"))
@@ -18,7 +18,7 @@ pxweb_as_data_frame <- function(x, row.names = NULL, optional = FALSE, ..., stri
 }
 
 #' @rdname pxweb_as_data_frame
-#' @keywords internal
+#' @export
 pxweb_as_data_frame.pxweb_data <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = FALSE, column.name.type = "text", variable.value.type = "text") {
   pxdims <- pxweb_data_dim(x)
   checkmate::assert_character(row.names, len = pxdims[1], null.ok = TRUE)
@@ -45,7 +45,7 @@ pxweb_as_data_frame.pxweb_data <- function(x, row.names = NULL, optional = FALSE
 }
 
 #' @rdname pxweb_as_data_frame
-#' @keywords internal
+#' @export
 pxweb_as_data_frame.pxweb_data_comments <- function(x, optional = FALSE, ..., stringsAsFactors = FALSE) {
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
@@ -72,7 +72,7 @@ pxweb_as_data_frame.pxweb_data_comments <- function(x, optional = FALSE, ..., st
 }
 
 #' @rdname pxweb_as_data_frame
-#' @keywords internal
+#' @export
 pxweb_as_data_frame.pxweb_data_comment <- function(x, optional = FALSE, ..., stringsAsFactors = FALSE) {
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
@@ -92,7 +92,7 @@ pxweb_as_data_frame.pxweb_data_comment <- function(x, optional = FALSE, ..., str
 
 
 #' @rdname pxweb_as_data_frame
-#' @keywords internal
+#' @export
 pxweb_as_data_frame.pxweb_levels <- function(x, optional = FALSE, ..., stringsAsFactors = FALSE) {
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)

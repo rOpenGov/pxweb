@@ -13,7 +13,7 @@ vignette: >
 
 
 This R package provides tools to access [PX-WEB
-API](https://pxnet2.stat.fi/API-description_SCB.pdf). Your
+API](https://www.scb.se/en/services/open-data-api/api-for-the-statistical-database/). Your
 [contributions](https://ropengov.org/community/) and [bug reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
 
@@ -30,8 +30,8 @@ The `pxweb` R package connects any PXWEB API to R and facilitates the access, us
 
 [A number of organizations](https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/pxweb-examples/) use PXWEB to distribute hierarchical data. You can browse the available data sets at:
 
- * [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](https://pxnet2.stat.fi/API-description_SCB.pdf)
- * [Statistics Finland](https://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](https://pxnet2.stat.fi/api1.html)
+ * [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](https://www.scb.se/en/services/open-data-api/api-for-the-statistical-database/)
+ * [Statistics Finland](https://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](https://statfin.stat.fi/api1.html)
  * [Other organizations using PX-WEB](https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/pxweb-examples/)
 
 ### About PXWEB APIs
