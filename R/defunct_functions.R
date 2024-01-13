@@ -1,9 +1,9 @@
 #' Defunct functions
-#' 
-#' @description 
+#'
+#' @description
 #' These function has as from version 0.10.0 become defunct.
 #' Call the functions to get information on new functions to use.
-#' 
+#'
 #' @param url Defunct argument.
 #' @param ... Defunct argument.
 #' @param api Defunct argument.
@@ -19,15 +19,15 @@
 #' @param quiet Defunct argument.
 #' @param path Defunct argument.
 #' @param topnodes Defunct argument.
-#' 
+#'
 #' @export
-api_catalogue <- function(){
+api_catalogue <- function() {
   .Defunct("pxweb_api_catalogue")
 }
 
 #' @rdname api_catalogue
 #' @export
-update_pxweb_apis <- function(){
+update_pxweb_apis <- function() {
   .Defunct(msg = "update_pxweb_apis() is no longer allowed by CRAN. See vignette(\"pxweb\") on how to update your API catalogue.")
 }
 
@@ -52,7 +52,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE, encoding = NULL) {
 
 #' @rdname api_catalogue
 #' @export
-get_pxweb_dims <- function(node, verbose=TRUE) {
+get_pxweb_dims <- function(node, verbose = TRUE) {
   .Defunct("pxweb_advanced_get")
 }
 
@@ -70,7 +70,7 @@ get_pxweb_metadata <- function(path = NULL, node = NULL, topnodes = NULL, quiet 
 
 #' @rdname api_catalogue
 #' @export pxweb_api
-pxweb_api <- list(new =function(){
+pxweb_api <- list(new = function() {
   .Defunct(msg = "'pxweb_api' class is defunct. \nUse 'pxweb' instead.\nSee help(\"Defunct\") ")
 })
 

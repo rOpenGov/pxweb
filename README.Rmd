@@ -46,7 +46,7 @@ sometimes compromised. Issue reports are welcome.
 The easiest way to use pxweb is to simply install it from CRAN:
 
 ```{r, eval=FALSE}
-install.packages('pxweb')
+install.packages("pxweb")
 ```
 
 
@@ -54,7 +54,7 @@ Alternatively, you can get the latest stable development version:
 
 ```{r, results='hide', message=FALSE, eval=FALSE}
 library(remotes)
-remotes::install_github('ropengov/pxweb')
+remotes::install_github("ropengov/pxweb")
 ```
 
 In some cases, the organization requires manual proxy settings. This can be set as follows:
@@ -65,7 +65,7 @@ library(httr)
 set_config(
   use_proxy("64.251.21.73", 8080) # Note! This is an example
 )
-remotes::install_github('ropengov/pxweb')
+remotes::install_github("ropengov/pxweb")
 ```
 
 ```{r, results='hide', echo=FALSE}

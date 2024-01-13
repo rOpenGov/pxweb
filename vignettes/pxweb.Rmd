@@ -73,7 +73,7 @@ vignette(topic="pxweb")
 We also recommend setting the UTF-8 encoding since each API may have local specific letters:
 
 ```{r locale, eval=FALSE}
-Sys.setlocale(locale="UTF-8") 
+Sys.setlocale(locale = "UTF-8")
 ```
 
 
@@ -213,11 +213,13 @@ pxq <- pxweb_query("path/to/the/json/query.json")
 Finally, we can create a PXWEB query from an R list where each list element is a variable and selected observation.
 
 ```{r rquery, message=FALSE, eval=TRUE}
-pxweb_query_list <- 
-  list("Civilstand"=c("*"), # Use "*" to select all
-       "Kon"=c("1","2"),
-       "ContentsCode"=c("BE0101N1"),
-       "Tid"=c("2015","2016","2017"))
+pxweb_query_list <-
+  list(
+    "Civilstand" = c("*"), # Use "*" to select all
+    "Kon" = c("1", "2"),
+    "ContentsCode" = c("BE0101N1"),
+    "Tid" = c("2015", "2016", "2017")
+  )
 pxq <- pxweb_query(pxweb_query_list)
 pxq
 ```
@@ -233,8 +235,10 @@ pxweb_validate_query_with_metadata(pxq, px_meta)
 When we have the URL to a data table and a query, we can download the data with "`pxweb_get()` ". The function returns a `pxweb_data` object that contains the downloaded data.
 
 ```{r, message=FALSE, eval=TRUE}
-pxd <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
-                 pxq)
+pxd <- pxweb_get(
+  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  pxq
+)
 pxd
 ```
 
@@ -242,8 +246,10 @@ If we instead want a JSON-stat object, we change the response format to JSON-sta
 
 ```{r, message=FALSE, eval=TRUE}
 pxq$response$format <- "json-stat"
-pxjstat <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
-                     pxq)
+pxjstat <- pxweb_get(
+  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  pxq
+)
 pxjstat
 ```
 
@@ -251,8 +257,10 @@ Some return formats return files. Then, these responses are stored in the R `tem
 
 ```{r, message=FALSE, eval=TRUE}
 pxq$response$format <- "px"
-pxfp <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
-                     pxq)
+pxfp <- pxweb_get(
+  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  pxq
+)
 pxfp
 ```
 

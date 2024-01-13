@@ -23,7 +23,7 @@ is.pxweb(x)
 A \code{pxweb} object.
 }
 \description{
-The pxwebapi object contain all information to do calls to the pxweb api and keep count 
+The pxwebapi object contain all information to do calls to the pxweb api and keep count
 of the number of calls. The object is constructed
 The object will also be cached in R temp folder to minimize calls to api.
 All urls should be passed through the constructor to set up the pxweb api config.
@@ -36,8 +36,8 @@ The url has been checked to be a pxweb api (through config)
 }
 \examples{
 \dontrun{
-pxapi_1 <- pxweb(url ="https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
-pxapi_2 <- pxweb(url ="https://api.scb.se/OV0104/v1/doris/sv")
+pxapi_1 <- pxweb(url = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
+pxapi_2 <- pxweb(url = "https://api.scb.se/OV0104/v1/doris/sv")
 }
 
 }

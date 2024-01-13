@@ -13,15 +13,15 @@ permutations(n, r, v = 1:n, set = TRUE, repeats.allowed = FALSE)
 
 \item{v}{See \code{gtools::permutations}.}
 
-\item{repeats.allowed}{See \code{gtools::permutations}.}
+\item{set}{See \code{gtools::permutations}.}
 
-\item{nset}{See \code{gtools::permutations}.}
+\item{repeats.allowed}{See \code{gtools::permutations}.}
 }
 \description{
 Generate permutations of dimensions to find optimal no of batches
 }
 \details{
-Taken from gtools to minimize dependencies. See permutations 
+Taken from gtools to minimize dependencies. See permutations
 of the gtools packages for details
 }
 \keyword{internal}

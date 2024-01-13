@@ -13,7 +13,7 @@ pxweb_add_config(obj)
 Add the config slot to a pxweb object
 }
 \details{
-Checks if there exist a config object in the object. 
+Checks if there exist a config object in the object.
 Otherwise it query the api to get it and add that call to the call stack.
 }
 \keyword{internal}

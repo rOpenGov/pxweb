@@ -6,9 +6,6 @@
 \usage{
 split_dimensions_left_right(x, bool, max_size)
 }
-\arguments{
-\item{pxq}{a \code{pxweb_query} object.}
-}
 \value{
 a \code{pxweb_split_dimensions}
 }

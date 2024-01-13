@@ -7,13 +7,13 @@
 str_pad(txt, n = 5, pad = " ", type = "left")
 }
 \arguments{
+\item{txt}{a character vector to pad}
+
 \item{n}{final char width}
 
 \item{pad}{pad symbol}
 
 \item{type}{pad from 'left' or 'right'.}
-
-\item{x}{a character vector to pad}
 }
 \description{
 Pad a string to a fixed size

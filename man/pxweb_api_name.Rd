@@ -92,7 +92,7 @@ API-NAME/API-VERSION/LANGUAGE/DATABASE-ID/<LEVELS>/TABLE-ID
 The full url is made up by the \code{rootpath}, \code{subpath}, and \code{path}.
 The \code{rootpath} is made up of the protocol and the API-NAME / hostname and protocol (if any).
 
-The \code{subpath} contain the API-VERSION and LANGUAGE but can contain other parts as well. 
+The \code{subpath} contain the API-VERSION and LANGUAGE but can contain other parts as well.
 The subpath is the shortest the config can be called for. It can be seen as the base for the API.
 
 The \code{dbpath}, the data base path, contain DATABASE-ID/<LEVELS>/TABLE-ID.
