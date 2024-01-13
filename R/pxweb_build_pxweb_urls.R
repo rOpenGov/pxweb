@@ -1,8 +1,8 @@
 #' Build the url to a PXWEB api
-#' 
+#'
 #' @keywords internal
-#' 
-build_pxweb_url <- function(x){
+#'
+build_pxweb_url <- function(x) {
   UseMethod("build_pxweb_url")
 }
 
@@ -50,10 +50,10 @@ build_pxweb_url.url <- function(x) {
 
 
 #' Build the url to get the config from a PXWEB api
-#' 
+#'
 #' @keywords internal
-#' 
-build_pxweb_config_url <- function(x){
+#'
+build_pxweb_config_url <- function(x) {
   UseMethod("build_pxweb_config_url")
 }
 
@@ -75,4 +75,3 @@ build_pxweb_config_url.pxweb <- function(x) {
 build_pxweb_config_url.url <- function(x) {
   paste0(build_pxweb_url(x), "?config")
 }
-

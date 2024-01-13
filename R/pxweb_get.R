@@ -16,8 +16,10 @@
 #' px_levels <- pxweb_get(url)
 #'
 #' url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-#' query <- file.path(system.file(package = "pxweb"),
-#'                    "extdata", "examples", "json_query_example.json")
+#' query <- file.path(
+#'   system.file(package = "pxweb"),
+#'   "extdata", "examples", "json_query_example.json"
+#' )
 #' px_data <- pxweb_get(url = url, query = query)
 #'
 #' # Convert to data.frame
@@ -30,18 +32,22 @@
 #' pxweb_data_comments(px_data)
 #'
 #' # Get jsonstat data
-#' jstat <- query <- file.path(system.file(package = "pxweb"),
-#'                             "extdata", "examples", "json-stat_query_example.json")
+#' jstat <- query <- file.path(
+#'   system.file(package = "pxweb"),
+#'   "extdata", "examples", "json-stat_query_example.json"
+#' )
 #' jstat_data <- pxweb_get(url = url, query = query)
 #'
 #' # Get very large datasets (multiple downloads needed)
-#' big_query <- file.path(system.file(package = "pxweb"),
-#'                        "extdata", "examples", "json_big_query_example.json")
+#' big_query <- file.path(
+#'   system.file(package = "pxweb"),
+#'   "extdata", "examples", "json_big_query_example.json"
+#' )
 #' px_data <- pxweb_get(url = url, query = big_query)
 #' }
 #'
 #' @export
-pxweb_get <- function(url, query = NULL, verbose = TRUE){
+pxweb_get <- function(url, query = NULL, verbose = TRUE) {
   pxweb_advanced_get(url = url, query = query, verbose = verbose)
 }
 
@@ -59,13 +65,15 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE){
 #' @examples
 #' \dontrun{
 #' url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-#' query <- file.path(system.file(package = "pxweb"),
-#'                    "extdata", "examples", "json_query_example.json")
+#' query <- file.path(
+#'   system.file(package = "pxweb"),
+#'   "extdata", "examples", "json_query_example.json"
+#' )
 #' df <- pxweb_get_data(url = url, query = query)
 #' }
 #'
 #' @export
-pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text", variable.value.type = "text"){
+pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text", variable.value.type = "text") {
   d <- pxweb_advanced_get(url = url, query = query, verbose = verbose)
   as.data.frame(d, column.name.type = column.name.type, variable.value.type = variable.value.type)
 }
@@ -86,17 +94,17 @@ pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text"
 #'            If used with query, also supply a \code{pxweb_metadata} object. Otherwise the same parameters are sent to
 #'            both \code{httr::POST} and \code{httr::GET}.
 #' @export
-pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls = FALSE, pxmdo = NULL, ...){
+pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls = FALSE, pxmdo = NULL, ...) {
   checkmate::assert_flag(log_http_calls)
   checkmate::assert_class(pxmdo, classes = "pxweb_metadata", null.ok = TRUE)
-  if(log_http_calls){
+  if (log_http_calls) {
     pxweb_http_log_on()
   }
 
   px <- pxweb(url)
-  if(!is.null(query)){
+  if (!is.null(query)) {
     pxq <- pxweb_query(query)
-    if(is.null(pxmdo)){
+    if (is.null(pxmdo)) {
       pxmd <- pxweb_get(px)
     } else {
       pxmd <- pxmdo
@@ -109,22 +117,24 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
     pxq <- NULL
   }
 
-  if(is.null(pxq)){
+  if (is.null(pxq)) {
     px <- pxweb_add_call(px)
-    r <- httr::GET(build_pxweb_url(px),
-                   pxweb_user_agent(),
-                   ...)
+    r <- httr::GET(
+      build_pxweb_url(px),
+      pxweb_user_agent(),
+      ...
+    )
     pxweb_http_log_response(r)
     httr::stop_for_status(r)
     pxr <- pxweb_parse_response(x = r)
     pxr <- pxweb_metadata_add_null_values(x = pxr, px)
   } else {
     pxr <- list()
-    if(length(pxqs) > 1 & verbose) {
+    if (length(pxqs) > 1 & verbose) {
       cat("  Downloading large query (in", length(pxqs), "batches):\n")
       pb <- utils::txtProgressBar(min = 0, max = length(pxqs), style = 3)
     }
-    for(i in seq_along(pxqs)){
+    for (i in seq_along(pxqs)) {
       px <- pxweb_add_call(px)
       pxurl <- build_pxweb_url(px)
       pxqs[[i]] <- pxweb_remove_metadata_from_query(pxqs[[i]], pxmd)
@@ -132,21 +142,21 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
       pxweb_http_log_response(r)
       httr::stop_for_status(r)
       pxr[[i]] <- pxweb_parse_response(x = r)
-      if(length(pxqs) > 1 & verbose) {
+      if (length(pxqs) > 1 & verbose) {
         utils::setTxtProgressBar(pb, i)
       }
     }
-    if(length(pxqs) > 1 & verbose) {
+    if (length(pxqs) > 1 & verbose) {
       close(pb)
     }
     pxr <- pxweb_c(pxr)
-    if(inherits(pxr, "pxweb_data")){
+    if (inherits(pxr, "pxweb_data")) {
       pxr$pxweb_metadata <- pxmd
       pxr$url <- pxurl
       pxr$time_stamp <- Sys.time()
     }
   }
-  if(log_http_calls){
+  if (log_http_calls) {
     pxweb_http_log_off()
   }
   pxr
@@ -162,14 +172,14 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
 #' @param px a \code{pxweb} object
 #'
 #' @keywords internal
-pxweb_metadata_add_null_values <- function(x, px){
-  if(!inherits(x, "pxweb_metadata")){
+pxweb_metadata_add_null_values <- function(x, px) {
+  if (!inherits(x, "pxweb_metadata")) {
     return(x)
   }
   # Create minimal query
   # Check if any NULL values, if not just return the metadata
   miss_values <- unlist(lapply(lapply(x$variables, names), function(x) !"values" %in% x))
-  if(!any(miss_values)){
+  if (!any(miss_values)) {
     return(x)
   }
 
@@ -177,14 +187,14 @@ pxweb_metadata_add_null_values <- function(x, px){
   qlist <- list()
   null_variable <- rep(FALSE, length(x$variables))
   code_variable <- character(length(x$variables))
-  for(i in seq_along(x$variables)){
+  for (i in seq_along(x$variables)) {
     code_variable[i] <- x$variables[[i]]$code
-    if(is.null(x$variables[[i]]$values)){
+    if (is.null(x$variables[[i]]$values)) {
       qlist[[x$variables[[i]]$code]] <- "*"
       null_variable[i] <- TRUE
       next
     }
-    if(x$variables[[i]]$elimination){
+    if (x$variables[[i]]$elimination) {
       next
     }
     qlist[[x$variables[[i]]$code]] <- x$variables[[i]]$values[1]
@@ -197,7 +207,7 @@ pxweb_metadata_add_null_values <- function(x, px){
 
   # assert that the meta-data object is correct.
   null_idx <- which(null_variable)
-  for(i in seq_along(null_idx)){
+  for (i in seq_along(null_idx)) {
     x$variables[[null_idx[i]]]$valueTexts <-
       x$variables[[null_idx[i]]]$values <-
       unique(pxd[[code_variable[null_idx[i]]]])
@@ -207,7 +217,7 @@ pxweb_metadata_add_null_values <- function(x, px){
 }
 
 
-pxweb_user_agent <- function(){
+pxweb_user_agent <- function() {
   httr::user_agent("https://github.com/rOpenGov/pxweb")
 }
 
@@ -218,7 +228,7 @@ pxweb_user_agent <- function(){
 #'
 #' @param pxq a \code{pxweb_query} object.
 #' @param pxmd a \code{pxweb_metadata} object.
-#' 
+#'
 #' @keywords internal
 pxweb_add_mandatory_variables <- function(pxq, pxmd) {
   checkmate::assert_class(pxq, "pxweb_query")
@@ -231,19 +241,24 @@ pxweb_add_mandatory_variables <- function(pxq, pxmd) {
 
   missing_variables <- setdiff(mandatory_variables, provided_variables)
   missing_mandatory_variables <- intersect(missing_variables, non_eliminationable_variables)
-  
+
   if (length(missing_mandatory_variables) > 0) {
     select_everything_template <- function(x) {
-      list(code = x,
-           selection = list(filter = "all",
-                            values = "*"))
+      list(
+        code = x,
+        selection = list(
+          filter = "all",
+          values = "*"
+        )
+      )
     }
 
     query_appendix <- lapply(missing_mandatory_variables, select_everything_template)
     pxq$query <- append(pxq$query, query_appendix)
-    warning(sprintf("Missing mandatory variable(s): %s. \nAll values are requested in query.",
-                    paste(paste0("'", missing_mandatory_variables,"'"), collapse = ", ")), call. = FALSE)
+    warning(sprintf(
+      "Missing mandatory variable(s): %s. \nAll values are requested in query.",
+      paste(paste0("'", missing_mandatory_variables, "'"), collapse = ", ")
+    ), call. = FALSE)
   }
   return(pxq)
 }
-
