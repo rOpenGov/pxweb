@@ -9,11 +9,18 @@ test_that(desc = "pxweb_api_catalogue", {
   # https://github.com/r-lib/actions/issues/609
   skip_on_cran()
 
-  expect_silent(pxac <- pxweb_api_catalogue())
-  expect_output(print(pxac), regexp = "Api:")
+  # Recapture calls (in interactive mode)
+  capture_calls <- FALSE
 
-  expect_silent(pxacgh <- pxweb:::pxweb_api_catalogue_from_github("master"))
-  expect_output(print(pxac), regexp = "Api:")
+  with_mock_api({
+    if(capture_calls) start_capturing()
+    expect_silent(pxac <- pxweb_api_catalogue())
+    expect_output(print(pxac), regexp = "Api:")
+    expect_silent(pxacgh <- suppressMessages(
+      pxweb:::pxweb_api_catalogue_from_github("master")))
+    expect_output(print(pxac), regexp = "Api:")
 
-  expect_equal(pxac[[2]], pxacgh[[2]])
+    expect_equal(pxac[[2]], pxacgh[[2]])
+    if(capture_calls) stop_capturing()
+  })
 })

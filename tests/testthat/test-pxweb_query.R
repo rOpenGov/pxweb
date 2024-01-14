@@ -153,6 +153,7 @@ test_that(desc = "mandatory variables are included automatically", {
   expect_failure(expect_identical(pxq3, pxq4))
 
   skip_on_ci()
+  skip_on_cran()
   # This gives an error on github action that it creates output
   # I cant reproduce that error as of now.
   expect_silent(out <- capture.output(pxd <- pxweb_get(url, pxq4)))

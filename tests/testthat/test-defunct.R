@@ -18,4 +18,5 @@ test_that(desc = "Assert defunct errors", {
   expect_error(get_pxweb_metadata(), class = "defunctError")
   expect_error(pxweb_api$new(), class = "defunctError")
   expect_error(checkForLevels(), class = "defunctError")
+
 })
