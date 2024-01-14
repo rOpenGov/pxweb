@@ -31,15 +31,16 @@ License: BSD_2_clause + file LICENSE
 URL: https://github.com/rOpenGov/pxweb/,
     https://ropengov.github.io/pxweb/, https://github.com/rOpenGov/pxweb
 BugReports: https://github.com/rOpenGov/pxweb/issues
-Depends:
+Depends: 
     R (>= 3.5.0)
-Imports:
+Imports: 
     checkmate,
     httr (>= 1.1),
     jsonlite
-Suggests:
-    knitr,
+Suggests: 
     digest,
+    httptest,
+    knitr,
     remotes,
     rmarkdown,
     testthat (>= 0.11),
