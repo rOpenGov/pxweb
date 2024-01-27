@@ -5,6 +5,7 @@ context("pxweb")
 test_that(desc = "Constructor works as it should with Statistics Sweden", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   expect_silent(pxapi1 <- pxweb(url = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_true(file.exists(pxapi1$paths$rda_file_path))
@@ -30,6 +31,7 @@ test_that(desc = "Constructor works as it should with Statistics Sweden", {
 test_that(desc = "Constructor works for erroneous urls", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   expect_silent(pxapi1 <- pxweb(url = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
 
@@ -50,6 +52,7 @@ test_that(desc = "Constructor works for erroneous urls", {
 test_that(desc = "Cache cleaner and print", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   expect_silent(pxapi1 <- pxweb(url = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_silent(pxapi2 <- pxweb("https://statfin.stat.fi/PXWeb/api/v1/fi/StatFin/tym/tyonv/statfin_tyonv_pxt_001.px"))

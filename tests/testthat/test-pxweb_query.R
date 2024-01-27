@@ -30,6 +30,7 @@ test_that(desc = "pxweb_query object", {
 test_that(desc = "split pxweb_query object", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   dims <- list(
@@ -85,6 +86,7 @@ test_that(desc = "split pxweb_query object", {
 test_that(desc = "split pxweb_query bug", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   url <- "http://px.hagstofa.is/pxis/api/v1/is/Efnahagur/utanrikisverslun/1_voruvidskipti/03_inntollskra/UTA03801.px"
   pxweb_query_list <- list(
@@ -120,6 +122,8 @@ test_that(desc = "pxweb_query JSON parse error message", {
 
 
 test_that(desc = "mandatory variables are included automatically", {
+  skip_if_offline()
+  skip_on_cran()
   fp <- test_path(file.path("test_data", "pxm1_test.rda"))
   url <- "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
 

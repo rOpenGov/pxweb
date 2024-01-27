@@ -5,6 +5,7 @@ context("pxweb_api_paths")
 test_that(desc = "Access api paths", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/AM/AM0301/"
   expect_silent(scb <- pxweb(url))

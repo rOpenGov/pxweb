@@ -5,6 +5,7 @@ context("pxweb_get")
 test_that(desc = "Test to download px and sdmx", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
   json_px_query <- readLines(test_path("test_data/test_query_px.json"))
 
   expect_silent(px_file_path1 <-
@@ -37,6 +38,7 @@ test_that(desc = "Test to download px and sdmx", {
 test_that(desc = "Constructor works as it should with Statistics Sweden", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   expect_silent(px_meta_data <- pxweb_get(url))
@@ -89,6 +91,7 @@ test_that(desc = "Constructor works as it should with Statistics Sweden", {
 test_that(desc = "Previous bugs", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   # This is a bug in the previous implementation of pxweb
   url <- "https://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
@@ -104,6 +107,7 @@ test_that(desc = "Previous bugs", {
 test_that(desc = "Test to download json-stat objects", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   # Test json-stat
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
@@ -126,6 +130,7 @@ test_that(desc = "Test to download json-stat objects", {
 test_that(desc = "Test pxweb_get_data", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
@@ -138,6 +143,7 @@ test_that(desc = "Test pxweb_get_data", {
 test_that(desc = "Test http logger", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   expect_silent(px <- pxweb(url))
@@ -154,6 +160,8 @@ test_that(desc = "Test http logger", {
 test_that(desc = "large variable call", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
+
   url <- "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0001/BE0001G/BE0001ENamn10"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_last_names.json")
   expect_silent(px <- pxweb_get(url, query = pxweb_query(json_query)))
@@ -163,6 +171,7 @@ test_that(desc = "large variable call", {
 test_that(desc = "Cite data", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   url <- "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
@@ -175,6 +184,7 @@ test_that(desc = "Cite data", {
 test_that(desc = "Filter query error bug", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   url <- "http://data.ssb.no/api/v0/en/table/04861"
   json_query <- readLines(test_path("test_data/filter_query.json"))
@@ -198,6 +208,7 @@ test_that(desc = "Filter query error bug", {
 test_that(desc = "a small big query", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   pxweb_query_list <-
     list(
@@ -225,6 +236,7 @@ test_that(desc = "a small big query", {
 test_that(desc = "manually supplying a pxmdo", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   pxweb_query_list <-
     list(
@@ -249,6 +261,7 @@ test_that(desc = "manually supplying a pxmdo", {
 test_that(desc = "return clear error message when missing values", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   pql <- list(
     "Tilltalsnamn" = c("20Agnes"),
@@ -263,6 +276,7 @@ test_that(desc = "return clear error message when missing values", {
 test_that(desc = "Query with non-ascii characters work as well", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_if_offline()
 
   pxweb_query_list <-
     list(
