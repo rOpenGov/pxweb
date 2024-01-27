@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mans Magnusson, Leo Lahti et al." />
 
-<meta name="date" content="2022-10-31" />
+<meta name="date" content="2024-01-27" />
 
 <title>PX-WEB API Interface for R</title>
 
@@ -31,23 +31,23 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
 <style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -65,55 +65,54 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {   }
+{ }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -122,13 +121,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -240,7 +246,7 @@ pre, code {
 background-color: #f7f7f7;
 border-radius: 3px;
 color: #333;
-white-space: pre-wrap;
+white-space: pre-wrap; 
 }
 pre {
 border-radius: 3px;
@@ -308,18 +314,18 @@ text-decoration: underline; }
 a[href^="https:"] {
 text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #d14; }
-code > span.fl { color: #d14; }
-code > span.ch { color: #d14; }
-code > span.st { color: #d14; }
-code > span.co { color: #888888; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #900; font-weight: bold; }
-code > span.er { color: #a61717; background-color: #e3d2d2; }
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -334,7 +340,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">PX-WEB API Interface for R</h1>
 <h4 class="author">Mans Magnusson, Leo Lahti et al.</h4>
-<h4 class="date">2022-10-31</h4>
+<h4 class="date">2024-01-27</h4>
 
 
 <div id="TOC">
@@ -369,8 +375,8 @@ troubleshooting</a></li>
 </ul>
 </div>
 
-<p>This R package provides tools to access <a href="https://www.scb.se/en/services/open-data-api/api-for-the-statistical-database/">PX-WEB API</a>.
-Your <a href="https://ropengov.org/community/">contributions</a> and <a href="https://github.com/ropengov/pxweb">bug reports and other
+<p>This R package provides tools to access <a href="https://www.scb.se/en/services/open-data-api/api-for-the-statistical-database/">PX-WEB
+API</a>. Your <a href="https://ropengov.org/community/">contributions</a> and <a href="https://github.com/ropengov/pxweb">bug reports and other
 feedback</a> are welcome!</p>
 <p>We can find more information on the PX-Web/PC-Axis API <a href="https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/">here</a>.</p>
 <div id="introduction" class="section level2">
@@ -409,20 +415,20 @@ dimensions are available for the data at that leaf node.</p>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
 <p>To install the latest stable release version from CRAN, just use:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pxweb&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pxweb&quot;</span>)</span></code></pre></div>
 <p>To install the latest stable release version from GitHub, just
 use:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ropengov/pxweb&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ropengov/pxweb&quot;</span>)</span></code></pre></div>
 <p>Test the installation by loading the library:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pxweb)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(pxweb)</span></code></pre></div>
 <p>A tutorial is included with the package with:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vignette</span>(<span class="at">topic=</span><span class="st">&quot;pxweb&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">vignette</span>(<span class="at">topic=</span><span class="st">&quot;pxweb&quot;</span>)</span></code></pre></div>
 <div id="installation-issues" class="section level3">
 <h3>Installation issues</h3>
 <p>We also recommend setting the UTF-8 encoding since each API may have
 local specific letters:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">locale=</span><span class="st">&quot;UTF-8&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">locale =</span> <span class="st">&quot;UTF-8&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="accessing-pxweb-from-r" class="section level2">
@@ -437,24 +443,24 @@ query specifying what data is of interest.</p>
 <p>The simplest way of using <code>pxweb</code> is to use it
 interactively, navigate the API to the data of interest, and then set up
 the query of interest.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Navigate through all pxweb api:s in the R package API catalogue</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>()</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get data from SCB (Statistics Sweden)</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;api.scb.se&quot;</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetching data from statfi (Statistics Finland)</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;pxnet2.stat.fi&quot;</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetching data from StatBank (Statistics Norway)</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;data.ssb.no&quot;</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># To see all available PXWEB APIs use</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>pxweb_apis <span class="ot">&lt;-</span> <span class="fu">pxweb_api_catalogue</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Navigate through all pxweb api:s in the R package API catalogue</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Get data from SCB (Statistics Sweden)</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;api.scb.se&quot;</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># Fetching data from statfi (Statistics Finland)</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;pxnet2.stat.fi&quot;</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># Fetching data from StatBank (Statistics Norway)</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;data.ssb.no&quot;</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co"># To see all available PXWEB APIs use</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>pxweb_apis <span class="ot">&lt;-</span> <span class="fu">pxweb_api_catalogue</span>()</span></code></pre></div>
 <p>In the example above, we use the interactive functionality from the
 PXWEB API root, but we could use any path to the API.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start with a specific path.</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Start with a specific path.</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A&quot;</span>)</span></code></pre></div>
 <p>This functionality also means that we can navigate any PXWEB API,
 irrespectively of if they are a part of the R package API catalogue or
 not. Just supply an URL to somewhere in the API and then navigate the
@@ -462,7 +468,7 @@ API from there.</p>
 <p>Due to new CRAN policies, it is not possible to use an R function to
 edit the API catalogue of the R package, but editing them can be done
 quickly from R using <code>file.edit()</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(<span class="fu">pxweb_api_catalogue_path</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">file.edit</span>(<span class="fu">pxweb_api_catalogue_path</span>())</span></code></pre></div>
 <p>Although, if the <code>pxweb</code> is installed again, it will
 overwrite the old API catalogue. So the easiest way is to add a PXWEB
 API to the global catalogue. To do this, do a pull request at the pxweb
@@ -477,22 +483,22 @@ chunks. If we use <code>pxweb_get()</code> without a query, the function
 either returns a PXWEB LEVELS object or a PXWEB METADATA object. What is
 returned depends on if the URL points to a table in the API or not. Here
 is an example of a PXWEB LEVELS object.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get PXWEB levels</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>px_levels <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/&quot;</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>px_levels</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Get PXWEB levels</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>px_levels <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>px_levels</span></code></pre></div>
 <pre><code>## PXWEB LEVELS
-##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2021
-##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2021
-##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2021
-##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2022M08
-##   BefolkningR1860N (t): Population by age and sex. Year 1860 - 2021</code></pre>
+##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2022
+##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2023
+##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2022
+##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2023M11
+##   BefolkningR1860N (t): Population by age and sex. Year 1860 - 2022</code></pre>
 <p>And if we use <code>pxweb_get()</code> for a table, a PXWEB METADATA
 object is returned.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get PXWEB metadata about a table</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>px_meta <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>px_meta</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Get PXWEB metadata about a table</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>px_meta <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>px_meta</span></code></pre></div>
 <pre><code>## PXWEB METADATA
-## Population by region, marital status, age, sex, observations and year
+## Population by region, marital status, age, sex, observations and year 
 ## variables:
 ##  [[1]] Region: region
 ##  [[2]] Civilstand: marital status
@@ -508,12 +514,12 @@ an URL that will return a metadata object if not a query is supplied.
 Creating a query can be done in three main ways. The first and most
 straightforward approach is to use <code>pxweb_interactive()</code> to
 explore the table URL and create a query interactively.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</span></code></pre></div>
 <p>The interactive function will return the query and the URL, even if
 the data is not downloaded.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>url</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>d<span class="sc">$</span>url</span></code></pre></div>
 <pre><code>## [1] &quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>query</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>d<span class="sc">$</span>query</span></code></pre></div>
 <pre><code>## PXWEB QUERY
 ## query:
 ##  [[1]] Region (item):
@@ -528,7 +534,7 @@ the data is not downloaded.</p>
 ##    2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017</code></pre>
 <p>We can also turn the query into a JSON query that we can use outside
 R.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxweb_query_as_json</span>(d<span class="sc">$</span>query, <span class="at">pretty =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">pxweb_query_as_json</span>(d<span class="sc">$</span>query, <span class="at">pretty =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## {
 ##   &quot;query&quot;: [
 ##     {
@@ -614,16 +620,18 @@ documentation.</p>
 } </code></pre>
 <p>To use this JSON query, we store the JSON query as a file and supply
 the path to the file to the “<code>pxweb_query()</code>”function.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pxq <span class="ot">&lt;-</span> <span class="fu">pxweb_query</span>(<span class="st">&quot;path/to/the/json/query.json&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>pxq <span class="ot">&lt;-</span> <span class="fu">pxweb_query</span>(<span class="st">&quot;path/to/the/json/query.json&quot;</span>)</span></code></pre></div>
 <p>Finally, we can create a PXWEB query from an R list where each list
 element is a variable and selected observation.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pxweb_query_list <span class="ot">&lt;-</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">&quot;Civilstand&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;*&quot;</span>), <span class="co"># Use &quot;*&quot; to select all</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Kon&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>),</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;ContentsCode&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;BE0101N1&quot;</span>),</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Tid&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;2015&quot;</span>,<span class="st">&quot;2016&quot;</span>,<span class="st">&quot;2017&quot;</span>))</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>pxq <span class="ot">&lt;-</span> <span class="fu">pxweb_query</span>(pxweb_query_list)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>pxq</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>pxweb_query_list <span class="ot">&lt;-</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>    <span class="st">&quot;Civilstand&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;*&quot;</span>), <span class="co"># Use &quot;*&quot; to select all</span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>    <span class="st">&quot;Kon&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>),</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>    <span class="st">&quot;ContentsCode&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;BE0101N1&quot;</span>),</span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>    <span class="st">&quot;Tid&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;2015&quot;</span>, <span class="st">&quot;2016&quot;</span>, <span class="st">&quot;2017&quot;</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>  )</span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>pxq <span class="ot">&lt;-</span> <span class="fu">pxweb_query</span>(pxweb_query_list)</span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>pxq</span></code></pre></div>
 <pre><code>## PXWEB QUERY
 ## query:
 ##  [[1]] Civilstand (all):
@@ -638,24 +646,28 @@ element is a variable and selected observation.</p>
 we can use the query. This validation is done automatically when the
 data is fetched with <code>pxweb_get()</code> but can also be done
 manually.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxweb_validate_query_with_metadata</span>(pxq, px_meta)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">pxweb_validate_query_with_metadata</span>(pxq, px_meta)</span></code></pre></div>
 </div>
 <div id="downloading-data" class="section level3">
 <h3>Downloading data</h3>
 <p>When we have the URL to a data table and a query, we can download the
 data with “<code>pxweb_get()</code>”. The function returns a
 <code>pxweb_data</code> object that contains the downloaded data.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pxd <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                 pxq)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>pxd</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>pxd <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>  <span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>  pxq</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>)</span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>pxd</span></code></pre></div>
 <pre><code>## PXWEB DATA
 ## With 4 variables and 24 observations.</code></pre>
 <p>If we instead want a JSON-stat object, we change the response format
 to JSON-stat, and we will get a JSON-stat object returned.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pxq<span class="sc">$</span>response<span class="sc">$</span>format <span class="ot">&lt;-</span> <span class="st">&quot;json-stat&quot;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pxjstat <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                     pxq)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>pxjstat</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>pxq<span class="sc">$</span>response<span class="sc">$</span>format <span class="ot">&lt;-</span> <span class="st">&quot;json-stat&quot;</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>pxjstat <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>  <span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>  pxq</span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>)</span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>pxjstat</span></code></pre></div>
 <pre><code>## {
 ##   &quot;dataset&quot;: {
 ##     &quot;dimension&quot;: {
@@ -674,6 +686,9 @@ to JSON-stat, and we will get a JSON-stat object returned.</p>
 ##             &quot;ÄNKL&quot;: [&quot;widowers/widows&quot;],
 ##             &quot;SK&quot;: [&quot;divorced&quot;]
 ##           }
+##         },
+##         &quot;extension&quot;: {
+##           &quot;show&quot;: [&quot;value&quot;]
 ##         }
 ##       },
 ##       &quot;Kon&quot;: {
@@ -696,6 +711,9 @@ to JSON-stat, and we will get a JSON-stat object returned.</p>
 ##               }
 ##             }
 ##           ]
+##         },
+##         &quot;extension&quot;: {
+##           &quot;show&quot;: [&quot;value&quot;]
 ##         }
 ##       },
 ##       &quot;ContentsCode&quot;: {
@@ -713,6 +731,9 @@ to JSON-stat, and we will get a JSON-stat object returned.</p>
 ##               &quot;decimals&quot;: [0]
 ##             }
 ##           }
+##         },
+##         &quot;extension&quot;: {
+##           &quot;show&quot;: [&quot;value&quot;]
 ##         }
 ##       },
 ##       &quot;Tid&quot;: {
@@ -728,6 +749,9 @@ to JSON-stat, and we will get a JSON-stat object returned.</p>
 ##             &quot;2016&quot;: [&quot;2016&quot;],
 ##             &quot;2017&quot;: [&quot;2017&quot;]
 ##           }
+##         },
+##         &quot;extension&quot;: {
+##           &quot;show&quot;: [&quot;code&quot;]
 ##         }
 ##       },
 ##       &quot;id&quot;: [
@@ -753,7 +777,7 @@ to JSON-stat, and we will get a JSON-stat object returned.</p>
 ##     },
 ##     &quot;label&quot;: [&quot;Population by marital status, sex, observations and year&quot;],
 ##     &quot;source&quot;: [&quot;Statistics Sweden&quot;],
-##     &quot;updated&quot;: [&quot;2022-10-31T09:01:00Z&quot;],
+##     &quot;updated&quot;: [&quot;2023-02-09T07:57:00Z&quot;],
 ##     &quot;value&quot;: [
 ##       [2762601],
 ##       [2820248],
@@ -794,11 +818,13 @@ the R <code>tempdir()</code> folded, and the file paths are returned by
 <code>pxweb_get()</code>. Currently, <code>px</code> and
 <code>sdmx</code> formats can be downloaded as files, but file an issue
 if you need other response formats.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pxq<span class="sc">$</span>response<span class="sc">$</span>format <span class="ot">&lt;-</span> <span class="st">&quot;px&quot;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pxfp <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                     pxq)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>pxfp</span></code></pre></div>
-<pre><code>## [1] &quot;/var/folders/8x/bgssdq5n6dx1_ydrhq1zgrym0000gn/T//RtmpHaUcgC/8ca1310ea6efb41cf436a4e403c2d2cd23d9f45a.px&quot;</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>pxq<span class="sc">$</span>response<span class="sc">$</span>format <span class="ot">&lt;-</span> <span class="st">&quot;px&quot;</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>pxfp <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>  <span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>  pxq</span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>)</span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>pxfp</span></code></pre></div>
+<pre><code>## [1] &quot;/var/folders/x9/dsgck_4s5mx2nrzzs8zd64rc0000gq/T//RtmpFdmiD7/34f86608f98d03b3cca3f1771a5081c3d3846465.px&quot;</code></pre>
 <p>If the queries are large (contain more values than the PXWEB API
 maximum allowed values), the query is chunked into optimal chunks and is
 then downloaded sequentially. PXWEB data objects are then combined into
@@ -818,8 +844,8 @@ values (such as “..” are converted to <code>NA</code>) in a
 <code>variable.value.type</code> and <code>column.name.type</code>, we
 can choose if we want the code or the text column names and value
 types.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pxdf <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pxd, <span class="at">column.name.type =</span> <span class="st">&quot;text&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;text&quot;</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pxdf)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>pxdf <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pxd, <span class="at">column.name.type =</span> <span class="st">&quot;text&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;text&quot;</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="fu">head</span>(pxdf)</span></code></pre></div>
 <pre><code>##   marital status   sex year Population
 ## 1         single   men 2015    2762601
 ## 2         single   men 2016    2820248
@@ -827,8 +853,8 @@ types.</p>
 ## 4         single women 2015    2394842
 ## 5         single women 2016    2437315
 ## 6         single women 2017    2477012</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pxdf <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pxd, <span class="at">column.name.type =</span> <span class="st">&quot;code&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;code&quot;</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pxdf)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>pxdf <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pxd, <span class="at">column.name.type =</span> <span class="st">&quot;code&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;code&quot;</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="fu">head</span>(pxdf)</span></code></pre></div>
 <pre><code>##   Civilstand Kon  Tid BE0101N1
 ## 1         OG   1 2015  2762601
 ## 2         OG   1 2016  2820248
@@ -838,9 +864,9 @@ types.</p>
 ## 6         OG   2 2017  2477012</code></pre>
 <p>Similarly, we can access the raw data as a character matrix with
 <code>as.matrix</code>.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>pxmat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(pxd, <span class="at">column.name.type =</span> <span class="st">&quot;code&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;code&quot;</span>)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pxmat)</span></code></pre></div>
-<pre><code>##      Civilstand Kon Tid    BE0101N1
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>pxmat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(pxd, <span class="at">column.name.type =</span> <span class="st">&quot;code&quot;</span>, <span class="at">variable.value.type =</span> <span class="st">&quot;code&quot;</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="fu">head</span>(pxmat)</span></code></pre></div>
+<pre><code>##      Civilstand Kon Tid    BE0101N1 
 ## [1,] &quot;OG&quot;       &quot;1&quot; &quot;2015&quot; &quot;2762601&quot;
 ## [2,] &quot;OG&quot;       &quot;1&quot; &quot;2016&quot; &quot;2820248&quot;
 ## [3,] &quot;OG&quot;       &quot;1&quot; &quot;2017&quot; &quot;2870477&quot;
@@ -853,13 +879,13 @@ types.</p>
 <p>In addition to the data, the PXWEB DATA object may also contain
 comments for the data. This can be accessed using
 <code>pxweb_data_comments()</code> function.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>pxdc <span class="ot">&lt;-</span> <span class="fu">pxweb_data_comments</span>(pxd)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>pxdc</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>pxdc <span class="ot">&lt;-</span> <span class="fu">pxweb_data_comments</span>(pxd)</span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>pxdc</span></code></pre></div>
 <pre><code>## NO PXWEB DATA COMMENTS</code></pre>
 <p>In this case, we did not have any comments. If we have comments, we
 can turn the comments into a <code>data. frame</code> with one comment
 per row.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(pxdc)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="fu">as.data.frame</span>(pxdc)</span></code></pre></div>
 </div>
 </div>
 <div id="citation" class="section level2">
@@ -867,36 +893,31 @@ per row.</p>
 <p>Finally, if we use the data, we can easily create a citation for a
 <code>pxweb_data</code> object using the <code>pxweb_cite()</code>
 function. For full reproducibility, please also cite the package.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxweb_cite</span>(pxd)</span></code></pre></div>
-<pre><code>##
-## Statistics Sweden (2022). &quot;Population by region, marital status, age,
-## sex, observations and year.&quot; [Data accessed 2022-10-31 10:01:52 using
-## pxweb R package 0.16.2],
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="fu">pxweb_cite</span>(pxd)</span></code></pre></div>
+<pre><code>## Statistics Sweden (2024). &quot;Population by region, marital status, age,
+## sex, observations and year.&quot; [Data accessed 2024-01-27 16:08:12.926294
+## using pxweb R package 0.16.3],
 ## &lt;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
-##
+## 
 ## A BibTeX entry for LaTeX users is
-##
+## 
 ##   @Misc{,
 ##     title = {Population by region, marital status, age, sex, observations and year},
 ##     author = {{Statistics Sweden}},
 ##     organization = {Statistics Sweden},
 ##     address = {Stockholm, Sweden},
-##     year = {2022},
+##     year = {2024},
 ##     url = {https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2022-10-31 10:01:52 using pxweb R package 0.16.2]},
+##     note = {[Data accessed 2024-01-27 16:08:12.926294 using pxweb R package 0.16.3]},
 ##   }
-##
-##
-##
-##
 ## Kindly cite the pxweb R package as follows:
-##
+## 
 ##   Mans Magnusson, Markus Kainu, Janne Huovari, and Leo Lahti
 ##   (rOpenGov).  pxweb: R tools for PXWEB API.  URL:
 ##   http://github.com/ropengov/pxweb
-##
+## 
 ## A BibTeX entry for LaTeX users is
-##
+## 
 ##   @Misc{,
 ##     title = {pxweb: R tools for PX-WEB API},
 ##     author = {Mans Magnusson and Markus Kainu and Janne Huovari and Leo Lahti},
@@ -917,39 +938,34 @@ file</a>.</p>
 <div id="session-info" class="section level2">
 <h2>Session info</h2>
 <p>We created this vignette with</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
-<pre><code>## R version 4.2.1 (2022-06-23)
-## Platform: x86_64-apple-darwin17.0 (64-bit)
-## Running under: macOS Big Sur ... 10.16
-##
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<pre><code>## R version 4.3.1 (2023-06-16)
+## Platform: aarch64-apple-darwin20 (64-bit)
+## Running under: macOS Sonoma 14.3
+## 
 ## Matrix products: default
-## BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
-## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
-##
+## BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+## 
 ## locale:
-## [1] C/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
-##
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## time zone: Europe/Stockholm
+## tzcode source: internal
+## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base
-##
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
 ## other attached packages:
-## [1] pxweb_0.16.2
-##
+## [1] rmarkdown_2.24  knitr_1.43      pxweb_0.16.3    testthat_3.1.10
+## 
 ## loaded via a namespace (and not attached):
-##  [1] jquerylib_0.1.4   bslib_0.3.1       pillar_1.7.0      compiler_4.2.1
-##  [5] prettyunits_1.1.1 remotes_2.4.2     tools_4.2.1       digest_0.6.29
-##  [9] pkgbuild_1.3.1    pkgload_1.3.0     evaluate_0.15     jsonlite_1.8.0
-## [13] memoise_2.0.1     lifecycle_1.0.1   tibble_3.1.7      checkmate_2.1.0
-## [17] pkgconfig_2.0.3   rlang_1.0.3       cli_3.3.0         rstudioapi_0.13
-## [21] curl_4.3.2        yaml_2.3.5        xfun_0.31         fastmap_1.1.0
-## [25] httr_1.4.3        withr_2.5.0       stringr_1.4.0     roxygen2_7.2.0
-## [29] knitr_1.39        xml2_1.3.3        sass_0.4.1        desc_1.4.1
-## [33] fs_1.5.2          vctrs_0.4.1       devtools_2.4.3    rprojroot_2.0.3
-## [37] glue_1.6.2        R6_2.5.1          processx_3.6.1    fansi_1.0.3
-## [41] rmarkdown_2.14    sessioninfo_1.2.2 callr_3.7.0       purrr_0.3.4
-## [45] magrittr_2.0.3    htmltools_0.5.2   backports_1.4.1   ps_1.7.1
-## [49] ellipsis_0.3.2    usethis_2.1.6     utf8_1.2.2        stringi_1.7.6
-## [53] cachem_1.0.6      crayon_1.5.1</code></pre>
+##  [1] digest_0.6.33     backports_1.4.1   R6_2.5.1          fastmap_1.1.1    
+##  [5] xfun_0.40         magrittr_2.0.3    cachem_1.0.8      htmltools_0.5.6  
+##  [9] cli_3.6.1         sass_0.4.7        jquerylib_0.1.4   compiler_4.3.1   
+## [13] httr_1.4.7        rstudioapi_0.15.0 tools_4.3.1       curl_5.1.0       
+## [17] brio_1.1.3        checkmate_2.2.0   bslib_0.5.1       mime_0.12        
+## [21] evaluate_0.21     yaml_2.3.7        rlang_1.1.2       jsonlite_1.8.7</code></pre>
 </div>
 
 
