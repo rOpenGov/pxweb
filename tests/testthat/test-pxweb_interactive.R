@@ -135,3 +135,13 @@ test_that(desc = "No value bug", {
   expect_silent(pxe <- pxweb:::pxweb_explorer.character(url))
   expect_output(pxweb:::print.pxweb_explorer(pxe), regexp = "\\[\\[HS-Number\\]\\]")
 })
+
+
+test_that(desc = "Fail on incorrect", {
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  skip_if_offline()
+
+  expect_error(pxweb_interactive("incorrect url"))
+})
+
