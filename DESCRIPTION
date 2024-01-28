@@ -1,8 +1,8 @@
 Type: Package
 Package: pxweb
 Title: R Interface to PXWEB APIs
-Version: 0.16.3
-Date: 2024-01-13
+Version: 0.17.0
+Date: 2024-01-28
 Authors@R: c(
     person("Mans", "Magnusson", , "mons.magnusson@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0296-2719")),
@@ -35,6 +35,7 @@ Depends:
     R (>= 3.5.0)
 Imports: 
     checkmate,
+    curl,
     httr (>= 1.1),
     jsonlite
 Suggests: 

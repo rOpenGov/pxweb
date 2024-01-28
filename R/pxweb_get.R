@@ -100,6 +100,13 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
   if (log_http_calls) {
     pxweb_http_log_on()
   }
+  if(!is.pxweb(url)){
+    url_parsed <- parse_url_or_fail(x = url)
+    if(!has_internet(url_parsed$hostname)){
+      message(no_internet_msg(url_parsed$hostname))
+      return(NULL)
+    }
+  }
 
   px <- pxweb(url)
   if (!is.null(query)) {

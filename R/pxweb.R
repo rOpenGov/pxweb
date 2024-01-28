@@ -34,6 +34,10 @@ pxweb <- function(url) {
   }
   checkmate::assert_string(url)
   url_parsed <- parse_url_or_fail(x = url)
+  if(!has_internet(url_parsed$hostname)){
+    message(no_internet_msg(url_parsed$hostname))
+    return(NULL)
+  }
 
   obj <- list(
     url = url_parsed,
@@ -118,4 +122,12 @@ pxweb_tempdir <- function(to = "apis") {
   } else {
     return(tmp_dir_logs)
   }
+}
+
+no_internet_msg <- function(host){
+  return(paste0("No internet access to '", host, "'."))
+}
+
+has_internet <- function(host){
+  !is.null(curl::nslookup(host, error = FALSE))
 }
