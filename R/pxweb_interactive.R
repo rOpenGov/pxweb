@@ -23,10 +23,17 @@
 #' ##  x <- pxweb_interactive(x = "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
 #'
 pxweb_interactive <- function(x = NULL) {
-  if(!curl::has_internet()){
-    message(no_internet_msg())
-    return(NULL)
+  # Check internet access if x is an url
+  if(!is.null(x)){
+    url_parsed <- parse_url(x)
+    if(parsed_url_has_hostname(url_parsed)){
+      if(!has_internet(url_parsed$hostname)){
+        message(no_internet_msg(url_parsed$hostname))
+        return(NULL)
+      }
+    }
   }
+
   # Setup structure
   pxe <- pxweb_explorer(x)
 
@@ -149,7 +156,11 @@ pxweb_explorer.pxweb <- function(x) {
 #' @rdname pxweb_explorer
 #' @keywords internal
 pxweb_explorer.pxweb_api_catalogue_entry <- function(x) {
-  pxe <- list(pxweb = pxweb(build_pxweb_url(x)))
+  suppressMessages(pxe <- list(pxweb = pxweb(build_pxweb_url(x))))
+  if(is.null(pxe$pxweb)) {
+    stop(no_internet_msg(parse_url(x$url)$hostname),
+         call. = FALSE)
+  }
   tot_pos <- pxweb_api_path(pxe$pxweb, as_vector = TRUE)
   pxe$root <- character(0)
   pxe$position <- character(0)

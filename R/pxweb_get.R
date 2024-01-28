@@ -95,14 +95,17 @@ pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text"
 #'            both \code{httr::POST} and \code{httr::GET}.
 #' @export
 pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls = FALSE, pxmdo = NULL, ...) {
-  if(!curl::has_internet()){
-    message(no_internet_msg())
-    return(NULL)
-  }
   checkmate::assert_flag(log_http_calls)
   checkmate::assert_class(pxmdo, classes = "pxweb_metadata", null.ok = TRUE)
   if (log_http_calls) {
     pxweb_http_log_on()
+  }
+  if(!is.pxweb(url)){
+    url_parsed <- parse_url_or_fail(x = url)
+    if(!has_internet(url_parsed$hostname)){
+      message(no_internet_msg(url_parsed$hostname))
+      return(NULL)
+    }
   }
 
   px <- pxweb(url)
