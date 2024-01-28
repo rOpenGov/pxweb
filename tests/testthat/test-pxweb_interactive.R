@@ -145,3 +145,6 @@ test_that(desc = "Fail on incorrect", {
   expect_error(pxweb_interactive("incorrect url"))
 })
 
+# The function could maybe be tested also with:
+# https://debruine.github.io/post/interactive-test/
+
