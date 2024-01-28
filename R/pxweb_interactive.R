@@ -23,6 +23,10 @@
 #' ##  x <- pxweb_interactive(x = "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
 #'
 pxweb_interactive <- function(x = NULL) {
+  if(!curl::has_internet()){
+    message(no_internet_msg())
+    return(NULL)
+  }
   # Setup structure
   pxe <- pxweb_explorer(x)
 

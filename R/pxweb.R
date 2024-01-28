@@ -29,6 +29,10 @@
 #'
 #' @export
 pxweb <- function(url) {
+  if(!curl::has_internet()){
+    message(no_internet_msg())
+    return(NULL)
+  }
   if (is.pxweb(url)) {
     return(url)
   }
@@ -118,4 +122,8 @@ pxweb_tempdir <- function(to = "apis") {
   } else {
     return(tmp_dir_logs)
   }
+}
+
+no_internet_msg <- function(){
+  return("No internet access.")
 }
