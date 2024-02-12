@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   pxweb: pxweb.html
-last_built: 2024-01-28T12:58Z
+last_built: 2024-02-12T14:53Z
 urls:
   reference: https://ropengov.github.io/pxweb/reference
   article: https://ropengov.github.io/pxweb/articles
