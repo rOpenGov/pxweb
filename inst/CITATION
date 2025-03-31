@@ -19,7 +19,7 @@ bibentry(bibtype="Manual",
 	 year = year,
 	 version = meta$Version,
 	 note = version_note,
-	 url = "https://github.com/rOpenGov/geofi",
+	 url = "https://github.com/rOpenGov/pxweb",
 	 key = paste0("R-", pkg)
 )
 
