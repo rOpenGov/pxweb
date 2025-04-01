@@ -11,5 +11,4 @@
 #' \url{https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/}
 #'
 #' @name pxweb-package
-#' @docType package
-NULL
+"_PACKAGE"

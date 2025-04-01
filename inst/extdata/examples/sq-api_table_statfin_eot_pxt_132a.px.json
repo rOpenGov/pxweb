@@ -1,0 +1,36 @@
+{"queryObj":{
+  "query": [
+    {
+      "code": "Kotitalouden elinvaihe",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "SS"
+        ]
+      }
+    },
+    {
+      "code": "Vuosi",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "2022",
+          "2023",
+          "2024"
+        ]
+      }
+    },
+    {
+      "code": "Tiedot",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "kotital"
+        ]
+      }
+    }
+  ],
+  "response": {
+    "format": "json-stat2"
+  }
+},"tableIdForQuery":"statfin_eot_pxt_132a.px"}

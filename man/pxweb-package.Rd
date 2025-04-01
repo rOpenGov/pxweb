@@ -14,3 +14,36 @@ The decription of the PXWEB API here:
 The official home page of PXWEB can be found here:
 \url{https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/}
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/rOpenGov/pxweb/}
+  \item \url{https://ropengov.github.io/pxweb/}
+  \item \url{https://github.com/rOpenGov/pxweb}
+  \item Report bugs at \url{https://github.com/rOpenGov/pxweb/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Mans Magnusson \email{mons.magnusson@gmail.com} (\href{https://orcid.org/0000-0002-0296-2719}{ORCID})
+
+Authors:
+\itemize{
+  \item Markus Kainu
+  \item Janne Huovari
+  \item Leo Lahti (\href{https://orcid.org/0000-0001-5537-637X}{ORCID})
+}
+
+Other contributors:
+\itemize{
+  \item Love Hansson [contributor]
+  \item Eydun Nielsen [contributor]
+  \item Bo Werth [contributor]
+  \item Thomas Runarsson [contributor]
+  \item Torbjörn Lindquist [contributor]
+  \item Palmar Thorsteinsson [contributor]
+  \item Pyry Kantanen [contributor]
+  \item Sebastian Ankargren [contributor]
+}
+
+}

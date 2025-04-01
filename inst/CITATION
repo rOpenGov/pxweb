@@ -1,20 +1,26 @@
+year <- sub("-.*", "", meta$Date)
+version_note <- paste("R package version", meta$Version)
+pkg <- meta$Package
+title <- gsub("'", "", meta$Title)
+doi <- paste0("10.32614/CRAN.package.", pkg)
+
 citHeader("Kindly cite the pxweb R package as follows:")
 
-bibentry(bibtype="misc",
-         title = "pxweb: R tools for PX-WEB API",
-         author = c(
+bibentry(bibtype="Manual",
+  header = sprintf("Kindly cite the '%s' R package as follows:", pkg),
+  title = sprintf("{%s: %s}", pkg, title),
+  doi = "10.32614/CRAN.package.pxweb",
+  author = c(
 	   person(given = "Mans", family= "Magnusson", email = "mons.magnusson@gmail.com"),
 	   person(given = "Markus", family= "Kainu"),
 	   person(given = "Janne", family= "Huovari"),
 	   person(given = "Leo", family= "Lahti")
-         ),
-	 journal = "",
-	 year = "2019",
-         textVersion =
-         paste("Mans Magnusson, Markus Kainu, Janne Huovari, and Leo Lahti (rOpenGov). ",
-               "pxweb: R tools for PXWEB API. ",
-	       "URL: http://github.com/ropengov/pxweb",
-               sep=" ")
-         )
+	   ),
+	 year = year,
+	 version = meta$Version,
+	 note = version_note,
+	 url = "https://github.com/rOpenGov/pxweb",
+	 key = paste0("R-", pkg)
+)
 
 
