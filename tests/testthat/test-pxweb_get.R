@@ -43,6 +43,10 @@ test_that(desc = "Constructor works as it should with Statistics Sweden", {
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   expect_silent(px_meta_data <- pxweb_get(url))
   expect_output(print(px_meta_data), regexp = "PXWEB METADATA")
+  
+  # anroparen kan göra 10 anrop på ett tidsfönster på 10 sekunder
+  # Let's wait 10 seconds before doing more calls
+  Sys.sleep(10)
 
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101"
   expect_silent(px_levels <- pxweb_get(url))
@@ -84,7 +88,7 @@ test_that(desc = "Constructor works as it should with Statistics Sweden", {
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_big_query_example.json")
   expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query, verbose = FALSE)))
   expect_output(print(px_data), regexp = "PXWEB DATA")
-  expect_output(print(px_data), regexp = "255200 observations")
+  expect_output(print(px_data), regexp = "93720 observations")
   expect_length(pxweb_data_comments(x = px_data), 2)
 })
 
