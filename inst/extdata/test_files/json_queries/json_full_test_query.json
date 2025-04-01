@@ -24,11 +24,11 @@
     {
       "code": "Alder",
       "selection": {
-        "filter": "agg:Ålder10år",
+        "filter": "agg:Ålder5år",
         "values": [
           "-4",
-          "5-14",
-          "95+"
+          "10-14",
+          "95-99"
         ]
       }
     },
@@ -55,7 +55,7 @@
       "code": "Tid",
       "selection": {
         "filter": "top",
-        "values": "11"
+        "values": ["11"]
       }
     }
   ],
