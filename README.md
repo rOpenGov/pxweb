@@ -89,10 +89,10 @@ Kindly cite the pxweb R package as follows:
 
 Kindly cite the 'pxweb' R package as follows:
 
-  Magnusson M, Kainu M, Huovari J, Lahti L (2024). _pxweb: R Interface
+  Magnusson M, Kainu M, Huovari J, Lahti L (2025). _pxweb: R Interface
   to PXWEB APIs_. doi:10.32614/CRAN.package.pxweb
   <https://doi.org/10.32614/CRAN.package.pxweb>, R package version
-  0.17.0, <https://github.com/rOpenGov/geofi>.
+  0.17.1, <https://github.com/rOpenGov/pxweb>.
 
 A BibTeX entry for LaTeX users is
 
@@ -100,10 +100,10 @@ A BibTeX entry for LaTeX users is
     title = {{pxweb: R Interface to PXWEB APIs}},
     doi = {10.32614/CRAN.package.pxweb},
     author = {Mans Magnusson and Markus Kainu and Janne Huovari and Leo Lahti},
-    year = {2024},
-    version = {0.17.0},
-    note = {R package version 0.17.0},
-    url = {https://github.com/rOpenGov/geofi},
+    year = {2025},
+    version = {0.17.1},
+    note = {R package version 0.17.1},
+    url = {https://github.com/rOpenGov/pxweb},
   }
 ```
 
