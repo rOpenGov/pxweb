@@ -1,8 +1,8 @@
 Type: Package
 Package: pxweb
 Title: R Interface to PXWEB APIs
-Version: 0.17.1
-Date: 2025-04-01
+Version: 0.17.2
+Date: 2025-12-04
 Authors@R: c(
     person("Mans", "Magnusson", , "mons.magnusson@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0296-2719")),
@@ -16,8 +16,10 @@ Authors@R: c(
     person("Thomas", "Runarsson", role = "ctb"),
     person("Torbjörn", "Lindquist", role = "ctb"),
     person("Palmar", "Thorsteinsson", role = "ctb"),
-    person("Pyry", "Kantanen", role = "ctb"),
-    person("Sebastian", "Ankargren", role = "ctb")
+    person("Pyry", "Kantanen", role = "ctb", 
+           comment = c(ORCID = "0000-0003-2853-2765")),
+    person("Sebastian", "Ankargren", role = "ctb"),
+    person("Sampo", "Vesanen", role = "ctb")
   )
 Description: Generic interface for the PX-Web/PC-Axis API. The
     PX-Web/PC-Axis API is used by organizations such as Statistics Sweden
@@ -49,6 +51,6 @@ Suggests:
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 X-schema.org-isPartOf: http://ropengov.org/
 X-schema.org-keywords: ropengov
