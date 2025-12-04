@@ -1,3 +1,11 @@
+# Version 0.17.2
+
+- Fix "Too Many Requests (RFC 6585) (HTTP 429)" error when downloading large queries (issue #281, PR #284 by @sampoves)
+
+# Version 0.17.1
+
+- Enable the use of json-query files downloaded from StatFin website that are wrapped in an additional queryObj-layer. The example json query files used by the package do not have this. (PR #280 by @pitkant)
+
 # Version 0.16.2
 
 - Return better error messages when using as.data.frame() for pxweb metadata objects.
