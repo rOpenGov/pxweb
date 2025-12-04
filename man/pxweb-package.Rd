@@ -42,8 +42,9 @@ Other contributors:
   \item Thomas Runarsson [contributor]
   \item Torbjörn Lindquist [contributor]
   \item Palmar Thorsteinsson [contributor]
-  \item Pyry Kantanen [contributor]
+  \item Pyry Kantanen (\href{https://orcid.org/0000-0003-2853-2765}{ORCID}) [contributor]
   \item Sebastian Ankargren [contributor]
+  \item Sampo Vesanen [contributor]
 }
 
 }
