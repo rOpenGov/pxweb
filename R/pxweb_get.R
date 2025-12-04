@@ -153,7 +153,20 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
       px <- pxweb_add_call(px)
       pxurl <- build_pxweb_url(px)
       pxqs[[i]] <- pxweb_remove_metadata_from_query(pxqs[[i]], pxmd)
-      r <- httr::POST(pxurl, body = pxweb_as_json(x = pxqs[[i]]), pxweb_user_agent(), ...)
+      r <- httr::RETRY(
+        verb = "POST",
+        url = pxurl,
+        body = pxweb_as_json(x = pxqs[[i]]),
+        times = 5,
+        pause_base = 2,
+        pause_cap = 30,
+        pause_min = 1,
+        terminate_on = c(400, 401, 403),
+        quiet = !verbose,
+        httr::add_headers(`Content-Type` = "application/json"),
+        pxweb_user_agent(),
+        ...
+      )
       pxweb_http_log_response(r)
       httr::stop_for_status(r)
       pxr[[i]] <- pxweb_parse_response(x = r)
