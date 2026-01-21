@@ -1,6 +1,6 @@
 # Test suits for the examples in the documentation
 
-context("pxweb")
+context("pxweb_constructor")
 
 test_that(desc = "Constructor works as it should with Statistics Sweden", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.

@@ -56,6 +56,14 @@ big_query <- file.path(
   "extdata", "examples", "json_big_query_example.json"
 )
 px_data <- pxweb_get(url = url, query = big_query)
+
+# Get json-stat2 data from statfin using downloaded json query
+jstat2_url <- "https://pxdata.stat.fi:443/PxWeb/api/v1/fi/StatFin/eot/statfin_eot_pxt_132a.px"
+jstat2_query <- file.path(
+  system.file(package = "pxweb"),
+  "extdata", "examples", "sq-api_table_statfin_eot_pxt_132a.px.json"
+)
+jstat2_data <- pxweb_get(url = jstat2_url, query = jstat2_query)
 }
 
 }

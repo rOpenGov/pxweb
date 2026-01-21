@@ -36,11 +36,20 @@ pxweb_query.character <- function(x) {
   if (is.character(obj)) {
     stop("jsonlite::fromJSON() cannot parse the PXWEB (JSON) query. Please check your (JSON) query.", call. = FALSE)
   }
+  if ("queryObj" %in% names(obj)) {
+    # JSON query files downloaded from StatFinn website have the query and
+    # response nested in queryObj
+    obj <- obj$queryObj
+  }
+  
   class(obj) <- c("pxweb_query", "list")
   assert_pxweb_query(obj, check_response_format = FALSE)
   if (tolower(obj$response$format) == "json") {
     obj$response$format <- "json"
   } else if (tolower(obj$response$format) %in% c("json-stat", "jsonstat")) {
+    obj$response$format <- "json-stat"
+  } else if (tolower(obj$response$format) %in% c("json-stat2")) {
+    # Hack support for json-stat2 for now. Are there downsides to this?
     obj$response$format <- "json-stat"
   } else if (tolower(obj$response$format) %in% pxweb_file_response_formats()) {
 

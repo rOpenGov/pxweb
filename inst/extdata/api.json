@@ -113,7 +113,7 @@
               },
               
     "vero2.stat.fi": {
-        "alias": "vero",
+        "alias": ["vero"],
         "description": "Verohallinto - Finnish Tax Administration",
         "citation" : {
           "organization" : "Finnish Tax Administration",

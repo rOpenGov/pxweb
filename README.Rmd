@@ -1,5 +1,5 @@
 ---
-output: md_document
+output: github_document
 ---
 
 
@@ -7,7 +7,7 @@ output: md_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "man/figures/"
 )
 ```
 
@@ -94,11 +94,11 @@ You are welcome to contact us:
 
 ### Acknowledgements
 
-**Kindly cite this work** as follows: [Måns Magnusson](https://github.com/mansmeg), Markus Kainu, Janne Huovari, and [Leo Lahti](https://github.com/antagomir). Retrieval and analysis of PC Axis data with the pxweb package. R package version `r sessionInfo()$otherPkgs$pxweb$Version`. URL: <https://ropengov.github.io/pxweb/>
+```{r acknowledgements, comment = "", highlight=FALSE}
+citation("pxweb")
+```
 
 We are grateful to all [contributors](https://github.com/rOpenGov/pxweb/graphs/contributors)! This project is part of [rOpenGov](http://ropengov.github.io).
-
-
 
 
 [github-watch-badge]: https://img.shields.io/github/watchers/ropengov/pxweb.svg?style=social

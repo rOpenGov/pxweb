@@ -1,6 +1,6 @@
 # Test suits for the examples in the documentation
 
-context("pxweb conversions")
+context("pxweb_as_dataframe")
 
 test_that(desc = "Converting pxweb data to matrices and data.frames", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
