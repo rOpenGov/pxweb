@@ -141,7 +141,7 @@
         "max_values_to_download" : 1000
               },
               
-    "pxwebb2017.vgregion.se": {
+    "pxweb2022.vgregion.se": {
         "alias" : ["vgregion"],
         "description" : "Vastra Gotaland Region in Sweden",
         "citation" : {
