@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2013-2021
+    COPYRIGHT HOLDER: Mans Magnusson, Love Hansson, Leo Lahti

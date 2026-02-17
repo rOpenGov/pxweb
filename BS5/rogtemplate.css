@@ -1,226 +1,480 @@
-/*!
-	* Beautify: https://www.freeformatter.com/css-beautifier.html
-	* Minify: https://www.freeformatter.com/css-minifier.html
-	* From http://ropengov.org/css/style.css
-*/
-.blog-header,
-.blog-post,
-.blog-pagination {
-	margin-bottom: 2rem;
+/*! Compressed with sass R library https: //rstudio.github.io/sass/ */
+
+[data-bs-theme="dark"] {
+  color-scheme: dark;
+  --bs-body-bg: hsla(210, 10%, 25%, 1);
 }
 
-
-/* Make sure the image size is reasonable. */
-
-.blog-post img {
-	max-width: 100%;
+.dropdown-menu {
+  --bs-dropdown-bg: var(--brand-gray_dark);
+  --bs-dropdown-link-active-bg: var(--bs-dropdown-bg);
+  --bs-dropdown-link-color: var(--bs-navbar-color);
+  --bs-dropdown-link-hover-color: rgba(255, 255, 255, 0.75);
+  --bs-dropdown-link-hover-bg: var(--bs-dropdown-bg);
+  --bs-dropdown-header-color: var(--bs-dropdown-link-hover-color);
 }
 
-img[src$='#center'] {
-	display: block;
-	margin: 0.7rem auto;
-	/* you can replace the vertical '0.7rem' by whatever floats your boat, but keep the horizontal 'auto' for this to work */
-	/* whatever else styles you fancy here */
+/* ---Images and captions figure spacing--- */
+main img {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-img[src$='#floatleft'] {
-	float: left;
-	margin: 0.7rem;
-	/* this margin is totally up to you */
-	/* whatever else styles you fancy here */
+.caption,
+.figure,
+.figcaption,
+figcaption,
+caption {
+  color: var(--bs-secondary);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  width: 100%;
 }
 
-img[src$='#floatright'] {
-	float: right;
-	margin: 0.7rem;
-	/* this margin is totally up to you */
-	/* whatever else styles you fancy here */
-}
-
-
-/*********************************/
-/*********************************/
-/******dieghernan.github.io ******/
-/*********************************/
-/*********************************/
-
-
-/* Navbar tweaks */
-
-.navbar-dark.bg-dark {
-	background-color: #343a40 !important;
-}
-
+/* ---Navbar tweaks--- */
 .navbar-brand {
-	font-family: 'B612 Mono', monospace;
-	letter-spacing: 2px;
-	font-size: 1.5rem;
-	color: #fff;
-}
-
-.navbar-brand:hover,
-.navbar-brand:focus {
-	color: #fff;
+  font-family: "B612 Mono", monospace;
+  font-size: 1.5rem;
+  color: var(--bs-white);
 }
 
 .navbar .text-muted {
-	color: #6c757d !important;
+  color: var(--bs-gray-500) !important;
 }
 
-.navbar .nav-link {
-	color: rgba(255, 255, 255, .5);
+/* Hovers */
+#navbar .nav-link:hover,
+#navbar .nav-link:focus {
+  color: rgba(255, 255, 255, 0.75);
+  background-color: transparent;
 }
 
-.navbar .nav-link:hover,
-.navbar .nav-link:focus {
-	color: rgba(255, 255, 255, .75);
-	background: #343a40 !important;
+#navbar .dropdown-menu .dropdown-item.active:hover,
+#navbar .dropdown-menu .dropdown-item.active:focus {
+  color: rgba(255, 255, 255, 0.75);
 }
 
-/* Position hack to get full width footer even though pkgdown puts it inside a container * See: https://css-tricks.com/full-width-containers-limited-width-parents/ */
+/* Actives */
+#navbar .nav-item.active .nav-link,
+#navbar .dropdown-menu .dropdown-item.active {
+  color: var(--bs-white);
+  background: transparent;
+}
 
+#navbar .dropdown-menu .dropdown-item .fa {
+  opacity: 1;
+  color: inherit;
+}
+
+/* --- Dividers in menu --- */
+.navbar-nav .nav-item.dropdown ul li:first-child hr {
+  display: none;
+}
+
+/* --- Search ---*/
+.algolia-autocomplete .aa-dropdown-menu {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+}
+
+mark,
+.mark {
+  background: linear-gradient(
+    -100deg,
+    RGBA(var(--bs-warning-rgb), 0.2),
+    RGBA(var(--bs-warning-rgb), 0.7) 95%,
+    RGBA(var(--bs-warning-rgb), 0.1)
+  );
+}
+
+/* ---Footer--- */
 footer {
-	width: 100vw;
-	position: relative;
-	left: 50%;
-	right: 50%;
-	margin-left: -50vw;
-	margin-right: -50vw;
-	background-color: #343a40 !important;
-	color: white;
-	margin-bottom: 0;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-bottom: 0;
 }
-
-.rog-logo {
-	margin-bottom: 5px;
-}
-
-
-/* More footers */
 
 footer a {
-	color: #dee2e6;
+  color: var(--bs-light);
 }
 
 footer a:hover,
 footer a:focus {
-	color: #ff6600;
+  color: var(--bs-warning);
 }
 
 footer .pkgdown-footer-right {
-	margin-right: auto;
-	padding-right: 1.25rem;
+  margin-right: auto;
+  padding-right: 1.25rem;
 }
 
 footer .pkgdown-footer-left {
-	margin-left: auto;
-	padding-left: 1.25rem;
+  margin-left: auto;
+  padding-left: 1.25rem;
 }
 
 @media screen and (max-width: 576px) {
-
-	footer .pkgdown-footer-right,
-	footer .pkgdown-footer-left {
-		margin-right: .75rem;
-		margin-left: .75rem;
-		padding-left: 0;
-		padding-right: 0;
-	}
+  footer .pkgdown-footer-right,
+  footer .pkgdown-footer-left {
+    margin: 0 0.75rem;
+    padding: 0 12px;
+  }
 }
 
-@media (max-width:768px) and (min-width:576px) {
-
-	footer .pkgdown-footer-right,
-	footer .pkgdown-footer-left {
-		max-width: 270px;
-	}
+@media (max-width: 768px) and (min-width: 576px) {
+  footer .pkgdown-footer-right,
+  footer .pkgdown-footer-left {
+    max-width: 270px;
+  }
 }
 
-@media (max-width: 992px) and (min-width:768px) {
-
-	footer .pkgdown-footer-right,
-	footer .pkgdown-footer-left {
-		max-width: 360px;
-	}
+@media (max-width: 992px) and (min-width: 768px) {
+  footer .pkgdown-footer-right,
+  footer .pkgdown-footer-left {
+    max-width: 360px;
+  }
 }
 
-@media (max-width: 1200px) and (min-width:992px) {
-
-	footer .pkgdown-footer-right,
-	footer .pkgdown-footer-left {
-		max-width: 480px;
-	}
+@media (max-width: 1200px) and (min-width: 992px) {
+  footer .pkgdown-footer-right,
+  footer .pkgdown-footer-left {
+    max-width: 480px;
+  }
 }
 
-@media (max-width: 1400px) and (min-width:1200px) {
-
-	footer .pkgdown-footer-right,
-	footer .pkgdown-footer-left {
-		max-width: 570px;
-	}
+@media (max-width: 1400px) and (min-width: 1200px) {
+  footer .pkgdown-footer-right,
+  footer .pkgdown-footer-left {
+    max-width: 570px;
+  }
 }
 
-@media (min-width:1400px) {
-
-	footer .pkgdown-footer-right,
-	footer .pkgdown-footer-left {
-		max-width: 660px;
-	}
+@media (min-width: 1400px) {
+  footer .pkgdown-footer-right,
+  footer .pkgdown-footer-left {
+    max-width: 660px;
+  }
 }
 
+/* ---Misc--- */
+
+/* Render author and date consistenly between Rmd and quarto files */
+.author,
+.date {
+  color: var(--bs-secondary);
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
+  margin-bottom: 0.5rem;
+}
+
+/* Logos */
+
+.rog-logo {
+  margin-bottom: 5px;
+}
+
+.mini_logo {
+  font-family: "B612 Mono", monospace;
+  text-decoration: none;
+  color: var(--bs-body-color);
+  display: inline-block;
+}
+
+/* Hack to reduce light in dark mode */
+[data-bs-theme="dark"] img.r-plt,
+[data-bs-theme="dark"] pre .r-plt.img img,
+[data-bs-theme="dark"] .cell-output-display img {
+  filter: brightness(80%) !important;
+}
+
+[data-bs-theme="dark"] img:not(.logo, .d-inline-block, .round-logo, .rog-logo) {
+  filter: brightness(80%) !important;
+}
 
 /* Clipboard button */
 
 .btn-copy-ex {
-	color: white;
-	background-color: #343a40;
-	border-color: #343a40;
+  color: white;
+  background-color: var(--bs-gray-dark);
+  border-color: var(--bs-gray-dark);
 }
 
 .btn-copy-ex:hover,
 .btn-copy-ex:focus {
-	color: white;
-	background-color: #ff6600;
-	border-color: #ff6600;
-}
-
-/* ---Caption figure--- */
-.caption,
-.figure {
-	color: #6c757d;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 0.5rem;
-	font-size: 85%;
+  color: white;
+  background-color: var(--bs-warning);
+  border-color: var(--bs-warning);
 }
 
 .pkg {
-	font-weight: bold;
+  font-weight: bold;
 }
 
-
-/* --- Inherited args --- */
-
-.template-reference-topic dt code {
-	font-weight: 700;
-	font-family: var(--bs-body-font-family);
-	font-size: var(--bs-body-font-size);
-	color: var(--bs-body-color);
-	text-align: var(--bs-body-text-align);
-	background-color: var(--bs-body-bg);
-	padding: 0;
-	border-radius: 0;
+/* ---Code--- */
+code a:any-link {
+  text-decoration: underline;
+  background-color: transparent !important;
 }
 
-/* ---allcontributors package--- */
-
-.allctb-avatar {
-	border: 1px solid;
-	border-radius: 50%;
-	border-color: var(--bs-dark-border-subtle);
-	max-width: 100px;
+a > code {
+  text-decoration: underline;
+  color: var(--bs-code-color);
 }
 
-table.allctb-table td {
-	border-color: transparent;
+code {
+  font-size: 87.5%;
+  word-wrap: break-word;
+  background-color: var(--body-bg) !important;
+}
+
+@media (max-width: 575.98px) {
+  /* See https://github.com/r-lib/pkgdown/pull/2970 */
+
+  /* Need to override pkgdown */
+  .btn-copy-ex {
+    right: 5px;
+  }
+
+  div > pre {
+    border-radius: 0;
+  }
+
+  :not(li, blockquote) > div > pre {
+    margin-left: calc(var(--bs-gutter-x) * -0.5);
+    margin-right: calc(var(--bs-gutter-x) * -0.5);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  :not(li, blockquote) > div > .btn-copy-ex {
+    right: calc(var(--bs-gutter-x) * -0.5 + 5px);
+  }
+}
+
+/* Highlighter based in tango for dark theme */
+pre {
+  border: none;
+}
+[data-bs-theme="dark"] {
+  pre {
+    background-color: var(--brand-gray_dark);
+    color: #fff;
+  }
+  pre code span.al /* Alert          */ {
+    color: var(--bs-danger-text-emphasis);
+  }
+  pre code span.an /* Annotation     */ {
+    color: var(--bs-warning-text-emphasis);
+    font-weight: bold;
+    font-style: italic;
+  }
+  pre code span.at /* Attribute      */ {
+    color: var(--bs-form-valid-color);
+  }
+  pre code span.bn /* BaseN          */ {
+    color: var(--bs-primary-text-emphasis);
+  }
+  pre code span.cf /* ControlFlow    */ {
+    color: var(--bs-link-hover-color);
+    font-weight: bold;
+  }
+  pre code span.ch /* Char           */ {
+    color: var(--bs-success-text-emphasis);
+  }
+  pre code span.cn /* Constant       */ {
+    color: #fff;
+  }
+  pre code span.co /* Comment        */ {
+    color: var(--bs-warning-text-emphasis);
+    font-style: italic;
+  }
+  pre code span.cv /* CommentVar     */ {
+    color: var(--bs-warning-text-emphasis);
+    font-weight: bold;
+    font-style: italic;
+  }
+  pre code span.do /* Documentation  */ {
+    color: var(--bs-warning-text-emphasis);
+    font-weight: bold;
+    font-style: italic;
+  }
+  pre code span.dt /* DataType       */ {
+    color: var(--bs-link-hover-color);
+  }
+  pre code span.dv /* DecVal         */ {
+    color: var(--bs-primary-text-emphasis);
+  }
+  pre code span.er /* Error          */ {
+    color: var(--bs-danger-text-emphasis);
+    font-weight: bold;
+  }
+
+  pre code span.fl /* Float          */ {
+    color: var(--bs-primary-text-emphasis);
+  }
+  pre code span.fu /* Function       */ {
+    color: #fff;
+  }
+
+  pre code span.in /* Information    */ {
+    color: var(--bs-warning-text-emphasis);
+    font-weight: bold;
+    font-style: italic;
+  }
+  pre code span.kw /* Keyword        */ {
+    color: var(--bs-link-hover-color);
+    font-weight: bold;
+  }
+  pre code span.op /* Operator       */ {
+    color: var(--bs-warning-text-emphasis);
+    font-weight: bold;
+  }
+  pre code span.ot /* Other          */ {
+    color: var(--bs-warning-text-emphasis);
+  }
+  pre code span.pp /* Preprocessor   */ {
+    color: var(--bs-warning-text-emphasis);
+    font-style: italic;
+  }
+  pre code span.sc /* SpecialChar    */ {
+    color: #fff;
+  }
+  pre code span.ss /* SpecialString  */ {
+    color: var(--bs-success-text-emphasis);
+  }
+  pre code span.st /* String         */ {
+    color: var(--bs-success-text-emphasis);
+  }
+  pre code span.va /* Variable       */ {
+    color: #fff;
+  }
+  pre code span.vs /* VerbatimString */ {
+    color: var(--bs-success-text-emphasis);
+  }
+  pre code span.wa /* Warning        */ {
+    color: var(--bs-warning-text-emphasis);
+    font-weight: bold;
+    font-style: italic;
+  }
+}
+
+/* Dark reactable */
+
+[data-bs-theme="dark"] {
+  .reactable.html-widget {
+    filter: none !important;
+  }
+
+  .Reactable {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+  }
+
+  .rt-sticky,
+  .rt-tbody,
+  .rt-tr,
+  .rt-tr-group {
+    background-color: inherit;
+  }
+
+  .rt-table {
+    border-color: var(--brand-gray_dark);
+  }
+
+  .rt-th {
+    border-bottom: 2px solid var(--brand-gray_dark);
+    border-left-color: var(--brand-gray_dark);
+  }
+
+  .rt-td {
+    border-left-color: var(--brand-gray_dark);
+    border-top: 1px solid var(--brand-gray_dark);
+  }
+
+  .rt-th-group:after {
+    background-color: var(--brand-gray_dark);
+  }
+
+  .rt-tr-striped {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  .rt-tr-striped-sticky {
+    background-color: var(--brand-gray_dark);
+  }
+
+  .rt-tr-highlight:hover,
+  .rt-tr-highlight-sticky:hover {
+    background-color: var(--bs-gray-800);
+  }
+  .rt-td-filter {
+    border-bottom: 1px solid var(--brand-gray_dark);
+  }
+
+  .rt-filter {
+    background-color: var(--brand-gray_dark);
+    border: 1px solid var(--brand-gray_dark);
+    color: inherit;
+  }
+
+  .rt-filter:focus {
+    border: 1px solid var(--brand-gray_dark);
+  }
+
+  .rt-expander:after {
+    border-top: 7px solid var(--brand-gray_dark);
+  }
+
+  .rt-pagination {
+    border-top: 1px solid var(--brand-gray_dark);
+  }
+
+  .rt-page-jump,
+  .rt-page-size-select {
+    background-color: var(--bs-body-bg);
+    border: 1px solid var(--brand-gray_dark);
+  }
+
+  .rt-page-button:hover {
+    background-color: var(--bs-gray-800);
+  }
+
+  .rt-page-button:active {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .rt-keyboard-active .rt-page-button:focus {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  .rt-page-button:disabled:focus,
+  .rt-page-button:disabled:hover {
+    background-color: transparent;
+  }
+
+  .rt-tbody-no-data .rt-td {
+    border-color: transparent;
+  }
+
+  .rt-search {
+    background-color: var(--brand-gray_dark);
+    border: 1px solid var(--brand-gray_dark);
+    color: var(--bs-body-color);
+  }
+
+  .rt-search:active,
+  .rt-search:focus {
+    border: 1px solid var(--brand-gray_dark);
+  }
+
+  .rt-borderless .rt-td,
+  .rt-tr-group:first-child > .rt-tr:first-child .rt-td {
+    border-top-color: var(--brand-gray_dark);
+  }
 }
