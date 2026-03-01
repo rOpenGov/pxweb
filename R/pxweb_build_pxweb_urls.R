@@ -49,10 +49,15 @@ build_pxweb_url.url <- function(x) {
 }
 
 
+#' Build the url to a PXWEB V2 API SUBPATH
+#'
+#' @keywords internal
 build_pxweb_v2_api_subpath <- function(x) {
   UseMethod("build_pxweb_v2_api_subpath")
 }
 
+#' @rdname build_pxweb_v2_api_subpath
+#' @keywords internal
 build_pxweb_v2_api_subpath.url <- function(x) {
   ps <- strsplit(x$path,"/")[[1]]
   subpath <- ps[1:which(grepl(ps, pattern = "v2"))[1]]

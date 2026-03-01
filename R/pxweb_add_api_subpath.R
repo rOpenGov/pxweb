@@ -8,7 +8,7 @@
 #' @keywords internal
 pxweb_add_api_subpath <- function(obj) {
   assert_pxweb_url(obj)
-  pxweb_version <- pxweb_detect_version(obj$url)
+  pxweb_version <- obj$version
   assert_pxweb_version(pxweb_version)
 
   if (inherits(obj, "pxweb")) {
@@ -26,7 +26,7 @@ pxweb_add_api_subpath <- function(obj) {
     return(obj)
   }
 
-  if(version == "v1"){
+  if(pxweb_version == "v1"){
     tmp_url <- obj$url
 
     for (p in 1:length(path_splt)) {
@@ -39,7 +39,7 @@ pxweb_add_api_subpath <- function(obj) {
     }
     # Add the subpath
     obj$paths$api_subpath <- list(path = tmp_url$path, vector = path_splt[1:p])
-  } else if (version == "v2"){
+  } else if (pxweb_version == "v2"){
     subpath <- build_pxweb_v2_api_subpath(obj$url)
     # Add the subpath
     obj$paths$api_subpath <- list(path = subpath, vector = strsplit(subpath, "/")[[1]])
