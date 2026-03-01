@@ -8,10 +8,13 @@
 #' @keywords internal
 pxweb_add_api_subpath <- function(obj) {
   assert_pxweb_url(obj)
+  pxweb_version <- pxweb_detect_version(obj$url)
+  assert_pxweb_version(pxweb_version)
 
   if (inherits(obj, "pxweb")) {
     return(obj)
   }
+
 
   path_splt <- strsplit(obj$url$path, "/")[[1]]
 
@@ -25,14 +28,18 @@ pxweb_add_api_subpath <- function(obj) {
 
   tmp_url <- obj$url
 
-  # Split up url to api parts
-  for (p in 1:length(path_splt)) {
-    obj <- pxweb_add_call(obj)
-    tmp_url$path <- paste(path_splt[1:p], collapse = "/")
-    tmp_cfg_url <- build_pxweb_config_url(tmp_url)
-    tmp_r <- httr::GET(tmp_cfg_url)
-    pxweb_http_log_response(tmp_r)
-    if (is_pxweb_config_response(tmp_r)) break()
+  if(pxweb_version == "v1"){
+    # Split up url to api parts
+    for (p in 1:length(path_splt)) {
+      obj <- pxweb_add_call(obj)
+      tmp_url$path <- paste(path_splt[1:p], collapse = "/")
+      tmp_cfg_url <- build_pxweb_config_url(tmp_url)
+      tmp_r <- httr::GET(tmp_cfg_url)
+      pxweb_http_log_response(tmp_r)
+      if (is_pxweb_config_response(tmp_r, pxweb_version)) break()
+    }
+  } else if(pxweb_version == "v2"){
+    p <- 2
   }
 
   # Add the subpath
@@ -40,3 +47,4 @@ pxweb_add_api_subpath <- function(obj) {
 
   obj
 }
+

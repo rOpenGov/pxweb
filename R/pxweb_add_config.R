@@ -10,6 +10,7 @@
 pxweb_add_config <- function(obj) {
   assert_pxweb_url(obj)
   assert_pxweb_rda_file_path(obj)
+  assert_pxweb_version(obj$version)
 
   if (inherits(obj, "pxweb")) {
     return(obj)
@@ -28,8 +29,7 @@ pxweb_add_config <- function(obj) {
   pxweb_http_log_response(r)
 
   # Check that we get a config back
-
-  if (!is_pxweb_config_response(r)) {
+  if (!is_pxweb_config_response(r, obj$version)) {
     base_url <- build_pxweb_url(obj)
     r2 <- httr::GET(base_url)
     pxweb_http_log_response(r2)
@@ -45,11 +45,19 @@ pxweb_add_config <- function(obj) {
     warning("PXWEB URL CHANGE:\n from: ", httpwr$redirected_from, "\n to:   ", httpwr$redirected_to, call. = FALSE)
   }
 
-  cfg <- httr::content(r, "parsed")
-  if(!is.null(cfg$maxCells)){
-    mvtd <- cfg$maxCells
-  } else {
-    mvtd <- cfg$maxValues
+  if(obj$version == "v1"){
+    cfg <- httr::content(r, "parsed")
+    if(!is.null(cfg$maxCells)){
+      mvtd <- cfg$maxCells
+    } else {
+      mvtd <- cfg$maxValues
+    }
+  } else if(obj$version == "v2"){
+    cfg <- httr::content(r, "parsed")
+    cfg$maxCalls <- cfg$maxCallsPerTimeWindow
+    cfg$timeWindow <- cfg$timeWindow
+    mvtd <- cfg$maxDataCells
+    cfg$CORS <- NULL
   }
 
   obj$config <- list(
@@ -68,14 +76,22 @@ pxweb_add_config <- function(obj) {
 #' Check if a response is a pxweb config response
 #'
 #' @param x a response object
+#' @param version the version of the pxweb API to check for
 #' @keywords internal
-is_pxweb_config_response <- function(x) {
+is_pxweb_config_response <- function(x, version) {
   checkmate::assert_class(x, "response")
+  assert_pxweb_version(version)
   if (httr::http_error(x)) {
     return(FALSE)
   }
   cfg <- suppressMessages(try(httr::content(x, "parsed"), silent = TRUE))
-  (all(c("maxValues", "maxCalls", "timeWindow", "CORS") %in% names(cfg))) & !inherits(cfg, "try-error")
+  if(version == "v1"){
+    return((all(c("maxCells", "maxCalls", "timeWindow", "CORS") %in% names(cfg))) & !inherits(cfg, "try-error"))
+  } else if(version == "v2"){
+    return((all(c("maxDataCells", "maxCallsPerTimeWindow", "timeWindow") %in% names(cfg))) & !inherits(cfg, "try-error"))
+  } else {
+    stop("Unknown PXWEB API version detected.", call. = FALSE)
+  }
 }
 
 

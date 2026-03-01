@@ -41,6 +41,7 @@ pxweb <- function(url) {
 
   obj <- list(
     url = url_parsed,
+    version = NULL,
     config = NULL,
     calls = NULL,
     paths = NULL
@@ -54,8 +55,10 @@ pxweb <- function(url) {
     obj$calls <- list(time_stamps = list())
   }
 
+  # Add the config slot (require one call first construction of the session for v1)
+  obj$version <- pxweb_detect_version(x = obj$url)
 
-  # Add the config slot (require one call first construction of the session)
+  # Add the config slot (require one call first construction of the session for v1)
   obj <- pxweb_add_config(obj)
 
   # Add subpath and query path
@@ -78,7 +81,7 @@ is.pxweb <- function(x) inherits(x, "pxweb")
 #' @rdname pxweb
 #' @export
 print.pxweb <- function(x, ...) {
-  cat("PXWEB API\n")
+  cat("PXWEB API (", x$version, ")\n", sep = "")
   cat("url:", httr::build_url(x$url), "\n")
   cat("config:\n")
   for (i in seq_along(x$config)) {
