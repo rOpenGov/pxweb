@@ -26,10 +26,9 @@ pxweb_add_api_subpath <- function(obj) {
     return(obj)
   }
 
-  tmp_url <- obj$url
+  if(version == "v1"){
+    tmp_url <- obj$url
 
-  if(pxweb_version == "v1"){
-    # Split up url to api parts
     for (p in 1:length(path_splt)) {
       obj <- pxweb_add_call(obj)
       tmp_url$path <- paste(path_splt[1:p], collapse = "/")
@@ -38,12 +37,13 @@ pxweb_add_api_subpath <- function(obj) {
       pxweb_http_log_response(tmp_r)
       if (is_pxweb_config_response(tmp_r, pxweb_version)) break()
     }
-  } else if(pxweb_version == "v2"){
-    p <- 2
+    # Add the subpath
+    obj$paths$api_subpath <- list(path = tmp_url$path, vector = path_splt[1:p])
+  } else if (version == "v2"){
+    subpath <- build_pxweb_v2_api_subpath(obj$url)
+    # Add the subpath
+    obj$paths$api_subpath <- list(path = subpath, vector = strsplit(subpath, "/")[[1]])
   }
-
-  # Add the subpath
-  obj$paths$api_subpath <- list(path = tmp_url$path, vector = path_splt[1:p])
 
   obj
 }

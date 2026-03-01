@@ -49,6 +49,17 @@ build_pxweb_url.url <- function(x) {
 }
 
 
+build_pxweb_v2_api_subpath <- function(x) {
+  UseMethod("build_pxweb_v2_api_subpath")
+}
+
+build_pxweb_v2_api_subpath.url <- function(x) {
+  ps <- strsplit(x$path,"/")[[1]]
+  subpath <- ps[1:which(grepl(ps, pattern = "v2"))[1]]
+  paste(subpath, collapse = "/")
+}
+
+
 #' Build the url to get the config from a PXWEB api
 #'
 #' @keywords internal
@@ -73,5 +84,14 @@ build_pxweb_config_url.pxweb <- function(x) {
 #' @rdname build_pxweb_config_url
 #' @keywords internal
 build_pxweb_config_url.url <- function(x) {
-  paste0(build_pxweb_url(x), "?config")
+  version <- pxweb_detect_version(x)
+  if(version == "v1"){
+    cfgurl <- paste0(build_pxweb_url(x), "?config")
+  } else if (version == "v2"){
+    x$path <- paste0(build_pxweb_v2_api_subpath(x), "/config")
+    cfgurl <- build_pxweb_url(x)
+  } else {
+    stop("Unknown PXWEB API version detected.", call. = FALSE)
+  }
+  cfgurl
 }

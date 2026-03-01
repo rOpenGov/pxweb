@@ -55,10 +55,10 @@ pxweb <- function(url) {
     obj$calls <- list(time_stamps = list())
   }
 
-  # Add the config slot (require one call first construction of the session for v1)
+  # Add pxweb API version
   obj$version <- pxweb_detect_version(x = obj$url)
 
-  # Add the config slot (require one call first construction of the session for v1)
+  # Add the config slot
   obj <- pxweb_add_config(obj)
 
   # Add subpath and query path
