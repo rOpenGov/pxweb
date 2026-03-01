@@ -302,7 +302,7 @@ pxweb_remove_metadata_from_query <- function(pxq, pxmd) {
   pxq
 }
 
-#' Compue the dimension of the query
+#' Compute the dimension of the query
 #'
 #' @param pxq a \code{pxweb_query} object.
 #'
