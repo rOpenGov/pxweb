@@ -4,19 +4,9 @@ on:
   push:
     paths-ignore:
       - 'paper/**'
-    branches:
-      - main
-      - master
-      - development
-      - dev
   pull_request:
-    paths-ignore: 
+    paths-ignore:
       - 'paper/**'
-    branches:
-      - main
-      - master
-      - development
-      - dev
 
 name: R-CMD-check (release)
 
