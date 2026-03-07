@@ -415,6 +415,20 @@
         "calls_per_period": 100,
         "period_in_seconds": 10,
         "max_values_to_download" : 10000000
+    },
+
+    "statistik.tillvaxtanalys.se": {
+        "alias" : ["tva", "tillvaxtanalys"],
+        "description" : "Swedish Agency for Growth Policy Analysis (Tillväxtanalys)",
+        "citation" : {
+          "organization" : "Myndigheten för tillväxtpolitiska utvärderingar och analyser",
+          "address" : "Östersund, Sweden"},
+        "url" : "https://statistik.tillvaxtanalys.se/PxWeb/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["sv"],
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
     }
   },
   "local_apis": {}
