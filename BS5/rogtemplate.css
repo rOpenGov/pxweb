@@ -87,6 +87,7 @@ mark,
     RGBA(var(--bs-warning-rgb), 0.7) 95%,
     RGBA(var(--bs-warning-rgb), 0.1)
   );
+  color: var(--bs-body-color);
 }
 
 /* ---Footer--- */

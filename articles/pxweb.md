@@ -719,7 +719,7 @@ sessionInfo()
     ##  [1] backports_1.5.0   digest_0.6.39     desc_1.4.3        R6_2.6.1         
     ##  [5] fastmap_1.2.0     xfun_0.56         cachem_1.1.0      knitr_1.51       
     ##  [9] htmltools_0.5.9   rmarkdown_2.30    lifecycle_1.0.5   cli_3.6.5        
-    ## [13] sass_0.4.10       pkgdown_2.2.0     textshaping_1.0.4 jquerylib_0.1.4  
-    ## [17] systemfonts_1.3.1 compiler_4.5.2    tools_4.5.2       ragg_1.5.0       
+    ## [13] sass_0.4.10       pkgdown_2.2.0     textshaping_1.0.5 jquerylib_0.1.4  
+    ## [17] systemfonts_1.3.2 compiler_4.5.2    tools_4.5.2       ragg_1.5.1       
     ## [21] checkmate_2.3.4   bslib_0.10.0      evaluate_1.0.5    yaml_2.3.12      
-    ## [25] jsonlite_2.0.0    rlang_1.1.7       fs_1.6.6          htmlwidgets_1.6.4
+    ## [25] jsonlite_2.0.0    rlang_1.1.7       fs_1.6.7          htmlwidgets_1.6.4
