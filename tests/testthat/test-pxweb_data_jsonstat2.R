@@ -107,6 +107,23 @@ test_that(desc = "PXWEB API v2 response parser routes JSON-stat2 data", {
   )
 })
 
+test_that(desc = "PXWEB API v2 response parser stores non JSON-stat2 output", {
+  response <- pxweb_v2_data_response(pxweb_v2_data_fixture())
+  response$url <- "https://example.test/api/v2/tables/TAB1/data?outputFormat=csv"
+  response$content <- charToRaw("Region,Tid,value\n01,2024,10\n")
+
+  expect_silent(path <- pxweb_parse_response(response))
+  expect_true(file.exists(path))
+  expect_match(path, "\\.csv$")
+})
+
+test_that(desc = "PXWEB API v2 data.frame wrapper requires JSON-stat2", {
+  expect_error(
+    pxweb_get_data("https://example.test/api/v2/tables/TAB1/metadata", list(Region = "01"), output_format = "csv"),
+    "requires output_format = 'json-stat2'"
+  )
+})
+
 test_that(desc = "PXWEB API v2 JSON-stat2 data batches can be combined", {
   chunk_one <- pxweb_v2_data_fixture()
   chunk_one$id <- list("Region", "Tid", "ContentsCode")
@@ -137,4 +154,41 @@ test_that(desc = "PXWEB API v2 JSON-stat2 data batches can be combined", {
     )
   )
   expect_equal(pxweb_c(chunks), combined)
+
+  metadata <- pxweb_metadata(list(
+    title = "Population by region and year",
+    variables = list(
+      list(
+        code = "Region",
+        text = "region",
+        values = c("01", "03"),
+        valueTexts = c("Stockholm", "Uppsala"),
+        elimination = FALSE,
+        time = FALSE
+      ),
+      list(
+        code = "Tid",
+        text = "year",
+        values = c("2024", "2025"),
+        valueTexts = c("2024", "2025"),
+        elimination = FALSE,
+        time = TRUE
+      ),
+      list(
+        code = "ContentsCode",
+        text = "contents",
+        values = "POP",
+        valueTexts = "Population",
+        elimination = FALSE,
+        time = FALSE
+      )
+    )
+  ))
+  chunks[[1]]$pxweb_metadata <- metadata
+  chunks[[2]]$pxweb_metadata <- metadata
+
+  expect_equal(
+    as.data.frame(pxweb_c(chunks), column.name.type = "code", variable.value.type = "code"),
+    as.data.frame(combined, column.name.type = "code", variable.value.type = "code")
+  )
 })

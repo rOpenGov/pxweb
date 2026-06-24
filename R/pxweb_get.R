@@ -3,6 +3,8 @@
 #' @param url a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.
 #' @param query a json string, json file or list object that can be coherced to a \code{pxweb_query} object.
 #' @param verbose should large queries print out progress.
+#' @param output_format output format for PXWEB API v2 data requests. Defaults
+#'   to \code{"json-stat2"}.
 #'
 #' @examples
 #' \dontrun{
@@ -55,8 +57,8 @@
 #' }
 #'
 #' @export
-pxweb_get <- function(url, query = NULL, verbose = TRUE) {
-  pxweb_advanced_get(url = url, query = query, verbose = verbose)
+pxweb_get <- function(url, query = NULL, verbose = TRUE, output_format = "json-stat2") {
+  pxweb_advanced_get(url = url, query = query, verbose = verbose, output_format = output_format)
 }
 
 #' Do a GET call to PXWEB API and return a data.frame
@@ -81,8 +83,11 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE) {
 #' }
 #'
 #' @export
-pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text", variable.value.type = "text") {
-  d <- pxweb_advanced_get(url = url, query = query, verbose = verbose)
+pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text", variable.value.type = "text", output_format = "json-stat2") {
+  if (!identical(output_format, "json-stat2")) {
+    stop("pxweb_get_data() requires output_format = 'json-stat2' for PXWEB API v2 requests.", call. = FALSE)
+  }
+  d <- pxweb_advanced_get(url = url, query = query, verbose = verbose, output_format = output_format)
   as.data.frame(d, column.name.type = column.name.type, variable.value.type = variable.value.type)
 }
 
@@ -98,13 +103,16 @@ pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text"
 #' @param log_http_calls Should the http calls to the API be logged (for debugging reasons).
 #'                       If TRUE, all calls and responses are logged and written to "log_pxweb_api_http_calls.txt" in the working directory.
 #' @param pxmdo A \code{pxweb_metadata} object to use for query.
+#' @param output_format output format for PXWEB API v2 data requests. Defaults
+#'   to \code{"json-stat2"}.
 #' @param ... Further arguments sent to \code{httr::POST} (for queries) or \code{httr::GET} (for query = \code{NULL}).
 #'            If used with query, also supply a \code{pxweb_metadata} object. Otherwise the same parameters are sent to
 #'            both \code{httr::POST} and \code{httr::GET}.
 #' @export
-pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls = FALSE, pxmdo = NULL, ...) {
+pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls = FALSE, pxmdo = NULL, output_format = "json-stat2", ...) {
   checkmate::assert_flag(log_http_calls)
   checkmate::assert_class(pxmdo, classes = "pxweb_metadata", null.ok = TRUE)
+  checkmate::assert_string(output_format, min.chars = 1)
   if (log_http_calls) {
     pxweb_http_log_on()
   }
@@ -120,7 +128,11 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
   if (!is.null(query)) {
     pxq <- pxweb_query(query)
     if (is.null(pxmdo)) {
-      pxmd <- pxweb_get(px)
+      if (px$version == "v2") {
+        pxmd <- pxweb_get(pxweb_v2_table_metadata_url(px), output_format = output_format)
+      } else {
+        pxmd <- pxweb_get(px)
+      }
     } else {
       pxmd <- pxmdo
     }
@@ -153,14 +165,15 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
       px <- pxweb_add_call(px)
       pxqs[[i]] <- pxweb_remove_metadata_from_query(pxqs[[i]], pxmd)
       if (px$version == "v2") {
-        pxurl <- build_pxweb_v2_table_data_url(px, pxweb_v2_table_id(px, pxmd))
+        v2_request <- pxweb_v2_data_request(px, pxqs[[i]], pxmd, output_format = output_format)
+        pxurl <- v2_request$url
         r <- httr::POST(
           pxurl,
-          body = pxweb_as_json(x = pxweb_query_as_v2(pxqs[[i]])),
+          body = v2_request$body,
           pxweb_user_agent(),
           httr::content_type_json(),
           httr::accept_json(),
-          query = pxweb_v2_data_query_params(px, pxmd),
+          query = v2_request$query,
           encode = "raw",
           ...
         )
@@ -300,4 +313,17 @@ pxweb_add_mandatory_variables <- function(pxq, pxmd) {
     ), call. = FALSE)
   }
   return(pxq)
+}
+
+pxweb_v2_data_request <- function(px, pxq, pxmd, output_format = "json-stat2") {
+  checkmate::assert_class(px, "pxweb")
+  checkmate::assert_class(pxq, "pxweb_query")
+  checkmate::assert_class(pxmd, "pxweb_metadata")
+  checkmate::assert_string(output_format, min.chars = 1)
+
+  list(
+    url = build_pxweb_v2_table_data_url(px, pxweb_v2_table_id(px, pxmd)),
+    body = pxweb_as_json(x = pxweb_query_as_v2(pxq)),
+    query = pxweb_v2_data_query_params(px, pxmd, output_format = output_format)
+  )
 }

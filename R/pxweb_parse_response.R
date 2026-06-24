@@ -12,7 +12,13 @@ pxweb_parse_response <- function(x) {
   checkmate::assert_class(x, "response")
 
   pxq <- pxweb_query(x)
-  if (is.null(pxq) || pxq$response %in% c("json", "json-stat")) {
+  v2_output_format <- pxweb_response_v2_output_format(x)
+  if (is.null(pxq) && !is.null(v2_output_format) && !v2_output_format %in% c("json-stat2")) {
+    obj <- suppressWarnings(httr::content(x, as = "raw"))
+    obj_path <- file.path(tempdir(), paste0(digest::sha1(obj), ".", pxweb_v2_output_file_extension(v2_output_format)))
+    writeBin(con = obj_path, object = obj)
+    return(obj_path)
+  } else if (is.null(pxq) || pxq$response %in% c("json", "json-stat")) {
     obj <- suppressWarnings(httr::content(x, as = "parsed"))
   } else if (pxq$response %in% pxweb_file_response_formats()) {
     obj <- suppressWarnings(httr::content(x, as = "raw"))
@@ -70,4 +76,25 @@ pxweb_parse_response <- function(x) {
 #' @export
 is_pxweb_response <- function(x) {
   !inherits(try(pxweb_parse_response(x), silent = TRUE), "try-error")
+}
+
+pxweb_response_v2_output_format <- function(x) {
+  checkmate::assert_class(x, "response")
+  u <- try(httr::parse_url(x$url), silent = TRUE)
+  if (inherits(u, "try-error")) {
+    return(NULL)
+  }
+  output_format <- u$query$outputFormat
+  if (is.null(output_format)) {
+    return(NULL)
+  }
+  tolower(output_format)
+}
+
+pxweb_v2_output_file_extension <- function(output_format) {
+  checkmate::assert_string(output_format, min.chars = 1)
+  if (identical(output_format, "json-px")) {
+    return("json")
+  }
+  output_format
 }

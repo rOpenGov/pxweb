@@ -76,6 +76,28 @@ build_pxweb_v2_table_metadata_url <- function(x, table_id) {
   paste0(build_pxweb_v2_tables_url(x), "/", table_id, "/metadata")
 }
 
+pxweb_v2_table_metadata_url <- function(x) {
+  metadata_url <- build_pxweb_v2_table_metadata_url(x, pxweb_v2_table_id(x))
+
+  if (checkmate::test_class(x, "pxweb")) {
+    lang <- x$url$query$lang
+  } else if (checkmate::test_class(x, "url")) {
+    lang <- x$query$lang
+  } else if (checkmate::test_string(x)) {
+    lang <- parse_url_or_fail(x)$query$lang
+  } else {
+    stop("Cannot build PXWEB API v2 metadata url for input.", call. = FALSE)
+  }
+
+  if (is.null(lang)) {
+    return(metadata_url)
+  }
+
+  u <- httr::parse_url(metadata_url)
+  u$query <- list(lang = lang)
+  httr::build_url(u)
+}
+
 build_pxweb_v2_table_data_url <- function(x, table_id) {
   checkmate::assert_string(table_id, min.chars = 1)
   table_id <- gsub("^/+", "", table_id)

@@ -4,7 +4,7 @@
 \alias{pxweb_get}
 \title{Do a GET call to PXWEB API}
 \usage{
-pxweb_get(url, query = NULL, verbose = TRUE)
+pxweb_get(url, query = NULL, verbose = TRUE, output_format = "json-stat2")
 }
 \arguments{
 \item{url}{a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.}
@@ -12,6 +12,9 @@ pxweb_get(url, query = NULL, verbose = TRUE)
 \item{query}{a json string, json file or list object that can be coherced to a \code{pxweb_query} object.}
 
 \item{verbose}{should large queries print out progress.}
+
+\item{output_format}{output format for PXWEB API v2 data requests. Defaults
+to \code{"json-stat2"}.}
 }
 \description{
 Do a GET call to PXWEB API
