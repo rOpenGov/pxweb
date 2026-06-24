@@ -25,6 +25,19 @@ test_that(desc = "PXWEB API v2 URL helpers build endpoint URLs", {
   )
 })
 
+test_that(desc = "PXWEB API v2 response parser routes fixture responses", {
+  metadata_response <- readRDS(test_path("test_data/pxweb_metadata_response_v2.rds"))
+  table_response <- readRDS(test_path("test_data/pxweb_table_response_v2.rds"))
+
+  expect_silent(metadata <- pxweb_parse_response(metadata_response))
+  expect_s3_class(metadata, "pxweb_metadata")
+  expect_equal(attr(metadata, "pxweb_metadata_v2")$extension$px$tableid, "TAB5974")
+
+  expect_silent(table <- pxweb_parse_response(table_response))
+  expect_s3_class(table, "pxweb_table_response_v2")
+  expect_equal(table$id, "TAB5974")
+})
+
 test_that(desc = "PXWEB API v2 constructor smoke test", {
   # Keep live API coverage small. Response parsing and data queries are fixture
   # tested until v2 metadata/data support is implemented.

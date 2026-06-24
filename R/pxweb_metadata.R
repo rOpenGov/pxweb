@@ -83,7 +83,7 @@ pxweb_metadata_v2 <- function(x) {
 #' @keywords internal
 assert_pxweb_metadata_response_v2 <- function(x) {
   checkmate::assert_class(x, "list")
-  checkmate::assert_names(names(x), must.include = c("version", "class", "label", "id", "dimension"))
+  checkmate::assert_names(names(x), must.include = c("version", "class", "label", "id", "dimension", "value"))
   checkmate::assert_string(x$version, pattern = "^2\\.")
   checkmate::assert_string(x$class, pattern = "^dataset$")
   checkmate::assert_character(unlist(x$id, use.names = FALSE), min.len = 1)
