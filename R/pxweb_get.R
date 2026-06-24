@@ -315,6 +315,24 @@ pxweb_add_mandatory_variables <- function(pxq, pxmd) {
   return(pxq)
 }
 
+#' Build a PXWEB API v2 data request.
+#'
+#' @description
+#' Creates the request pieces used to POST a query to the PXWEB API v2
+#' \code{/tables/{tableId}/data} endpoint. The returned body is the v2
+#' \code{selection} JSON generated from a \code{pxweb_query}; the query
+#' parameters include language and output format.
+#'
+#' @param px a \code{pxweb} object for a PXWEB API v2 endpoint.
+#' @param pxq a \code{pxweb_query} object.
+#' @param pxmd a \code{pxweb_metadata} object created from v2 metadata.
+#' @param output_format data output format requested from the API. Defaults to
+#'   \code{"json-stat2"}.
+#'
+#' @return
+#' a list with \code{url}, \code{body}, and \code{query} elements.
+#'
+#' @keywords internal
 pxweb_v2_data_request <- function(px, pxq, pxmd, output_format = "json-stat2") {
   checkmate::assert_class(px, "pxweb")
   checkmate::assert_class(pxq, "pxweb_query")

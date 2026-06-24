@@ -78,6 +78,20 @@ is_pxweb_response <- function(x) {
   !inherits(try(pxweb_parse_response(x), silent = TRUE), "try-error")
 }
 
+#' Get the requested PXWEB API v2 output format from a response URL.
+#'
+#' @description
+#' Extracts the \code{outputFormat} query parameter from a PXWEB API v2
+#' response URL. The value is lower-cased so it can be used for response
+#' routing. If the response URL has no \code{outputFormat} parameter, the
+#' function returns \code{NULL}.
+#'
+#' @param x a \code{httr} response object.
+#'
+#' @return
+#' a lower-case output format string, or \code{NULL}.
+#'
+#' @keywords internal
 pxweb_response_v2_output_format <- function(x) {
   checkmate::assert_class(x, "response")
   u <- try(httr::parse_url(x$url), silent = TRUE)
@@ -91,6 +105,19 @@ pxweb_response_v2_output_format <- function(x) {
   tolower(output_format)
 }
 
+#' Convert a PXWEB API v2 output format to a file extension.
+#'
+#' @description
+#' Maps a PXWEB API v2 \code{outputFormat} value to the file extension used
+#' when non JSON-stat2 responses are written to a temporary file. Most formats
+#' are already valid extensions; \code{json-px} is normalized to \code{json}.
+#'
+#' @param output_format a PXWEB API v2 output format string.
+#'
+#' @return
+#' a file extension string.
+#'
+#' @keywords internal
 pxweb_v2_output_file_extension <- function(output_format) {
   checkmate::assert_string(output_format, min.chars = 1)
   if (identical(output_format, "json-px")) {

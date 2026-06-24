@@ -76,6 +76,19 @@ build_pxweb_v2_table_metadata_url <- function(x, table_id) {
   paste0(build_pxweb_v2_tables_url(x), "/", table_id, "/metadata")
 }
 
+#' Build the PXWEB API v2 metadata URL for a table.
+#'
+#' @description
+#' Creates a \code{/tables/{tableId}/metadata} URL from any PXWEB API v2 table,
+#' metadata, or data URL. If the input URL contains a \code{lang} query
+#' parameter, it is preserved on the metadata URL.
+#'
+#' @param x a \code{pxweb} object, \code{url} object, or URL string.
+#'
+#' @return
+#' a metadata endpoint URL string.
+#'
+#' @keywords internal
 pxweb_v2_table_metadata_url <- function(x) {
   metadata_url <- build_pxweb_v2_table_metadata_url(x, pxweb_v2_table_id(x))
 
