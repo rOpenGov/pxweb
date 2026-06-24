@@ -96,6 +96,78 @@ test_that(desc = "PXWEB API v2 JSON-stat2 data converts to data.frame", {
   )
 })
 
+test_that(desc = "PXWEB API v2 JSON-stat2 null values convert to NA", {
+  x <- pxweb_v2_data_fixture()
+  x$value <- list(10, NULL, 30, 40)
+
+  expect_silent(data <- pxweb_data_v2(x))
+  df <- as.data.frame(data, column.name.type = "code", variable.value.type = "code")
+
+  expect_equal(df$value, c(10, NA, 30, 40))
+  expect_true(is.numeric(df$value))
+})
+
+test_that(desc = "PXWEB API v2 JSON-stat2 status and notes are preserved", {
+  x <- pxweb_v2_data_fixture()
+  x$status <- list("1" = "..")
+  x$note <- list("Dataset note")
+  x$dimension$Region$note <- list("Region note")
+  x$dimension$ContentsCode$category$unit <- list(
+    POP = list(base = "persons", decimals = 0L)
+  )
+
+  expect_silent(data <- pxweb_data_v2(x))
+  expect_identical(data$status, x$status)
+  expect_identical(data$note, x$note)
+  expect_identical(data$dimension$Region$note, x$dimension$Region$note)
+  expect_identical(
+    data$dimension$ContentsCode$category$unit,
+    x$dimension$ContentsCode$category$unit
+  )
+  expect_equal(nrow(as.data.frame(data)), 4)
+})
+
+test_that(desc = "PXWEB API v2 JSON-stat2 falls back to codes when value labels are missing", {
+  x <- pxweb_v2_data_fixture()
+  x$dimension$Region$category$label <- NULL
+  x$dimension$Tid$category$label <- list("2024" = "Year 2024")
+
+  expect_silent(data <- pxweb_data_v2(x))
+  df <- as.data.frame(data, column.name.type = "text", variable.value.type = "text")
+
+  expect_equal(df$region, c("01", "01", "03", "03"))
+  expect_equal(df$year, c("Year 2024", "2025", "Year 2024", "2025"))
+})
+
+test_that(desc = "PXWEB API v2 JSON-stat2 data supports multiple content values", {
+  x <- pxweb_v2_data_fixture()
+  x$size <- list(2L, 2L, 2L)
+  x$dimension$ContentsCode$category$index <- list("POP" = 0L, "AREA" = 1L)
+  x$dimension$ContentsCode$category$label <- list(
+    "POP" = "Population",
+    "AREA" = "Area"
+  )
+  x$value <- seq_len(8)
+
+  expect_silent(data <- pxweb_data_v2(x))
+
+  expect_equal(
+    as.data.frame(data, column.name.type = "code", variable.value.type = "code"),
+    data.frame(
+      Region = c("01", "01", "01", "01", "03", "03", "03", "03"),
+      Tid = c("2024", "2024", "2025", "2025", "2024", "2024", "2025", "2025"),
+      ContentsCode = c("POP", "AREA", "POP", "AREA", "POP", "AREA", "POP", "AREA"),
+      value = seq_len(8),
+      stringsAsFactors = FALSE
+    )
+  )
+
+  expect_equal(
+    as.data.frame(data, column.name.type = "text", variable.value.type = "text")$contents,
+    c("Population", "Area", "Population", "Area", "Population", "Area", "Population", "Area")
+  )
+})
+
 test_that(desc = "PXWEB API v2 response parser routes JSON-stat2 data", {
   response <- pxweb_v2_data_response(pxweb_v2_data_fixture())
 
