@@ -3,10 +3,12 @@
 \name{pxweb_as_data_frame}
 \alias{pxweb_as_data_frame}
 \alias{pxweb_as_data_frame.pxweb_data}
+\alias{pxweb_as_data_frame.pxweb_data_v2}
 \alias{pxweb_as_data_frame.pxweb_data_comments}
 \alias{pxweb_as_data_frame.pxweb_data_comment}
 \alias{pxweb_as_data_frame.pxweb_levels}
 \alias{as.data.frame.pxweb_data}
+\alias{as.data.frame.pxweb_data_v2}
 \alias{as.data.frame.pxweb_data_comments}
 \alias{as.data.frame.pxweb_levels}
 \alias{as.data.frame.pxweb_metadata}
@@ -27,6 +29,16 @@ pxweb_as_data_frame(
 )
 
 \method{pxweb_as_data_frame}{pxweb_data}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = FALSE,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
+
+\method{pxweb_as_data_frame}{pxweb_data_v2}(
   x,
   row.names = NULL,
   optional = FALSE,
@@ -61,6 +73,16 @@ pxweb_as_data_frame(
 )
 
 \method{as.data.frame}{pxweb_data}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = FALSE,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
+
+\method{as.data.frame}{pxweb_data_v2}(
   x,
   row.names = NULL,
   optional = FALSE,

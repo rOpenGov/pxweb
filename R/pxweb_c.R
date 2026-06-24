@@ -81,6 +81,20 @@ pxweb_data_c <- function(x) {
   full_pxd
 }
 
+#' Combine PXWEB API v2 data objects.
+#'
+#' @description
+#' Combines a list of \code{pxweb_data_v2} JSON-stat2 data objects returned
+#' from split PXWEB API v2 queries. The combined object keeps the v2 data
+#' shape and rebuilds dimension indexes, labels, sizes, and values so it can be
+#' converted with \code{as.data.frame()}.
+#'
+#' @param x a list of \code{pxweb_data_v2} objects.
+#'
+#' @return
+#' a combined \code{pxweb_data_v2} object.
+#'
+#' @keywords internal
 pxweb_data_v2_c <- function(x) {
   for (i in seq_along(x)) {
     checkmate::assert_class(x[[i]], "pxweb_data_v2")

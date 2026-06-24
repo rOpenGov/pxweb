@@ -3,11 +3,14 @@
 \name{pxweb_as_json}
 \alias{pxweb_as_json}
 \alias{pxweb_as_json.pxweb_query}
+\alias{pxweb_as_json.pxweb_query_v2}
 \title{Convert object to json}
 \usage{
 pxweb_as_json(x)
 
 \method{pxweb_as_json}{pxweb_query}(x)
+
+\method{pxweb_as_json}{pxweb_query_v2}(x)
 }
 \arguments{
 \item{x}{an object to convert.}

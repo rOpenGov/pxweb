@@ -82,6 +82,21 @@ build_pxweb_v2_table_data_url <- function(x, table_id) {
   paste0(build_pxweb_v2_tables_url(x), "/", table_id, "/data")
 }
 
+#' Extract a PXWEB API v2 table id.
+#'
+#' @description
+#' Gets the table id used by PXWEB API v2 \code{/tables/{tableId}} endpoints.
+#' When v2 metadata is available, the id is read from the preserved raw
+#' metadata attribute; otherwise it is parsed from the URL path.
+#'
+#' @param x a \code{pxweb} object, \code{url} object, or URL string.
+#' @param pxmd optional \code{pxweb_metadata} object created from a v2 metadata
+#'   response.
+#'
+#' @return
+#' a single table id string.
+#'
+#' @keywords internal
 pxweb_v2_table_id <- function(x, pxmd = NULL) {
   if (!is.null(pxmd)) {
     checkmate::assert_class(pxmd, "pxweb_metadata")
@@ -111,6 +126,23 @@ pxweb_v2_table_id <- function(x, pxmd = NULL) {
   parts[[table_idx[1] + 1L]]
 }
 
+#' Build PXWEB API v2 data endpoint query parameters.
+#'
+#' @description
+#' Creates the query parameter list sent to PXWEB API v2
+#' \code{/tables/{tableId}/data} requests. The language is taken from the URL
+#' when present, otherwise from the raw v2 metadata attached to \code{pxmd}.
+#'
+#' @param px a \code{pxweb} object.
+#' @param pxmd optional \code{pxweb_metadata} object created from a v2 metadata
+#'   response.
+#' @param output_format data output format requested from the API. Defaults to
+#'   \code{"json-stat2"}.
+#'
+#' @return
+#' a named list of query parameters.
+#'
+#' @keywords internal
 pxweb_v2_data_query_params <- function(px, pxmd = NULL, output_format = "json-stat2") {
   checkmate::assert_class(px, "pxweb")
   checkmate::assert_string(output_format, min.chars = 1)
