@@ -29,6 +29,20 @@ pxweb_metadata <- function(x) {
   x
 }
 
+#' Construct a \code{pxweb_metadata} object from a PXWEB API v2 metadata response.
+#'
+#' @description
+#' Converts the JSON-stat2-style metadata returned by PXWEB API v2
+#' \code{/tables/{tableId}/metadata} endpoints to the existing
+#' \code{pxweb_metadata} shape used by the package internals. The original v2
+#' payload is preserved as the \code{pxweb_metadata_v2} attribute.
+#'
+#' @param x a list returned from a PXWEB API v2 metadata endpoint.
+#'
+#' @return
+#' a \code{pxweb_metadata} object.
+#'
+#' @keywords internal
 pxweb_metadata_v2 <- function(x) {
   checkmate::assert_class(x, "list")
   assert_pxweb_metadata_response_v2(x)
@@ -62,6 +76,11 @@ pxweb_metadata_v2 <- function(x) {
   res
 }
 
+#' Assert that x is a PXWEB API v2 metadata response.
+#'
+#' @param x an object to check.
+#'
+#' @keywords internal
 assert_pxweb_metadata_response_v2 <- function(x) {
   checkmate::assert_class(x, "list")
   checkmate::assert_names(names(x), must.include = c("version", "class", "label", "id", "dimension"))
@@ -80,6 +99,14 @@ assert_pxweb_metadata_response_v2 <- function(x) {
   }
 }
 
+#' Get ordered values from a PXWEB API v2 dimension.
+#'
+#' @param dim a dimension list from a PXWEB API v2 metadata response.
+#'
+#' @return
+#' a character vector of value codes ordered by the dimension index.
+#'
+#' @keywords internal
 pxweb_metadata_v2_values <- function(dim) {
   index <- dim$category$index
   if (is.null(index)) {
@@ -98,6 +125,15 @@ pxweb_metadata_v2_values <- function(dim) {
   names(index)[order(index_order)]
 }
 
+#' Get value texts from a PXWEB API v2 dimension.
+#'
+#' @param dim a dimension list from a PXWEB API v2 metadata response.
+#' @param values a character vector of value codes.
+#'
+#' @return
+#' a character vector of value labels aligned with \code{values}.
+#'
+#' @keywords internal
 pxweb_metadata_v2_value_texts <- function(dim, values) {
   labels <- dim$category$label
   if (is.null(labels) || length(values) == 0) {
