@@ -46,6 +46,50 @@ pxweb_as_data_frame.pxweb_data <- function(x, row.names = NULL, optional = FALSE
 
 #' @rdname pxweb_as_data_frame
 #' @export
+pxweb_as_data_frame.pxweb_data_v2 <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = FALSE, column.name.type = "text", variable.value.type = "text") {
+  checkmate::assert_choice(column.name.type, c("code", "text"))
+  checkmate::assert_choice(variable.value.type, c("code", "text"))
+  checkmate::assert_flag(optional)
+  checkmate::assert_flag(stringsAsFactors)
+
+  variable_ids <- unlist(x$id, use.names = FALSE)
+  dimension_values <- lapply(variable_ids, function(variable_id) {
+    values <- pxweb_metadata_v2_values(x$dimension[[variable_id]])
+    if (variable.value.type == "code") {
+      return(values)
+    }
+    pxweb_metadata_v2_value_texts(x$dimension[[variable_id]], values)
+  })
+
+  df <- do.call(
+    expand.grid,
+    c(rev(dimension_values), list(KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE))
+  )
+  df <- df[rev(names(df))]
+
+  if (column.name.type == "code") {
+    names(df) <- variable_ids
+  } else {
+    names(df) <- vapply(variable_ids, function(variable_id) x$dimension[[variable_id]]$label, character(1))
+  }
+
+  df$value <- pxweb_data_jsonstat2_values(x)
+  if (!is.null(row.names)) {
+    checkmate::assert_character(row.names, len = nrow(df))
+    row.names(df) <- row.names
+  }
+
+  df <- as.data.frame(df, optional = optional, stringsAsFactors = FALSE, ...)
+  if (stringsAsFactors) {
+    for (j in seq_along(variable_ids)) {
+      df[[j]] <- as.factor(df[[j]])
+    }
+  }
+  df
+}
+
+#' @rdname pxweb_as_data_frame
+#' @export
 pxweb_as_data_frame.pxweb_data_comments <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = FALSE) {
   checkmate::assert_flag(optional)
   checkmate::assert_flag(stringsAsFactors)
@@ -123,6 +167,25 @@ as.data.frame.pxweb_data <- function(x,
                                      stringsAsFactors = FALSE,
                                      column.name.type = "text",
                                      variable.value.type = "text") {
+  pxweb_as_data_frame(x,
+    row.names = row.names,
+    optional = optional,
+    ...,
+    stringsAsFactors = stringsAsFactors,
+    column.name.type = column.name.type,
+    variable.value.type = variable.value.type
+  )
+}
+
+#' @rdname pxweb_as_data_frame
+#' @export
+as.data.frame.pxweb_data_v2 <- function(x,
+                                        row.names = NULL,
+                                        optional = FALSE,
+                                        ...,
+                                        stringsAsFactors = FALSE,
+                                        column.name.type = "text",
+                                        variable.value.type = "text") {
   pxweb_as_data_frame(x,
     row.names = row.names,
     optional = optional,
