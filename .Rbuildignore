@@ -45,3 +45,5 @@ TROUBLESHOOTING.md
 ^\._pkgdown\.yml$
 TODO.tdl
 
+^\.positai$
+^\.claude$

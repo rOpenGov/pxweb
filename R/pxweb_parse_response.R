@@ -47,6 +47,11 @@ pxweb_parse_response <- function(x) {
     return(try_obj)
   }
 
+  try_obj <- try(pxweb_table_v2(x = obj), silent = TRUE)
+  if (!inherits(try_obj, "try-error")) {
+    return(try_obj)
+  }
+
   stop("Incorrect return response from PXWEB API url: \n", x$url, call. = FALSE)
 }
 
