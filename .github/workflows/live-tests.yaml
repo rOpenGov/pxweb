@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [dev]
+    branches: [dev, development]
   workflow_dispatch:
 
 name: Live API tests
