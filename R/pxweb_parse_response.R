@@ -32,6 +32,11 @@ pxweb_parse_response <- function(x) {
     return(try_obj)
   }
 
+  try_obj <- try(pxweb_metadata_v2(obj), silent = TRUE)
+  if (!inherits(try_obj, "try-error")) {
+    return(try_obj)
+  }
+
   try_obj <- try(pxweb_metadata(obj), silent = TRUE)
   if (!inherits(try_obj, "try-error")) {
     return(try_obj)
@@ -47,7 +52,7 @@ pxweb_parse_response <- function(x) {
     return(try_obj)
   }
 
-  try_obj <- try(pxweb_table_v2(x = obj), silent = TRUE)
+  try_obj <- try(pxweb_table_response_v2(x = obj), silent = TRUE)
   if (!inherits(try_obj, "try-error")) {
     return(try_obj)
   }

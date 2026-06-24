@@ -29,6 +29,91 @@ pxweb_metadata <- function(x) {
   x
 }
 
+pxweb_metadata_v2 <- function(x) {
+  checkmate::assert_class(x, "list")
+  assert_pxweb_metadata_response_v2(x)
+
+  variable_ids <- unlist(x$id, use.names = FALSE)
+  time_ids <- unlist(x$role$time, use.names = FALSE)
+  if (is.null(time_ids)) {
+    time_ids <- character(0)
+  }
+
+  variables <- lapply(variable_ids, function(variable_id) {
+    dim <- x$dimension[[variable_id]]
+    values <- pxweb_metadata_v2_values(dim)
+    value_texts <- pxweb_metadata_v2_value_texts(dim, values)
+
+    list(
+      code = variable_id,
+      text = dim$label,
+      values = values,
+      valueTexts = value_texts,
+      elimination = isTRUE(dim$extension$elimination),
+      time = variable_id %in% time_ids
+    )
+  })
+
+  res <- pxweb_metadata(list(
+    title = x$label,
+    variables = variables
+  ))
+  attr(res, "pxweb_metadata_v2") <- x
+  res
+}
+
+assert_pxweb_metadata_response_v2 <- function(x) {
+  checkmate::assert_class(x, "list")
+  checkmate::assert_names(names(x), must.include = c("version", "class", "label", "id", "dimension"))
+  checkmate::assert_string(x$version, pattern = "^2\\.")
+  checkmate::assert_string(x$class, pattern = "^dataset$")
+  checkmate::assert_character(unlist(x$id, use.names = FALSE), min.len = 1)
+  checkmate::assert_list(x$dimension, min.len = 1)
+  checkmate::assert_true(identical(length(unlist(x$value, use.names = FALSE)), 0L))
+
+  variable_ids <- unlist(x$id, use.names = FALSE)
+  checkmate::assert_subset(variable_ids, choices = names(x$dimension))
+  for (variable_id in variable_ids) {
+    dim <- x$dimension[[variable_id]]
+    checkmate::assert_names(names(dim), must.include = c("label", "category", "extension"))
+    checkmate::assert_string(dim$label)
+  }
+}
+
+pxweb_metadata_v2_values <- function(dim) {
+  index <- dim$category$index
+  if (is.null(index)) {
+    return(character(0))
+  }
+
+  index <- unlist(index, use.names = TRUE)
+  if (is.null(names(index))) {
+    return(as.character(index))
+  }
+
+  index_order <- suppressWarnings(as.numeric(index))
+  if (any(is.na(index_order))) {
+    return(names(index))
+  }
+  names(index)[order(index_order)]
+}
+
+pxweb_metadata_v2_value_texts <- function(dim, values) {
+  labels <- dim$category$label
+  if (is.null(labels) || length(values) == 0) {
+    return(values)
+  }
+
+  labels <- unlist(labels, use.names = TRUE)
+  if (is.null(names(labels))) {
+    value_texts <- as.character(labels)
+  } else {
+    value_texts <- unname(labels[values])
+  }
+  value_texts[is.na(value_texts)] <- values[is.na(value_texts)]
+  as.character(value_texts)
+}
+
 
 
 #' Assert that x is a correct \code{pxweb_metadata} object.
