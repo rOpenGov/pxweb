@@ -5,7 +5,7 @@ context("pxweb_as_dataframe")
 test_that(desc = "Converting pxweb data to matrices and data.frames", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip_if_offline()
+  skip_if_not_live_api()
 
   # Move to
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"

@@ -5,7 +5,7 @@ context("pxweb_interactive")
 test_that(desc = "Basic usage", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip_if_offline()
+  skip_if_not_live_api()
 
   expect_silent(pxe <- pxweb:::pxweb_explorer.character("https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxweb:::print.pxweb_explorer(pxe), "/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
@@ -30,7 +30,7 @@ test_that(desc = "Basic usage", {
 test_that(desc = "API catalogue usage", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip_if_offline()
+  skip_if_not_live_api()
 
   expect_silent(pxe_scb <- pxweb:::pxweb_explorer.character("api.scb.se"))
   expect_output(pxweb:::print.pxweb_explorer(pxe_scb), "v1")
@@ -59,7 +59,7 @@ test_that(desc = "API catalogue usage", {
 test_that(desc = "Select all and eliminate", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip_if_offline()
+  skip_if_not_live_api()
 
   expect_silent(pxe <- pxweb:::pxweb_explorer.character("https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxweb:::print.pxweb_explorer(pxe), "/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
@@ -73,7 +73,7 @@ test_that(desc = "Select all and eliminate", {
 test_that(desc = "Select all and eliminate", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip_if_offline()
+  skip_if_not_live_api()
 
   expect_silent(pxe <- pxweb:::pxweb_explorer.character("https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "e"))
@@ -112,7 +112,7 @@ test_that(desc = "Select all and eliminate", {
 test_that(desc = "Stat Iceland structure", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip_if_offline()
+  skip_if_not_external_live_api()
 
   expect_silent(pxe <- pxweb:::pxweb_explorer.NULL())
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "10"))
@@ -129,7 +129,7 @@ test_that(desc = "Stat Iceland structure", {
 test_that(desc = "No value bug", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip_if_offline()
+  skip_if_not_external_live_api()
 
   url <- "http://px.hagstofa.is/pxen/api/v1/en/Efnahagur/utanrikisverslun/1_voruvidskipti/02_uttollskra/UTA02801.px"
   expect_silent(pxe <- pxweb:::pxweb_explorer.character(url))
@@ -140,11 +140,10 @@ test_that(desc = "No value bug", {
 test_that(desc = "Fail on incorrect", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  skip_if_offline()
+  skip_if_not_live_api()
 
   expect_error(pxweb_interactive("incorrect url"))
 })
 
 # The function could maybe be tested also with:
 # https://debruine.github.io/post/interactive-test/
-

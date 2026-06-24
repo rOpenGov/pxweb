@@ -84,7 +84,7 @@ test_that(desc = "split pxweb_query object", {
 
 
 test_that(desc = "split pxweb_query bug", {
-  skip("External Iceland API regression smoke test; enable manually when investigating that API.")
+  skip_if_not_external_live_api()
 
   url <- "http://px.hagstofa.is/pxis/api/v1/is/Efnahagur/utanrikisverslun/1_voruvidskipti/03_inntollskra/UTA03801.px"
   pxweb_query_list <- list(

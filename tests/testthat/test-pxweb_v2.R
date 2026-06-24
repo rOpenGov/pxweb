@@ -29,7 +29,7 @@ test_that(desc = "PXWEB API v2 constructor smoke test", {
   # Keep live API coverage small. Response parsing and data queries are fixture
   # tested until v2 metadata/data support is implemented.
   skip_on_cran()
-  skip_if_offline()
+  skip_if_not_live_api()
 
   metadata_url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB5974/metadata"
   expect_silent(pxapi_v2 <- pxweb(url = metadata_url))
