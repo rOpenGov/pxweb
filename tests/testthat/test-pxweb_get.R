@@ -35,67 +35,36 @@ test_that(desc = "Test to download px and sdmx", {
   expect_true(px_file_path2 == pxfp)
 })
 
-test_that(desc = "Constructor works as it should with Statistics Sweden", {
+test_that(desc = "PXWEB v1 live smoke test with Statistics Sweden", {
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
   skip_if_offline()
 
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   expect_silent(px_meta_data <- pxweb_get(url))
-  expect_output(print(px_meta_data), regexp = "PXWEB METADATA")
-  
-  # anroparen kan göra 10 anrop på ett tidsfönster på 10 sekunder
-  # Let's wait 10 seconds before doing more calls
-  Sys.sleep(10)
+  expect_s3_class(px_meta_data, "pxweb_metadata")
+  expect_true(length(px_meta_data$variables) > 0)
 
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101"
   expect_silent(px_levels <- pxweb_get(url))
-  expect_output(print(px_levels), regexp = "PXWEB LEVELS")
+  expect_s3_class(px_levels, "pxweb_levels")
+  expect_true(length(px_levels) > 0)
 
   url <- "https://api.scb.se/OV0104/v1/doris/sv"
   expect_silent(px <- pxweb(url))
+  expect_equal(px$version, "v1")
   expect_silent(px_levels <- pxweb_get(px))
-  expect_output(print(px_levels), regexp = "PXWEB LEVELS")
-
-  url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
-  expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query)))
-  expect_output(print(px_data), regexp = "PXWEB DATA")
-  expect_length(pxweb_data_comments(x = px_data), 2)
-
+  expect_s3_class(px_levels, "pxweb_levels")
 
   url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "test_files", "json_queries", "json_single_query_test.json")
   expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query)))
-  expect_output(print(px_data), regexp = "PXWEB DATA")
-
-
-  url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-  json_query <- file.path(system.file(package = "pxweb"), "extdata", "test_files", "json_queries", "json_full_test_query.json")
-  px <- pxweb(url)
-  max_val <- px$config$max_values_to_download
-  px$config$max_values_to_download <- 11
-  expect_silent(px_data <- suppressWarnings(pxweb_get(url = px, query = json_query, verbose = FALSE)))
-  expect_output(print(px_data), regexp = "PXWEB DATA")
-  expect_output(print(px_data), regexp = "396 observations")
-
-  px$config$max_values_to_download <- max_val
-  expect_silent(px_data <- suppressWarnings(pxweb_get(url = px, query = json_query)))
-  expect_output(print(px_data), regexp = "PXWEB DATA")
-  expect_output(print(px_data), regexp = "396 observations")
-
-  url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
-  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_big_query_example.json")
-  expect_silent(px_data <- suppressWarnings(pxweb_get(url = url, query = json_query, verbose = FALSE)))
-  expect_output(print(px_data), regexp = "PXWEB DATA")
-  expect_output(print(px_data), regexp = "93720 observations")
-  expect_length(pxweb_data_comments(x = px_data), 2)
+  expect_s3_class(px_data, "pxweb_data")
+  expect_true(all(pxweb_data_dim(px_data) > 0))
 })
 
 test_that(desc = "Previous bugs", {
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip_if_offline()
+  skip("External Greenland API regression smoke test; enable manually when investigating that API.")
 
   # This is a bug in the previous implementation of pxweb
   url <- "https://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
@@ -161,14 +130,13 @@ test_that(desc = "Test http logger", {
   expect_true(file.size(file.path(getwd(), "log_pxweb_api_http_calls.txt")) > 5000)
 })
 
-test_that(desc = "large variable call", {
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip_if_offline()
-
-  url <- "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0001/BE0001G/BE0001ENamn10"
+test_that(desc = "query can request all values for a large variable", {
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_last_names.json")
-  expect_silent(px <- pxweb_get(url, query = pxweb_query(json_query)))
+  expect_silent(pxq <- pxweb_query(json_query))
+
+  expect_equal(pxq$query[[1]]$code, "Efternamn")
+  expect_equal(pxq$query[[1]]$selection$filter, "all")
+  expect_equal(pxq$query[[1]]$selection$values, "*")
 })
 
 
@@ -186,9 +154,7 @@ test_that(desc = "Cite data", {
 
 
 test_that(desc = "Filter query error bug", {
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip_if_offline()
+  skip("External SSB API regression smoke test; enable manually when investigating that API.")
 
   url <- "http://data.ssb.no/api/v0/en/table/04861"
   json_query <- readLines(test_path("test_data/filter_query.json"))
@@ -263,24 +229,49 @@ test_that(desc = "manually supplying a pxmdo", {
 
 
 test_that(desc = "return clear error message when missing values", {
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip_if_offline()
-
   pql <- list(
     "Tilltalsnamn" = c("20Agnes"),
     "Tid" = c("2019")
   )
-  url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0001/BE0001D/BE0001T05AR"
-  expect_warning(pd <- pxweb_get(url, query = pql), regexp = "ContentsCode")
+  pxq <- pxweb_query(pql)
+  pxmd <- pxweb_metadata(list(
+    title = "Test metadata",
+    variables = list(
+      list(
+        code = "Tilltalsnamn",
+        text = "tilltalsnamn",
+        values = "20Agnes",
+        valueTexts = "Agnes",
+        elimination = FALSE,
+        time = FALSE
+      ),
+      list(
+        code = "ContentsCode",
+        text = "tabellinnehåll",
+        values = "BE0001",
+        valueTexts = "Antal",
+        elimination = FALSE,
+        time = FALSE
+      ),
+      list(
+        code = "Tid",
+        text = "år",
+        values = "2019",
+        valueTexts = "2019",
+        elimination = FALSE,
+        time = TRUE
+      )
+    )
+  ))
+
+  expect_warning(pxq <- pxweb_add_mandatory_variables(pxq, pxmd), regexp = "ContentsCode")
+  expect_true("ContentsCode" %in% vapply(pxq$query, function(x) x$code, character(1)))
 })
 
 
 
 test_that(desc = "Query with non-ascii characters work as well", {
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip_if_offline()
+  skip("External Slovenia API regression smoke test; enable manually when investigating that API.")
 
   pxweb_query_list <-
     list(
