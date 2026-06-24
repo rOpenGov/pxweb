@@ -122,7 +122,8 @@ test_that(desc = "PXWEB API v2 JSON-stat2 data batches can be combined", {
   chunk_two$dimension$Region$category$label <- list("03" = "Uppsala")
   chunk_two$value <- c(30, 40)
 
-  combined <- pxweb_c(list(pxweb_data_v2(chunk_one), pxweb_data_v2(chunk_two)))
+  chunks <- list(pxweb_data_v2(chunk_one), pxweb_data_v2(chunk_two))
+  combined <- pxweb_data_v2_c(chunks)
 
   expect_s3_class(combined, "pxweb_data_v2")
   expect_equal(
@@ -135,4 +136,5 @@ test_that(desc = "PXWEB API v2 JSON-stat2 data batches can be combined", {
       stringsAsFactors = FALSE
     )
   )
+  expect_equal(pxweb_c(chunks), combined)
 })
