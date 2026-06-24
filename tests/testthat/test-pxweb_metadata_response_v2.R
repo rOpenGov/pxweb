@@ -12,11 +12,27 @@ test_that(desc = "PXWEB API v2 metadata fixture has expected JSON-stat2 shape", 
 })
 
 test_that(desc = "PXWEB API v2 metadata constructor", {
-  skip_if_not(exists("pxweb_metadata_v2", mode = "function"), "pxweb_metadata_v2() is not implemented yet.")
-
   r <- readRDS(test_path("test_data/pxweb_metadata_response_v2.rds"))
   x <- suppressWarnings(httr::content(r, as = "parsed"))
 
   expect_silent(x <- pxweb_metadata_v2(x))
-  expect_s3_class(x, "pxweb_metadata_v2")
+  expect_s3_class(x, "pxweb_metadata")
+  expect_equal(x$title, "Folkmängd efter inrikes/utrikes född, ålder och kön.  År 2025-2120")
+  expect_equal(pxweb_metadata_dim(x), c(
+    InrikesUtrikes = 3,
+    Alder = 106,
+    Kon = 2,
+    ContentsCode = 1,
+    Tid = 96
+  ))
+  expect_equal(pxweb_metadata_time(x), c(
+    InrikesUtrikes = FALSE,
+    Alder = FALSE,
+    Kon = FALSE,
+    ContentsCode = FALSE,
+    Tid = TRUE
+  ))
+  expect_equal(x$variables[[1]]$values, c("13", "23", "83"))
+  expect_equal(x$variables[[1]]$valueTexts, c("inrikes födda", "utrikes födda", "inrikes och utrikes födda"))
+  expect_equal(attr(x, "pxweb_metadata_v2")$extension$px$tableid, "TAB5974")
 })
