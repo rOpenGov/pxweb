@@ -151,12 +151,31 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
     }
     for (i in seq_along(pxqs)) {
       px <- pxweb_add_call(px)
-      pxurl <- build_pxweb_url(px)
       pxqs[[i]] <- pxweb_remove_metadata_from_query(pxqs[[i]], pxmd)
-      r <- httr::POST(pxurl, body = pxweb_as_json(x = pxqs[[i]]), pxweb_user_agent(), ...)
+      if (px$version == "v2") {
+        pxurl <- build_pxweb_v2_table_data_url(px, pxweb_v2_table_id(px, pxmd))
+        r <- httr::POST(
+          pxurl,
+          body = pxweb_as_json(x = pxweb_query_as_v2(pxqs[[i]])),
+          pxweb_user_agent(),
+          httr::content_type_json(),
+          httr::accept_json(),
+          query = pxweb_v2_data_query_params(px, pxmd),
+          encode = "raw",
+          ...
+        )
+      } else {
+        pxurl <- build_pxweb_url(px)
+        r <- httr::POST(pxurl, body = pxweb_as_json(x = pxqs[[i]]), pxweb_user_agent(), ...)
+      }
       pxweb_http_log_response(r)
       httr::stop_for_status(r)
       pxr[[i]] <- pxweb_parse_response(x = r)
+      if (inherits(pxr[[i]], "pxweb_data_v2")) {
+        pxr[[i]]$pxweb_metadata <- pxmd
+        pxr[[i]]$url <- pxurl
+        pxr[[i]]$time_stamp <- Sys.time()
+      }
       if (length(pxqs) > 1 & verbose) {
         utils::setTxtProgressBar(pb, i)
       }
@@ -166,6 +185,11 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
     }
     pxr <- pxweb_c(pxr)
     if (inherits(pxr, "pxweb_data")) {
+      pxr$pxweb_metadata <- pxmd
+      pxr$url <- pxurl
+      pxr$time_stamp <- Sys.time()
+    }
+    if (inherits(pxr, "pxweb_data_v2")) {
       pxr$pxweb_metadata <- pxmd
       pxr$url <- pxurl
       pxr$time_stamp <- Sys.time()

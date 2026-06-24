@@ -110,7 +110,12 @@ pxweb_query.response <- function(x) {
   if (is.null(x$request$options$postfields)) {
     return(NULL)
   }
-  pxweb_query(x = readBin(x$request$options$postfields, what = "character"))
+  postfields <- readBin(x$request$options$postfields, what = "character")
+  obj <- try(jsonlite::fromJSON(postfields, simplifyDataFrame = FALSE), silent = TRUE)
+  if (!inherits(obj, "try-error") && "selection" %in% names(obj) && !"query" %in% names(obj)) {
+    return(NULL)
+  }
+  pxweb_query(x = postfields)
 }
 
 
@@ -379,6 +384,76 @@ pxweb_query_as_json <- function(pxq, ...) {
     pxq$query[[i]]$selection$filter <- jsonlite::unbox(pxq$query[[i]]$selection$filter)
   }
   jsonlite::toJSON(pxq, ...)
+}
+
+#' Convert a \code{pxweb_query} object to a PXWEB API v2 query.
+#'
+#' @param pxq a \code{pxweb_query} object.
+#'
+#' @return
+#' a \code{pxweb_query_v2} object.
+#'
+#' @keywords internal
+pxweb_query_as_v2 <- function(pxq) {
+  checkmate::assert_class(pxq, "pxweb_query")
+
+  selection <- lapply(pxq$query, function(query_dim) {
+    filter <- tolower(query_dim$selection$filter)
+    values <- query_dim$selection$values
+
+    if (filter == "top") {
+      values <- paste0("top(", values, ")")
+    } else if (!filter %in% c("item", "all")) {
+      stop(
+        "PXWEB API v2 query conversion does not support selection filter '",
+        query_dim$selection$filter,
+        "' for variable '",
+        query_dim$code,
+        "'.",
+        call. = FALSE
+      )
+    }
+
+    list(
+      variableCode = query_dim$code,
+      valueCodes = as.list(values)
+    )
+  })
+
+  pxweb_query_v2(list(selection = selection))
+}
+
+#' Construct a \code{pxweb_query_v2} object.
+#'
+#' @param x a list with a PXWEB API v2 \code{selection} body.
+#'
+#' @return
+#' a \code{pxweb_query_v2} object.
+#'
+#' @keywords internal
+pxweb_query_v2 <- function(x) {
+  checkmate::assert_class(x, "list")
+  assert_pxweb_query_v2(x)
+  class(x) <- c("pxweb_query_v2", "list")
+  x
+}
+
+#' Assert a \code{pxweb_query_v2} object.
+#'
+#' @param x an object to check.
+#'
+#' @keywords internal
+assert_pxweb_query_v2 <- function(x) {
+  checkmate::assert_class(x, "list")
+  checkmate::assert_names(names(x), must.include = "selection")
+  checkmate::assert_list(x$selection, min.len = 1)
+
+  for (i in seq_along(x$selection)) {
+    checkmate::assert_names(names(x$selection[[i]]), must.include = c("variableCode", "valueCodes"))
+    checkmate::assert_string(x$selection[[i]]$variableCode)
+    checkmate::assert_list(x$selection[[i]]$valueCodes, min.len = 1)
+    checkmate::assert_character(unlist(x$selection[[i]]$valueCodes, use.names = FALSE), min.len = 1)
+  }
 }
 
 #' Print a \code{pxweb_query} object as R code

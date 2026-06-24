@@ -37,6 +37,10 @@ pxweb_v2_data_fixture <- function() {
 
 pxweb_v2_data_response <- function(x) {
   json <- jsonlite::toJSON(x, auto_unbox = TRUE)
+  postfields <- charToRaw(jsonlite::toJSON(
+    list(selection = list(list(variableCode = "Region", valueCodes = list("01")))),
+    auto_unbox = TRUE
+  ))
   structure(
     list(
       url = "https://example.test/api/v2/tables/TAB1/data",
@@ -47,7 +51,7 @@ pxweb_v2_data_response <- function(x) {
       ),
       content = charToRaw(json),
       request = structure(
-        list(options = list()),
+        list(options = list(postfields = postfields)),
         class = "request"
       )
     ),
@@ -100,5 +104,35 @@ test_that(desc = "PXWEB API v2 response parser routes JSON-stat2 data", {
   expect_equal(
     as.data.frame(data, column.name.type = "code", variable.value.type = "code")$value,
     c(10, 20, 30, 40)
+  )
+})
+
+test_that(desc = "PXWEB API v2 JSON-stat2 data batches can be combined", {
+  chunk_one <- pxweb_v2_data_fixture()
+  chunk_one$id <- list("Region", "Tid", "ContentsCode")
+  chunk_one$size <- list(1L, 2L, 1L)
+  chunk_one$dimension$Region$category$index <- list("01" = 0L)
+  chunk_one$dimension$Region$category$label <- list("01" = "Stockholm")
+  chunk_one$value <- c(10, 20)
+
+  chunk_two <- pxweb_v2_data_fixture()
+  chunk_two$id <- list("Region", "Tid", "ContentsCode")
+  chunk_two$size <- list(1L, 2L, 1L)
+  chunk_two$dimension$Region$category$index <- list("03" = 0L)
+  chunk_two$dimension$Region$category$label <- list("03" = "Uppsala")
+  chunk_two$value <- c(30, 40)
+
+  combined <- pxweb_c(list(pxweb_data_v2(chunk_one), pxweb_data_v2(chunk_two)))
+
+  expect_s3_class(combined, "pxweb_data_v2")
+  expect_equal(
+    as.data.frame(combined, column.name.type = "code", variable.value.type = "code"),
+    data.frame(
+      Region = c("01", "01", "03", "03"),
+      Tid = c("2024", "2025", "2024", "2025"),
+      ContentsCode = c("POP", "POP", "POP", "POP"),
+      value = c(10, 20, 30, 40),
+      stringsAsFactors = FALSE
+    )
   )
 })

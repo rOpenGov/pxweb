@@ -15,3 +15,9 @@ pxweb_as_json.pxweb_query <- function(x) {
   }
   jsonlite::toJSON(x, auto_unbox = TRUE)
 }
+
+#' @rdname pxweb_as_json
+#' @keywords internal
+pxweb_as_json.pxweb_query_v2 <- function(x) {
+  jsonlite::toJSON(x, auto_unbox = TRUE)
+}

@@ -81,3 +81,49 @@ build_pxweb_v2_table_data_url <- function(x, table_id) {
   table_id <- gsub("^/+", "", table_id)
   paste0(build_pxweb_v2_tables_url(x), "/", table_id, "/data")
 }
+
+pxweb_v2_table_id <- function(x, pxmd = NULL) {
+  if (!is.null(pxmd)) {
+    checkmate::assert_class(pxmd, "pxweb_metadata")
+    raw_metadata <- attr(pxmd, "pxweb_metadata_v2")
+    table_id <- raw_metadata$extension$px$tableid
+    if (!is.null(table_id)) {
+      return(table_id)
+    }
+  }
+
+  if (checkmate::test_class(x, "pxweb")) {
+    path <- x$url$path
+  } else if (checkmate::test_class(x, "url")) {
+    path <- x$path
+  } else if (checkmate::test_string(x)) {
+    path <- parse_url_or_fail(x)$path
+  } else {
+    stop("Cannot extract PXWEB API v2 table id for input.", call. = FALSE)
+  }
+
+  parts <- strsplit(path, "/", fixed = TRUE)[[1]]
+  parts <- parts[nzchar(parts)]
+  table_idx <- which(parts == "tables")
+  if (length(table_idx) == 0 || length(parts) < table_idx[1] + 1L) {
+    stop("Could not identify PXWEB API v2 table id in url path: ", path, call. = FALSE)
+  }
+  parts[[table_idx[1] + 1L]]
+}
+
+pxweb_v2_data_query_params <- function(px, pxmd = NULL, output_format = "json-stat2") {
+  checkmate::assert_class(px, "pxweb")
+  checkmate::assert_string(output_format, min.chars = 1)
+
+  lang <- px$url$query$lang
+  if (is.null(lang) && !is.null(pxmd)) {
+    raw_metadata <- attr(pxmd, "pxweb_metadata_v2")
+    lang <- raw_metadata$extension$px$language
+  }
+
+  res <- list(
+    lang = lang,
+    outputFormat = output_format
+  )
+  res[!vapply(res, is.null, logical(1))]
+}
