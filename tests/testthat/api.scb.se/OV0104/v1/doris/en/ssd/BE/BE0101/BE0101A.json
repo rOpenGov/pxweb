@@ -1,0 +1,74 @@
+[
+    {
+        "id": "BefolkManadCKM",
+        "type": "t",
+        "text": "Population per month by region, age and sex.  Year 2025M01 - 2026M04",
+        "updated": "2026-06-08T08:00:00"
+    },
+    {
+        "id": "BefolkManad",
+        "type": "t",
+        "text": "Population per month by region, age and sex. Year 2000M01 - 2024M12",
+        "updated": "2025-02-21T08:00:00"
+    },
+    {
+        "id": "BefolkningR1860NCKM",
+        "type": "t",
+        "text": "Population by age and sex. Year 2025",
+        "updated": "2026-02-24T08:00:00"
+    },
+    {
+        "id": "BefolkningR1860N",
+        "type": "t",
+        "text": "Population by age and sex. Year 1860 - 2024",
+        "updated": "2025-02-21T08:00:00"
+    },
+    {
+        "id": "BefolkningCKM",
+        "type": "t",
+        "text": "Population by region, marital status, age and sex. Year 2025",
+        "updated": "2026-02-24T08:00:00"
+    },
+    {
+        "id": "BefolkningNy",
+        "type": "t",
+        "text": "Population by region, marital status, age and sex.  Year 1968 - 2024",
+        "updated": "2025-02-21T08:00:00"
+    },
+    {
+        "id": "FolkmangdDecCKM",
+        "type": "t",
+        "text": "Population by region, age (extended age groups) and sex. Year 2025",
+        "updated": "2026-02-24T08:00:00"
+    },
+    {
+        "id": "FolkmangdDistriktCKM",
+        "type": "t",
+        "text": "Population by district, Landscape or Part of the country by sex. Year 2025",
+        "updated": "2026-03-24T08:00:00"
+    },
+    {
+        "id": "FolkmangdDistrikt",
+        "type": "t",
+        "text": "Population by district, Landscape or Part of the country by sex. Year 2015 - 2024",
+        "updated": "2025-03-21T08:00:00"
+    },
+    {
+        "id": "FkvotHVD",
+        "type": "t",
+        "text": "Dependency ratio by region. Year 2000 - 2025",
+        "updated": "2026-03-24T08:00:00"
+    },
+    {
+        "id": "FolkmangdNovCKM",
+        "type": "t",
+        "text": "Population 1 November by region, age and sex. Year 2025",
+        "updated": "2025-12-10T08:00:00"
+    },
+    {
+        "id": "FolkmangdNov",
+        "type": "t",
+        "text": "Population 1 November by region, age and sex. Year 2002 - 2024",
+        "updated": "2024-12-10T08:00:00"
+    }
+]

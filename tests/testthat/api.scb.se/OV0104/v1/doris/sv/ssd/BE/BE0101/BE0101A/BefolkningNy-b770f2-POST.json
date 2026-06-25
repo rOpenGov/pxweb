@@ -1,0 +1,68 @@
+{
+    "columns": [
+        {
+            "code": "Civilstand",
+            "text": "civilstånd",
+            "type": "d"
+        },
+        {
+            "code": "Tid",
+            "text": "år",
+            "type": "t"
+        },
+        {
+            "code": "BE0101N1",
+            "text": "Folkmängd",
+            "type": "c"
+        }
+    ],
+    "comments": [
+
+    ],
+    "data": [
+        {
+            "key": [
+                "OG",
+                "2017"
+            ],
+            "values": [
+                "5347489"
+            ]
+        },
+        {
+            "key": [
+                "G",
+                "2017"
+            ],
+            "values": [
+                "3358397"
+            ]
+        },
+        {
+            "key": [
+                "SK",
+                "2017"
+            ],
+            "values": [
+                "978713"
+            ]
+        },
+        {
+            "key": [
+                "ÄNKL",
+                "2017"
+            ],
+            "values": [
+                "435643"
+            ]
+        }
+    ],
+    "metadata": [
+        {
+            "infofile": "BE0101",
+            "updated": "2025-02-21T07:00:00Z",
+            "label": "Folkmängd efter civilstånd, år och tabellinnehåll",
+            "source": "SCB"
+        }
+    ]
+}

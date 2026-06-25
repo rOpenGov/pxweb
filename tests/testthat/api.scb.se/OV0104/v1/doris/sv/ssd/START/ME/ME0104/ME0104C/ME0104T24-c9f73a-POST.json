@@ -1,0 +1,57 @@
+{
+    "columns": [
+        {
+            "code": "Parti",
+            "text": "parti",
+            "type": "d"
+        },
+        {
+            "code": "Kon",
+            "text": "kön",
+            "type": "d"
+        },
+        {
+            "code": "Tid",
+            "text": "valår",
+            "type": "t"
+        },
+        {
+            "code": "ME0104AV",
+            "text": "Antal personröster",
+            "type": "c"
+        }
+    ],
+    "comments": [
+
+    ],
+    "data": [
+        {
+            "key": [
+                "M",
+                "1",
+                "2002"
+            ],
+            "values": [
+                "133222"
+            ]
+        },
+        {
+            "key": [
+                "C",
+                "1",
+                "2002"
+            ],
+            "values": [
+                "59183"
+            ]
+        }
+    ],
+    "metadata": [
+        {
+            "infofile": "ME0104",
+            "updated": "2023-02-27T07:00:00Z",
+            "label": "Riksdagsval - antal personröster efter parti, kön, valår och tabellinnehåll",
+            "source": "SCB"
+        }
+    ]
+}

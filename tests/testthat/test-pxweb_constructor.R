@@ -3,9 +3,8 @@
 context("pxweb_constructor")
 
 test_that(desc = "Constructor works as it should with Statistics Sweden", {
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip_if_not_live_api()
+  # Mocks recorded by tests/testthat/record-mocks.R.
+  with_pxweb_mock_api({
 
   expect_silent(pxapi1 <- pxweb(url = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_true(file.exists(pxapi1$paths$rda_file_path))
@@ -25,6 +24,7 @@ test_that(desc = "Constructor works as it should with Statistics Sweden", {
   expect_equal(pxapi1$paths$api_subpath$path, "OV0104/v1/doris/sv")
   expect_silent(pxapi1 <- pxweb(url = "https://api.scb.se/OV0104/v1/doris/en/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_equal(pxapi1$paths$api_subpath$path, "OV0104/v1/doris/en")
+  })
 })
 
 

@@ -1,0 +1,60 @@
+{
+    "columns": [
+        {
+            "code": "Tid",
+            "text": "year",
+            "type": "t"
+        },
+        {
+            "code": "BE0101N1",
+            "text": "Population",
+            "type": "c"
+        },
+        {
+            "code": "BE0101N2",
+            "text": "Population growth",
+            "comment": "Population growth is defined as the difference between the population at the beginning of the year and at the end of the year.\r\n",
+            "type": "c"
+        }
+    ],
+    "comments": [
+
+    ],
+    "data": [
+        {
+            "key": [
+                "2010"
+            ],
+            "values": [
+                "9415570",
+                "74888"
+            ]
+        },
+        {
+            "key": [
+                "2011"
+            ],
+            "values": [
+                "9482855",
+                "67285"
+            ]
+        },
+        {
+            "key": [
+                "2012"
+            ],
+            "values": [
+                "9555893",
+                "73038"
+            ]
+        }
+    ],
+    "metadata": [
+        {
+            "infofile": "BE0101",
+            "updated": "2025-02-21T07:00:00Z",
+            "label": "Population by year and observations",
+            "source": "Statistics Sweden"
+        }
+    ]
+}

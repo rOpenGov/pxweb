@@ -3,9 +3,8 @@
 context("pxweb_interactive")
 
 test_that(desc = "Basic usage", {
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip_if_not_live_api()
+  # Mocks recorded by tests/testthat/record-mocks.R.
+  with_pxweb_mock_api({
 
   expect_silent(pxe <- pxweb:::pxweb_explorer.character("https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxweb:::print.pxweb_explorer(pxe), "/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
@@ -24,6 +23,7 @@ test_that(desc = "Basic usage", {
   # Incorrect input
   expect_error(capture_output(pxe_error <- pxweb:::pxweb_interactive_input(pxe, test_input = "9999")), "incorrect")
   expect_error(capture_output(pxe_error <- pxweb:::pxweb_interactive_input(pxe, test_input = character(0))), "incorrect")
+  })
 })
 
 
@@ -57,9 +57,8 @@ test_that(desc = "API catalogue usage", {
 
 
 test_that(desc = "Select all and eliminate", {
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip_if_not_live_api()
+  # Mocks recorded by tests/testthat/record-mocks.R.
+  with_pxweb_mock_api({
 
   expect_silent(pxe <- pxweb:::pxweb_explorer.character("https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxweb:::print.pxweb_explorer(pxe), "/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24")
@@ -67,13 +66,13 @@ test_that(desc = "Select all and eliminate", {
   expect_equal(pxweb:::pxe_metadata_choices(pxe_star)[[1]], 1:32)
   expect_output(pxe_star_e <- pxweb:::pxweb_interactive_input(pxe_star, test_input = "e"), "Separate multiple choices by")
   expect_equal(pxweb:::pxe_metadata_choices(pxe_star_e)[[2]], "eliminate")
+  })
 })
 
 
 test_that(desc = "Select all and eliminate", {
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip_if_not_live_api()
+  # Mocks recorded by tests/testthat/record-mocks.R.
+  with_pxweb_mock_api({
 
   expect_silent(pxe <- pxweb:::pxweb_explorer.character("https://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0104/ME0104C/ME0104T24"))
   expect_output(pxe <- pxweb:::pxweb_interactive_input(pxe, test_input = "e"))
@@ -105,6 +104,7 @@ test_that(desc = "Select all and eliminate", {
   expect_output(pxweb:::pxe_print_download_code(pxe, "r"), "pxweb_query_list")
   expect_output(pxweb:::pxe_print_download_code(pxe, "r"), "# Download data")
   expect_output(pxweb:::pxe_print_download_code(pxe, "r"), "# Convert to data.frame")
+  })
 })
 
 
@@ -138,10 +138,6 @@ test_that(desc = "No value bug", {
 
 
 test_that(desc = "Fail on incorrect", {
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  skip_if_not_live_api()
-
   expect_error(pxweb_interactive("incorrect url"))
 })
 

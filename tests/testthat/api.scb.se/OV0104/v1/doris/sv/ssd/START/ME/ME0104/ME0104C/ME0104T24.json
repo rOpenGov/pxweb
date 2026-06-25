@@ -1,0 +1,155 @@
+{
+    "title": "Riksdagsval - personröster efter region, parti, kön, tabellinnehåll och valår",
+    "variables": [
+        {
+            "code": "Region",
+            "text": "region",
+            "values": [
+                "00",
+                "VR1",
+                "VR2",
+                "VR3",
+                "VR4",
+                "VR5",
+                "VR6",
+                "VR7",
+                "VR8",
+                "VR9",
+                "VR10",
+                "VR11",
+                "VR12",
+                "VR12G",
+                "VR13",
+                "VR13G",
+                "VR14",
+                "VR15",
+                "VR16",
+                "VR17",
+                "VR18",
+                "VR19",
+                "VR20",
+                "VR21",
+                "VR22",
+                "VR23",
+                "VR24",
+                "VR25",
+                "VR26",
+                "VR27",
+                "VR28",
+                "VR29"
+            ],
+            "valueTexts": [
+                "Riket",
+                "Stockholms kommuns valkrets",
+                "Stockholms läns valkrets",
+                "Uppsala läns valkrets",
+                "Södermanlands läns valkrets",
+                "Östergötlands läns valkrets",
+                "Jönköpings läns valkrets",
+                "Kronobergs läns valkrets",
+                "Kalmar läns valkrets",
+                "Gotlands läns valkrets",
+                "Blekinge läns valkrets",
+                "Malmö kommuns valkrets",
+                "Skåne läns västra valkrets",
+                "Fyrstadskretsen",
+                "Skåne läns södra valkrets",
+                "Malmöhus läns valkrets",
+                "Skåne läns norra och östra valkrets",
+                "Hallands läns valkrets",
+                "Göteborgs kommuns valkrets",
+                "Västra Götalands läns västra valkrets",
+                "Västra Götalands läns norra valkrets",
+                "Västra Götalands läns södra valkrets",
+                "Västra Götalands läns östra valkrets",
+                "Värmlands läns valkrets",
+                "Örebro läns valkrets",
+                "Västmanlands läns valkrets",
+                "Dalarnas läns valkrets",
+                "Gävleborgs läns valkrets",
+                "Västernorrlands läns valkrets",
+                "Jämtlands läns valkrets",
+                "Västerbottens läns valkrets",
+                "Norrbottens läns valkrets"
+            ],
+            "elimination": true
+        },
+        {
+            "code": "Parti",
+            "text": "parti",
+            "values": [
+                "M",
+                "C",
+                "FP",
+                "KD",
+                "MP",
+                "S",
+                "V",
+                "SD",
+                "ÖVRIGA",
+                "TOTALT"
+            ],
+            "valueTexts": [
+                "Moderaterna",
+                "Centerpartiet",
+                "Liberalerna",
+                "Kristdemokraterna",
+                "Miljöpartiet",
+                "Socialdemokraterna",
+                "Vänsterpartiet",
+                "Sverigedemokraterna",
+                "övriga partier",
+                "totalt"
+            ],
+            "elimination": true
+        },
+        {
+            "code": "Kon",
+            "text": "kön",
+            "values": [
+                "1",
+                "2",
+                "1+2"
+            ],
+            "valueTexts": [
+                "män",
+                "kvinnor",
+                "totalt"
+            ],
+            "elimination": true
+        },
+        {
+            "code": "ContentsCode",
+            "text": "tabellinnehåll",
+            "values": [
+                "ME0104AV",
+                "ME0104AW"
+            ],
+            "valueTexts": [
+                "Antal personröster",
+                "Andel personröster (av giltiga röster)"
+            ]
+        },
+        {
+            "code": "Tid",
+            "text": "valår",
+            "values": [
+                "2002",
+                "2006",
+                "2010",
+                "2014",
+                "2018",
+                "2022"
+            ],
+            "valueTexts": [
+                "2002",
+                "2006",
+                "2010",
+                "2014",
+                "2018",
+                "2022"
+            ],
+            "time": true
+        }
+    ]
+}

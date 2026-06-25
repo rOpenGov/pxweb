@@ -1,0 +1,60 @@
+{
+    "columns": [
+        {
+            "code": "Region",
+            "text": "region",
+            "comment": "År 1968–1998 redovisas enligt regional indelning 1998-01-01.\r\n",
+            "type": "d"
+        },
+        {
+            "code": "Civilstand",
+            "text": "civilstånd",
+            "type": "d"
+        },
+        {
+            "code": "Alder",
+            "text": "ålder",
+            "type": "d"
+        },
+        {
+            "code": "Kon",
+            "text": "kön",
+            "type": "d"
+        },
+        {
+            "code": "Tid",
+            "text": "år",
+            "type": "t"
+        },
+        {
+            "code": "BE0101N1",
+            "text": "Folkmängd",
+            "type": "c"
+        }
+    ],
+    "comments": [
+
+    ],
+    "data": [
+        {
+            "key": [
+                "00",
+                "OG",
+                "0",
+                "1",
+                "2024"
+            ],
+            "values": [
+                "50937"
+            ]
+        }
+    ],
+    "metadata": [
+        {
+            "infofile": "BE0101",
+            "updated": "2025-02-21T07:00:00Z",
+            "label": "Folkmängd efter region, civilstånd, ålder, kön, år och tabellinnehåll",
+            "source": "SCB"
+        }
+    ]
+}

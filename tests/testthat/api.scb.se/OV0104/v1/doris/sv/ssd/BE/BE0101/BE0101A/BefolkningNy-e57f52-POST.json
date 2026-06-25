@@ -1,0 +1,41 @@
+{
+    "columns": [
+        {
+            "code": "Kon",
+            "text": "kön",
+            "type": "d"
+        },
+        {
+            "code": "Tid",
+            "text": "år",
+            "type": "t"
+        },
+        {
+            "code": "BE0101N1",
+            "text": "Folkmängd",
+            "type": "c"
+        }
+    ],
+    "comments": [
+
+    ],
+    "data": [
+        {
+            "key": [
+                "1",
+                "2017"
+            ],
+            "values": [
+                "5082662"
+            ]
+        }
+    ],
+    "metadata": [
+        {
+            "infofile": "BE0101",
+            "updated": "2025-02-21T07:00:00Z",
+            "label": "Folkmängd efter kön, år och tabellinnehåll",
+            "source": "SCB"
+        }
+    ]
+}

@@ -131,10 +131,8 @@ test_that(desc = "PXWEB API v2 response parser routes fixture responses", {
 })
 
 test_that(desc = "PXWEB API v2 constructor smoke test", {
-  # Keep live API coverage small. Response parsing and data queries are fixture
-  # tested until v2 metadata/data support is implemented.
-  skip_on_cran()
-  skip_if_not_live_api()
+  # Mocks recorded by tests/testthat/record-mocks.R.
+  with_pxweb_mock_api({
 
   metadata_url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB5974/metadata"
   expect_silent(pxapi_v2 <- pxweb(url = metadata_url))
@@ -143,11 +141,12 @@ test_that(desc = "PXWEB API v2 constructor smoke test", {
   expect_equal(pxapi_v2$paths$api_subpath$path, "api/v2")
   expect_named(pxapi_v2$config, c("calls_per_period", "period_in_seconds", "max_values_to_download", "CORS"))
   expect_true(pxapi_v2$config$max_values_to_download > 0)
+  })
 })
 
-test_that(desc = "PXWEB API v2 live end-to-end workflow", {
-  skip_on_cran()
-  skip_if_not_live_api()
+test_that(desc = "PXWEB API v2 fixture end-to-end workflow", {
+  # Mocks recorded by tests/testthat/record-mocks.R.
+  with_pxweb_mock_api({
 
   table_id <- "TAB5974"
   table_url <- paste0("https://statistikdatabasen.scb.se/api/v2/tables/", table_id, "?lang=sv")
@@ -220,6 +219,7 @@ test_that(desc = "PXWEB API v2 live end-to-end workflow", {
   expect_equal(nrow(df_text), 2)
   expect_true("value" %in% names(df_text))
   expect_true(any(df_text$value > 0))
+  })
 })
 
 test_that(desc = "PXWEB API v1 and v2 equivalent fixtures agree after normalization", {
@@ -300,9 +300,9 @@ test_that(desc = "PXWEB API v1 and v2 equivalent fixtures agree after normalizat
   expect_equal(v1_comments, v2_comments)
 })
 
-test_that(desc = "PXWEB API v1 and v2 live equivalent table helpers agree after normalization", {
-  skip_on_cran()
-  skip_if_not_live_api()
+test_that(desc = "PXWEB API v1 and v2 fixture table helpers agree after normalization", {
+  # Mocks recorded by tests/testthat/record-mocks.R.
+  with_pxweb_mock_api({
 
   v1_url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   v2_url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=sv"
@@ -356,4 +356,5 @@ test_that(desc = "PXWEB API v1 and v2 live equivalent table helpers agree after 
 
   expect_true(length(v1_comments) > 0)
   expect_true(any(v1_comments %in% v2_comments))
+  })
 })

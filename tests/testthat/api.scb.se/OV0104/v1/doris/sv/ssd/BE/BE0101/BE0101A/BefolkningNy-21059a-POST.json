@@ -1,0 +1,140 @@
+{
+    "columns": [
+        {
+            "code": "Civilstand",
+            "text": "civilstånd",
+            "type": "d"
+        },
+        {
+            "code": "Tid",
+            "text": "år",
+            "type": "t"
+        },
+        {
+            "code": "BE0101N1",
+            "text": "Folkmängd",
+            "type": "c"
+        }
+    ],
+    "comments": [
+
+    ],
+    "data": [
+        {
+            "key": [
+                "OG",
+                "2015"
+            ],
+            "values": [
+                "5157443"
+            ]
+        },
+        {
+            "key": [
+                "OG",
+                "2016"
+            ],
+            "values": [
+                "5257563"
+            ]
+        },
+        {
+            "key": [
+                "OG",
+                "2017"
+            ],
+            "values": [
+                "5347489"
+            ]
+        },
+        {
+            "key": [
+                "G",
+                "2015"
+            ],
+            "values": [
+                "3291001"
+            ]
+        },
+        {
+            "key": [
+                "G",
+                "2016"
+            ],
+            "values": [
+                "3329589"
+            ]
+        },
+        {
+            "key": [
+                "G",
+                "2017"
+            ],
+            "values": [
+                "3358397"
+            ]
+        },
+        {
+            "key": [
+                "SK",
+                "2015"
+            ],
+            "values": [
+                "957814"
+            ]
+        },
+        {
+            "key": [
+                "SK",
+                "2016"
+            ],
+            "values": [
+                "967638"
+            ]
+        },
+        {
+            "key": [
+                "SK",
+                "2017"
+            ],
+            "values": [
+                "978713"
+            ]
+        },
+        {
+            "key": [
+                "ÄNKL",
+                "2015"
+            ],
+            "values": [
+                "444759"
+            ]
+        },
+        {
+            "key": [
+                "ÄNKL",
+                "2016"
+            ],
+            "values": [
+                "440363"
+            ]
+        },
+        {
+            "key": [
+                "ÄNKL",
+                "2017"
+            ],
+            "values": [
+                "435643"
+            ]
+        }
+    ],
+    "metadata": [
+        {
+            "infofile": "BE0101",
+            "updated": "2025-02-21T07:00:00Z",
+            "label": "Folkmängd efter civilstånd, år och tabellinnehåll",
+            "source": "SCB"
+        }
+    ]
+}
