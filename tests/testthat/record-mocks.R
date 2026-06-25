@@ -22,8 +22,46 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
 }
 
 devtools::load_all(".", quiet = TRUE)
-httptest::.mockPaths(file.path(getwd(), "tests", "testthat"))
+mock_root <- file.path(getwd(), "tests", "testthat")
+short_mock_root <- file.path(getwd(), "tests", "mock")
+httptest::.mockPaths(mock_root)
 options(httptest.verbose = TRUE)
+
+convert_long_json_mocks <- function(mock_root, short_mock_root) {
+  files <- list.files(mock_root, pattern = "[.]json$", recursive = TRUE, full.names = TRUE)
+  long_files <- files[nchar(file.path("pxweb", files)) > 100]
+
+  for (file in long_files) {
+    mock_file <- sub(
+      paste0("^", normalizePath(mock_root, winslash = "/", mustWork = TRUE), "/?"),
+      "",
+      normalizePath(file, winslash = "/", mustWork = TRUE)
+    )
+    mock_base <- sub("[.][^.]+$", "", mock_file)
+    mock_base <- sub("(-[[:xdigit:]]{6})+(-POST)?$", "", mock_base)
+    response <- structure(
+      list(
+        url = paste0("https://", mock_base),
+        status_code = 200L,
+        headers = structure(
+          list(`content-type` = "application/json"),
+          class = c("insensitive", "list")
+        ),
+        content = readBin(file, "raw", n = file.info(file)$size)
+      ),
+      class = "response"
+    )
+
+    r_file <- sub("[.]json$", ".R", file)
+    if (nchar(file.path("pxweb", r_file)) > 100) {
+      r_file <- file.path(short_mock_root, mock_file)
+      r_file <- sub("[.]json$", ".R", r_file)
+    }
+    dir.create(dirname(r_file), recursive = TRUE, showWarnings = FALSE)
+    dput(response, file = r_file)
+    unlink(file)
+  }
+}
 
 v1_table_sv <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 v1_table_en <- "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
@@ -154,4 +192,5 @@ invisible(httptest::capture_requests({
   pxweb_get(v2_equivalent, query = equivalent_query, verbose = FALSE)
 }, simplify = TRUE))
 
+convert_long_json_mocks(mock_root, short_mock_root)
 invisible(pxweb:::pxweb_clear_cache())

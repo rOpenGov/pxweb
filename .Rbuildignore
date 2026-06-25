@@ -17,6 +17,7 @@ sandbox
 tests_bash/*.R
 tests_bash/*.sh
 tests_bash
+^tests/testthat/record-mocks\.R$
 todo.txt
 
 README.md

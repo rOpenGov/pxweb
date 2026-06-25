@@ -136,6 +136,8 @@ There are two ways of using the `pxweb` R package to access data, either interac
 ## Interactive use
 
 The simplest way of using `pxweb` is to use it interactively, navigate the API to the data of interest, and then set up the query of interest.
+When selecting values for a table variable, use `*` to select all available values, separate multiple choices with `,`, and use `:` to select a range of choices.
+If a variable can be eliminated from the query, use `e` to eliminate it.
 
 ```{r standardquery, message=FALSE, eval=FALSE}
 # Navigate through all pxweb api:s in the R package API catalogue
@@ -210,7 +212,10 @@ To download data, we need both the URL to the table and a query specifying what 
 d <- pxweb_interactive(scb_table_url)
 ```
 
-The interactive function will return the query and the URL, even if the data is not downloaded.
+The interactive function returns an invisible list.
+The list always contains the table URL and the query, even if the data is not downloaded.
+If you choose to download data before exiting the interactive session, the list also contains a `data` element with the downloaded data.
+This is different from `pxweb_get()`, which returns the API response itself.
 
 ```{r , message=FALSE, eval=TRUE, echo=FALSE}
 # save(d, file = "d_example.rda")
@@ -218,6 +223,7 @@ load("d_example.rda")
 ```
 
 ```{r, message=FALSE, eval=TRUE}
+names(d)
 d$url
 d$query
 ```
