@@ -130,7 +130,7 @@ test_that(desc = "PXWEB API v2 response parser routes fixture responses", {
   expect_equal(table$id, "TAB5974")
 })
 
-test_that(desc = "PXWEB API v2 constructor smoke test", {
+test_that(desc = "PXWEB API v2 constructor fixture contract", {
   # Mocks recorded by tests/testthat/record-mocks.R.
   with_pxweb_mock_api({
 

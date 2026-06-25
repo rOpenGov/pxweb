@@ -35,7 +35,7 @@ test_that(desc = "Test to download px and sdmx", {
   })
 })
 
-test_that(desc = "PXWEB v1 fixture smoke test with Statistics Sweden", {
+test_that(desc = "PXWEB v1 fixture contract with Statistics Sweden", {
   # Mocks recorded by tests/testthat/record-mocks.R.
   with_pxweb_mock_api({
 
