@@ -20,7 +20,7 @@ test_that(desc = "pxweb_query object", {
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_agg_example.json")
   expect_silent(pxq3 <- pxweb_query(json_query))
   
-  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "sq-api_table_statfin_eot_pxt_132a.px.json")
+  json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "statfin_vaenn_139e_query.json")
   expect_silent(pxq4 <- pxweb_query(json_query))
 
   dims <- list(Alue = c("*", "*"))
