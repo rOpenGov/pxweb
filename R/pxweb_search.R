@@ -85,6 +85,10 @@ pxweb_search <- function(query,
   }
 }
 
+#' Detect the PXWEB API version used by a search URL
+#'
+#' @param api_url a PXWEB API URL.
+#' @keywords internal
 pxweb_search_api_version <- function(api_url) {
   parsed <- parse_url_or_fail(api_url)
   path <- pxweb_search_path_parts(parsed)
@@ -105,6 +109,11 @@ pxweb_search_api_version <- function(api_url) {
   )
 }
 
+#' Build the PXWEB search URL
+#'
+#' @param api_url a PXWEB API root URL.
+#' @param version PXWEB API version, \code{"v1"} or \code{"v2"}.
+#' @keywords internal
 pxweb_search_url <- function(api_url, version) {
   parsed <- parse_url_or_fail(api_url)
   if (length(parsed$query) > 0) {
@@ -155,15 +164,29 @@ pxweb_search_url <- function(api_url, version) {
   normalized_url
 }
 
+#' Do a PXWEB search GET request
+#'
+#' @param url a PXWEB search URL.
+#' @param query a named list of query string parameters.
+#' @param ... further arguments passed to \code{httr::GET}.
+#' @keywords internal
 pxweb_search_request <- function(url, query, ...) {
   httr::GET(url, pxweb_user_agent(), query = query, ...)
 }
 
+#' Parse a PXWEB search response
+#'
+#' @param response a \code{httr} response object.
+#' @keywords internal
 pxweb_search_response <- function(response) {
   httr::stop_for_status(response)
   suppressWarnings(httr::content(response, as = "parsed"))
 }
 
+#' Parse PXWEB API v2 search results
+#'
+#' @param x a parsed PXWEB API v2 search response.
+#' @keywords internal
 pxweb_search_parse_v2 <- function(x) {
   if (!is.list(x) || is.null(x$tables) || !is.list(x$tables)) {
     stop(
@@ -192,6 +215,11 @@ pxweb_search_parse_v2 <- function(x) {
   )
 }
 
+#' Parse PXWEB API v1 search results
+#'
+#' @param x a parsed PXWEB API v1 search response.
+#' @param api_url the PXWEB API v1 database root URL used for the search.
+#' @keywords internal
 pxweb_search_parse_v1 <- function(x, api_url) {
   if (!is.list(x) || !all(vapply(x, is.list, logical(1)))) {
     stop(
@@ -227,6 +255,9 @@ pxweb_search_parse_v1 <- function(x, api_url) {
   )
 }
 
+#' Create an empty PXWEB API v1 search result
+#'
+#' @keywords internal
 pxweb_search_empty_v1 <- function() {
   data.frame(
     id = character(),
@@ -239,6 +270,10 @@ pxweb_search_empty_v1 <- function() {
   )
 }
 
+#' Split a parsed URL path into parts
+#'
+#' @param parsed_url a parsed URL object.
+#' @keywords internal
 pxweb_search_path_parts <- function(parsed_url) {
   path <- parsed_url$path
   if (is.null(path) || !nzchar(path)) {
@@ -247,10 +282,19 @@ pxweb_search_path_parts <- function(parsed_url) {
   strsplit(gsub("^/+|/+$", "", path), "/", fixed = FALSE)[[1]]
 }
 
+#' Remove trailing slashes from a URL string
+#'
+#' @param x a character string.
+#' @keywords internal
 pxweb_search_trim_slash <- function(x) {
   gsub("/+$", "", x)
 }
 
+#' Extract a scalar character value from a list
+#'
+#' @param x a list.
+#' @param name the element name to extract.
+#' @keywords internal
 pxweb_search_chr <- function(x, name) {
   value <- x[[name]]
   if (is.null(value) || length(value) == 0) {
@@ -259,6 +303,11 @@ pxweb_search_chr <- function(x, name) {
   as.character(value[[1]])
 }
 
+#' Extract a scalar numeric value from a list
+#'
+#' @param x a list.
+#' @param name the element name to extract.
+#' @keywords internal
 pxweb_search_num <- function(x, name) {
   value <- x[[name]]
   if (is.null(value) || length(value) == 0) {
@@ -267,6 +316,11 @@ pxweb_search_num <- function(x, name) {
   as.numeric(value[[1]])
 }
 
+#' Extract a link URL from a PXWEB API v2 links list
+#'
+#' @param links a PXWEB API links list.
+#' @param rel the link relation to extract.
+#' @keywords internal
 pxweb_search_link <- function(links, rel) {
   if (is.null(links) || !is.list(links)) {
     return(NA_character_)
@@ -279,6 +333,12 @@ pxweb_search_link <- function(links, rel) {
   pxweb_search_chr(links[[idx]], "href")
 }
 
+#' Build a PXWEB API v1 table URL from a search hit
+#'
+#' @param api_url the PXWEB API v1 database root URL.
+#' @param path the search hit path.
+#' @param id the search hit table id.
+#' @keywords internal
 pxweb_search_v1_table_url <- function(api_url, path, id) {
   paste(
     pxweb_search_trim_slash(api_url),
