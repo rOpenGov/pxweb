@@ -362,6 +362,56 @@ v2_data <- pxweb_get(v2_url, query = v2_query)
 as.data.frame(v2_data, column.name.type = "code", variable.value.type = "code")
 ```
 
+#### Query helpers for PXWEB API v2
+
+PXWEB API v2 tables may expose value sets and aggregation codelists, for example age groups, regional groupings or other ready-made classifications. These are represented in the API with extra URL parameters such as `codelist[Variable]` and `outputValues[Variable]`. The helper functions below let you express these choices directly in the R query instead of writing those API details by hand.
+
+The helpers can be mixed with ordinary character values:
+
+```{r, message=FALSE, eval=FALSE}
+v2_query <- list(
+  Region = pxweb_all(),
+  Alder = pxweb_aggregation("agg_Alder5ar_1"),
+  Kon = c("1", "2"),
+  ContentsCode = "BE0101N1",
+  Tid = pxweb_latest()
+)
+
+v2_df <- pxweb_get_data(
+  v2_url,
+  query = v2_query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+The most common helpers are:
+
+```{r, message=FALSE, eval=FALSE}
+pxweb_all()                         # all values for a variable
+pxweb_latest()                      # latest time period, resolved from metadata
+pxweb_top(10)                       # top 10 values
+pxweb_bottom(10)                    # bottom 10 values
+pxweb_aggregation("agg_Alder5ar_1") # use an aggregation codelist
+pxweb_valueset("vs_Alder1ar")       # use a value set codelist
+```
+
+If only some values from a codelist should be requested, supply them with `value_codes`.
+
+```{r, message=FALSE, eval=FALSE}
+v2_query <- list(
+  Alder = pxweb_aggregation(
+    "agg_Alder5ar_1",
+    value_codes = c("0-4", "5-9", "10-14")
+  ),
+  Kon = "1",
+  ContentsCode = "BE0101N1",
+  Tid = pxweb_latest()
+)
+```
+
+The exact aggregation and value set identifiers are found in the v2 metadata for a table. In metadata returned by the API, they are listed under each variable's `extension$codelists` field.
+
 If you want a data frame directly, use `pxweb_get_data()`.
 
 ```{r, message=FALSE, eval=FALSE}
