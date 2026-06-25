@@ -8,10 +8,13 @@
 #' @keywords internal
 pxweb_add_api_subpath <- function(obj) {
   assert_pxweb_url(obj)
+  pxweb_version <- obj$version
+  assert_pxweb_version(pxweb_version)
 
   if (inherits(obj, "pxweb")) {
     return(obj)
   }
+
 
   path_splt <- strsplit(obj$url$path, "/")[[1]]
 
@@ -23,20 +26,25 @@ pxweb_add_api_subpath <- function(obj) {
     return(obj)
   }
 
-  tmp_url <- obj$url
+  if(pxweb_version == "v1"){
+    tmp_url <- obj$url
 
-  # Split up url to api parts
-  for (p in 1:length(path_splt)) {
-    obj <- pxweb_add_call(obj)
-    tmp_url$path <- paste(path_splt[1:p], collapse = "/")
-    tmp_cfg_url <- build_pxweb_config_url(tmp_url)
-    tmp_r <- httr::GET(tmp_cfg_url)
-    pxweb_http_log_response(tmp_r)
-    if (is_pxweb_config_response(tmp_r)) break()
+    for (p in 1:length(path_splt)) {
+      obj <- pxweb_add_call(obj)
+      tmp_url$path <- paste(path_splt[1:p], collapse = "/")
+      tmp_cfg_url <- build_pxweb_config_url(tmp_url)
+      tmp_r <- httr::GET(tmp_cfg_url)
+      pxweb_http_log_response(tmp_r)
+      if (is_pxweb_config_response(tmp_r, pxweb_version)) break()
+    }
+    # Add the subpath
+    obj$paths$api_subpath <- list(path = tmp_url$path, vector = path_splt[1:p])
+  } else if (pxweb_version == "v2"){
+    subpath <- build_pxweb_v2_api_subpath(obj$url)
+    # Add the subpath
+    obj$paths$api_subpath <- list(path = subpath, vector = strsplit(subpath, "/")[[1]])
   }
-
-  # Add the subpath
-  obj$paths$api_subpath <- list(path = tmp_url$path, vector = path_splt[1:p])
 
   obj
 }
+

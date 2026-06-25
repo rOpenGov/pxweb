@@ -1,19 +1,18 @@
 
 <!-- badges: start -->
 
-[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
+[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
 [![R build
 status](https://github.com/rOpenGov/pxweb/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/pxweb/actions)
-[![codecov](https://codecov.io/gh/rOpenGov/pxweb/branch/master/graph/badge.svg?token=zYtxsus27g)](https://codecov.io/gh/rOpenGov/pxweb)
+[![codecov](https://codecov.io/gh/rOpenGov/pxweb/graph/badge.svg?token=zYtxsus27g)](https://app.codecov.io/gh/rOpenGov/pxweb)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://cran.r-project.org/package=pxweb)
 [![Downloads](http://cranlogs.r-pkg.org/badges/pxweb)](https://cran.r-project.org/package=pxweb)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/pxweb)](https://cran.r-project.org/package=pxweb)
-[![Gitter](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://gitter.im/rOpenGov/pxweb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://app.gitter.im/#/room/#rOpenGov_pxweb:gitter.im?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Watch on
 GitHub](https://img.shields.io/github/watchers/ropengov/pxweb.svg?style=social)](https://github.com/ropengov/pxweb/watchers)
 [![Star on
 GitHub](https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social)](https://github.com/ropengov/pxweb/stargazers)
-[![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
 [![R-CMD-check](https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -64,6 +63,70 @@ remotes::install_github("ropengov/pxweb")
 For examples, check the
 [tutorial/vignette](https://ropengov.github.io/pxweb/articles/pxweb.html).
 
+### PXWEB API v2
+
+PXWEB API v2 tables can be queried with the same `pxweb_get()` and
+`pxweb_get_data()` workflow. A v2 data request is sent to the table’s
+`/data` endpoint and returns JSON-stat2 by default.
+
+``` r
+url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=sv"
+
+query <- list(
+  Region = "00",
+  Civilstand = "OG",
+  Alder = "0",
+  Kon = "1",
+  ContentsCode = "BE0101N1",
+  Tid = "2024"
+)
+
+px_data <- pxweb_get(url, query = query)
+as.data.frame(px_data, column.name.type = "code", variable.value.type = "code")
+
+px_df <- pxweb_get_data(
+  url,
+  query = query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+For v2 tables with value sets or aggregation codelists, use query
+helpers instead of writing API-specific parameters by hand:
+
+``` r
+query <- list(
+  Region = pxweb_all(),
+  Alder = pxweb_aggregation("agg_Ålder5år_1"),
+  Kon = c("1", "2"),
+  ContentsCode = "BE0101N1",
+  Tid = pxweb_latest()
+)
+
+px_df <- pxweb_get_data(
+  url,
+  query = query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+Available codelist identifiers can be listed from the v2 metadata:
+
+``` r
+meta <- pxweb_get(url)
+pxweb_codelists(meta, variable = "Alder")
+```
+
+`pxweb_latest()` is resolved against the table metadata before the
+request is sent. It replaces its placeholder value, `"9999"` by default,
+with the last available metadata value for that variable.
+
+For v2 data, the content variable is kept as a dimension, such as
+`ContentsCode`, and observations are returned in a generic `value`
+column.
+
 ## Problems?
 
 See
@@ -79,7 +142,8 @@ You are welcome to contact us:
   of `sessionInfo()` and `packageVersion("pxweb")`)
 - [Send a pull request](https://github.com/ropengov/pxweb)
 - [Star us on the Github page](https://github.com/ropengov/pxweb)
-- [Join the discussion in Gitter](https://gitter.im/rOpenGov/pxweb)
+- [Join the discussion in
+  Gitter](https://app.gitter.im/#/room/#rOpenGov_pxweb:gitter.im)
 
 ### Acknowledgements
 

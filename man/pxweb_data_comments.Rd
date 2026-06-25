@@ -3,11 +3,14 @@
 \name{pxweb_data_comments}
 \alias{pxweb_data_comments}
 \alias{pxweb_data_comments.pxweb_data}
+\alias{pxweb_data_comments.pxweb_data_v2}
 \title{Construct a \code{pxweb_data_comments} object.}
 \usage{
 pxweb_data_comments(x)
 
 \method{pxweb_data_comments}{pxweb_data}(x)
+
+\method{pxweb_data_comments}{pxweb_data_v2}(x)
 }
 \arguments{
 \item{x}{a \code{pxweb_data} object.}

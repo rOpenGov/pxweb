@@ -1,0 +1,62 @@
+{
+    "language": "sv",
+    "id": "TAB5974",
+    "label": "Folkmängd efter inrikes/utrikes född, ålder och kön.  År 2026-2120",
+    "description": "",
+    "sortCode": "01",
+    "updated": "2026-04-16T06:00:00Z",
+    "firstPeriod": "2026",
+    "lastPeriod": "2120",
+    "category": "public",
+    "variableNames": [
+        "inrikes/utrikes född",
+        "ålder",
+        "kön",
+        "tabellinnehåll",
+        "år"
+    ],
+    "source": "SCB",
+    "subjectCode": "BE",
+    "timeUnit": "Annual",
+    "paths": [
+        [
+            {
+                "id": "BE",
+                "label": "Befolkning",
+                "sortCode": "Befolkning"
+            },
+            {
+                "id": "BE0401",
+                "label": "Befolkningsframskrivningar",
+                "sortCode": "Befolkningsframskrivningar"
+            },
+            {
+                "id": "BE0401A",
+                "label": "Aktuella framskrivningar",
+                "sortCode": "010"
+            }
+        ]
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "hreflang": "sv",
+            "href": "https://statistikdatabasen.scb.se/api/v2/tables/TAB5974?lang=sv"
+        },
+        {
+            "rel": "alternate",
+            "hreflang": "en",
+            "href": "https://statistikdatabasen.scb.se/api/v2/tables/TAB5974?lang=en"
+        },
+        {
+            "rel": "metadata",
+            "hreflang": "sv",
+            "href": "https://statistikdatabasen.scb.se/api/v2/tables/TAB5974/metadata?lang=sv"
+        },
+        {
+            "rel": "data",
+            "hreflang": "sv",
+            "href": "https://statistikdatabasen.scb.se/api/v2/tables/TAB5974/data?lang=sv&outputFormat=json-stat2"
+        }
+    ]
+}

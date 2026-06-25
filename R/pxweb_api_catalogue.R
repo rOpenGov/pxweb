@@ -84,15 +84,6 @@ assert_pxweb_api_catalogue_entry <- function(x) {
   checkmate::assert_string(x$url, pattern = "^http")
   checkmate::assert_character(x$version, min.chars = 1)
   checkmate::assert_character(x$lang, min.chars = 1)
-  if (!is.null(x$period_in_seconds)) {
-    checkmate::assert_int(x$period_in_seconds, lower = 1)
-  }
-  if (!is.null(x$calls_per_period)) {
-    checkmate::assert_int(x$calls_per_period, lower = 1)
-  }
-  if (!is.null(x$max_values_to_download)) {
-    checkmate::assert_int(x$max_values_to_download, lower = 1)
-  }
 }
 
 
@@ -110,10 +101,6 @@ print.pxweb_api_catalogue_entry <- function(x, ...) {
   }
   cat("Version(s)   :", paste(x$version, collapse = ", "), "\n")
   cat("Language(s)  :", paste(x$lang, collapse = ", "), "\n")
-  if (!is.null(x$calls_per_period) & !is.null(x$period_in_seconds) & !is.null(x$max_values_to_download)) {
-    cat("Limit(s)     :", x$calls_per_period, "calls per", x$period_in_seconds, "sec.\n")
-    cat("              ", x$max_values_to_download, " values per call.\n")
-  }
   cat("Url template :\n", x$url, "\n")
 }
 

@@ -2,9 +2,15 @@
 % Please edit documentation in R/pxweb_data.R
 \name{pxweb_data_dim}
 \alias{pxweb_data_dim}
+\alias{pxweb_data_dim.pxweb_data}
+\alias{pxweb_data_dim.pxweb_data_v2}
 \title{Compute the dimension of the query \code{pxweb_data} object}
 \usage{
 pxweb_data_dim(pxd)
+
+\method{pxweb_data_dim}{pxweb_data}(pxd)
+
+\method{pxweb_data_dim}{pxweb_data_v2}(pxd)
 }
 \arguments{
 \item{pxd}{a \code{pxweb_data} object.}
