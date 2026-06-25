@@ -93,6 +93,37 @@ px_df <- pxweb_get_data(
 )
 ```
 
+For v2 tables with value sets or aggregation codelists, use query
+helpers instead of writing API-specific parameters by hand:
+
+``` r
+query <- list(
+  Region = pxweb_all(),
+  Alder = pxweb_aggregation("agg_Ålder5år_1"),
+  Kon = c("1", "2"),
+  ContentsCode = "BE0101N1",
+  Tid = pxweb_latest()
+)
+
+px_df <- pxweb_get_data(
+  url,
+  query = query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+Available codelist identifiers can be listed from the v2 metadata:
+
+``` r
+meta <- pxweb_get(url)
+pxweb_codelists(meta, variable = "Alder")
+```
+
+`pxweb_latest()` is resolved against the table metadata before the
+request is sent. It replaces its placeholder value, `"9999"` by default,
+with the last available metadata value for that variable.
+
 For v2 data, the content variable is kept as a dimension, such as
 `ContentsCode`, and observations are returned in a generic `value`
 column.

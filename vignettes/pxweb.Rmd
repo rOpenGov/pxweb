@@ -371,7 +371,7 @@ The helpers can be mixed with ordinary character values:
 ```{r, message=FALSE, eval=FALSE}
 v2_query <- list(
   Region = pxweb_all(),
-  Alder = pxweb_aggregation("agg_Alder5ar_1"),
+  Alder = pxweb_aggregation("agg_Ålder5år_1"),
   Kon = c("1", "2"),
   ContentsCode = "BE0101N1",
   Tid = pxweb_latest()
@@ -392,8 +392,8 @@ pxweb_all()                         # all values for a variable
 pxweb_latest()                      # latest time period, resolved from metadata
 pxweb_top(10)                       # top 10 values
 pxweb_bottom(10)                    # bottom 10 values
-pxweb_aggregation("agg_Alder5ar_1") # use an aggregation codelist
-pxweb_valueset("vs_Alder1ar")       # use a value set codelist
+pxweb_aggregation("agg_Ålder5år_1") # use an aggregation codelist
+pxweb_valueset("vs_Ålder1årG")      # use a value set codelist
 ```
 
 If only some values from a codelist should be requested, supply them with `value_codes`.
@@ -401,7 +401,7 @@ If only some values from a codelist should be requested, supply them with `value
 ```{r, message=FALSE, eval=FALSE}
 v2_query <- list(
   Alder = pxweb_aggregation(
-    "agg_Alder5ar_1",
+    "agg_Ålder5år_1",
     value_codes = c("0-4", "5-9", "10-14")
   ),
   Kon = "1",
@@ -410,7 +410,14 @@ v2_query <- list(
 )
 ```
 
-The exact aggregation and value set identifiers are found in the v2 metadata for a table. In metadata returned by the API, they are listed under each variable's `extension$codelists` field.
+The exact aggregation and value set identifiers are found in the v2 metadata for a table. Use `pxweb_codelists()` to list them without inspecting the raw API response by hand.
+
+```{r, message=FALSE, eval=FALSE}
+v2_meta <- pxweb_get(v2_url)
+pxweb_codelists(v2_meta, variable = "Alder")
+```
+
+`pxweb_latest()` is resolved against the table metadata before the data request is sent. By default it uses the placeholder `"9999"` in the query object and replaces it with the last available value for that variable from the metadata. It is mainly intended for time variables.
 
 If you want a data frame directly, use `pxweb_get_data()`.
 

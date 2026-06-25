@@ -55,6 +55,47 @@ test_that(desc = "PXWEB API v2 metadata keeps raw metadata attribute", {
   expect_identical(attr(x, "pxweb_metadata_v2")$dimension$Tid$category$index, raw$dimension$Tid$category$index)
 })
 
+test_that(desc = "PXWEB API v2 metadata codelists are exposed as a data.frame", {
+  r <- readRDS(test_path("test_data/pxweb_metadata_response_v2.rds"))
+  raw <- suppressWarnings(httr::content(r, as = "parsed"))
+  meta <- pxweb_metadata_v2(raw)
+
+  code_lists <- pxweb_codelists(meta)
+
+  expect_s3_class(code_lists, "data.frame")
+  expect_named(code_lists, c("variable_code", "variable_text", "id", "label", "type", "href"))
+  expect_equal(code_lists$variable_code, rep("Alder", 3))
+  expect_equal(code_lists$id, c("agg_Ålder10år_1", "agg_Ålder5år_1", "vs_Ålder1årG"))
+  expect_equal(code_lists$type, c("Aggregation", "Aggregation", "Valueset"))
+
+  expect_equal(pxweb_codelists(raw), code_lists)
+  expect_equal(pxweb_codelists(meta, variable = "Alder"), code_lists)
+  expect_equal(pxweb_codelists(meta, variable = "ålder"), code_lists)
+  expect_equal(
+    pxweb_codelists(meta, variable = "Alder", type = "Aggregation")$id,
+    c("agg_Ålder10år_1", "agg_Ålder5år_1")
+  )
+  expect_equal(nrow(pxweb_codelists(meta, variable = "Tid")), 0)
+})
+
+test_that(desc = "PXWEB codelists helper rejects non-v2 metadata", {
+  meta <- pxweb_metadata(list(
+    title = "Test",
+    variables = list(
+      list(
+        code = "Region",
+        text = "region",
+        values = "00",
+        valueTexts = "Sweden",
+        elimination = FALSE,
+        time = FALSE
+      )
+    )
+  ))
+
+  expect_error(pxweb_codelists(meta), "not PXWEB API v2 metadata")
+})
+
 test_that(desc = "PXWEB API v2 metadata values are ordered by category index", {
   x <- list(
     version = "2.0",
