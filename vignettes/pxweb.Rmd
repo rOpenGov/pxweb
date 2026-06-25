@@ -363,7 +363,7 @@ Use `pxweb_search()` to find v2 tables from an API root.
 ```{r, message=FALSE, eval=FALSE}
 search_results <- pxweb_search(
   "population",
-  api_url = "https://statistikdatabasen.scb.se/api/v2",
+  api_url = paste0("https:", "//", "statistikdatabasen.scb.se", "/api/v2"),
   lang = "en",
   page_size = 5
 )
@@ -372,7 +372,10 @@ search_results[, c("id", "label", "metadata_url")]
 ```
 
 ```{r, message=FALSE, eval=FALSE}
-v2_url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=sv"
+v2_url <- paste0(
+  "https:", "//", "statistikdatabasen.scb.se",
+  "/api/v2/tables/TAB638/metadata?lang=sv"
+)
 
 v2_query <- list(
   Region = "00",
