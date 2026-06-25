@@ -310,3 +310,170 @@ test_that(desc = "PXWEB API v2 JSON-stat2 data batches can be combined", {
     as.data.frame(combined, column.name.type = "code", variable.value.type = "code")
   )
 })
+
+test_that(desc = "PXWEB API v2 large queries are split, downloaded, and combined", {
+  px <- structure(
+    list(
+      url = parse_url_or_fail("https://example.test/api/v2/tables/TAB1/metadata?lang=sv"),
+      version = "v2",
+      config = list(
+        calls_per_period = 100L,
+        period_in_seconds = 1L,
+        max_values_to_download = 2L,
+        CORS = NULL
+      ),
+      calls = list(time_stamps = list()),
+      paths = list(
+        rda_file_path = tempfile(fileext = ".rda"),
+        api_subpath = list(path = "api/v2", vector = c("api", "v2"))
+      )
+    ),
+    class = c("pxweb", "list")
+  )
+
+  metadata <- pxweb_metadata(list(
+    title = "Population by region and year",
+    variables = list(
+      list(
+        code = "Region",
+        text = "region",
+        values = c("01", "03"),
+        valueTexts = c("Stockholm", "Uppsala"),
+        elimination = TRUE,
+        time = FALSE
+      ),
+      list(
+        code = "Tid",
+        text = "year",
+        values = c("2024", "2025"),
+        valueTexts = c("2024", "2025"),
+        elimination = FALSE,
+        time = TRUE
+      ),
+      list(
+        code = "ContentsCode",
+        text = "contents",
+        values = "POP",
+        valueTexts = "Population",
+        elimination = FALSE,
+        time = FALSE
+      )
+    )
+  ))
+  attr(metadata, "pxweb_metadata_v2") <- list(
+    extension = list(px = list(tableid = "TAB1", language = "sv"))
+  )
+
+  post_bodies <- list()
+  post_queries <- list()
+
+  data_response <- function(body) {
+    selection <- jsonlite::fromJSON(body, simplifyVector = FALSE)$selection
+    selected <- lapply(selection, function(x) unlist(x$valueCodes, use.names = FALSE))
+    names(selected) <- vapply(selection, function(x) x$variableCode, character(1))
+    all_values <- list(
+      Region = c("01", "03"),
+      Tid = c("2024", "2025"),
+      ContentsCode = "POP"
+    )
+    selected_names <- names(selected)
+    selected <- lapply(selected_names, function(variable) {
+      values <- selected[[variable]]
+      if (identical(values, "*")) {
+        all_values[[variable]]
+      } else {
+        values
+      }
+    })
+    names(selected) <- selected_names
+
+    x <- pxweb_v2_data_fixture()
+    x$id <- list("Region", "Tid", "ContentsCode")
+    x$size <- list(length(selected$Region), length(selected$Tid), 1L)
+    x$dimension$Region$category$index <- as.list(seq_along(selected$Region) - 1L)
+    names(x$dimension$Region$category$index) <- selected$Region
+    x$dimension$Region$category$label <- as.list(c("01" = "Stockholm", "03" = "Uppsala")[selected$Region])
+    names(x$dimension$Region$category$label) <- selected$Region
+    x$dimension$Tid$category$index <- as.list(seq_along(selected$Tid) - 1L)
+    names(x$dimension$Tid$category$index) <- selected$Tid
+    x$dimension$Tid$category$label <- as.list(selected$Tid)
+    names(x$dimension$Tid$category$label) <- selected$Tid
+    x$dimension$ContentsCode$category$index <- list(POP = 0L)
+    x$dimension$ContentsCode$category$label <- list(POP = "Population")
+
+    value_lookup <- c(
+      "01\r2024\rPOP" = 10,
+      "01\r2025\rPOP" = 20,
+      "03\r2024\rPOP" = 30,
+      "03\r2025\rPOP" = 40
+    )
+    grid <- expand.grid(
+      ContentsCode = selected$ContentsCode,
+      Tid = selected$Tid,
+      Region = selected$Region,
+      KEEP.OUT.ATTRS = FALSE,
+      stringsAsFactors = FALSE
+    )
+    grid <- grid[c("Region", "Tid", "ContentsCode")]
+    key <- do.call(paste, c(grid, sep = "\r"))
+    x$value <- unname(value_lookup[key])
+
+    json <- jsonlite::toJSON(x, auto_unbox = TRUE)
+    structure(
+      list(
+        url = "https://example.test/api/v2/tables/TAB1/data?lang=sv&outputFormat=json-stat2",
+        status_code = 200L,
+        headers = structure(
+          list("content-type" = "application/json; charset=utf-8"),
+          class = c("insensitive", "list")
+        ),
+        content = charToRaw(json),
+        request = structure(
+          list(options = list(postfields = charToRaw(body))),
+          class = "request"
+        )
+      ),
+      class = "response"
+    )
+  }
+
+  local_mocked_bindings(
+    POST = function(url, body, ..., query = list(), encode = NULL) {
+      post_bodies[[length(post_bodies) + 1L]] <<- jsonlite::fromJSON(body, simplifyVector = FALSE)
+      post_queries[[length(post_queries) + 1L]] <<- query
+      data_response(body)
+    },
+    .package = "httr"
+  )
+
+  query <- list(
+    Region = c("01", "03"),
+    Tid = c("2024", "2025"),
+    ContentsCode = "POP"
+  )
+
+  expect_output(
+    data <- pxweb_advanced_get(
+      url = px,
+      query = query,
+      verbose = TRUE,
+      pxmdo = metadata
+    ),
+    regexp = "2 batches"
+  )
+  expect_s3_class(data, "pxweb_data_v2")
+  expect_length(post_bodies, 2)
+  expect_true(all(vapply(post_queries, function(x) {
+    identical(x, list(lang = "sv", outputFormat = "json-stat2"))
+  }, logical(1))))
+  expect_equal(
+    as.data.frame(data, column.name.type = "code", variable.value.type = "code"),
+    data.frame(
+      Region = c("01", "01", "03", "03"),
+      Tid = c("2024", "2025", "2024", "2025"),
+      ContentsCode = c("POP", "POP", "POP", "POP"),
+      value = c(10, 20, 30, 40),
+      stringsAsFactors = FALSE
+    )
+  )
+})
