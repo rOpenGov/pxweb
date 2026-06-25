@@ -167,16 +167,26 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
       if (px$version == "v2") {
         v2_request <- pxweb_v2_data_request(px, pxqs[[i]], pxmd, output_format = output_format)
         pxurl <- v2_request$url
-        r <- httr::POST(
-          pxurl,
-          body = v2_request$body,
-          pxweb_user_agent(),
-          httr::content_type_json(),
-          httr::accept_json(),
-          query = v2_request$query,
-          encode = "raw",
-          ...
-        )
+        if (length(pxweb_query_v2_extra_query(pxqs[[i]])) > 0) {
+          r <- httr::GET(
+            pxurl,
+            pxweb_user_agent(),
+            httr::accept_json(),
+            query = c(v2_request$query, pxweb_v2_data_value_codes_query(pxqs[[i]])),
+            ...
+          )
+        } else {
+          r <- httr::POST(
+            pxurl,
+            body = v2_request$body,
+            pxweb_user_agent(),
+            httr::content_type_json(),
+            httr::accept_json(),
+            query = v2_request$query,
+            encode = "raw",
+            ...
+          )
+        }
       } else {
         pxurl <- build_pxweb_url(px)
         r <- httr::POST(pxurl, body = pxweb_as_json(x = pxqs[[i]]), pxweb_user_agent(), ...)
@@ -342,6 +352,18 @@ pxweb_v2_data_request <- function(px, pxq, pxmd, output_format = "json-stat2") {
   list(
     url = build_pxweb_v2_table_data_url(px, pxweb_v2_table_id(px, pxmd)),
     body = pxweb_as_json(x = pxweb_query_as_v2(pxq)),
-    query = pxweb_v2_data_query_params(px, pxmd, output_format = output_format)
+    query = c(pxweb_v2_data_query_params(px, pxmd, output_format = output_format), pxweb_query_v2_extra_query(pxq))
   )
+}
+
+pxweb_v2_data_value_codes_query <- function(pxq) {
+  checkmate::assert_class(pxq, "pxweb_query")
+
+  query <- lapply(pxq$query, function(query_dim) {
+    stats::setNames(
+      list(paste(query_dim$selection$values, collapse = ",")),
+      paste0("valueCodes[", query_dim$code, "]")
+    )
+  })
+  do.call(c, query)
 }

@@ -10,7 +10,7 @@
 #' @examples
 #' query <- list(
 #'   Region = pxweb_all(),
-#'   Alder = pxweb_aggregation("agg_Alder5ar_1"),
+#'   Alder = pxweb_aggregation("agg_Ålder5år_1"),
 #'   Tid = pxweb_latest()
 #' )
 #'
@@ -28,8 +28,9 @@ pxweb_all <- function() {
 }
 
 #' @rdname pxweb_query_helpers
-#' @param code value code used to represent the latest time period before it is
-#'   resolved against table metadata.
+#' @param code placeholder value used before the latest available value is
+#'   resolved against table metadata. The default \code{"9999"} is replaced by
+#'   the last metadata value before the v2 data request is sent.
 #' @export
 pxweb_latest <- function(code = "9999") {
   checkmate::assert_string(code, min.chars = 1)
@@ -136,6 +137,36 @@ pxweb_query_selection <- function(type, value_codes, codelist = NULL, output_val
 #' @keywords internal
 is_pxweb_query_selection <- function(x) {
   inherits(x, "pxweb_query_selection")
+}
+
+#' Get the PXWEB API v2 selection type for a query variable.
+#'
+#' @param pxq a \code{pxweb_query} object.
+#' @param variable_code PXWEB variable code.
+#'
+#' @keywords internal
+pxweb_query_v2_selection_type <- function(pxq, variable_code) {
+  checkmate::assert_class(pxq, "pxweb_query")
+  checkmate::assert_string(variable_code, min.chars = 1)
+
+  if (is.null(pxq$v2_selection_type) || is.null(pxq$v2_selection_type[[variable_code]])) {
+    return("item")
+  }
+
+  pxq$v2_selection_type[[variable_code]]
+}
+
+#' Test whether a query variable uses a PXWEB API v2 codelist.
+#'
+#' @param pxq a \code{pxweb_query} object.
+#' @param variable_code PXWEB variable code.
+#'
+#' @keywords internal
+pxweb_query_v2_has_codelist <- function(pxq, variable_code) {
+  checkmate::assert_class(pxq, "pxweb_query")
+  checkmate::assert_string(variable_code, min.chars = 1)
+
+  !is.null(pxq$v2_extra_query[[paste0("codelist[", variable_code, "]")]])
 }
 
 #' Convert a named list to a PXWEB API v2 request.
