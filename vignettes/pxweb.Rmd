@@ -21,7 +21,10 @@ px_levels
 save(px_levels, file = "vignettes/px_levels_example.rda")
 
 # Get PXWEB metadata about a table
-px_meta <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+scb_table_url <- paste0(
+  "https", "://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+)
+px_meta <- pxweb_get(scb_table_url)
 px_meta
 save(px_meta, file = "vignettes/px_meta_example.rda")
 
@@ -37,21 +40,21 @@ pxweb_query_list <-
 pxq <- pxweb_query(pxweb_query_list)
 
 pxd <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 save(pxd, file = "vignettes/pxd_example.rda")
 
 pxq$response$format <- "json-stat"
 pxjstat <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 save(pxjstat, file = "vignettes/pxjstat_example.rda")
 
 pxq$response$format <- "px"
 pxfp <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 save(pxfp, file = "vignettes/pxfp_example.rda")
@@ -186,7 +189,10 @@ And if we use `pxweb_get()` for a table, a PXWEB METADATA object is returned.
 
 ```{r meta, message=FALSE, eval=FALSE}
 # Get PXWEB metadata about a table
-px_meta <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+scb_table_url <- paste0(
+  "https", "://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+)
+px_meta <- pxweb_get(scb_table_url)
 px_meta
 ```
 
@@ -201,7 +207,7 @@ px_meta
 To download data, we need both the URL to the table and a query specifying what parts of the table are of interest. An URL to a table is an URL that will return a metadata object if not a query is supplied. Creating a query can be done in three main ways. The first and most straightforward approach is to use `pxweb_interactive()` to explore the table URL and create a query interactively.
 
 ```{r, message=FALSE, eval=FALSE}
-d <- pxweb_interactive("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+d <- pxweb_interactive(scb_table_url)
 ```
 
 The interactive function will return the query and the URL, even if the data is not downloaded.
@@ -295,7 +301,7 @@ When we have the URL to a data table and a query, we can download the data with 
 
 ```{r, message=FALSE, eval=FALSE}
 pxd <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 pxd
@@ -311,7 +317,7 @@ If we instead want a JSON-stat object, we change the response format to JSON-sta
 ```{r, message=FALSE, eval=FALSE}
 pxq$response$format <- "json-stat"
 pxjstat <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 pxjstat
@@ -327,7 +333,7 @@ Some return formats return files. Then, these responses are stored in the R `tem
 ```{r, message=FALSE, eval=FALSE}
 pxq$response$format <- "px"
 pxfp <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 pxfp
