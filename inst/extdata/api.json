@@ -295,6 +295,203 @@
         "lang": ["sl"]
     },
 
+    "statistik.csn.se": {
+        "alias" : ["csn"],
+        "description" : "Swedish Board of Student Finance",
+        "citation" : {
+          "organization" : "Swedish Board of Student Finance",
+          "address" : "Sundsvall, Sweden"},
+        "url" : "https://statistik.csn.se/PXWeb/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["sv"]
+    },
+
+    "m02-http-pxwebb.login.sundsvall.se": {
+        "alias" : ["sundsvall"],
+        "description" : "Sundsvall municipality in Sweden",
+        "citation" : {
+          "organization" : "City of Sundsvall",
+          "address" : "Sundsvall, Sweden"},
+        "url" : "https://m02-http-pxwebb.login.sundsvall.se/PXWeb_Ext/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["sv"]
+    },
+
+    "statistik.vasteras.se": {
+        "alias" : ["vasteras"],
+        "description" : "Vasteras municipality in Sweden",
+        "citation" : {
+          "organization" : "City of Vasteras",
+          "address" : "Vasteras, Sweden"},
+        "url" : "https://statistik.vasteras.se/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["sv"]
+    },
+
+    "pxweb.nhwstat.org": {
+        "alias" : ["nhwstat"],
+        "description" : "Nordic Health and Welfare Statistics",
+        "citation" : {
+          "organization" : "Nordic Health and Welfare Statistics"},
+        "url" : "https://pxweb.nhwstat.org/Prod/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "web.dzs.hr": {
+        "alias" : ["croatia", "dzs"],
+        "description" : "Croatian Bureau of Statistics",
+        "citation" : {
+          "organization" : "Croatian Bureau of Statistics",
+          "address" : "Zagreb, Croatia"},
+        "url" : "https://web.dzs.hr/PXWeb/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "etab.llv.li": {
+        "alias" : ["liechtenstein"],
+        "description" : "Statistics Liechtenstein",
+        "citation" : {
+          "organization" : "Office of Statistics Liechtenstein",
+          "address" : "Vaduz, Liechtenstein"},
+        "url" : "https://etab.llv.li/PXWeb/api/[version]/[lang]/eTab",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "www6.poderjudicial.es": {
+        "alias" : ["poderjudicial"],
+        "description" : "Judicial statistics, Spain",
+        "citation" : {
+          "organization" : "General Council of the Judiciary",
+          "address" : "Madrid, Spain"},
+        "url" : "https://www6.poderjudicial.es/PxWeb-20252-v1/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["es"]
+    },
+
+    "openstat.psa.gov.ph": {
+        "alias" : ["psa", "openstat"],
+        "description" : "Philippine Statistics Authority OpenSTAT",
+        "citation" : {
+          "organization" : "Philippine Statistics Authority",
+          "address" : "Quezon City, Philippines"},
+        "url" : "https://openstat.psa.gov.ph/PXWeb/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "px.web.ined.fr": {
+        "alias" : ["ggp", "ined"],
+        "description" : "Generations and Gender Contextual Database",
+        "citation" : {
+          "organization" : "Institut national d'études démographiques",
+          "address" : "Paris, France"},
+        "url" : "https://px.web.ined.fr/GGP/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "statistika.spkc.gov.lv": {
+        "alias" : ["spkc", "latvia_health"],
+        "description" : "Latvian Health Statistics Database",
+        "citation" : {
+          "organization" : "Centre for Disease Prevention and Control of Latvia",
+          "address" : "Riga, Latvia"},
+        "url" : "https://statistika.spkc.gov.lv/api/[version]/[lang]/Health",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "pxweb.irena.org": {
+        "alias" : ["irena"],
+        "description" : "International Renewable Energy Agency",
+        "citation" : {
+          "organization" : "International Renewable Energy Agency",
+          "address" : "Abu Dhabi, United Arab Emirates"},
+        "url" : "https://pxweb.irena.org/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "tilastot.etk.fi": {
+        "alias" : ["etk"],
+        "description" : "Finnish Centre for Pensions",
+        "citation" : {
+          "organization" : "Finnish Centre for Pensions",
+          "address" : "Helsinki, Finland"},
+        "url" : "https://tilastot.etk.fi/api/[version]/[lang]/ETK",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "pc-axis.geostat.ge": {
+        "alias" : ["geostat"],
+        "description" : "Geostat Statistics Database",
+        "citation" : {
+          "organization" : "National Statistics Office of Georgia",
+          "address" : "Tbilisi, Georgia"},
+        "url" : "http://pc-axis.geostat.ge/PXweb/api/[version]/[lang]/Database",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "statistika.tai.ee": {
+        "alias" : ["tai", "estonia_health"],
+        "description" : "Estonian Health Statistics and Health Research Database",
+        "citation" : {
+          "organization" : "National Institute for Health Development",
+          "address" : "Tallinn, Estonia"},
+        "url" : "https://statistika.tai.ee/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "pxexternal.energimyndigheten.se": {
+        "alias" : ["energimyndigheten"],
+        "description" : "Swedish Energy Agency",
+        "citation" : {
+          "organization" : "Swedish Energy Agency",
+          "address" : "Eskilstuna, Sweden"},
+        "url" : "https://pxexternal.energimyndigheten.se/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "skogsstatistik.slu.se": {
+        "alias" : ["slu", "riksskogstaxeringen"],
+        "description" : "Swedish University of Agricultural Sciences forest statistics",
+        "citation" : {
+          "organization" : "Swedish University of Agricultural Sciences",
+          "address" : "Umea, Sweden"},
+        "url" : "https://skogsstatistik.slu.se/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "pxweb.skogsstyrelsen.se": {
+        "alias" : ["skogsstyrelsen"],
+        "description" : "The Swedish Forest Agency",
+        "citation" : {
+          "organization" : "Swedish Forest Agency",
+          "address" : "Jonkoping, Sweden"},
+        "url" : "https://pxweb.skogsstyrelsen.se/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
+    "tilastot.tela.fi": {
+        "alias" : ["tela"],
+        "description" : "Finnish Pension Alliance statistics",
+        "citation" : {
+          "organization" : "Finnish Pension Alliance TELA",
+          "address" : "Helsinki, Finland"},
+        "url" : "https://tilastot.tela.fi/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["en"]
+    },
+
     "statistik.tillvaxtanalys.se": {
         "alias" : ["tva", "tillvaxtanalys"],
         "description" : "Swedish Agency for Growth Policy Analysis (Tillväxtanalys)",

@@ -86,7 +86,11 @@ is_pxweb_config_response <- function(x, version) {
   }
   cfg <- suppressMessages(try(httr::content(x, "parsed"), silent = TRUE))
   if(version == "v1"){
-    return((all(c("maxCells", "maxCalls", "timeWindow", "CORS") %in% names(cfg))) & !inherits(cfg, "try-error"))
+    return(
+      !inherits(cfg, "try-error") &&
+        all(c("maxCalls", "timeWindow", "CORS") %in% names(cfg)) &&
+        any(c("maxCells", "maxValues") %in% names(cfg))
+    )
   } else if(version == "v2"){
     return((all(c("maxDataCells", "maxCallsPerTimeWindow", "timeWindow") %in% names(cfg))) & !inherits(cfg, "try-error"))
   } else {

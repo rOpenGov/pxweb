@@ -38,6 +38,18 @@ test_that(desc = "Catalogue config audit reports endpoint status", {
           body = list(maxCells = 1L, maxCalls = 2L, timeWindow = 3L)
         ))
       }
+      if (grepl("maxvalues", url)) {
+        return(pxweb_test_response(
+          url = url,
+          body = list(maxValues = 1L, maxCalls = 2L, timeWindow = 3L, CORS = TRUE)
+        ))
+      }
+      if (grepl("nolimit", url)) {
+        return(pxweb_test_response(
+          url = url,
+          body = list(maxCalls = 2L, timeWindow = 3L, CORS = TRUE)
+        ))
+      }
       if (grepl("bad", url)) {
         return(pxweb_test_response(url = url, status_code = 500L, body = list()))
       }
@@ -51,6 +63,8 @@ test_that(desc = "Catalogue config audit reports endpoint status", {
 
   apis <- list(
     ok.example.com = pxweb_test_catalogue_entry("https://ok.example.com/api/[version]/[lang]"),
+    maxvalues.example.com = pxweb_test_catalogue_entry("https://maxvalues.example.com/api/[version]/[lang]"),
+    nolimit.example.com = pxweb_test_catalogue_entry("https://nolimit.example.com/api/[version]/[lang]"),
     missing.example.com = pxweb_test_catalogue_entry("https://missing.example.com/api/[version]/[lang]"),
     bad.example.com = pxweb_test_catalogue_entry("https://bad.example.com/api/[version]/[lang]"),
     old.example.com = pxweb_test_catalogue_entry("https://old.example.com/api/[version]/[lang]", version = "v0")
@@ -60,12 +74,13 @@ test_that(desc = "Catalogue config audit reports endpoint status", {
 
   expect_equal(audit$api, names(apis))
   expect_equal(audit$config_url[1], "https://ok.example.com/api/v1/en?config")
-  expect_equal(audit$ok, c(TRUE, FALSE, FALSE, FALSE))
-  expect_equal(audit$missing_fields[2], "CORS")
-  expect_equal(audit$status_code[3], 500L)
-  expect_equal(audit$error[3], "HTTP 500")
-  expect_equal(audit$error[4], "Unsupported PXWEB API version: v0")
-  expect_equal(get_calls, audit$config_url[1:3])
+  expect_equal(audit$ok, c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE))
+  expect_equal(audit$missing_fields[3], "maxCells or maxValues")
+  expect_equal(audit$missing_fields[4], "CORS")
+  expect_equal(audit$status_code[5], 500L)
+  expect_equal(audit$error[5], "HTTP 500")
+  expect_equal(audit$error[6], "Unsupported PXWEB API version: v0")
+  expect_equal(get_calls, audit$config_url[1:5])
 })
 
 test_that(desc = "Mixed node levels object", {

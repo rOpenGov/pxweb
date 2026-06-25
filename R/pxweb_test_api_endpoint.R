@@ -309,15 +309,22 @@ pxweb_config_missing_fields <- function(response, version) {
 
   required_fields <- switch(
     version,
-    v1 = c("maxCells", "maxCalls", "timeWindow", "CORS"),
+    v1 = c("maxCalls", "timeWindow", "CORS"),
     v2 = c("maxDataCells", "maxCallsPerTimeWindow", "timeWindow")
   )
   cfg <- suppressMessages(try(httr::content(response, "parsed"), silent = TRUE))
   if (inherits(cfg, "try-error")) {
+    if (version == "v1") {
+      return(c(required_fields, "maxCells or maxValues"))
+    }
     return(required_fields)
   }
 
-  setdiff(required_fields, names(cfg))
+  missing_fields <- setdiff(required_fields, names(cfg))
+  if (version == "v1" && !any(c("maxCells", "maxValues") %in% names(cfg))) {
+    missing_fields <- c(missing_fields, "maxCells or maxValues")
+  }
+  missing_fields
 }
 
 

@@ -32,6 +32,26 @@ test_that(desc = "pxweb_api_catalogue contains active APIs without hard-coded li
   expect_true("pxweb.asub.ax" %in% names(pxac))
   expect_true("pxweb2022.vgregion.se" %in% names(pxac))
   expect_true("askdata.rks-gov.net" %in% names(pxac))
+  expect_true(all(c(
+    "statistik.csn.se",
+    "m02-http-pxwebb.login.sundsvall.se",
+    "statistik.vasteras.se",
+    "pxweb.nhwstat.org",
+    "web.dzs.hr",
+    "etab.llv.li",
+    "www6.poderjudicial.es",
+    "openstat.psa.gov.ph",
+    "px.web.ined.fr",
+    "statistika.spkc.gov.lv",
+    "pxweb.irena.org",
+    "tilastot.etk.fi",
+    "pc-axis.geostat.ge",
+    "statistika.tai.ee",
+    "pxexternal.energimyndigheten.se",
+    "skogsstatistik.slu.se",
+    "pxweb.skogsstyrelsen.se",
+    "tilastot.tela.fi"
+  ) %in% names(pxac)))
   expect_equal(
     pxac[["statdb.luke.fi"]]$url,
     "https://statdb.luke.fi/PXWeb/api/[version]/[lang]"
