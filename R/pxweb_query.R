@@ -84,19 +84,38 @@ pxweb_query.list <- function(x) {
   checkmate::assert_named(x)
   obj <- list(
     query = list(),
-    response = list(format = "json")
+    response = list(format = "json"),
+    v2_extra_query = list(),
+    v2_selection_type = character(0)
   )
   for (i in seq_along(x)) {
+    value <- x[[i]]
+    filter <- "item"
+    selection_type <- "item"
+
+    if (is_pxweb_query_selection(value)) {
+      selection_type <- value$type
+      obj$v2_extra_query <- c(obj$v2_extra_query, pxweb_query_selection_extra_query(value, names(x)[i]))
+      value <- value$value_codes
+
+      if (selection_type == "all" || (inherits(x[[i]], "pxweb_query_codelist") && identical(value, "*"))) {
+        filter <- "all"
+      } else if (selection_type %in% c("top", "bottom")) {
+        filter <- selection_type
+        value <- sub("^[[:space:]]*(top|bottom)[[:space:]]*\\([[:space:]]*([0-9]+)[[:space:]]*\\)[[:space:]]*$", "\\2", value, ignore.case = TRUE)
+      }
+    } else if (value[1] == "*") {
+      filter <- "all"
+    }
+
     obj$query[[i]] <- list(
       code = names(x)[i],
       selection = list(
-        filter = "item",
-        values = x[[i]]
+        filter = filter,
+        values = value
       )
     )
-    if (x[[i]][1] == "*") {
-      obj$query[[i]]$selection$filter <- "all"
-    }
+    obj$v2_selection_type[[names(x)[i]]] <- selection_type
   }
   class(obj) <- c("pxweb_query", "list")
   assert_pxweb_query(obj)
@@ -110,7 +129,12 @@ pxweb_query.response <- function(x) {
   if (is.null(x$request$options$postfields)) {
     return(NULL)
   }
-  pxweb_query(x = readBin(x$request$options$postfields, what = "character"))
+  postfields <- readBin(x$request$options$postfields, what = "character")
+  obj <- try(jsonlite::fromJSON(postfields, simplifyDataFrame = FALSE), silent = TRUE)
+  if (!inherits(obj, "try-error") && "selection" %in% names(obj) && !"query" %in% names(obj)) {
+    return(NULL)
+  }
+  pxweb_query(x = postfields)
 }
 
 
@@ -169,8 +193,8 @@ assert_pxweb_query <- function(x, check_response_format = TRUE) {
       filter_aggr <- TRUE
     }
     if (!filter_aggr) {
-      checkmate::assert_choice(x$query[[i]]$selection$filter, choices = c("item", "all", "top", "agg:[aggregated values]", "vs:[other value set]"))
-      if (x$query[[i]]$selection$filter %in% c("all", "top")) {
+      checkmate::assert_choice(x$query[[i]]$selection$filter, choices = c("item", "all", "top", "bottom", "agg:[aggregated values]", "vs:[other value set]"))
+      if (x$query[[i]]$selection$filter %in% c("all", "top", "bottom")) {
         checkmate::assert_character(x$query[[i]]$selection$values, len = 1, .var.name = paste0("x$query[[", i, "]]$selection$values"))
       }
     }
@@ -225,7 +249,7 @@ pxweb_validate_query_with_metadata <- function(pxq, pxmd) {
     query_variables[i] <- pxq$query[[i]]$code
     pxweb_query_variable_code <- pxq$query[[i]]$code
     checkmate::assert_choice(pxweb_query_variable_code, choices = pxweb_metadata_variables)
-    if (tolower(pxq$query[[i]]$selection$filter) == "item") {
+    if (tolower(pxq$query[[i]]$selection$filter) == "item" && !pxweb_query_v2_has_codelist(pxq, pxweb_query_variable_code)) {
       pxweb_query_variable_values <- pxq$query[[i]]$selection$values
       meta_idx <- which(pxweb_metadata_variables %in% pxweb_query_variable_code)
       pxweb_metadata_variable_values <- pxmd$variables[[meta_idx]]$values
@@ -265,10 +289,15 @@ pxweb_add_metadata_to_query <- function(pxq, pxmd) {
   for (i in seq_along(pxq$query)) {
     pxweb_query_variable_code <- pxq$query[[i]]$code
     checkmate::assert_choice(pxweb_query_variable_code, choices = pxweb_metadata_variables)
-    if (tolower(pxq$query[[i]]$selection$filter) == "all") {
+    meta_idx <- which(pxweb_metadata_variables %in% pxweb_query_variable_code)
+    if (identical(pxweb_query_v2_selection_type(pxq, pxweb_query_variable_code), "latest")) {
+      pxq$query[[i]]$selection$values <- utils::tail(pxmd$variables[[meta_idx]]$values, 1)
+      pxq$query[[i]]$selection$filter <- "item"
+    }
+    if (tolower(pxq$query[[i]]$selection$filter) == "all" && !pxweb_query_v2_has_codelist(pxq, pxweb_query_variable_code)) {
       px_pattern <- pxq$query[[i]]$selection$values
       px_pattern <- paste0("^", gsub(pattern = "\\*", replacement = "\\.\\+", px_pattern))
-      meta_data_values <- pxmd$variables[[which(pxweb_metadata_variables %in% pxweb_query_variable_code)]]$values
+      meta_data_values <- pxmd$variables[[meta_idx]]$values
       if (!is.null(meta_data_values)) {
         meta_data_values <- meta_data_values[grepl(x = meta_data_values, pattern = px_pattern)]
         pxq$query[[i]]$selection$values <- meta_data_values
@@ -293,7 +322,7 @@ pxweb_remove_metadata_from_query <- function(pxq, pxmd) {
     query_size <- length(pxq$query[[i]]$selection$values)
     pxweb_query_variable_code <- pxq$query[[i]]$code
     meta_data_size <- length(pxmd$variables[[which(pxweb_metadata_variables %in% pxweb_query_variable_code)]]$values)
-    if (query_size >= meta_data_size & query_size > 1) {
+    if (query_size >= meta_data_size & query_size > 1 && !pxweb_query_v2_has_codelist(pxq, pxweb_query_variable_code)) {
       pxq$query[[i]]$selection$filter <- "all"
       pxq$query[[i]]$selection$values <- "*"
     }
@@ -302,7 +331,7 @@ pxweb_remove_metadata_from_query <- function(pxq, pxmd) {
   pxq
 }
 
-#' Compue the dimension of the query
+#' Compute the dimension of the query
 #'
 #' @param pxq a \code{pxweb_query} object.
 #'
@@ -314,8 +343,12 @@ pxweb_query_dim <- function(pxq) {
     names(dim_res)[i] <- pxq$query[[i]]$code
     if (tolower(pxq$query[[i]]$selection$filter) == "top") {
       dim_res[i] <- as.numeric(pxq$query[[i]]$selection$values)
+    } else if (tolower(pxq$query[[i]]$selection$filter) == "bottom") {
+      dim_res[i] <- as.numeric(pxq$query[[i]]$selection$values)
     } else if (tolower(pxq$query[[i]]$selection$filter) == "all") {
-      warning("Cannot compute the dimension for a variable with filter 'all', set to 1.", call. = FALSE)
+      if (!pxweb_query_v2_has_codelist(pxq, pxq$query[[i]]$code)) {
+        warning("Cannot compute the dimension for a variable with filter 'all', set to 1.", call. = FALSE)
+      }
       dim_res[i] <- 1
     } else {
       dim_res[i] <- length(pxq$query[[i]]$selection$values)
@@ -354,6 +387,43 @@ pxweb_query_filter <- function(pxq) {
   res
 }
 
+#' Get PXWEB API v2 extra query parameters.
+#'
+#' Returns the extra URL query parameters attached to a \code{pxweb_query} by
+#' v2 selection helpers, for example aggregation and valueset codelists.
+#'
+#' @param pxq a \code{pxweb_query} object.
+#'
+#' @return
+#' A named list of extra v2 query parameters, such as
+#' \code{codelist[Variable]} and \code{outputValues[Variable]}.
+#'
+#' @keywords internal
+pxweb_query_v2_extra_query <- function(pxq) {
+  checkmate::assert_class(pxq, "pxweb_query")
+  extra_query <- pxq$v2_extra_query
+  if (is.null(extra_query)) {
+    return(list())
+  }
+  extra_query
+}
+
+pxweb_query_v2_selection_type <- function(pxq, variable_code) {
+  checkmate::assert_class(pxq, "pxweb_query")
+  checkmate::assert_string(variable_code, min.chars = 1)
+  selection_type <- pxq$v2_selection_type[[variable_code]]
+  if (is.null(selection_type)) {
+    return(NULL)
+  }
+  selection_type
+}
+
+pxweb_query_v2_has_codelist <- function(pxq, variable_code) {
+  checkmate::assert_class(pxq, "pxweb_query")
+  checkmate::assert_string(variable_code, min.chars = 1)
+  !is.null(pxweb_query_v2_extra_query(pxq)[[paste0("codelist[", variable_code, "]")]])
+}
+
 
 #' Convert a \code{pxweb_query} object to a \code{json} string
 #'
@@ -373,12 +443,85 @@ pxweb_query_filter <- function(pxq) {
 #' @export
 pxweb_query_as_json <- function(pxq, ...) {
   checkmate::assert_class(pxq, "pxweb_query")
+  pxq <- pxq[c("query", "response")]
   pxq$response$format <- jsonlite::unbox(pxq$response$format)
   for (i in seq_along(pxq$query)) {
     pxq$query[[i]]$code <- jsonlite::unbox(pxq$query[[i]]$code)
     pxq$query[[i]]$selection$filter <- jsonlite::unbox(pxq$query[[i]]$selection$filter)
   }
   jsonlite::toJSON(pxq, ...)
+}
+
+#' Convert a \code{pxweb_query} object to a PXWEB API v2 query.
+#'
+#' @param pxq a \code{pxweb_query} object.
+#'
+#' @return
+#' a \code{pxweb_query_v2} object.
+#'
+#' @keywords internal
+pxweb_query_as_v2 <- function(pxq) {
+  checkmate::assert_class(pxq, "pxweb_query")
+
+  selection <- lapply(pxq$query, function(query_dim) {
+    filter <- tolower(query_dim$selection$filter)
+    values <- query_dim$selection$values
+
+    if (filter == "top") {
+      values <- paste0("top(", values, ")")
+    } else if (filter == "bottom") {
+      values <- paste0("bottom(", values, ")")
+    } else if (!filter %in% c("item", "all")) {
+      stop(
+        "PXWEB API v2 query conversion does not support selection filter '",
+        query_dim$selection$filter,
+        "' for variable '",
+        query_dim$code,
+        "'.",
+        call. = FALSE
+      )
+    }
+
+    list(
+      variableCode = query_dim$code,
+      valueCodes = as.list(values)
+    )
+  })
+
+  pxweb_query_v2(list(selection = selection))
+}
+
+#' Construct a \code{pxweb_query_v2} object.
+#'
+#' @param x a list with a PXWEB API v2 \code{selection} body.
+#'
+#' @return
+#' a \code{pxweb_query_v2} object.
+#'
+#' @keywords internal
+pxweb_query_v2 <- function(x) {
+  checkmate::assert_class(x, "list")
+  assert_pxweb_query_v2(x)
+  class(x) <- c("pxweb_query_v2", "list")
+  x
+}
+
+#' Assert a \code{pxweb_query_v2} object.
+#'
+#' @param x an object to check.
+#'
+#' @keywords internal
+assert_pxweb_query_v2 <- function(x) {
+  checkmate::assert_class(x, "list")
+  checkmate::assert_names(names(x), must.include = "selection")
+  checkmate::assert_list(x$selection, min.len = 1)
+
+  for (i in seq_along(x$selection)) {
+    checkmate::assert_names(names(x$selection[[i]]), must.include = c("variableCode", "valueCodes"))
+    checkmate::assert_string(x$selection[[i]]$variableCode)
+    checkmate::assert_list(x$selection[[i]]$valueCodes, min.len = 1)
+    checkmate::assert_character(unlist(x$selection[[i]]$valueCodes, use.names = FALSE), min.len = 1)
+  }
 }
 
 #' Print a \code{pxweb_query} object as R code

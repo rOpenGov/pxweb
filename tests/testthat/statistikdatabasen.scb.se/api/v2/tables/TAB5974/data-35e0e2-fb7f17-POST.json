@@ -1,0 +1,194 @@
+{
+    "version": "2.0",
+    "class": "dataset",
+    "label": "Folkmängd 31 dec, antal efter inrikes/utrikes född, ålder, kön och år",
+    "source": "SCB",
+    "updated": "2026-04-16T06:00:00Z",
+    "role": {
+        "time": [
+            "Tid"
+        ],
+        "metric": [
+            "ContentsCode"
+        ]
+    },
+    "id": [
+        "InrikesUtrikes",
+        "Alder",
+        "Kon",
+        "ContentsCode",
+        "Tid"
+    ],
+    "size": [
+        1,
+        1,
+        2,
+        1,
+        1
+    ],
+    "dimension": {
+        "InrikesUtrikes": {
+            "label": "inrikes/utrikes född",
+            "category": {
+                "index": {
+                    "83": 0
+                },
+                "label": {
+                    "83": "inrikes och utrikes födda"
+                }
+            },
+            "extension": {
+                "elimination": true,
+                "eliminationValueCode": "83",
+                "show": "value"
+            }
+        },
+        "Alder": {
+            "label": "ålder",
+            "category": {
+                "index": {
+                    "0": 0
+                },
+                "label": {
+                    "0": "0 år"
+                }
+            },
+            "extension": {
+                "elimination": false,
+                "show": "value"
+            },
+            "link": {
+                "describedby": [
+                    {
+                        "extension": {
+                            "Alder": "Ålder"
+                        }
+                    }
+                ]
+            }
+        },
+        "Kon": {
+            "label": "kön",
+            "category": {
+                "index": {
+                    "1": 0,
+                    "2": 1
+                },
+                "label": {
+                    "1": "män",
+                    "2": "kvinnor"
+                }
+            },
+            "extension": {
+                "elimination": true,
+                "show": "value"
+            },
+            "link": {
+                "describedby": [
+                    {
+                        "extension": {
+                            "Kon": "Kön"
+                        }
+                    }
+                ]
+            }
+        },
+        "ContentsCode": {
+            "label": "tabellinnehåll",
+            "category": {
+                "index": {
+                    "000005NO": 0
+                },
+                "label": {
+                    "000005NO": "Antal"
+                },
+                "unit": {
+                    "000005NO": {
+                        "base": "antal",
+                        "decimals": 0
+                    }
+                }
+            },
+            "extension": {
+                "elimination": false,
+                "refperiod": {
+                    "000005NO": "31 december respektive år"
+                },
+                "show": "value",
+                "measuringType": {
+                    "000005NO": "Stock"
+                },
+                "priceType": {
+                    "000005NO": "NotApplicable"
+                },
+                "adjustment": {
+                    "000005NO": "None"
+                },
+                "alternativeText": {
+                    "000005NO": "Folkmängd 31 dec, antal"
+                }
+            }
+        },
+        "Tid": {
+            "label": "år",
+            "category": {
+                "index": {
+                    "2026": 0
+                },
+                "label": {
+                    "2026": "2026"
+                }
+            },
+            "extension": {
+                "elimination": false,
+                "show": "code"
+            }
+        }
+    },
+    "extension": {
+        "px": {
+            "infofile": "BE0401",
+            "tableid": "TAB5974",
+            "decimals": 0,
+            "official-statistics": true,
+            "aggregallowed": true,
+            "copyright": false,
+            "language": "sv",
+            "contents": "Folkmängd 31 dec, antal",
+            "descriptiondefault": false,
+            "heading": [
+                "ContentsCode",
+                "Tid"
+            ],
+            "stub": [
+                "InrikesUtrikes",
+                "Alder",
+                "Kon"
+            ],
+            "matrix": "TAB5974",
+            "subject-code": "BE",
+            "subject-area": "Befolkning"
+        },
+        "discontinued": null,
+        "contact": [
+            {
+                "name": "Lena  Lundkvist",
+                "organization": "SCB",
+                "phone": "010-479 46 78",
+                "mail": "lena.lundkvist@scb.se",
+                "raw": "Lena  Lundkvist, SCB# +46 010-479 46 78#lena.lundkvist@scb.se"
+            },
+            {
+                "name": "Demografi -",
+                "organization": "SCB",
+                "phone": "-",
+                "mail": "demografi@scb.se",
+                "raw": "Demografi -, SCB# - -#demografi@scb.se"
+            }
+        ]
+    },
+    "value": [
+        50080,
+        47361
+    ]
+}

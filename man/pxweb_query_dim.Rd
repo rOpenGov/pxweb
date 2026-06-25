@@ -2,7 +2,7 @@
 % Please edit documentation in R/pxweb_query.R
 \name{pxweb_query_dim}
 \alias{pxweb_query_dim}
-\title{Compue the dimension of the query}
+\title{Compute the dimension of the query}
 \usage{
 pxweb_query_dim(pxq)
 }
@@ -10,6 +10,6 @@ pxweb_query_dim(pxq)
 \item{pxq}{a \code{pxweb_query} object.}
 }
 \description{
-Compue the dimension of the query
+Compute the dimension of the query
 }
 \keyword{internal}

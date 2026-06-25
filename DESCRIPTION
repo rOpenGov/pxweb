@@ -1,8 +1,8 @@
 Type: Package
 Package: pxweb
 Title: R Interface to PXWEB APIs
-Version: 0.17.1
-Date: 2025-04-01
+Version: 0.18.0
+Date: 2026-06-25
 Authors@R: c(
     person("Mans", "Magnusson", , "mons.magnusson@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0296-2719")),
@@ -44,11 +44,11 @@ Suggests:
     knitr,
     remotes,
     rmarkdown,
-    testthat (>= 0.11),
+    testthat (>= 3.1.7),
     xml2
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 X-schema.org-isPartOf: http://ropengov.org/
 X-schema.org-keywords: ropengov

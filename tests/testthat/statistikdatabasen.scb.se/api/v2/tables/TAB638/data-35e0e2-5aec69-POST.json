@@ -1,0 +1,215 @@
+{
+    "version": "2.0",
+    "class": "dataset",
+    "label": "Folkmängd efter region, civilstånd, ålder, kön och år",
+    "source": "SCB",
+    "updated": "2025-02-21T07:00:00Z",
+    "note": [
+        "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. ",
+        "Folkmängd år 1968–1982 redovisas enligt regional indelning 1983-01-01. Justeringar för att spegla indelningen 1983-01-01 har gjorts med hjälp av församlingsindelning men inte på fastighetsnivå vilket gör att det kan finnas brister i statistiken. Folkmängd år 1983 och framåt redovisas enligt regional indelning den 1 januari efterföljande år. \r\n \r\nFolkökning för år 1968–2009 definieras i denna tabell som skillnaden mellan folkmängden vid årets början och årets slut. Från år 2010 redovisas folkökningen enligt den indelning i administrativa områden som gällde den 1 januari innevarande år.",
+        "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar."
+    ],
+    "role": {
+        "time": [
+            "Tid"
+        ],
+        "metric": [
+            "ContentsCode"
+        ]
+    },
+    "id": [
+        "Region",
+        "Civilstand",
+        "Alder",
+        "Kon",
+        "ContentsCode",
+        "Tid"
+    ],
+    "size": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+    ],
+    "dimension": {
+        "Region": {
+            "label": "region",
+            "note": [
+                "År 1968–1998 redovisas enligt regional indelning 1998-01-01."
+            ],
+            "category": {
+                "index": {
+                    "00": 0
+                },
+                "label": {
+                    "00": "Riket"
+                }
+            },
+            "extension": {
+                "elimination": true,
+                "eliminationValueCode": "00",
+                "show": "code_value"
+            }
+        },
+        "Civilstand": {
+            "label": "civilstånd",
+            "category": {
+                "index": {
+                    "OG": 0
+                },
+                "label": {
+                    "OG": "ogifta"
+                }
+            },
+            "extension": {
+                "elimination": false,
+                "show": "value"
+            }
+        },
+        "Alder": {
+            "label": "ålder",
+            "category": {
+                "index": {
+                    "0": 0
+                },
+                "label": {
+                    "0": "0 år"
+                }
+            },
+            "extension": {
+                "elimination": false,
+                "show": "value"
+            },
+            "link": {
+                "describedby": [
+                    {
+                        "extension": {
+                            "Alder": "Ålder"
+                        }
+                    }
+                ]
+            }
+        },
+        "Kon": {
+            "label": "kön",
+            "category": {
+                "index": {
+                    "1": 0
+                },
+                "label": {
+                    "1": "män"
+                }
+            },
+            "extension": {
+                "elimination": false,
+                "show": "value"
+            },
+            "link": {
+                "describedby": [
+                    {
+                        "extension": {
+                            "Kon": "Kön"
+                        }
+                    }
+                ]
+            }
+        },
+        "ContentsCode": {
+            "label": "tabellinnehåll",
+            "category": {
+                "index": {
+                    "BE0101N1": 0
+                },
+                "label": {
+                    "BE0101N1": "Folkmängd"
+                },
+                "unit": {
+                    "BE0101N1": {
+                        "base": "antal personer",
+                        "decimals": 0
+                    }
+                }
+            },
+            "extension": {
+                "elimination": false,
+                "refperiod": {
+                    "BE0101N1": "31 december respektive år"
+                },
+                "show": "value",
+                "measuringType": {
+                    "BE0101N1": "Stock"
+                },
+                "priceType": {
+                    "BE0101N1": "NotApplicable"
+                },
+                "adjustment": {
+                    "BE0101N1": "None"
+                },
+                "alternativeText": {
+                    "BE0101N1": "Folkmängd"
+                }
+            }
+        },
+        "Tid": {
+            "label": "år",
+            "category": {
+                "index": {
+                    "2024": 0
+                },
+                "label": {
+                    "2024": "2024"
+                }
+            },
+            "extension": {
+                "elimination": false,
+                "show": "code"
+            }
+        }
+    },
+    "extension": {
+        "noteMandatory": {
+            "0": true,
+            "1": true,
+            "2": true
+        },
+        "px": {
+            "infofile": "BE0101",
+            "tableid": "TAB638",
+            "decimals": 0,
+            "official-statistics": true,
+            "aggregallowed": true,
+            "copyright": false,
+            "language": "sv",
+            "contents": "Folkmängd",
+            "descriptiondefault": false,
+            "heading": [
+                "ContentsCode",
+                "Tid"
+            ],
+            "stub": [
+                "Region",
+                "Civilstand",
+                "Alder",
+                "Kon"
+            ],
+            "matrix": "TAB638",
+            "subject-code": "BE",
+            "subject-area": "Befolkning"
+        },
+        "discontinued": null,
+        "contact": [
+            {
+                "name": "Statistikservice",
+                "organization": "SCB",
+                "phone": "010-479 50 00",
+                "mail": "information@scb.se",
+                "raw": " Statistikservice, SCB# +46 010-479 50 00#information@scb.se"
+            }
+        ]
+    },
+    "value": [
+        50937
+    ]
+}

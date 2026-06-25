@@ -4,10 +4,12 @@
 \alias{is_pxweb_config_response}
 \title{Check if a response is a pxweb config response}
 \usage{
-is_pxweb_config_response(x)
+is_pxweb_config_response(x, version)
 }
 \arguments{
 \item{x}{a response object}
+
+\item{version}{the version of the pxweb API to check for}
 }
 \description{
 Check if a response is a pxweb config response

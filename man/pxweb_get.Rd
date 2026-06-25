@@ -4,7 +4,7 @@
 \alias{pxweb_get}
 \title{Do a GET call to PXWEB API}
 \usage{
-pxweb_get(url, query = NULL, verbose = TRUE)
+pxweb_get(url, query = NULL, verbose = TRUE, output_format = "json-stat2")
 }
 \arguments{
 \item{url}{a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.}
@@ -12,6 +12,19 @@ pxweb_get(url, query = NULL, verbose = TRUE)
 \item{query}{a json string, json file or list object that can be coherced to a \code{pxweb_query} object.}
 
 \item{verbose}{should large queries print out progress.}
+
+\item{output_format}{output format for PXWEB API v2 data requests. Defaults
+to \code{"json-stat2"}.}
+}
+\value{
+If \code{query = NULL}, returns metadata about the API path: a
+\code{pxweb_levels} object for API branches or a \code{pxweb_metadata}
+object for data tables. If \code{query} is supplied, returns the parsed data
+response, typically a \code{pxweb_data}, \code{pxweb_data_jsonstat},
+\code{pxweb_data_jsonstat2}, or \code{pxweb_data_v2} object depending on the
+API version and response format. File-based response formats, such as
+\code{"px"} and \code{"sdmx"}, are written to a temporary file and the file
+path is returned. Returns \code{NULL} if the URL host cannot be reached.
 }
 \description{
 Do a GET call to PXWEB API
@@ -57,11 +70,11 @@ big_query <- file.path(
 )
 px_data <- pxweb_get(url = url, query = big_query)
 
-# Get json-stat2 data from statfin using downloaded json query
-jstat2_url <- "https://pxdata.stat.fi:443/PxWeb/api/v1/fi/StatFin/eot/statfin_eot_pxt_132a.px"
+# Get json-stat2 data from StatFin using a downloaded json query
+jstat2_url <- "https://pxdata.stat.fi/PxWeb/api/v1/en/StatFin/vaenn/139e.px"
 jstat2_query <- file.path(
   system.file(package = "pxweb"),
-  "extdata", "examples", "sq-api_table_statfin_eot_pxt_132a.px.json"
+  "extdata", "examples", "statfin_vaenn_139e_query.json"
 )
 jstat2_data <- pxweb_get(url = jstat2_url, query = jstat2_query)
 }

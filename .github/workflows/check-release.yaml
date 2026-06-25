@@ -4,19 +4,9 @@ on:
   push:
     paths-ignore:
       - 'paper/**'
-    branches:
-      - main
-      - master
-      - development
-      - dev
   pull_request:
-    paths-ignore: 
+    paths-ignore:
       - 'paper/**'
-    branches:
-      - main
-      - master
-      - development
-      - dev
 
 name: R-CMD-check (release)
 
@@ -26,6 +16,8 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      PXWEB_RUN_LIVE_TESTS: "false"
+      PXWEB_RUN_EXTERNAL_LIVE_TESTS: "false"
     steps:
       - uses: actions/checkout@v3
 

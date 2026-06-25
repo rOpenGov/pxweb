@@ -28,9 +28,9 @@ pxweb_add_call <- function(obj, time_stamp = Sys.time()) {
     second_between_first_and_last_call <- as.numeric(obj$calls$time_stamps[[1]], units = "secs") - as.numeric(obj$calls$time_stamps[[length(obj$calls$time_stamps)]], units = "secs")
     obj$calls$time_stamps[[length(obj$calls$time_stamps)]] <- NULL
     if (is.pxweb(obj)) save_pxweb(obj)
-    # cat(second_between_first_and_last_call, ":", obj$config$calls_per_period, ": Sleep:", max(obj$config$calls_per_period - second_between_first_and_last_call,0))
+    # cat(second_between_first_and_last_call, ":", obj$config$period_in_seconds, ": Sleep:", max(obj$config$period_in_seconds - second_between_first_and_last_call,0))
     # print(obj$calls$time_stamps[c(1,length(obj$calls$time_stamps))])
-    Sys.sleep(time = max(obj$config$calls_per_period - second_between_first_and_last_call, 0))
+    Sys.sleep(time = max(obj$config$period_in_seconds - second_between_first_and_last_call, 0))
   } else {
     if (is.pxweb(obj)) save_pxweb(obj)
   }

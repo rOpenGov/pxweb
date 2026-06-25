@@ -9,7 +9,8 @@ pxweb_get_data(
   query,
   verbose = TRUE,
   column.name.type = "text",
-  variable.value.type = "text"
+  variable.value.type = "text",
+  output_format = "json-stat2"
 )
 }
 \arguments{
@@ -22,6 +23,9 @@ pxweb_get_data(
 \item{column.name.type}{character: should \code{code} or \code{text} be used as column names?}
 
 \item{variable.value.type}{character: should \code{code} or \code{text} be used as values in columns?}
+
+\item{output_format}{output format for PXWEB API v2 data requests. Defaults
+to \code{"json-stat2"}.}
 }
 \description{
 Do a GET call to PXWEB API and return a data.frame

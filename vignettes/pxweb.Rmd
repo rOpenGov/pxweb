@@ -21,7 +21,10 @@ px_levels
 save(px_levels, file = "vignettes/px_levels_example.rda")
 
 # Get PXWEB metadata about a table
-px_meta <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+scb_table_url <- paste0(
+  "https", "://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+)
+px_meta <- pxweb_get(scb_table_url)
 px_meta
 save(px_meta, file = "vignettes/px_meta_example.rda")
 
@@ -37,21 +40,21 @@ pxweb_query_list <-
 pxq <- pxweb_query(pxweb_query_list)
 
 pxd <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 save(pxd, file = "vignettes/pxd_example.rda")
 
 pxq$response$format <- "json-stat"
 pxjstat <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 save(pxjstat, file = "vignettes/pxjstat_example.rda")
 
 pxq$response$format <- "px"
 pxfp <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 save(pxfp, file = "vignettes/pxfp_example.rda")
@@ -133,6 +136,8 @@ There are two ways of using the `pxweb` R package to access data, either interac
 ## Interactive use
 
 The simplest way of using `pxweb` is to use it interactively, navigate the API to the data of interest, and then set up the query of interest.
+When selecting values for a table variable, use `*` to select all available values, separate multiple choices with `,`, and use `:` to select a range of choices.
+If a variable can be eliminated from the query, use `e` to eliminate it.
 
 ```{r standardquery, message=FALSE, eval=FALSE}
 # Navigate through all pxweb api:s in the R package API catalogue
@@ -186,7 +191,10 @@ And if we use `pxweb_get()` for a table, a PXWEB METADATA object is returned.
 
 ```{r meta, message=FALSE, eval=FALSE}
 # Get PXWEB metadata about a table
-px_meta <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+scb_table_url <- paste0(
+  "https", "://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+)
+px_meta <- pxweb_get(scb_table_url)
 px_meta
 ```
 
@@ -201,10 +209,13 @@ px_meta
 To download data, we need both the URL to the table and a query specifying what parts of the table are of interest. An URL to a table is an URL that will return a metadata object if not a query is supplied. Creating a query can be done in three main ways. The first and most straightforward approach is to use `pxweb_interactive()` to explore the table URL and create a query interactively.
 
 ```{r, message=FALSE, eval=FALSE}
-d <- pxweb_interactive("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+d <- pxweb_interactive(scb_table_url)
 ```
 
-The interactive function will return the query and the URL, even if the data is not downloaded.
+The interactive function returns an invisible list.
+The list always contains the table URL and the query, even if the data is not downloaded.
+If you choose to download data before exiting the interactive session, the list also contains a `data` element with the downloaded data.
+This is different from `pxweb_get()`, which returns the API response itself.
 
 ```{r , message=FALSE, eval=TRUE, echo=FALSE}
 # save(d, file = "d_example.rda")
@@ -212,6 +223,7 @@ load("d_example.rda")
 ```
 
 ```{r, message=FALSE, eval=TRUE}
+names(d)
 d$url
 d$query
 ```
@@ -295,7 +307,7 @@ When we have the URL to a data table and a query, we can download the data with 
 
 ```{r, message=FALSE, eval=FALSE}
 pxd <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 pxd
@@ -311,7 +323,7 @@ If we instead want a JSON-stat object, we change the response format to JSON-sta
 ```{r, message=FALSE, eval=FALSE}
 pxq$response$format <- "json-stat"
 pxjstat <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 pxjstat
@@ -327,7 +339,7 @@ Some return formats return files. Then, these responses are stored in the R `tem
 ```{r, message=FALSE, eval=FALSE}
 pxq$response$format <- "px"
 pxfp <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 pxfp
@@ -341,6 +353,112 @@ pxfp
 If the queries are large (contain more values than the PXWEB API maximum allowed values), the query is chunked into optimal chunks and is then downloaded sequentially. PXWEB data objects are then combined into one large PXWEB data object, while JSON-stat objects are returned as a list of JSON-stat objects, and other files are stored in `tempdir()` as separate files.
 
 For more advanced connections to the API, the `pxweb_advanced_get()` gives the flexibility to access the underlying HTTP calls using `httr` and log the HTTP calls for debugging.
+
+### PXWEB API v2 tables
+
+PXWEB API v2 tables use table identifiers and separate metadata and data endpoints. The `pxweb_get()` function handles this internally: when a query is supplied for a v2 table, the request is sent to the table's `/data` endpoint and JSON-stat2 is requested by default.
+
+Use `pxweb_search()` to find v2 tables from an API root.
+
+```{r, message=FALSE, eval=FALSE}
+search_results <- pxweb_search(
+  "population",
+  api_url = paste0("https:", "//", "statistikdatabasen.scb.se", "/api/v2"),
+  lang = "en",
+  page_size = 5
+)
+
+search_results[, c("id", "label", "metadata_url")]
+```
+
+```{r, message=FALSE, eval=FALSE}
+v2_url <- paste0(
+  "https:", "//", "statistikdatabasen.scb.se",
+  "/api/v2/tables/TAB638/metadata?lang=sv"
+)
+
+v2_query <- list(
+  Region = "00",
+  Civilstand = "OG",
+  Alder = "0",
+  Kon = "1",
+  ContentsCode = "BE0101N1",
+  Tid = "2024"
+)
+
+v2_data <- pxweb_get(v2_url, query = v2_query)
+as.data.frame(v2_data, column.name.type = "code", variable.value.type = "code")
+```
+
+#### Query helpers for PXWEB API v2
+
+PXWEB API v2 tables may expose value sets and aggregation codelists, for example age groups, regional groupings or other ready-made classifications. These are represented in the API with extra URL parameters such as `codelist[Variable]` and `outputValues[Variable]`. The helper functions below let you express these choices directly in the R query instead of writing those API details by hand.
+
+The helpers can be mixed with ordinary character values:
+
+```{r, message=FALSE, eval=FALSE}
+v2_query <- list(
+  Region = pxweb_all(),
+  Alder = pxweb_aggregation("agg_Ålder5år_1"),
+  Kon = c("1", "2"),
+  ContentsCode = "BE0101N1",
+  Tid = pxweb_latest()
+)
+
+v2_df <- pxweb_get_data(
+  v2_url,
+  query = v2_query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+The most common helpers are:
+
+```{r, message=FALSE, eval=FALSE}
+pxweb_all()                         # all values for a variable
+pxweb_latest()                      # latest time period, resolved from metadata
+pxweb_top(10)                       # top 10 values
+pxweb_bottom(10)                    # bottom 10 values
+pxweb_aggregation("agg_Ålder5år_1") # use an aggregation codelist
+pxweb_valueset("vs_Ålder1årG")      # use a value set codelist
+```
+
+If only some values from a codelist should be requested, supply them with `value_codes`.
+
+```{r, message=FALSE, eval=FALSE}
+v2_query <- list(
+  Alder = pxweb_aggregation(
+    "agg_Ålder5år_1",
+    value_codes = c("0-4", "5-9", "10-14")
+  ),
+  Kon = "1",
+  ContentsCode = "BE0101N1",
+  Tid = pxweb_latest()
+)
+```
+
+The exact aggregation and value set identifiers are found in the v2 metadata for a table. Use `pxweb_codelists()` to list them without inspecting the raw API response by hand.
+
+```{r, message=FALSE, eval=FALSE}
+v2_meta <- pxweb_get(v2_url)
+pxweb_codelists(v2_meta, variable = "Alder")
+```
+
+`pxweb_latest()` is resolved against the table metadata before the data request is sent. By default it uses the placeholder `"9999"` in the query object and replaces it with the last available value for that variable from the metadata. It is mainly intended for time variables.
+
+If you want a data frame directly, use `pxweb_get_data()`.
+
+```{r, message=FALSE, eval=FALSE}
+v2_df <- pxweb_get_data(
+  v2_url,
+  query = v2_query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+In v2 JSON-stat2 output, the content variable is retained as a dimension, such as `ContentsCode`, and observations are returned in a generic `value` column.
 
 We can then convert the downloaded PXWEB data objects to a `data. frame` or to a character matrix. The character matrix contains the "raw" data while `data. frame` returns an R `data.frame` in a tidy format. This conversion means missing values (such as ".." are converted to `NA`) in a `data. frame`. Using the arguments `variable.value.type` and `column.name.type`, we can choose if we want the code or the text column names and value types.
 
@@ -408,4 +526,3 @@ We created this vignette with
 ```{r sessioninfo, message=FALSE, warning=FALSE}
 sessionInfo()
 ```
-

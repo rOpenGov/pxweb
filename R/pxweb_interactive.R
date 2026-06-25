@@ -1,14 +1,19 @@
 #' @title Find and download data interactively from a PXWEB API
 #'
 #' @description Wrapper function (for \link{pxweb_get}) to simply find and download data to the current R session.
+#' \code{interactive_pxweb()} is a deprecated alias for \code{pxweb_interactive()}.
 #'
 #' @param x The name or alias of the pxweb api to connect to, a \code{pxweb} object or an url.
 #'
 #' @return
-#' The function returns a list with three slots:
-#' \code{url}: The URL to the data
-#' \code{query}: The query to access the data
-#' \code{data}: The downloaded data (if chosen to download data)
+#' Invisibly returns a list with at least:
+#' \describe{
+#'   \item{\code{url}}{The URL to the selected data table.}
+#'   \item{\code{query}}{A \code{pxweb_query} object that can be passed to \code{\link{pxweb_get}}.}
+#' }
+#' If data is downloaded during the interactive session, the list also includes
+#' \code{data}, containing the downloaded data object returned by \code{\link{pxweb_get}}.
+#' This return value is not the same as calling \code{pxweb_get()} directly.
 #'
 #' @seealso
 #' \code{\link{pxweb_get}}
@@ -69,6 +74,7 @@ pxweb_interactive <- function(x = NULL) {
 #' @rdname pxweb_interactive
 #' @export
 interactive_pxweb <- function(x = NULL) {
+  .Deprecated("pxweb_interactive")
   pxweb_interactive(x)
 }
 
