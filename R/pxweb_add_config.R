@@ -103,7 +103,7 @@ is_pxweb_config_response <- function(x, version) {
 #' @return list with slots \code{was_redirected}, \code{redirected_from} and  \code{redirected_to}
 #'
 #' @references
-#' Function in large parts taken from \url{https://petermeissner.de/blog/2018/11/07/using-httr-to-detect-redirects/}.
+#' Function in large parts taken from \code{petermeissner.de/blog/2018/11/07/using-httr-to-detect-redirects/}.
 #'
 #' @examples
 #' \dontrun{
