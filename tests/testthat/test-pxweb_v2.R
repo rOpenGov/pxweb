@@ -222,6 +222,84 @@ test_that(desc = "PXWEB API v2 live end-to-end workflow", {
   expect_true(any(df_text$value > 0))
 })
 
+test_that(desc = "PXWEB API v1 and v2 equivalent fixtures agree after normalization", {
+  content_code <- "BE0101N1"
+  v1_data <- pxweb_data(list(
+    columns = list(
+      list(code = "Region", text = "region", type = "c", comment = "Region note"),
+      list(code = "Civilstand", text = "civil status", type = "c"),
+      list(code = "Alder", text = "age", type = "c"),
+      list(code = "Kon", text = "sex", type = "c"),
+      list(code = "Tid", text = "year", type = "t"),
+      list(code = content_code, text = "population", type = "d")
+    ),
+    comments = list(),
+    data = list(
+      list(
+        key = list("00", "OG", "0", "1", "2024"),
+        values = list("50937")
+      )
+    )
+  ))
+
+  one_value_category <- function(label, code, text) {
+    list(
+      label = label,
+      category = list(
+        index = structure(list(0L), names = code),
+        label = structure(list(text), names = code)
+      )
+    )
+  }
+
+  v2_data <- pxweb_data_v2(list(
+    version = "2.0",
+    class = "dataset",
+    id = list("Region", "Civilstand", "Alder", "Kon", "ContentsCode", "Tid"),
+    size = as.list(rep(1L, 6)),
+    dimension = list(
+      Region = c(one_value_category("region", "00", "Sweden"), list(note = list("Region note"))),
+      Civilstand = one_value_category("civil status", "OG", "unmarried"),
+      Alder = one_value_category("age", "0", "0 years"),
+      Kon = one_value_category("sex", "1", "men"),
+      ContentsCode = one_value_category("contents", content_code, "population"),
+      Tid = one_value_category("year", "2024", "2024")
+    ),
+    value = 50937
+  ))
+
+  v1_df <- as.data.frame(v1_data, column.name.type = "code", variable.value.type = "code")
+  v2_df <- as.data.frame(v2_data, column.name.type = "code", variable.value.type = "code")
+
+  common_columns <- c("Region", "Civilstand", "Alder", "Kon", "Tid")
+  v1_normalized <- data.frame(
+    v1_df[common_columns],
+    value = v1_df[[content_code]],
+    stringsAsFactors = FALSE
+  )
+  v2_normalized <- data.frame(
+    v2_df[common_columns],
+    value = v2_df$value,
+    stringsAsFactors = FALSE
+  )
+
+  expect_equal(v1_normalized, v2_normalized)
+  expect_equal(pxweb_data_dim(v1_data)[1], pxweb_data_dim(v2_data)[1])
+  expect_equal(
+    setdiff(pxweb_data_colnames(v1_data, "code"), content_code),
+    setdiff(pxweb_data_colnames(v2_data, "code"), c("ContentsCode", "value"))
+  )
+  expect_equal(as.matrix(v1_normalized), as.matrix(v2_normalized))
+
+  normalize_comment <- function(x) {
+    gsub("\\s+", " ", trimws(x))
+  }
+  v1_comments <- normalize_comment(as.data.frame(pxweb_data_comments(v1_data))$comment)
+  v2_comments <- normalize_comment(as.data.frame(pxweb_data_comments(v2_data))$comment)
+
+  expect_equal(v1_comments, v2_comments)
+})
+
 test_that(desc = "PXWEB API v1 and v2 live equivalent table helpers agree after normalization", {
   skip_on_cran()
   skip_if_not_live_api()
