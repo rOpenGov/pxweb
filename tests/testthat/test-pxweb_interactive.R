@@ -141,5 +141,12 @@ test_that(desc = "Fail on incorrect", {
   expect_error(pxweb_interactive("incorrect url"))
 })
 
+test_that(desc = "interactive_pxweb is deprecated", {
+  expect_warning(
+    expect_error(interactive_pxweb("incorrect url")),
+    "deprecated"
+  )
+})
+
 # The function could maybe be tested also with:
 # https://debruine.github.io/post/interactive-test/

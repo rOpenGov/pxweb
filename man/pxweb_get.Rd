@@ -16,6 +16,16 @@ pxweb_get(url, query = NULL, verbose = TRUE, output_format = "json-stat2")
 \item{output_format}{output format for PXWEB API v2 data requests. Defaults
 to \code{"json-stat2"}.}
 }
+\value{
+If \code{query = NULL}, returns metadata about the API path: a
+\code{pxweb_levels} object for API branches or a \code{pxweb_metadata}
+object for data tables. If \code{query} is supplied, returns the parsed data
+response, typically a \code{pxweb_data}, \code{pxweb_data_jsonstat},
+\code{pxweb_data_jsonstat2}, or \code{pxweb_data_v2} object depending on the
+API version and response format. File-based response formats, such as
+\code{"px"} and \code{"sdmx"}, are written to a temporary file and the file
+path is returned. Returns \code{NULL} if the URL host cannot be reached.
+}
 \description{
 Do a GET call to PXWEB API
 }
