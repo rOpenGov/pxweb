@@ -2,8 +2,7 @@
 % Please edit documentation in R/pxweb_table_response_v2.R
 \name{assert_pxweb_table_response_v2}
 \alias{assert_pxweb_table_response_v2}
-\title{Assert that x is a correct \code{pxweb_data_jsonstat} object.
-Assert a json-stat version 1.0 or later object}
+\title{Assert that x is a correct \code{pxweb_table_response_v2} object.}
 \usage{
 assert_pxweb_table_response_v2(x)
 }
@@ -11,7 +10,6 @@ assert_pxweb_table_response_v2(x)
 \item{x}{an object to check.}
 }
 \description{
-Assert that x is a correct \code{pxweb_data_jsonstat} object.
-Assert a json-stat version 1.0 or later object
+Assert that x is a correct \code{pxweb_table_response_v2} object.
 }
 \keyword{internal}

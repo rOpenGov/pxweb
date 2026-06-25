@@ -141,8 +141,14 @@ is_pxweb_query_selection <- function(x) {
 
 #' Get the PXWEB API v2 selection type for a query variable.
 #'
+#' The selection type is recorded when a query is built from v2 helper objects
+#' such as \code{\link{pxweb_latest}} or \code{\link{pxweb_aggregation}}.
+#'
 #' @param pxq a \code{pxweb_query} object.
 #' @param variable_code PXWEB variable code.
+#'
+#' @return
+#' A character scalar with the v2 selection type for \code{variable_code}.
 #'
 #' @keywords internal
 pxweb_query_v2_selection_type <- function(pxq, variable_code) {
@@ -158,8 +164,15 @@ pxweb_query_v2_selection_type <- function(pxq, variable_code) {
 
 #' Test whether a query variable uses a PXWEB API v2 codelist.
 #'
+#' Codelist selections are carried as URL query parameters in v2 requests and
+#' should not be validated or expanded against the ordinary metadata values.
+#'
 #' @param pxq a \code{pxweb_query} object.
 #' @param variable_code PXWEB variable code.
+#'
+#' @return
+#' \code{TRUE} if \code{variable_code} uses a v2 codelist query parameter,
+#' otherwise \code{FALSE}.
 #'
 #' @keywords internal
 pxweb_query_v2_has_codelist <- function(pxq, variable_code) {

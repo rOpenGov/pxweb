@@ -387,6 +387,18 @@ pxweb_query_filter <- function(pxq) {
   res
 }
 
+#' Get PXWEB API v2 extra query parameters.
+#'
+#' Returns the extra URL query parameters attached to a \code{pxweb_query} by
+#' v2 selection helpers, for example aggregation and valueset codelists.
+#'
+#' @param pxq a \code{pxweb_query} object.
+#'
+#' @return
+#' A named list of extra v2 query parameters, such as
+#' \code{codelist[Variable]} and \code{outputValues[Variable]}.
+#'
+#' @keywords internal
 pxweb_query_v2_extra_query <- function(pxq) {
   checkmate::assert_class(pxq, "pxweb_query")
   extra_query <- pxq$v2_extra_query

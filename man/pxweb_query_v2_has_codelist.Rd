@@ -11,7 +11,12 @@ pxweb_query_v2_has_codelist(pxq, variable_code)
 
 \item{variable_code}{PXWEB variable code.}
 }
+\value{
+\code{TRUE} if \code{variable_code} uses a v2 codelist query parameter,
+otherwise \code{FALSE}.
+}
 \description{
-Test whether a query variable uses a PXWEB API v2 codelist.
+Codelist selections are carried as URL query parameters in v2 requests and
+should not be validated or expanded against the ordinary metadata values.
 }
 \keyword{internal}

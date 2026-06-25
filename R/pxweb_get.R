@@ -356,6 +356,18 @@ pxweb_v2_data_request <- function(px, pxq, pxmd, output_format = "json-stat2") {
   )
 }
 
+#' Build PXWEB API v2 value code query parameters.
+#'
+#' Creates the \code{valueCodes[Variable]} URL query parameters used when a
+#' split v2 request cannot send its selection in the JSON body.
+#'
+#' @param pxq a \code{pxweb_query} object.
+#'
+#' @return
+#' A named list of \code{valueCodes[Variable]} query parameters, one for each
+#' query dimension.
+#'
+#' @keywords internal
 pxweb_v2_data_value_codes_query <- function(pxq) {
   checkmate::assert_class(pxq, "pxweb_query")
 

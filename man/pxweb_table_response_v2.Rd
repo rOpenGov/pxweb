@@ -10,7 +10,7 @@ pxweb_table_response_v2(x)
 \item{x}{a list returned from a PXWEB API to convert to a \code{table_response_v2} object.}
 }
 \value{
-a \code{pxweb_table_v2} object.
+a \code{pxweb_table_response_v2} object.
 }
 \description{
 An object that contain the data for a given PXWEB TableResponse (API v2).

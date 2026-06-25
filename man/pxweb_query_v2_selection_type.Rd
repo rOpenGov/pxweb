@@ -11,7 +11,11 @@ pxweb_query_v2_selection_type(pxq, variable_code)
 
 \item{variable_code}{PXWEB variable code.}
 }
+\value{
+A character scalar with the v2 selection type for \code{variable_code}.
+}
 \description{
-Get the PXWEB API v2 selection type for a query variable.
+The selection type is recorded when a query is built from v2 helper objects
+such as \code{\link{pxweb_latest}} or \code{\link{pxweb_aggregation}}.
 }
 \keyword{internal}
