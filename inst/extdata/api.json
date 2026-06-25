@@ -40,7 +40,7 @@
         "citation" : {
           "organization" : "Public Health Agency of Sweden",
           "address" : "Solna, Sweden"},        
-        "url" : "http://fohm-app.folkhalsomyndigheten.se/Folkhalsodata/api/[version]/[lang]",
+        "url" : "https://fohm-app.folkhalsomyndigheten.se/Folkhalsodata/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["sv"]
               },
@@ -51,7 +51,7 @@
         "citation" : {
           "organization" : "Swedish National Institute of Economic Research",
           "address" : "Stockholm, Sweden"},        
-        "url" : "http://statistik.konj.se/PXWeb/api/[version]/[lang]",
+        "url" : "https://statistik.konj.se/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en", "sv"]
               },
@@ -62,7 +62,7 @@
                 "citation" : {
           "organization" : "Swedish National Institute of Economic Research",
           "address" : "Stockholm, Sweden"},        
-                "url" : "http://prognos.konj.se/PXWeb/api/[version]/[lang]",
+                "url" : "https://prognos.konj.se/PXWeb/api/[version]/[lang]",
                 "version" : ["v1"], 
                 "lang" : ["sv"]
     },
@@ -84,7 +84,7 @@
         "citation" : {
           "organization" : "Finnish Tax Administration",
           "address" : "Helsinki, Finland"},
-        "url": "http://vero2.stat.fi/PXWeb/api/[version]/[lang]",
+        "url": "https://vero2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"],
         "lang": ["en","fi","sv"]
               },
@@ -95,7 +95,7 @@
         "citation" : {
           "organization" : "Statistics Iceland",
           "address" : "Reykjavík, Iceland"},
-        "url" : "http://px.hagstofa.is/px[lang]/api/[version]/[lang]",
+        "url" : "https://px.hagstofa.is/px[lang]/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","is"]
               },
@@ -106,11 +106,22 @@
         "citation" : {
           "organization" : "City of Linköping",
           "address" : "Linköping, Sweden"},
-        "url" : "http://statistik.linkoping.se/PXWeb/api/[version]/[lang]",
+        "url" : "https://statistik.linkoping.se/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["sv"]
               },
               
+    "pxweb2022.vgregion.se": {
+        "alias" : ["vgregion"],
+        "description" : "Vastra Gotaland Region in Sweden",
+        "citation" : {
+          "organization" : "Region Västra Götaland",
+          "address" : "Vänersborg, Sweden"},
+        "url" : "https://pxweb2022.vgregion.se/Pxwebb/api/[version]/[lang]",
+        "version": ["v1"],
+        "lang": ["sv"]
+              },
+
     "bank.stat.gl": {
         "alias" : ["greenland"],
         "description" : "Statbank Greenland",
@@ -150,7 +161,7 @@
       "citation" : {
           "organization" : "State Statistical Office of the Republic of Macedonia",
           "address" : "Skopje, Macedonia"},
-      "url" : "https://makstat.stat.gov.mk/PXWeb/api/[version]/[lang]/MakStat/",
+      "url" : "https://makstat.stat.gov.mk/PXWeb/api/[version]/[lang]",
       "version": ["v1"], 
       "lang": ["en", "mk"]
     },
@@ -188,6 +199,17 @@
         "lang": ["en", "de", "fr"]
     },
     
+    "askdata.rks-gov.net": {
+      "alias" : ["askdata"],
+      "description" : "Statistics Kosovo",
+      "citation" : {
+          "organization" : "Kosovo Agency of Statistics",
+          "address" : "Pristina, Kosovo"},
+      "url" : "https://askdata.rks-gov.net/api/[version]/[lang]/",
+      "version": ["v1"],
+      "lang": ["en"]
+    },
+
     "trafi2.stat.fi": {
       "alias" : ["trafi2"],
       "description" : "Finnish Transport Safety Agency",
@@ -226,7 +248,7 @@
         "citation" : {
           "organization" : "Business Finland / Statistics Finland",
           "address" : "Helsinki, Finland"},
-        "url" : "http://visitfinland.stat.fi/PXWeb/api/[version]/[lang]/VisitFinland",
+        "url" : "https://visitfinland.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"]
     },
@@ -247,7 +269,7 @@
         "citation" : {
           "organization" : "Statistics Estonia",
           "address" : "Tallinn, Estonia"},
-        "url" : "https://andmed.stat.ee/api/[version]/[lang]/stat",
+        "url" : "https://andmed.stat.ee/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en", "et"]
     },
@@ -268,7 +290,7 @@
           "organization" : "Statistical Office of the Republic of Slovenia",
           "address" : "Ljubljana, Slovenia"
           },
-        "url" : "https://pxweb.stat.si/SiStatData/api/[version]/[lang]/Data",
+        "url" : "https://pxweb.stat.si/SiStatData/api/[version]/[lang]",
         "version": ["v1"],
         "lang": ["sl"]
     },

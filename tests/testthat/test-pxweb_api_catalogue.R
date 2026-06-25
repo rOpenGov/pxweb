@@ -30,16 +30,25 @@ test_that(desc = "pxweb_api_catalogue contains active APIs without hard-coded li
 
   expect_true("statistik.tillvaxtanalys.se" %in% names(pxac))
   expect_true("pxweb.asub.ax" %in% names(pxac))
+  expect_true("pxweb2022.vgregion.se" %in% names(pxac))
+  expect_true("askdata.rks-gov.net" %in% names(pxac))
   expect_equal(
     pxac[["statdb.luke.fi"]]$url,
     "https://statdb.luke.fi/PXWeb/api/[version]/[lang]"
+  )
+  expect_equal(
+    pxac[["pxweb2022.vgregion.se"]]$url,
+    "https://pxweb2022.vgregion.se/Pxwebb/api/[version]/[lang]"
+  )
+  expect_equal(
+    pxac[["askdata.rks-gov.net"]]$url,
+    "https://askdata.rks-gov.net/api/[version]/[lang]/"
   )
   expect_false(any(c(
     "pxwebapi2.stat.fi",
     "data.ssb.no",
     "px.rsv.is",
-    "pxwebb2017.vgregion.se",
-    "askdata.rks-gov.net"
+    "pxwebb2017.vgregion.se"
   ) %in% names(pxac)))
 
   limit_fields <- c("calls_per_period", "period_in_seconds", "max_values_to_download")
