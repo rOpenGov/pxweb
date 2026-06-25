@@ -166,6 +166,19 @@ pxweb_data_obs_comment <- function(x, obs_idx) {
   obj
 }
 
+#' Normalize PXWEB API v2 note/status text.
+#'
+#' @description
+#' Collapses JSON-stat2 note-like fields to a single character string. Empty
+#' and missing values return \code{NULL}, while multiple note fragments are
+#' joined with newlines.
+#'
+#' @param x a JSON-stat2 note/status field.
+#'
+#' @return
+#' a character string, or \code{NULL} when no text is available.
+#'
+#' @keywords internal
 pxweb_data_v2_note_text <- function(x) {
   if (is.null(x) || length(x) == 0) {
     return(NULL)
@@ -179,6 +192,20 @@ pxweb_data_v2_note_text <- function(x) {
   paste(x, collapse = "\n")
 }
 
+#' Construct a v2 dataset note comment.
+#'
+#' @description
+#' Converts a JSON-stat2 dataset-level note to an \code{obs_comment} object.
+#' Dataset notes do not point to a specific row or column, so both index
+#' positions are \code{NA}.
+#'
+#' @param x a \code{pxweb_data_v2} object.
+#' @param comment a normalized comment string.
+#'
+#' @return
+#' a \code{pxweb_data_comment} object.
+#'
+#' @keywords internal
 pxweb_data_v2_dataset_note_comment <- function(x, comment) {
   obj <- list(
     code = pxweb_data_colnames(x, "code"),
@@ -191,6 +218,20 @@ pxweb_data_v2_dataset_note_comment <- function(x, comment) {
   obj
 }
 
+#' Construct a v2 dimension note comment.
+#'
+#' @description
+#' Converts a JSON-stat2 dimension-level note to a v1-style
+#' \code{column_comment} object.
+#'
+#' @param x a \code{pxweb_data_v2} object.
+#' @param column_idx integer index of the dimension column.
+#' @param comment a normalized comment string.
+#'
+#' @return
+#' a \code{pxweb_data_comment} object.
+#'
+#' @keywords internal
 pxweb_data_v2_column_comment <- function(x, column_idx, comment) {
   variable_ids <- unlist(x$id, use.names = FALSE)
   variable_id <- variable_ids[[column_idx]]
@@ -205,6 +246,22 @@ pxweb_data_v2_column_comment <- function(x, column_idx, comment) {
   obj
 }
 
+#' Construct a v2 category note comment.
+#'
+#' @description
+#' Converts a JSON-stat2 category-level note to a v1-style
+#' \code{value_comment} object and indexes every data-frame row containing the
+#' noted value.
+#'
+#' @param x a \code{pxweb_data_v2} object.
+#' @param column_idx integer index of the dimension column.
+#' @param value_code category value code that carries the note.
+#' @param comment a normalized comment string.
+#'
+#' @return
+#' a \code{pxweb_data_comment} object.
+#'
+#' @keywords internal
 pxweb_data_v2_value_comment <- function(x, column_idx, value_code, comment) {
   variable_ids <- unlist(x$id, use.names = FALSE)
   variable_id <- variable_ids[[column_idx]]
@@ -225,6 +282,20 @@ pxweb_data_v2_value_comment <- function(x, column_idx, value_code, comment) {
   obj
 }
 
+#' Construct a v2 observation comment.
+#'
+#' @description
+#' Converts a JSON-stat2 observation-level annotation, currently cell
+#' \code{status}, to a v1-style \code{obs_comment} object.
+#'
+#' @param x a \code{pxweb_data_v2} object.
+#' @param obs_idx one-based observation row index.
+#' @param comment a normalized comment string.
+#'
+#' @return
+#' a \code{pxweb_data_comment} object.
+#'
+#' @keywords internal
 pxweb_data_v2_obs_comment <- function(x, obs_idx, comment) {
   df <- as.data.frame(x, column.name.type = "code", variable.value.type = "code")
   obj <- list(
@@ -238,6 +309,20 @@ pxweb_data_v2_obs_comment <- function(x, obs_idx, comment) {
   obj
 }
 
+#' Construct v2 status comments.
+#'
+#' @description
+#' Converts JSON-stat2 \code{status} entries to a list of v1-style
+#' \code{obs_comment} objects. JSON-stat2 status indexes are zero-based, so
+#' they are shifted to the one-based row indexes used by
+#' \code{pxweb_data_comments}.
+#'
+#' @param x a \code{pxweb_data_v2} object.
+#'
+#' @return
+#' a list of \code{pxweb_data_comment} objects.
+#'
+#' @keywords internal
 pxweb_data_v2_status_comments <- function(x) {
   status <- x$status
   if (is.null(status) || length(status) == 0) {
