@@ -168,6 +168,52 @@ test_that(desc = "PXWEB API v2 JSON-stat2 data supports multiple content values"
   )
 })
 
+test_that(desc = "PXWEB API v2 data supports v1-style dimension and column helpers", {
+  data <- pxweb_data_v2(pxweb_v2_data_fixture())
+
+  expect_equal(pxweb_data_dim(data), c(4, 4))
+  expect_equal(pxweb_data_colnames(data, type = "code"), c("Region", "Tid", "ContentsCode", "value"))
+  expect_equal(pxweb_data_colnames(data, type = "text"), c("region", "year", "contents", "value"))
+})
+
+test_that(desc = "PXWEB API v2 data supports matrix coercion", {
+  data <- pxweb_data_v2(pxweb_v2_data_fixture())
+
+  expect_equal(
+    as.matrix(data, column.name.type = "code", variable.value.type = "code"),
+    as.matrix(as.data.frame(data, column.name.type = "code", variable.value.type = "code"))
+  )
+  expect_equal(
+    as.matrix(data, column.name.type = "text", variable.value.type = "text"),
+    as.matrix(as.data.frame(data, column.name.type = "text", variable.value.type = "text"))
+  )
+})
+
+test_that(desc = "PXWEB API v2 comments map notes and statuses to v1-style comments", {
+  x <- pxweb_v2_data_fixture()
+  x$note <- list("Dataset note")
+  x$status <- list("1" = "..")
+  x$dimension$Region$note <- list("Region note")
+  x$dimension$Region$category$note <- list("03" = "Uppsala note")
+
+  expect_silent(comments <- pxweb_data_comments(pxweb_data_v2(x)))
+  expect_s3_class(comments, "pxweb_data_comments")
+  expect_equal(comments$data_dim, c(4, 4))
+  expect_equal(length(comments$pxweb_data_comments), 4)
+
+  comments_df <- as.data.frame(comments, stringsAsFactors = FALSE)
+  expect_equal(
+    comments_df,
+    data.frame(
+      row_no = c(NA_integer_, NA_integer_, 3L, 4L, 2L),
+      col_no = c(NA_integer_, 1L, 1L, 1L, NA_integer_),
+      comment_type = c("obs_comment", "column_comment", "value_comment", "value_comment", "obs_comment"),
+      comment = c("Dataset note", "Region note", "Uppsala note", "Uppsala note", "Status: .."),
+      stringsAsFactors = FALSE
+    )
+  )
+})
+
 test_that(desc = "PXWEB API v2 response parser routes JSON-stat2 data", {
   response <- pxweb_v2_data_response(pxweb_v2_data_fixture())
 

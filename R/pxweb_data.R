@@ -63,8 +63,23 @@ print.pxweb_data <- function(x, ...) {
 #'
 #' @keywords internal
 pxweb_data_dim <- function(pxd) {
+  UseMethod("pxweb_data_dim")
+}
+
+#' @rdname pxweb_data_dim
+#' @keywords internal
+#' @export
+pxweb_data_dim.pxweb_data <- function(pxd) {
   checkmate::assert_class(pxd, "pxweb_data")
   c(length(pxd$data), length(pxd$columns))
+}
+
+#' @rdname pxweb_data_dim
+#' @keywords internal
+#' @export
+pxweb_data_dim.pxweb_data_v2 <- function(pxd) {
+  checkmate::assert_class(pxd, "pxweb_data_v2")
+  c(prod(unlist(pxd$size, use.names = FALSE)), length(unlist(pxd$id, use.names = FALSE)) + 1L)
 }
 
 
@@ -76,9 +91,33 @@ pxweb_data_dim <- function(pxd) {
 #'
 #' @keywords internal
 pxweb_data_colnames <- function(pxd, type = "text") {
+  UseMethod("pxweb_data_colnames")
+}
+
+#' @rdname pxweb_data_colnames
+#' @keywords internal
+#' @export
+pxweb_data_colnames.pxweb_data <- function(pxd, type = "text") {
   checkmate::assert_class(pxd, "pxweb_data")
   checkmate::assert_choice(type, choices = c("text", "code"))
   unlist(lapply(pxd$columns, function(x) x[[type]]))
+}
+
+#' @rdname pxweb_data_colnames
+#' @keywords internal
+#' @export
+pxweb_data_colnames.pxweb_data_v2 <- function(pxd, type = "text") {
+  checkmate::assert_class(pxd, "pxweb_data_v2")
+  checkmate::assert_choice(type, choices = c("text", "code"))
+
+  variable_ids <- unlist(pxd$id, use.names = FALSE)
+  if (type == "code") {
+    return(c(variable_ids, "value"))
+  }
+
+  c(unname(vapply(variable_ids, function(variable_id) {
+    pxd$dimension[[variable_id]]$label
+  }, character(1))), "value")
 }
 
 

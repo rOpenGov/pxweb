@@ -14,7 +14,9 @@
 \alias{as.data.frame.pxweb_metadata}
 \alias{pxweb_as_matrix}
 \alias{pxweb_as_matrix.pxweb_data}
+\alias{pxweb_as_matrix.pxweb_data_v2}
 \alias{as.matrix.pxweb_data}
+\alias{as.matrix.pxweb_data_v2}
 \alias{pxweb_pxd_slot_idx_pos}
 \title{Coerce a \code{pxweb_data} object to a \code{data.frame}}
 \usage{
@@ -130,7 +132,22 @@ pxweb_as_matrix(
   variable.value.type = "text"
 )
 
+\method{pxweb_as_matrix}{pxweb_data_v2}(
+  x,
+  row.names = NULL,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
+
 \method{as.matrix}{pxweb_data}(
+  x,
+  ...,
+  row.names = NULL,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
+
+\method{as.matrix}{pxweb_data_v2}(
   x,
   ...,
   row.names = NULL,

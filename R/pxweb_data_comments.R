@@ -54,6 +54,52 @@ pxweb_data_comments.pxweb_data <- function(x) {
   obj
 }
 
+#' @rdname pxweb_data_comments
+#' @keywords internal
+#' @export
+pxweb_data_comments.pxweb_data_v2 <- function(x) {
+  checkmate::assert_class(x, "pxweb_data_v2")
+
+  obj <- list()
+  dataset_note <- pxweb_data_v2_note_text(x$note)
+  if (!is.null(dataset_note)) {
+    obj[[length(obj) + 1L]] <- pxweb_data_v2_dataset_note_comment(x, dataset_note)
+  }
+
+  variable_ids <- unlist(x$id, use.names = FALSE)
+  for (i in seq_along(variable_ids)) {
+    variable_id <- variable_ids[[i]]
+    dim_note <- pxweb_data_v2_note_text(x$dimension[[variable_id]]$note)
+    if (!is.null(dim_note)) {
+      obj[[length(obj) + 1L]] <- pxweb_data_v2_column_comment(x, i, dim_note)
+    }
+
+    category_notes <- x$dimension[[variable_id]]$category$note
+    if (!is.null(category_notes)) {
+      category_notes <- as.list(category_notes)
+      for (value_code in names(category_notes)) {
+        value_note <- pxweb_data_v2_note_text(category_notes[[value_code]])
+        if (!is.null(value_note)) {
+          obj[[length(obj) + 1L]] <- pxweb_data_v2_value_comment(x, i, value_code, value_note)
+        }
+      }
+    }
+  }
+
+  status <- pxweb_data_v2_status_comments(x)
+  if (length(status) > 0) {
+    obj <- c(obj, status)
+  }
+
+  obj <- list(
+    pxweb_data_comments = obj,
+    data_dim = pxweb_data_dim(x)
+  )
+  class(obj) <- c("pxweb_data_comments", "list")
+  assert_pxweb_data_comments(x = obj)
+  obj
+}
+
 
 #' Construct a \code{pxweb_data_comment} object
 #' @param x an \code{pxweb_data} to extract a \code{pxweb_data_comment} object from.
@@ -118,6 +164,113 @@ pxweb_data_obs_comment <- function(x, obs_idx) {
   obj$idx_data_frame <- data.frame(row_no = obs_idx, col_no = NA)
   class(obj) <- c("obs_comment", "pxweb_data_comment", "list")
   obj
+}
+
+pxweb_data_v2_note_text <- function(x) {
+  if (is.null(x) || length(x) == 0) {
+    return(NULL)
+  }
+  x <- unlist(x, use.names = FALSE)
+  x <- as.character(x)
+  x <- x[nzchar(x)]
+  if (length(x) == 0) {
+    return(NULL)
+  }
+  paste(x, collapse = "\n")
+}
+
+pxweb_data_v2_dataset_note_comment <- function(x, comment) {
+  obj <- list(
+    code = pxweb_data_colnames(x, "code"),
+    text = pxweb_data_colnames(x, "text"),
+    value = NULL,
+    comment = comment
+  )
+  obj$idx_data_frame <- data.frame(row_no = NA_integer_, col_no = NA_integer_)
+  class(obj) <- c("obs_comment", "pxweb_data_comment", "list")
+  obj
+}
+
+pxweb_data_v2_column_comment <- function(x, column_idx, comment) {
+  variable_ids <- unlist(x$id, use.names = FALSE)
+  variable_id <- variable_ids[[column_idx]]
+  obj <- list(
+    code = variable_id,
+    text = x$dimension[[variable_id]]$label,
+    value = NULL,
+    comment = comment
+  )
+  obj$idx_data_frame <- data.frame(row_no = NA_integer_, col_no = column_idx)
+  class(obj) <- c("column_comment", "pxweb_data_comment", "list")
+  obj
+}
+
+pxweb_data_v2_value_comment <- function(x, column_idx, value_code, comment) {
+  variable_ids <- unlist(x$id, use.names = FALSE)
+  variable_id <- variable_ids[[column_idx]]
+  df <- as.data.frame(x, column.name.type = "code", variable.value.type = "code")
+  has_value <- df[[variable_id]] == value_code
+
+  obj <- list(
+    code = variable_id,
+    text = x$dimension[[variable_id]]$label,
+    value = value_code,
+    comment = comment
+  )
+  obj$idx_data_frame <- data.frame(
+    row_no = which(has_value),
+    col_no = rep(column_idx, sum(has_value))
+  )
+  class(obj) <- c("value_comment", "pxweb_data_comment", "list")
+  obj
+}
+
+pxweb_data_v2_obs_comment <- function(x, obs_idx, comment) {
+  df <- as.data.frame(x, column.name.type = "code", variable.value.type = "code")
+  obj <- list(
+    code = pxweb_data_colnames(x, "code"),
+    text = pxweb_data_colnames(x, "text"),
+    value = unname(unlist(df[obs_idx, , drop = TRUE])),
+    comment = comment
+  )
+  obj$idx_data_frame <- data.frame(row_no = obs_idx, col_no = NA_integer_)
+  class(obj) <- c("obs_comment", "pxweb_data_comment", "list")
+  obj
+}
+
+pxweb_data_v2_status_comments <- function(x) {
+  status <- x$status
+  if (is.null(status) || length(status) == 0) {
+    return(list())
+  }
+
+  status <- as.list(status)
+  status_names <- names(status)
+  if (is.null(status_names)) {
+    status_names <- as.character(seq_along(status) - 1L)
+  }
+
+  res <- list()
+  for (i in seq_along(status)) {
+    status_text <- pxweb_data_v2_note_text(status[[i]])
+    if (is.null(status_text)) {
+      next
+    }
+    status_idx <- suppressWarnings(as.integer(status_names[[i]]))
+    if (is.na(status_idx)) {
+      next
+    }
+    obs_idx <- status_idx + 1L
+    if (obs_idx < 1L || obs_idx > pxweb_data_dim(x)[1]) {
+      next
+    }
+    res[[length(res) + 1L]] <- pxweb_data_v2_obs_comment(
+      x,
+      obs_idx,
+      paste("Status:", status_text)
+    )
+  }
+  res
 }
 
 #' Assert that x is a correct \code{pxweb_data_comments} object.

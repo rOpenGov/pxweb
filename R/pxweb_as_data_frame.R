@@ -280,10 +280,38 @@ pxweb_as_matrix.pxweb_data <- function(x, row.names = NULL, column.name.type = "
   mat
 }
 
+#' @rdname pxweb_as_data_frame
+#' @keywords internal
+#' @export
+pxweb_as_matrix.pxweb_data_v2 <- function(x, row.names = NULL, column.name.type = "text", variable.value.type = "text") {
+  checkmate::assert_class(x, "pxweb_data_v2")
+  checkmate::assert_character(row.names, len = pxweb_data_dim(x)[1], null.ok = TRUE)
+  checkmate::assert_choice(column.name.type, c("code", "text"))
+  checkmate::assert_choice(variable.value.type, c("code", "text"))
+
+  as.matrix(as.data.frame(
+    x,
+    row.names = row.names,
+    column.name.type = column.name.type,
+    variable.value.type = variable.value.type,
+    stringsAsFactors = FALSE
+  ))
+}
+
 
 #' @rdname pxweb_as_data_frame
 #' @export
 as.matrix.pxweb_data <- function(x, ..., row.names = NULL, column.name.type = "text", variable.value.type = "text") {
+  pxweb_as_matrix(x,
+    row.names = row.names,
+    column.name.type = column.name.type,
+    variable.value.type = variable.value.type
+  )
+}
+
+#' @rdname pxweb_as_data_frame
+#' @export
+as.matrix.pxweb_data_v2 <- function(x, ..., row.names = NULL, column.name.type = "text", variable.value.type = "text") {
   pxweb_as_matrix(x,
     row.names = row.names,
     column.name.type = column.name.type,
