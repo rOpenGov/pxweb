@@ -31,8 +31,9 @@ pxweb_top(n)
 pxweb_bottom(n)
 }
 \arguments{
-\item{code}{value code used to represent the latest time period before it is
-resolved against table metadata.}
+\item{code}{placeholder value used before the latest available value is
+resolved against table metadata. The default \code{"9999"} is replaced by
+the last metadata value before the v2 data request is sent.}
 
 \item{id}{codelist id, for example an aggregation id returned by a PXWEB API
 v2 metadata response.}
@@ -54,7 +55,7 @@ relying on magic strings in user code.
 \examples{
 query <- list(
   Region = pxweb_all(),
-  Alder = pxweb_aggregation("agg_Alder5ar_1"),
+  Alder = pxweb_aggregation("agg_Ålder5år_1"),
   Tid = pxweb_latest()
 )
 
