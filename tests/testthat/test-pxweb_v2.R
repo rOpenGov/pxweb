@@ -221,3 +221,61 @@ test_that(desc = "PXWEB API v2 live end-to-end workflow", {
   expect_true("value" %in% names(df_text))
   expect_true(any(df_text$value > 0))
 })
+
+test_that(desc = "PXWEB API v1 and v2 live equivalent table helpers agree after normalization", {
+  skip_on_cran()
+  skip_if_not_live_api()
+
+  v1_url <- "https://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  v2_url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=sv"
+  content_code <- "BE0101N1"
+  query <- list(
+    Region = "00",
+    Civilstand = "OG",
+    Alder = "0",
+    Kon = "1",
+    ContentsCode = content_code,
+    Tid = "2024"
+  )
+
+  expect_silent(v1_data <- pxweb_get(v1_url, query = query, verbose = FALSE))
+  expect_silent(v2_data <- pxweb_get(v2_url, query = query, verbose = FALSE))
+
+  expect_s3_class(v1_data, "pxweb_data")
+  expect_s3_class(v2_data, "pxweb_data_v2")
+
+  v1_df <- as.data.frame(v1_data, column.name.type = "code", variable.value.type = "code")
+  v2_df <- as.data.frame(v2_data, column.name.type = "code", variable.value.type = "code")
+
+  common_columns <- c("Region", "Civilstand", "Alder", "Kon", "Tid")
+  v1_normalized <- data.frame(
+    v1_df[common_columns],
+    value = v1_df[[content_code]],
+    stringsAsFactors = FALSE
+  )
+  v2_normalized <- data.frame(
+    v2_df[common_columns],
+    value = v2_df$value,
+    stringsAsFactors = FALSE
+  )
+
+  expect_equal(v1_normalized, v2_normalized)
+  expect_equal(pxweb_data_dim(v1_data)[1], pxweb_data_dim(v2_data)[1])
+  expect_equal(
+    setdiff(pxweb_data_colnames(v1_data, "code"), content_code),
+    setdiff(pxweb_data_colnames(v2_data, "code"), c("ContentsCode", "value"))
+  )
+  expect_equal(
+    as.matrix(v1_normalized),
+    as.matrix(v2_normalized)
+  )
+
+  normalize_comment <- function(x) {
+    gsub("\\s+", " ", trimws(x))
+  }
+  v1_comments <- normalize_comment(as.data.frame(pxweb_data_comments(v1_data))$comment)
+  v2_comments <- normalize_comment(as.data.frame(pxweb_data_comments(v2_data))$comment)
+
+  expect_true(length(v1_comments) > 0)
+  expect_true(any(v1_comments %in% v2_comments))
+})
