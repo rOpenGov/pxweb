@@ -342,6 +342,39 @@ If the queries are large (contain more values than the PXWEB API maximum allowed
 
 For more advanced connections to the API, the `pxweb_advanced_get()` gives the flexibility to access the underlying HTTP calls using `httr` and log the HTTP calls for debugging.
 
+### PXWEB API v2 tables
+
+PXWEB API v2 tables use table identifiers and separate metadata and data endpoints. The `pxweb_get()` function handles this internally: when a query is supplied for a v2 table, the request is sent to the table's `/data` endpoint and JSON-stat2 is requested by default.
+
+```{r, message=FALSE, eval=FALSE}
+v2_url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=sv"
+
+v2_query <- list(
+  Region = "00",
+  Civilstand = "OG",
+  Alder = "0",
+  Kon = "1",
+  ContentsCode = "BE0101N1",
+  Tid = "2024"
+)
+
+v2_data <- pxweb_get(v2_url, query = v2_query)
+as.data.frame(v2_data, column.name.type = "code", variable.value.type = "code")
+```
+
+If you want a data frame directly, use `pxweb_get_data()`.
+
+```{r, message=FALSE, eval=FALSE}
+v2_df <- pxweb_get_data(
+  v2_url,
+  query = v2_query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+In v2 JSON-stat2 output, the content variable is retained as a dimension, such as `ContentsCode`, and observations are returned in a generic `value` column.
+
 We can then convert the downloaded PXWEB data objects to a `data. frame` or to a character matrix. The character matrix contains the "raw" data while `data. frame` returns an R `data.frame` in a tidy format. This conversion means missing values (such as ".." are converted to `NA`) in a `data. frame`. Using the arguments `variable.value.type` and `column.name.type`, we can choose if we want the code or the text column names and value types.
 
 ```{r, message=FALSE, eval=TRUE}
@@ -408,4 +441,3 @@ We created this vignette with
 ```{r sessioninfo, message=FALSE, warning=FALSE}
 sessionInfo()
 ```
-

@@ -64,6 +64,39 @@ remotes::install_github("ropengov/pxweb")
 For examples, check the
 [tutorial/vignette](https://ropengov.github.io/pxweb/articles/pxweb.html).
 
+### PXWEB API v2
+
+PXWEB API v2 tables can be queried with the same `pxweb_get()` and
+`pxweb_get_data()` workflow. A v2 data request is sent to the table’s
+`/data` endpoint and returns JSON-stat2 by default.
+
+``` r
+url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=sv"
+
+query <- list(
+  Region = "00",
+  Civilstand = "OG",
+  Alder = "0",
+  Kon = "1",
+  ContentsCode = "BE0101N1",
+  Tid = "2024"
+)
+
+px_data <- pxweb_get(url, query = query)
+as.data.frame(px_data, column.name.type = "code", variable.value.type = "code")
+
+px_df <- pxweb_get_data(
+  url,
+  query = query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+For v2 data, the content variable is kept as a dimension, such as
+`ContentsCode`, and observations are returned in a generic `value`
+column.
+
 ## Problems?
 
 See
