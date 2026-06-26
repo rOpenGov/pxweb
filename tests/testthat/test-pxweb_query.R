@@ -118,6 +118,65 @@ test_that(desc = "pxweb_query JSON parse error message", {
   expect_error(pxq1 <- pxweb_query(x = jq), regexp = "cannot parse")
 })
 
+test_that(desc = "pxweb_query preserves JSON-stat2 response format", {
+  query <- list(
+    query = list(
+      list(
+        code = "Region",
+        selection = list(
+          filter = "item",
+          values = list("01")
+        )
+      )
+    ),
+    response = list(format = "json-stat2")
+  )
+
+  expect_silent(pxq <- pxweb_query(jsonlite::toJSON(query, auto_unbox = TRUE)))
+  expect_equal(pxq$response$format, "json-stat2")
+  expect_equal(
+    jsonlite::fromJSON(pxweb_as_json(pxq), simplifyVector = FALSE)$response$format,
+    "json-stat2"
+  )
+})
+
+test_that(desc = "pxweb_selection preserves explicit PXWEB filters in R queries", {
+  expect_error(pxweb_selection("", "MK01"))
+  expect_error(pxweb_selection("agg:_Regions 2026.agg", character(0)))
+
+  query <- list(
+    alue_23_20260101 = pxweb_selection("agg:_Regions 2026.agg", "MK01"),
+    timeperiod_y = "2025",
+    contentscode = "rakennus_lkm"
+  )
+
+  expect_silent(pxq <- pxweb_query(query))
+  expect_s3_class(query$alue_23_20260101, "pxweb_query_selection_filter")
+  expect_equal(pxweb_query_filter(pxq), c(
+    alue_23_20260101 = "agg:_Regions 2026.agg",
+    timeperiod_y = "item",
+    contentscode = "item"
+  ))
+  expect_equal(pxweb_query_values(pxq)$alue_23_20260101, "MK01")
+
+  json <- jsonlite::fromJSON(pxweb_query_as_json(pxq), simplifyVector = FALSE)
+  expect_equal(json$query[[1]]$selection$filter, "agg:_Regions 2026.agg")
+  expect_equal(json$query[[1]]$selection$values, list("MK01"))
+})
+
+test_that(desc = "pxweb_selection validates item filters and guides v2 codelist use", {
+  expect_error(
+    pxweb_query(list(Region = pxweb_selection("not-a-filter", "01"))),
+    "not-a-filter"
+  )
+
+  pxq <- pxweb_query(list(Region = pxweb_selection("agg:_Regions 2026.agg", "MK01")))
+  expect_error(
+    pxweb_query_as_v2(pxq),
+    "pxweb_aggregation\\(\\)"
+  )
+})
+
 
 test_that(desc = "mandatory variables are included automatically", {
   fp <- test_path(file.path("test_data", "pxm1_test.rda"))

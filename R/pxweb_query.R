@@ -28,6 +28,48 @@ pxweb_query <- function(x) {
   UseMethod("pxweb_query")
 }
 
+#' Create a PXWEB query selection
+#'
+#' @description
+#' Creates a query selection for use inside a named list passed to
+#' \code{\link{pxweb_query}} or \code{\link{pxweb_get}}. This is useful when a
+#' PXWEB table requires an explicit API filter such as an aggregation or value
+#' set filter.
+#'
+#' @param filter a PXWEB selection filter, for example \code{"item"},
+#'   \code{"all"}, \code{"agg:_Regions 2026.agg"}, or
+#'   \code{"vs:Some valueset"}.
+#' @param values selected value codes for the filter.
+#'
+#' @return
+#' A \code{pxweb_query_selection_filter} object.
+#'
+#' @examples
+#' query <- list(
+#'   alue_23_20260101 = pxweb_selection("agg:_Regions 2026.agg", "MK01"),
+#'   timeperiod_y = "2025"
+#' )
+#'
+#' pxq <- pxweb_query(query)
+#'
+#' @export
+pxweb_selection <- function(filter = "item", values) {
+  checkmate::assert_string(filter, min.chars = 1)
+  checkmate::assert_character(values, min.len = 1, any.missing = FALSE)
+
+  structure(
+    list(
+      filter = filter,
+      values = values
+    ),
+    class = c("pxweb_query_selection_filter", "list")
+  )
+}
+
+is_pxweb_query_selection_filter <- function(x) {
+  inherits(x, "pxweb_query_selection_filter")
+}
+
 #' @rdname pxweb_query
 #' @keywords internal
 #' @export
@@ -49,8 +91,7 @@ pxweb_query.character <- function(x) {
   } else if (tolower(obj$response$format) %in% c("json-stat", "jsonstat")) {
     obj$response$format <- "json-stat"
   } else if (tolower(obj$response$format) %in% c("json-stat2")) {
-    # Hack support for json-stat2 for now. Are there downsides to this?
-    obj$response$format <- "json-stat"
+    obj$response$format <- "json-stat2"
   } else if (tolower(obj$response$format) %in% pxweb_file_response_formats()) {
 
   } else {
@@ -93,7 +134,10 @@ pxweb_query.list <- function(x) {
     filter <- "item"
     selection_type <- "item"
 
-    if (is_pxweb_query_selection(value)) {
+    if (is_pxweb_query_selection_filter(value)) {
+      filter <- value$filter
+      value <- value$values
+    } else if (is_pxweb_query_selection(value)) {
       selection_type <- value$type
       obj$v2_extra_query <- c(obj$v2_extra_query, pxweb_query_selection_extra_query(value, names(x)[i]))
       value <- value$value_codes
@@ -170,7 +214,7 @@ assert_pxweb_query <- function(x, check_response_format = TRUE) {
   checkmate::assert_names(names(x), must.include = c("query", "response"), .var.name = "names(pxweb_query)")
   checkmate::assert_names(names(x$response), must.include = c("format"))
   if (check_response_format) {
-    checkmate::assert_choice(x$response$format, c("json", "json-stat", pxweb_file_response_formats()))
+    checkmate::assert_choice(x$response$format, c("json", "json-stat", "json-stat2", pxweb_file_response_formats()))
   }
 
 
@@ -477,7 +521,8 @@ pxweb_query_as_v2 <- function(pxq) {
         query_dim$selection$filter,
         "' for variable '",
         query_dim$code,
-        "'.",
+        "'. Use PXWEB API v2 helpers such as pxweb_aggregation() or ",
+        "pxweb_valueset() for v2 codelists.",
         call. = FALSE
       )
     }
