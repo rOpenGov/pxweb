@@ -9,12 +9,17 @@ reference:
   - pxweb_get
   - pxweb_get_data
   - pxweb_parse_response  
+  - pxweb_query_helpers
   - pxweb_query_as_json
+  - pxweb_selection
   - pxweb_test_api
   - pxweb_validate_query_with_metadata
   - api_catalogue
+  - pxweb_audit_api_catalogue_config
   - assert_query_can_be_split_to_batches
+  - pxweb_codelists
   - pxweb_query_as_rcode
+  - pxweb_search
 - title: Interactive functions
   desc: |
     Listing of interactive functions

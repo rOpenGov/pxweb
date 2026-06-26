@@ -301,8 +301,11 @@ aggregation filters. These can be expressed in an R query with
 aggregations where the API filter identifies the aggregation file and the value
 selects the aggregated region.
 
-```{r v1_aggregation_query, message=FALSE, eval=FALSE}
-statfin_url <- "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/raku/15er.px"
+```{r v1_aggregation_query, message=FALSE, eval=FALSE, purl=FALSE}
+statfin_url <- paste0(
+  "https://statfin.stat.fi",
+  "/PxWeb/api/v1/en/StatFin/raku/15er.px"
+)
 
 aggregation_query <- list(
   alue_23_20260101 = pxweb_selection(
