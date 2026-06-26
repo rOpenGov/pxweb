@@ -49,8 +49,7 @@ pxweb_query.character <- function(x) {
   } else if (tolower(obj$response$format) %in% c("json-stat", "jsonstat")) {
     obj$response$format <- "json-stat"
   } else if (tolower(obj$response$format) %in% c("json-stat2")) {
-    # Hack support for json-stat2 for now. Are there downsides to this?
-    obj$response$format <- "json-stat"
+    obj$response$format <- "json-stat2"
   } else if (tolower(obj$response$format) %in% pxweb_file_response_formats()) {
 
   } else {
@@ -170,7 +169,7 @@ assert_pxweb_query <- function(x, check_response_format = TRUE) {
   checkmate::assert_names(names(x), must.include = c("query", "response"), .var.name = "names(pxweb_query)")
   checkmate::assert_names(names(x$response), must.include = c("format"))
   if (check_response_format) {
-    checkmate::assert_choice(x$response$format, c("json", "json-stat", pxweb_file_response_formats()))
+    checkmate::assert_choice(x$response$format, c("json", "json-stat", "json-stat2", pxweb_file_response_formats()))
   }
 
 

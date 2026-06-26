@@ -18,7 +18,7 @@ pxweb_parse_response <- function(x) {
     obj_path <- file.path(tempdir(), paste0(digest::sha1(obj), ".", pxweb_v2_output_file_extension(v2_output_format)))
     writeBin(con = obj_path, object = obj)
     return(obj_path)
-  } else if (is.null(pxq) || pxq$response %in% c("json", "json-stat")) {
+  } else if (is.null(pxq) || pxq$response %in% c("json", "json-stat", "json-stat2")) {
     obj <- suppressWarnings(httr::content(x, as = "parsed"))
   } else if (pxq$response %in% pxweb_file_response_formats()) {
     obj <- suppressWarnings(httr::content(x, as = "raw"))

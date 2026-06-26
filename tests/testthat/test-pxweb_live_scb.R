@@ -55,3 +55,56 @@ test_that(desc = "PXWEB API v2 live smoke test with Statistics Sweden", {
   expect_s3_class(data, "pxweb_data_v2")
   expect_true(all(pxweb_data_dim(data) > 0))
 })
+
+test_that(desc = "PXWEB API v1 JSON-stat2 live response exposes StatFin metadata", {
+  skip_on_cran()
+  skip_if_not_external_live_api()
+  pxweb_clear_cache()
+
+  url <- "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/raku/15er.px"
+  query <- list(
+    query = list(
+      list(
+        code = "alue_23_20260101",
+        selection = list(filter = "item", values = list("KU005"))
+      ),
+      list(
+        code = "rakennus_6_20180101",
+        selection = list(filter = "item", values = list("012"))
+      ),
+      list(
+        code = "timeperiod_y",
+        selection = list(filter = "item", values = list("2025"))
+      ),
+      list(
+        code = "polttoaineet_12_20260101",
+        selection = list(filter = "item", values = list("01"))
+      ),
+      list(
+        code = "rak_valm_v_10_20210101",
+        selection = list(filter = "item", values = list("SSS"))
+      ),
+      list(
+        code = "contentscode",
+        selection = list(filter = "item", values = list("rakennus_lkm"))
+      )
+    ),
+    response = list(format = "json-stat2")
+  )
+
+  expect_silent(data <- pxweb_get(
+    url = url,
+    query = jsonlite::toJSON(query, auto_unbox = TRUE),
+    verbose = FALSE
+  ))
+
+  expect_s3_class(data, "pxweb_data_v2")
+  expect_equal(data$extension$px$tableid, "15er")
+  expect_true(is.list(data$extension$contact))
+  expect_true(isTRUE(data$extension$px$aggregallowed))
+  expect_type(data$source, "character")
+  expect_type(data$updated, "character")
+  expect_true(is.list(data$note))
+  expect_gt(length(data$note), 0)
+  expect_true(all(pxweb_data_dim(data) > 0))
+})

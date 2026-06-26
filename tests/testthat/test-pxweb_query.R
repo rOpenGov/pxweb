@@ -118,6 +118,28 @@ test_that(desc = "pxweb_query JSON parse error message", {
   expect_error(pxq1 <- pxweb_query(x = jq), regexp = "cannot parse")
 })
 
+test_that(desc = "pxweb_query preserves JSON-stat2 response format", {
+  query <- list(
+    query = list(
+      list(
+        code = "Region",
+        selection = list(
+          filter = "item",
+          values = list("01")
+        )
+      )
+    ),
+    response = list(format = "json-stat2")
+  )
+
+  expect_silent(pxq <- pxweb_query(jsonlite::toJSON(query, auto_unbox = TRUE)))
+  expect_equal(pxq$response$format, "json-stat2")
+  expect_equal(
+    jsonlite::fromJSON(pxweb_as_json(pxq), simplifyVector = FALSE)$response$format,
+    "json-stat2"
+  )
+})
+
 
 test_that(desc = "mandatory variables are included automatically", {
   fp <- test_path(file.path("test_data", "pxm1_test.rda"))
