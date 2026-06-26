@@ -295,6 +295,32 @@ pxq <- pxweb_query(pxweb_query_list)
 pxq
 ```
 
+Some PXWEB API v1 tables support additional selection filters, such as
+aggregation filters. These can be expressed in an R query with
+`pxweb_selection()`. For example, Statistics Finland tables may expose regional
+aggregations where the API filter identifies the aggregation file and the value
+selects the aggregated region.
+
+```{r v1_aggregation_query, message=FALSE, eval=FALSE}
+statfin_url <- "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/raku/15er.px"
+
+aggregation_query <- list(
+  alue_23_20260101 = pxweb_selection(
+    filter = "agg:_Regions 2026.agg",
+    values = "MK01"
+  ),
+  timeperiod_y = "2025",
+  contentscode = "rakennus_lkm"
+)
+
+pxd <- pxweb_get_data(
+  statfin_url,
+  query = aggregation_query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
 We can validate the query against the metadata object to asses that we can use the query. This validation is done automatically when the data is fetched with `pxweb_get()` but can also be done manually.
 
 ```{r validate_query, message=FALSE, eval=TRUE}
