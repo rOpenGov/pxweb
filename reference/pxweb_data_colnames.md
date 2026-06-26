@@ -6,6 +6,12 @@ Get query filter
 
 ``` r
 pxweb_data_colnames(pxd, type = "text")
+
+# S3 method for class 'pxweb_data'
+pxweb_data_colnames(pxd, type = "text")
+
+# S3 method for class 'pxweb_data_v2'
+pxweb_data_colnames(pxd, type = "text")
 ```
 
 ## Arguments

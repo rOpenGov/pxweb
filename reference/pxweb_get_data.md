@@ -10,7 +10,8 @@ pxweb_get_data(
   query,
   verbose = TRUE,
   column.name.type = "text",
-  variable.value.type = "text"
+  variable.value.type = "text",
+  output_format = "json-stat2"
 )
 ```
 
@@ -36,6 +37,11 @@ pxweb_get_data(
 - variable.value.type:
 
   character: should `code` or `text` be used as values in columns?
+
+- output_format:
+
+  output format for PXWEB API v2 data requests. Defaults to
+  `"json-stat2"`.
 
 ## Details
 

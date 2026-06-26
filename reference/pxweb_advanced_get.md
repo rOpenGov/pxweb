@@ -11,6 +11,7 @@ pxweb_advanced_get(
   verbose = TRUE,
   log_http_calls = FALSE,
   pxmdo = NULL,
+  output_format = "json-stat2",
   ...
 )
 ```
@@ -39,6 +40,11 @@ pxweb_advanced_get(
 - pxmdo:
 
   A `pxweb_metadata` object to use for query.
+
+- output_format:
+
+  output format for PXWEB API v2 data requests. Defaults to
+  `"json-stat2"`.
 
 - ...:
 

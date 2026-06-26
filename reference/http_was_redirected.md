@@ -21,7 +21,7 @@ list with slots `was_redirected`, `redirected_from` and `redirected_to`
 ## References
 
 Function in large parts taken from
-<https://petermeissner.de/blog/2018/11/07/using-httr-to-detect-redirects/>.
+`petermeissner.de/blog/2018/11/07/using-httr-to-detect-redirects/`.
 
 ## Examples
 

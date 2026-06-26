@@ -23,10 +23,21 @@ Listing of functions in the pxweb package
   [`is_pxweb_response()`](https://ropengov.github.io/pxweb/reference/pxweb_parse_response.md)
   : Parse the response from a PXWEB API (advanced)
 
+- [`pxweb_all()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  [`pxweb_latest()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  [`pxweb_aggregation()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  [`pxweb_valueset()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  [`pxweb_top()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  [`pxweb_bottom()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  : PXWEB API v2 query helpers
+
 - [`pxweb_query_as_json()`](https://ropengov.github.io/pxweb/reference/pxweb_query_as_json.md)
   :
 
   Convert a `pxweb_query` object to a `json` string
+
+- [`pxweb_selection()`](https://ropengov.github.io/pxweb/reference/pxweb_selection.md)
+  : Create a PXWEB query selection
 
 - [`pxweb_test_api()`](https://ropengov.github.io/pxweb/reference/pxweb_test_api.md)
   : Test a full or a part of a PXWEB api.
@@ -48,13 +59,22 @@ Listing of functions in the pxweb package
   [`checkForLevels()`](https://ropengov.github.io/pxweb/reference/api_catalogue.md)
   : Defunct functions
 
+- [`pxweb_audit_api_catalogue_config()`](https://ropengov.github.io/pxweb/reference/pxweb_audit_api_catalogue_config.md)
+  : Audit PXWEB API catalogue config endpoints
+
 - [`assert_query_can_be_split_to_batches()`](https://ropengov.github.io/pxweb/reference/assert_query_can_be_split_to_batches.md)
   : Assert that a given pxweb query can be split
+
+- [`pxweb_codelists()`](https://ropengov.github.io/pxweb/reference/pxweb_codelists.md)
+  : List PXWEB API v2 codelists in metadata.
 
 - [`pxweb_query_as_rcode()`](https://ropengov.github.io/pxweb/reference/pxweb_query_as_rcode.md)
   :
 
   Print a `pxweb_query` object as R code
+
+- [`pxweb_search()`](https://ropengov.github.io/pxweb/reference/pxweb_search.md)
+  : Search PXWEB API tables
 
 ## Interactive functions
 

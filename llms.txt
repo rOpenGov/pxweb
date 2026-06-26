@@ -2,6 +2,8 @@
 
   
 
+**The package now supports PXWEB API 2.0**
+
 The pxweb R package provides tools to interface with the PX-WEB API for
 data search, download, manipulation and visualization purposes. This is
 used by a large number of statistical authorities world-wide. It offers
@@ -16,12 +18,14 @@ sometimes compromised. Issue reports are welcome.
 The easiest way to use pxweb is to simply install it from CRAN:
 
 ``` r
+
 install.packages("pxweb")
 ```
 
 Alternatively, you can get the latest stable development version:
 
 ``` r
+
 library(remotes)
 remotes::install_github("ropengov/pxweb")
 ```
@@ -30,6 +34,7 @@ In some cases, the organization requires manual proxy settings. This can
 be set as follows:
 
 ``` r
+
 library(remotes)
 library(httr)
 set_config(
@@ -42,6 +47,77 @@ remotes::install_github("ropengov/pxweb")
 
 For examples, check the
 [tutorial/vignette](https://ropengov.github.io/pxweb/articles/pxweb.html).
+
+### PXWEB API v2
+
+PXWEB API v2 tables can be queried with the same
+[`pxweb_get()`](https://ropengov.github.io/pxweb/reference/pxweb_get.md)
+and
+[`pxweb_get_data()`](https://ropengov.github.io/pxweb/reference/pxweb_get_data.md)
+workflow. A v2 data request is sent to the table’s `/data` endpoint and
+returns JSON-stat2 by default.
+
+``` r
+
+url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=sv"
+
+query <- list(
+  Region = "00",
+  Civilstand = "OG",
+  Alder = "0",
+  Kon = "1",
+  ContentsCode = "BE0101N1",
+  Tid = "2024"
+)
+
+px_data <- pxweb_get(url, query = query)
+as.data.frame(px_data, column.name.type = "code", variable.value.type = "code")
+
+px_df <- pxweb_get_data(
+  url,
+  query = query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+For v2 tables with value sets or aggregation codelists, use query
+helpers instead of writing API-specific parameters by hand:
+
+``` r
+
+query <- list(
+  Region = pxweb_all(),
+  Alder = pxweb_aggregation("agg_Ålder5år_1"),
+  Kon = c("1", "2"),
+  ContentsCode = "BE0101N1",
+  Tid = pxweb_latest()
+)
+
+px_df <- pxweb_get_data(
+  url,
+  query = query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+Available codelist identifiers can be listed from the v2 metadata:
+
+``` r
+
+meta <- pxweb_get(url)
+pxweb_codelists(meta, variable = "Alder")
+```
+
+[`pxweb_latest()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+is resolved against the table metadata before the request is sent. It
+replaces its placeholder value, `"9999"` by default, with the last
+available metadata value for that variable.
+
+For v2 data, the content variable is kept as a dimension, such as
+`ContentsCode`, and observations are returned in a generic `value`
+column.
 
 ## Problems?
 
@@ -59,7 +135,8 @@ You are welcome to contact us:
   `packageVersion("pxweb")`)
 - [Send a pull request](https://github.com/ropengov/pxweb)
 - [Star us on the Github page](https://github.com/ropengov/pxweb)
-- [Join the discussion in Gitter](https://gitter.im/rOpenGov/pxweb)
+- [Join the discussion in
+  Gitter](https://app.gitter.im/#/room/#rOpenGov_pxweb:gitter.im)
 
 ### Acknowledgements
 
@@ -116,10 +193,21 @@ Listing of functions in the pxweb package
   [`is_pxweb_response()`](https://ropengov.github.io/pxweb/reference/pxweb_parse_response.md)
   : Parse the response from a PXWEB API (advanced)
 
+- [`pxweb_all()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  [`pxweb_latest()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  [`pxweb_aggregation()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  [`pxweb_valueset()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  [`pxweb_top()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  [`pxweb_bottom()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+  : PXWEB API v2 query helpers
+
 - [`pxweb_query_as_json()`](https://ropengov.github.io/pxweb/reference/pxweb_query_as_json.md)
   :
 
   Convert a `pxweb_query` object to a `json` string
+
+- [`pxweb_selection()`](https://ropengov.github.io/pxweb/reference/pxweb_selection.md)
+  : Create a PXWEB query selection
 
 - [`pxweb_test_api()`](https://ropengov.github.io/pxweb/reference/pxweb_test_api.md)
   : Test a full or a part of a PXWEB api.
@@ -141,13 +229,22 @@ Listing of functions in the pxweb package
   [`checkForLevels()`](https://ropengov.github.io/pxweb/reference/api_catalogue.md)
   : Defunct functions
 
+- [`pxweb_audit_api_catalogue_config()`](https://ropengov.github.io/pxweb/reference/pxweb_audit_api_catalogue_config.md)
+  : Audit PXWEB API catalogue config endpoints
+
 - [`assert_query_can_be_split_to_batches()`](https://ropengov.github.io/pxweb/reference/assert_query_can_be_split_to_batches.md)
   : Assert that a given pxweb query can be split
+
+- [`pxweb_codelists()`](https://ropengov.github.io/pxweb/reference/pxweb_codelists.md)
+  : List PXWEB API v2 codelists in metadata.
 
 - [`pxweb_query_as_rcode()`](https://ropengov.github.io/pxweb/reference/pxweb_query_as_rcode.md)
   :
 
   Print a `pxweb_query` object as R code
+
+- [`pxweb_search()`](https://ropengov.github.io/pxweb/reference/pxweb_search.md)
+  : Search PXWEB API tables
 
 ## Interactive functions
 

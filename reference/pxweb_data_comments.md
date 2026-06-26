@@ -9,6 +9,9 @@ pxweb_data_comments(x)
 
 # S3 method for class 'pxweb_data'
 pxweb_data_comments(x)
+
+# S3 method for class 'pxweb_data_v2'
+pxweb_data_comments(x)
 ```
 
 ## Arguments

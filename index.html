@@ -13,8 +13,8 @@
 <link rel="manifest" href="site.webmanifest">
 <!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="katex-auto.js"></script><script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/B612_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/B612_Mono-0.4.10/font.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="R Interface to PXWEB APIs">
@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="index.html">pxweb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,6 +76,7 @@
 </h1>
 </div>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<p><strong>The package now supports PXWEB API 2.0</strong></p>
 <p>The pxweb R package provides tools to interface with the PX-WEB API for data search, download, manipulation and visualization purposes. This is used by a large number of statistical authorities world-wide. It offers methods to utilize information about the data hierarchy stored behind the PXWEB API.</p>
 <p>Many API services are still in their early stages, and data quality is sometimes compromised. Issue reports are welcome.</p>
 <div class="section level2">
@@ -101,6 +102,54 @@
 <h2 id="using-the-package">Using the package<a class="anchor" aria-label="anchor" href="#using-the-package"></a>
 </h2>
 <p>For examples, check the <a href="https://ropengov.github.io/pxweb/articles/pxweb.html">tutorial/vignette</a>.</p>
+<div class="section level3">
+<h3 id="pxweb-api-v2">PXWEB API v2<a class="anchor" aria-label="anchor" href="#pxweb-api-v2"></a>
+</h3>
+<p>PXWEB API v2 tables can be queried with the same <code><a href="reference/pxweb_get.html">pxweb_get()</a></code> and <code><a href="reference/pxweb_get_data.html">pxweb_get_data()</a></code> workflow. A v2 data request is sent to the table’s <code>/data</code> endpoint and returns JSON-stat2 by default.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=sv"</span></span>
+<span></span>
+<span><span class="va">query</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  Region <span class="op">=</span> <span class="st">"00"</span>,</span>
+<span>  Civilstand <span class="op">=</span> <span class="st">"OG"</span>,</span>
+<span>  Alder <span class="op">=</span> <span class="st">"0"</span>,</span>
+<span>  Kon <span class="op">=</span> <span class="st">"1"</span>,</span>
+<span>  ContentsCode <span class="op">=</span> <span class="st">"BE0101N1"</span>,</span>
+<span>  Tid <span class="op">=</span> <span class="st">"2024"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">px_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="va">url</span>, query <span class="op">=</span> <span class="va">query</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">px_data</span>, column.name.type <span class="op">=</span> <span class="st">"code"</span>, variable.value.type <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">px_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pxweb_get_data.html">pxweb_get_data</a></span><span class="op">(</span></span>
+<span>  <span class="va">url</span>,</span>
+<span>  query <span class="op">=</span> <span class="va">query</span>,</span>
+<span>  column.name.type <span class="op">=</span> <span class="st">"code"</span>,</span>
+<span>  variable.value.type <span class="op">=</span> <span class="st">"code"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>For v2 tables with value sets or aggregation codelists, use query helpers instead of writing API-specific parameters by hand:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">query</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  Region <span class="op">=</span> <span class="fu"><a href="reference/pxweb_query_helpers.html">pxweb_all</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  Alder <span class="op">=</span> <span class="fu"><a href="reference/pxweb_query_helpers.html">pxweb_aggregation</a></span><span class="op">(</span><span class="st">"agg_Ålder5år_1"</span><span class="op">)</span>,</span>
+<span>  Kon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span><span class="op">)</span>,</span>
+<span>  ContentsCode <span class="op">=</span> <span class="st">"BE0101N1"</span>,</span>
+<span>  Tid <span class="op">=</span> <span class="fu"><a href="reference/pxweb_query_helpers.html">pxweb_latest</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">px_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pxweb_get_data.html">pxweb_get_data</a></span><span class="op">(</span></span>
+<span>  <span class="va">url</span>,</span>
+<span>  query <span class="op">=</span> <span class="va">query</span>,</span>
+<span>  column.name.type <span class="op">=</span> <span class="st">"code"</span>,</span>
+<span>  variable.value.type <span class="op">=</span> <span class="st">"code"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Available codelist identifiers can be listed from the v2 metadata:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/pxweb_codelists.html">pxweb_codelists</a></span><span class="op">(</span><span class="va">meta</span>, variable <span class="op">=</span> <span class="st">"Alder"</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="reference/pxweb_query_helpers.html">pxweb_latest()</a></code> is resolved against the table metadata before the request is sent. It replaces its placeholder value, <code>"9999"</code> by default, with the last available metadata value for that variable.</p>
+<p>For v2 data, the content variable is kept as a dimension, such as <code>ContentsCode</code>, and observations are returned in a generic <code>value</code> column.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="problems">Problems?<a class="anchor" aria-label="anchor" href="#problems"></a>
@@ -117,7 +166,7 @@
 <a href="https://github.com/ropengov/pxweb/issues" class="external-link">Submit suggestions and bug reports</a> (provide the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> and <code>packageVersion("pxweb")</code>)</li>
 <li><a href="https://github.com/ropengov/pxweb" class="external-link">Send a pull request</a></li>
 <li><a href="https://github.com/ropengov/pxweb" class="external-link">Star us on the Github page</a></li>
-<li><a href="https://gitter.im/rOpenGov/pxweb" class="external-link">Join the discussion in Gitter</a></li>
+<li><a href="https://app.gitter.im/#/room/#rOpenGov_pxweb:gitter.im" class="external-link">Join the discussion in Gitter</a></li>
 </ul>
 <div class="section level3">
 <h3 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
@@ -197,16 +246,15 @@ A BibTeX entry for LaTeX users is
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="http://ropengov.org/" class="external-link"><img src="https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg" alt="rOG-badge"></a></li>
+<li><a href="https://ropengov.org/" class="external-link"><img src="https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg" alt="rOG-badge"></a></li>
 <li><a href="https://github.com/rOpenGov/pxweb/actions" class="external-link"><img src="https://github.com/rOpenGov/pxweb/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/rOpenGov/pxweb" class="external-link"><img src="https://codecov.io/gh/rOpenGov/pxweb/branch/master/graph/badge.svg?token=zYtxsus27g" alt="codecov"></a></li>
+<li><a href="https://app.codecov.io/gh/rOpenGov/pxweb" class="external-link"><img src="https://codecov.io/gh/rOpenGov/pxweb/graph/badge.svg?token=zYtxsus27g" alt="codecov"></a></li>
 <li><a href="https://cran.r-project.org/package=pxweb" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/pxweb" alt="Downloads"></a></li>
 <li><a href="https://cran.r-project.org/package=pxweb" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/pxweb" alt="Downloads"></a></li>
 <li><a href="https://cran.r-project.org/package=pxweb" class="external-link"><img src="https://www.r-pkg.org/badges/version/pxweb" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://gitter.im/rOpenGov/pxweb?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge" class="external-link"><img src="https://badges.gitter.im/rOpenGov/pxweb.svg" alt="Gitter"></a></li>
+<li><a href="https://app.gitter.im/#/room/#rOpenGov_pxweb:gitter.im?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge" class="external-link"><img src="https://badges.gitter.im/rOpenGov/pxweb.svg" alt="Gitter"></a></li>
 <li><a href="https://github.com/ropengov/pxweb/watchers" class="external-link"><img src="https://img.shields.io/github/watchers/ropengov/pxweb.svg?style=social" alt="Watch on GitHub"></a></li>
 <li><a href="https://github.com/ropengov/pxweb/stargazers" class="external-link"><img src="https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social" alt="Star on GitHub"></a></li>
-<li><a href="https://twitter.com/intent/follow?screen_name=ropengov" class="external-link"><img src="https://img.shields.io/twitter/follow/ropengov.svg?style=social" alt="Follow"></a></li>
 <li><a href="https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>

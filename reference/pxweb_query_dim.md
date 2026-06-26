@@ -1,6 +1,6 @@
-# Compue the dimension of the query
+# Compute the dimension of the query
 
-Compue the dimension of the query
+Compute the dimension of the query
 
 ## Usage
 

@@ -3,6 +3,7 @@
 Wrapper function (for
 [pxweb_get](https://ropengov.github.io/pxweb/reference/pxweb_get.md)) to
 simply find and download data to the current R session.
+`interactive_pxweb()` is a deprecated alias for `pxweb_interactive()`.
 
 ## Usage
 
@@ -21,9 +22,23 @@ interactive_pxweb(x = NULL)
 
 ## Value
 
-The function returns a list with three slots: `url`: The URL to the data
-`query`: The query to access the data `data`: The downloaded data (if
-chosen to download data)
+Invisibly returns a list with at least:
+
+- `url`:
+
+  The URL to the selected data table.
+
+- `query`:
+
+  A `pxweb_query` object that can be passed to
+  [`pxweb_get`](https://ropengov.github.io/pxweb/reference/pxweb_get.md).
+
+If data is downloaded during the interactive session, the list also
+includes `data`, containing the downloaded data object returned by
+[`pxweb_get`](https://ropengov.github.io/pxweb/reference/pxweb_get.md).
+This return value is not the same as calling
+[`pxweb_get()`](https://ropengov.github.io/pxweb/reference/pxweb_get.md)
+directly.
 
 ## See also
 
@@ -39,8 +54,6 @@ pxweb_api_catalogue() # List apis
 #>      ('scb')
 #> Version(s)   : v1 
 #> Language(s)  : en, sv 
-#> Limit(s)     : 30 calls per 10 sec.
-#>                110000  values per call.
 #> Url template :
 #>  https://api.scb.se/OV0104/[version]/doris/[lang] 
 #> 
@@ -50,20 +63,8 @@ pxweb_api_catalogue() # List apis
 #>      ('statfi', 'statfin')
 #> Version(s)   : v1 
 #> Language(s)  : en, fi, sv 
-#> Limit(s)     : 30 calls per 10 sec.
-#>                120000  values per call.
 #> Url template :
 #>  https://statfin.stat.fi/PXWeb/api/[version]/[lang] 
-#> 
-#> $pxwebapi2.stat.fi
-#> Api: pxwebapi2.stat.fi
-#>      Statistics Finland (old version) 
-#> Version(s)   : v1 
-#> Language(s)  : fi 
-#> Limit(s)     : 1000 calls per 10 sec.
-#>                110000  values per call.
-#> Url template :
-#>  https://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang] 
 #> 
 #> $statistik.sjv.se
 #> Api: statistik.sjv.se
@@ -71,8 +72,6 @@ pxweb_api_catalogue() # List apis
 #>      ('jordbruksverket')
 #> Version(s)   : v1 
 #> Language(s)  : sv 
-#> Limit(s)     : 1000 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
 #>  https://statistik.sjv.se/PXWeb/api/[version]/[lang] 
 #> 
@@ -82,10 +81,8 @@ pxweb_api_catalogue() # List apis
 #>      ('fohm')
 #> Version(s)   : v1 
 #> Language(s)  : sv 
-#> Limit(s)     : 1000 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
-#>  http://fohm-app.folkhalsomyndigheten.se/Folkhalsodata/api/[version]/[lang] 
+#>  https://fohm-app.folkhalsomyndigheten.se/Folkhalsodata/api/[version]/[lang] 
 #> 
 #> $statistik.konj.se
 #> Api: statistik.konj.se
@@ -93,10 +90,8 @@ pxweb_api_catalogue() # List apis
 #>      ('konj')
 #> Version(s)   : v1 
 #> Language(s)  : en, sv 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
-#>  http://statistik.konj.se/PXWeb/api/[version]/[lang] 
+#>  https://statistik.konj.se/PXWeb/api/[version]/[lang] 
 #> 
 #> $prognos.konj.se
 #> Api: prognos.konj.se
@@ -104,10 +99,8 @@ pxweb_api_catalogue() # List apis
 #>      ('konjforcast')
 #> Version(s)   : v1 
 #> Language(s)  : sv 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
-#>  http://prognos.konj.se/PXWeb/api/[version]/[lang] 
+#>  https://prognos.konj.se/PXWeb/api/[version]/[lang] 
 #> 
 #> $statdb.luke.fi
 #> Api: statdb.luke.fi
@@ -115,10 +108,8 @@ pxweb_api_catalogue() # List apis
 #>      ('luke')
 #> Version(s)   : v1 
 #> Language(s)  : en, fi, sv 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                10000  values per call.
 #> Url template :
-#>  http://statdb.luke.fi/PXWeb/api/[version]/[lang] 
+#>  https://statdb.luke.fi/PXWeb/api/[version]/[lang] 
 #> 
 #> $vero2.stat.fi
 #> Api: vero2.stat.fi
@@ -126,10 +117,8 @@ pxweb_api_catalogue() # List apis
 #>      ('vero')
 #> Version(s)   : v1 
 #> Language(s)  : en, fi, sv 
-#> Limit(s)     : 100 calls per 10 sec.
-#>                150000  values per call.
 #> Url template :
-#>  http://vero2.stat.fi/PXWeb/api/[version]/[lang] 
+#>  https://vero2.stat.fi/PXWeb/api/[version]/[lang] 
 #> 
 #> $px.hagstofa.is
 #> Api: px.hagstofa.is
@@ -137,10 +126,8 @@ pxweb_api_catalogue() # List apis
 #>      ('statice')
 #> Version(s)   : v1 
 #> Language(s)  : en, is 
-#> Limit(s)     : 30 calls per 1 sec.
-#>                10000  values per call.
 #> Url template :
-#>  http://px.hagstofa.is/px[lang]/api/[version]/[lang] 
+#>  https://px.hagstofa.is/px[lang]/api/[version]/[lang] 
 #> 
 #> $statistik.linkoping.se
 #> Api: statistik.linkoping.se
@@ -148,21 +135,17 @@ pxweb_api_catalogue() # List apis
 #>      ('linkoping')
 #> Version(s)   : v1 
 #> Language(s)  : sv 
-#> Limit(s)     : 1000 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
-#>  http://statistik.linkoping.se/PXWeb/api/[version]/[lang] 
+#>  https://statistik.linkoping.se/PXWeb/api/[version]/[lang] 
 #> 
-#> $pxwebb2017.vgregion.se
-#> Api: pxwebb2017.vgregion.se
+#> $pxweb2022.vgregion.se
+#> Api: pxweb2022.vgregion.se
 #>      Vastra Gotaland Region in Sweden 
 #>      ('vgregion')
 #> Version(s)   : v1 
 #> Language(s)  : sv 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
-#>  http://pxwebb2017.vgregion.se/pxweb/api/[version]/[lang] 
+#>  https://pxweb2022.vgregion.se/Pxwebb/api/[version]/[lang] 
 #> 
 #> $bank.stat.gl
 #> Api: bank.stat.gl
@@ -170,21 +153,8 @@ pxweb_api_catalogue() # List apis
 #>      ('greenland')
 #> Version(s)   : v1 
 #> Language(s)  : en, kl, da 
-#> Limit(s)     : 10000 calls per 10 sec.
-#>                1000000  values per call.
 #> Url template :
 #>  https://bank.stat.gl/api/[version]/[lang] 
-#> 
-#> $px.rsv.is
-#> Api: px.rsv.is
-#>      Icelandic Centre for Retail Studies 
-#>      ('rsv')
-#> Version(s)   : v1 
-#> Language(s)  : en, is 
-#> Limit(s)     : 30 calls per 1 sec.
-#>                10000  values per call.
-#> Url template :
-#>  http://px.rsv.is/PXWeb/api/[version]/[lang] 
 #> 
 #> $statbank.hagstova.fo
 #> Api: statbank.hagstova.fo
@@ -192,21 +162,8 @@ pxweb_api_catalogue() # List apis
 #>      ('hagstovan')
 #> Version(s)   : v1 
 #> Language(s)  : en, fo 
-#> Limit(s)     : 1000000 calls per 1000000 sec.
-#>                100000  values per call.
 #> Url template :
 #>  https://statbank.hagstova.fo:443/api/[version]/[lang] 
-#> 
-#> $data.ssb.no
-#> Api: data.ssb.no
-#>      Statistics Norway 
-#>      ('ssb')
-#> Version(s)   : v0 
-#> Language(s)  : en, no 
-#> Limit(s)     : 30 calls per 60 sec.
-#>                30000  values per call.
-#> Url template :
-#>  http://data.ssb.no/api/[version]/[lang] 
 #> 
 #> $pxweb.asub.ax
 #> Api: pxweb.asub.ax
@@ -214,8 +171,6 @@ pxweb_api_catalogue() # List apis
 #>      ('asub')
 #> Version(s)   : v1 
 #> Language(s)  : en, sv 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
 #>  https://pxweb.asub.ax/PXWeb/api/[version]/[lang]/ 
 #> 
@@ -225,10 +180,8 @@ pxweb_api_catalogue() # List apis
 #>      ('makstat')
 #> Version(s)   : v1 
 #> Language(s)  : en, mk 
-#> Limit(s)     : 30 calls per 1 sec.
-#>                10000  values per call.
 #> Url template :
-#>  https://makstat.stat.gov.mk/PXWeb/api/[version]/[lang]/MakStat/ 
+#>  https://makstat.stat.gov.mk/PXWeb/api/[version]/[lang] 
 #> 
 #> $data.stat.gov.lv
 #> Api: data.stat.gov.lv
@@ -236,8 +189,6 @@ pxweb_api_catalogue() # List apis
 #>      ('csb_lv')
 #> Version(s)   : v1 
 #> Language(s)  : en, lv 
-#> Limit(s)     : 100 calls per 10 sec.
-#>                3800  values per call.
 #> Url template :
 #>  https://data.stat.gov.lv/api/[version]/[lang]/ 
 #> 
@@ -247,8 +198,6 @@ pxweb_api_catalogue() # List apis
 #>      ('statistica_md')
 #> Version(s)   : v1 
 #> Language(s)  : en, ro 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
 #>  https://statbank.statistica.md/pxweb/api/[version]/[lang]/ 
 #> 
@@ -258,8 +207,6 @@ pxweb_api_catalogue() # List apis
 #>      ('switzerland')
 #> Version(s)   : v1 
 #> Language(s)  : en, de, fr 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                5000  values per call.
 #> Url template :
 #>  https://www.pxweb.bfs.admin.ch/api/[version]/[lang] 
 #> 
@@ -269,10 +216,8 @@ pxweb_api_catalogue() # List apis
 #>      ('askdata')
 #> Version(s)   : v1 
 #> Language(s)  : en 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
-#>  https://askdata.rks-gov.net/PXWeb/api/[version]/[lang]/ 
+#>  https://askdata.rks-gov.net/api/[version]/[lang]/ 
 #> 
 #> $trafi2.stat.fi
 #> Api: trafi2.stat.fi
@@ -280,8 +225,6 @@ pxweb_api_catalogue() # List apis
 #>      ('trafi2')
 #> Version(s)   : v1 
 #> Language(s)  : en, sv, fi 
-#> Limit(s)     : 100 calls per 10 sec.
-#>                110000  values per call.
 #> Url template :
 #>  https://trafi2.stat.fi/PXWeb/api/[version]/[lang]/ 
 #> 
@@ -291,8 +234,6 @@ pxweb_api_catalogue() # List apis
 #>      ('unece')
 #> Version(s)   : v1 
 #> Language(s)  : en 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                100000  values per call.
 #> Url template :
 #>  https://w3.unece.org/PXWeb2015/api/[version]/[lang]/ 
 #> 
@@ -302,8 +243,6 @@ pxweb_api_catalogue() # List apis
 #>      ('grande-region')
 #> Version(s)   : v1 
 #> Language(s)  : fr, de 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
 #>  https://www.grande-region.lu/pxweb/api/[version]/[lang] 
 #> 
@@ -312,18 +251,14 @@ pxweb_api_catalogue() # List apis
 #>      Visit Finland (Rudolf service) 
 #> Version(s)   : v1 
 #> Language(s)  : fi 
-#> Limit(s)     : 20 calls per 10 sec.
-#>                110000  values per call.
 #> Url template :
-#>  http://visitfinland.stat.fi/PXWeb/api/[version]/[lang]/VisitFinland 
+#>  https://visitfinland.stat.fi/PXWeb/api/[version]/[lang] 
 #> 
 #> $stat.hel.fi
 #> Api: stat.hel.fi
 #>      Helsingin seudun aluesarjat -tilastotietokanta 
 #> Version(s)   : v1 
 #> Language(s)  : fi 
-#> Limit(s)     : 1000 calls per 10 sec.
-#>                100000  values per call.
 #> Url template :
 #>  https://stat.hel.fi/api/[version]/[lang] 
 #> 
@@ -333,18 +268,14 @@ pxweb_api_catalogue() # List apis
 #>      ('stat_ee')
 #> Version(s)   : v1 
 #> Language(s)  : en, et 
-#> Limit(s)     : 1000 calls per 10 sec.
-#>                1000000  values per call.
 #> Url template :
-#>  https://andmed.stat.ee/api/[version]/[lang]/stat 
+#>  https://andmed.stat.ee/api/[version]/[lang] 
 #> 
 #> $pxweb.nordicstatistics.org
 #> Api: pxweb.nordicstatistics.org
 #>      Nordic Statistics Database 
 #> Version(s)   : v1 
 #> Language(s)  : en 
-#> Limit(s)     : 10 calls per 10 sec.
-#>                1000  values per call.
 #> Url template :
 #>  https://pxweb.nordicstatistics.org/api/[version]/[lang]/ 
 #> 
@@ -353,10 +284,179 @@ pxweb_api_catalogue() # List apis
 #>      SiStat Database 
 #> Version(s)   : v1 
 #> Language(s)  : sl 
-#> Limit(s)     : 100 calls per 10 sec.
-#>                10000000  values per call.
 #> Url template :
-#>  https://pxweb.stat.si/SiStatData/api/[version]/[lang]/Data 
+#>  https://pxweb.stat.si/SiStatData/api/[version]/[lang] 
+#> 
+#> $statistik.csn.se
+#> Api: statistik.csn.se
+#>      Swedish Board of Student Finance 
+#>      ('csn')
+#> Version(s)   : v1 
+#> Language(s)  : sv 
+#> Url template :
+#>  https://statistik.csn.se/PXWeb/api/[version]/[lang] 
+#> 
+#> $`m02-http-pxwebb.login.sundsvall.se`
+#> Api: m02-http-pxwebb.login.sundsvall.se
+#>      Sundsvall municipality in Sweden 
+#>      ('sundsvall')
+#> Version(s)   : v1 
+#> Language(s)  : sv 
+#> Url template :
+#>  https://m02-http-pxwebb.login.sundsvall.se/PXWeb_Ext/api/[version]/[lang] 
+#> 
+#> $statistik.vasteras.se
+#> Api: statistik.vasteras.se
+#>      Vasteras municipality in Sweden 
+#>      ('vasteras')
+#> Version(s)   : v1 
+#> Language(s)  : sv 
+#> Url template :
+#>  https://statistik.vasteras.se/api/[version]/[lang] 
+#> 
+#> $pxweb.nhwstat.org
+#> Api: pxweb.nhwstat.org
+#>      Nordic Health and Welfare Statistics 
+#>      ('nhwstat')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://pxweb.nhwstat.org/Prod/api/[version]/[lang] 
+#> 
+#> $web.dzs.hr
+#> Api: web.dzs.hr
+#>      Croatian Bureau of Statistics 
+#>      ('croatia', 'dzs')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://web.dzs.hr/PXWeb/api/[version]/[lang] 
+#> 
+#> $etab.llv.li
+#> Api: etab.llv.li
+#>      Statistics Liechtenstein 
+#>      ('liechtenstein')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://etab.llv.li/PXWeb/api/[version]/[lang]/eTab 
+#> 
+#> $www6.poderjudicial.es
+#> Api: www6.poderjudicial.es
+#>      Judicial statistics, Spain 
+#>      ('poderjudicial')
+#> Version(s)   : v1 
+#> Language(s)  : es 
+#> Url template :
+#>  https://www6.poderjudicial.es/PxWeb-20252-v1/api/[version]/[lang] 
+#> 
+#> $openstat.psa.gov.ph
+#> Api: openstat.psa.gov.ph
+#>      Philippine Statistics Authority OpenSTAT 
+#>      ('psa', 'openstat')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://openstat.psa.gov.ph/PXWeb/api/[version]/[lang] 
+#> 
+#> $px.web.ined.fr
+#> Api: px.web.ined.fr
+#>      Generations and Gender Contextual Database 
+#>      ('ggp', 'ined')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://px.web.ined.fr/GGP/api/[version]/[lang] 
+#> 
+#> $statistika.spkc.gov.lv
+#> Api: statistika.spkc.gov.lv
+#>      Latvian Health Statistics Database 
+#>      ('spkc', 'latvia_health')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://statistika.spkc.gov.lv/api/[version]/[lang]/Health 
+#> 
+#> $pxweb.irena.org
+#> Api: pxweb.irena.org
+#>      International Renewable Energy Agency 
+#>      ('irena')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://pxweb.irena.org/api/[version]/[lang] 
+#> 
+#> $tilastot.etk.fi
+#> Api: tilastot.etk.fi
+#>      Finnish Centre for Pensions 
+#>      ('etk')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://tilastot.etk.fi/api/[version]/[lang]/ETK 
+#> 
+#> $`pc-axis.geostat.ge`
+#> Api: pc-axis.geostat.ge
+#>      Geostat Statistics Database 
+#>      ('geostat')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  http://pc-axis.geostat.ge/PXweb/api/[version]/[lang]/Database 
+#> 
+#> $statistika.tai.ee
+#> Api: statistika.tai.ee
+#>      Estonian Health Statistics and Health Research Database 
+#>      ('tai', 'estonia_health')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://statistika.tai.ee/api/[version]/[lang] 
+#> 
+#> $pxexternal.energimyndigheten.se
+#> Api: pxexternal.energimyndigheten.se
+#>      Swedish Energy Agency 
+#>      ('energimyndigheten')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://pxexternal.energimyndigheten.se/api/[version]/[lang] 
+#> 
+#> $skogsstatistik.slu.se
+#> Api: skogsstatistik.slu.se
+#>      Swedish University of Agricultural Sciences forest statistics 
+#>      ('slu', 'riksskogstaxeringen')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://skogsstatistik.slu.se/api/[version]/[lang] 
+#> 
+#> $pxweb.skogsstyrelsen.se
+#> Api: pxweb.skogsstyrelsen.se
+#>      The Swedish Forest Agency 
+#>      ('skogsstyrelsen')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://pxweb.skogsstyrelsen.se/api/[version]/[lang] 
+#> 
+#> $tilastot.tela.fi
+#> Api: tilastot.tela.fi
+#>      Finnish Pension Alliance statistics 
+#>      ('tela')
+#> Version(s)   : v1 
+#> Language(s)  : en 
+#> Url template :
+#>  https://tilastot.tela.fi/api/[version]/[lang] 
+#> 
+#> $statistik.tillvaxtanalys.se
+#> Api: statistik.tillvaxtanalys.se
+#>      Swedish Agency for Growth Policy Analysis (Tillväxtanalys) 
+#>      ('tva', 'tillvaxtanalys')
+#> Version(s)   : v1 
+#> Language(s)  : sv 
+#> Url template :
+#>  https://statistik.tillvaxtanalys.se/PxWeb/api/[version]/[lang] 
 #> 
 #> attr(,"class")
 #> [1] "pxweb_api_catalogue" "list"               

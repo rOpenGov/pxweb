@@ -45,12 +45,14 @@ dimensions are available for the data at that leaf node.
 To install the latest stable release version from CRAN, just use:
 
 ``` r
+
 install.packages("pxweb")
 ```
 
 To install the latest stable release version from GitHub, just use:
 
 ``` r
+
 library("remotes")
 remotes::install_github("ropengov/pxweb")
 ```
@@ -58,12 +60,14 @@ remotes::install_github("ropengov/pxweb")
 Test the installation by loading the library:
 
 ``` r
+
 library(pxweb)
 ```
 
 A tutorial is included with the package with:
 
 ``` r
+
 vignette(topic="pxweb")
 ```
 
@@ -73,6 +77,7 @@ We also recommend setting the UTF-8 encoding since each API may have
 local specific letters:
 
 ``` r
+
 Sys.setlocale(locale = "UTF-8")
 ```
 
@@ -87,8 +92,13 @@ data is of interest.
 
 The simplest way of using `pxweb` is to use it interactively, navigate
 the API to the data of interest, and then set up the query of interest.
+When selecting values for a table variable, use `*` to select all
+available values, separate multiple choices with `,`, and use `:` to
+select a range of choices. If a variable can be eliminated from the
+query, use `e` to eliminate it.
 
 ``` r
+
 # Navigate through all pxweb api:s in the R package API catalogue
 d <- pxweb_interactive()
 
@@ -96,7 +106,7 @@ d <- pxweb_interactive()
 d <- pxweb_interactive("api.scb.se")
 
 # Fetching data from statfi (Statistics Finland)
-d <- pxweb_interactive("statfin.stat.fi")
+d <- pxweb_interactive("pxnet2.stat.fi")
 
 # Fetching data from StatBank (Statistics Norway)
 d <- pxweb_interactive("data.ssb.no")
@@ -109,6 +119,7 @@ In the example above, we use the interactive functionality from the
 PXWEB API root, but we could use any path to the API.
 
 ``` r
+
 # Start with a specific path.
 d <- pxweb_interactive("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A")
 ```
@@ -124,6 +135,7 @@ quickly from R using
 [`file.edit()`](https://rdrr.io/r/utils/file.edit.html).
 
 ``` r
+
 file.edit(pxweb_api_catalogue_path())
 ```
 
@@ -145,6 +157,7 @@ PXWEB METADATA object. What is returned depends on if the URL points to
 a table in the API or not. Here is an example of a PXWEB LEVELS object.
 
 ``` r
+
 # Get PXWEB levels
 px_levels <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
 px_levels
@@ -162,8 +175,12 @@ And if we use
 for a table, a PXWEB METADATA object is returned.
 
 ``` r
+
 # Get PXWEB metadata about a table
-px_meta <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+scb_table_url <- paste0(
+  "https", "://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+)
+px_meta <- pxweb_get(scb_table_url)
 px_meta
 ```
 
@@ -188,19 +205,34 @@ straightforward approach is to use
 to explore the table URL and create a query interactively.
 
 ``` r
-d <- pxweb_interactive("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+
+d <- pxweb_interactive(scb_table_url)
 ```
 
-The interactive function will return the query and the URL, even if the
-data is not downloaded.
+The interactive function returns an invisible list. The list always
+contains the table URL and the query, even if the data is not
+downloaded. If you choose to download data before exiting the
+interactive session, the list also contains a `data` element with the
+downloaded data. This is different from
+[`pxweb_get()`](https://ropengov.github.io/pxweb/reference/pxweb_get.md),
+which returns the API response itself.
 
 ``` r
+
+names(d)
+```
+
+    ## [1] "url"   "query"
+
+``` r
+
 d$url
 ```
 
     ## [1] "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
 
 ``` r
+
 d$query
 ```
 
@@ -220,6 +252,7 @@ d$query
 We can also turn the query into a JSON query that we can use outside R.
 
 ``` r
+
 pxweb_query_as_json(d$query, pretty = TRUE)
 ```
 
@@ -314,6 +347,7 @@ path to the file to the
 “[`pxweb_query()`](https://ropengov.github.io/pxweb/reference/pxweb_query.md)”function.
 
 ``` r
+
 pxq <- pxweb_query("path/to/the/json/query.json")
 ```
 
@@ -321,6 +355,7 @@ Finally, we can create a PXWEB query from an R list where each list
 element is a variable and selected observation.
 
 ``` r
+
 pxweb_query_list <-
   list(
     "Civilstand" = c("*"), # Use "*" to select all
@@ -343,6 +378,37 @@ pxq
     ##  [[4]] Tid (item):
     ##    2015, 2016, 2017
 
+Some PXWEB API v1 tables support additional selection filters, such as
+aggregation filters. These can be expressed in an R query with
+[`pxweb_selection()`](https://ropengov.github.io/pxweb/reference/pxweb_selection.md).
+For example, Statistics Finland tables may expose regional aggregations
+where the API filter identifies the aggregation file and the value
+selects the aggregated region.
+
+``` r
+
+statfin_url <- paste0(
+  "https://statfin.stat.fi",
+  "/PxWeb/api/v1/en/StatFin/raku/15er.px"
+)
+
+aggregation_query <- list(
+  alue_23_20260101 = pxweb_selection(
+    filter = "agg:_Regions 2026.agg",
+    values = "MK01"
+  ),
+  timeperiod_y = "2025",
+  contentscode = "rakennus_lkm"
+)
+
+pxd <- pxweb_get_data(
+  statfin_url,
+  query = aggregation_query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
 We can validate the query against the metadata object to asses that we
 can use the query. This validation is done automatically when the data
 is fetched with
@@ -350,6 +416,7 @@ is fetched with
 but can also be done manually.
 
 ``` r
+
 pxweb_validate_query_with_metadata(pxq, px_meta)
 ```
 
@@ -362,8 +429,9 @@ The function returns a `pxweb_data` object that contains the downloaded
 data.
 
 ``` r
+
 pxd <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 pxd
@@ -376,9 +444,10 @@ If we instead want a JSON-stat object, we change the response format to
 JSON-stat, and we will get a JSON-stat object returned.
 
 ``` r
+
 pxq$response$format <- "json-stat"
 pxjstat <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 pxjstat
@@ -538,9 +607,10 @@ Currently, `px` and `sdmx` formats can be downloaded as files, but file
 an issue if you need other response formats.
 
 ``` r
+
 pxq$response$format <- "px"
 pxfp <- pxweb_get(
-  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  scb_table_url,
   pxq
 )
 pxfp
@@ -560,6 +630,142 @@ For more advanced connections to the API, the
 gives the flexibility to access the underlying HTTP calls using `httr`
 and log the HTTP calls for debugging.
 
+### PXWEB API v2 tables
+
+PXWEB API v2 tables use table identifiers and separate metadata and data
+endpoints. The
+[`pxweb_get()`](https://ropengov.github.io/pxweb/reference/pxweb_get.md)
+function handles this internally: when a query is supplied for a v2
+table, the request is sent to the table’s `/data` endpoint and
+JSON-stat2 is requested by default.
+
+Use
+[`pxweb_search()`](https://ropengov.github.io/pxweb/reference/pxweb_search.md)
+to find v2 tables from an API root.
+
+``` r
+
+search_results <- pxweb_search(
+  "population",
+  api_url = paste0("https:", "//", "statistikdatabasen.scb.se", "/api/v2"),
+  lang = "en",
+  page_size = 5
+)
+
+search_results[, c("id", "label", "metadata_url")]
+```
+
+``` r
+
+v2_url <- paste0(
+  "https:", "//", "statistikdatabasen.scb.se",
+  "/api/v2/tables/TAB638/metadata?lang=sv"
+)
+
+v2_query <- list(
+  Region = "00",
+  Civilstand = "OG",
+  Alder = "0",
+  Kon = "1",
+  ContentsCode = "BE0101N1",
+  Tid = "2024"
+)
+
+v2_data <- pxweb_get(v2_url, query = v2_query)
+as.data.frame(v2_data, column.name.type = "code", variable.value.type = "code")
+```
+
+#### Query helpers for PXWEB API v2
+
+PXWEB API v2 tables may expose value sets and aggregation codelists, for
+example age groups, regional groupings or other ready-made
+classifications. These are represented in the API with extra URL
+parameters such as `codelist[Variable]` and `outputValues[Variable]`.
+The helper functions below let you express these choices directly in the
+R query instead of writing those API details by hand.
+
+The helpers can be mixed with ordinary character values:
+
+``` r
+
+v2_query <- list(
+  Region = pxweb_all(),
+  Alder = pxweb_aggregation("agg_Ålder5år_1"),
+  Kon = c("1", "2"),
+  ContentsCode = "BE0101N1",
+  Tid = pxweb_latest()
+)
+
+v2_df <- pxweb_get_data(
+  v2_url,
+  query = v2_query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+The most common helpers are:
+
+``` r
+
+pxweb_all()                         # all values for a variable
+pxweb_latest()                      # latest time period, resolved from metadata
+pxweb_top(10)                       # top 10 values
+pxweb_bottom(10)                    # bottom 10 values
+pxweb_aggregation("agg_Ålder5år_1") # use an aggregation codelist
+pxweb_valueset("vs_Ålder1årG")      # use a value set codelist
+```
+
+If only some values from a codelist should be requested, supply them
+with `value_codes`.
+
+``` r
+
+v2_query <- list(
+  Alder = pxweb_aggregation(
+    "agg_Ålder5år_1",
+    value_codes = c("0-4", "5-9", "10-14")
+  ),
+  Kon = "1",
+  ContentsCode = "BE0101N1",
+  Tid = pxweb_latest()
+)
+```
+
+The exact aggregation and value set identifiers are found in the v2
+metadata for a table. Use
+[`pxweb_codelists()`](https://ropengov.github.io/pxweb/reference/pxweb_codelists.md)
+to list them without inspecting the raw API response by hand.
+
+``` r
+
+v2_meta <- pxweb_get(v2_url)
+pxweb_codelists(v2_meta, variable = "Alder")
+```
+
+[`pxweb_latest()`](https://ropengov.github.io/pxweb/reference/pxweb_query_helpers.md)
+is resolved against the table metadata before the data request is sent.
+By default it uses the placeholder `"9999"` in the query object and
+replaces it with the last available value for that variable from the
+metadata. It is mainly intended for time variables.
+
+If you want a data frame directly, use
+[`pxweb_get_data()`](https://ropengov.github.io/pxweb/reference/pxweb_get_data.md).
+
+``` r
+
+v2_df <- pxweb_get_data(
+  v2_url,
+  query = v2_query,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+```
+
+In v2 JSON-stat2 output, the content variable is retained as a
+dimension, such as `ContentsCode`, and observations are returned in a
+generic `value` column.
+
 We can then convert the downloaded PXWEB data objects to a `data. frame`
 or to a character matrix. The character matrix contains the “raw” data
 while `data. frame` returns an R `data.frame` in a tidy format. This
@@ -569,6 +775,7 @@ a `data. frame`. Using the arguments `variable.value.type` and
 names and value types.
 
 ``` r
+
 pxdf <- as.data.frame(pxd, column.name.type = "text", variable.value.type = "text")
 head(pxdf)
 ```
@@ -582,6 +789,7 @@ head(pxdf)
     ## 6         single women 2017    2477012
 
 ``` r
+
 pxdf <- as.data.frame(pxd, column.name.type = "code", variable.value.type = "code")
 head(pxdf)
 ```
@@ -598,6 +806,7 @@ Similarly, we can access the raw data as a character matrix with
 `as.matrix`.
 
 ``` r
+
 pxmat <- as.matrix(pxd, column.name.type = "code", variable.value.type = "code")
 head(pxmat)
 ```
@@ -618,6 +827,7 @@ for the data. This can be accessed using
 function.
 
 ``` r
+
 pxdc <- pxweb_data_comments(pxd)
 pxdc
 ```
@@ -628,6 +838,7 @@ In this case, we did not have any comments. If we have comments, we can
 turn the comments into a `data. frame` with one comment per row.
 
 ``` r
+
 as.data.frame(pxdc)
 ```
 
@@ -639,6 +850,7 @@ Finally, if we use the data, we can easily create a citation for a
 function. For full reproducibility, please also cite the package.
 
 ``` r
+
 pxweb_cite(pxd)
 ```
 
@@ -689,12 +901,13 @@ file](https://github.com/rOpenGov/pxweb/blob/master/DESCRIPTION).
 We created this vignette with
 
 ``` r
+
 sessionInfo()
 ```
 
-    ## R version 4.5.2 (2025-10-31)
+    ## R version 4.6.1 (2026-06-24)
     ## Platform: x86_64-pc-linux-gnu
-    ## Running under: Ubuntu 24.04.3 LTS
+    ## Running under: Ubuntu 24.04.4 LTS
     ## 
     ## Matrix products: default
     ## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -713,13 +926,14 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] pxweb_0.17.1
+    ## [1] pxweb_0.19.0
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] backports_1.5.0   digest_0.6.39     desc_1.4.3        R6_2.6.1         
-    ##  [5] fastmap_1.2.0     xfun_0.56         cachem_1.1.0      knitr_1.51       
-    ##  [9] htmltools_0.5.9   rmarkdown_2.30    lifecycle_1.0.5   cli_3.6.5        
+    ##  [1] backports_1.5.1   digest_0.6.39     desc_1.4.3        R6_2.6.1         
+    ##  [5] fastmap_1.2.0     xfun_0.59         cachem_1.1.0      knitr_1.51       
+    ##  [9] htmltools_0.5.9   rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6        
     ## [13] sass_0.4.10       pkgdown_2.2.0     textshaping_1.0.5 jquerylib_0.1.4  
-    ## [17] systemfonts_1.3.2 compiler_4.5.2    tools_4.5.2       ragg_1.5.1       
-    ## [21] checkmate_2.3.4   bslib_0.10.0      evaluate_1.0.5    yaml_2.3.12      
-    ## [25] jsonlite_2.0.0    rlang_1.1.7       fs_1.6.7          htmlwidgets_1.6.4
+    ## [17] systemfonts_1.3.2 compiler_4.6.1    tools_4.6.1       ragg_1.5.2       
+    ## [21] checkmate_2.3.4   bslib_0.11.0      evaluate_1.0.5    yaml_2.3.12      
+    ## [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.2.0       fs_2.1.0         
+    ## [29] htmlwidgets_1.6.4

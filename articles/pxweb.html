@@ -13,8 +13,8 @@
 <link rel="manifest" href="../site.webmanifest">
 <!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="../katex-auto.js"></script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/B612_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/B612_Mono-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="PX-WEB API Interface for R">
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">pxweb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,9 +70,9 @@
                         <h4 data-toc-skip class="author">Mans Magnusson,
 Leo Lahti et al.</h4>
             
-            <h4 data-toc-skip class="date">2026-03-10</h4>
+            <h4 data-toc-skip class="date">2026-06-26</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/rOpenGov/pxweb/blob/master/vignettes/pxweb.Rmd" class="external-link"><code>vignettes/pxweb.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rOpenGov/pxweb/blob/v0.19.0/vignettes/pxweb.Rmd" class="external-link"><code>vignettes/pxweb.Rmd</code></a></small>
       <div class="d-none name"><code>pxweb.Rmd</code></div>
     </div>
 
@@ -161,7 +161,11 @@ query specifying what data is of interest.</p>
 </h2>
 <p>The simplest way of using <code>pxweb</code> is to use it
 interactively, navigate the API to the data of interest, and then set up
-the query of interest.</p>
+the query of interest. When selecting values for a table variable, use
+<code>*</code> to select all available values, separate multiple choices
+with <code>,</code>, and use <code>:</code> to select a range of
+choices. If a variable can be eliminated from the query, use
+<code>e</code> to eliminate it.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Navigate through all pxweb api:s in the R package API catalogue</span></span>
 <span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_interactive.html">pxweb_interactive</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -170,7 +174,7 @@ the query of interest.</p>
 <span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_interactive.html">pxweb_interactive</a></span><span class="op">(</span><span class="st">"api.scb.se"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Fetching data from statfi (Statistics Finland)</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_interactive.html">pxweb_interactive</a></span><span class="op">(</span><span class="st">"statfin.stat.fi"</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_interactive.html">pxweb_interactive</a></span><span class="op">(</span><span class="st">"pxnet2.stat.fi"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Fetching data from StatBank (Statistics Norway)</span></span>
 <span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_interactive.html">pxweb_interactive</a></span><span class="op">(</span><span class="st">"data.ssb.no"</span><span class="op">)</span></span>
@@ -220,7 +224,10 @@ is an example of a PXWEB LEVELS object.</p>
 object is returned.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get PXWEB metadata about a table</span></span>
-<span><span class="va">px_meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span><span class="op">)</span></span>
+<span><span class="va">scb_table_url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https"</span>, <span class="st">"://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">px_meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="va">scb_table_url</span><span class="op">)</span></span>
 <span><span class="va">px_meta</span></span></code></pre></div>
 <pre><code><span><span class="co">## PXWEB METADATA</span></span>
 <span><span class="co">## Population by region, marital status, age, sex, observations and year </span></span>
@@ -241,13 +248,20 @@ Creating a query can be done in three main ways. The first and most
 straightforward approach is to use <code><a href="../reference/pxweb_interactive.html">pxweb_interactive()</a></code> to
 explore the table URL and create a query interactively.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_interactive.html">pxweb_interactive</a></span><span class="op">(</span><span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span><span class="op">)</span></span></code></pre></div>
-<p>The interactive function will return the query and the URL, even if
-the data is not downloaded.</p>
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_interactive.html">pxweb_interactive</a></span><span class="op">(</span><span class="va">scb_table_url</span><span class="op">)</span></span></code></pre></div>
+<p>The interactive function returns an invisible list. The list always
+contains the table URL and the query, even if the data is not
+downloaded. If you choose to download data before exiting the
+interactive session, the list also contains a <code>data</code> element
+with the downloaded data. This is different from
+<code><a href="../reference/pxweb_get.html">pxweb_get()</a></code>, which returns the API response itself.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "url"   "query"</span></span></code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span><span class="op">$</span><span class="va">url</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span><span class="op">$</span><span class="va">query</span></span></code></pre></div>
 <pre><code><span><span class="co">## PXWEB QUERY</span></span>
 <span><span class="co">## query:</span></span>
@@ -263,7 +277,7 @@ the data is not downloaded.</p>
 <span><span class="co">##    2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017</span></span></code></pre>
 <p>We can also turn the query into a JSON query that we can use outside
 R.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pxweb_query_as_json.html">pxweb_query_as_json</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">query</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## {</span></span>
 <span><span class="co">##   "query": [</span></span>
@@ -350,11 +364,11 @@ documentation.</p>
 } </code></pre>
 <p>To use this JSON query, we store the JSON query as a file and supply
 the path to the file to the “<code><a href="../reference/pxweb_query.html">pxweb_query()</a></code>”function.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_query.html">pxweb_query</a></span><span class="op">(</span><span class="st">"path/to/the/json/query.json"</span><span class="op">)</span></span></code></pre></div>
 <p>Finally, we can create a PXWEB query from an R list where each list
 element is a variable and selected observation.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxweb_query_list</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    <span class="st">"Civilstand"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>, <span class="co"># Use "*" to select all</span></span>
@@ -374,11 +388,37 @@ element is a variable and selected observation.</p>
 <span><span class="co">##    BE0101N1</span></span>
 <span><span class="co">##  [[4]] Tid (item):</span></span>
 <span><span class="co">##    2015, 2016, 2017</span></span></code></pre>
+<p>Some PXWEB API v1 tables support additional selection filters, such
+as aggregation filters. These can be expressed in an R query with
+<code><a href="../reference/pxweb_selection.html">pxweb_selection()</a></code>. For example, Statistics Finland tables
+may expose regional aggregations where the API filter identifies the
+aggregation file and the value selects the aggregated region.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">statfin_url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://statfin.stat.fi"</span>,</span>
+<span>  <span class="st">"/PxWeb/api/v1/en/StatFin/raku/15er.px"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">aggregation_query</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  alue_23_20260101 <span class="op">=</span> <span class="fu"><a href="../reference/pxweb_selection.html">pxweb_selection</a></span><span class="op">(</span></span>
+<span>    filter <span class="op">=</span> <span class="st">"agg:_Regions 2026.agg"</span>,</span>
+<span>    values <span class="op">=</span> <span class="st">"MK01"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  timeperiod_y <span class="op">=</span> <span class="st">"2025"</span>,</span>
+<span>  contentscode <span class="op">=</span> <span class="st">"rakennus_lkm"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pxd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get_data.html">pxweb_get_data</a></span><span class="op">(</span></span>
+<span>  <span class="va">statfin_url</span>,</span>
+<span>  query <span class="op">=</span> <span class="va">aggregation_query</span>,</span>
+<span>  column.name.type <span class="op">=</span> <span class="st">"code"</span>,</span>
+<span>  variable.value.type <span class="op">=</span> <span class="st">"code"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>We can validate the query against the metadata object to asses that
 we can use the query. This validation is done automatically when the
 data is fetched with <code><a href="../reference/pxweb_get.html">pxweb_get()</a></code> but can also be done
 manually.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pxweb_validate_query_with_metadata.html">pxweb_validate_query_with_metadata</a></span><span class="op">(</span><span class="va">pxq</span>, <span class="va">px_meta</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -387,9 +427,9 @@ manually.</p>
 <p>When we have the URL to a data table and a query, we can download the
 data with “<code><a href="../reference/pxweb_get.html">pxweb_get()</a></code>”. The function returns a
 <code>pxweb_data</code> object that contains the downloaded data.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
+<span>  <span class="va">scb_table_url</span>,</span>
 <span>  <span class="va">pxq</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">pxd</span></span></code></pre></div>
@@ -397,10 +437,10 @@ data with “<code><a href="../reference/pxweb_get.html">pxweb_get()</a></code>�
 <span><span class="co">## With 4 variables and 24 observations.</span></span></code></pre>
 <p>If we instead want a JSON-stat object, we change the response format
 to JSON-stat, and we will get a JSON-stat object returned.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxq</span><span class="op">$</span><span class="va">response</span><span class="op">$</span><span class="va">format</span> <span class="op">&lt;-</span> <span class="st">"json-stat"</span></span>
 <span><span class="va">pxjstat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
+<span>  <span class="va">scb_table_url</span>,</span>
 <span>  <span class="va">pxq</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">pxjstat</span></span></code></pre></div>
@@ -554,10 +594,10 @@ the R <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link"
 <code><a href="../reference/pxweb_get.html">pxweb_get()</a></code>. Currently, <code>px</code> and
 <code>sdmx</code> formats can be downloaded as files, but file an issue
 if you need other response formats.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxq</span><span class="op">$</span><span class="va">response</span><span class="op">$</span><span class="va">format</span> <span class="op">&lt;-</span> <span class="st">"px"</span></span>
 <span><span class="va">pxfp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"</span>,</span>
+<span>  <span class="va">scb_table_url</span>,</span>
 <span>  <span class="va">pxq</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">pxfp</span></span></code></pre></div>
@@ -572,6 +612,112 @@ list of JSON-stat objects, and other files are stored in
 <code><a href="../reference/pxweb_advanced_get.html">pxweb_advanced_get()</a></code> gives the flexibility to access the
 underlying HTTP calls using <code>httr</code> and log the HTTP calls for
 debugging.</p>
+</div>
+<div class="section level3">
+<h3 id="pxweb-api-v2-tables">PXWEB API v2 tables<a class="anchor" aria-label="anchor" href="#pxweb-api-v2-tables"></a>
+</h3>
+<p>PXWEB API v2 tables use table identifiers and separate metadata and
+data endpoints. The <code><a href="../reference/pxweb_get.html">pxweb_get()</a></code> function handles this
+internally: when a query is supplied for a v2 table, the request is sent
+to the table’s <code>/data</code> endpoint and JSON-stat2 is requested
+by default.</p>
+<p>Use <code><a href="../reference/pxweb_search.html">pxweb_search()</a></code> to find v2 tables from an API
+root.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">search_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_search.html">pxweb_search</a></span><span class="op">(</span></span>
+<span>  <span class="st">"population"</span>,</span>
+<span>  api_url <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https:"</span>, <span class="st">"//"</span>, <span class="st">"statistikdatabasen.scb.se"</span>, <span class="st">"/api/v2"</span><span class="op">)</span>,</span>
+<span>  lang <span class="op">=</span> <span class="st">"en"</span>,</span>
+<span>  page_size <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">search_results</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"metadata_url"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">v2_url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https:"</span>, <span class="st">"//"</span>, <span class="st">"statistikdatabasen.scb.se"</span>,</span>
+<span>  <span class="st">"/api/v2/tables/TAB638/metadata?lang=sv"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">v2_query</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  Region <span class="op">=</span> <span class="st">"00"</span>,</span>
+<span>  Civilstand <span class="op">=</span> <span class="st">"OG"</span>,</span>
+<span>  Alder <span class="op">=</span> <span class="st">"0"</span>,</span>
+<span>  Kon <span class="op">=</span> <span class="st">"1"</span>,</span>
+<span>  ContentsCode <span class="op">=</span> <span class="st">"BE0101N1"</span>,</span>
+<span>  Tid <span class="op">=</span> <span class="st">"2024"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">v2_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="va">v2_url</span>, query <span class="op">=</span> <span class="va">v2_query</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">v2_data</span>, column.name.type <span class="op">=</span> <span class="st">"code"</span>, variable.value.type <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="query-helpers-for-pxweb-api-v2">Query helpers for PXWEB API v2<a class="anchor" aria-label="anchor" href="#query-helpers-for-pxweb-api-v2"></a>
+</h4>
+<p>PXWEB API v2 tables may expose value sets and aggregation codelists,
+for example age groups, regional groupings or other ready-made
+classifications. These are represented in the API with extra URL
+parameters such as <code>codelist[Variable]</code> and
+<code>outputValues[Variable]</code>. The helper functions below let you
+express these choices directly in the R query instead of writing those
+API details by hand.</p>
+<p>The helpers can be mixed with ordinary character values:</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">v2_query</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  Region <span class="op">=</span> <span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_all</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  Alder <span class="op">=</span> <span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_aggregation</a></span><span class="op">(</span><span class="st">"agg_Ålder5år_1"</span><span class="op">)</span>,</span>
+<span>  Kon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span><span class="op">)</span>,</span>
+<span>  ContentsCode <span class="op">=</span> <span class="st">"BE0101N1"</span>,</span>
+<span>  Tid <span class="op">=</span> <span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_latest</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">v2_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get_data.html">pxweb_get_data</a></span><span class="op">(</span></span>
+<span>  <span class="va">v2_url</span>,</span>
+<span>  query <span class="op">=</span> <span class="va">v2_query</span>,</span>
+<span>  column.name.type <span class="op">=</span> <span class="st">"code"</span>,</span>
+<span>  variable.value.type <span class="op">=</span> <span class="st">"code"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The most common helpers are:</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_all</a></span><span class="op">(</span><span class="op">)</span>                         <span class="co"># all values for a variable</span></span>
+<span><span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_latest</a></span><span class="op">(</span><span class="op">)</span>                      <span class="co"># latest time period, resolved from metadata</span></span>
+<span><span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_top</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>                       <span class="co"># top 10 values</span></span>
+<span><span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_bottom</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>                    <span class="co"># bottom 10 values</span></span>
+<span><span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_aggregation</a></span><span class="op">(</span><span class="st">"agg_Ålder5år_1"</span><span class="op">)</span> <span class="co"># use an aggregation codelist</span></span>
+<span><span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_valueset</a></span><span class="op">(</span><span class="st">"vs_Ålder1årG"</span><span class="op">)</span>      <span class="co"># use a value set codelist</span></span></code></pre></div>
+<p>If only some values from a codelist should be requested, supply them
+with <code>value_codes</code>.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">v2_query</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  Alder <span class="op">=</span> <span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_aggregation</a></span><span class="op">(</span></span>
+<span>    <span class="st">"agg_Ålder5år_1"</span>,</span>
+<span>    value_codes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"0-4"</span>, <span class="st">"5-9"</span>, <span class="st">"10-14"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  Kon <span class="op">=</span> <span class="st">"1"</span>,</span>
+<span>  ContentsCode <span class="op">=</span> <span class="st">"BE0101N1"</span>,</span>
+<span>  Tid <span class="op">=</span> <span class="fu"><a href="../reference/pxweb_query_helpers.html">pxweb_latest</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The exact aggregation and value set identifiers are found in the v2
+metadata for a table. Use <code><a href="../reference/pxweb_codelists.html">pxweb_codelists()</a></code> to list them
+without inspecting the raw API response by hand.</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">v2_meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get.html">pxweb_get</a></span><span class="op">(</span><span class="va">v2_url</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/pxweb_codelists.html">pxweb_codelists</a></span><span class="op">(</span><span class="va">v2_meta</span>, variable <span class="op">=</span> <span class="st">"Alder"</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="../reference/pxweb_query_helpers.html">pxweb_latest()</a></code> is resolved against the table metadata
+before the data request is sent. By default it uses the placeholder
+<code>"9999"</code> in the query object and replaces it with the last
+available value for that variable from the metadata. It is mainly
+intended for time variables.</p>
+<p>If you want a data frame directly, use
+<code><a href="../reference/pxweb_get_data.html">pxweb_get_data()</a></code>.</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">v2_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_get_data.html">pxweb_get_data</a></span><span class="op">(</span></span>
+<span>  <span class="va">v2_url</span>,</span>
+<span>  query <span class="op">=</span> <span class="va">v2_query</span>,</span>
+<span>  column.name.type <span class="op">=</span> <span class="st">"code"</span>,</span>
+<span>  variable.value.type <span class="op">=</span> <span class="st">"code"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>In v2 JSON-stat2 output, the content variable is retained as a
+dimension, such as <code>ContentsCode</code>, and observations are
+returned in a generic <code>value</code> column.</p>
 <p>We can then convert the downloaded PXWEB data objects to a
 <code>data. frame</code> or to a character matrix. The character matrix
 contains the “raw” data while <code>data. frame</code> returns an R
@@ -581,7 +727,7 @@ values (such as “..” are converted to <code>NA</code>) in a
 <code>variable.value.type</code> and <code>column.name.type</code>, we
 can choose if we want the code or the text column names and value
 types.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">pxd</span>, column.name.type <span class="op">=</span> <span class="st">"text"</span>, variable.value.type <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pxdf</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   marital status   sex year Population</span></span>
@@ -591,7 +737,7 @@ types.</p>
 <span><span class="co">## 4         single women 2015    2394842</span></span>
 <span><span class="co">## 5         single women 2016    2437315</span></span>
 <span><span class="co">## 6         single women 2017    2477012</span></span></code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">pxd</span>, column.name.type <span class="op">=</span> <span class="st">"code"</span>, variable.value.type <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pxdf</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   Civilstand Kon  Tid BE0101N1</span></span>
@@ -603,7 +749,7 @@ types.</p>
 <span><span class="co">## 6         OG   2 2017  2477012</span></span></code></pre>
 <p>Similarly, we can access the raw data as a character matrix with
 <code>as.matrix</code>.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">pxd</span>, column.name.type <span class="op">=</span> <span class="st">"code"</span>, variable.value.type <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pxmat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##      Civilstand Kon Tid    BE0101N1 </span></span>
@@ -614,20 +760,21 @@ types.</p>
 <span><span class="co">## [5,] "OG"       "2" "2016" "2437315"</span></span>
 <span><span class="co">## [6,] "OG"       "2" "2017" "2477012"</span></span></code></pre>
 </div>
+</div>
 <div class="section level3">
 <h3 id="access-data-footnotescomments">Access data footnotes/comments<a class="anchor" aria-label="anchor" href="#access-data-footnotescomments"></a>
 </h3>
 <p>In addition to the data, the PXWEB DATA object may also contain
 comments for the data. This can be accessed using
 <code><a href="../reference/pxweb_data_comments.html">pxweb_data_comments()</a></code> function.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pxdc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pxweb_data_comments.html">pxweb_data_comments</a></span><span class="op">(</span><span class="va">pxd</span><span class="op">)</span></span>
 <span><span class="va">pxdc</span></span></code></pre></div>
 <pre><code><span><span class="co">## NO PXWEB DATA COMMENTS</span></span></code></pre>
 <p>In this case, we did not have any comments. If we have comments, we
 can turn the comments into a <code>data. frame</code> with one comment
 per row.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">pxdc</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -637,7 +784,7 @@ per row.</p>
 <p>Finally, if we use the data, we can easily create a citation for a
 <code>pxweb_data</code> object using the <code><a href="../reference/pxweb_cite.html">pxweb_cite()</a></code>
 function. For full reproducibility, please also cite the package.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pxweb_cite.html">pxweb_cite</a></span><span class="op">(</span><span class="va">pxd</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Statistics Sweden (2024). “Population by region, marital status, age,</span></span>
 <span><span class="co">## sex, observations and year.” [Data accessed 2024-01-27 16:19:42.712139</span></span>
@@ -686,11 +833,11 @@ file</a>.</p>
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <p>We created this vignette with</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R version 4.5.2 (2025-10-31)</span></span>
+<pre><code><span><span class="co">## R version 4.6.1 (2026-06-24)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
-<span><span class="co">## Running under: Ubuntu 24.04.3 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 24.04.4 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
@@ -709,16 +856,17 @@ file</a>.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] pxweb_0.17.1</span></span>
+<span><span class="co">## [1] pxweb_0.19.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] backports_1.5.0   digest_0.6.39     desc_1.4.3        R6_2.6.1         </span></span>
-<span><span class="co">##  [5] fastmap_1.2.0     xfun_0.56         cachem_1.1.0      knitr_1.51       </span></span>
-<span><span class="co">##  [9] htmltools_0.5.9   rmarkdown_2.30    lifecycle_1.0.5   cli_3.6.5        </span></span>
+<span><span class="co">##  [1] backports_1.5.1   digest_0.6.39     desc_1.4.3        R6_2.6.1         </span></span>
+<span><span class="co">##  [5] fastmap_1.2.0     xfun_0.59         cachem_1.1.0      knitr_1.51       </span></span>
+<span><span class="co">##  [9] htmltools_0.5.9   rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6        </span></span>
 <span><span class="co">## [13] sass_0.4.10       pkgdown_2.2.0     textshaping_1.0.5 jquerylib_0.1.4  </span></span>
-<span><span class="co">## [17] systemfonts_1.3.2 compiler_4.5.2    tools_4.5.2       ragg_1.5.1       </span></span>
-<span><span class="co">## [21] checkmate_2.3.4   bslib_0.10.0      evaluate_1.0.5    yaml_2.3.12      </span></span>
-<span><span class="co">## [25] jsonlite_2.0.0    rlang_1.1.7       fs_1.6.7          htmlwidgets_1.6.4</span></span></code></pre>
+<span><span class="co">## [17] systemfonts_1.3.2 compiler_4.6.1    tools_4.6.1       ragg_1.5.2       </span></span>
+<span><span class="co">## [21] checkmate_2.3.4   bslib_0.11.0      evaluate_1.0.5    yaml_2.3.12      </span></span>
+<span><span class="co">## [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.2.0       fs_2.1.0         </span></span>
+<span><span class="co">## [29] htmlwidgets_1.6.4</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

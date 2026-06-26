@@ -26,6 +26,17 @@ pxweb_as_data_frame(
   variable.value.type = "text"
 )
 
+# S3 method for class 'pxweb_data_v2'
+pxweb_as_data_frame(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = FALSE,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
+
 # S3 method for class 'pxweb_data_comments'
 pxweb_as_data_frame(
   x,
@@ -54,6 +65,17 @@ pxweb_as_data_frame(
 )
 
 # S3 method for class 'pxweb_data'
+as.data.frame(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  stringsAsFactors = FALSE,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
+
+# S3 method for class 'pxweb_data_v2'
 as.data.frame(
   x,
   row.names = NULL,
@@ -106,7 +128,24 @@ pxweb_as_matrix(
   variable.value.type = "text"
 )
 
+# S3 method for class 'pxweb_data_v2'
+pxweb_as_matrix(
+  x,
+  row.names = NULL,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
+
 # S3 method for class 'pxweb_data'
+as.matrix(
+  x,
+  ...,
+  row.names = NULL,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
+
+# S3 method for class 'pxweb_data_v2'
 as.matrix(
   x,
   ...,

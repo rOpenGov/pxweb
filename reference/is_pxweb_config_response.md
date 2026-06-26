@@ -5,7 +5,7 @@ Check if a response is a pxweb config response
 ## Usage
 
 ``` r
-is_pxweb_config_response(x)
+is_pxweb_config_response(x, version)
 ```
 
 ## Arguments
@@ -13,3 +13,7 @@ is_pxweb_config_response(x)
 - x:
 
   a response object
+
+- version:
+
+  the version of the pxweb API to check for

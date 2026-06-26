@@ -9,6 +9,9 @@ pxweb_as_json(x)
 
 # S3 method for class 'pxweb_query'
 pxweb_as_json(x)
+
+# S3 method for class 'pxweb_query_v2'
+pxweb_as_json(x)
 ```
 
 ## Arguments
