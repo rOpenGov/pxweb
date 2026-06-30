@@ -479,20 +479,13 @@ pxweb_cite(px_data)
 
 \section{Case Study}
 \label{sec:case-study}
-% TODO: Shorten the case study so there is not repetition with the functionality.
 
 We illustrate the package with a Statistics Sweden population table
 that is both substantively familiar and technically useful for showing
-PX-Web query handling. The full replication code is in
-\code{case-study.R}; this section presents the same workflow in smaller
-steps.
-
-The first step is to find the table programmatically. Statistics
-Sweden's PX-Web API version 2 exposes a searchable table endpoint, so
-we start from the API root and search for a population table.
-
-% TODO: Also add pxweb_comment to extract comments in the case study to show
-% how this can be done. Do this even if there are no comments in the object retrieved.
+large-query handling. The full replication code is in
+\code{case-study.R}. The example uses Statistics Sweden's version 2
+table search to locate table \code{TAB638}, ``Population by region,
+marital status, age and sex. Year 1968--2024''.
 
 \begin{Code}
 library("pxweb")
@@ -508,15 +501,10 @@ search_results[, c("id", "label", "metadata_url")]
 metadata_url <- search_results$metadata_url[search_results$id == "TAB638"][1]
 \end{Code}
 
-The first result is table \code{TAB638}, ``Population by region,
-marital status, age and sex. Year 1968--2024''. The metadata URL is
-stored and used for the remaining steps.
-
-The table contains annual population counts by region, marital status,
-single-year age, sex, content variable, and year. We use a large but
-manageable subset: all 21 Swedish counties, all marital-status
-categories, single-year ages from 0 to 100+, both sexes, the population
-count content variable, and all years from 1968 to 2024.
+We use a large but manageable subset of the table: all 21 Swedish
+counties, all marital-status categories, single-year ages from 0 to
+100+, both sexes, the population count content variable, and all years
+from 1968 to 2024.
 
 \begin{Code}
 years <- as.character(1968:2024)
@@ -556,8 +544,24 @@ Downloading large query (in 7 batches):
 |======================================================================| 100%
 \end{CodeOutput}
 
-The downloaded object preserves PX-Web metadata, but can be converted
-directly to a standard \code{data.frame} for analysis.
+Comments, notes, and observation statuses can be extracted from the
+downloaded object before conversion. The same call returns an empty
+comments data frame for responses without comments.
+
+\begin{Code}
+comments <- pxweb_data_comments(px_data)
+comments_df <- as.data.frame(comments, stringsAsFactors = FALSE)
+comments_df[, c("comment_type", "comment")]
+\end{Code}
+
+\begin{CodeOutput}
+    comment_type    comment
+1    obs_comment    Heby municipality changed county affiliation ...
+2 column_comment    The period 1968-1998 is reported according to ...
+\end{CodeOutput}
+
+The downloaded object can then be converted directly to a standard
+\code{data.frame} for analysis.
 
 \begin{Code}
 population <- as.data.frame(
@@ -573,7 +577,8 @@ dim(population)
 [1] 967176      7
 \end{CodeOutput}
 
-The same downloaded data object can be cited.
+The same downloaded data object can be cited. The replication script
+stores both the comments data frame and the citation output.
 
 \begin{Code}
 pxweb_cite(px_data)
@@ -592,9 +597,9 @@ population and the increasing share of the population aged 65 years or
 older. The lower panels compare the age and sex structure in 1968 and
 2024. The example therefore demonstrates the main package workflow: a
 PX-Web API version 2 table is found through search, queried
-programmatically, split because it exceeds the API cell limit, cited,
-and transformed into standard \proglang{R} objects for analysis and
-visualization.
+programmatically, split because it exceeds the API cell limit, inspected
+for comments, cited, and transformed into standard \proglang{R} objects
+for analysis and visualization.
 
 \begin{figure}[t!]
 \centering
