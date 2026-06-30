@@ -266,6 +266,17 @@ Appendix~\ref{app:api-catalogue}. At the time of writing, the bundled
 catalogue entries point to version 1 API paths; version 2 APIs can also
 be used by passing explicit PX-Web URLs.
 
+A central implementation detail is that user-supplied URLs are first
+converted into \code{pxweb} objects. The constructor parses the URL,
+detects whether the endpoint belongs to PX-Web API version 1 or version
+2, retrieves provider configuration metadata, and stores call history in
+a temporary cache. Provider configuration is normalized into a common
+internal representation with the number of calls allowed per time
+window, the length of that time window, and the maximum number of
+downloadable values or cells. This lets the same retrieval workflow use
+version 1 \code{?config} responses and version 2 \code{/config}
+responses through a shared interface.
+
 Support for PX-Web API version 2 is expressed in the same top-level
 workflow as version 1 \citep{PxToolsPxWeb2Intro}. Version 2 tables use separate metadata and data
 endpoints and return JSON-stat2 by default. The \pkg{pxweb} package detects v2 URLs,
@@ -274,15 +285,23 @@ and adds query parameters for codelists and output values when needed.
 This keeps user code close to the v1 workflow while still exposing v2
 features.
 
-Large queries can exceed provider-side limits. Here, \pkg{pxweb}
-collects provider configuration where available, including call limits,
-time windows, and maximum downloadable values or cells, and uses this
-information together with table metadata to validate requests and split
-supported large downloads into batches when possible. Returned pieces
-are then combined into a single data object where the response type
-supports it. This behavior is important for official statistics tables
-with many regions, time periods, or classifications that often can be
-larger than the actual provider-side limits.
+For data requests, \code{pxweb_get()} first obtains table metadata,
+adds mandatory variables when needed, validates the query against the
+metadata, and computes any required batches before making data requests.
+Version 1 tables are queried with the table URL and a JSON request body,
+whereas version 2 tables use the corresponding
+\code{/tables/\{id\}/data} endpoint with version-specific query
+parameters such as language and output format. The returned pieces are
+parsed into package-specific S3 objects and combined when the response
+type supports it.
+
+Large queries can exceed provider-side limits. The splitting algorithm
+compares the requested query dimensions with the provider's maximum
+downloadable size. If the query is too large, it searches over
+splittable dimensions and chooses the batch structure that minimizes the
+number of API calls. Splittable dimensions are determined from table
+metadata: time variables and eliminable variables can be split, while
+content variables and top or bottom selections are kept intact.
 
 The package follows common open-source software practices, including
 version control, automated tests, mocked API fixtures, continuous
