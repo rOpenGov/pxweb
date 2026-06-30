@@ -54,11 +54,11 @@
 %% in the following format:
 \Address{
   M\r{a}ns Magnusson\\
-  Department of Computer Science\\
-  Aalto University\\
-  Finland\\
+  Department of Statistics\\
+  Uppsala University\\
+  Sweden\\
   E-mail: \email{mons.magnusson@gmail.com}\\
-\\ 
+\\
   Leo Lahti\\
   Department of Mathematics and Statistics\\
   University of Turku\\
@@ -79,119 +79,305 @@
 
 \begin{document}
 
-%% include your article here, just as usual
-%% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
+%% This is now the canonical JSS manuscript source. Earlier R Journal
+%% draft material is retained in magnusson-kainu-lahti.tex for reference.
 
 
-\section[Introduction]{Introduction}
-%% Note: If there is markup in \(sub)section, then it has to be escape as above.
+\section{Introduction}
 
-Motivation here. Why do we need this package? The open data pipeline, access, use and cite.
+Open data science workflows rely heavily on algorithmic tools for data
+retrieval. Automating major parts of the data workflow,
+such as finding, accessing, integrating, citing, and reporting data,
+helps users spend more time on statistical analysis and interpretation.
+It can also improve reproducible research \citep{Gandrud13,
+Boettiger2015} by making data acquisition explicit and repeatable.
 
-TOWRITE: Mans and Leo (1 page)
+Official statistics are a particularly important class of public data.
+National statistical institutes and international agencies publish
+large collections of data on demography, economics, health,
+infrastructure, climate, and other areas \citep{TODO,TODO}. Such data are often
+multidimensional, geographically detailed, and updated over long time
+periods. Opening these resources through public web interfaces is,
+however, only the first step. Users also need software that can bridge
+the gap between online statistical databases and reproducible analysis
+in statistical programming environments such as \proglang{R}.
 
-Various statistical authorities are increasingly sharing open data resources \cite{xxx}. For instance, international agencies such as Eurostat\footnote{\url{http://ec.europa.eu/eurostat/data/database}} \cite{xxx}, ILO\footnote{\url{https://www.ilo.org/ilostat}} \cite{xxx} , FAO\footnote{\url{http://www.fao.org/faostat}} \cite{xxx} and World Bank\footnote{\url{https://data.worldbank.org}} \cite{xxx} have released popular open data services. Altogether, national and international statistical authorities are now sharing massive amounts of open data on national and international aspects of politics, economics, demography, health, infrastructure, climate, and other areas. Such statistical data sets can be available with a great geographical resolution, with time series spanning several years to decades or even centuries \cite{xxx}.
+Dedicated software packages simplify, standardize, and automate
+analysis workflows. They take into account variations in raw data
+formats, access details, metadata conventions, and typical use cases so
+that users can avoid repetitive programming tasks and reduce the risk of
+misinterpretation and data processing errors \citep{TODO}.
+In \proglang{R}, several packages support generic or
+source-specific data retrieval, including \pkg{quandl} \citep{quandl},
+\pkg{pdfetch} \citep{pdfetch}, \pkg{eurostat}
+\citep{Lahti17eurostat}, \pkg{WDI} \citep{WDI}, and \pkg{osmar}
+\citep{osmar}.
 
-Opening statistical data collections is, however, only the first step towards realizing their full potential and value. Algorithmic tools for data access and analysis can greatly increase the value of such data resources and benefit reproducible research \citep{Gandrud13, Boettiger2015}. Dedicated software packages can be used to simplify, standardize, and automate analysis workflows, taking into account variations in raw data formats, access details, and typical use cases so that the end users can avoid  repetitive programming tasks, avoid potential misinterpretations and coding errors, and save time. 
+The \pkg{pxweb} package fills a complementary role: it provides a
+general \proglang{R} interface to databases exposed through the PX-Web
+API. The package can navigate PX-Web resources, fetch metadata,
+construct and validate queries, retrieve data, convert responses into
+standard \proglang{R} data structures, and produce citation information
+for the source data. As of version 1.0.0, the
+package includes 46 bundled API catalogue entries and supports both
+PX-Web API version 1 and version 2.
 
-Consequently, various developers have released software tools to facilitate the use of statistical data resources. Instead of merely providing tools for data browsing and standard retrieval, we emphasize the need for algorithms that provide the seamless bridge between original data sources and downstream analysis tasks in statistical software languages. For instance in R, various packages have been recently released for generic open data retrieval, including for instance quandl \cite{quandl} and pdfetch \cite{pdfetch}, and for more dedicated access to specific data sources such as open data from Eurostat \cite{Lahti17eurostat}, World Bank (\CRANpkg{WDI}; \citealt{WDI}), Open Street Map (\CRANpkg{osmar}; \citealt{osmar}) and other sources.
+Data citation is another motivation for the package. Data reuse should
+document source organizations, accessed resources, version information,
+and retrieval times where possible. \pkg{pxweb} helps standardize this
+process for PX-Web data by collecting source information from the API
+catalogue and data objects and by encouraging users to cite both the
+retrieved data and the software used to retrieve them.
 
-Whereas dozens of statistical authorities have started to share data through the PX-WEB API, 
-a dedicated R package that provides a unified access to these data collections has been missing. The \CRANpkg{pxweb} package is now filling this gap [CLOSELY RELATED PKGS SHOULD BE CITED HERE?]. Following its first CRAN release in 2014, the \CRANpkg{pxweb}, several contributors and feedback from the user community have supported the package development. 
-[HAS THE PKG BEEN APPLIED IN PUBLICATIONS. THIS WOULD BE A GOOD PLACE TO CITE THOSE?].  SOME brief WORDS ABOUT DATA STANDARDS AND POSSIBLE VARIATIONS BETWEEN DATA PROVIDERS; further details will be in the later section. The pxweb depends on further R packages including \pkg{checkmate} \citep{checkmate}, \pkg{httr} \citep{httr}, \pkg{jsonlite} \citep{jsonlite}. The \pkg{pxweb} package is part of the rOpenGov open data science project \citep{Lahti13icml}. 
+The package was first released on CRAN in 2014 and was substantially
+reworked in 2018 and 2026. Recent development has added support for the PX-Web
+API version 2, including table search, JSON-stat2 responses, v2
+metadata, codelists, value sets, aggregation helpers, and observation
+status comments. The current package is part of the rOpenGov open data
+science project \citep{Lahti13icml}.
 
-In summary, the \CRANpkg{pxweb} package provides custom tools for open statistical data resources provided through the PX-WEB API. Currently, the pxweb package provides seamless algorithmic access from the R environment to dozens of data collections from national authorities in countries such as Estonia, Iceland, Finland, Norway, Sweden, The Netherlands, and elsewhere. Seamless integration with other data analysis tools is facilitated by support for features such as cache, date formatting, tidy data principles \citep{wickham2014}, and the \Cpkg{tibble} \citep{tibble} data format. In this article, we provide an overview of the functionality and use cases based on the current CRAN release version. The comprehensive on-line documentation, which is available via the package homepage\footnote{\url{http://ropengov.github.io/pxweb}}, includes simple examples for individual functions, generic tutorials, and links to more advanced case studies. Moreover, the package is following best practices in open source software development such as version control, automated unit tests, continuous integration, and collaborative development \citep{PerezRiverol2016}.
+\section[PX-Web and PC-Axis]{PX-Web and PC-Axis}
+\label{sec:pxweb-pcaxis}
 
-The introduced tools can benefit researchers and data analysts in academia, government, and industry. Complete analytical workflow from raw data to statistical summaries and final publication can be greatly facilitated by combining programmatic data access with downstream data analysis and visualization tools. The pxweb package supports automated, transparent, reproducible, and well-documented data retrieval from statistical authorities. Utilities such as search, subsetting and cache support efficient data processing and analysis. Further custom tools and functionality can be built around this package. 
+PX-Web is a web application and API for disseminating PC-Axis
+statistical data \citep{TODO}. PC-Axis data are typically organized as
+multidimensional tables with dimensions such as region, time, sex, age,
+indicator, or content variable and has a long tradition in national
+statistical agencies \citep[NSI, ][]{TODO}. PX-Web exposes these data and their
+metadata through HTTP endpoints that can be explored interactively or
+accessed programmatically.
 
+From the perspective of an \proglang{R} user, PX-Web APIs have three
+important purposes. First, a table query must be constructed from table
+metadata. Second, the data response has to be parsed back into an
+analysis-ready format while preserving enough metadata to make the
+result interpretable. Third, the downloaded data should be easy to
+cite to facilitate reproducibility. \pkg{pxweb} handles all three.
 
-\subsection[PXWEB and PC-Axis]{PXWEB}
+The package distinguishes between the PX-Web API and the older PC-Axis
+file format, typically stored as \code{.px} files \citep{TODO}. \pkg{pxweb} is
+designed for APIs, while packages such as \pkg{pxR} focus on parsing
+legacy PC-Axis files \citep{TODO}. This distinction is important because API access
+requires metadata discovery, query construction, request validation,
+and response parsing rather than only local file import.
 
-What is PXWEB and PC-Axis, where does this come from. Who uses this etc.
+% TODO: Add a concise historical paragraph on PX-Web/PC-Axis and cite
+% authoritative documentation from Statistics Sweden or the PX-Web project.
+% TODO: Clarify current PX-Web API v1/v2 adoption among catalogue entries.
+% TODO: Describe provider-side query limits and rate limits using current docs.
 
-TOWRITE: Jan (and Oyvind) (1/2 page)
+\section{Package Design}
+\label{sec:package-design}
 
-- Are there limitations in query sizes etc? Is this applicable (borrowed from eurostat manuscript): "The data sets are stored in cache by default to avoid repeated downloads of identical data and to speed up the analysis. Storing an exact copy of the retrieved raw data on the hard disk will also support reproducibility when the source database is constantly updated."
+The \pkg{pxweb} package is designed as a generic interface rather than a
+client for one statistical agency. Its core design goal is to provide a
+stable \proglang{R} workflow across PX-Web providers while preserving
+provider-specific metadata where it affects query construction,
+codelists, comments, and citation.
 
+The current package interface has 39 exported functions. The central
+workflow is built around \code{pxweb_get()}, which retrieves hierarchy
+levels, table metadata, or table data depending on the supplied URL and
+query. The helper \code{pxweb_get_data()} wraps the same workflow and
+returns a \code{data.frame}. Query construction is handled by
+\code{pxweb_query()} and related conversion helpers, including
+\code{pxweb_query_as_json()} and \code{pxweb_query_as_rcode()}.
 
-\section[pxweb]{The \code{pxweb} R package}
+Internally, the package represents API URLs, metadata, data, comments,
+and query objects with S3 classes. This allows common operations such as
+printing, validation, conversion with \code{as.data.frame()}, and
+combining split responses to behave consistently across API versions.
+The package uses \pkg{httr} for HTTP requests and \pkg{jsonlite} for
+JSON parsing \citep{httr,jsonlite}.
 
-TOWRITE: Måns (1-2 pages)
+The bundled API catalogue is a practical layer on top of the generic
+API client. It stores provider URL templates, available languages,
+version paths, aliases, and citation metadata. Users can rely on the
+catalogue for common providers or pass explicit PX-Web URLs for APIs
+that are not bundled with the package. The current catalogue contains
+46 entries covering national, regional, and international statistical
+resources, see Table \ref{TODO}.
 
-TODO: MOVE ALL DESIGN PRINCIPLES AND OBJECTS INTO article
+Support for PX-Web API version 2 is expressed in the same top-level
+workflow as version 1 \citep{TODO}. Version 2 tables use separate metadata and data
+endpoints and return JSON-stat2 by default. The \pkg{pxweb} package detects v2 URLs,
+builds the corresponding data endpoint, constructs the v2 query body,
+and adds query parameters for codelists and output values when needed.
+This keeps user code close to the v1 workflow while still exposing v2
+features.
 
-In 2018, we made major design decisions and largely rewrote the package in order to simplify the overall design while improving the overall capabilities and efficiency. Hence the current, mature version, is a result of active development and testing by the user community 
+Large queries can exceed provider-side limits. Here, \pkg{pxweb} validates
+queries against metadata and splits supported large requests into
+batches when possible. Returned pieces are then combined into a single
+data object where the response type supports it. This behavior is
+important for official statistics tables with many regions, time
+periods, or classifications that often can be larger than the actual
+provider-side limits.
 
+The package follows common open-source software practices, including
+version control, automated tests, mocked API fixtures, continuous
+integration, and live smoke-test workflows for selected APIs
+\citep{PerezRiverol2016}. The default local test suite currently uses
+mocked and offline-safe tests, with live tests controlled by
+environment variables.
 
-% Some relevant initial references for citing data:
-% https://www.openoffice.org/bibliographic/bibtex-defs.pdf
-% https://tex.stackexchange.com/questions/109127/how-would-i-cite-a-dataset-with-bibtex
-% http://www.dcc.ac.uk/resources/how-guides/cite-datasets#fn11
-% https://libguides.ub.uu.se/referensguiden/harvard\_exempel
-% https://www.scb.se/Upload/PC-Axis/Download/PX-Web/2017v1/Release-notes-pxweb-2017-v1.pdf
-% https://www.scb.se/sv\_/PC-Axis/Documentation/Error-codes-PC-Axis/
+% TODO: Add a figure showing the object/workflow model: catalogue or URL,
+% metadata, query, data request, parsed data, comments, citation.
+% TODO: Add a compact table of exported functions grouped by workflow.
 
-% Contact PXWEB API crew on issues to add:
-% - citation information needed should be attached to metadata objects
-% - send post message to get info on package usage.
+\section{Functionality}
+\label{sec:functionality}
 
-
-\section[case studies]{Usage case studies}
+The package supports both interactive and production workflows.
+Interactive use starts with \code{pxweb_interactive()}, which allows a
+user to navigate a known API, select a table, build a query, optionally
+download data, and print reusable \proglang{R} code. Code use
+starts from either a catalogue entry or a URL and combines metadata
+inspection, query construction, validation, and retrieval.
 
 Installation of the CRAN release version follows the standard procedure in R.
 
 \begin{Code}
-  install.packages("pxweb")
-  library("pxweb")
+install.packages("pxweb")
+library("pxweb")
 \end{Code}
 
+In PX-WEB APIs version 2, users can search for tables with
+\code{pxweb_search()}, retrieve metadata with \code{pxweb_get()}, build
+a query as a named list, fetch data with \code{pxweb_get()} or
+\code{pxweb_get_data()}, and convert the result to a \code{data.frame}.
 
+\begin{Code}
+url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=sv"
 
-\subsection{Data case study one}
+query <- list(
+  Region = "00",
+  Civilstand = "OG",
+  Alder = "0",
+  Kon = "1",
+  ContentsCode = "BE0101N1",
+  Tid = "2024"
+)
 
-TOWRITE: Markus Kainu (1-2 pages)
+px_data <- pxweb_get(url, query = query)
+px_df <- as.data.frame(
+  px_data,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+\end{Code}
 
-\subsection{Data case study two}
+Version 2 APIs may expose aggregation codelists and value sets. The
+package provides query helpers for all values, latest values, top and
+bottom selections, aggregations, and value sets so that users can
+express these selections in \proglang{R} rather than manually
+constructing API-specific URL parameters. Available codelists can be
+inspected with \code{pxweb_codelists()}.
 
-TOWRITE: Markus Kainu (1-2 pages)
+\begin{Code}
+meta <- pxweb_get(url)
+pxweb_codelists(meta, variable = "Alder")
 
-The package functionality can be further enhanced by integrating it with other downstream tools and data sets, such as geographical maps in order to allow geospatial visualization.
+query <- list(
+  Region = pxweb_all(),
+  Alder = pxweb_aggregation("agg_Ålder5år_1"),
+  Kon = c("1", "2"),
+  ContentsCode = "BE0101N1",
+  Tid = pxweb_latest()
+)
+\end{Code}
 
+PX-Web responses may include comments, notes, or status information.
+\pkg{pxweb} exposes these through \code{pxweb_data_comments()}, with
+support for both v1 comments and v2 dataset notes, dimension notes,
+value notes, and observation status comments. Citation support is
+provided by \code{pxweb_cite()}, which prints citation information for
+the retrieved data source and the \pkg{pxweb} package itself.
 
-\subsection[Including pxweb in other applications]{Including \code{pxweb} in other applications}
+% TODO: Turn this section into a tighter software tour with one running
+% example and short subsections for search, query, data conversion,
+% comments/codelists, citation, and extension to uncatalogued APIs.
 
-TOWRITE: Oyvind (1-2 pages)
+\section{Case Study}
+\label{sec:case-study}
 
-\section[summary]{Summary (LEO)}
+% TODO: Select one case study and implement it as JSS replication code.
+% TODO: Add one generated table or figure and reference it from the text.
 
-The pxweb R package provides a seamless programmatic access to statistical data resources that are shared via the PX-WEB API. This popular interface has been adopted by dozens of official statistical authorities world-wide, and hence the pxweb package can facilitate the access and analysis of a remarkable vast collection of curated data collections. 
+\section{Related Software}
+\label{sec:related}
 
-The available tools include utilities for data query, download, manipulation and visualization, and they can utilize information about the incorporated data hierarchies. The combination of algorithms provides a smooth, automated, reproducible and well-documented access to continuously evolving statistical data streams. The online documentation provides detailed examples on how the package can be used to investigate spatial, temporal, demographic, and other phenomena.
+\pkg{pxweb} sits between general data-retrieval packages and
+source-specific official-statistics packages. Packages such as
+\pkg{quandl} and \pkg{pdfetch} provide access to broad data services or
+time-series sources \citep{quandl,pdfetch}. Packages such as
+\pkg{eurostat} and \pkg{WDI} focus on specific data providers
+\citep{Lahti17eurostat,WDI}. In contrast, \pkg{pxweb} targets a shared
+API family used by multiple statistical organizations.
 
-Algorithmic tools, such as the ones provided by the pxweb package, can help to realize the full potential of open statistical data collections. We have introduced a set of targeted tools for the PX-WEB API, which is a widely used data sharing platforms among national and other statistical authorities. Research and citizen science can benefit from the increasing availability of open statistical data resources. 
+The package should also be distinguished from tools for local PC-Axis
+files. \pkg{pxweb} targets web APIs, including metadata discovery,
+query validation, request splitting, and response parsing. File-oriented
+tools such as \pkg{pxR} address a related but different problem: reading
+local \code{.px} files.
 
-Whereas the pxweb tools can be used with any PX-WEB API that is locally accessible, an increasing number of the official statistical resources are being shared openly. For instance, the statistical authorities in many nordic countries have invested in open data sharing, which has supported various use cases by governmental authorities, companies, and citizen scientists \cite{xxx}. More about connections to the overall open data framework...
+Finally, \pkg{pxweb} can serve as infrastructure for more specialized
+packages and applications. Domain-specific tools can build on its API
+access, query, and parsing functionality while adding provider-specific
+analysis, visualization, or educational workflows.
 
-Our work is also advancing data citation practices. In particular, our implementations provide automatically collected citation information and details for the accessed data sets and version numbers, thus facilitating transparent and reproducible research in the ever-changing digital landscape. Automation of the citation data collection  is not only saving time by increased efficiency but also improving the reliability and accuracy of the citation data. Data citation practices have been recently discussed \cite{xxx}, with recommended best practices \cite{xxx}. By providing these tools we hope to promote more wide-spread adoption of data citation guidelines.
+% TODO: Add current references for PxWebApiData, geofi, pxR, and any
+% official PX-Web clients or agency-specific R packages.
 
-Future developments of the package will include improved query options, analytical, and visualization capabilities. The pxweb package provides the core functionality. This can be, and has been complemented by other packages that provide additional utilities built around it.. here discuss the new pkg by our collaborators.
+\section{Discussion}
+\label{sec:discussion}
 
-As such, our work contributes to the rapidly growing field of open data science \cite{Lahti2018IDA}, helping to bring state-of-art and up-to-date data sets from dozens of statistical authorities more accessible for the statistical community. This work provides substantial improvements over the previously available tools, and has been extensively tested by an active user community. Open access to data resources facilitates opening of the complete data analytical workflows. Example data sets for statistical methods development. Encourages further data sharing. Unexpected use cases by integration with external sources.
+The \pkg{pxweb} package provides access to official
+statistics shared through the PX-Web API. It helps bridge the gap
+between data providers and users by supporting discovery, query
+construction, data retrieval, parsing, comments, codelists, and
+citation. This enables transparent and reproducible workflows from raw
+online data to statistical summaries and publication-ready outputs.
 
-The work has been released as open source under the permissive modified BSD-2-clause license\footnote{\url{https://opensource.org/licenses/BSD-2-Clause}}, which is permissive license and suited for research use \cite{Morin2012}. We appreciate feedback from the users through the Github issue tracker\footnote{\url{https://github.com/rOpenGov/pxweb/issues}}, or contributions through pull requests. We hope that our active commitment to the project maintenance and development of the package will encourage further feedback and contributions from the user community.
+The package has matured through active development since its first CRAN
+release in 2014, including a major redesign in 2018 and 2026, with recent support
+for PX-Web API version 2. The current implementation is tested with a
+combination of unit tests, mocked API responses, and optional live
+smoke tests. The local default test suite currently passes 667 tests
+with live tests skipped unless explicitly enabled.
+
+Limitations remain. PX-Web installations differ across providers,
+provider-side query limits vary, and live APIs can change independently
+of the package. For this reason, robust metadata validation, mocked
+fixtures, and live smoke tests are all important parts of the
+maintenance strategy. The package also needs careful documentation of
+which v2 features are generic and which depend on provider-specific
+metadata conventions.
+
+The package has been used, for instance, in research on electronic
+gambling machines and socioeconomic status \citep{Raisamo2019}. More
+generally, programmatic access to official statistics can support open
+data science, governmental analysis, research, education, and citizen
+science. The work contributes to the broader open data science
+ecosystem \citep{Lahti2018IDA} by making official statistics easier to
+retrieve, document, and reuse in \proglang{R}.
+
+% TODO: Update with more citations and where the package has been used..
+% TODO: Update download counts and usage indicators from current CRAN logs.
+% TODO: Add a concise limitations paragraph based on current open issues.
+% TODO: Replace this discussion with a stronger conclusion after the case
+% study and related-software sections are finalized.
 
 \section*{Acknowledgments}
 
-We are grateful to all package contributors, including ... 
-
-The work has been partially funded by Academy of Finland (decisions 295741, 307127 to LL), and is part of rOpenGov\footnote{\url{https://github.ropengov.io}}.
+We are grateful to all package contributors. The work has been
+partially funded by Academy of Finland (decisions 295741, 345630 to
+LL), and is part of rOpenGov\footnote{\url{https://github.ropengov.io}}.
 
 
 \bibliography{magnusson-kainu-lahti}
 
 \end{document}
-
-
 
 
 
