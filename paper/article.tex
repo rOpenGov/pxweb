@@ -556,12 +556,41 @@ analysis.}
 \label{sec:related}
 
 \pkg{pxweb} sits between general data-retrieval packages and
-source-specific official-statistics packages. Packages such as
-\pkg{quandl} and \pkg{pdfetch} provide access to broad data services or
-time-series sources \citep{quandl,pdfetch}. Packages such as
-\pkg{eurostat} and \pkg{WDI} focus on specific data providers
-\citep{Lahti17eurostat,WDI}. In contrast, \pkg{pxweb} targets a shared
-API family used by multiple statistical organizations.
+source-specific official-statistics packages. Table~\ref{tab:related-software}
+summarizes the main distinctions. Packages such as \pkg{quandl} and
+\pkg{pdfetch} provide access to broad data services or time-series
+sources \citep{quandl,pdfetch}. Packages such as \pkg{eurostat} and
+\pkg{WDI} focus on specific data providers \citep{Lahti17eurostat,WDI}.
+In contrast, \pkg{pxweb} targets a shared API family used by multiple
+statistical organizations.
+
+\begin{table}[t!]
+\centering
+\small
+\begin{tabular}{p{0.25\textwidth}p{0.22\textwidth}p{0.43\textwidth}}
+\hline
+Software type & Examples & Relation to \pkg{pxweb}\\
+\hline
+Provider-specific data clients &
+\pkg{eurostat}, \pkg{WDI} &
+Focus on one data provider or data family rather than the PX-Web API family\\
+Generic data-retrieval tools &
+\pkg{quandl}, \pkg{pdfetch} &
+Retrieve broad data sources but do not target PX-Web metadata and query semantics\\
+PX/PC-Axis file tools &
+\pkg{pxR} &
+Work with local \code{.px} files rather than live PX-Web APIs\\
+Provider-side PX-Web software &
+PxWeb, PxWebApi &
+Publish the API endpoints consumed by \pkg{pxweb}\\
+Downstream domain packages &
+\pkg{geofi} &
+Can build specialized workflows on top of official-data access\\
+\hline
+\end{tabular}
+\caption{\label{tab:related-software}Related software and its relation
+to \pkg{pxweb}.}
+\end{table}
 
 The package should also be distinguished from tools for local PC-Axis
 files and from provider-side PX-Web software. \pkg{pxweb} targets web
