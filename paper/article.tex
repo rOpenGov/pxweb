@@ -301,8 +301,60 @@ the retrieved data source and the \pkg{pxweb} package itself.
 \section{Case Study}
 \label{sec:case-study}
 
-% TODO: Select one case study and implement it as JSS replication code.
-% TODO: Add one generated table or figure and reference it from the text.
+We illustrate the package with a Statistics Sweden population table
+that is both substantively familiar and technically useful for showing
+PX-Web query handling. The table ``Population by region, marital
+status, age and sex. Year 1968--2024'' is available through the PX-Web
+API version 2 as table \code{TAB638}. It contains annual population
+counts by region, marital status, single-year age, sex, content
+variable, and year.
+
+The complete table is much larger than a typical interactive API
+request. Its dimensions contain 312 region codes, four marital-status
+categories, 102 age categories, two sex categories, two content
+variables, and 57 years. Downloading the full table would imply more
+than 29 million cells. Statistics Sweden's PX-Web API version 2
+configuration currently limits a single data response to 150,000 data
+cells. This makes the table a useful example of why metadata-aware
+query validation and request splitting are needed for reproducible
+official-statistics workflows.
+
+The replication script \code{case-study.R} uses a large but manageable
+query. It requests the county-level population counts for all 21
+Swedish counties, all marital-status categories, single-year ages from
+0 to 100+, both sexes, the population count content variable, and all
+years from 1968 to 2024. This query contains 967,176 cells, which is
+well above the provider-side limit. The \pkg{pxweb} package validates
+the query, splits it into seven batches, downloads the pieces, and
+combines them into one \code{data.frame}. The script caches the
+downloaded data locally so that the figure can be regenerated without
+repeated API calls.
+
+\begin{Code}
+source("case-study.R")
+\end{Code}
+
+Figure~\ref{fig:case-study-population} summarizes the downloaded data.
+The first two panels aggregate counties, marital statuses, ages, and
+sexes to show the growth of the population and the increasing share of
+the population aged 65 years or older. The lower panels compare the age
+and sex structure in 1968 and 2024. The example therefore demonstrates
+the main package workflow: a PX-Web API version 2 table is queried
+programmatically, a request larger than the API cell limit is split and
+combined by \pkg{pxweb}, and the resulting data are transformed into
+standard \proglang{R} objects for analysis and visualization.
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=\textwidth]{case-study-population}
+\caption{\label{fig:case-study-population}Population development in
+Sweden based on Statistics Sweden table \code{TAB638}. The data are
+downloaded at county level for all years from 1968 to 2024, all
+single-year age groups from 0 to 100+, both sexes, and all
+marital-status categories. The request contains 967,176 cells and is
+split by \pkg{pxweb} into seven API calls before being combined for
+analysis.}
+\end{figure}
 
 \section{Related Software}
 \label{sec:related}
@@ -378,8 +430,6 @@ LL), and is part of rOpenGov\footnote{\url{https://github.ropengov.io}}.
 \bibliography{magnusson-kainu-lahti}
 
 \end{document}
-
-
 
 
 
