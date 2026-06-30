@@ -10,6 +10,7 @@ pxweb_advanced_get(
   verbose = TRUE,
   log_http_calls = FALSE,
   pxmdo = NULL,
+  output_format = "json-stat2",
   ...
 )
 }
@@ -24,6 +25,9 @@ pxweb_advanced_get(
 If TRUE, all calls and responses are logged and written to "log_pxweb_api_http_calls.txt" in the working directory.}
 
 \item{pxmdo}{A \code{pxweb_metadata} object to use for query.}
+
+\item{output_format}{output format for PXWEB API v2 data requests. Defaults
+to \code{"json-stat2"}.}
 
 \item{...}{Further arguments sent to \code{httr::POST} (for queries) or \code{httr::GET} (for query = \code{NULL}).
 If used with query, also supply a \code{pxweb_metadata} object. Otherwise the same parameters are sent to

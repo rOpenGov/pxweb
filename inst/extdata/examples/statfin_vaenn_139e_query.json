@@ -1,0 +1,43 @@
+{
+  "query": [
+    {
+      "code": "timeperiod_y",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "2025"
+        ]
+      }
+    },
+    {
+      "code": "contentscode",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "vaenn-vm01"
+        ]
+      }
+    },
+    {
+      "code": "sukupuoli_9_20180101",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "SSS"
+        ]
+      }
+    },
+    {
+      "code": "vaestoennuste_2_20240101",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "ennuste2024"
+        ]
+      }
+    }
+  ],
+  "response": {
+    "format": "json-stat2"
+  }
+}

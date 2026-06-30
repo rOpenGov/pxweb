@@ -22,6 +22,6 @@ pxweb:::http_was_redirected(r)
 }
 }
 \references{
-Function in large parts taken from \url{https://petermeissner.de/blog/2018/11/07/using-httr-to-detect-redirects/}.
+Function in large parts taken from \code{petermeissner.de/blog/2018/11/07/using-httr-to-detect-redirects/}.
 }
 \keyword{internal}

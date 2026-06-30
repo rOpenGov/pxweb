@@ -1,0 +1,102 @@
+[
+    {
+        "id": "BE0101A",
+        "type": "l",
+        "text": "Folkmängd"
+    },
+    {
+        "id": "BE0101G",
+        "type": "l",
+        "text": "Befolkningsförändringar"
+    },
+    {
+        "id": "BE0101H",
+        "type": "l",
+        "text": "Födda"
+    },
+    {
+        "id": "BE0101I",
+        "type": "l",
+        "text": "Döda"
+    },
+    {
+        "id": "BE0101J",
+        "type": "l",
+        "text": "Flyttningar - inrikes och utrikes"
+    },
+    {
+        "id": "BE0101D",
+        "type": "l",
+        "text": "Medelfolkmängd"
+    },
+    {
+        "id": "BE0101E",
+        "type": "l",
+        "text": "Utrikes födda"
+    },
+    {
+        "id": "BE0101F",
+        "type": "l",
+        "text": "Utländska medborgare"
+    },
+    {
+        "id": "BE0101Q",
+        "type": "l",
+        "text": "Utländsk/svensk bakgrund"
+    },
+    {
+        "id": "BE0101N",
+        "type": "l",
+        "text": "Medborgarskapsbyten"
+    },
+    {
+        "id": "BE0101B",
+        "type": "l",
+        "text": "Medelålder"
+    },
+    {
+        "id": "BE0101L",
+        "type": "l",
+        "text": "Gifta, Skilda och Änka/änkling"
+    },
+    {
+        "id": "BE0101O",
+        "type": "l",
+        "text": "Partnerskap"
+    },
+    {
+        "id": "BE0101K",
+        "type": "l",
+        "text": "Adopterade"
+    },
+    {
+        "id": "BE0101P",
+        "type": "l",
+        "text": "Asylsökande"
+    },
+    {
+        "id": "BE0101C",
+        "type": "l",
+        "text": "Befolkningstäthet"
+    },
+    {
+        "id": "BE0101S",
+        "type": "l",
+        "text": "Hushåll"
+    },
+    {
+        "id": "BE0101X",
+        "type": "l",
+        "text": "Nyckeltal"
+    },
+    {
+        "id": "BE0101Y",
+        "type": "l",
+        "text": "Regional statistik på lägre nivå än kommun (DeSO/RegSO)"
+    },
+    {
+        "id": "BE0101M",
+        "type": "l",
+        "text": "Cirkulär migration – Äldre tabeller som inte längre uppdateras"
+    }
+]

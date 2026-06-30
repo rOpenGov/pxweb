@@ -1,0 +1,196 @@
+#' Backend helpers for PXWEB APIs
+#'
+#' @keywords internal
+
+pxweb_detect_version <- function(x) {
+  if (checkmate::test_class(x, "url")) {
+    url <- x
+  } else if (checkmate::test_class(x, "pxweb")) {
+    url <- x$url
+  } else if (checkmate::test_string(x)) {
+    url <- parse_url_or_fail(x)
+  } else {
+    stop("Cannot detect version for input.", call. = FALSE)
+  }
+
+  path <- tolower(url$path)
+  if (grepl("/v2/", path)) {
+    return("v2")
+  }
+  "v1"
+}
+
+assert_pxweb_version <- function(x) {
+  checkmate::assert_string(x)
+  checkmate::assert_choice(x, choices = c("v1", "v2"))
+}
+
+pxweb_v2_api_subpath <- function(x, as_vector = FALSE) {
+  if (checkmate::test_class(x, "pxweb")) {
+    path <- x$url$path
+  } else if (checkmate::test_class(x, "url")) {
+    path <- x$path
+  } else if (checkmate::test_string(x)) {
+    path <- parse_url_or_fail(x)$path
+  } else {
+    stop("Cannot extract v2 API subpath for input.", call. = FALSE)
+  }
+
+  parts <- strsplit(path, "/", fixed = TRUE)[[1]]
+  parts <- parts[nzchar(parts)]
+  api_idx <- which(parts == "api")
+  v2_idx <- which(parts == "v2")
+  idx <- intersect(api_idx + 1L, v2_idx)
+  if (length(idx) == 0) {
+    stop("Could not identify '/api/v2' in url path: ", path, call. = FALSE)
+  }
+  end_idx <- idx[1]
+  subpath <- parts[1:end_idx]
+
+  if (as_vector) {
+    return(subpath)
+  }
+  paste(subpath, collapse = "/")
+}
+
+build_pxweb_v2_tables_url <- function(x) {
+  if (checkmate::test_class(x, "pxweb")) {
+    u <- x$url
+  } else if (checkmate::test_class(x, "url")) {
+    u <- x
+  } else if (checkmate::test_string(x)) {
+    u <- parse_url_or_fail(x)
+  } else if (checkmate::test_class(x, "list")) {
+    assert_pxweb_url(x)
+    u <- x$url
+  } else {
+    stop("Cannot build v2 tables url for input.", call. = FALSE)
+  }
+  u$path <- paste(c(pxweb_v2_api_subpath(u, as_vector = TRUE), "tables"), collapse = "/")
+  build_pxweb_url(u)
+}
+
+build_pxweb_v2_table_metadata_url <- function(x, table_id) {
+  checkmate::assert_string(table_id, min.chars = 1)
+  table_id <- gsub("^/+", "", table_id)
+  paste0(build_pxweb_v2_tables_url(x), "/", table_id, "/metadata")
+}
+
+#' Build the PXWEB API v2 metadata URL for a table.
+#'
+#' @description
+#' Creates a \code{/tables/{tableId}/metadata} URL from any PXWEB API v2 table,
+#' metadata, or data URL. If the input URL contains a \code{lang} query
+#' parameter, it is preserved on the metadata URL.
+#'
+#' @param x a \code{pxweb} object, \code{url} object, or URL string.
+#'
+#' @return
+#' a metadata endpoint URL string.
+#'
+#' @keywords internal
+pxweb_v2_table_metadata_url <- function(x) {
+  metadata_url <- build_pxweb_v2_table_metadata_url(x, pxweb_v2_table_id(x))
+
+  if (checkmate::test_class(x, "pxweb")) {
+    lang <- x$url$query$lang
+  } else if (checkmate::test_class(x, "url")) {
+    lang <- x$query$lang
+  } else if (checkmate::test_string(x)) {
+    lang <- parse_url_or_fail(x)$query$lang
+  } else {
+    stop("Cannot build PXWEB API v2 metadata url for input.", call. = FALSE)
+  }
+
+  if (is.null(lang)) {
+    return(metadata_url)
+  }
+
+  u <- httr::parse_url(metadata_url)
+  u$query <- list(lang = lang)
+  httr::build_url(u)
+}
+
+build_pxweb_v2_table_data_url <- function(x, table_id) {
+  checkmate::assert_string(table_id, min.chars = 1)
+  table_id <- gsub("^/+", "", table_id)
+  paste0(build_pxweb_v2_tables_url(x), "/", table_id, "/data")
+}
+
+#' Extract a PXWEB API v2 table id.
+#'
+#' @description
+#' Gets the table id used by PXWEB API v2 \code{/tables/{tableId}} endpoints.
+#' When v2 metadata is available, the id is read from the preserved raw
+#' metadata attribute; otherwise it is parsed from the URL path.
+#'
+#' @param x a \code{pxweb} object, \code{url} object, or URL string.
+#' @param pxmd optional \code{pxweb_metadata} object created from a v2 metadata
+#'   response.
+#'
+#' @return
+#' a single table id string.
+#'
+#' @keywords internal
+pxweb_v2_table_id <- function(x, pxmd = NULL) {
+  if (!is.null(pxmd)) {
+    checkmate::assert_class(pxmd, "pxweb_metadata")
+    raw_metadata <- attr(pxmd, "pxweb_metadata_v2")
+    table_id <- raw_metadata$extension$px$tableid
+    if (!is.null(table_id)) {
+      return(table_id)
+    }
+  }
+
+  if (checkmate::test_class(x, "pxweb")) {
+    path <- x$url$path
+  } else if (checkmate::test_class(x, "url")) {
+    path <- x$path
+  } else if (checkmate::test_string(x)) {
+    path <- parse_url_or_fail(x)$path
+  } else {
+    stop("Cannot extract PXWEB API v2 table id for input.", call. = FALSE)
+  }
+
+  parts <- strsplit(path, "/", fixed = TRUE)[[1]]
+  parts <- parts[nzchar(parts)]
+  table_idx <- which(parts == "tables")
+  if (length(table_idx) == 0 || length(parts) < table_idx[1] + 1L) {
+    stop("Could not identify PXWEB API v2 table id in url path: ", path, call. = FALSE)
+  }
+  parts[[table_idx[1] + 1L]]
+}
+
+#' Build PXWEB API v2 data endpoint query parameters.
+#'
+#' @description
+#' Creates the query parameter list sent to PXWEB API v2
+#' \code{/tables/{tableId}/data} requests. The language is taken from the URL
+#' when present, otherwise from the raw v2 metadata attached to \code{pxmd}.
+#'
+#' @param px a \code{pxweb} object.
+#' @param pxmd optional \code{pxweb_metadata} object created from a v2 metadata
+#'   response.
+#' @param output_format data output format requested from the API. Defaults to
+#'   \code{"json-stat2"}.
+#'
+#' @return
+#' a named list of query parameters.
+#'
+#' @keywords internal
+pxweb_v2_data_query_params <- function(px, pxmd = NULL, output_format = "json-stat2") {
+  checkmate::assert_class(px, "pxweb")
+  checkmate::assert_string(output_format, min.chars = 1)
+
+  lang <- px$url$query$lang
+  if (is.null(lang) && !is.null(pxmd)) {
+    raw_metadata <- attr(pxmd, "pxweb_metadata_v2")
+    lang <- raw_metadata$extension$px$language
+  }
+
+  res <- list(
+    lang = lang,
+    outputFormat = output_format
+  )
+  res[!vapply(res, is.null, logical(1))]
+}

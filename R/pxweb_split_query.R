@@ -107,6 +107,7 @@ pxweb_query_dim_splittable <- function(pxq, pxmd) {
   # can_be_eliminated <- can_be_eliminated[sample(1:length(can_be_eliminated))]
   spltable <- can_be_eliminated[names(filter)]
   spltable[tolower(filter) == "top"] <- FALSE
+  spltable[tolower(filter) == "bottom"] <- FALSE
   spltable
 }
 

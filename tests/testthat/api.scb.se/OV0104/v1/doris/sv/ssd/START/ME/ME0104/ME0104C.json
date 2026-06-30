@@ -1,0 +1,50 @@
+[
+    {
+        "id": "Riksdagsmandat",
+        "type": "t",
+        "text": "Riksdagsval - erhållna mandat efter region och parti. Valår 1973 - 2022",
+        "updated": "2022-11-21T08:00:00"
+    },
+    {
+        "id": "RiksdagsvalRostb7698",
+        "type": "t",
+        "text": "Riksdagsval - röstberättigade efter region. Valår 1973 - 2022",
+        "updated": "2022-11-21T08:00:00"
+    },
+    {
+        "id": "ME0104T24",
+        "type": "t",
+        "text": "Riksdagsval - personröster efter riksdagsvalkrets, parti och kön. Antal och andelar. Valår 2002 - 2022",
+        "updated": "2023-02-27T08:00:00"
+    },
+    {
+        "id": "ME0104T3",
+        "type": "t",
+        "text": "Riksdagsval - valresultat efter region och parti mm. Antal och andelar. Valår 1973 - 2022",
+        "updated": "2022-11-21T08:00:00"
+    },
+    {
+        "id": "ME0104T20",
+        "type": "t",
+        "text": "Riksdagsval - röstberättigade efter folkbokförda i Sverige/utlandssvenskar och kön. Antal och andelar. Valår 2002 - 2022",
+        "updated": "2023-02-27T08:00:00"
+    },
+    {
+        "id": "ME0104T21",
+        "type": "t",
+        "text": "Riksdagsval - röstberättigade efter folkbokförda i Sverige/utlandssvenskar, kön och ålder/förstagångsväljare. Antal och andelar. Valår 2002 - 2022",
+        "updated": "2023-02-27T08:00:00"
+    },
+    {
+        "id": "ME0104T22",
+        "type": "t",
+        "text": "Riksdagsval  - röstberättigade folkbokförda i Sverige efter kön och födelseregion. Antal och andelar. Valår 2002 - 2022",
+        "updated": "2023-02-27T08:00:00"
+    },
+    {
+        "id": "ME0104T23",
+        "type": "t",
+        "text": "Riksdagsval  - röstberättigade folkbokförda i Sverige efter kön och utländsk/svensk bakgrund. Antal och andelar. Valår 2002 - 2022",
+        "updated": "2023-02-27T08:00:00"
+    }
+]

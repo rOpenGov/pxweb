@@ -182,6 +182,151 @@ pxweb_get_api_test_data_frame <- function(x) {
   df
 }
 
+#' Audit PXWEB API catalogue config endpoints
+#'
+#' @description
+#' Checks whether each version and language combination in a PXWEB API
+#' catalogue entry exposes a valid config endpoint.
+#'
+#' @param apis a list of pxweb_api_catalogue_entry elements
+#' @param timeout Time limit in seconds for each config endpoint request.
+#' @param verbose Print progress while auditing.
+#'
+#' @return
+#' A data.frame with one row per catalogue URL.
+#'
+#' @export
+pxweb_audit_api_catalogue_config <- function(apis = pxweb_api_catalogue(), timeout = 10, verbose = TRUE) {
+  checkmate::assert_class(apis, "list")
+  checkmate::assert_number(timeout, lower = 1)
+  checkmate::assert_flag(verbose)
+
+  api_paths <- pxweb_test_create_api_paths(apis)
+  audit <- vector("list", length(api_paths$paths))
+
+  for (i in seq_along(api_paths$paths)) {
+    if (verbose) {
+      cat("Checking config", i, "of", length(api_paths$paths), ":", api_paths$paths[i], "\n")
+    }
+
+    audit[[i]] <- pxweb_audit_api_config_url(
+      api = api_paths$api[i],
+      api_idx = api_paths$idx[i],
+      version = api_paths$version[i],
+      lang = api_paths$lang[i],
+      url = api_paths$paths[i],
+      timeout = timeout
+    )
+  }
+
+  do.call(rbind, audit)
+}
+
+
+#' Audit a PXWEB API config endpoint
+#'
+#' @keywords internal
+#' @noRd
+pxweb_audit_api_config_url <- function(api, api_idx, version, lang, url, timeout) {
+  checkmate::assert_string(api)
+  checkmate::assert_int(api_idx, lower = 1)
+  checkmate::assert_string(version)
+  checkmate::assert_string(lang)
+  checkmate::assert_string(url)
+  checkmate::assert_number(timeout, lower = 1)
+
+  config_url <- NA_character_
+  status_code <- NA_integer_
+  ok <- FALSE
+  error <- NA_character_
+  missing_fields <- NA_character_
+
+  if (!version %in% c("v1", "v2")) {
+    error <- paste0("Unsupported PXWEB API version: ", version)
+  } else {
+    config_url <- pxweb_test_config_url(url, version)
+    response <- tryCatch(
+      httr::GET(config_url, httr::timeout(timeout)),
+      error = function(e) e
+    )
+
+    if (inherits(response, "error")) {
+      error <- conditionMessage(response)
+    } else {
+      status_code <- httr::status_code(response)
+      ok <- is_pxweb_config_response(response, version)
+      if (!ok) {
+        if (httr::http_error(response)) {
+          error <- paste0("HTTP ", status_code)
+        } else {
+          missing_fields <- paste(pxweb_config_missing_fields(response, version), collapse = ", ")
+        }
+      }
+    }
+  }
+
+  data.frame(
+    api = api,
+    api_idx = api_idx,
+    version = version,
+    lang = lang,
+    url = url,
+    config_url = config_url,
+    status_code = status_code,
+    ok = ok,
+    error = error,
+    missing_fields = missing_fields,
+    stringsAsFactors = FALSE
+  )
+}
+
+
+#' Build config URL for API catalogue testing
+#'
+#' @keywords internal
+#' @noRd
+pxweb_test_config_url <- function(url, version) {
+  checkmate::assert_string(url)
+  assert_pxweb_version(version)
+
+  parsed_url <- parse_url_or_fail(url)
+  if (version == "v1") {
+    paste0(build_pxweb_url(parsed_url), "?config")
+  } else {
+    parsed_url$path <- paste0(build_pxweb_v2_api_subpath(parsed_url), "/config")
+    build_pxweb_url(parsed_url)
+  }
+}
+
+
+#' Find missing config response fields
+#'
+#' @keywords internal
+#' @noRd
+pxweb_config_missing_fields <- function(response, version) {
+  checkmate::assert_class(response, "response")
+  assert_pxweb_version(version)
+
+  required_fields <- switch(
+    version,
+    v1 = c("maxCalls", "timeWindow", "CORS"),
+    v2 = c("maxDataCells", "maxCallsPerTimeWindow", "timeWindow")
+  )
+  cfg <- suppressMessages(try(httr::content(response, "parsed"), silent = TRUE))
+  if (inherits(cfg, "try-error")) {
+    if (version == "v1") {
+      return(c(required_fields, "maxCells or maxValues"))
+    }
+    return(required_fields)
+  }
+
+  missing_fields <- setdiff(required_fields, names(cfg))
+  if (version == "v1" && !any(c("maxCells", "maxValues") %in% names(cfg))) {
+    missing_fields <- c(missing_fields, "maxCells or maxValues")
+  }
+  missing_fields
+}
+
 
 
 #' Test time limit object
@@ -215,11 +360,21 @@ pxweb_test_create_api_paths <- function(apis) {
     checkmate::assert_class(apis[[i]], "pxweb_api_catalogue_entry")
   }
   api_idx <- numeric(0)
+  api_names <- character(0)
+  api_versions <- character(0)
+  api_langs <- character(0)
   api_paths <- character(0)
   for (i in seq_along(apis)) {
+    api_name <- names(apis)[i]
+    if (is.null(api_name) || is.na(api_name) || !nzchar(api_name)) {
+      api_name <- as.character(i)
+    }
     for (j in seq_along(apis[[i]]$version)) {
       for (k in seq_along(apis[[i]]$lang)) {
         api_idx[length(api_idx) + 1] <- i
+        api_names[length(api_names) + 1] <- api_name
+        api_versions[length(api_versions) + 1] <- apis[[i]]$version[j]
+        api_langs[length(api_langs) + 1] <- apis[[i]]$lang[k]
         base_url <- apis[[i]]$url
         base_url <- gsub("\\[version\\]", base_url, replacement = apis[[i]]$version[j])
         base_url <- gsub("\\[lang\\]", base_url, replacement = apis[[i]]$lang[k])
@@ -227,5 +382,5 @@ pxweb_test_create_api_paths <- function(apis) {
       }
     }
   }
-  list(idx = api_idx, paths = api_paths)
+  list(idx = api_idx, api = api_names, version = api_versions, lang = api_langs, paths = api_paths)
 }

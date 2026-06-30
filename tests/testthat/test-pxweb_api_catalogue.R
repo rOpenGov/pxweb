@@ -24,3 +24,57 @@ test_that(desc = "pxweb_api_catalogue", {
     if(capture_calls) stop_capturing()
   })
 })
+
+test_that(desc = "pxweb_api_catalogue contains active APIs without hard-coded limits", {
+  pxac <- pxweb_api_catalogue()
+
+  expect_true("statistik.tillvaxtanalys.se" %in% names(pxac))
+  expect_true("pxweb.asub.ax" %in% names(pxac))
+  expect_true("pxweb2022.vgregion.se" %in% names(pxac))
+  expect_true("askdata.rks-gov.net" %in% names(pxac))
+  expect_true(all(c(
+    "statistik.csn.se",
+    "m02-http-pxwebb.login.sundsvall.se",
+    "statistik.vasteras.se",
+    "pxweb.nhwstat.org",
+    "web.dzs.hr",
+    "etab.llv.li",
+    "www6.poderjudicial.es",
+    "openstat.psa.gov.ph",
+    "px.web.ined.fr",
+    "statistika.spkc.gov.lv",
+    "pxweb.irena.org",
+    "tilastot.etk.fi",
+    "pc-axis.geostat.ge",
+    "statistika.tai.ee",
+    "pxexternal.energimyndigheten.se",
+    "skogsstatistik.slu.se",
+    "pxweb.skogsstyrelsen.se",
+    "tilastot.tela.fi"
+  ) %in% names(pxac)))
+  expect_equal(
+    pxac[["statdb.luke.fi"]]$url,
+    "https://statdb.luke.fi/PXWeb/api/[version]/[lang]"
+  )
+  expect_equal(
+    pxac[["pxweb2022.vgregion.se"]]$url,
+    "https://pxweb2022.vgregion.se/Pxwebb/api/[version]/[lang]"
+  )
+  expect_equal(
+    pxac[["askdata.rks-gov.net"]]$url,
+    "https://askdata.rks-gov.net/api/[version]/[lang]/"
+  )
+  expect_false(any(c(
+    "pxwebapi2.stat.fi",
+    "data.ssb.no",
+    "px.rsv.is",
+    "pxwebb2017.vgregion.se"
+  ) %in% names(pxac)))
+
+  limit_fields <- c("calls_per_period", "period_in_seconds", "max_values_to_download")
+  expect_false(any(vapply(
+    pxac,
+    function(api) any(limit_fields %in% names(api)),
+    logical(1)
+  )))
+})

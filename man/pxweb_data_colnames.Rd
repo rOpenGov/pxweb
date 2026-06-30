@@ -2,9 +2,15 @@
 % Please edit documentation in R/pxweb_data.R
 \name{pxweb_data_colnames}
 \alias{pxweb_data_colnames}
+\alias{pxweb_data_colnames.pxweb_data}
+\alias{pxweb_data_colnames.pxweb_data_v2}
 \title{Get query filter}
 \usage{
 pxweb_data_colnames(pxd, type = "text")
+
+\method{pxweb_data_colnames}{pxweb_data}(pxd, type = "text")
+
+\method{pxweb_data_colnames}{pxweb_data_v2}(pxd, type = "text")
 }
 \arguments{
 \item{pxd}{a \code{pxweb_data} object.}
