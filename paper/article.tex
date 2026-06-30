@@ -180,8 +180,12 @@ legacy PC-Axis files \citep{pxR}. This distinction is important because API acce
 requires metadata discovery, query construction, request validation,
 and response parsing rather than only local file import.
 
-% TODO: Clarify current PX-Web API v1/v2 adoption among catalogue entries.
-% TODO: Describe provider-side query limits and rate limits using current docs.
+Because PX-Web installations are configured by individual providers,
+API version support and request limits are endpoint-level properties
+rather than global constants. The package therefore collects available
+provider configuration metadata, including version 1 \code{?config}
+responses, and uses this information when validating requests,
+throttling calls, and splitting large downloads.
 
 \section{Package Design}
 \label{sec:package-design}
@@ -270,13 +274,15 @@ and adds query parameters for codelists and output values when needed.
 This keeps user code close to the v1 workflow while still exposing v2
 features.
 
-Large queries can exceed provider-side limits. Here, \pkg{pxweb} validates
-queries against metadata and splits supported large requests into
-batches when possible. Returned pieces are then combined into a single
-data object where the response type supports it. This behavior is
-important for official statistics tables with many regions, time
-periods, or classifications that often can be larger than the actual
-provider-side limits.
+Large queries can exceed provider-side limits. Here, \pkg{pxweb}
+collects provider configuration where available, including call limits,
+time windows, and maximum downloadable values or cells, and uses this
+information together with table metadata to validate requests and split
+supported large downloads into batches when possible. Returned pieces
+are then combined into a single data object where the response type
+supports it. This behavior is important for official statistics tables
+with many regions, time periods, or classifications that often can be
+larger than the actual provider-side limits.
 
 The package follows common open-source software practices, including
 version control, automated tests, mocked API fixtures, continuous
