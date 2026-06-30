@@ -196,56 +196,50 @@ stable \proglang{R} workflow across PX-Web providers while preserving
 provider-specific metadata where it affects query construction,
 codelists, comments, and citation.
 
-The current package interface has 39 exported functions. The central
+The current package interface has 39 exported functions, but ordinary
+analysis workflows are built from a smaller recommended set. The central
 workflow is built around \code{pxweb_get()}, which retrieves hierarchy
 levels, table metadata, or table data depending on the supplied URL and
 query. The helper \code{pxweb_get_data()} wraps the same workflow and
 returns a \code{data.frame}. Query construction is handled by
-\code{pxweb_query()} and related conversion helpers, including
-\code{pxweb_query_as_json()} and \code{pxweb_query_as_rcode()}.
-Table~\ref{tab:exported-functions} summarizes the exported functions by
-their main role in the package workflow.
+\code{pxweb_query()} and selection helpers such as \code{pxweb_all()},
+\code{pxweb_latest()}, and \code{pxweb_aggregation()}.
+Table~\ref{tab:workflow-functions} summarizes the main user-facing
+functions and methods by their role in the recommended workflow.
 
 \begin{table}[t!]
 \centering
 \small
 \begin{tabular}{p{0.24\textwidth}p{0.68\textwidth}}
 \hline
-Workflow part & Exported functions\\
+Workflow part & Recommended functions and methods\\
 \hline
 Search and discovery &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
-\code{pxweb()}, \code{pxweb_search()}, \code{pxweb_interactive()},
-\code{interactive_pxweb()}, \code{pxweb_test_api()},
-\code{pxweb_api_catalogue()}, \code{pxweb_api_catalogue_path()},
-\code{update_pxweb_apis()}, \code{pxweb_audit_api_catalogue_config()},
-\code{pxweb_api()}, \code{api_catalogue()}, \code{api_parameters()},
-\code{base_url()}, \code{is.pxweb()}, \code{is_pxweb_response()}\end{minipage}\\
+\code{pxweb_search()}, \code{pxweb_interactive()},
+\code{pxweb_api_catalogue()}\end{minipage}\\
 Metadata &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
-\code{get_pxweb_metadata()}, \code{get_pxweb_levels()},
-\code{get_pxweb_dims()}, \code{checkForLevels()}, \code{pxweb_codelists()}\end{minipage}\\
+\code{pxweb_get()}, \code{pxweb_codelists()}\end{minipage}\\
 Query &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
-\code{pxweb_query()}, \code{pxweb_query_as_json()},
-\code{pxweb_query_as_rcode()}, \code{pxweb_validate_query_with_metadata()},
-\code{pxweb_all()}, \code{pxweb_latest()}, \code{pxweb_top()},
-\code{pxweb_bottom()}, \code{pxweb_selection()},
+\code{pxweb_query()}, \code{pxweb_validate_query_with_metadata()},
+\code{pxweb_all()}, \code{pxweb_latest()},
 \code{pxweb_aggregation()}, \code{pxweb_valueset()}\end{minipage}\\
 Retrieval &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
-\code{pxweb_get()}, \code{pxweb_get_data()}, \code{pxweb_advanced_get()},
-\code{get_pxweb_data()}, \code{pxweb_parse_response()}\end{minipage}\\
+\code{pxweb_get()}, \code{pxweb_get_data()}\end{minipage}\\
 Conversion &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
-\code{pxweb_as_data_frame()}\end{minipage}\\
+\code{as.data.frame()}\end{minipage}\\
 Comments and citation &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
 \code{pxweb_data_comments()}, \code{pxweb_cite()}\end{minipage}\\
 \hline
 \end{tabular}
-\caption{\label{tab:exported-functions}Exported functions in
-\pkg{pxweb} grouped by their main role in the package workflow.}
+\caption{\label{tab:workflow-functions}Recommended \pkg{pxweb}
+functions and methods grouped by their main role in the package
+workflow.}
 \end{table}
 
 Internally, the package represents API URLs, metadata, data, comments,
@@ -295,13 +289,18 @@ parameters such as language and output format. The returned pieces are
 parsed into package-specific S3 objects and combined when the response
 type supports it.
 
-Large queries can exceed provider-side limits. The splitting algorithm
-compares the requested query dimensions with the provider's maximum
-downloadable size. If the query is too large, it searches over
-splittable dimensions and chooses the batch structure that minimizes the
-number of API calls. Splittable dimensions are determined from table
-metadata: time variables and eliminable variables can be split, while
-content variables and top or bottom selections are kept intact.
+Large queries can exceed provider-side limits. The batching procedure
+can be viewed as a constrained multidimensional query-partitioning
+heuristic. Given the provider's maximum downloadable size, the algorithm
+first identifies splittable dimensions from table metadata: time
+variables and eliminable variables can be split, while content variables
+and top or bottom selections are kept intact. It then evaluates
+candidate orderings of the splittable dimensions and, for each ordering,
+greedily chooses the largest dimension chunks that keep each subquery
+below the provider limit. The ordering with the smallest resulting
+number of batches is used. For the typical case of fewer than seven
+splittable dimensions all orderings are evaluated; otherwise a random
+sample of orderings is used to keep computation bounded.
 
 The package follows common open-source software practices, including
 version control, automated tests, mocked API fixtures, continuous
