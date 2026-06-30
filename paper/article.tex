@@ -185,6 +185,46 @@ query. The helper \code{pxweb_get_data()} wraps the same workflow and
 returns a \code{data.frame}. Query construction is handled by
 \code{pxweb_query()} and related conversion helpers, including
 \code{pxweb_query_as_json()} and \code{pxweb_query_as_rcode()}.
+Table~\ref{tab:exported-functions} summarizes the exported functions by
+their main role in the package workflow.
+
+\begin{table}[t!]
+\centering
+\small
+\begin{tabular}{p{0.24\textwidth}p{0.68\textwidth}}
+\hline
+Workflow part & Exported functions\\
+\hline
+Catalogue and configuration &
+\code{pxweb_api_catalogue()}, \code{pxweb_api_catalogue_path()},
+\code{update_pxweb_apis()}, \code{pxweb_audit_api_catalogue_config()},
+\code{pxweb_api()}, \code{api_catalogue()}, \code{api_parameters()},
+\code{base_url()}\\
+Discovery and interactive use &
+\code{pxweb()}, \code{pxweb_search()}, \code{pxweb_interactive()},
+\code{interactive_pxweb()}, \code{pxweb_test_api()}\\
+Retrieval &
+\code{pxweb_get()}, \code{pxweb_get_data()}, \code{pxweb_advanced_get()},
+\code{get_pxweb_data()}, \code{get_pxweb_metadata()},
+\code{get_pxweb_levels()}, \code{get_pxweb_dims()}, \code{checkForLevels()}\\
+Query construction and validation &
+\code{pxweb_query()}, \code{pxweb_query_as_json()},
+\code{pxweb_query_as_rcode()}, \code{pxweb_validate_query_with_metadata()}\\
+Selection helpers &
+\code{pxweb_all()}, \code{pxweb_latest()}, \code{pxweb_top()},
+\code{pxweb_bottom()}, \code{pxweb_selection()},
+\code{pxweb_aggregation()}, \code{pxweb_valueset()}\\
+Parsing and conversion &
+\code{pxweb_parse_response()}, \code{pxweb_as_data_frame()}\\
+Comments, codelists, and citation &
+\code{pxweb_codelists()}, \code{pxweb_data_comments()}, \code{pxweb_cite()}\\
+Predicates &
+\code{is.pxweb()}, \code{is_pxweb_response()}\\
+\hline
+\end{tabular}
+\caption{\label{tab:exported-functions}Exported functions in
+\pkg{pxweb} grouped by their main role in the package workflow.}
+\end{table}
 
 Internally, the package represents API URLs, metadata, data, comments,
 and query objects with S3 classes. This allows common operations such as
@@ -199,8 +239,48 @@ version paths, aliases, and citation metadata. Users can rely on the
 catalogue for common providers or pass explicit PX-Web URLs for APIs
 that are not bundled with the package. The current catalogue contains
 46 entries covering national, regional, and international statistical
-resources. A compact catalogue summary table will be added in a later
-revision.
+resources (Table~\ref{tab:api-catalogue}). At the time of writing, the
+bundled catalogue entries point to version 1 API paths; version 2 APIs
+can also be used by passing explicit PX-Web URLs.
+
+\begin{table}[t!]
+\centering
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}p{0.16\textwidth}p{0.20\textwidth}p{0.035\textwidth}p{0.065\textwidth}@{\hspace{0.015\textwidth}}p{0.16\textwidth}p{0.20\textwidth}p{0.035\textwidth}p{0.065\textwidth}@{}}
+\hline
+Entry & Provider & Ver. & Lang. & Entry & Provider & Ver. & Lang.\\
+\hline
+\url{web.dzs.hr} & Croatian Bureau of Statistics & v1 & en & \url{statbank.hagstova.fo} & Statistics Faroe Islands & v1 & en, fo\\
+\url{andmed.stat.ee} & Estonia -- official statistics & v1 & en, et & \url{statfin.stat.fi} & Statistics Finland & v1 & en, fi, sv\\
+\url{statistika.tai.ee} & Estonian Health Statistics and Health Research Database & v1 & en & \url{px.hagstofa.is} & Statistics Iceland & v1 & en, is\\
+\url{tilastot.etk.fi} & Finnish Centre for Pensions & v1 & en & \url{askdata.rks-gov.net} & Statistics Kosovo & v1 & en\\
+\url{tilastot.tela.fi} & Finnish Pension Alliance statistics & v1 & en & \url{etab.llv.li} & Statistics Liechtenstein & v1 & en\\
+\url{trafi2.stat.fi} & Finnish Transport Safety Agency & v1 & en, sv, fi & \url{statbank.statistica.md} & Statistics Moldova & v1 & en, ro\\
+\url{px.web.ined.fr} & Generations and Gender Contextual Database & v1 & en & \url{api.scb.se} & Statistics Sweden & v1 & en, sv\\
+\url{pc-axis.geostat.ge} & Geostat Statistics Database & v1 & en & \url{www.pxweb.bfs.admin.ch} & Statistics Switzerland & v1 & en, de, fr\\
+\url{stat.hel.fi} & Helsingin seudun aluesarjat -tilastotietokanta & v1 & fi & \url{m02-http-pxwebb.login.sundsvall.se} & Sundsvall municipality in Sweden & v1 & sv\\
+\url{pxweb.irena.org} & International Renewable Energy Agency & v1 & en & \url{statistik.tillvaxtanalys.se} & Swedish Agency for Growth Policy Analysis & v1 & sv\\
+\url{www6.poderjudicial.es} & Judicial statistics, Spain & v1 & es & \url{statistik.csn.se} & Swedish Board of Student Finance & v1 & sv\\
+\url{data.stat.gov.lv} & Latvia -- official statistics & v1 & en, lv & \url{pxexternal.energimyndigheten.se} & Swedish Energy Agency & v1 & en\\
+\url{statistika.spkc.gov.lv} & Latvian Health Statistics Database & v1 & en & \url{skogsstatistik.slu.se} & Swedish University of Agricultural Sciences forest statistics & v1 & en\\
+\url{statistik.linkoping.se} & Linkoping municipality in Sweden & v1 & sv & \url{fohm-app.folkhalsomyndigheten.se} & The Public Health Agency of Sweden & v1 & sv\\
+\url{statdb.luke.fi} & LUKE Natural Resources Institute Finland & v1 & en, fi, sv & \url{statistik.sjv.se} & The Swedish Agricultural Agency & v1 & sv\\
+\url{pxweb.nhwstat.org} & Nordic Health and Welfare Statistics & v1 & en & \url{pxweb.skogsstyrelsen.se} & The Swedish Forest Agency & v1 & en\\
+\url{pxweb.nordicstatistics.org} & Nordic Statistics Database & v1 & en & \url{statistik.konj.se} & The Swedish National Institute of Economic Research & v1 & en, sv\\
+\url{openstat.psa.gov.ph} & Philippine Statistics Authority OpenSTAT & v1 & en & \url{prognos.konj.se} & Swedish National Institute of Economic Research, forecast database & v1 & sv\\
+\url{www.grande-region.lu} & Portail statistique de la Grande Region & v1 & fr, de & \url{w3.unece.org} & United Nations Economic Commission for Europe & v1 & en\\
+\url{pxweb.stat.si} & SiStat Database & v1 & sl & \url{statistik.vasteras.se} & Vasteras municipality in Sweden & v1 & sv\\
+\url{bank.stat.gl} & Statbank Greenland & v1 & en, kl, da & \url{pxweb2022.vgregion.se} & Vastra Gotaland Region in Sweden & v1 & sv\\
+\url{makstat.stat.gov.mk} & State Statistical Office of the Republic of Macedonia & v1 & en, mk & \url{vero2.stat.fi} & Verohallinto -- Finnish Tax Administration & v1 & en, fi, sv\\
+\url{pxweb.asub.ax} & Statistics Aland & v1 & en, sv & \url{visitfinland.stat.fi} & Visit Finland (Rudolf service) & v1 & fi\\
+\hline
+\end{tabular}
+}
+\caption{\label{tab:api-catalogue}Bundled PX-Web API catalogue
+entries in \pkg{pxweb}. The table lists the catalogue key, provider
+description, configured API version path, and available languages.}
+\end{table}
 
 Support for PX-Web API version 2 is expressed in the same top-level
 workflow as version 1 \citep{PxToolsPxWeb2Intro}. Version 2 tables use separate metadata and data
@@ -225,9 +305,14 @@ integration, and live smoke-test workflows for selected APIs
 mocked and offline-safe tests, with live tests controlled by
 environment variables.
 
-% TODO: Add a figure showing the object/workflow model: catalogue or URL,
-% metadata, query, data request, parsed data, comments, citation.
-% TODO: Add a compact table of exported functions grouped by workflow.
+\begin{figure}[t!]
+\centering
+\includegraphics[width=\textwidth]{workflow-model}
+\caption{\label{fig:workflow-model}Main \pkg{pxweb} workflow from a
+catalogue entry or explicit PX-Web URL to metadata discovery, query
+construction, data retrieval, parsing, conversion, comments,
+codelists, and citation.}
+\end{figure}
 
 \section{Functionality}
 \label{sec:functionality}
@@ -510,6 +595,3 @@ LL), and is part of rOpenGov\footnote{\url{https://github.ropengov.io}}.
 \bibliography{magnusson-kainu-lahti}
 
 \end{document}
-
-
-
