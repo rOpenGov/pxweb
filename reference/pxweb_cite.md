@@ -12,7 +12,7 @@ pxweb_cite(x, style = "citation")
 
 - x:
 
-  a `pxweb_data` object to cite.
+  a `pxweb_data` or `pxweb_data_v2` object to cite.
 
 - style:
 
