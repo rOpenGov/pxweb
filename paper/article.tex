@@ -303,11 +303,58 @@ the retrieved data source and the \pkg{pxweb} package itself.
 
 We illustrate the package with a Statistics Sweden population table
 that is both substantively familiar and technically useful for showing
-PX-Web query handling. The table ``Population by region, marital
-status, age and sex. Year 1968--2024'' is available through the PX-Web
-API version 2 as table \code{TAB638}. It contains annual population
-counts by region, marital status, single-year age, sex, content
-variable, and year.
+PX-Web query handling. The full replication code is in
+\code{case-study.R}; this section presents the same workflow in smaller
+steps.
+
+The first step is to find the table programmatically. Statistics
+Sweden's PX-Web API version 2 exposes a searchable table endpoint, so
+we start from the API root and search for a population table.
+
+\begin{Code}
+library("pxweb")
+
+search_results <- pxweb_search(
+  query = "Population by region marital status age sex",
+  api_url = "https://statistikdatabasen.scb.se/api/v2",
+  lang = "en",
+  page_size = 5
+)
+
+search_results[, c("id", "label", "metadata_url")]
+\end{Code}
+
+The first result is table \code{TAB638}, ``Population by region,
+marital status, age and sex. Year 1968--2024''. The metadata URL is
+stored and used for the remaining steps.
+
+\begin{Code}
+metadata_url <- search_results$metadata_url[search_results$id == "TAB638"][1]
+\end{Code}
+
+The table contains annual population counts by region, marital status,
+single-year age, sex, content variable, and year. We use a large but
+manageable subset: all 21 Swedish counties, all marital-status
+categories, single-year ages from 0 to 100+, both sexes, the population
+count content variable, and all years from 1968 to 2024.
+
+\begin{Code}
+years <- as.character(1968:2024)
+ages <- c(as.character(0:99), "100+")
+county_codes <- c(
+  "01", "03", "04", "05", "06", "07", "08", "09", "10", "12", "13",
+  "14", "17", "18", "19", "20", "21", "22", "23", "24", "25"
+)
+
+query <- list(
+  Region = county_codes,
+  Civilstand = c("OG", "G", "SK", "ÄNKL"),
+  Alder = ages,
+  Kon = c("1", "2"),
+  ContentsCode = "BE0101N1",
+  Tid = years
+)
+\end{Code}
 
 The complete table is much larger than a typical interactive API
 request. Its dimensions contain 312 region codes, four marital-status
@@ -315,34 +362,63 @@ categories, 102 age categories, two sex categories, two content
 variables, and 57 years. Downloading the full table would imply more
 than 29 million cells. Statistics Sweden's PX-Web API version 2
 configuration currently limits a single data response to 150,000 data
-cells. This makes the table a useful example of why metadata-aware
-query validation and request splitting are needed for reproducible
-official-statistics workflows.
-
-The replication script \code{case-study.R} uses a large but manageable
-query. It requests the county-level population counts for all 21
-Swedish counties, all marital-status categories, single-year ages from
-0 to 100+, both sexes, the population count content variable, and all
-years from 1968 to 2024. This query contains 967,176 cells, which is
-well above the provider-side limit. The \pkg{pxweb} package validates
-the query, splits it into seven batches, downloads the pieces, and
-combines them into one \code{data.frame}. The script caches the
-downloaded data locally so that the figure can be regenerated without
-repeated API calls.
+cells. Our subset contains 967,176 cells, which is also above the
+single-response limit. Calling \code{pxweb_get()} validates the query,
+splits it into seven batches, downloads the pieces, and combines them
+into one \code{pxweb_data_v2} object.
 
 \begin{Code}
-source("case-study.R")
+px_data <- pxweb_get(metadata_url, query = query, verbose = TRUE)
 \end{Code}
 
-Figure~\ref{fig:case-study-population} summarizes the downloaded data.
-The first two panels aggregate counties, marital statuses, ages, and
-sexes to show the growth of the population and the increasing share of
-the population aged 65 years or older. The lower panels compare the age
-and sex structure in 1968 and 2024. The example therefore demonstrates
-the main package workflow: a PX-Web API version 2 table is queried
-programmatically, a request larger than the API cell limit is split and
-combined by \pkg{pxweb}, and the resulting data are transformed into
-standard \proglang{R} objects for analysis and visualization.
+\begin{CodeOutput}
+Downloading large query (in 7 batches):
+|======================================================================| 100%
+\end{CodeOutput}
+
+The downloaded object preserves PX-Web metadata, but can be converted
+directly to a standard \code{data.frame} for analysis. The replication
+script caches this data frame as an \code{.rds} file so that the figure
+can be regenerated without repeated API calls.
+
+\begin{Code}
+population <- as.data.frame(
+  px_data,
+  column.name.type = "code",
+  variable.value.type = "code"
+)
+
+dim(population)
+\end{Code}
+
+\begin{CodeOutput}
+[1] 967176      7
+\end{CodeOutput}
+
+The same downloaded data object can be cited. For reproducibility, the
+case-study script stores the citation output in
+\code{data/scb-population-citation.txt}.
+
+\begin{Code}
+pxweb_cite(px_data)
+\end{Code}
+
+\begin{CodeOutput}
+Statistics Sweden (2026). "Population by region, marital status, age
+and sex. Year 1968-2024." [Data accessed ... using pxweb R package
+0.19.0].
+\end{CodeOutput}
+
+Finally, the data are aggregated and plotted. Figure~\ref{fig:case-study-population}
+summarizes the downloaded data. The first two panels aggregate
+counties, marital statuses, ages, and sexes to show the growth of the
+population and the increasing share of the population aged 65 years or
+older. The lower panels compare the age and sex structure in 1968 and
+2024. The example therefore demonstrates the main package workflow: a
+PX-Web API version 2 table is found through search, queried
+programmatically, split because it exceeds the API cell limit, cited,
+and transformed into standard \proglang{R} objects for analysis and
+visualization.
 
 \begin{figure}[t!]
 \centering
@@ -430,8 +506,6 @@ LL), and is part of rOpenGov\footnote{\url{https://github.ropengov.io}}.
 \bibliography{magnusson-kainu-lahti}
 
 \end{document}
-
-
 
 
 

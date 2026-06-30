@@ -18,6 +18,7 @@ data_dir <- file.path(script_dir, "data")
 dir.create(data_dir, showWarnings = FALSE, recursive = TRUE)
 
 data_path <- file.path(data_dir, "scb-population-counties-1968-2024.rds")
+citation_path <- file.path(data_dir, "scb-population-citation.txt")
 figure_path <- file.path(script_dir, "case-study-population.pdf")
 
 if (!requireNamespace("pxweb", quietly = TRUE)) {
@@ -28,6 +29,7 @@ if (utils::packageVersion("pxweb") < "0.19.0") {
 }
 
 metadata_url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
+
 years <- as.character(1968:2024)
 ages <- c(as.character(0:99), "100+")
 county_codes <- c(
@@ -44,6 +46,17 @@ if (file.exists(data_path) && !refresh_data) {
 }
 
 if (!file.exists(data_path) || refresh_data) {
+  search_results <- pxweb::pxweb_search(
+    query = "Population by region marital status age sex",
+    api_url = "https://statistikdatabasen.scb.se/api/v2",
+    lang = "en",
+    page_size = 5
+  )
+  metadata_url <- search_results$metadata_url[search_results$id == "TAB638"][1]
+  if (is.na(metadata_url)) {
+    stop("Could not find Statistics Sweden table TAB638 with pxweb_search().", call. = FALSE)
+  }
+
   query <- list(
     Region = county_codes,
     Civilstand = marital_status_codes,
@@ -53,17 +66,25 @@ if (!file.exists(data_path) || refresh_data) {
     Tid = years
   )
 
-  data <- pxweb::pxweb_get_data(
+  px_data <- pxweb::pxweb_get(
     url = metadata_url,
     query = query,
-    column.name.type = "code",
-    variable.value.type = "code",
     verbose = TRUE
+  )
+  if (is.null(px_data)) {
+    stop("Could not download SCB population data from the PX-Web API.", call. = FALSE)
+  }
+
+  data <- as.data.frame(
+    px_data,
+    column.name.type = "code",
+    variable.value.type = "code"
   )
   if (is.null(data)) {
     stop("Could not download SCB population data from the PX-Web API.", call. = FALSE)
   }
 
+  writeLines(capture.output(pxweb::pxweb_cite(px_data)), citation_path)
   saveRDS(data, data_path)
 } else {
   data <- cached_data
