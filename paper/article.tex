@@ -1,21 +1,22 @@
-\documentclass[article]{jss}
+\documentclass[article,nojss]{jss}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% almost as usual
-\author{M\r{a}ns Magnusson\\Aalto University \And 
-        Markus Kainu\\Plus Affiliation  \And 
+\author{M\r{a}ns Magnusson\\Aalto University \And
+        Markus Kainu\\Plus Affiliation \And
+        Janne Huovari\\Plus Affiliation \And
         Leo Lahti\\University of Turku}
         
 %\title{\pkg{pxweb}: a toolkit for open public data}
-\title{Opening  official statistics with the \pkg{pxweb} package}
+\title{Opening Up Official Statistics with the \pkg{pxweb} Package}
 
 %% for pretty printing and a nice hypersummary also set:
-\Plainauthor{Achim Zeileis, Second Author} %% comma-separated
-\Plaintitle{A Capitalized Title: Something about a Package foo} %% without formatting
-\Shorttitle{\pkg{foo}: A Capitalized Title} %% a short title (if necessary)
+\Plainauthor{Mans Magnusson, Markus Kainu, Janne Huovari, Leo Lahti} %% comma-separated
+\Plaintitle{Opening Up Official Statistics with the pxweb Package} %% without formatting
+\Shorttitle{\pkg{pxweb}: Opening Up Official Statistics} %% a short title (if necessary)
 
 %% an abstract and keywords
 \Abstract{
@@ -24,6 +25,11 @@
 \Keywords{open data, citing data, public data, pxweb, PC-Axis, \proglang{R}}
 \Plainkeywords{open data, citing data, public data, pxweb, PC-Axis, R} %% without formatting
 %% at least one keyword must be supplied
+
+%% Compatibility aliases while the manuscript is migrated from the R Journal
+%% template to the JSS template.
+\newcommand{\CRANpkg}[1]{\pkg{#1}}
+\newcommand{\Cpkg}[1]{\pkg{#1}}
 
 %% publication information
 %% NOTE: Typically, this can be left commented and will be filled out by the technical editor
@@ -84,7 +90,7 @@ Whereas dozens of statistical authorities have started to share data through the
 a dedicated R package that provides a unified access to these data collections has been missing. The \CRANpkg{pxweb} package is now filling this gap [CLOSELY RELATED PKGS SHOULD BE CITED HERE?]. Following its first CRAN release in 2014, the \CRANpkg{pxweb}, several contributors and feedback from the user community have supported the package development. 
 [HAS THE PKG BEEN APPLIED IN PUBLICATIONS. THIS WOULD BE A GOOD PLACE TO CITE THOSE?].  SOME brief WORDS ABOUT DATA STANDARDS AND POSSIBLE VARIATIONS BETWEEN DATA PROVIDERS; further details will be in the later section. The pxweb depends on further R packages including \pkg{checkmate} \citep{checkmate}, \pkg{httr} \citep{httr}, \pkg{jsonlite} \citep{jsonlite}. The \pkg{pxweb} package is part of the rOpenGov open data science project \citep{Lahti13icml}. 
 
-In summary, the \CRANpkg{pxweb} package provides custom tools for open statistical data resources provided through the PX-WEB API. Currently, the pxweb package provides seamless algorithmic access from the R environment to dozens of data collections from national authorities in countries such as Estonia, Iceland, Finland, Norway, Sweden, The Netherlands, and elsewhere. Seamless integration with other data analysis tools is facilitated by support for features such as cache, date formatting, tidy data principles \citep{wickham2014}, and the \Cpkg{tibble} \citep{tibble} data format. In this article, we provide an overview of the functionality and use cases based on the current CRAN release version (0.8). The comprehensive on-line documentation, which is available via the package homepage\footnote{\url{http://ropengov.github.io/pxweb}}, includes simple examples for individual functions, generic tutorials, and links to more advanced case studies. Moreover, the package is following best practices in open source software development such as version control, automated unit tests, continuous integration, and collaborative development \citep{PerezRiverol2016}.
+In summary, the \CRANpkg{pxweb} package provides custom tools for open statistical data resources provided through the PX-WEB API. Currently, the pxweb package provides seamless algorithmic access from the R environment to dozens of data collections from national authorities in countries such as Estonia, Iceland, Finland, Norway, Sweden, The Netherlands, and elsewhere. Seamless integration with other data analysis tools is facilitated by support for features such as cache, date formatting, tidy data principles \citep{wickham2014}, and the \Cpkg{tibble} \citep{tibble} data format. In this article, we provide an overview of the functionality and use cases based on the current CRAN release version. The comprehensive on-line documentation, which is available via the package homepage\footnote{\url{http://ropengov.github.io/pxweb}}, includes simple examples for individual functions, generic tutorials, and links to more advanced case studies. Moreover, the package is following best practices in open source software development such as version control, automated unit tests, continuous integration, and collaborative development \citep{PerezRiverol2016}.
 
 The introduced tools can benefit researchers and data analysts in academia, government, and industry. Complete analytical workflow from raw data to statistical summaries and final publication can be greatly facilitated by combining programmatic data access with downstream data analysis and visualization tools. The pxweb package supports automated, transparent, reproducible, and well-documented data retrieval from statistical authorities. Utilities such as search, subsetting and cache support efficient data processing and analysis. Further custom tools and functionality can be built around this package. 
 
@@ -107,27 +113,27 @@ TODO: MOVE ALL DESIGN PRINCIPLES AND OBJECTS INTO article
 In 2018, we made major design decisions and largely rewrote the package in order to simplify the overall design while improving the overall capabilities and efficiency. Hence the current, mature version, is a result of active development and testing by the user community 
 
 
-# som relevant initial references for citing data
-https://www.openoffice.org/bibliographic/bibtex-defs.pdf
-https://tex.stackexchange.com/questions/109127/how-would-i-cite-a-dataset-with-bibtex
-http://www.dcc.ac.uk/resources/how-guides/cite-datasets#fn11
-https://libguides.ub.uu.se/referensguiden/harvard\_exempel
-https://www.scb.se/Upload/PC-Axis/Download/PX-Web/2017v1/Release-notes-pxweb-2017-v1.pdf
-https://www.scb.se/sv\_/PC-Axis/Documentation/Error-codes-PC-Axis/
+% Some relevant initial references for citing data:
+% https://www.openoffice.org/bibliographic/bibtex-defs.pdf
+% https://tex.stackexchange.com/questions/109127/how-would-i-cite-a-dataset-with-bibtex
+% http://www.dcc.ac.uk/resources/how-guides/cite-datasets#fn11
+% https://libguides.ub.uu.se/referensguiden/harvard\_exempel
+% https://www.scb.se/Upload/PC-Axis/Download/PX-Web/2017v1/Release-notes-pxweb-2017-v1.pdf
+% https://www.scb.se/sv\_/PC-Axis/Documentation/Error-codes-PC-Axis/
 
-# Contact PXWEB API crew on issues to add:
-- citation information needed should be attached to metadata objects
-- send post message to get info on package usage.
+% Contact PXWEB API crew on issues to add:
+% - citation information needed should be attached to metadata objects
+% - send post message to get info on package usage.
 
 
 \section[case studies]{Usage case studies}
 
 Installation of the CRAN release version follows the standard procedure in R.
 
-\begin{example}
+\begin{Code}
   install.packages("pxweb")
   library("pxweb")
-\end{example}
+\end{Code}
 
 
 
@@ -142,7 +148,7 @@ TOWRITE: Markus Kainu (1-2 pages)
 The package functionality can be further enhanced by integrating it with other downstream tools and data sets, such as geographical maps in order to allow geospatial visualization.
 
 
-\subsection{Including \code{pxweb} in other applications}
+\subsection[Including pxweb in other applications]{Including \code{pxweb} in other applications}
 
 TOWRITE: Oyvind (1-2 pages)
 
@@ -171,13 +177,9 @@ We are grateful to all package contributors, including ...
 The work has been partially funded by Academy of Finland (decisions 295741, 307127 to LL), and is part of rOpenGov\footnote{\url{https://github.ropengov.io}}.
 
 
-\bibliography{biblio}
+\bibliography{magnusson-kainu-lahti}
 
 \end{document}
-
-
-
-
 
 
 

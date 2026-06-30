@@ -9,6 +9,7 @@ inst/extras/*~
 .Rhistory
 *.Rproj
 sandbox/*
+tmp/
 todo.txt
 TODO.tdl
 vignettes/pxweb.R
