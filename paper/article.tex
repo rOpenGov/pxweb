@@ -195,39 +195,35 @@ their main role in the package workflow.
 \hline
 Workflow part & Exported functions\\
 \hline
-Catalogue and configuration &
+Search and discovery &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
+\code{pxweb()}, \code{pxweb_search()}, \code{pxweb_interactive()},
+\code{interactive_pxweb()}, \code{pxweb_test_api()},
 \code{pxweb_api_catalogue()}, \code{pxweb_api_catalogue_path()},
 \code{update_pxweb_apis()}, \code{pxweb_audit_api_catalogue_config()},
 \code{pxweb_api()}, \code{api_catalogue()}, \code{api_parameters()},
-\code{base_url()}\end{minipage}\\
-Discovery and interactive use &
+\code{base_url()}, \code{is.pxweb()}, \code{is_pxweb_response()}\end{minipage}\\
+Metadata &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
-\code{pxweb()}, \code{pxweb_search()}, \code{pxweb_interactive()},
-\code{interactive_pxweb()}, \code{pxweb_test_api()}\end{minipage}\\
-Retrieval &
-\begin{minipage}[t]{0.68\textwidth}\raggedright
-\code{pxweb_get()}, \code{pxweb_get_data()}, \code{pxweb_advanced_get()},
-\code{get_pxweb_data()}, \code{get_pxweb_metadata()},
-\code{get_pxweb_levels()}, \code{get_pxweb_dims()}, \code{checkForLevels()}\end{minipage}\\
-Query construction and validation &
+\code{get_pxweb_metadata()}, \code{get_pxweb_levels()},
+\code{get_pxweb_dims()}, \code{checkForLevels()}, \code{pxweb_codelists()}\end{minipage}\\
+Query &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
 \code{pxweb_query()}, \code{pxweb_query_as_json()},
-\code{pxweb_query_as_rcode()}, \code{pxweb_validate_query_with_metadata()}\end{minipage}\\
-Selection helpers &
-\begin{minipage}[t]{0.68\textwidth}\raggedright
+\code{pxweb_query_as_rcode()}, \code{pxweb_validate_query_with_metadata()},
 \code{pxweb_all()}, \code{pxweb_latest()}, \code{pxweb_top()},
 \code{pxweb_bottom()}, \code{pxweb_selection()},
 \code{pxweb_aggregation()}, \code{pxweb_valueset()}\end{minipage}\\
-Parsing and conversion &
+Retrieval &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
-\code{pxweb_parse_response()}, \code{pxweb_as_data_frame()}\end{minipage}\\
-Comments, codelists, and citation &
+\code{pxweb_get()}, \code{pxweb_get_data()}, \code{pxweb_advanced_get()},
+\code{get_pxweb_data()}, \code{pxweb_parse_response()}\end{minipage}\\
+Conversion &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
-\code{pxweb_codelists()}, \code{pxweb_data_comments()}, \code{pxweb_cite()}\end{minipage}\\
-Predicates &
+\code{pxweb_as_data_frame()}\end{minipage}\\
+Comments and citation &
 \begin{minipage}[t]{0.68\textwidth}\raggedright
-\code{is.pxweb()}, \code{is_pxweb_response()}\end{minipage}\\
+\code{pxweb_data_comments()}, \code{pxweb_cite()}\end{minipage}\\
 \hline
 \end{tabular}
 \caption{\label{tab:exported-functions}Exported functions in
@@ -278,21 +274,21 @@ environment variables.
 \begin{figure}[t!]
 \centering
 \includegraphics[width=\textwidth]{workflow-model}
-\caption{\label{fig:workflow-model}Main \pkg{pxweb} workflow from a
-catalogue entry or explicit PX-Web URL to metadata discovery, query
-construction, data retrieval, parsing, conversion, comments,
-codelists, and citation.}
+\caption{\label{fig:workflow-model}Main \pkg{pxweb} workflow:
+search and discovery, metadata, query construction, retrieval,
+conversion, comments, and citation.}
 \end{figure}
 
 \section{Functionality}
 \label{sec:functionality}
 
-The package supports both interactive and production workflows.
-Interactive use starts with \code{pxweb_interactive()}, which allows a
-user to navigate a known API, select a table, build a query, optionally
-download data, and print reusable \proglang{R} code. Code use
-starts from either a catalogue entry or a URL and combines metadata
-inspection, query construction, validation, and retrieval.
+The package supports the full workflow shown in
+Figure~\ref{fig:workflow-model}: search and discovery, metadata
+inspection, query construction, retrieval, conversion, comments, and
+citation. Interactive use starts with \code{pxweb_interactive()}, which
+allows a user to navigate a known API, select a table, build a query,
+optionally download data, and print reusable \proglang{R} code.
+Scripted use follows the same steps with explicit function calls.
 
 Installation of the CRAN release version follows the standard procedure in R.
 
@@ -301,24 +297,69 @@ install.packages("pxweb")
 library("pxweb")
 \end{Code}
 
-In PX-WEB APIs version 2, users can search for tables with
-\code{pxweb_search()}, retrieve metadata with \code{pxweb_get()}, build
-a query as a named list, fetch data with \code{pxweb_get()} or
-\code{pxweb_get_data()}, and convert the result to a \code{data.frame}.
+Search and discovery start either from the bundled API catalogue, from
+an explicit URL, or, for PX-Web API version 2, from table search. The
+following example searches Statistics Sweden's version 2 API for a
+population table and stores its metadata URL.
 
 \begin{Code}
-url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=sv"
+search_results <- pxweb_search(
+  query = "Population by region marital status age sex",
+  api_url = "https://statistikdatabasen.scb.se/api/v2",
+  lang = "en",
+  page_size = 5
+)
 
+url <- search_results$metadata_url[search_results$id == "TAB638"][1]
+\end{Code}
+
+Metadata are retrieved with \code{pxweb_get()} when no query is
+supplied. The returned metadata object describes the table dimensions,
+values, labels, and version-specific metadata needed for query
+validation and data retrieval. Version 2 APIs may also expose
+aggregation codelists and value sets, which can be inspected with
+\code{pxweb_codelists()}.
+
+\begin{Code}
+meta <- pxweb_get(url)
+pxweb_codelists(meta, variable = "Alder")
+\end{Code}
+
+Queries can be written as named \proglang{R} lists and converted to
+\code{pxweb_query} objects when needed. Helper functions express common
+selection patterns such as all values, the latest time period, top or
+bottom selections, aggregations, and value sets. Queries are validated
+against metadata before retrieval.
+
+\begin{Code}
 query <- list(
   Region = "00",
   Civilstand = "OG",
-  Alder = "0",
-  Kon = "1",
+  Alder = pxweb_aggregation("agg_Ålder5år_1"),
+  Kon = c("1", "2"),
   ContentsCode = "BE0101N1",
-  Tid = "2024"
+  Tid = pxweb_latest()
 )
 
+px_query <- pxweb_query(query)
+pxweb_validate_query_with_metadata(px_query, meta)
+\end{Code}
+
+Retrieval is handled by \code{pxweb_get()} or by
+\code{pxweb_get_data()} when the user wants a \code{data.frame}
+directly. The same top-level call handles version 1 and version 2 URLs,
+constructs the appropriate request body, and splits large supported
+queries into batches when needed.
+
+\begin{Code}
 px_data <- pxweb_get(url, query = query)
+\end{Code}
+
+Conversion methods turn PX-Web responses into standard \proglang{R}
+objects. Users can choose whether column names and variable values use
+provider labels or codes.
+
+\begin{Code}
 px_df <- as.data.frame(
   px_data,
   column.name.type = "code",
@@ -326,36 +367,18 @@ px_df <- as.data.frame(
 )
 \end{Code}
 
-Version 2 APIs may expose aggregation codelists and value sets. The
-package provides query helpers for all values, latest values, top and
-bottom selections, aggregations, and value sets so that users can
-express these selections in \proglang{R} rather than manually
-constructing API-specific URL parameters. Available codelists can be
-inspected with \code{pxweb_codelists()}.
+Finally, PX-Web responses may include comments, notes, or status
+information. \pkg{pxweb} exposes these through
+\code{pxweb_data_comments()}, with support for both version 1 comments
+and version 2 dataset notes, dimension notes, value notes, and
+observation status comments. Citation support is provided by
+\code{pxweb_cite()}, which prints citation information for the
+retrieved data source and the \pkg{pxweb} package itself.
 
 \begin{Code}
-meta <- pxweb_get(url)
-pxweb_codelists(meta, variable = "Alder")
-
-query <- list(
-  Region = pxweb_all(),
-  Alder = pxweb_aggregation("agg_Ålder5år_1"),
-  Kon = c("1", "2"),
-  ContentsCode = "BE0101N1",
-  Tid = pxweb_latest()
-)
+comments <- pxweb_data_comments(px_data)
+pxweb_cite(px_data)
 \end{Code}
-
-PX-Web responses may include comments, notes, or status information.
-\pkg{pxweb} exposes these through \code{pxweb_data_comments()}, with
-support for both v1 comments and v2 dataset notes, dimension notes,
-value notes, and observation status comments. Citation support is
-provided by \code{pxweb_cite()}, which prints citation information for
-the retrieved data source and the \pkg{pxweb} package itself.
-
-% TODO: Turn this section into a tighter software tour with one running
-% example and short subsections for search, query, data conversion,
-% comments/codelists, citation, and extension to uncatalogued APIs.
 
 \section{Case Study}
 \label{sec:case-study}

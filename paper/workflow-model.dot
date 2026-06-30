@@ -25,24 +25,17 @@ digraph pxweb_workflow {
     fontsize = 9
   ];
 
-  start [label = "Catalogue entry\nor explicit URL"];
-  url [label = "PX-Web URL\npxweb object"];
-  metadata [label = "Hierarchy and\ntable metadata"];
-  query [label = "Query construction\nand validation"];
-  request [label = "Data request\noptional batching"];
-  data [label = "Parsed pxweb\ndata object"];
+  search [label = "Search and\ndiscovery\ncatalogue, URL,\nor API search"];
+  metadata [label = "Metadata\nhierarchy, values, codelists"];
+  query [label = "Query\nselection and validation"];
+  retrieval [label = "Retrieval\nrequest and optional batching"];
+  conversion [label = "Conversion\ndata.frame or matrix"];
+  comments [label = "Comments\nand citation\nnotes, status,\nsource"];
 
-  dataframe [label = "data.frame\nor matrix", fillcolor = "#EDF2F7"];
-  comments [label = "Comments\nand codelists", fillcolor = "#EDF2F7"];
-  citation [label = "Data and package\ncitation", fillcolor = "#EDF2F7"];
-
-  start -> url;
-  url -> metadata;
+  search -> metadata;
   metadata -> query;
-  query -> request;
-  request -> data;
-  data -> dataframe;
-  data -> comments;
-  data -> citation;
+  query -> retrieval;
+  retrieval -> conversion;
+  conversion -> comments;
 }
 

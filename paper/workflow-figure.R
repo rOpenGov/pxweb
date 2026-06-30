@@ -46,25 +46,18 @@ digraph pxweb_workflow {
     fontsize = 9
   ];
 
-  start [label = "Catalogue entry\\nor explicit URL"];
-  url [label = "PX-Web URL\\npxweb object"];
-  metadata [label = "Hierarchy and\\ntable metadata"];
-  query [label = "Query construction\\nand validation"];
-  request [label = "Data request\\noptional batching"];
-  data [label = "Parsed pxweb\\ndata object"];
+  search [label = "Search and\\ndiscovery\\ncatalogue, URL,\\nor API search"];
+  metadata [label = "Metadata\\nhierarchy, values, codelists"];
+  query [label = "Query\\nselection and validation"];
+  retrieval [label = "Retrieval\\nrequest and optional batching"];
+  conversion [label = "Conversion\\ndata.frame or matrix"];
+  comments [label = "Comments\\nand citation\\nnotes, status,\\nsource"];
 
-  dataframe [label = "data.frame\\nor matrix", fillcolor = "#EDF2F7"];
-  comments [label = "Comments\\nand codelists", fillcolor = "#EDF2F7"];
-  citation [label = "Data and package\\ncitation", fillcolor = "#EDF2F7"];
-
-  start -> url;
-  url -> metadata;
+  search -> metadata;
   metadata -> query;
-  query -> request;
-  request -> data;
-  data -> dataframe;
-  data -> comments;
-  data -> citation;
+  query -> retrieval;
+  retrieval -> conversion;
+  conversion -> comments;
 }
 '
 
@@ -109,31 +102,23 @@ render_with_base_r <- function(figure_path) {
   plot.new()
   plot.window(xlim = c(0, 1), ylim = c(0, 1), asp = NA)
 
-  xs <- seq(0.09, 0.76, length.out = 6)
+  xs <- seq(0.10, 0.90, length.out = 6)
   y <- 0.56
   labels <- c(
-    "Catalogue entry\nor explicit URL",
-    "PX-Web URL\npxweb object",
-    "Hierarchy and\ntable metadata",
-    "Query construction\nand validation",
-    "Data request\noptional batching",
-    "Parsed pxweb\ndata object"
+    "Search and\ndiscovery\ncatalogue, URL,\nor API search",
+    "Metadata\nhierarchy, values,\ncodelists",
+    "Query\nselection and\nvalidation",
+    "Retrieval\nrequest and\noptional batching",
+    "Conversion\ndata.frame\nor matrix",
+    "Comments\nand citation\nnotes, status,\nsource"
   )
 
   for (i in seq_along(xs)) {
-    draw_node(xs[i], y, labels[i])
+    draw_node(xs[i], y, labels[i], width = 0.13, height = 0.22,
+              fill = if (i >= 5) "#EDF2F7" else "#F7FAFC")
   }
   for (i in seq_len(length(xs) - 1L)) {
-    draw_arrow(xs[i] + 0.06, y, xs[i + 1L] - 0.06, y)
-  }
-
-  out_x <- 0.92
-  out_y <- c(0.78, 0.56, 0.34)
-  out_labels <- c("data.frame\nor matrix", "Comments\nand codelists",
-                  "Data and package\ncitation")
-  for (i in seq_along(out_y)) {
-    draw_node(out_x, out_y[i], out_labels[i], fill = "#EDF2F7")
-    draw_arrow(xs[6] + 0.06, y, out_x - 0.07, out_y[i])
+    draw_arrow(xs[i] + 0.065, y, xs[i + 1L] - 0.065, y)
   }
 
   invisible(TRUE)
