@@ -141,7 +141,7 @@ science project \citep{Lahti13icml}.
 \label{sec:pxweb-pcaxis}
 
 PX-Web is a web application and API for disseminating PC-Axis
-statistical data \citep{TODO}. PC-Axis data are typically organized as
+statistical data \citep{PxToolsPxWeb2Intro}. PC-Axis data are typically organized as
 multidimensional tables with dimensions such as region, time, sex, age,
 indicator, or content variable and has a long tradition in national
 statistical agencies \citep[NSI, ][]{TODO}. PX-Web exposes these data and their
@@ -156,9 +156,9 @@ result interpretable. Third, the downloaded data should be easy to
 cite to facilitate reproducibility. \pkg{pxweb} handles all three.
 
 The package distinguishes between the PX-Web API and the older PC-Axis
-file format, typically stored as \code{.px} files \citep{TODO}. \pkg{pxweb} is
-designed for APIs, while packages such as \pkg{pxR} focus on parsing
-legacy PC-Axis files \citep{TODO}. This distinction is important because API access
+file format, typically stored as \code{.px} files \citep{SCBPxFileFormat2013}.
+\pkg{pxweb} is designed for APIs, while packages such as \pkg{pxR} focus on parsing
+legacy PC-Axis files \citep{pxR}. This distinction is important because API access
 requires metadata discovery, query construction, request validation,
 and response parsing rather than only local file import.
 
@@ -201,7 +201,7 @@ resources. A compact catalogue summary table will be added in a later
 revision.
 
 Support for PX-Web API version 2 is expressed in the same top-level
-workflow as version 1 \citep{TODO}. Version 2 tables use separate metadata and data
+workflow as version 1 \citep{PxToolsPxWeb2Intro}. Version 2 tables use separate metadata and data
 endpoints and return JSON-stat2 by default. The \pkg{pxweb} package detects v2 URLs,
 builds the corresponding data endpoint, constructs the v2 query body,
 and adds query parameters for codelists and output values when needed.
