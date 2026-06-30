@@ -116,7 +116,7 @@ source-specific data retrieval, including \pkg{quandl} \citep{quandl},
 
 The \pkg{pxweb} package fills a complementary role: it provides a
 general \proglang{R} interface to databases exposed through the PX-Web
-API \citep{TODO}. The package can navigate PX-Web resources, fetch metadata,
+API \citep{PxToolsPxWeb2Intro}. The package can navigate PX-Web resources, fetch metadata,
 construct and validate queries, retrieve data, convert responses into
 standard \proglang{R} data structures, and produce citation information
 for the source data. As of version 1.0.0, the
@@ -164,8 +164,8 @@ through web interfaces and API endpoints
 \citep{PxToolsPxWeb2Intro}. Recent PxWebApi version 2 development,
 including the Statbank Norway launch in 2025, further modernizes this
 infrastructure with a more stable URL structure, GET requests, improved
-filtering, and richer metadata access \citep{TODO,StatisticsNorwayAPI}.
-% TODO: Add a reference to the original source for PXWEB in the TODO.
+filtering, and richer metadata access
+\citep{PxToolsPxWeb2Intro,StatisticsNorwayAPI}.
 
 From the perspective of an \proglang{R} user, PX-Web APIs have three
 important parts. First, a table query must be constructed from table
@@ -246,7 +246,7 @@ analysis, visualization, or educational workflows. For example,
 ecosystem by simplifying access to Finnish geospatial data from
 Statistics Finland's spatial APIs \citep{geofi}.
 
-\section{The \pkg{pxweb} package}
+\section[The pxweb package]{The \pkg{pxweb} package}
 \label{sec:package-design}
 
 The \pkg{pxweb} package is designed as a generic interface rather than a
