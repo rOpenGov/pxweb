@@ -1,0 +1,48 @@
+
+digraph pxweb_workflow {
+  graph [
+    rankdir = LR,
+    bgcolor = "white",
+    margin = 0.05,
+    nodesep = 0.42,
+    ranksep = 0.52
+  ];
+
+  node [
+    shape = box,
+    style = "rounded,filled",
+    color = "#4A5568",
+    fillcolor = "#F7FAFC",
+    fontname = "Helvetica",
+    fontsize = 10,
+    margin = "0.08,0.05"
+  ];
+
+  edge [
+    color = "#4A5568",
+    arrowsize = 0.65,
+    fontname = "Helvetica",
+    fontsize = 9
+  ];
+
+  start [label = "Catalogue entry\nor explicit URL"];
+  url [label = "PX-Web URL\npxweb object"];
+  metadata [label = "Hierarchy and\ntable metadata"];
+  query [label = "Query construction\nand validation"];
+  request [label = "Data request\noptional batching"];
+  data [label = "Parsed pxweb\ndata object"];
+
+  dataframe [label = "data.frame\nor matrix", fillcolor = "#EDF2F7"];
+  comments [label = "Comments\nand codelists", fillcolor = "#EDF2F7"];
+  citation [label = "Data and package\ncitation", fillcolor = "#EDF2F7"];
+
+  start -> url;
+  url -> metadata;
+  metadata -> query;
+  query -> request;
+  request -> data;
+  data -> dataframe;
+  data -> comments;
+  data -> citation;
+}
+
