@@ -19,6 +19,7 @@ dir.create(data_dir, showWarnings = FALSE, recursive = TRUE)
 
 data_path <- file.path(data_dir, "scb-population-counties-1968-2024.rds")
 citation_path <- file.path(data_dir, "scb-population-citation.txt")
+comments_path <- file.path(data_dir, "scb-population-comments.rds")
 figure_path <- file.path(script_dir, "case-study-population.pdf")
 
 if (!requireNamespace("pxweb", quietly = TRUE)) {
@@ -84,6 +85,9 @@ if (!file.exists(data_path) || refresh_data) {
     stop("Could not download SCB population data from the PX-Web API.", call. = FALSE)
   }
 
+  comments <- pxweb::pxweb_data_comments(px_data)
+  comments_df <- as.data.frame(comments, stringsAsFactors = FALSE)
+  saveRDS(comments_df, comments_path)
   writeLines(capture.output(pxweb::pxweb_cite(px_data)), citation_path)
   saveRDS(data, data_path)
 } else {
@@ -125,7 +129,7 @@ population_pyramid <- function(year_value, main) {
   female <- wide$value.Women / 1000
   max_value <- max(abs(c(male, female)), na.rm = TRUE)
 
-  barplot(
+  bar_midpoints <- barplot(
     male,
     horiz = TRUE,
     col = "#4C78A8",
@@ -151,8 +155,9 @@ population_pyramid <- function(year_value, main) {
   )
   axis(1, at = pretty(c(-max_value, max_value)),
        labels = abs(pretty(c(-max_value, max_value))))
-  axis(2, at = seq(1, length(wide$age), by = 20),
-       labels = wide$age[seq(1, length(wide$age), by = 20)], las = 1)
+  age_labels <- ifelse(wide$age == 100L, "100+", as.character(wide$age))
+  age_tick_idx <- seq(1, length(wide$age), by = 20)
+  axis(2, at = bar_midpoints[age_tick_idx], labels = age_labels[age_tick_idx], las = 1)
   legend(
     "topright",
     fill = c("#4C78A8", "#F58518"),
