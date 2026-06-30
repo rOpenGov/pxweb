@@ -6,8 +6,8 @@
 
 %% almost as usual
 \author{M\r{a}ns Magnusson\\Aalto University \And
-        Markus Kainu\\Plus Affiliation \And
-        Janne Huovari\\Plus Affiliation \And
+        Markus Kainu\\The Social Insurance Institution of Finland \And
+        Janne Huovari\\Pellervo Economic Research PTT \And
         Leo Lahti\\University of Turku}
 
 %\title{\pkg{pxweb}: a toolkit for open public data}
@@ -30,7 +30,7 @@
   data structures, extraction of comments and codelists, and citation of
   retrieved data. This article introduces the motivation and design of
   \pkg{pxweb}, outlines the support for both PX-Web API version 1 and
-  version 2, and provides an reproducible case study using official statistics.
+  version 2, and provides a reproducible case study using official statistics.
 }
 \Keywords{open data, citing data, public data, pxweb, PC-Axis, \proglang{R}}
 \Plainkeywords{open data, citing data, public data, pxweb, PC-Axis, R} %% without formatting
@@ -107,7 +107,7 @@ Dedicated software packages simplify, standardize, and automate
 analysis workflows. They take into account variations in raw data
 formats, access details, metadata conventions, and typical use cases so
 that users can avoid repetitive programming tasks and reduce the risk of
-misinterpretation and processing errors \citep{Grooves2010}.
+misinterpretation and processing errors \citep{GrovesLyberg2010}.
 In \proglang{R}, several packages support generic or
 source-specific data retrieval, including \pkg{quandl} \citep{quandl},
 \pkg{pdfetch} \citep{pdfetch}, \pkg{eurostat}
@@ -410,7 +410,7 @@ pxweb_cite(px_data)
 \begin{CodeOutput}
 Statistics Sweden (2026). "Population by region, marital status, age
 and sex. Year 1968-2024." [Data accessed ... using pxweb R package
-0.19.0].
+1.0.0].
 \end{CodeOutput}
 
 Finally, the data are aggregated and plotted. Figure~\ref{fig:case-study-population}
@@ -510,7 +510,6 @@ LL), and is part of rOpenGov\footnote{\url{https://github.ropengov.io}}.
 \bibliography{magnusson-kainu-lahti}
 
 \end{document}
-
 
 
 
