@@ -565,41 +565,38 @@ Statistics Finland's spatial APIs \citep{geofi}.
 \section{Discussion}
 \label{sec:discussion}
 
-The \pkg{pxweb} package provides access to official
-statistics shared through the PX-Web API. It helps bridge the gap
-between data providers and users by supporting discovery, query
-construction, data retrieval, parsing, comments, codelists, and
-citation. This enables transparent and reproducible workflows from raw
-online data to statistical summaries and publication-ready outputs.
+The \pkg{pxweb} package provides access to official statistics shared
+through PX-Web APIs. It supports the full workflow from API discovery
+and metadata inspection to query construction, retrieval, conversion,
+comments, codelists, and citation. In doing so, it helps users move
+from interactive table browsing to scripted, transparent, and
+reproducible statistical workflows.
 
 The package has matured through active development since its first CRAN
-release in 2014, including a major redesign in 2018 and 2026, with recent support
-for PX-Web API version 2. The current implementation is tested with a
-combination of unit tests, mocked API responses, and optional live
-smoke tests. The local default test suite currently passes 667 tests
-with live tests skipped unless explicitly enabled.
+release in 2014, including major redesigns in 2018 and 2026 and recent
+support for PX-Web API version 2. As an indication of use, CRAN download
+logs report 116,074 downloads between January 2014 and June 2026
+\citep{CranlogsPxweb2026}. The package is also used directly in
+research, for instance in work on electronic gambling machines and
+socioeconomic status \citep{Raisamo2019}, income-inequality data
+construction \citep{Solt2019}, trends in youth serious violence
+\citep{Tanskanen2026}, and radiation-dose modeling after the Chernobyl
+nuclear power plant accident \citep{Tondel2025}.
 
-Limitations remain. PX-Web installations differ across providers,
-provider-side query limits vary, and live APIs can change independently
-of the package. For this reason, robust metadata validation, mocked
-fixtures, and live smoke tests are all important parts of the
-maintenance strategy. The package also needs careful documentation of
-which v2 features are generic and which depend on provider-specific
-metadata conventions.
+Several limitations remain. PX-Web installations differ across
+providers, provider-side query limits and rate limits vary, and live
+APIs can change independently of the package. These issues motivate the
+package's emphasis on metadata validation, request splitting, mocked
+fixtures, and optional live smoke tests. They also mean that support for
+PX-Web API version 2 must distinguish between generic API behavior and
+metadata conventions that are provider-specific.
 
-The package has been used, for instance, in research on electronic
-gambling machines and socioeconomic status \citep{Raisamo2019}. More
-generally, programmatic access to official statistics can support open
-data science, governmental analysis, research, education, and citizen
-science. The work contributes to the broader open data science
-ecosystem \citep{Lahti2018IDA} by making official statistics easier to
-retrieve, document, and reuse in \proglang{R}.
-
-% TODO: Update with more citations and where the package has been used..
-% TODO: Update download counts and usage indicators from current CRAN logs.
-% TODO: Add a concise limitations paragraph based on current open issues.
-% TODO: Replace this discussion with a stronger conclusion after the case
-% study and related-software sections are finalized.
+More broadly, \pkg{pxweb} contributes to the open data science ecosystem
+\citep{Lahti2018IDA} by making official statistics easier to retrieve,
+document, and reuse in \proglang{R}. The package does not replace
+provider documentation or local domain knowledge, but it gives
+researchers, public-sector analysts, educators, and civic users a common
+programmatic interface to a widely used dissemination infrastructure.
 
 \appendix
 \section{Bundled API Catalogue}
