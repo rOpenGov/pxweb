@@ -130,6 +130,22 @@ test_that(desc = "PXWEB API v2 response parser routes fixture responses", {
   expect_equal(table$id, "TAB5974")
 })
 
+test_that(desc = "PXWEB API v2 data objects can be cited", {
+  x <- structure(
+    list(
+      label = "Population by region, marital status, age and sex. Year 1968-2024",
+      source = "Statistics Sweden",
+      url = "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/data",
+      time_stamp = as.POSIXct("2026-06-30 12:00:00", tz = "UTC")
+    ),
+    class = c("pxweb_data_v2", "pxweb_data_jsonstat2", "list")
+  )
+
+  expect_output(pxweb_cite(x), regexp = "Population by region")
+  expect_output(pxweb_cite(x), regexp = "Statistics Sweden")
+  expect_output(pxweb_cite(x), regexp = "pxweb R package")
+})
+
 test_that(desc = "PXWEB API v2 constructor fixture contract", {
   # Mocks recorded by tests/testthat/record-mocks.R.
   with_pxweb_mock_api({

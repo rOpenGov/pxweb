@@ -7,7 +7,7 @@
 pxweb_cite(x, style = "citation")
 }
 \arguments{
-\item{x}{a \code{pxweb_data} object to cite.}
+\item{x}{a \code{pxweb_data} or \code{pxweb_data_v2} object to cite.}
 
 \item{style}{see \code{\link[utils]{bibentry}}.}
 }
