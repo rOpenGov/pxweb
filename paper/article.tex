@@ -150,6 +150,22 @@ Finland, and Statistics Norway
 PX-Web exposes these data and their metadata through HTTP endpoints
 that can be explored interactively or accessed programmatically.
 
+The PX/PC-Axis ecosystem predates current web APIs. The PX file-format
+specification documents a metadata-and-data file structure and records
+core keywords such as \code{CONTENTS}, \code{DATA}, \code{MATRIX},
+\code{STUB}, and \code{CODES} with introduction years going back to
+1990 \citep{SCBPxFileFormat2013}. Statistics Sweden describes PX as a
+standard format for statistics files used by many statistical offices
+and as the basis for tools such as PxWin, PxWeb, and PxEdit; PxWin
+replaced the older PC-Axis 2008 application in 2016
+\citep{SCBPxPrograms}. PxWeb extends this file-oriented tradition to
+online dissemination by publishing multidimensional statistical tables
+through web interfaces and API endpoints
+\citep{PxToolsPxWeb2Intro}. Recent PxWebApi version 2 development,
+including the Statbank Norway launch in 2025, further modernizes this
+infrastructure with a more stable URL structure, GET requests, improved
+filtering, and richer metadata access \citep{StatisticsNorwayAPI}.
+
 From the perspective of an \proglang{R} user, PX-Web APIs have three
 important purposes. First, a table query must be constructed from table
 metadata. Second, the data response has to be parsed back into an
@@ -164,8 +180,6 @@ legacy PC-Axis files \citep{pxR}. This distinction is important because API acce
 requires metadata discovery, query construction, request validation,
 and response parsing rather than only local file import.
 
-% TODO: Add a concise historical paragraph on PX-Web/PC-Axis and cite
-% authoritative documentation from Statistics Sweden or the PX-Web project.
 % TODO: Clarify current PX-Web API v1/v2 adoption among catalogue entries.
 % TODO: Describe provider-side query limits and rate limits using current docs.
 
@@ -526,18 +540,21 @@ time-series sources \citep{quandl,pdfetch}. Packages such as
 API family used by multiple statistical organizations.
 
 The package should also be distinguished from tools for local PC-Axis
-files. \pkg{pxweb} targets web APIs, including metadata discovery,
-query validation, request splitting, and response parsing. File-oriented
-tools such as \pkg{pxR} address a related but different problem: reading
-local \code{.px} files.
+files and from provider-side PX-Web software. \pkg{pxweb} targets web
+APIs, including metadata discovery, query validation, request splitting,
+and response parsing. File-oriented tools such as \pkg{pxR} address a
+related but different problem: reading and writing local \code{.px}
+files \citep{pxR}. The official PX-Web and PxWebApi software provide
+the server-side infrastructure through which statistical producers
+publish tables and API endpoints \citep{PxToolsPxWeb2Intro}.
 
 Finally, \pkg{pxweb} can serve as infrastructure for more specialized
-packages and applications. Domain-specific tools can build on its API
+packages and applications. Domain-specific packages can build on its API
 access, query, and parsing functionality while adding provider-specific
-analysis, visualization, or educational workflows.
-
-% TODO: Add current references for PxWebApiData, geofi, pxR, and any
-% official PX-Web clients or agency-specific R packages.
+analysis, visualization, or educational workflows. For example,
+\pkg{geofi} addresses a complementary part of the Finnish official-data
+ecosystem by simplifying access to Finnish geospatial data from
+Statistics Finland's spatial APIs \citep{geofi}.
 
 \section{Discussion}
 \label{sec:discussion}
