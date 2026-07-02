@@ -20,10 +20,10 @@
 
 %% an abstract and keywords
 \Abstract{
-The \pkg{pxweb} package provides an interface from \proglang{R} to statistical databases published through the PX-Web API.
-PX-Web is used by national, regional, and international statistical organizations to disseminate official statistics in multidimensional tables.
-The package supports discovery of API resources, construction and validation of table queries, retrieval and parsing of data and metadata, conversion to standard \proglang{R}, data structures, extraction of comments, and citation of retrieved data.
-This article introduces the motivation and design of \pkg{pxweb}, outlines the support for both PX-Web API version 1 and version 2, and provides a simple reproducible case study using official statistics.
+The \pkg{pxweb} package provides an interface from \proglang{R} to statistical databases published through the PxWeb API.
+PxWeb is used by national, regional, and international statistical organizations to disseminate official statistics in multidimensional tables.
+The package supports discovery of API resources, construction and validation of table queries, retrieval and parsing of data and metadata, conversion to standard \proglang{R} data structures, extraction of comments, and citation of retrieved data.
+This article introduces the motivation and design of \pkg{pxweb}, outlines the support for both PxWeb API version 1 and version 2, and provides a simple reproducible case study using official statistics.
 }
 \Keywords{open data, citing data, public data, pxweb, PC-Axis, \proglang{R}}
 \Plainkeywords{open data, citing data, public data, pxweb, PC-Axis, R} %% without formatting
@@ -92,25 +92,27 @@ Dedicated software packages simplify, standardize, and automate analysis workflo
 They take into account variations in raw data formats, access details, metadata conventions, and typical use cases so that users can avoid repetitive programming tasks and reduce the risk of misinterpretation and processing errors \citep{GrovesLyberg2010}.
 In \proglang{R}, several packages support generic or source-specific data retrieval, including \pkg{quandl} \citep{quandl}, \pkg{pdfetch} \citep{pdfetch}, \pkg{eurostat} \citep{Lahti17eurostat}, \pkg{WDI} \citep{WDI}, and \pkg{osmar} \citep{osmar}.
 
-The \pkg{pxweb} package fills a complementary role: it provides a general \proglang{R} interface to databases exposed through the PX-Web API \citep{PxToolsPxWeb2Intro}.
-The package can navigate PX-Web resources, fetch metadata, construct and validate queries, retrieve data, convert responses into standard \proglang{R} data structures, and produce citation information for the source data.
-As of version 1.0, the \pkg{pxweb} package includes 46 API catalogue entries and supports both PX-Web API version 1 and version 2.
+The \pkg{pxweb} package fills a complementary role: it provides a general \proglang{R} interface to databases exposed through the PxWeb API \citep{PxToolsPxWeb2Intro}.
+The package can navigate PxWeb resources, fetch metadata, construct and validate queries, retrieve data, convert responses into standard \proglang{R} data structures, and produce citation information for the source data.
+As of version 1.0.0, the \pkg{pxweb} package includes 46 API catalogue entries and supports both PxWeb API version 1 and version 2.
 
-Data citation is another motivation for the package. Data reuse should document source organizations, accessed resources, version information, and retrieval times where possible.
-The \pkg{pxweb} package helps standardize this process for PX-Web data by collecting source information from the API and data objects and by encouraging users to cite both the retrieved data and the software used to retrieve them.
+Data citation is another motivation for the package.
+Data reuse should document source organizations, accessed resources, version information, and retrieval times where possible.
+The \pkg{pxweb} package helps standardize this process for PxWeb data by collecting source information from the API and data objects and by encouraging users to cite both the retrieved data and the software used to retrieve them.
 
-The package was first released on CRAN in 2014 and was substantially reworked in 2018 and 2026. Recent development has added support for the PX-Web API version 2, including table search, JSON-stat2 responses, v2 metadata, codelists, value sets, aggregation helpers, and observation status comments.
+The package was first released on CRAN in 2014 and was substantially reworked in 2018 and 2026.
+Recent development has added support for the PxWeb API version 2, including table search, JSON-stat2 responses, v2 metadata, codelists, value sets, aggregation helpers, and observation status comments.
 The current package is part of the rOpenGov open data science project \citep{Lahti13icml}.
 
-\subsection[PX-Web and PC-Axis]{PX-Web and PC-Axis}
+\subsection[PxWeb and PC-Axis]{PxWeb and PC-Axis}
 \label{sec:pxweb-pcaxis}
 
-PX-Web is a web application and API for disseminating PC-Axis statistical data \citep{PxToolsPxWeb2Intro}.
+PxWeb is a web application and API for disseminating PC-Axis statistical data \citep{PxToolsPxWeb2Intro}.
 PC-Axis data are typically organized as multidimensional tables with dimensions such as region, time, sex, age, indicator, or content variable.
 The PX software family is used by statistical producers, e.g. Statistics Sweden, Statistics Finland, and Statistics Norway \citep{SCBPxPrograms,StatisticsFinlandPxSuite,StatisticsNorwayAPI}.
-PX-Web exposes these data and their metadata through HTTP endpoints that can be explored interactively or accessed programmatically.
+PxWeb exposes these data and their metadata through HTTP endpoints that can be explored interactively or accessed programmatically.
 
-The PX/PC-Axis ecosystem predates current web PXWEB APIs.
+The PX/PC-Axis ecosystem predates current web PxWeb APIs.
 The PX file-format specification documents a metadata-and-data file structure and records core keywords such as \code{CONTENTS}, \code{DATA}, \code{MATRIX}, \code{STUB}, and \code{CODES} with introduction years going back to 1990 \citep{SCBPxFileFormat2013}.
 Statistics Sweden describes PX as a standard format for statistics files used by many statistical offices
 and as the basis for tools such as PxWin, PxWeb, and PxEdit \citep{SCBPxPrograms}.
@@ -118,18 +120,18 @@ PxWin replaced the older PC-Axis 2008 application in 2016 \citep{SCBPxPrograms}.
 PxWeb extends this file-oriented tradition to online dissemination by publishing multidimensional statistical tables through web interfaces and API endpoints \citep{PxToolsPxWeb2Intro}.
 Recent PxWeb API version 2 development, including the Statbank Norway launch in 2025, further modernizes this infrastructure with a more stable URL structure, GET requests, improved filtering, and richer metadata access \citep{PxToolsPxWeb2Intro,StatisticsNorwayAPI}.
 
-From the perspective of an \proglang{R} user, PX-Web APIs have three important parts.
+From the perspective of an \proglang{R} user, PxWeb APIs have three important parts.
 First, a table query must be constructed from table metadata.
 Second, the data response has to be retrieved and converted into an analysis-ready format.
 Third, the downloaded data should be easy to cite to facilitate reproducibility.
 The \pkg{pxweb} package handles all three parts for the \proglang{R} user.
 
-The package distinguishes between the PX-Web API and the older PC-Axis file format, typically stored as \code{.px} files \citep{SCBPxFileFormat2013}.
-The \pkg{pxweb} package is designed for PX-Web APIs, while packages such as \pkg{pxR} focus on parsing
+The package distinguishes between the PxWeb API and the older PC-Axis file format, typically stored as \code{.px} files \citep{SCBPxFileFormat2013}.
+The \pkg{pxweb} package is designed for PxWeb APIs, while packages such as \pkg{pxR} focus on parsing
 legacy PC-Axis files \citep{pxR}.
 This distinction is important because API access requires metadata discovery, query construction, request validation, and response parsing rather than only local file import.
 
-Because PX-Web installations are configured by individual providers, API version support and request limits are endpoint-level properties rather than global constants.
+Because PxWeb installations are configured by individual providers, API version support and request limits are endpoint-level properties rather than global constants.
 The \pkg{pxweb} package therefore collects available provider configuration metadata, including version 1 \code{?config} responses, and uses this information when validating requests, making calls, and splitting large downloads.
 
 \subsection{Related Software}
