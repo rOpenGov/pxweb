@@ -30,7 +30,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/rOpenGov/pxweb/blob/v0.19.2/inst/CITATION)
+[`inst/CITATION`](https://github.com/rOpenGov/pxweb/blob/master/inst/CITATION)
 
 Magnusson M, Kainu M, Huovari J, Lahti L (2026). *pxweb: R Interface to
 PXWEB APIs*.
