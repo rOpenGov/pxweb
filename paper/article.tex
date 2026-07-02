@@ -257,7 +257,7 @@ Time variables can be split, and so can variables marked as eliminable in the pr
 Content variables and top or bottom selections are kept intact because they affect the meaning or ordering of the returned values.
 It then evaluates candidate orderings of the splittable dimensions and, for each ordering, greedily chooses the largest dimension chunks that keep each subquery below the provider limit.
 The ordering with the smallest resulting number of batches is used.
-For the typical case of fewer than seven splittable dimensions all orderings are evaluated.
+For the typical case of fewer than seven splittable dimensions, all orderings are evaluated.
 Otherwise, a random sample of orderings is used to keep computation bounded.
 
 The package follows common software engineering practices, including version control, automated tests, API fixtures, continuous integration, and test workflows for selected APIs \citep{PerezRiverol2016}.
@@ -405,7 +405,7 @@ variables:
  [[6]] Tid: year
 \end{CodeOutput}
 
-The metadata print method shows the labels returned by the provider.
+The metadata object contains the labels returned by the provider.
 With \code{lang = "en"} in the search call, the selected metadata URL also requests English labels.
 
 \begin{Code}
