@@ -106,7 +106,7 @@ d <- pxweb_interactive()
 d <- pxweb_interactive("api.scb.se")
 
 # Fetching data from statfi (Statistics Finland)
-d <- pxweb_interactive("statfin.stat.fi")
+d <- pxweb_interactive("pxnet2.stat.fi")
 
 # Fetching data from StatBank (Statistics Norway)
 d <- pxweb_interactive("data.ssb.no")
@@ -926,7 +926,7 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] pxweb_0.19.1
+    ## [1] pxweb_0.19.2
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] backports_1.5.1   digest_0.6.39     desc_1.4.3        R6_2.6.1         
