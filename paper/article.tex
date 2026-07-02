@@ -316,8 +316,8 @@ pxweb_codelists(meta, variable = "Alder")
 4   vs_ÅlderTotA    Valueset Ålder, totalt, ...
 \end{CodeOutput}
 
-The codelist labels are provider-supplied and are returned in Swedish for this table.
-Here, \code{ålder} means age, \code{10-årsklasser} and \code{5-årsklasser} mean 10- and 5-year age groups, \code{Ålder, 1 års-klasser} denotes single-year ages, and \code{Ålder, totalt, alla redovisade åldrar} denotes all reported ages.
+The codelist labels are provider-supplied.
+In this example the English metadata endpoint returns English labels, while the \code{id} values remain provider identifiers that are passed unchanged to query helpers.
 
 Queries can be written as named \proglang{R} lists and converted to \code{pxweb_query} objects when needed.
 For codelists, the \code{id} column returned by \code{pxweb_codelists()} is passed to helpers such as \code{pxweb_aggregation()} or \code{pxweb_valueset()}.
@@ -395,18 +395,18 @@ px_metadata <- pxweb_get(metadata_url)
 
 \begin{CodeOutput}
 PXWEB METADATA
-Folkmängden efter region, civilstånd, ålder och kön.  År 1968-2024
+Population by region, marital status, age and sex.  Year 1968-2024
 variables:
  [[1]] Region: region
- [[2]] Civilstand: civilstånd
- [[3]] Alder: ålder
- [[4]] Kon: kön
- [[5]] ContentsCode: tabellinnehåll
- [[6]] Tid: år
+ [[2]] Civilstand: marital status
+ [[3]] Alder: age
+ [[4]] Kon: sex
+ [[5]] ContentsCode: observations
+ [[6]] Tid: year
 \end{CodeOutput}
 
-The metadata print method shows the labels returned by the provider, which for this table are partly Swedish.
-The title translates to ``Population by region, marital status, age and sex. Year 1968--2024''; the variable labels \code{civilstånd}, \code{ålder}, \code{kön}, \code{tabellinnehåll}, and \code{år} correspond to marital status, age, sex, content variable, and year.
+The metadata print method shows the labels returned by the provider.
+With \code{lang = "en"} in the search call, the selected metadata URL also requests English labels.
 
 \begin{Code}
 years <- as.character(1968:2024)
