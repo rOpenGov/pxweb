@@ -37,15 +37,8 @@ build_pxweb_url.pxweb_api_catalogue_entry <- function(x) {
 #' @rdname build_pxweb_config_url
 #' @keywords internal
 build_pxweb_url.url <- function(x) {
-  scheme <- x$scheme
-  hostname <- x$hostname
-  if (!is.null(x$port)) {
-    port <- paste0(":", x$port)
-  } else {
-    port <- NULL
-  }
-  path <- paste(gsub("^/", "", x$path), collapse = "/")
-  paste0(scheme, "://", hostname, port, "/", path)
+  x$path <- paste(gsub("^/", "", x$path), collapse = "/")
+  httr::build_url(x)
 }
 
 
@@ -91,9 +84,11 @@ build_pxweb_config_url.pxweb <- function(x) {
 build_pxweb_config_url.url <- function(x) {
   version <- pxweb_detect_version(x)
   if(version == "v1"){
+    x$query <- NULL
     cfgurl <- paste0(build_pxweb_url(x), "?config")
   } else if (version == "v2"){
     x$path <- paste0(build_pxweb_v2_api_subpath(x), "/config")
+    x$query <- NULL
     cfgurl <- build_pxweb_url(x)
   } else {
     stop("Unknown PXWEB API version detected.", call. = FALSE)
