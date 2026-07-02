@@ -36,6 +36,111 @@ test_that(desc = "PXWEB API v2 URL helpers build endpoint URLs", {
   )
 })
 
+test_that(desc = "pxweb_get preserves v2 metadata URL query parameters", {
+  pxweb_clear_cache()
+  metadata_url <- "https://query.example.test/api/v2/tables/TAB638/metadata?lang=en"
+  requested_urls <- character()
+
+  response <- function(body, url) {
+    json <- jsonlite::toJSON(body, auto_unbox = TRUE)
+    structure(
+      list(
+        url = url,
+        status_code = 200L,
+        headers = structure(
+          list("content-type" = "application/json; charset=utf-8"),
+          class = c("insensitive", "list")
+        ),
+        content = charToRaw(json),
+        request = structure(list(url = url), class = "request"),
+        all_headers = list(list(status = 200L))
+      ),
+      class = "response"
+    )
+  }
+
+  config_response <- response(
+    list(
+      maxDataCells = 1000,
+      maxCallsPerTimeWindow = 100,
+      timeWindow = 60
+    ),
+    "https://query.example.test/api/v2/config"
+  )
+  metadata_response <- response(
+    list(
+      version = "2.0",
+      class = "dataset",
+      label = "Population by region, marital status, age and sex. Year 1968-2024",
+      id = list("Civilstand", "Alder", "Kon", "ContentsCode", "Tid"),
+      size = list(1, 1, 1, 1, 1),
+      dimension = list(
+        Civilstand = list(
+          label = "marital status",
+          category = list(index = list(OG = 0), label = list(OG = "unmarried")),
+          extension = list(elimination = TRUE)
+        ),
+        Alder = list(
+          label = "age",
+          category = list(index = list(`0` = 0), label = list(`0` = "0 years")),
+          extension = list(elimination = FALSE)
+        ),
+        Kon = list(
+          label = "sex",
+          category = list(index = list(`1` = 0), label = list(`1` = "men")),
+          extension = list(elimination = FALSE)
+        ),
+        ContentsCode = list(
+          label = "observations",
+          category = list(index = list(`000005NO` = 0), label = list(`000005NO` = "Population")),
+          extension = list(elimination = FALSE)
+        ),
+        Tid = list(
+          label = "year",
+          category = list(index = list(`2024` = 0), label = list(`2024` = "2024")),
+          extension = list(elimination = FALSE)
+        )
+      ),
+      role = list(time = list("Tid")),
+      value = list(),
+      extension = list(px = list(tableid = "TAB638", language = "en"))
+    ),
+    metadata_url
+  )
+
+  testthat::local_mocked_bindings(
+    GET = function(url, ...) {
+      requested_urls <<- c(requested_urls, url)
+      if (grepl("/config$", url)) {
+        config_response
+      } else {
+        metadata_response
+      }
+    },
+    .package = "httr"
+  )
+  testthat::local_mocked_bindings(
+    has_internet = function(host) TRUE,
+    pxweb_http_log_response = function(r) invisible(NULL),
+    http_was_redirected = function(r) list(
+      was_redirected = FALSE,
+      redirected_from = NULL,
+      redirected_to = NULL
+    ),
+    .package = "pxweb"
+  )
+
+  expect_silent(metadata <- pxweb_get(metadata_url))
+
+  expect_true(metadata_url %in% requested_urls)
+  expect_equal(metadata$title, "Population by region, marital status, age and sex. Year 1968-2024")
+  expect_equal(
+    vapply(metadata$variables, `[[`, character(1), "text"),
+    c("marital status", "age", "sex", "observations", "year")
+  )
+  expect_equal(attr(metadata, "pxweb_metadata_v2")$extension$px$language, "en")
+})
+
 test_that(desc = "PXWEB API v2 query conversion creates selection body", {
   pxq <- pxweb_query(list(
     InrikesUtrikes = "83",

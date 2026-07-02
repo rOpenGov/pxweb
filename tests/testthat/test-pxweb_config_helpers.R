@@ -124,7 +124,9 @@ test_that("PXWEB config is normalized for v1 and v2 APIs", {
 
 test_that("PXWEB URL and RDA path S3 helpers support common input classes", {
   url <- "https://example.test:8443/api/v1/en/table"
+  query_url <- "https://example.test:8443/api/v1/en/table?lang=en&outputFormat=json-stat2"
   parsed <- parse_url_or_fail(url)
+  parsed_query_url <- parse_url_or_fail(query_url)
   px <- structure(
     list(
       url = parsed,
@@ -142,11 +144,13 @@ test_that("PXWEB URL and RDA path S3 helpers support common input classes", {
 
   expect_equal(pxweb:::build_pxweb_url(url), url)
   expect_equal(pxweb:::build_pxweb_url(list(url = parsed)), url)
+  expect_equal(pxweb:::build_pxweb_url(parsed_query_url), query_url)
   expect_equal(pxweb:::build_pxweb_url(px), url)
   expect_equal(pxweb:::build_pxweb_url(entry), "https://example.test/api/v1/en")
   expect_equal(pxweb:::build_pxweb_config_url(px), paste0(url, "?config"))
+  expect_equal(pxweb:::build_pxweb_config_url(parsed_query_url), paste0(url, "?config"))
   expect_equal(
-    pxweb:::build_pxweb_config_url(parse_url_or_fail("https://example.test/api/v2/tables/TAB1/metadata")),
+    pxweb:::build_pxweb_config_url(parse_url_or_fail("https://example.test/api/v2/tables/TAB1/metadata?lang=en")),
     "https://example.test/api/v2/config"
   )
 

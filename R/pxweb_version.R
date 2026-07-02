@@ -67,6 +67,7 @@ build_pxweb_v2_tables_url <- function(x) {
     stop("Cannot build v2 tables url for input.", call. = FALSE)
   }
   u$path <- paste(c(pxweb_v2_api_subpath(u, as_vector = TRUE), "tables"), collapse = "/")
+  u$query <- NULL
   build_pxweb_url(u)
 }
 

@@ -1,0 +1,1542 @@
+{
+    "version": "2.0",
+    "class": "dataset",
+    "label": "Folkmängden efter region, civilstånd, ålder och kön.  År 1968-2024",
+    "source": "SCB",
+    "updated": "2025-02-21T07:00:00Z",
+    "note": [
+        "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. ",
+        "Folkmängd år 1968–1982 redovisas enligt regional indelning 1983-01-01. Justeringar för att spegla indelningen 1983-01-01 har gjorts med hjälp av församlingsindelning men inte på fastighetsnivå vilket gör att det kan finnas brister i statistiken. Folkmängd år 1983 och framåt redovisas enligt regional indelning den 1 januari efterföljande år. \r\n \r\nFolkökning för år 1968–2009 definieras i denna tabell som skillnaden mellan folkmängden vid årets början och årets slut. Från år 2010 redovisas folkökningen enligt den indelning i administrativa områden som gällde den 1 januari innevarande år.",
+        "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar."
+    ],
+    "role": {
+        "time": [
+            "Tid"
+        ],
+        "metric": [
+            "ContentsCode"
+        ]
+    },
+    "id": [
+        "Region",
+        "Civilstand",
+        "Alder",
+        "Kon",
+        "ContentsCode",
+        "Tid"
+    ],
+    "size": [
+        312,
+        4,
+        102,
+        2,
+        2,
+        57
+    ],
+    "dimension": {
+        "Region": {
+            "label": "region",
+            "note": [
+                "År 1968–1998 redovisas enligt regional indelning 1998-01-01."
+            ],
+            "category": {
+                "index": {
+                    "00": 0,
+                    "01": 1,
+                    "0114": 2,
+                    "0115": 3,
+                    "0117": 4,
+                    "0120": 5,
+                    "0123": 6,
+                    "0125": 7,
+                    "0126": 8,
+                    "0127": 9,
+                    "0128": 10,
+                    "0136": 11,
+                    "0138": 12,
+                    "0139": 13,
+                    "0140": 14,
+                    "0160": 15,
+                    "0162": 16,
+                    "0163": 17,
+                    "0180": 18,
+                    "0181": 19,
+                    "0182": 20,
+                    "0183": 21,
+                    "0184": 22,
+                    "0186": 23,
+                    "0187": 24,
+                    "0188": 25,
+                    "0191": 26,
+                    "0192": 27,
+                    "03": 28,
+                    "0305": 29,
+                    "0319": 30,
+                    "0330": 31,
+                    "0331": 32,
+                    "0360": 33,
+                    "0380": 34,
+                    "0381": 35,
+                    "0382": 36,
+                    "04": 37,
+                    "0428": 38,
+                    "0461": 39,
+                    "0480": 40,
+                    "0481": 41,
+                    "0482": 42,
+                    "0483": 43,
+                    "0484": 44,
+                    "0486": 45,
+                    "0488": 46,
+                    "05": 47,
+                    "0509": 48,
+                    "0512": 49,
+                    "0513": 50,
+                    "0560": 51,
+                    "0561": 52,
+                    "0562": 53,
+                    "0563": 54,
+                    "0580": 55,
+                    "0581": 56,
+                    "0582": 57,
+                    "0583": 58,
+                    "0584": 59,
+                    "0586": 60,
+                    "06": 61,
+                    "0604": 62,
+                    "0617": 63,
+                    "0642": 64,
+                    "0643": 65,
+                    "0662": 66,
+                    "0665": 67,
+                    "0680": 68,
+                    "0682": 69,
+                    "0683": 70,
+                    "0684": 71,
+                    "0685": 72,
+                    "0686": 73,
+                    "0687": 74,
+                    "07": 75,
+                    "0760": 76,
+                    "0761": 77,
+                    "0763": 78,
+                    "0764": 79,
+                    "0765": 80,
+                    "0767": 81,
+                    "0780": 82,
+                    "0781": 83,
+                    "08": 84,
+                    "0821": 85,
+                    "0834": 86,
+                    "0840": 87,
+                    "0860": 88,
+                    "0861": 89,
+                    "0862": 90,
+                    "0880": 91,
+                    "0881": 92,
+                    "0882": 93,
+                    "0883": 94,
+                    "0884": 95,
+                    "0885": 96,
+                    "09": 97,
+                    "0980": 98,
+                    "10": 99,
+                    "1060": 100,
+                    "1080": 101,
+                    "1081": 102,
+                    "1082": 103,
+                    "1083": 104,
+                    "12": 105,
+                    "1214": 106,
+                    "1230": 107,
+                    "1231": 108,
+                    "1233": 109,
+                    "1256": 110,
+                    "1257": 111,
+                    "1260": 112,
+                    "1261": 113,
+                    "1262": 114,
+                    "1263": 115,
+                    "1264": 116,
+                    "1265": 117,
+                    "1266": 118,
+                    "1267": 119,
+                    "1270": 120,
+                    "1272": 121,
+                    "1273": 122,
+                    "1275": 123,
+                    "1276": 124,
+                    "1277": 125,
+                    "1278": 126,
+                    "1280": 127,
+                    "1281": 128,
+                    "1282": 129,
+                    "1283": 130,
+                    "1284": 131,
+                    "1285": 132,
+                    "1286": 133,
+                    "1287": 134,
+                    "1290": 135,
+                    "1291": 136,
+                    "1292": 137,
+                    "1293": 138,
+                    "13": 139,
+                    "1315": 140,
+                    "1380": 141,
+                    "1381": 142,
+                    "1382": 143,
+                    "1383": 144,
+                    "1384": 145,
+                    "14": 146,
+                    "1401": 147,
+                    "1402": 148,
+                    "1407": 149,
+                    "1415": 150,
+                    "1419": 151,
+                    "1421": 152,
+                    "1427": 153,
+                    "1430": 154,
+                    "1435": 155,
+                    "1438": 156,
+                    "1439": 157,
+                    "1440": 158,
+                    "1441": 159,
+                    "1442": 160,
+                    "1443": 161,
+                    "1444": 162,
+                    "1445": 163,
+                    "1446": 164,
+                    "1447": 165,
+                    "1452": 166,
+                    "1460": 167,
+                    "1461": 168,
+                    "1462": 169,
+                    "1463": 170,
+                    "1465": 171,
+                    "1466": 172,
+                    "1470": 173,
+                    "1471": 174,
+                    "1472": 175,
+                    "1473": 176,
+                    "1480": 177,
+                    "1481": 178,
+                    "1482": 179,
+                    "1484": 180,
+                    "1485": 181,
+                    "1486": 182,
+                    "1487": 183,
+                    "1488": 184,
+                    "1489": 185,
+                    "1490": 186,
+                    "1491": 187,
+                    "1492": 188,
+                    "1493": 189,
+                    "1494": 190,
+                    "1495": 191,
+                    "1496": 192,
+                    "1497": 193,
+                    "1498": 194,
+                    "1499": 195,
+                    "17": 196,
+                    "1715": 197,
+                    "1730": 198,
+                    "1737": 199,
+                    "1760": 200,
+                    "1761": 201,
+                    "1762": 202,
+                    "1763": 203,
+                    "1764": 204,
+                    "1765": 205,
+                    "1766": 206,
+                    "1780": 207,
+                    "1781": 208,
+                    "1782": 209,
+                    "1783": 210,
+                    "1784": 211,
+                    "1785": 212,
+                    "18": 213,
+                    "1814": 214,
+                    "1860": 215,
+                    "1861": 216,
+                    "1862": 217,
+                    "1863": 218,
+                    "1864": 219,
+                    "1880": 220,
+                    "1881": 221,
+                    "1882": 222,
+                    "1883": 223,
+                    "1884": 224,
+                    "1885": 225,
+                    "19": 226,
+                    "1904": 227,
+                    "1907": 228,
+                    "1960": 229,
+                    "1961": 230,
+                    "1962": 231,
+                    "1980": 232,
+                    "1981": 233,
+                    "1982": 234,
+                    "1983": 235,
+                    "1984": 236,
+                    "20": 237,
+                    "2021": 238,
+                    "2023": 239,
+                    "2026": 240,
+                    "2029": 241,
+                    "2031": 242,
+                    "2034": 243,
+                    "2039": 244,
+                    "2061": 245,
+                    "2062": 246,
+                    "2080": 247,
+                    "2081": 248,
+                    "2082": 249,
+                    "2083": 250,
+                    "2084": 251,
+                    "2085": 252,
+                    "21": 253,
+                    "2101": 254,
+                    "2104": 255,
+                    "2121": 256,
+                    "2132": 257,
+                    "2161": 258,
+                    "2180": 259,
+                    "2181": 260,
+                    "2182": 261,
+                    "2183": 262,
+                    "2184": 263,
+                    "22": 264,
+                    "2260": 265,
+                    "2262": 266,
+                    "2280": 267,
+                    "2281": 268,
+                    "2282": 269,
+                    "2283": 270,
+                    "2284": 271,
+                    "23": 272,
+                    "2303": 273,
+                    "2305": 274,
+                    "2309": 275,
+                    "2313": 276,
+                    "2321": 277,
+                    "2326": 278,
+                    "2361": 279,
+                    "2380": 280,
+                    "24": 281,
+                    "2401": 282,
+                    "2403": 283,
+                    "2404": 284,
+                    "2409": 285,
+                    "2417": 286,
+                    "2418": 287,
+                    "2421": 288,
+                    "2422": 289,
+                    "2425": 290,
+                    "2460": 291,
+                    "2462": 292,
+                    "2463": 293,
+                    "2480": 294,
+                    "2481": 295,
+                    "2482": 296,
+                    "25": 297,
+                    "2505": 298,
+                    "2506": 299,
+                    "2510": 300,
+                    "2513": 301,
+                    "2514": 302,
+                    "2518": 303,
+                    "2521": 304,
+                    "2523": 305,
+                    "2560": 306,
+                    "2580": 307,
+                    "2581": 308,
+                    "2582": 309,
+                    "2583": 310,
+                    "2584": 311
+                },
+                "label": {
+                    "00": "Riket",
+                    "01": "Stockholms län",
+                    "0114": "Upplands Väsby",
+                    "0115": "Vallentuna",
+                    "0117": "Österåker",
+                    "0120": "Värmdö",
+                    "0123": "Järfälla",
+                    "0125": "Ekerö",
+                    "0126": "Huddinge",
+                    "0127": "Botkyrka",
+                    "0128": "Salem",
+                    "0136": "Haninge",
+                    "0138": "Tyresö",
+                    "0139": "Upplands-Bro",
+                    "0140": "Nykvarn",
+                    "0160": "Täby",
+                    "0162": "Danderyd",
+                    "0163": "Sollentuna",
+                    "0180": "Stockholm",
+                    "0181": "Södertälje",
+                    "0182": "Nacka",
+                    "0183": "Sundbyberg",
+                    "0184": "Solna",
+                    "0186": "Lidingö",
+                    "0187": "Vaxholm",
+                    "0188": "Norrtälje",
+                    "0191": "Sigtuna",
+                    "0192": "Nynäshamn",
+                    "03": "Uppsala län",
+                    "0305": "Håbo",
+                    "0319": "Älvkarleby",
+                    "0330": "Knivsta",
+                    "0331": "Heby",
+                    "0360": "Tierp",
+                    "0380": "Uppsala",
+                    "0381": "Enköping",
+                    "0382": "Östhammar",
+                    "04": "Södermanlands län",
+                    "0428": "Vingåker",
+                    "0461": "Gnesta",
+                    "0480": "Nyköping",
+                    "0481": "Oxelösund",
+                    "0482": "Flen",
+                    "0483": "Katrineholm",
+                    "0484": "Eskilstuna",
+                    "0486": "Strängnäs",
+                    "0488": "Trosa",
+                    "05": "Östergötlands län",
+                    "0509": "Ödeshög",
+                    "0512": "Ydre",
+                    "0513": "Kinda",
+                    "0560": "Boxholm",
+                    "0561": "Åtvidaberg",
+                    "0562": "Finspång",
+                    "0563": "Valdemarsvik",
+                    "0580": "Linköping",
+                    "0581": "Norrköping",
+                    "0582": "Söderköping",
+                    "0583": "Motala",
+                    "0584": "Vadstena",
+                    "0586": "Mjölby",
+                    "06": "Jönköpings län",
+                    "0604": "Aneby",
+                    "0617": "Gnosjö",
+                    "0642": "Mullsjö",
+                    "0643": "Habo",
+                    "0662": "Gislaved",
+                    "0665": "Vaggeryd",
+                    "0680": "Jönköping",
+                    "0682": "Nässjö",
+                    "0683": "Värnamo",
+                    "0684": "Sävsjö",
+                    "0685": "Vetlanda",
+                    "0686": "Eksjö",
+                    "0687": "Tranås",
+                    "07": "Kronobergs län",
+                    "0760": "Uppvidinge",
+                    "0761": "Lessebo",
+                    "0763": "Tingsryd",
+                    "0764": "Alvesta",
+                    "0765": "Älmhult",
+                    "0767": "Markaryd",
+                    "0780": "Växjö",
+                    "0781": "Ljungby",
+                    "08": "Kalmar län",
+                    "0821": "Högsby",
+                    "0834": "Torsås",
+                    "0840": "Mörbylånga",
+                    "0860": "Hultsfred",
+                    "0861": "Mönsterås",
+                    "0862": "Emmaboda",
+                    "0880": "Kalmar",
+                    "0881": "Nybro",
+                    "0882": "Oskarshamn",
+                    "0883": "Västervik",
+                    "0884": "Vimmerby",
+                    "0885": "Borgholm",
+                    "09": "Gotlands län",
+                    "0980": "Gotland",
+                    "10": "Blekinge län",
+                    "1060": "Olofström",
+                    "1080": "Karlskrona",
+                    "1081": "Ronneby",
+                    "1082": "Karlshamn",
+                    "1083": "Sölvesborg",
+                    "12": "Skåne län",
+                    "1214": "Svalöv",
+                    "1230": "Staffanstorp",
+                    "1231": "Burlöv",
+                    "1233": "Vellinge",
+                    "1256": "Östra Göinge",
+                    "1257": "Örkelljunga",
+                    "1260": "Bjuv",
+                    "1261": "Kävlinge",
+                    "1262": "Lomma",
+                    "1263": "Svedala",
+                    "1264": "Skurup",
+                    "1265": "Sjöbo",
+                    "1266": "Hörby",
+                    "1267": "Höör",
+                    "1270": "Tomelilla",
+                    "1272": "Bromölla",
+                    "1273": "Osby",
+                    "1275": "Perstorp",
+                    "1276": "Klippan",
+                    "1277": "Åstorp",
+                    "1278": "Båstad",
+                    "1280": "Malmö",
+                    "1281": "Lund",
+                    "1282": "Landskrona",
+                    "1283": "Helsingborg",
+                    "1284": "Höganäs",
+                    "1285": "Eslöv",
+                    "1286": "Ystad",
+                    "1287": "Trelleborg",
+                    "1290": "Kristianstad",
+                    "1291": "Simrishamn",
+                    "1292": "Ängelholm",
+                    "1293": "Hässleholm",
+                    "13": "Hallands län",
+                    "1315": "Hylte",
+                    "1380": "Halmstad",
+                    "1381": "Laholm",
+                    "1382": "Falkenberg",
+                    "1383": "Varberg",
+                    "1384": "Kungsbacka",
+                    "14": "Västra Götalands län",
+                    "1401": "Härryda",
+                    "1402": "Partille",
+                    "1407": "Öckerö",
+                    "1415": "Stenungsund",
+                    "1419": "Tjörn",
+                    "1421": "Orust",
+                    "1427": "Sotenäs",
+                    "1430": "Munkedal",
+                    "1435": "Tanum",
+                    "1438": "Dals-Ed",
+                    "1439": "Färgelanda",
+                    "1440": "Ale",
+                    "1441": "Lerum",
+                    "1442": "Vårgårda",
+                    "1443": "Bollebygd",
+                    "1444": "Grästorp",
+                    "1445": "Essunga",
+                    "1446": "Karlsborg",
+                    "1447": "Gullspång",
+                    "1452": "Tranemo",
+                    "1460": "Bengtsfors",
+                    "1461": "Mellerud",
+                    "1462": "Lilla Edet",
+                    "1463": "Mark",
+                    "1465": "Svenljunga",
+                    "1466": "Herrljunga",
+                    "1470": "Vara",
+                    "1471": "Götene",
+                    "1472": "Tibro",
+                    "1473": "Töreboda",
+                    "1480": "Göteborg",
+                    "1481": "Mölndal",
+                    "1482": "Kungälv",
+                    "1484": "Lysekil",
+                    "1485": "Uddevalla",
+                    "1486": "Strömstad",
+                    "1487": "Vänersborg",
+                    "1488": "Trollhättan",
+                    "1489": "Alingsås",
+                    "1490": "Borås",
+                    "1491": "Ulricehamn",
+                    "1492": "Åmål",
+                    "1493": "Mariestad",
+                    "1494": "Lidköping",
+                    "1495": "Skara",
+                    "1496": "Skövde",
+                    "1497": "Hjo",
+                    "1498": "Tidaholm",
+                    "1499": "Falköping",
+                    "17": "Värmlands län",
+                    "1715": "Kil",
+                    "1730": "Eda",
+                    "1737": "Torsby",
+                    "1760": "Storfors",
+                    "1761": "Hammarö",
+                    "1762": "Munkfors",
+                    "1763": "Forshaga",
+                    "1764": "Grums",
+                    "1765": "Årjäng",
+                    "1766": "Sunne",
+                    "1780": "Karlstad",
+                    "1781": "Kristinehamn",
+                    "1782": "Filipstad",
+                    "1783": "Hagfors",
+                    "1784": "Arvika",
+                    "1785": "Säffle",
+                    "18": "Örebro län",
+                    "1814": "Lekeberg",
+                    "1860": "Laxå",
+                    "1861": "Hallsberg",
+                    "1862": "Degerfors",
+                    "1863": "Hällefors",
+                    "1864": "Ljusnarsberg",
+                    "1880": "Örebro",
+                    "1881": "Kumla",
+                    "1882": "Askersund",
+                    "1883": "Karlskoga",
+                    "1884": "Nora",
+                    "1885": "Lindesberg",
+                    "19": "Västmanlands län",
+                    "1904": "Skinnskatteberg",
+                    "1907": "Surahammar",
+                    "1960": "Kungsör",
+                    "1961": "Hallstahammar",
+                    "1962": "Norberg",
+                    "1980": "Västerås",
+                    "1981": "Sala",
+                    "1982": "Fagersta",
+                    "1983": "Köping",
+                    "1984": "Arboga",
+                    "20": "Dalarnas län",
+                    "2021": "Vansbro",
+                    "2023": "Malung-Sälen",
+                    "2026": "Gagnef",
+                    "2029": "Leksand",
+                    "2031": "Rättvik",
+                    "2034": "Orsa",
+                    "2039": "Älvdalen",
+                    "2061": "Smedjebacken",
+                    "2062": "Mora",
+                    "2080": "Falun",
+                    "2081": "Borlänge",
+                    "2082": "Säter",
+                    "2083": "Hedemora",
+                    "2084": "Avesta",
+                    "2085": "Ludvika",
+                    "21": "Gävleborgs län",
+                    "2101": "Ockelbo",
+                    "2104": "Hofors",
+                    "2121": "Ovanåker",
+                    "2132": "Nordanstig",
+                    "2161": "Ljusdal",
+                    "2180": "Gävle",
+                    "2181": "Sandviken",
+                    "2182": "Söderhamn",
+                    "2183": "Bollnäs",
+                    "2184": "Hudiksvall",
+                    "22": "Västernorrlands län",
+                    "2260": "Ånge",
+                    "2262": "Timrå",
+                    "2280": "Härnösand",
+                    "2281": "Sundsvall",
+                    "2282": "Kramfors",
+                    "2283": "Sollefteå",
+                    "2284": "Örnsköldsvik",
+                    "23": "Jämtlands län",
+                    "2303": "Ragunda",
+                    "2305": "Bräcke",
+                    "2309": "Krokom",
+                    "2313": "Strömsund",
+                    "2321": "Åre",
+                    "2326": "Berg",
+                    "2361": "Härjedalen",
+                    "2380": "Östersund",
+                    "24": "Västerbottens län",
+                    "2401": "Nordmaling",
+                    "2403": "Bjurholm",
+                    "2404": "Vindeln",
+                    "2409": "Robertsfors",
+                    "2417": "Norsjö",
+                    "2418": "Malå",
+                    "2421": "Storuman",
+                    "2422": "Sorsele",
+                    "2425": "Dorotea",
+                    "2460": "Vännäs",
+                    "2462": "Vilhelmina",
+                    "2463": "Åsele",
+                    "2480": "Umeå",
+                    "2481": "Lycksele",
+                    "2482": "Skellefteå",
+                    "25": "Norrbottens län",
+                    "2505": "Arvidsjaur",
+                    "2506": "Arjeplog",
+                    "2510": "Jokkmokk",
+                    "2513": "Överkalix",
+                    "2514": "Kalix",
+                    "2518": "Övertorneå",
+                    "2521": "Pajala",
+                    "2523": "Gällivare",
+                    "2560": "Älvsbyn",
+                    "2580": "Luleå",
+                    "2581": "Piteå",
+                    "2582": "Boden",
+                    "2583": "Haparanda",
+                    "2584": "Kiruna"
+                },
+                "note": {
+                    "0140": [
+                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140).",
+                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (0181) bildar en ny kommun benämnd Nykvarn (0140)."
+                    ],
+                    "0181": [
+                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140).",
+                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (0181) bildar en ny kommun benämnd Nykvarn (0140)."
+                    ],
+                    "0186": [
+                        "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+                    ],
+                    "0187": [
+                        "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+                    ],
+                    "0330": [
+                        "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun (0380) bildar en ny kommun benämnd Knivsta kommun (0330)."
+                    ],
+                    "0380": [
+                        "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun (0380) bildar en ny kommun benämnd Knivsta kommun (0330)."
+                    ],
+                    "0461": [
+                        "Ny regional indelning fr.o.m. 1992-01-01. Delar av Nyköpings kommun (0480) bildar en ny kommun benämnd Gnesta kommun (0461)."
+                    ],
+                    "0480": [
+                        "Ny regional indelning fr.o.m. 1992-01-01. Delar av Nyköpings kommun (0480) bildar två nya kommuner benämnda Gnesta kommun (0461) och Trosa kommun (0488)."
+                    ],
+                    "0488": [
+                        "Ny regional indelning fr.o.m. 1992-01-01. Delar av Nyköpings kommun (0480) bildar en ny kommun benämnd Trosa kommun (0488)."
+                    ],
+                    "1443": [
+                        "Ny regional indelning fr.o.m. 1995-01-01. Delar av Borås kommun (1583) bildar en ny kommun benämnd Bollebygds kommun (1535)."
+                    ],
+                    "1490": [
+                        "Ny regional indelning fr.o.m. 1995-01-01. Delar av Borås kommun (1583) bildar en ny kommun benämnd Bollebygds kommun (1535)."
+                    ],
+                    "1814": [
+                        "Ny regional indelning fr.o.m. 1995-01-01. Delar av Örebro kommun (1880) bildar en ny kommun benämnd Lekebergs kommun (1814)."
+                    ],
+                    "1880": [
+                        "Ny regional indelning fr.o.m. 1995-01-01. Delar av Örebro kommun (1880) bildar en ny kommun benämnd Lekebergs kommun (1814)."
+                    ]
+                }
+            },
+            "extension": {
+                "elimination": true,
+                "categoryNoteMandatory": {
+                    "0140": {
+                        "1": true
+                    },
+                    "0181": {
+                        "1": true
+                    },
+                    "0186": {
+                        "0": true
+                    },
+                    "0187": {
+                        "0": true
+                    },
+                    "0330": {
+                        "0": true
+                    },
+                    "0380": {
+                        "0": true
+                    },
+                    "0461": {
+                        "0": true
+                    },
+                    "0480": {
+                        "0": true
+                    },
+                    "0488": {
+                        "0": true
+                    },
+                    "1443": {
+                        "0": true
+                    },
+                    "1490": {
+                        "0": true
+                    },
+                    "1814": {
+                        "0": true
+                    },
+                    "1880": {
+                        "0": true
+                    }
+                },
+                "show": "code_value",
+                "codelists": [
+                    {
+                        "id": "agg_RegionA-region_2",
+                        "label": "A-regioner",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionA-region_2?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionKommungrupp2005-_1",
+                        "label": "Kommungrupper (SKL:s) 2005",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionKommungrupp2005-_1?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionKommungrupp2011-",
+                        "label": "Kommungrupper (SKL:s) 2011",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionKommungrupp2011-?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionKommungrupp2017-",
+                        "label": "Kommungrupper (SKL:s) 2017",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionKommungrupp2017-?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionKommungrupp2023-",
+                        "label": "Kommungrupper (SKR:s) 2023",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionKommungrupp2023-?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionLA1998",
+                        "label": "Lokala arbetsmarknader 1998",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionLA1998?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionLA2003_1",
+                        "label": "Lokala arbetsmarknader 2003",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionLA2003_1?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionLA2008",
+                        "label": "Lokala arbetsmarknader 2008",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionLA2008?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionLA2013",
+                        "label": "Lokala arbetsmarknader 2013",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionLA2013?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionLA2018",
+                        "label": "Lokala arbetsmarknader 2018",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionLA2018?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionNUTS1_2008",
+                        "label": "NUTS1 fr.o.m. 2008",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionNUTS1_2008?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionNUTS2_2008",
+                        "label": "NUTS2 fr.o.m. 2008",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionNUTS2_2008?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionNUTS3_2008",
+                        "label": "NUTS3 fr.o.m. 2008",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionNUTS3_2008?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionStoromr-04_2",
+                        "label": "Storstadsområden -2004",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionStoromr-04_2?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_RegionStoromr05-_1",
+                        "label": "Storstadsområden 2005-",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_RegionStoromr05-_1?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "vs_RegionKommun07",
+                        "label": "Kommuner",
+                        "type": "Valueset",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/vs_RegionKommun07?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "vs_RegionLän07",
+                        "label": "Län",
+                        "type": "Valueset",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/vs_RegionLän07?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "vs_RegionRiket99",
+                        "label": "Riket",
+                        "type": "Valueset",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/vs_RegionRiket99?lang=sv"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "Civilstand": {
+            "label": "civilstånd",
+            "category": {
+                "index": {
+                    "OG": 0,
+                    "G": 1,
+                    "SK": 2,
+                    "ÄNKL": 3
+                },
+                "label": {
+                    "OG": "ogifta",
+                    "G": "gifta",
+                    "SK": "skilda",
+                    "ÄNKL": "änkor/änklingar"
+                }
+            },
+            "extension": {
+                "elimination": true,
+                "show": "value",
+                "codelists": [
+
+                ]
+            }
+        },
+        "Alder": {
+            "label": "ålder",
+            "category": {
+                "index": {
+                    "0": 0,
+                    "1": 1,
+                    "2": 2,
+                    "3": 3,
+                    "4": 4,
+                    "5": 5,
+                    "6": 6,
+                    "7": 7,
+                    "8": 8,
+                    "9": 9,
+                    "10": 10,
+                    "11": 11,
+                    "12": 12,
+                    "13": 13,
+                    "14": 14,
+                    "15": 15,
+                    "16": 16,
+                    "17": 17,
+                    "18": 18,
+                    "19": 19,
+                    "20": 20,
+                    "21": 21,
+                    "22": 22,
+                    "23": 23,
+                    "24": 24,
+                    "25": 25,
+                    "26": 26,
+                    "27": 27,
+                    "28": 28,
+                    "29": 29,
+                    "30": 30,
+                    "31": 31,
+                    "32": 32,
+                    "33": 33,
+                    "34": 34,
+                    "35": 35,
+                    "36": 36,
+                    "37": 37,
+                    "38": 38,
+                    "39": 39,
+                    "40": 40,
+                    "41": 41,
+                    "42": 42,
+                    "43": 43,
+                    "44": 44,
+                    "45": 45,
+                    "46": 46,
+                    "47": 47,
+                    "48": 48,
+                    "49": 49,
+                    "50": 50,
+                    "51": 51,
+                    "52": 52,
+                    "53": 53,
+                    "54": 54,
+                    "55": 55,
+                    "56": 56,
+                    "57": 57,
+                    "58": 58,
+                    "59": 59,
+                    "60": 60,
+                    "61": 61,
+                    "62": 62,
+                    "63": 63,
+                    "64": 64,
+                    "65": 65,
+                    "66": 66,
+                    "67": 67,
+                    "68": 68,
+                    "69": 69,
+                    "70": 70,
+                    "71": 71,
+                    "72": 72,
+                    "73": 73,
+                    "74": 74,
+                    "75": 75,
+                    "76": 76,
+                    "77": 77,
+                    "78": 78,
+                    "79": 79,
+                    "80": 80,
+                    "81": 81,
+                    "82": 82,
+                    "83": 83,
+                    "84": 84,
+                    "85": 85,
+                    "86": 86,
+                    "87": 87,
+                    "88": 88,
+                    "89": 89,
+                    "90": 90,
+                    "91": 91,
+                    "92": 92,
+                    "93": 93,
+                    "94": 94,
+                    "95": 95,
+                    "96": 96,
+                    "97": 97,
+                    "98": 98,
+                    "99": 99,
+                    "100+": 100,
+                    "tot": 101
+                },
+                "label": {
+                    "0": "0 år",
+                    "1": "1 år",
+                    "2": "2 år",
+                    "3": "3 år",
+                    "4": "4 år",
+                    "5": "5 år",
+                    "6": "6 år",
+                    "7": "7 år",
+                    "8": "8 år",
+                    "9": "9 år",
+                    "10": "10 år",
+                    "11": "11 år",
+                    "12": "12 år",
+                    "13": "13 år",
+                    "14": "14 år",
+                    "15": "15 år",
+                    "16": "16 år",
+                    "17": "17 år",
+                    "18": "18 år",
+                    "19": "19 år",
+                    "20": "20 år",
+                    "21": "21 år",
+                    "22": "22 år",
+                    "23": "23 år",
+                    "24": "24 år",
+                    "25": "25 år",
+                    "26": "26 år",
+                    "27": "27 år",
+                    "28": "28 år",
+                    "29": "29 år",
+                    "30": "30 år",
+                    "31": "31 år",
+                    "32": "32 år",
+                    "33": "33 år",
+                    "34": "34 år",
+                    "35": "35 år",
+                    "36": "36 år",
+                    "37": "37 år",
+                    "38": "38 år",
+                    "39": "39 år",
+                    "40": "40 år",
+                    "41": "41 år",
+                    "42": "42 år",
+                    "43": "43 år",
+                    "44": "44 år",
+                    "45": "45 år",
+                    "46": "46 år",
+                    "47": "47 år",
+                    "48": "48 år",
+                    "49": "49 år",
+                    "50": "50 år",
+                    "51": "51 år",
+                    "52": "52 år",
+                    "53": "53 år",
+                    "54": "54 år",
+                    "55": "55 år",
+                    "56": "56 år",
+                    "57": "57 år",
+                    "58": "58 år",
+                    "59": "59 år",
+                    "60": "60 år",
+                    "61": "61 år",
+                    "62": "62 år",
+                    "63": "63 år",
+                    "64": "64 år",
+                    "65": "65 år",
+                    "66": "66 år",
+                    "67": "67 år",
+                    "68": "68 år",
+                    "69": "69 år",
+                    "70": "70 år",
+                    "71": "71 år",
+                    "72": "72 år",
+                    "73": "73 år",
+                    "74": "74 år",
+                    "75": "75 år",
+                    "76": "76 år",
+                    "77": "77 år",
+                    "78": "78 år",
+                    "79": "79 år",
+                    "80": "80 år",
+                    "81": "81 år",
+                    "82": "82 år",
+                    "83": "83 år",
+                    "84": "84 år",
+                    "85": "85 år",
+                    "86": "86 år",
+                    "87": "87 år",
+                    "88": "88 år",
+                    "89": "89 år",
+                    "90": "90 år",
+                    "91": "91 år",
+                    "92": "92 år",
+                    "93": "93 år",
+                    "94": "94 år",
+                    "95": "95 år",
+                    "96": "96 år",
+                    "97": "97 år",
+                    "98": "98 år",
+                    "99": "99 år",
+                    "100+": "100+ år",
+                    "tot": "totalt ålder"
+                }
+            },
+            "extension": {
+                "elimination": true,
+                "show": "value",
+                "codelists": [
+                    {
+                        "id": "agg_Ålder10årJ",
+                        "label": "10-årsklasser",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_Ålder10årJ?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "agg_Ålder5år",
+                        "label": "5-årsklasser",
+                        "type": "Aggregation",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/agg_Ålder5år?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "vs_Ålder1årA",
+                        "label": "Ålder, 1 års-klasser",
+                        "type": "Valueset",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/vs_Ålder1årA?lang=sv"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "vs_ÅlderTotA",
+                        "label": "Ålder, totalt, alla redovisade åldrar",
+                        "type": "Valueset",
+                        "links": [
+                            {
+                                "rel": "metadata",
+                                "hreflang": "sv",
+                                "href": "https://statistikdatabasen.scb.se/api/v2/codeLists/vs_ÅlderTotA?lang=sv"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "link": {
+                "describedby": [
+                    {
+                        "extension": {
+                            "Alder": "Ålder  "
+                        }
+                    }
+                ]
+            }
+        },
+        "Kon": {
+            "label": "kön",
+            "category": {
+                "index": {
+                    "1": 0,
+                    "2": 1
+                },
+                "label": {
+                    "1": "män",
+                    "2": "kvinnor"
+                }
+            },
+            "extension": {
+                "elimination": true,
+                "show": "value",
+                "codelists": [
+
+                ]
+            },
+            "link": {
+                "describedby": [
+                    {
+                        "extension": {
+                            "Kon": "Kön"
+                        }
+                    }
+                ]
+            }
+        },
+        "ContentsCode": {
+            "label": "tabellinnehåll",
+            "category": {
+                "index": {
+                    "BE0101N1": 0,
+                    "BE0101N2": 1
+                },
+                "label": {
+                    "BE0101N1": "Folkmängd",
+                    "BE0101N2": "Folkökning"
+                },
+                "note": {
+                    "BE0101N2": [
+                        "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."
+                    ]
+                },
+                "unit": {
+                    "BE0101N1": {
+                        "base": "antal personer",
+                        "decimals": 0
+                    },
+                    "BE0101N2": {
+                        "base": "antal personer",
+                        "decimals": 0
+                    }
+                }
+            },
+            "extension": {
+                "elimination": false,
+                "categoryNoteMandatory": {
+                    "BE0101N2": {
+                        "0": true
+                    }
+                },
+                "refperiod": {
+                    "BE0101N1": "31 december respektive år",
+                    "BE0101N2": ""
+                },
+                "show": "value",
+                "codelists": [
+
+                ],
+                "measuringType": {
+                    "BE0101N1": "Stock",
+                    "BE0101N2": "Flow"
+                },
+                "priceType": {
+                    "BE0101N1": "NotApplicable",
+                    "BE0101N2": "NotApplicable"
+                },
+                "adjustment": {
+                    "BE0101N1": "None",
+                    "BE0101N2": "None"
+                },
+                "alternativeText": {
+                    "BE0101N1": "Folkmängd",
+                    "BE0101N2": "Folkökning"
+                }
+            }
+        },
+        "Tid": {
+            "label": "år",
+            "category": {
+                "index": {
+                    "1968": 0,
+                    "1969": 1,
+                    "1970": 2,
+                    "1971": 3,
+                    "1972": 4,
+                    "1973": 5,
+                    "1974": 6,
+                    "1975": 7,
+                    "1976": 8,
+                    "1977": 9,
+                    "1978": 10,
+                    "1979": 11,
+                    "1980": 12,
+                    "1981": 13,
+                    "1982": 14,
+                    "1983": 15,
+                    "1984": 16,
+                    "1985": 17,
+                    "1986": 18,
+                    "1987": 19,
+                    "1988": 20,
+                    "1989": 21,
+                    "1990": 22,
+                    "1991": 23,
+                    "1992": 24,
+                    "1993": 25,
+                    "1994": 26,
+                    "1995": 27,
+                    "1996": 28,
+                    "1997": 29,
+                    "1998": 30,
+                    "1999": 31,
+                    "2000": 32,
+                    "2001": 33,
+                    "2002": 34,
+                    "2003": 35,
+                    "2004": 36,
+                    "2005": 37,
+                    "2006": 38,
+                    "2007": 39,
+                    "2008": 40,
+                    "2009": 41,
+                    "2010": 42,
+                    "2011": 43,
+                    "2012": 44,
+                    "2013": 45,
+                    "2014": 46,
+                    "2015": 47,
+                    "2016": 48,
+                    "2017": 49,
+                    "2018": 50,
+                    "2019": 51,
+                    "2020": 52,
+                    "2021": 53,
+                    "2022": 54,
+                    "2023": 55,
+                    "2024": 56
+                },
+                "label": {
+                    "1968": "1968",
+                    "1969": "1969",
+                    "1970": "1970",
+                    "1971": "1971",
+                    "1972": "1972",
+                    "1973": "1973",
+                    "1974": "1974",
+                    "1975": "1975",
+                    "1976": "1976",
+                    "1977": "1977",
+                    "1978": "1978",
+                    "1979": "1979",
+                    "1980": "1980",
+                    "1981": "1981",
+                    "1982": "1982",
+                    "1983": "1983",
+                    "1984": "1984",
+                    "1985": "1985",
+                    "1986": "1986",
+                    "1987": "1987",
+                    "1988": "1988",
+                    "1989": "1989",
+                    "1990": "1990",
+                    "1991": "1991",
+                    "1992": "1992",
+                    "1993": "1993",
+                    "1994": "1994",
+                    "1995": "1995",
+                    "1996": "1996",
+                    "1997": "1997",
+                    "1998": "1998",
+                    "1999": "1999",
+                    "2000": "2000",
+                    "2001": "2001",
+                    "2002": "2002",
+                    "2003": "2003",
+                    "2004": "2004",
+                    "2005": "2005",
+                    "2006": "2006",
+                    "2007": "2007",
+                    "2008": "2008",
+                    "2009": "2009",
+                    "2010": "2010",
+                    "2011": "2011",
+                    "2012": "2012",
+                    "2013": "2013",
+                    "2014": "2014",
+                    "2015": "2015",
+                    "2016": "2016",
+                    "2017": "2017",
+                    "2018": "2018",
+                    "2019": "2019",
+                    "2020": "2020",
+                    "2021": "2021",
+                    "2022": "2022",
+                    "2023": "2023",
+                    "2024": "2024"
+                }
+            },
+            "extension": {
+                "elimination": false,
+                "show": "code",
+                "codelists": [
+
+                ]
+            }
+        }
+    },
+    "extension": {
+        "noteMandatory": {
+            "0": true,
+            "1": true,
+            "2": true
+        },
+        "px": {
+            "infofile": "BE0101",
+            "tableid": "TAB638",
+            "decimals": 0,
+            "official-statistics": true,
+            "aggregallowed": true,
+            "copyright": false,
+            "language": "sv",
+            "contents": "Folkmängden",
+            "descriptiondefault": false,
+            "heading": [
+                "ContentsCode",
+                "Tid"
+            ],
+            "stub": [
+                "Region",
+                "Civilstand",
+                "Alder",
+                "Kon"
+            ],
+            "matrix": "TAB638",
+            "subject-code": "BE",
+            "subject-area": "Befolkning"
+        },
+        "contact": [
+            {
+                "name": "Statistikservice",
+                "organization": "SCB",
+                "phone": "010-479 50 00",
+                "mail": "information@scb.se",
+                "raw": " Statistikservice, SCB# +46 010-479 50 00#information@scb.se"
+            }
+        ]
+    },
+    "value": [
+
+    ]
+}
