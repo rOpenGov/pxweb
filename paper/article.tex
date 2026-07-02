@@ -475,38 +475,20 @@ The request contains 967,176 cells and is split by \pkg{pxweb} into seven API ca
 \section{Discussion}
 \label{sec:discussion}
 
-The \pkg{pxweb} package provides access to official statistics shared
-through PX-Web APIs. It supports the full workflow from API discovery
-and metadata inspection to query construction, retrieval, conversion,
-comments, codelists, and citation. In doing so, it helps users move
-from interactive table browsing to scripted, transparent, and
-reproducible statistical workflows.
+The \pkg{pxweb} package provides access to official statistics shared through PX-Web APIs.
+It supports the full workflow from API discovery and metadata inspection to query construction, retrieval, conversion, comments, codelists, and citation.
+In doing so, it helps users move from interactive table browsing to scripted, transparent, and reproducible statistical workflows.
 
-The package has matured through active development since its first CRAN
-release in 2014, including major redesigns in 2018 and 2026 and recent
-support for PX-Web API version 2. As an indication of use, CRAN download
-logs report 116,074 downloads between January 2014 and June 2026
-\citep{CranlogsPxweb2026}. The package is also used directly in
-research, for instance in work on electronic gambling machines and
-socioeconomic status \citep{Raisamo2019}, income-inequality data
-construction \citep{Solt2019}, trends in youth serious violence
-\citep{Tanskanen2026}, and radiation-dose modeling after the Chernobyl
-nuclear power plant accident \citep{Tondel2025}.
+The package has matured through active development since its first CRAN release in 2014, including major redesigns in 2018 and 2026 and recent support for PX-Web API version 2.
+As an indication of use, CRAN download logs report 116,164 downloads between January 2014 and June 2026 \citep{CranlogsPxweb2026}.
+The package is also used directly in research, for instance in work on electronic gambling machines and socioeconomic status \citep{Raisamo2019}, income-inequality data construction \citep{Solt2019}, trends in youth serious violence \citep{Tanskanen2026}, and radiation-dose modeling after the Chernobyl nuclear power plant accident \citep{Tondel2025}.
 
-Several limitations remain. PX-Web installations differ across
-providers, provider-side query limits and rate limits vary, and
-APIs can change independently of the package. These issues motivate the
-package's emphasis on metadata validation, request splitting, test
-fixtures, and optional live tests. They also mean that support for
-PX-Web API version 2 must distinguish between generic API behavior and
-metadata conventions that are provider-specific.
+Several limitations remain. PX-Web installations differ across providers, provider-side query limits and rate limits vary, and APIs can change independently of the package.
+These issues motivate the package's emphasis on metadata validation, request splitting, test fixtures, and extensive testing.
+They also mean that support for PX-Web API version 2 must distinguish between generic API behavior and metadata conventions that are provider-specific.
 
-More broadly, \pkg{pxweb} contributes to the open data science ecosystem
-\citep{Lahti2018IDA} by making official statistics easier to retrieve,
-document, and reuse in \proglang{R}. The package does not replace
-provider documentation or local domain knowledge, but it gives
-researchers, public-sector analysts, educators, and civic users a common
-programmatic interface to a widely used dissemination infrastructure.
+More broadly, \pkg{pxweb} contributes to the open data science ecosystem \citep{Lahti2018IDA} by making official statistics easier to retrieve, document, and reuse in \proglang{R}.
+The package does not replace provider documentation or domain knowledge, but it gives researchers, public-sector analysts, educators, and civic users a common programmatic interface to a widely used dissemination infrastructure.
 
 \appendix
 \section{Bundled API Catalogue}
