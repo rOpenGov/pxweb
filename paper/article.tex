@@ -305,15 +305,15 @@ Version 2 APIs may also expose aggregation codelists and value sets, which can b
 
 \begin{Code}
 meta <- pxweb_get(url)
-pxweb_codelists(meta, variable = "Alder")
+pxweb_codelists(meta, variable = "Alder")[, c("id", "type", "label")]
 \end{Code}
 
 \begin{CodeOutput}
-              id        type              label
-1 agg_Ålder10årJ Aggregation     10-årsklasser
-2   agg_Ålder5år Aggregation      5-årsklasser
-3   vs_Ålder1årA    Valueset Ålder, 1 års-klasser
-4   vs_ÅlderTotA    Valueset Ålder, totalt, ...
+              id        type                          label
+1 agg_Ålder10årJ Aggregation             ´10-year intervals
+2   agg_Ålder5år Aggregation               5-year intervals
+3   vs_Ålder1årA    Valueset        Age, 1 year age classes
+4   vs_ÅlderTotA    Valueset Age, total, all presented ages
 \end{CodeOutput}
 
 The codelist labels are provider-supplied.
