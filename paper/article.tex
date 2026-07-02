@@ -316,6 +316,9 @@ pxweb_codelists(meta, variable = "Alder")
 4   vs_ÅlderTotA    Valueset Ålder, totalt, ...
 \end{CodeOutput}
 
+The codelist labels are provider-supplied and are returned in Swedish for this table.
+Here, \code{ålder} means age, \code{10-årsklasser} and \code{5-årsklasser} mean 10- and 5-year age groups, \code{Ålder, 1 års-klasser} denotes single-year ages, and \code{Ålder, totalt, alla redovisade åldrar} denotes all reported ages.
+
 Queries can be written as named \proglang{R} lists and converted to \code{pxweb_query} objects when needed.
 For codelists, the \code{id} column returned by \code{pxweb_codelists()} is passed to helpers such as \code{pxweb_aggregation()} or \code{pxweb_valueset()}.
 Helper functions express common selection patterns such as all values, the latest time period, top or bottom selections, aggregations, and value sets.
@@ -401,6 +404,9 @@ variables:
  [[5]] ContentsCode: tabellinnehåll
  [[6]] Tid: år
 \end{CodeOutput}
+
+The metadata print method shows the labels returned by the provider, which for this table are partly Swedish.
+The title translates to ``Population by region, marital status, age and sex. Year 1968--2024''; the variable labels \code{civilstånd}, \code{ålder}, \code{kön}, \code{tabellinnehåll}, and \code{år} correspond to marital status, age, sex, content variable, and year.
 
 \begin{Code}
 years <- as.character(1968:2024)
