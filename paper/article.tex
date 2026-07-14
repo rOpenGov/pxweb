@@ -34,6 +34,12 @@ This article introduces the motivation and design of \pkg{pxweb}, outlines the s
 \newcommand{\CRANpkg}[1]{\pkg{#1}}
 \newcommand{\Cpkg}[1]{\pkg{#1}}
 
+%% Force references with very long author lists to always use the
+%% abbreviated "et al." citation form, avoiding fully spelled-out
+%% author lists on first in-text citation (natbib's longnamesfirst
+%% default, as used by jss.cls).
+\shortcites{tidyverse2019,PerezRiverol2016,Hakkarainen2026}
+
 %% publication information
 %% NOTE: Typically, this can be left commented and will be filled out by the technical editor
 %% \Volume{50}
@@ -90,15 +96,15 @@ Users also need software that can bridge the gap between online statistical data
 
 Dedicated software packages simplify, standardize, and automate analysis workflows.
 They take into account variations in raw data formats, access details, metadata conventions, and typical use cases so that users can avoid repetitive programming tasks and reduce the risk of misinterpretation and processing errors \citep{GrovesLyberg2010}.
-In \proglang{R}, several packages support programmatic data retrieval from specific sources \citep{Lahti17eurostat, osmar, WDI, pdfetch}, or more generic data types \citep{szocs2020webchem, caro2017intsvy}. The \pkg{rsdmx} package supports Statistical Data and Metadata eXchange (SDMX) standard, which is the most widely adopted alternative to PxWeb among statistical agencies \citep{willekens2023sdmx}. 
+In \proglang{R}, several packages support programmatic data retrieval from specific sources \citep{Lahti17eurostat, osmar, WDI}, broader compiled sources such as \pkg{pdfetch}, which provides access to economic and financial time-series data \citep{pdfetch}, or more generic data types \citep{szocs2020webchem, caro2017intsvy}. The \pkg{rsdmx} package \citep{rsdmx} supports the Statistical Data and Metadata eXchange (SDMX) standard, an alternative to PxWeb. 
 
-The \pkg{pxweb} package fills a complementary role: it provides a general \proglang{R} interface to databases exposed through the PxWeb API \citep{PxToolsPxWeb2Intro}.
+The \pkg{pxweb} package fills a complementary role: it provides a general \proglang{R} interface to databases exposed through the PxWeb application programming interface (API) \citep{PxToolsPxWeb2Intro}.
 The package can navigate PxWeb resources, fetch metadata, construct and validate queries, retrieve data, convert responses into standard \proglang{R} data structures, and produce citation and provenance information for the source data.
 As of version 1.0.0, the \pkg{pxweb} package includes 46 API catalogue entries and supports both PxWeb API version 1 and version 2.
 
 Data citation is another motivation for the package.
-Data reuse should document source organizations, accessed resources, version information, and retrieval times where possible but this faces many practical challenges \cite{Parsons2019}.
-The \pkg{pxweb} package helps standardize and streamnline this process for PxWeb data by collecting source information from the API and data objects and by encouraging users to cite both the retrieved data and the software used to retrieve them.
+Data reuse should document source organizations, accessed resources, version information, and retrieval times where possible but this faces many practical challenges \citep{Parsons2019}.
+The \pkg{pxweb} package helps standardize and streamline this process for PxWeb data by collecting source information from the API and data objects and by encouraging users to cite both the retrieved data and the software used to retrieve them.
 
 The package was first released on CRAN in 2014 and was substantially upgraded in 2018 and 2026.
 Recent development has added support for the PxWeb API version 2, including table search, JSON-stat2 responses, v2 metadata, codelists, value sets, aggregation helpers, and observation status comments.
@@ -109,8 +115,8 @@ The current package is part of the rOpenGov open data science project \citep{Lah
 
 PxWeb is a web application and API for disseminating PC-Axis statistical data \citep{PxToolsPxWeb2Intro}.
 PC-Axis data are typically organized as multidimensional tables with dimensions such as region, time, sex, age, indicator, or content variable.
-The PX software family is used by statistical producers, e.g. Statistics Sweden, Statistics Finland, and Statistics Norway \citep{SCBPxPrograms,StatisticsFinlandPxSuite,StatisticsNorwayAPI}.
-PxWeb exposes these data and their metadata through HTTP endpoints that can be explored interactively or accessed programmatically.
+The PX software family is used by statistical producers, e.g., Statistics Sweden, Statistics Finland, and Statistics Norway \citep{SCBPxPrograms,StatisticsFinlandPxSuite,StatisticsNorwayAPI}.
+PxWeb exposes these data and their metadata through hypertext transfer protocol (HTTP) endpoints that can be explored interactively or accessed programmatically.
 
 The PX/PC-Axis ecosystem predates current web PxWeb APIs.
 The PX file-format specification documents a metadata-and-data file structure and records core keywords such as \code{CONTENTS}, \code{DATA}, \code{MATRIX}, \code{STUB}, and \code{CODES} with introduction years going back to 1990 \citep{SCBPxFileFormat2013}.
@@ -137,7 +143,7 @@ The \pkg{pxweb} package therefore collects available provider configuration meta
 
 The \pkg{pxweb} package sits between general data-retrieval packages and source-specific official-statistics packages.
 Table~\ref{tab:related-software} summarizes the main distinctions.
-Whereas \pkg{pdfetch} provides access to broad economic and financial time-series sources \citep{pdfetch}, other packages support specific data providers such as Eurostat (\pkg{eurostat}) \citep{Lahti17eurostat}, World Bank (\pkg{WDI}) \citep{WDI}, or Open Street Map (\pkg{osmar}) \citep{osmar}, or generic data types, such as \pkg{webchem} \citep{szocs2020webchem}, \pkg{intsvy} \citep{caro2017intsvy} or data standards such as the Statistical Data and Metadata eXchange (SDMX) standard, which is the most widely adopted alternative to PxWeb among statistical agencies \citep{willekens2023sdmx} supported by the \pkg{rsdmx} package. In contrast, \pkg{pxweb} targets a shared API family used by multiple statistical organizations.
+Whereas \pkg{pdfetch} provides access to broad economic and financial time-series sources \citep{pdfetch}, other packages support specific data providers such as Eurostat (\pkg{eurostat}) \citep{Lahti17eurostat}, World Bank (\pkg{WDI}) \citep{WDI}, or Open Street Map (\pkg{osmar}) \citep{osmar}. Furthermore, there are packages supporting generic data types (e.g., \pkg{webchem} \citep{szocs2020webchem}, \pkg{intsvy} \citep{caro2017intsvy}) or data standards such as the Statistical Data and Metadata eXchange (SDMX) standard, which is the most widely adopted alternative to PxWeb among statistical agencies \citep{willekens2023sdmx} supported by the \pkg{rsdmx} package \citep{rsdmx}. In contrast, \pkg{pxweb} targets a shared API family used by multiple statistical organizations.
 
 The \pkg{pxweb} package targets web APIs, including metadata discovery, query validation, request splitting, and response parsing.
 File-oriented tools such as \pkg{pxR} address a related but different problem: reading and writing local \code{.px} files \citep{pxR}.
@@ -169,15 +175,14 @@ Provider-side PxWeb software &
 PxWeb &
 Publish the API endpoints consumed by \pkg{pxweb}\\
 SDMX-standard tools &
-\pkg{rsdmx} \citep{willekens2023sdmx} &
+\pkg{rsdmx} \citep{rsdmx} &
 Accessing data via SDMX standard, a popular alternative to PxWeb among statistical agencies\\
 Downstream domain packages &
 \pkg{geofi} &
 Can build specialized workflows on top of official-data access\\
 \hline
 \end{tabular}
-\caption{\label{tab:related-software}Related software and its relation
-to \pkg{pxweb}.}
+\caption{\label{tab:related-software}Related software and its relation to \pkg{pxweb}.}
 \end{table}
 
 
@@ -193,11 +198,37 @@ Its core design goal is to provide a stable \proglang{R} workflow across PxWeb p
 
 In version 1.0.0, the package interface has 39 exported functions, but ordinary analysis workflows are built from a smaller set of recommended functions.
 The central workflow is built around the \code{pxweb_get()} function, which retrieves hierarchy levels, table metadata, or table data depending on the supplied URL and query.
-The helper \code{pxweb_get_data()} wraps the same workflow and returns a \code{data.frame}; further utilities (e.g. \code{as.data.frame()}) are available to integrate the outputs directly with \pkg{tidyverse} workflows \citep{tidyverse2019} for subsequent filtering, reshaping, and visualization, allowing users to move seamlessly from data retrieval to tidy data analysis \cite{Wickham2014tidy}.
+The helper \code{pxweb_get_data()} wraps the same workflow and returns a \code{data.frame}; further utilities (e.g., \code{as.data.frame()}) are available to integrate the outputs directly with \pkg{tidyverse} workflows \citep{tidyverse2019} for subsequent filtering, reshaping, and visualization, allowing users to move seamlessly from data retrieval to tidy data analysis \citep{Wickham2014tidy} and the vast array of advanced statistical and probabilistic programming tools available through the \proglang{R} ecosystem.
 Query construction is handled by \code{pxweb_query()} together with helper functions such as \code{pxweb_all()}, \code{pxweb_latest()}, and \code{pxweb_aggregation()}.
 Table~\ref{tab:workflow-functions} summarizes the main user-facing functions and methods by their role in the recommended workflow.
 
-The package is licensed under the BSD-2-Clause (aka FreeBSD) license, supporting the use of permissive open source licenses on research software \citep{Morin2012}.
+The package is licensed under the BSD-2-Clause (aka FreeBSD) license, consistent with common practice for research software \citep{Morin2012}.
+
+
+
+Internally, the package represents API URLs, metadata, data, comments, and query objects with S3 classes.
+This allows common operations such as printing, validation, conversion with \code{as.data.frame()}, and combining split responses to behave consistently across API versions.
+The package uses \pkg{httr} for HTTP requests and \pkg{jsonlite} for JSON parsing \citep{httr,jsonlite}.
+
+The bundled API catalogue is a practical layer on top of the generic API client.
+It stores provider URL templates, available languages, version paths, aliases, and citation metadata.
+Users can rely on the catalogue for common providers or pass explicit PxWeb URLs for APIs that are not already bundled with the package.
+The current catalogue contains 46 entries covering national, regional, and international statistical resources; the complete list is given in Appendix~\ref{app:api-catalogue}.
+At the time of writing, the bundled catalogue entries point mainly to version 1 API paths; version 2 APIs can also be used by passing explicit PxWeb URLs.
+
+A central implementation detail is that user-supplied URLs are first converted into \code{pxweb} objects.
+The constructor parses the URL, detects whether the endpoint belongs to PxWeb API version 1 or version 2, retrieves provider configuration metadata, and stores call history in a temporary cache.
+Provider configuration is normalized into a common internal representation with the number of calls allowed per time window, the length of that time window, and the maximum number of downloadable values or cells.
+This lets the same retrieval workflow use version 1 \code{?config} responses and version 2 \code{/config} responses through a shared interface.
+
+Support for PxWeb API version 2 is expressed in the same top-level workflow as version 1 \citep{PxToolsPxWeb2Intro}.
+Version 2 tables use separate metadata and data endpoints and return JSON-stat2 by default.
+The \pkg{pxweb} package detects v2 URLs, builds the corresponding data endpoint, constructs the v2 query body, and adds query parameters for codelists and output values when needed.
+This keeps the user workflow broadly similar across API versions, even though the underlying endpoints and request details differ.
+
+For data requests, \code{pxweb_get()} first obtains table metadata, adds mandatory variables when needed, validates the query against the metadata, and computes any required batches before making data requests.
+Version 1 tables are queried with the table URL and a JSON request body, whereas version 2 tables use the corresponding \code{/tables/\{id\}/data} endpoint with version-specific query parameters such as language and output format.
+The returned pieces are parsed into package-specific S3 objects and combined when the response type supports it.
 
 \begin{table}[t!]
 \centering
@@ -233,30 +264,6 @@ Comments and citation &
 functions and methods grouped by their main role in the package
 workflow.}
 \end{table}
-
-Internally, the package represents API URLs, metadata, data, comments, and query objects with S3 classes.
-This allows common operations such as printing, validation, conversion with \code{as.data.frame()}, and combining split responses to behave consistently across API versions.
-The package uses \pkg{httr} for HTTP requests and \pkg{jsonlite} for JSON parsing \citep{httr,jsonlite}.
-
-The bundled API catalogue is a practical layer on top of the generic API client.
-It stores provider URL templates, available languages, version paths, aliases, and citation metadata.
-Users can rely on the catalogue for common providers or pass explicit PxWeb URLs for APIs that are not already bundled with the package.
-The current catalogue contains 46 entries covering national, regional, and international statistical resources; the complete list is given in Appendix~\ref{app:api-catalogue}.
-At the time of writing, the bundled catalogue entries point mainly to version 1 API paths; version 2 APIs can also be used by passing explicit PxWeb URLs.
-
-A central implementation detail is that user-supplied URLs are first converted into \code{pxweb} objects.
-The constructor parses the URL, detects whether the endpoint belongs to PxWeb API version 1 or version 2, retrieves provider configuration metadata, and stores call history in a temporary cache.
-Provider configuration is normalized into a common internal representation with the number of calls allowed per time window, the length of that time window, and the maximum number of downloadable values or cells.
-This lets the same retrieval workflow use version 1 \code{?config} responses and version 2 \code{/config} responses through a shared interface.
-
-Support for PxWeb API version 2 is expressed in the same top-level workflow as version 1 \citep{PxToolsPxWeb2Intro}.
-Version 2 tables use separate metadata and data endpoints and return JSON-stat2 by default.
-The \pkg{pxweb} package detects v2 URLs, builds the corresponding data endpoint, constructs the v2 query body, and adds query parameters for codelists and output values when needed.
-This keeps the user workflow broadly similar across API versions, even though the underlying endpoints and request details differ.
-
-For data requests, \code{pxweb_get()} first obtains table metadata, adds mandatory variables when needed, validates the query against the metadata, and computes any required batches before making data requests.
-Version 1 tables are queried with the table URL and a JSON request body, whereas version 2 tables use the corresponding \code{/tables/\{id\}/data} endpoint with version-specific query parameters such as language and output format.
-The returned pieces are parsed into package-specific S3 objects and combined when the response type supports it.
 
 Large queries can exceed provider-side limits.
 The batching procedure can be viewed as a constrained multidimensional query-partitioning heuristic.
@@ -346,7 +353,8 @@ px_query <- pxweb_query(query)
 \end{Code}
 
 Retrieval is handled by \code{pxweb_get()}.
-Users who want a \code{data.frame} directly can use \code{pxweb_get_data()}.
+Users who want a \code{data.frame} directly can instead use
+\code{pxweb_get_data()}.
 The same top-level workflow handles version 1 and version 2 URLs, constructs the appropriate request body, and splits large supported queries into batches when needed.
 
 \begin{Code}
@@ -520,7 +528,7 @@ In doing so, it helps users move from interactive table browsing to scripted, tr
 
 The package has matured through active development since its first CRAN release in 2014, including major redesigns in 2018 and 2026 and recent support for PxWeb API version 2.
 As an indication of use at the time of writing, CRAN download logs report 116,164 downloads between January 2014 and June 2026 \citep{CranlogsPxweb2026}.
-The package has found direct uses in research, for instance in work on electronic gambling machines and socioeconomic status \citep{raisamo2019density}, income-inequality data construction \citep{Solt2019}, trends in youth violence and mortality \citep{Tanskanen2026, Hakkarainen2026}, and radiation-dose modeling after the Chernobyl nuclear power plant accident \citep{Tondel2025}.
+The package has found direct uses in research, for instance in work on electronic gambling machines and socioeconomic status \citep{raisamo2019density}, income-inequality data construction \citep{Solt2019}, trends in youth violence and mortality \citep{Tanskanen2026, Hakkarainen2026}, radiation-dose modeling after the Chernobyl nuclear power plant accident \citep{Tondel2025}, and programmatic access to open statistical data for population studies \citep{willekens2023sdmx}.
 
 Several limitations remain.
 PxWeb installations differ across providers, provider-side query limits and rate limits vary, and APIs can change independently of the package.
