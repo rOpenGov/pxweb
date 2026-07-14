@@ -160,23 +160,20 @@ For example, the \pkg{hetu} \citep{Kantanen2025hetu} and \pkg{geofi} packages ad
 \small
 \begin{tabular}{p{0.25\textwidth}p{0.22\textwidth}p{0.43\textwidth}}
 \hline
-Software type & Examples & Relation to \pkg{pxweb}\\
+Software type & R packages & Relation to \pkg{pxweb}\\
 \hline
 Provider-specific data clients &
 \pkg{eurostat}, \pkg{WDI}, \pkg{osmar} &
 Focus on one data provider or data family rather than the PxWeb API family\\
-Generic data-retrieval tools &
+Generic data retrieval tools &
 \pkg{pdfetch}, \pkg{webchem}, \pkg{intsvy} &
 Retrieve broad data sources but do not target PxWeb metadata and query semantics\\
 PX/PC-Axis file tools &
 \pkg{pxR} &
-Work with local \code{.px} files rather than live PxWeb APIs\\
-Provider-side PxWeb software &
-PxWeb &
-Publish the API endpoints consumed by \pkg{pxweb}\\
+Work with local \code{.px} files\\
 SDMX-standard tools &
-\pkg{rsdmx} \citep{rsdmx} &
-Accessing data via SDMX standard, a popular alternative to PxWeb among statistical agencies\\
+\pkg{rsdmx} &
+Acces data via alternative SDMX standard.\\
 Downstream domain packages &
 \pkg{geofi} &
 Can build specialized workflows on top of official-data access\\
@@ -203,32 +200,6 @@ Query construction is handled by \code{pxweb_query()} together with helper funct
 Table~\ref{tab:workflow-functions} summarizes the main user-facing functions and methods by their role in the recommended workflow.
 
 The package is licensed under the BSD-2-Clause (aka FreeBSD) license, consistent with common practice for research software \citep{Morin2012}.
-
-
-
-Internally, the package represents API URLs, metadata, data, comments, and query objects with S3 classes.
-This allows common operations such as printing, validation, conversion with \code{as.data.frame()}, and combining split responses to behave consistently across API versions.
-The package uses \pkg{httr} for HTTP requests and \pkg{jsonlite} for JSON parsing \citep{httr,jsonlite}.
-
-The bundled API catalogue is a practical layer on top of the generic API client.
-It stores provider URL templates, available languages, version paths, aliases, and citation metadata.
-Users can rely on the catalogue for common providers or pass explicit PxWeb URLs for APIs that are not already bundled with the package.
-The current catalogue contains 46 entries covering national, regional, and international statistical resources; the complete list is given in Appendix~\ref{app:api-catalogue}.
-At the time of writing, the bundled catalogue entries point mainly to version 1 API paths; version 2 APIs can also be used by passing explicit PxWeb URLs.
-
-A central implementation detail is that user-supplied URLs are first converted into \code{pxweb} objects.
-The constructor parses the URL, detects whether the endpoint belongs to PxWeb API version 1 or version 2, retrieves provider configuration metadata, and stores call history in a temporary cache.
-Provider configuration is normalized into a common internal representation with the number of calls allowed per time window, the length of that time window, and the maximum number of downloadable values or cells.
-This lets the same retrieval workflow use version 1 \code{?config} responses and version 2 \code{/config} responses through a shared interface.
-
-Support for PxWeb API version 2 is expressed in the same top-level workflow as version 1 \citep{PxToolsPxWeb2Intro}.
-Version 2 tables use separate metadata and data endpoints and return JSON-stat2 by default.
-The \pkg{pxweb} package detects v2 URLs, builds the corresponding data endpoint, constructs the v2 query body, and adds query parameters for codelists and output values when needed.
-This keeps the user workflow broadly similar across API versions, even though the underlying endpoints and request details differ.
-
-For data requests, \code{pxweb_get()} first obtains table metadata, adds mandatory variables when needed, validates the query against the metadata, and computes any required batches before making data requests.
-Version 1 tables are queried with the table URL and a JSON request body, whereas version 2 tables use the corresponding \code{/tables/\{id\}/data} endpoint with version-specific query parameters such as language and output format.
-The returned pieces are parsed into package-specific S3 objects and combined when the response type supports it.
 
 \begin{table}[t!]
 \centering
@@ -264,6 +235,32 @@ Comments and citation &
 functions and methods grouped by their main role in the package
 workflow.}
 \end{table}
+
+Internally, the package represents API URLs, metadata, data, comments, and query objects with S3 classes.
+This allows common operations such as printing, validation, conversion with \code{as.data.frame()}, and combining split responses to behave consistently across API versions.
+The package uses \pkg{httr} for HTTP requests and \pkg{jsonlite} for JSON parsing \citep{httr,jsonlite}.
+
+The bundled API catalogue is a practical layer on top of the generic API client.
+It stores provider URL templates, available languages, version paths, aliases, and citation metadata.
+Users can rely on the catalogue for common providers or pass explicit PxWeb URLs for APIs that are not already bundled with the package.
+The current catalogue contains 46 entries covering national, regional, and international statistical resources; the complete list is given in Appendix~\ref{app:api-catalogue}.
+At the time of writing, the bundled catalogue entries point mainly to version 1 API paths; version 2 APIs can also be used by passing explicit PxWeb URLs.
+
+A central implementation detail is that user-supplied URLs are first converted into \code{pxweb} objects.
+The constructor parses the URL, detects whether the endpoint belongs to PxWeb API version 1 or version 2, retrieves provider configuration metadata, and stores call history in a temporary cache.
+Provider configuration is normalized into a common internal representation with the number of calls allowed per time window, the length of that time window, and the maximum number of downloadable values or cells.
+This lets the same retrieval workflow use version 1 \code{?config} responses and version 2 \code{/config} responses through a shared interface.
+
+Support for PxWeb API version 2 is expressed in the same top-level workflow as version 1 \citep{PxToolsPxWeb2Intro}.
+Version 2 tables use separate metadata and data endpoints and return JSON-stat2 by default.
+The \pkg{pxweb} package detects v2 URLs, builds the corresponding data endpoint, constructs the v2 query body, and adds query parameters for codelists and output values when needed.
+This keeps the user workflow broadly similar across API versions, even though the underlying endpoints and request details differ.
+
+For data requests, \code{pxweb_get()} first obtains table metadata, adds mandatory variables when needed, validates the query against the metadata, and computes any required batches before making data requests.
+Version 1 tables are queried with the table URL and a JSON request body, whereas version 2 tables use the corresponding \code{/tables/\{id\}/data} endpoint with version-specific query parameters such as language and output format.
+The returned pieces are parsed into package-specific S3 objects and combined when the response type supports it.
+
+
 
 Large queries can exceed provider-side limits.
 The batching procedure can be viewed as a constrained multidimensional query-partitioning heuristic.
@@ -546,63 +543,60 @@ The package does not replace provider documentation or domain knowledge, but it 
 \begin{table}[p!]
 \centering
 \scriptsize
-\begin{tabular}{@{}p{0.28\textwidth}p{0.38\textwidth}p{0.06\textwidth}p{0.12\textwidth}@{}}
+\begin{tabular}{@{}p{0.30\textwidth}p{0.46\textwidth}p{0.14\textwidth}@{}}
 \hline
-Entry & Provider & Ver. & Lang.\\
+Entry & Provider & Language\\
 \hline
-\url{web.dzs.hr} & Croatian Bureau of Statistics & v1 & en\\
-\url{andmed.stat.ee} & Estonia -- official statistics & v1 & en, et\\
-\url{statistika.tai.ee} & Estonian Health Statistics and Health Research Database & v1 & en\\
-\url{tilastot.etk.fi} & Finnish Centre for Pensions & v1 & en\\
-\url{tilastot.tela.fi} & Finnish Pension Alliance statistics & v1 & en\\
-\url{trafi2.stat.fi} & Finnish Transport Safety Agency & v1 & en, sv, fi\\
-\url{px.web.ined.fr} & Generations and Gender Contextual Database & v1 & en\\
-\url{pc-axis.geostat.ge} & Geostat Statistics Database & v1 & en\\
-\url{stat.hel.fi} & Helsingin seudun aluesarjat -tilastotietokanta & v1 & fi\\
-\url{pxweb.irena.org} & International Renewable Energy Agency & v1 & en\\
-\url{www6.poderjudicial.es} & Judicial statistics, Spain & v1 & es\\
-\url{data.stat.gov.lv} & Latvia -- official statistics & v1 & en, lv\\
-\url{statistika.spkc.gov.lv} & Latvian Health Statistics Database & v1 & en\\
-\url{statistik.linkoping.se} & Linkoping municipality in Sweden & v1 & sv\\
-\url{statdb.luke.fi} & LUKE Natural Resources Institute Finland & v1 & en, fi, sv\\
-\url{pxweb.nhwstat.org} & Nordic Health and Welfare Statistics & v1 & en\\
-\url{pxweb.nordicstatistics.org} & Nordic Statistics Database & v1 & en\\
-\url{openstat.psa.gov.ph} & Philippine Statistics Authority OpenSTAT & v1 & en\\
-\url{www.grande-region.lu} & Portail statistique de la Grande Region & v1 & fr, de\\
-\url{pxweb.stat.si} & SiStat Database & v1 & sl\\
-\url{bank.stat.gl} & Statbank Greenland & v1 & en, kl, da\\
-\url{makstat.stat.gov.mk} & State Statistical Office of the Republic of Macedonia & v1 & en, mk\\
-\url{pxweb.asub.ax} & Statistics Aland & v1 & en, sv\\
-\url{statbank.hagstova.fo} & Statistics Faroe Islands & v1 & en, fo\\
-\url{statfin.stat.fi} & Statistics Finland & v1 & en, fi, sv\\
-\url{px.hagstofa.is} & Statistics Iceland & v1 & en, is\\
-\url{askdata.rks-gov.net} & Statistics Kosovo & v1 & en\\
-\url{etab.llv.li} & Statistics Liechtenstein & v1 & en\\
-\url{statbank.statistica.md} & Statistics Moldova & v1 & en, ro\\
-\url{api.scb.se} & Statistics Sweden & v1 & en, sv\\
-\url{www.pxweb.bfs.admin.ch} & Statistics Switzerland & v1 & en, de, fr\\
-\url{m02-http-pxwebb.login.sundsvall.se} & Sundsvall municipality in Sweden & v1 & sv\\
-\url{statistik.tillvaxtanalys.se} & Swedish Agency for Growth Policy Analysis & v1 & sv\\
-\url{statistik.csn.se} & Swedish Board of Student Finance & v1 & sv\\
-\url{pxexternal.energimyndigheten.se} & Swedish Energy Agency & v1 & en\\
-\url{skogsstatistik.slu.se} & Swedish University of Agricultural Sciences forest statistics & v1 & en\\
-\url{fohm-app.folkhalsomyndigheten.se} & The Public Health Agency of Sweden & v1 & sv\\
-\url{statistik.sjv.se} & The Swedish Agricultural Agency & v1 & sv\\
-\url{pxweb.skogsstyrelsen.se} & The Swedish Forest Agency & v1 & en\\
-\url{statistik.konj.se} & The Swedish National Institute of Economic Research & v1 & en, sv\\
-\url{prognos.konj.se} & Swedish National Institute of Economic Research, forecast database & v1 & sv\\
-\url{w3.unece.org} & United Nations Economic Commission for Europe & v1 & en\\
-\url{statistik.vasteras.se} & Vasteras municipality in Sweden & v1 & sv\\
-\url{pxweb2022.vgregion.se} & Vastra Gotaland Region in Sweden & v1 & sv\\
-\url{vero2.stat.fi} & Verohallinto -- Finnish Tax Administration & v1 & en, fi, sv\\
-\url{visitfinland.stat.fi} & Visit Finland (Rudolf service) & v1 & fi\\
+\url{web.dzs.hr} & Croatian Bureau of Statistics & en\\
+\url{andmed.stat.ee} & Estonia -- official statistics & en, et\\
+\url{statistika.tai.ee} & Estonian Health Statistics and Health Research Database & en\\
+\url{tilastot.etk.fi} & Finnish Centre for Pensions & en\\
+\url{tilastot.tela.fi} & Finnish Pension Alliance statistics & en\\
+\url{trafi2.stat.fi} & Finnish Transport Safety Agency & en, sv, fi\\
+\url{px.web.ined.fr} & Generations and Gender Contextual Database & en\\
+\url{pc-axis.geostat.ge} & Geostat Statistics Database & en\\
+\url{stat.hel.fi} & Helsingin seudun aluesarjat -tilastotietokanta & fi\\
+\url{pxweb.irena.org} & International Renewable Energy Agency & en\\
+\url{www6.poderjudicial.es} & Judicial statistics, Spain & es\\
+\url{data.stat.gov.lv} & Latvia -- official statistics & en, lv\\
+\url{statistika.spkc.gov.lv} & Latvian Health Statistics Database & en\\
+\url{statistik.linkoping.se} & Linkoping municipality in Sweden & sv\\
+\url{statdb.luke.fi} & LUKE Natural Resources Institute Finland & en, fi, sv\\
+\url{pxweb.nhwstat.org} & Nordic Health and Welfare Statistics & en\\
+\url{pxweb.nordicstatistics.org} & Nordic Statistics Database & en\\
+\url{openstat.psa.gov.ph} & Philippine Statistics Authority OpenSTAT & en\\
+\url{www.grande-region.lu} & Portail statistique de la Grande Region & fr, de\\
+\url{pxweb.stat.si} & SiStat Database & sl\\
+\url{bank.stat.gl} & Statbank Greenland & en, kl, da\\
+\url{makstat.stat.gov.mk} & State Statistical Office of the Republic of Macedonia & en, mk\\
+\url{pxweb.asub.ax} & Statistics Aland & en, sv\\
+\url{statbank.hagstova.fo} & Statistics Faroe Islands & en, fo\\
+\url{statfin.stat.fi} & Statistics Finland & en, fi, sv\\
+\url{px.hagstofa.is} & Statistics Iceland & en, is\\
+\url{askdata.rks-gov.net} & Statistics Kosovo & en\\
+\url{etab.llv.li} & Statistics Liechtenstein & en\\
+\url{statbank.statistica.md} & Statistics Moldova & en, ro\\
+\url{api.scb.se} & Statistics Sweden & en, sv\\
+\url{www.pxweb.bfs.admin.ch} & Statistics Switzerland & en, de, fr\\
+\url{m02-http-pxwebb.login.sundsvall.se} & Sundsvall municipality in Sweden & sv\\
+\url{statistik.tillvaxtanalys.se} & Swedish Agency for Growth Policy Analysis & sv\\
+\url{statistik.csn.se} & Swedish Board of Student Finance & sv\\
+\url{pxexternal.energimyndigheten.se} & Swedish Energy Agency & en\\
+\url{skogsstatistik.slu.se} & Swedish University of Agricultural Sciences forest statistics & en\\
+\url{fohm-app.folkhalsomyndigheten.se} & The Public Health Agency of Sweden & sv\\
+\url{statistik.sjv.se} & The Swedish Agricultural Agency & sv\\
+\url{pxweb.skogsstyrelsen.se} & The Swedish Forest Agency & en\\
+\url{statistik.konj.se} & The Swedish National Institute of Economic Research & en, sv\\
+\url{prognos.konj.se} & Swedish National Institute of Economic Research, forecast database & sv\\
+\url{w3.unece.org} & United Nations Economic Commission for Europe & en\\
+\url{statistik.vasteras.se} & Vasteras municipality in Sweden & sv\\
+\url{pxweb2022.vgregion.se} & Vastra Gotaland Region in Sweden & sv\\
+\url{vero2.stat.fi} & Verohallinto -- Finnish Tax Administration & en, fi, sv\\
+\url{visitfinland.stat.fi} & Visit Finland (Rudolf service) & fi\\
 \hline
 \end{tabular}
-\caption{\label{tab:api-catalogue}Bundled PxWeb API catalogue entries in \pkg{pxweb}. The table lists the catalogue key, provider description, configured API version path, and available languages.}
+\caption{\label{tab:api-catalogue}Bundled PxWeb API catalogue entries in \pkg{pxweb}. The table lists the catalogue key, provider description, and available languages.}
 \end{table}
-
-
-
 
 \section*{Acknowledgments}
 
