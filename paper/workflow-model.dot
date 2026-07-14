@@ -1,0 +1,41 @@
+
+digraph pxweb_workflow {
+  graph [
+    rankdir = LR,
+    bgcolor = "white",
+    margin = 0.05,
+    nodesep = 0.42,
+    ranksep = 0.52
+  ];
+
+  node [
+    shape = box,
+    style = "rounded,filled",
+    color = "#4A5568",
+    fillcolor = "#F7FAFC",
+    fontname = "Helvetica",
+    fontsize = 10,
+    margin = "0.08,0.05"
+  ];
+
+  edge [
+    color = "#4A5568",
+    arrowsize = 0.65,
+    fontname = "Helvetica",
+    fontsize = 9
+  ];
+
+  search [label = "Search and\ndiscovery\ncatalogue, URL,\nor API search"];
+  metadata [label = "Metadata\nhierarchy, values, codelists"];
+  query [label = "Query\nselection and validation"];
+  retrieval [label = "Retrieval\nrequest and optional batching"];
+  conversion [label = "Conversion\ndata.frame or matrix"];
+  comments [label = "Comments\nand citation\nnotes, status,\nsource"];
+
+  search -> metadata;
+  metadata -> query;
+  query -> retrieval;
+  retrieval -> conversion;
+  conversion -> comments;
+}
+

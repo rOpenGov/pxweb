@@ -1,4 +1,6 @@
-To reproduce the figures, tables, and manuscript PDF run in R:
-source("main.R")
+To reproduce the JSS manuscript PDF run in R from this directory:
 
+```r
+source("main.R")
+```
 
