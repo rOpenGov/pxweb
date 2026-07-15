@@ -34,6 +34,12 @@ This article introduces the motivation and design of \pkg{pxweb}, outlines the s
 \newcommand{\CRANpkg}[1]{\pkg{#1}}
 \newcommand{\Cpkg}[1]{\pkg{#1}}
 
+%% Force references with very long author lists to always use the
+%% abbreviated "et al." citation form, avoiding fully spelled-out
+%% author lists on first in-text citation (natbib's longnamesfirst
+%% default, as used by jss.cls).
+\shortcites{tidyverse2019,PerezRiverol2016,Hakkarainen2026}
+
 %% publication information
 %% NOTE: Typically, this can be left commented and will be filled out by the technical editor
 %% \Volume{50}
@@ -53,7 +59,7 @@ This article introduces the motivation and design of \pkg{pxweb}, outlines the s
   E-mail: \email{mons.magnusson@gmail.com}\\
 \\
   Leo Lahti\\
-  Department of Mathematics and Statistics\\
+  Department of Computing\\
   University of Turku\\
   Finland\\
   E-mail: \email{leo.lahti@iki.fi}
@@ -90,17 +96,17 @@ Users also need software that can bridge the gap between online statistical data
 
 Dedicated software packages simplify, standardize, and automate analysis workflows.
 They take into account variations in raw data formats, access details, metadata conventions, and typical use cases so that users can avoid repetitive programming tasks and reduce the risk of misinterpretation and processing errors \citep{GrovesLyberg2010}.
-In \proglang{R}, several packages support generic or source-specific data retrieval, including \pkg{pdfetch} \citep{pdfetch}, \pkg{eurostat} \citep{Lahti17eurostat}, \pkg{WDI} \citep{WDI}, and \pkg{osmar} \citep{osmar}.
+In \proglang{R}, several packages support programmatic data retrieval from specific sources \citep{Lahti17eurostat, osmar, WDI}, broader compiled sources such as \pkg{pdfetch}, which provides access to economic and financial time-series data \citep{pdfetch}, or more generic data types \citep{szocs2020webchem, caro2017intsvy}. The \pkg{rsdmx} package \citep{rsdmx} supports the Statistical Data and Metadata eXchange (SDMX) standard, an alternative to PxWeb. 
 
-The \pkg{pxweb} package fills a complementary role: it provides a general \proglang{R} interface to databases exposed through the PxWeb API \citep{PxToolsPxWeb2Intro}.
-The package can navigate PxWeb resources, fetch metadata, construct and validate queries, retrieve data, convert responses into standard \proglang{R} data structures, and produce citation information for the source data.
+The \pkg{pxweb} package fills a complementary role: it provides a general \proglang{R} interface to databases exposed through the PxWeb application programming interface (API) \citep{PxToolsPxWeb2Intro}.
+The package can navigate PxWeb resources, fetch metadata, construct and validate queries, retrieve data, convert responses into standard \proglang{R} data structures, and produce citation and provenance information for the source data.
 As of version 1.0.0, the \pkg{pxweb} package includes 46 API catalogue entries and supports both PxWeb API version 1 and version 2.
 
 Data citation is another motivation for the package.
-Data reuse should document source organizations, accessed resources, version information, and retrieval times where possible.
-The \pkg{pxweb} package helps standardize this process for PxWeb data by collecting source information from the API and data objects and by encouraging users to cite both the retrieved data and the software used to retrieve them.
+Data reuse should document source organizations, accessed resources, version information, and retrieval times where possible but this faces many practical challenges \citep{Parsons2019}.
+The \pkg{pxweb} package helps standardize and streamline this process for PxWeb data by collecting source information from the API and data objects and by encouraging users to cite both the retrieved data and the software used to retrieve them.
 
-The package was first released on CRAN in 2014 and was substantially reworked in 2018 and 2026.
+The package was first released on CRAN in 2014 and was substantially upgraded in 2018 and 2026.
 Recent development has added support for the PxWeb API version 2, including table search, JSON-stat2 responses, v2 metadata, codelists, value sets, aggregation helpers, and observation status comments.
 The current package is part of the rOpenGov open data science project \citep{Lahti13icml}.
 
@@ -109,8 +115,8 @@ The current package is part of the rOpenGov open data science project \citep{Lah
 
 PxWeb is a web application and API for disseminating PC-Axis statistical data \citep{PxToolsPxWeb2Intro}.
 PC-Axis data are typically organized as multidimensional tables with dimensions such as region, time, sex, age, indicator, or content variable.
-The PX software family is used by statistical producers, e.g. Statistics Sweden, Statistics Finland, and Statistics Norway \citep{SCBPxPrograms,StatisticsFinlandPxSuite,StatisticsNorwayAPI}.
-PxWeb exposes these data and their metadata through HTTP endpoints that can be explored interactively or accessed programmatically.
+The PX software family is used by statistical producers, e.g., Statistics Sweden, Statistics Finland, and Statistics Norway \citep{SCBPxPrograms,StatisticsFinlandPxSuite,StatisticsNorwayAPI}.
+PxWeb exposes these data and their metadata through hypertext transfer protocol (HTTP) endpoints that can be explored interactively or accessed programmatically.
 
 The PX/PC-Axis ecosystem predates current web PxWeb APIs.
 The PX file-format specification documents a metadata-and-data file structure and records core keywords such as \code{CONTENTS}, \code{DATA}, \code{MATRIX}, \code{STUB}, and \code{CODES} with introduction years going back to 1990 \citep{SCBPxFileFormat2013}.
@@ -121,7 +127,7 @@ Recent PxWeb API version 2 development, including the Statbank Norway launch in 
 From the perspective of an \proglang{R} user, PxWeb APIs have three important parts.
 First, a table query must be constructed from table metadata.
 Second, the data response has to be retrieved and converted into an analysis-ready format.
-Third, the downloaded data should be easy to cite to facilitate reproducibility.
+Third, the downloaded data should be easy to cite to facilitate provenance and reproducibility.
 The \pkg{pxweb} package handles all three parts for the \proglang{R} user.
 
 The package distinguishes between the PxWeb API and the older PC-Axis file format, typically stored as \code{.px} files \citep{SCBPxFileFormat2013}.
@@ -137,38 +143,7 @@ The \pkg{pxweb} package therefore collects available provider configuration meta
 
 The \pkg{pxweb} package sits between general data-retrieval packages and source-specific official-statistics packages.
 Table~\ref{tab:related-software} summarizes the main distinctions.
-\pkg{pdfetch} provides access to broad economic and financial time-series
-sources \citep{pdfetch}.
-Packages such as \pkg{eurostat} and \pkg{WDI} focus on specific data providers \citep{Lahti17eurostat,WDI}.
-In contrast, \pkg{pxweb} targets a shared API family used by multiple statistical organizations.
-
-\begin{table}[t!]
-\centering
-\small
-\begin{tabular}{p{0.25\textwidth}p{0.22\textwidth}p{0.43\textwidth}}
-\hline
-Software type & Examples & Relation to \pkg{pxweb}\\
-\hline
-Provider-specific data clients &
-\pkg{eurostat}, \pkg{WDI} &
-Focus on one data provider or data family rather than the PxWeb API family\\
-Generic data-retrieval tools &
-\pkg{pdfetch} &
-Retrieve broad data sources but do not target PxWeb metadata and query semantics\\
-PX/PC-Axis file tools &
-\pkg{pxR} &
-Work with local \code{.px} files rather than live PxWeb APIs\\
-Provider-side PxWeb software &
-PxWeb &
-Publish the API endpoints consumed by \pkg{pxweb}\\
-Downstream domain packages &
-\pkg{geofi} &
-Can build specialized workflows on top of official-data access\\
-\hline
-\end{tabular}
-\caption{\label{tab:related-software}Related software and its relation
-to \pkg{pxweb}.}
-\end{table}
+Whereas \pkg{pdfetch} provides access to broad economic and financial time-series sources \citep{pdfetch}, other packages support specific data providers such as Eurostat (\pkg{eurostat}) \citep{Lahti17eurostat}, World Bank (\pkg{WDI}) \citep{WDI}, or Open Street Map (\pkg{osmar}) \citep{osmar}. Furthermore, there are packages supporting generic data types (e.g., \pkg{webchem} \citep{szocs2020webchem}, \pkg{intsvy} \citep{caro2017intsvy}) or data standards such as the Statistical Data and Metadata eXchange (SDMX) standard, which is the most widely adopted alternative to PxWeb among statistical agencies \citep{willekens2023sdmx} supported by the \pkg{rsdmx} package \citep{rsdmx}. In contrast, \pkg{pxweb} targets a shared API family used by multiple statistical organizations.
 
 The \pkg{pxweb} package targets web APIs, including metadata discovery, query validation, request splitting, and response parsing.
 File-oriented tools such as \pkg{pxR} address a related but different problem: reading and writing local \code{.px} files \citep{pxR}.
@@ -177,7 +152,40 @@ The official PxWeb software provides the server-side infrastructure through whic
 Finally, \pkg{pxweb} can serve as infrastructure for more specialized
 packages and applications.
 Domain-specific packages can build on its API access, query, and parsing functionality while adding provider-specific analysis, visualization, or educational workflows.
-For example, \pkg{geofi} addresses a complementary part of the Finnish official-data ecosystem by simplifying access to Finnish geospatial data from Statistics Finland's spatial APIs \citep{geofi}.
+For example, the \pkg{hetu} \citep{Kantanen2025hetu} and \pkg{geofi} packages address complementary parts of the official-data ecosystem by simplifying the handling of personal and organizational identity codes, and access to Finnish geospatial data from Statistics Finland's spatial APIs \citep{geofi}, respectively.
+
+
+\begin{table}[t!]
+\centering
+\small
+\begin{tabular}{p{0.25\textwidth}p{0.22\textwidth}p{0.43\textwidth}}
+\hline
+Software type & R packages & Relation to \pkg{pxweb}\\
+\hline
+Provider-specific data clients &
+\pkg{eurostat}, \pkg{WDI}, \pkg{osmar} &
+Focus on one data provider or data family rather than the PxWeb API family\\
+Generic data retrieval tools &
+\pkg{pdfetch}, \pkg{webchem}, \pkg{intsvy} &
+Retrieve broad data sources but do not target PxWeb metadata and query semantics\\
+PX/PC-Axis file tools &
+\pkg{pxR} &
+Work with local \code{.px} files\\
+SDMX-standard tools &
+\pkg{rsdmx} &
+Acces data via alternative SDMX standard.\\
+Downstream domain packages &
+\pkg{geofi} &
+Can build specialized workflows on top of official-data access\\
+\hline
+\end{tabular}
+\caption{\label{tab:related-software}Related software and its relation to \pkg{pxweb}.}
+\end{table}
+
+
+
+
+
 
 \section[The pxweb package]{The \pkg{pxweb} package}
 \label{sec:package-design}
@@ -187,9 +195,11 @@ Its core design goal is to provide a stable \proglang{R} workflow across PxWeb p
 
 In version 1.0.0, the package interface has 39 exported functions, but ordinary analysis workflows are built from a smaller set of recommended functions.
 The central workflow is built around the \code{pxweb_get()} function, which retrieves hierarchy levels, table metadata, or table data depending on the supplied URL and query.
-The helper \code{pxweb_get_data()} wraps the same workflow and returns a \code{data.frame}.
+The helper \code{pxweb_get_data()} wraps the same workflow and returns a \code{data.frame}; further utilities (e.g., \code{as.data.frame()}) are available to integrate the outputs directly with \pkg{tidyverse} workflows \citep{tidyverse2019} for subsequent filtering, reshaping, and visualization, allowing users to move seamlessly from data retrieval to tidy data analysis \citep{Wickham2014tidy} and the vast array of advanced statistical and probabilistic programming tools available through the \proglang{R} ecosystem.
 Query construction is handled by \code{pxweb_query()} together with helper functions such as \code{pxweb_all()}, \code{pxweb_latest()}, and \code{pxweb_aggregation()}.
 Table~\ref{tab:workflow-functions} summarizes the main user-facing functions and methods by their role in the recommended workflow.
+
+The package is licensed under the BSD-2-Clause (aka FreeBSD) license, consistent with common practice for research software \citep{Morin2012}.
 
 \begin{table}[t!]
 \centering
@@ -249,6 +259,8 @@ This keeps the user workflow broadly similar across API versions, even though th
 For data requests, \code{pxweb_get()} first obtains table metadata, adds mandatory variables when needed, validates the query against the metadata, and computes any required batches before making data requests.
 Version 1 tables are queried with the table URL and a JSON request body, whereas version 2 tables use the corresponding \code{/tables/\{id\}/data} endpoint with version-specific query parameters such as language and output format.
 The returned pieces are parsed into package-specific S3 objects and combined when the response type supports it.
+
+
 
 Large queries can exceed provider-side limits.
 The batching procedure can be viewed as a constrained multidimensional query-partitioning heuristic.
@@ -338,7 +350,8 @@ px_query <- pxweb_query(query)
 \end{Code}
 
 Retrieval is handled by \code{pxweb_get()}.
-Users who want a \code{data.frame} directly can use \code{pxweb_get_data()}.
+Users who want a \code{data.frame} directly can instead use
+\code{pxweb_get_data()}.
 The same top-level workflow handles version 1 and version 2 URLs, constructs the appropriate request body, and splits large supported queries into batches when needed.
 
 \begin{Code}
@@ -508,11 +521,11 @@ The request contains 967,176 cells and is split by \pkg{pxweb} into seven API ca
 
 The \pkg{pxweb} package provides access to official statistics shared through PxWeb APIs.
 It supports the full workflow from API discovery and metadata inspection to query construction, retrieval, conversion, comments, codelists, and citation.
-In doing so, it helps users move from interactive table browsing to scripted, transparent, and reproducible statistical workflows.
+In doing so, it helps users move from interactive table browsing to scripted, transparent, and reproducible statistical workflows following the tidy data principles \citep{tidyverse2019, Wickham2014tidy}.
 
 The package has matured through active development since its first CRAN release in 2014, including major redesigns in 2018 and 2026 and recent support for PxWeb API version 2.
 As an indication of use at the time of writing, CRAN download logs report 116,164 downloads between January 2014 and June 2026 \citep{CranlogsPxweb2026}.
-The package is also used directly in research, for instance in work on electronic gambling machines and socioeconomic status \citep{raisamo2019density}, income-inequality data construction \citep{Solt2019}, trends in youth serious violence \citep{Tanskanen2026}, and radiation-dose modeling after the Chernobyl nuclear power plant accident \citep{Tondel2025}.
+The package has found direct uses in research, for instance in work on electronic gambling machines and socioeconomic status \citep{raisamo2019density}, income-inequality data construction \citep{Solt2019}, trends in youth violence and mortality \citep{Tanskanen2026, Hakkarainen2026}, radiation-dose modeling after the Chernobyl nuclear power plant accident \citep{Tondel2025}, and programmatic access to open statistical data for population studies \citep{willekens2023sdmx}.
 
 Several limitations remain.
 PxWeb installations differ across providers, provider-side query limits and rate limits vary, and APIs can change independently of the package.
@@ -526,50 +539,71 @@ The package does not replace provider documentation or domain knowledge, but it 
 \section{Bundled API Catalogue}
 \label{app:api-catalogue}
 
+
 \begin{table}[p!]
 \centering
 \scriptsize
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}p{0.16\textwidth}p{0.20\textwidth}p{0.035\textwidth}p{0.065\textwidth}@{\hspace{0.015\textwidth}}p{0.16\textwidth}p{0.20\textwidth}p{0.035\textwidth}p{0.065\textwidth}@{}}
+\begin{tabular}{@{}p{0.30\textwidth}p{0.46\textwidth}p{0.14\textwidth}@{}}
 \hline
-Entry & Provider & Ver. & Lang. & Entry & Provider & Ver. & Lang.\\
+Entry & Provider & Language\\
 \hline
-\url{web.dzs.hr} & Croatian Bureau of Statistics & v1 & en & \url{statbank.hagstova.fo} & Statistics Faroe Islands & v1 & en, fo\\
-\url{andmed.stat.ee} & Estonia -- official statistics & v1 & en, et & \url{statfin.stat.fi} & Statistics Finland & v1 & en, fi, sv\\
-\url{statistika.tai.ee} & Estonian Health Statistics and Health Research Database & v1 & en & \url{px.hagstofa.is} & Statistics Iceland & v1 & en, is\\
-\url{tilastot.etk.fi} & Finnish Centre for Pensions & v1 & en & \url{askdata.rks-gov.net} & Statistics Kosovo & v1 & en\\
-\url{tilastot.tela.fi} & Finnish Pension Alliance statistics & v1 & en & \url{etab.llv.li} & Statistics Liechtenstein & v1 & en\\
-\url{trafi2.stat.fi} & Finnish Transport Safety Agency & v1 & en, sv, fi & \url{statbank.statistica.md} & Statistics Moldova & v1 & en, ro\\
-\url{px.web.ined.fr} & Generations and Gender Contextual Database & v1 & en & \url{api.scb.se} & Statistics Sweden & v1 & en, sv\\
-\url{pc-axis.geostat.ge} & Geostat Statistics Database & v1 & en & \url{www.pxweb.bfs.admin.ch} & Statistics Switzerland & v1 & en, de, fr\\
-\url{stat.hel.fi} & Helsingin seudun aluesarjat -tilastotietokanta & v1 & fi & \url{m02-http-pxwebb.login.sundsvall.se} & Sundsvall municipality in Sweden & v1 & sv\\
-\url{pxweb.irena.org} & International Renewable Energy Agency & v1 & en & \url{statistik.tillvaxtanalys.se} & Swedish Agency for Growth Policy Analysis & v1 & sv\\
-\url{www6.poderjudicial.es} & Judicial statistics, Spain & v1 & es & \url{statistik.csn.se} & Swedish Board of Student Finance & v1 & sv\\
-\url{data.stat.gov.lv} & Latvia -- official statistics & v1 & en, lv & \url{pxexternal.energimyndigheten.se} & Swedish Energy Agency & v1 & en\\
-\url{statistika.spkc.gov.lv} & Latvian Health Statistics Database & v1 & en & \url{skogsstatistik.slu.se} & Swedish University of Agricultural Sciences forest statistics & v1 & en\\
-\url{statistik.linkoping.se} & Linkoping municipality in Sweden & v1 & sv & \url{fohm-app.folkhalsomyndigheten.se} & The Public Health Agency of Sweden & v1 & sv\\
-\url{statdb.luke.fi} & LUKE Natural Resources Institute Finland & v1 & en, fi, sv & \url{statistik.sjv.se} & The Swedish Agricultural Agency & v1 & sv\\
-\url{pxweb.nhwstat.org} & Nordic Health and Welfare Statistics & v1 & en & \url{pxweb.skogsstyrelsen.se} & The Swedish Forest Agency & v1 & en\\
-\url{pxweb.nordicstatistics.org} & Nordic Statistics Database & v1 & en & \url{statistik.konj.se} & The Swedish National Institute of Economic Research & v1 & en, sv\\
-\url{openstat.psa.gov.ph} & Philippine Statistics Authority OpenSTAT & v1 & en & \url{prognos.konj.se} & Swedish National Institute of Economic Research, forecast database & v1 & sv\\
-\url{www.grande-region.lu} & Portail statistique de la Grande Region & v1 & fr, de & \url{w3.unece.org} & United Nations Economic Commission for Europe & v1 & en\\
-\url{pxweb.stat.si} & SiStat Database & v1 & sl & \url{statistik.vasteras.se} & Vasteras municipality in Sweden & v1 & sv\\
-\url{bank.stat.gl} & Statbank Greenland & v1 & en, kl, da & \url{pxweb2022.vgregion.se} & Vastra Gotaland Region in Sweden & v1 & sv\\
-\url{makstat.stat.gov.mk} & State Statistical Office of the Republic of Macedonia & v1 & en, mk & \url{vero2.stat.fi} & Verohallinto -- Finnish Tax Administration & v1 & en, fi, sv\\
-\url{pxweb.asub.ax} & Statistics Aland & v1 & en, sv & \url{visitfinland.stat.fi} & Visit Finland (Rudolf service) & v1 & fi\\
+\url{web.dzs.hr} & Croatian Bureau of Statistics & en\\
+\url{andmed.stat.ee} & Estonia -- official statistics & en, et\\
+\url{statistika.tai.ee} & Estonian Health Statistics and Health Research Database & en\\
+\url{tilastot.etk.fi} & Finnish Centre for Pensions & en\\
+\url{tilastot.tela.fi} & Finnish Pension Alliance statistics & en\\
+\url{trafi2.stat.fi} & Finnish Transport Safety Agency & en, sv, fi\\
+\url{px.web.ined.fr} & Generations and Gender Contextual Database & en\\
+\url{pc-axis.geostat.ge} & Geostat Statistics Database & en\\
+\url{stat.hel.fi} & Helsingin seudun aluesarjat -tilastotietokanta & fi\\
+\url{pxweb.irena.org} & International Renewable Energy Agency & en\\
+\url{www6.poderjudicial.es} & Judicial statistics, Spain & es\\
+\url{data.stat.gov.lv} & Latvia -- official statistics & en, lv\\
+\url{statistika.spkc.gov.lv} & Latvian Health Statistics Database & en\\
+\url{statistik.linkoping.se} & Linkoping municipality in Sweden & sv\\
+\url{statdb.luke.fi} & LUKE Natural Resources Institute Finland & en, fi, sv\\
+\url{pxweb.nhwstat.org} & Nordic Health and Welfare Statistics & en\\
+\url{pxweb.nordicstatistics.org} & Nordic Statistics Database & en\\
+\url{openstat.psa.gov.ph} & Philippine Statistics Authority OpenSTAT & en\\
+\url{www.grande-region.lu} & Portail statistique de la Grande Region & fr, de\\
+\url{pxweb.stat.si} & SiStat Database & sl\\
+\url{bank.stat.gl} & Statbank Greenland & en, kl, da\\
+\url{makstat.stat.gov.mk} & State Statistical Office of the Republic of Macedonia & en, mk\\
+\url{pxweb.asub.ax} & Statistics Aland & en, sv\\
+\url{statbank.hagstova.fo} & Statistics Faroe Islands & en, fo\\
+\url{statfin.stat.fi} & Statistics Finland & en, fi, sv\\
+\url{px.hagstofa.is} & Statistics Iceland & en, is\\
+\url{askdata.rks-gov.net} & Statistics Kosovo & en\\
+\url{etab.llv.li} & Statistics Liechtenstein & en\\
+\url{statbank.statistica.md} & Statistics Moldova & en, ro\\
+\url{api.scb.se} & Statistics Sweden & en, sv\\
+\url{www.pxweb.bfs.admin.ch} & Statistics Switzerland & en, de, fr\\
+\url{m02-http-pxwebb.login.sundsvall.se} & Sundsvall municipality in Sweden & sv\\
+\url{statistik.tillvaxtanalys.se} & Swedish Agency for Growth Policy Analysis & sv\\
+\url{statistik.csn.se} & Swedish Board of Student Finance & sv\\
+\url{pxexternal.energimyndigheten.se} & Swedish Energy Agency & en\\
+\url{skogsstatistik.slu.se} & Swedish University of Agricultural Sciences forest statistics & en\\
+\url{fohm-app.folkhalsomyndigheten.se} & The Public Health Agency of Sweden & sv\\
+\url{statistik.sjv.se} & The Swedish Agricultural Agency & sv\\
+\url{pxweb.skogsstyrelsen.se} & The Swedish Forest Agency & en\\
+\url{statistik.konj.se} & The Swedish National Institute of Economic Research & en, sv\\
+\url{prognos.konj.se} & Swedish National Institute of Economic Research, forecast database & sv\\
+\url{w3.unece.org} & United Nations Economic Commission for Europe & en\\
+\url{statistik.vasteras.se} & Vasteras municipality in Sweden & sv\\
+\url{pxweb2022.vgregion.se} & Vastra Gotaland Region in Sweden & sv\\
+\url{vero2.stat.fi} & Verohallinto -- Finnish Tax Administration & en, fi, sv\\
+\url{visitfinland.stat.fi} & Visit Finland (Rudolf service) & fi\\
 \hline
 \end{tabular}
-}
-\caption{\label{tab:api-catalogue}Bundled PxWeb API catalogue
-entries in \pkg{pxweb}. The table lists the catalogue key, provider
-description, configured API version path, and available languages.}
+\caption{\label{tab:api-catalogue}Bundled PxWeb API catalogue entries in \pkg{pxweb}. The table lists the catalogue key, provider description, and available languages.}
 \end{table}
 
 \section*{Acknowledgments}
 
-We are grateful to all package contributors.
-The work has been partially funded by the Academy of Finland (decisions 295741, 345630 to
-LL), and is part of rOpenGov\footnote{\url{https://github.ropengov.io}}.
+We are grateful to all package contributors and Pyry Kantanen and Jeba
+Akewak for technical assistance. The work has been supported by the
+Research Council of Finland (decision 372345 to LL), and is part of
+rOpenGov\footnote{\url{https://github.ropengov.io}}.
 
 
 \bibliography{magnusson-kainu-lahti}
