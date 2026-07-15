@@ -1,0 +1,17 @@
+Dear Editors,
+
+We are happy to submit the manuscript “Opening Up Official Statistics in R with pxweb” for consideration in the Journal of Statistical Software.
+
+The manuscript presents pxweb, an R package for programmatic access to official statistics disseminated through the PxWeb API. PxWeb is used by national, regional, and international statistical organisations. The package supports the complete workflow from API discovery and metadata inspection to query construction, request validation, retrieval, conversion to R data structures, comment extraction, and citation of retrieved data.
+
+Although pxweb is primarily a data access package rather than a package introducing a new statistical method, we believe it fits well within the scope of JSS. Reliable access to official statistics is a prerequisite for many statistical analyses, and pxweb addresses several statistical software challenges that arise in this setting: multidimensional metadata handling, validation of user queries against provider metadata, splitting large requests within provider-side limits, reproducible data retrieval, and citation/provenance support. In this respect, the manuscript is similar in spirit to other JSS articles presenting infrastructure for statistical data access, retrieval, or reuse, such as packages for accessing economic, survey, chemical, geospatial, and statistical-exchange data sources.
+
+We believe the manuscript will be of interest to JSS readers who work with official statistics, reproducible data pipelines, public-sector data, survey and register-based research, and statistical analysis workflows that depend on regularly updated external data sources. The package helps bridge the gap between interactive statistical databases and scripted, reproducible analysis in R.
+
+The manuscript has not been published previously and is not under consideration elsewhere. All authors have approved the submission.
+
+Thank you for considering our manuscript.
+
+Sincerely,
+
+Måns Magnusson, corresponding author
