@@ -930,10 +930,10 @@ sessionInfo()
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] backports_1.5.1   digest_0.6.39     desc_1.4.3        R6_2.6.1         
-    ##  [5] fastmap_1.2.0     xfun_0.59         cachem_1.1.0      knitr_1.51       
+    ##  [5] fastmap_1.2.0     xfun_0.60         cachem_1.1.0      knitr_1.51       
     ##  [9] htmltools_0.5.9   rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6        
-    ## [13] sass_0.4.10       pkgdown_2.2.0     textshaping_1.0.5 jquerylib_0.1.4  
+    ## [13] sass_0.4.10       pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4  
     ## [17] systemfonts_1.3.2 compiler_4.6.1    tools_4.6.1       ragg_1.5.2       
     ## [21] checkmate_2.3.4   bslib_0.11.0      evaluate_1.0.5    yaml_2.3.12      
-    ## [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.2.0       fs_2.1.0         
+    ## [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
     ## [29] htmlwidgets_1.6.4
