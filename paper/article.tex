@@ -123,7 +123,10 @@ The PX/PC-Axis ecosystem predates current web PxWeb APIs.
 The PX file-format specification documents a metadata-and-data file structure and records core keywords such as \code{CONTENTS}, \code{DATA}, \code{MATRIX}, \code{STUB}, and \code{CODES} with introduction years going back to 1990 \citep{SCBPxFileFormat2013}.
 Statistics Sweden describes PX as a standard format for statistics files used by many statistical offices and as the basis for tools such as PxWin, PxWeb, and PxEdit \citep{SCBPxPrograms}.
 PxWeb extends this file-oriented tradition to online dissemination by publishing multidimensional statistical tables through web interfaces and API endpoints \citep{PxToolsPxWeb2Intro}.
-Recent PxWeb API version 2 development, including the Statbank Norway launch in 2025, further modernizes this infrastructure with a more stable URL structure, GET requests, improved filtering, and richer metadata access \citep{PxToolsPxWeb2Intro,StatisticsNorwayAPI}.
+
+PxWeb API version 2 emerged as a joint Statistics Sweden and Statistics Norway project initiated in January 2024 because the older PxWeb version 1 interface had become both difficult to develop further and changing user needs.
+Public test versions appeared in 2024, followed by a PxWebApi v2 release in September 2025 and a PxWeb 2 release in October 2025.
+The new API modernizes the infrastructure through GET URL support, JSON-stat2 output, improved filtering and selection expressions, language handling, and richer metadata access \citep{PxToolsPxWeb2Process,PxToolsPxWeb2Plans,PxToolsPxWebApi2UserGuide}.
 
 From the perspective of an \proglang{R} user, PxWeb APIs have three important parts.
 First, a table query must be constructed from table metadata.
@@ -349,8 +352,6 @@ Retrieval is handled by \code{pxweb_get()}.
 Users who want a \code{data.frame} directly can instead use
 \code{pxweb_get_data()}.
 The same top-level workflow handles version 1 and version 2 URLs, constructs the appropriate request body, and splits large supported queries into batches when needed.
-
-% TODO: Check if there I have thoroughly explained the difference between version 1 and 2.
 
 \begin{Code}
 px_data <- pxweb_get(url, query = query)
