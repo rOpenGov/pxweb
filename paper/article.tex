@@ -201,7 +201,7 @@ SDMX clients &
 Access data via the alternative SDMX standard.\\
 Direct PxWeb API clients &
 \pkg{PxWebApiData}, \pkg{pxwebpy} &
-Address PxWeb APIs directly; \pkg{PxWebApiData} provides specialized \proglang{R} workflows and can use \pkg{pxweb} internally, while \pkg{pxwebpy} serves \proglang{Python}; \pkg{pxweb} emphasizes general \proglang{R} infrastructure with catalogue support, S3 objects, validation, comments, and citation\\
+Address PxWeb APIs directly; \pkg{PxWebApiData} provides specialized \proglang{R} workflows and can use \pkg{pxweb} through optional backend settings and wrappers, while \pkg{pxwebpy} serves \proglang{Python}; \pkg{pxweb} emphasizes general \proglang{R} infrastructure with catalogue support, S3 objects, validation, comments, and citation\\
 Downstream domain packages &
 \pkg{geofi} &
 Can build specialized workflows on top of official-data access\\
@@ -368,7 +368,7 @@ Version 2 APIs may also expose aggregation codelists and value sets, which can b
 \begin{Code}
 meta <- pxweb_get(url)
 age_codelists <- pxweb_codelists(meta, variable = "Alder")
-age_codelists[, c("variable_code", "type", "label")]
+age_codelists[, c("id", "type", "label")]
 \end{Code}
 
 \begin{CodeOutput}
@@ -580,7 +580,7 @@ In doing so, it helps users move from interactive table browsing to scripted, tr
 
 The package has matured through active development since its first CRAN release in 2014, including major redesigns in 2018 and 2026 and recent support for PxWeb API version 2.
 As an indication of use at the time of writing, CRAN download logs report 116,164 downloads between January 2014 and June 2026 \citep{CranlogsPxweb2026}.
-The package has found direct uses in research, for instance in work on electronic gambling machines and socioeconomic status \citep{raisamo2019density}, income-inequality data construction \citep{Solt2019}, trends in youth violence and mortality \citep{Tanskanen2026, Hakkarainen2026}, radiation-dose modeling after the Chernobyl nuclear power plant accident \citep{Tondel2025}, and programmatic access to open statistical data for population studies \citep{willekens2023sdmx}.
+The package has been cited in research using official-statistics data, for instance in work on electronic gambling machines and socioeconomic status \citep{raisamo2019density}, income-inequality data construction \citep{Solt2019}, trends in youth violence and mortality \citep{Tanskanen2026, Hakkarainen2026}, radiation-dose modeling after the Chernobyl nuclear power plant accident \citep{Tondel2025}, and programmatic access to open statistical data for population studies \citep{willekens2023sdmx}.
 
 Limitations remain.
 PxWeb installations differ across providers, provider-side query limits and rate limits vary, and APIs can change independently of the package.
