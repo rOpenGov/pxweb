@@ -163,7 +163,10 @@ Broader data-retrieval packages, such as \pkg{pdfetch} \citep{pdfetch}, \pkg{web
 The \pkg{rsdmx} package supports the Statistical Data and Metadata eXchange (SDMX) standard, which is an important alternative standard for statistical data exchange \citep{rsdmx,willekens2023sdmx}.
 The closest software relatives are direct PxWeb API clients.
 In \proglang{R}, \pkg{PxWebApiData} reads PxWeb data by API and supports both PxWeb API version 1 and 2 \citep{PxWebApiData}.
+It has been developed in the Statistics Norway software ecosystem for specialized PxWeb data-access workflows, and its documented backend options can use \pkg{pxweb} for API capture and data-frame conversion.
+The \pkg{pxweb} package predates these newer clients, with a first CRAN release in 2014, and is positioned as general \proglang{R} infrastructure for discovering, querying, retrieving, converting, commenting, and citing data from PxWeb APIs.
 In \proglang{Python}, \pkg{pxwebpy} targets PxWeb API version 2 and emphasizes table search, metadata retrieval, automatic query batching, caching, and conversion to common dataframe libraries \citep{pxwebpy}.
+Compared with \pkg{pxwebpy}, \pkg{pxweb} serves \proglang{R} workflows directly.
 
 In this landscape, \pkg{pxweb} occupies the PxWeb API niche.
 It provides a common interface for discovering databases and tables, inspecting metadata, constructing valid queries, respecting provider limits, retrieving data, and retaining comments and citation information across statistical organizations that publish through PxWeb.
@@ -198,7 +201,7 @@ SDMX clients &
 Access data via the alternative SDMX standard.\\
 Direct PxWeb API clients &
 \pkg{PxWebApiData}, \pkg{pxwebpy} &
-Address PxWeb APIs directly; \pkg{pxweb} emphasizes a general \proglang{R} workflow with catalogue support, S3 objects, validation, comments, and citation\\
+Address PxWeb APIs directly; \pkg{PxWebApiData} provides specialized \proglang{R} workflows and can use \pkg{pxweb} internally, while \pkg{pxwebpy} serves \proglang{Python}; \pkg{pxweb} emphasizes general \proglang{R} infrastructure with catalogue support, S3 objects, validation, comments, and citation\\
 Downstream domain packages &
 \pkg{geofi} &
 Can build specialized workflows on top of official-data access\\
@@ -292,6 +295,7 @@ The bundled API catalogue is a practical layer on top of the generic API client.
 It stores provider URL templates, available languages, version paths, aliases, and citation metadata.
 Users can rely on the catalogue for common providers or pass explicit PxWeb URLs for APIs that are not already bundled with the package.
 The current catalogue contains 46 entries covering national, regional, and international statistical resources; the complete list is given in Appendix~\ref{app:api-catalogue}.
+Because PxWeb installations are maintained by the individual data providers, the catalogue is a tested convenience layer rather than a guarantee that every endpoint will remain permanently available; users can pass explicit PxWeb URLs when catalogue entries change.
 At the time of writing, the bundled catalogue entries point mainly to version 1 API paths; version 2 APIs can also be used by passing explicit PxWeb URLs.
 
 A central implementation detail is that user-supplied URLs are first converted into \code{pxweb} objects.
@@ -516,8 +520,8 @@ comments_df[, c("comment_type", "comment")]
 
 \begin{CodeOutput}
     comment_type    comment
-1    obs_comment    Heby municipality changed county affiliation ...
-2 column_comment    The period 1968-1998 is reported according to ...
+1    obs_comment    Heby municipality changed county affiliation from Upps ...
+2 column_comment    The period 1968-1998 is reported according to the regi ...
 \end{CodeOutput}
 
 The downloaded object can then be converted directly to a standard \code{data.frame} for analysis.
@@ -565,6 +569,7 @@ marital-status categories.
 The request contains 967,176 cells and is split by \pkg{pxweb} into seven API calls before being combined for analysis.}
 \end{figure}
 
+\clearpage
 
 \section{Discussion}
 \label{sec:discussion}
