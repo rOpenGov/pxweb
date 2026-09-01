@@ -40,6 +40,15 @@ This article introduces the motivation and design of \pkg{pxweb}, outlines the s
 %% default, as used by jss.cls).
 \shortcites{tidyverse2019,PerezRiverol2016,Hakkarainen2026}
 
+%% The JSS class uses Zapf Chancery for the journal header and footer.
+%% Keep the official font when available, but fall back to Latin Modern
+%% on minimal TeX installations where the pzc metrics are not installed.
+\IfFileExists{pzcmi8t.tfm}{}{%
+  \DeclareFontFamily{T1}{pzc}{}%
+  \DeclareFontShape{T1}{pzc}{m}{n}{<->ssub*lmr/m/n}{}%
+  \DeclareFontShape{T1}{pzc}{m}{it}{<->ssub*lmr/m/it}{}%
+}
+
 %% publication information
 %% NOTE: Typically, this can be left commented and will be filled out by the technical editor
 %% \Volume{50}
@@ -124,7 +133,7 @@ The PX file-format specification documents a metadata-and-data file structure an
 Statistics Sweden describes PX as a standard format for statistics files used by many statistical offices and as the basis for tools such as PxWin, PxWeb, and PxEdit \citep{SCBPxPrograms}.
 PxWeb extends this file-oriented tradition to online dissemination by publishing multidimensional statistical tables through web interfaces and API endpoints \citep{PxToolsPxWeb2Intro}.
 
-PxWeb API version 2 emerged as a joint Statistics Sweden and Statistics Norway project initiated in January 2024 because the older PxWeb version 1 interface had become both difficult to develop further and changing user needs.
+PxWeb API version 2 emerged as a joint Statistics Sweden and Statistics Norway project initiated in January 2024 because the older PxWeb version 1 interface had become difficult to develop further and user needs were changing.
 Public test versions appeared in 2024, followed by a PxWebApi v2 release in September 2025 and a PxWeb 2 release in October 2025.
 The new API modernizes the infrastructure through GET URL support, JSON-stat2 output, improved filtering and selection expressions, language handling, and richer metadata access \citep{PxToolsPxWeb2Process,PxToolsPxWeb2Plans,PxToolsPxWebApi2UserGuide}.
 
@@ -138,10 +147,10 @@ The package distinguishes between the PxWeb API and the older PC-Axis file forma
 The \pkg{pxweb} package is designed for PxWeb APIs, while packages such as \pkg{pxR} focus on parsing legacy PC-Axis files \citep{pxR}.
 This distinction is important because API access requires metadata discovery, query construction, request validation, and response parsing rather than only local file import.
 
-Since PxWeb installations are configured by individual providers, such as national statistical organisations, API version support and request limits are endpoint-level properties rather than global constants.
+Since PxWeb installations are configured by individual providers, such as national statistical organizations, API version support and request limits are endpoint-level properties rather than global constants.
 The \pkg{pxweb} package therefore collects available provider configuration metadata, including version 1 and 2 \code{config} responses, and uses this information when validating requests, making calls, and splitting large downloads.
 
-\subsection{Related Software}
+\subsection{Related software}
 \label{sec:related}
 
 The \pkg{pxweb} package sits between general data-retrieval packages and source-specific official-statistics packages.
@@ -178,7 +187,7 @@ PX/PC-Axis file tools &
 Work with local \code{.px} files\\
 SDMX-standard tools &
 \pkg{rsdmx} &
-Acces data via alternative SDMX standard.\\
+Access data via the alternative SDMX standard.\\
 Downstream domain packages &
 \pkg{geofi} &
 Can build specialized workflows on top of official-data access\\
@@ -196,7 +205,8 @@ Its core design goal is to provide a stable \proglang{R} workflow across PxWeb p
 
 In version 1.0.0, the package interface has 39 exported functions, but ordinary analysis workflows are built from a smaller set of recommended functions.
 The central workflow is built around the \code{pxweb_get()} function, which retrieves hierarchy levels, table metadata, or table data depending on the supplied URL and query.
-The helper \code{pxweb_get_data()} wraps the same workflow and returns a \code{data.frame}; further functionality (e.g., \code{as.data.frame()}) are available to integrate the outputs directly with \pkg{tidyverse} workflows \citep{tidyverse2019} for subsequent filtering, reshaping, and visualization, allowing users to move seamlessly from data retrieval to tidy data analysis \citep{Wickham2014tidy} and the vast array of advanced statistical and probabilistic programming tools available through the \proglang{R} ecosystem.
+The helper \code{pxweb_get_data()} wraps the same workflow and returns a \code{data.frame}.
+Additional methods, such as \code{as.data.frame()}, integrate the outputs directly with \pkg{tidyverse} workflows \citep{tidyverse2019} for subsequent filtering, reshaping, and visualization, allowing users to move from data retrieval to tidy data analysis \citep{Wickham2014tidy} and the broader statistical and probabilistic programming tools available through the \proglang{R} ecosystem.
 Query construction is handled by \code{pxweb_query()} together with helper functions such as \code{pxweb_all()}, \code{pxweb_latest()}, and \code{pxweb_aggregation()}.
 Table~\ref{tab:workflow-functions} summarizes the main user-facing functions and methods by their role in the recommended workflow.
 
@@ -377,7 +387,7 @@ comments <- pxweb_data_comments(px_data)
 pxweb_cite(px_data)
 \end{Code}
 
-\section{Case Study}
+\section{Case study}
 \label{sec:case-study}
 
 We illustrate the package with a Statistics Sweden population table that is both familiar official statistics and technically useful for showing large-query handling.
@@ -533,12 +543,14 @@ They also mean that support for PxWeb API version 2 must distinguish between gen
 More broadly, \pkg{pxweb} contributes to the open data science ecosystem \citep{lahti2018open} by making official statistics easier to retrieve, document, and reuse in \proglang{R}.
 The package does not replace provider documentation or domain knowledge, but it gives researchers, public-sector analysts, educators, and civic users a common programmatic interface to a widely used dissemination infrastructure.
 
+\clearpage
+
 \appendix
-\section{Bundled API Catalogue}
+\section{Bundled API catalogue}
 \label{app:api-catalogue}
 
 
-\begin{table}[p!]
+\begin{table}[!htbp]
 \centering
 \scriptsize
 \begin{tabular}{@{}p{0.30\textwidth}p{0.46\textwidth}p{0.14\textwidth}@{}}
@@ -595,6 +607,8 @@ Entry & Provider & Language\\
 \end{tabular}
 \caption{\label{tab:api-catalogue}Bundled PxWeb API catalogue entries in \pkg{pxweb}. The table lists the catalogue key, provider description, and available languages.}
 \end{table}
+
+\clearpage
 
 \section*{Acknowledgments}
 
