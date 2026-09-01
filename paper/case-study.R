@@ -3,17 +3,28 @@
 # Set PXWEB_PAPER_REFRESH_DATA=true to re-download the data even when the
 # cached RDS file is present.
 
-script_path <- tryCatch({
-  args <- commandArgs(FALSE)
-  file_arg <- grep("^--file=", args, value = TRUE)
-  if (length(file_arg) > 0) {
-    normalizePath(sub("^--file=", "", file_arg[[1]]))
-  } else {
-    normalizePath(sys.frame(1)$ofile)
-  }
-}, error = function(e) NA_character_)
+source_file <- tryCatch(sys.frame(1)$ofile, error = function(e) NA_character_)
+args <- commandArgs(FALSE)
+file_arg <- grep("^--file=", args, value = TRUE)
+script_file <- if (length(source_file) == 1L && !is.na(source_file) && nzchar(source_file)) {
+  source_file
+} else if (length(file_arg) > 0) {
+  sub("^--file=", "", file_arg[[1]])
+} else {
+  "case-study.R"
+}
 
-script_dir <- if (!is.na(script_path)) dirname(script_path) else getwd()
+candidate_dirs <- unique(c(
+  getwd(),
+  file.path(getwd(), "paper"),
+  dirname(normalizePath(script_file, mustWork = FALSE)),
+  dirname(normalizePath(file.path(getwd(), script_file), mustWork = FALSE))
+))
+script_dir <- candidate_dirs[file.exists(file.path(candidate_dirs, "case-study.R"))]
+if (length(script_dir) < 1) {
+  stop("Run case-study.R from the paper directory or the package root.", call. = FALSE)
+}
+script_dir <- normalizePath(script_dir[[1]])
 data_dir <- file.path(script_dir, "data")
 dir.create(data_dir, showWarnings = FALSE, recursive = TRUE)
 
@@ -25,8 +36,8 @@ figure_path <- file.path(script_dir, "case-study-population.pdf")
 if (!requireNamespace("pxweb", quietly = TRUE)) {
   stop("The pxweb package is required to run this case study.", call. = FALSE)
 }
-if (utils::packageVersion("pxweb") < "0.19.0") {
-  stop("This case study requires pxweb >= 0.19.0.", call. = FALSE)
+if (utils::packageVersion("pxweb") < "1.0.0") {
+  stop("This case study requires pxweb >= 1.0.0.", call. = FALSE)
 }
 
 metadata_url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
@@ -37,7 +48,7 @@ county_codes <- c(
   "01", "03", "04", "05", "06", "07", "08", "09", "10", "12", "13",
   "14", "17", "18", "19", "20", "21", "22", "23", "24", "25"
 )
-marital_status_codes <- c("OG", "G", "SK", "ÄNKL")
+marital_status_codes <- c("OG", "G", "SK", "\u00c4NKL")
 sex_codes <- c("1", "2")
 
 refresh_data <- identical(tolower(Sys.getenv("PXWEB_PAPER_REFRESH_DATA")), "true")
@@ -205,5 +216,5 @@ population_pyramid(2024, "D. Age and sex structure, 2024")
 par(op)
 dev.off()
 
-cat("Wrote data cache:", data_path, "\n")
-cat("Wrote figure:", figure_path, "\n")
+cat("Wrote data cache:", file.path("data", basename(data_path)), "\n")
+cat("Wrote figure:", basename(figure_path), "\n")

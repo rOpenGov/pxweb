@@ -1,4 +1,4 @@
-# Version 0.18.0
+# Version 1.0.0
 
 - Added support for PXWEB API v2, including v2 metadata, table, data and
   JSON-stat2 response handling while preserving the existing v1 workflows.

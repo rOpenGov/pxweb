@@ -5,17 +5,28 @@
 # fallback draws the same workflow to PDF so the manuscript can still be
 # reproduced on systems without Graphviz.
 
-script_path <- tryCatch({
-  args <- commandArgs(FALSE)
-  file_arg <- grep("^--file=", args, value = TRUE)
-  if (length(file_arg) > 0) {
-    normalizePath(sub("^--file=", "", file_arg[[1]]))
-  } else {
-    normalizePath(sys.frame(1)$ofile)
-  }
-}, error = function(e) NA_character_)
+source_file <- tryCatch(sys.frame(1)$ofile, error = function(e) NA_character_)
+args <- commandArgs(FALSE)
+file_arg <- grep("^--file=", args, value = TRUE)
+script_file <- if (length(source_file) == 1L && !is.na(source_file) && nzchar(source_file)) {
+  source_file
+} else if (length(file_arg) > 0) {
+  sub("^--file=", "", file_arg[[1]])
+} else {
+  "workflow-figure.R"
+}
 
-script_dir <- if (!is.na(script_path)) dirname(script_path) else getwd()
+candidate_dirs <- unique(c(
+  getwd(),
+  file.path(getwd(), "paper"),
+  dirname(normalizePath(script_file, mustWork = FALSE)),
+  dirname(normalizePath(file.path(getwd(), script_file), mustWork = FALSE))
+))
+script_dir <- candidate_dirs[file.exists(file.path(candidate_dirs, "workflow-figure.R"))]
+if (length(script_dir) < 1) {
+  stop("Run workflow-figure.R from the paper directory or the package root.", call. = FALSE)
+}
+script_dir <- normalizePath(script_dir[[1]])
 dot_path <- file.path(script_dir, "workflow-model.dot")
 figure_path <- file.path(script_dir, "workflow-model.pdf")
 
