@@ -363,7 +363,8 @@ Version 2 APIs may also expose aggregation codelists and value sets, which can b
 
 \begin{Code}
 meta <- pxweb_get(url)
-pxweb_codelists(meta, variable = "Alder")[, c("id", "type", "label")]
+age_codelists <- pxweb_codelists(meta, variable = "Alder")
+age_codelists[, c("variable_code", "type", "label")]
 \end{Code}
 
 \begin{CodeOutput}
@@ -384,10 +385,12 @@ Helper functions express common selection patterns such as all values, the lates
 Queries are validated against metadata before calling the PxWeb API.
 
 \begin{Code}
+age_5_year_id <- age_codelists$id[age_codelists$label == "5-year intervals"][1]
+
 query <- list(
   Region = "00",
   Civilstand = "OG",
-  Alder = pxweb_aggregation("agg_Ålder5år"),
+  Alder = pxweb_aggregation(age_5_year_id),
   Kon = c("1", "2"),
   ContentsCode = "BE0101N1",
   Tid = pxweb_latest()
@@ -654,7 +657,7 @@ Entry & Provider & Language\\
 We are grateful to all package contributors and Pyry Kantanen and Jeba
 Akewak for technical assistance. The work has been supported by the
 Research Council of Finland (decision 372345 to LL), and is part of
-rOpenGov\footnote{\url{https://github.ropengov.io}}.
+rOpenGov\footnote{\url{https://ropengov.org/}}.
 
 
 \bibliography{magnusson-kainu-lahti}
