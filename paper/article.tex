@@ -155,28 +155,34 @@ The \pkg{pxweb} package therefore collects available provider configuration meta
 \subsection{Related software}
 \label{sec:related}
 
-The \pkg{pxweb} package sits between general data-retrieval packages and source-specific official-statistics packages.
+The relevant comparison for \pkg{pxweb} is the data-access workflow implied by PxWeb APIs rather than a particular statistical model.
+The \proglang{R} ecosystem contains several packages for accessing official statistics and other public data, but these tools differ in the publication systems and data models they target.
 Table~\ref{tab:related-software} summarizes the main distinctions.
-Whereas \pkg{pdfetch} provides access to broad economic and financial time-series sources \citep{pdfetch}, other packages support specific data providers such as Eurostat (\pkg{eurostat}) \citep{Lahti17eurostat}, World Bank (\pkg{WDI}) \citep{WDI}, or Open Street Map (\pkg{osmar}) \citep{osmar}.
-Furthermore, there are packages supporting generic data types (e.g., \pkg{webchem} \citep{szocs2020webchem}, \pkg{intsvy} \citep{caro2017intsvy}) or data standards such as the Statistical Data and Metadata eXchange (SDMX) standard, which is the most widely adopted alternative to PxWeb among statistical agencies \citep{willekens2023sdmx} supported by the \pkg{rsdmx} package \citep{rsdmx}.
-In contrast, \pkg{pxweb} targets a shared API family used by multiple statistical organizations.
+Provider-specific packages, such as \pkg{eurostat} \citep{Lahti17eurostat}, \pkg{WDI} \citep{WDI}, and \pkg{osmar} \citep{osmar}, provide convenient access to individual statistical sources or data families.
+Broader data-retrieval packages, such as \pkg{pdfetch} \citep{pdfetch}, \pkg{webchem} \citep{szocs2020webchem}, and \pkg{intsvy} \citep{caro2017intsvy}, support other domains or data collections.
+The \pkg{rsdmx} package supports the Statistical Data and Metadata eXchange (SDMX) standard, which is an important alternative standard for statistical data exchange \citep{rsdmx,willekens2023sdmx}.
+The closest software relatives are direct PxWeb API clients.
+In \proglang{R}, \pkg{PxWebApiData} reads PxWeb data by API and supports both PxWeb API version 1 and 2 \citep{PxWebApiData}.
+In \proglang{Python}, \pkg{pxwebpy} targets PxWeb API version 2 and emphasizes table search, metadata retrieval, automatic query batching, caching, and conversion to common dataframe libraries \citep{pxwebpy}.
 
-The \pkg{pxweb} package targets web APIs, including metadata discovery, query validation, request splitting, and response parsing.
-The official PxWeb software provides the server-side infrastructure through which statistical producers publish tables and API endpoints \citep{PxToolsPxWeb2Intro}.
-File-oriented tools such as \pkg{pxR} address a related but different problem: reading and writing local \code{.px} files \citep{pxR}.
+In this landscape, \pkg{pxweb} occupies the PxWeb API niche.
+It provides a common interface for discovering databases and tables, inspecting metadata, constructing valid queries, respecting provider limits, retrieving data, and retaining comments and citation information across statistical organizations that publish through PxWeb.
+This makes \pkg{pxweb} complementary to existing tools.
+When data are exposed through SDMX, an SDMX client is often the natural choice; when the task is to read archived PC-Axis files, a file reader such as \pkg{pxR} is appropriate \citep{pxR}; and when a project depends on a single well-supported provider, a provider-specific package may offer the shortest route.
+The contribution of \pkg{pxweb} is to support the common case where official statistics are distributed through PxWeb APIs and where users need a general, metadata-aware, and reproducible interface from \proglang{R}.
 
 Finally, \pkg{pxweb} can serve as infrastructure for more specialized
 packages and applications.
 Domain-specific packages can build on its API access, query, and parsing functionality while adding provider-specific analysis, visualization, or educational workflows.
-For example, the \pkg{hetu} \citep{Kantanen2025hetu} and \pkg{geofi} packages address complementary parts of the official-data ecosystem by simplifying the handling of personal and organizational identity codes, and access to Finnish geospatial data from Statistics Finland's spatial APIs \citep{geofi}, respectively.
+For example, the \pkg{hetu} package simplifies the handling of personal and organizational identity codes \citep{Kantanen2025hetu}, while \pkg{geofi} provides access to Finnish geospatial data from Statistics Finland's spatial APIs \citep{geofi}.
 
 
-\begin{table}[t!]
+\begin{table}[!htbp]
 \centering
 \small
-\begin{tabular}{p{0.25\textwidth}p{0.22\textwidth}p{0.43\textwidth}}
+\begin{tabular}{L{0.25\textwidth}L{0.22\textwidth}L{0.43\textwidth}}
 \hline
-Software type & R packages & Relation to \pkg{pxweb}\\
+Software type & Packages & Relation to \pkg{pxweb}\\
 \hline
 Provider-specific data clients &
 \pkg{eurostat}, \pkg{WDI}, \pkg{osmar} &
@@ -190,6 +196,9 @@ Work with local \code{.px} files\\
 SDMX clients &
 \pkg{rsdmx} &
 Access data via the alternative SDMX standard.\\
+Direct PxWeb API clients &
+\pkg{PxWebApiData}, \pkg{pxwebpy} &
+Address PxWeb APIs directly; \pkg{pxweb} emphasizes a general \proglang{R} workflow with catalogue support, S3 objects, validation, comments, and citation\\
 Downstream domain packages &
 \pkg{geofi} &
 Can build specialized workflows on top of official-data access\\
