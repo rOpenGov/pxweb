@@ -1,4 +1,5 @@
 \documentclass[article]{jss}
+\usepackage{array}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -33,6 +34,7 @@ This article introduces the motivation and design of \pkg{pxweb}, outlines the s
 %% template to the JSS template.
 \newcommand{\CRANpkg}[1]{\pkg{#1}}
 \newcommand{\Cpkg}[1]{\pkg{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 %% Force references with very long author lists to always use the
 %% abbreviated "et al." citation form, avoiding fully spelled-out
@@ -110,7 +112,7 @@ The \pkg{rsdmx} package \citep{rsdmx} supports the Statistical Data and Metadata
 
 The \pkg{pxweb} package fills a complementary role: it provides a general \proglang{R} interface to databases exposed through the PxWeb application programming interface (API) \citep{PxToolsPxWeb2Intro}.
 The package can navigate PxWeb resources, fetch metadata, construct and validate queries, retrieve data, convert responses into standard \proglang{R} data structures, and produce citation and provenance information for the source data.
-As of version 1.0.0, the \pkg{pxweb} package includes 46 API catalogue entries and supports both PxWeb API version 1 and 2.
+The package source submitted with this manuscript corresponds to a forthcoming version 1.0.0 release; it includes 46 API catalogue entries and supports both PxWeb API version 1 and 2.
 
 Data citation is another motivation for the package.
 Data reuse should document source organizations, accessed resources, version information, and retrieval times where possible but this faces many practical challenges \citep{Parsons2019}.
@@ -185,7 +187,7 @@ Retrieve broad data sources but do not target PxWeb metadata and query semantics
 PX/PC-Axis file tools &
 \pkg{pxR} &
 Work with local \code{.px} files\\
-SDMX-standard tools &
+SDMX clients &
 \pkg{rsdmx} &
 Access data via the alternative SDMX standard.\\
 Downstream domain packages &
@@ -202,8 +204,10 @@ Can build specialized workflows on top of official-data access\\
 
 The \pkg{pxweb} package is designed as a generic interface rather than a client for one statistical agency or API.
 Its core design goal is to provide a stable \proglang{R} workflow across PxWeb providers while preserving provider-specific metadata where it affects query construction, codelists, comments, and citation.
+The package is not a statistical modeling package in the sense of implementing new estimators or inferential procedures.
+Its contribution is instead infrastructure for reproducible access to official statistics APIs: it turns API discovery, metadata inspection, query construction, retrieval, conversion, comments, and citation into scriptable \proglang{R} operations.
 
-In version 1.0.0, the package interface has 39 exported functions, but ordinary analysis workflows are built from a smaller set of recommended functions.
+In the forthcoming version 1.0.0 release described here, the package interface has 39 exported functions, but ordinary analysis workflows are built from a smaller set of recommended functions.
 The central workflow is built around the \code{pxweb_get()} function, which retrieves hierarchy levels, table metadata, or table data depending on the supplied URL and query.
 The helper \code{pxweb_get_data()} wraps the same workflow and returns a \code{data.frame}.
 Additional methods, such as \code{as.data.frame()}, integrate the outputs directly with \pkg{tidyverse} workflows \citep{tidyverse2019} for subsequent filtering, reshaping, and visualization, allowing users to move from data retrieval to tidy data analysis \citep{Wickham2014tidy} and the broader statistical and probabilistic programming tools available through the \proglang{R} ecosystem.
@@ -212,10 +216,10 @@ Table~\ref{tab:workflow-functions} summarizes the main user-facing functions and
 
 The package is licensed under the BSD-2-Clause (aka FreeBSD) license, consistent with common practice for research software \citep{Morin2012}.
 
-\begin{table}[t!]
+\begin{table}[!htbp]
 \centering
 \small
-\begin{tabular}{p{0.24\textwidth}p{0.68\textwidth}}
+\begin{tabular}{L{0.24\textwidth}L{0.68\textwidth}}
 \hline
 Workflow part & Recommended functions and methods\\
 \hline
@@ -249,7 +253,31 @@ workflow.}
 
 Internally, the package represents API URLs, metadata, data, comments, and query objects with S3 classes.
 This allows common operations such as printing, validation, conversion with \code{as.data.frame()}, and combining split responses to behave consistently across API versions.
+Table~\ref{tab:object-classes} summarizes the main object classes used in ordinary workflows.
 The package uses \pkg{httr} for HTTP requests and \pkg{jsonlite} for JSON parsing \citep{httr,jsonlite}.
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabular}{L{0.25\textwidth}L{0.65\textwidth}}
+\hline
+Class & Role and common methods\\
+\hline
+\code{pxweb} &
+Represents an API endpoint created from a URL, including provider configuration, API version, and call history; printed with \code{print()}\\
+\code{pxweb_metadata} &
+Stores table dimensions, values, labels, time and elimination metadata, and selected version 2 metadata; used by \code{pxweb_metadata_dim()}, \code{pxweb_codelists()}, and \code{pxweb_validate_query_with_metadata()}\\
+\code{pxweb_query} &
+Represents selections to send to the API; created with \code{pxweb_query()}, validated, converted to JSON with \code{pxweb_query_as_json()}, and converted back to executable code with \code{pxweb_query_as_rcode()}\\
+\code{pxweb_data}, \code{pxweb_data_v2} &
+Represent retrieved table data for API versions 1 and 2; created by \code{pxweb_get()} with a query, converted with \code{as.data.frame()} or \code{as.matrix()}, inspected with \code{pxweb_data_dim()} and \code{pxweb_data_colnames()}, and cited with \code{pxweb_cite()}\\
+\code{pxweb_data_comments} &
+Collects dataset, dimension, value, and observation comments from \code{pxweb_data_comments()}; printed or converted to a \code{data.frame} for inspection and reporting\\
+\hline
+\end{tabular}
+\caption{\label{tab:object-classes}Main S3 object classes used by
+\pkg{pxweb} in ordinary data-access workflows.}
+\end{table}
 
 The bundled API catalogue is a practical layer on top of the generic API client.
 It stores provider URL templates, available languages, version paths, aliases, and citation metadata.
@@ -299,7 +327,7 @@ The package supports the full workflow shown in Figure~\ref{fig:workflow-model}:
 Interactive use starts with \code{pxweb_interactive()} for version 1, which allows a user to navigate a known API, select a table, build a query, optionally download data, and print reusable \proglang{R} code.
 Programmatic use follows the same steps with explicit function calls.
 
-Installation of the CRAN release version follows the standard procedure in R.
+For released versions, installation from CRAN follows the standard procedure in R.
 
 \begin{Code}
 install.packages("pxweb")
@@ -339,6 +367,7 @@ pxweb_codelists(meta, variable = "Alder")[, c("id", "type", "label")]
 
 The codelist labels are provider-supplied.
 In this example the English metadata endpoint returns English labels, while the \code{id} values remain provider identifiers that are passed unchanged to query helpers.
+The five-year age aggregation can therefore be selected from the metadata and stored as an object before query construction.
 
 Queries can be written as named \proglang{R} lists and converted to \code{pxweb_query} objects when needed.
 For codelists, the \code{id} column returned by \code{pxweb_codelists()} is passed to helpers such as \code{pxweb_aggregation()} or \code{pxweb_valueset()}.
@@ -409,6 +438,7 @@ metadata_url <- search_results$metadata_url[search_results$id == "TAB638"][1]
 
 We use a large but manageable subset of the table: all 21 Swedish counties, all marital-status categories, single-year ages from 0 to 100+, both sexes, the population count content variable, and all years from 1968 to 2024.
 These codes can all be accessed with the metadata object.
+The marital-status code with a non-ASCII provider character is written with a Unicode escape in the source below.
 
 \begin{Code}
 px_metadata <- pxweb_get(metadata_url)
@@ -439,7 +469,7 @@ county_codes <- c(
 
 query <- list(
   Region = county_codes,
-  Civilstand = c("OG", "G", "SK", "ÄNKL"),
+  Civilstand = c("OG", "G", "SK", "\u00c4NKL"),
   Alder = ages,
   Kon = c("1", "2"),
   ContentsCode = "BE0101N1",
@@ -512,7 +542,7 @@ The first two panels aggregate counties, marital statuses, ages, and sexes to sh
 The lower panels compare the age and sex structure in 1968 and 2024.
 The example demonstrates the main package workflow: a PxWeb API version 2 table is found through search, queried programmatically, split because it exceeds the API cell limit, inspected for comments, cited, and transformed into standard \proglang{R} objects for analysis and visualization.
 
-\begin{figure}[t!]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{case-study-population}
 \caption{\label{fig:case-study-population}Population development in
@@ -553,7 +583,7 @@ The package does not replace provider documentation or domain knowledge, but it 
 \begin{table}[!htbp]
 \centering
 \scriptsize
-\begin{tabular}{@{}p{0.30\textwidth}p{0.46\textwidth}p{0.14\textwidth}@{}}
+\begin{tabular}{@{}L{0.30\textwidth}L{0.46\textwidth}L{0.14\textwidth}@{}}
 \hline
 Entry & Provider & Language\\
 \hline
