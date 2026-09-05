@@ -136,7 +136,7 @@ You are welcome to contact us:
 - [Send a pull request](https://github.com/ropengov/pxweb)
 - [Star us on the Github page](https://github.com/ropengov/pxweb)
 - [Join the discussion in
-  Gitter](https://app.gitter.im/#/room/#rOpenGov_pxweb:gitter.im)
+  Gitter](https://app.gitter.im/#/room/%23rOpenGov_pxweb:gitter.im)
 
 ### Acknowledgements
 

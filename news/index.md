@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 0.19.2
+
+- Fixed PXWEB API v2 URL/language handling
+- Improved
+  [`pxweb_cite()`](https://ropengov.github.io/pxweb/reference/pxweb_cite.md)
+  handling for PXWEB API v2 responses.
+- Added selection handling for
+  [`pxweb_query()`](https://ropengov.github.io/pxweb/reference/pxweb_query.md)
+  workflows.
+- Fixed JSON-stat2 parsing and query handling edge cases.
+
 ## Version 0.18.0
 
 - Added support for PXWEB API v2, including v2 metadata, table, data and
