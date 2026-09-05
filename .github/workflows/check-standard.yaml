@@ -18,8 +18,8 @@ jobs:
       max-parallel: 1
       matrix:
         config:
-          - {r: 'devel', http-user-agent: 'release'}
           - {r: 'release'}
+          - {r: 'devel', http-user-agent: 'release'}
           - {r: 'oldrel-1'}
 
     env:
@@ -54,7 +54,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      max-parallel: 1
       matrix:
         config:
           - {r: 'devel'}
@@ -93,7 +92,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      max-parallel: 1
       matrix:
         config:
           - {r: 'devel'}
