@@ -2,7 +2,7 @@ Type: Package
 Package: pxweb
 Title: R Interface to PXWEB APIs
 Version: 1.0.0
-Date: 2026-09-01
+Date: 2026-09-05
 Authors@R: c(
     person("Mans", "Magnusson", , "mons.magnusson@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0296-2719")),
