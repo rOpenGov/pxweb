@@ -1,3 +1,10 @@
+# Version 0.19.2
+
+- Fixed PXWEB API v2 URL/language handling
+- Improved `pxweb_cite()` handling for PXWEB API v2 responses.
+- Added selection handling for `pxweb_query()` workflows.
+- Fixed JSON-stat2 parsing and query handling edge cases.
+
 # Version 0.18.0
 
 - Added support for PXWEB API v2, including v2 metadata, table, data and
