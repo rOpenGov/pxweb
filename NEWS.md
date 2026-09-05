@@ -6,7 +6,6 @@
 - Fixed JSON-stat2 parsing and query handling edge cases.
 
 # Version 0.18.0
->>>>>>> master
 
 - Added support for PXWEB API v2, including v2 metadata, table, data and
   JSON-stat2 response handling while preserving the existing v1 workflows.
