@@ -2,17 +2,15 @@
 <!-- badges: start -->
 
 [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
-[![R build
-status](https://github.com/rOpenGov/pxweb/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/pxweb/actions)
 [![codecov](https://codecov.io/gh/rOpenGov/pxweb/graph/badge.svg?token=zYtxsus27g)](https://app.codecov.io/gh/rOpenGov/pxweb)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/pxweb)](https://cran.r-project.org/package=pxweb)
 [![Downloads](http://cranlogs.r-pkg.org/badges/pxweb)](https://cran.r-project.org/package=pxweb)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/pxweb)](https://cran.r-project.org/package=pxweb)
-[![Gitter](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://app.gitter.im/#/room/#rOpenGov_pxweb:gitter.im?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://app.gitter.im/#/room/%23rOpenGov_pxweb:gitter.im?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Watch on
-GitHub](https://img.shields.io/github/watchers/ropengov/pxweb.svg?style=social)](https://github.com/ropengov/pxweb/watchers)
+GitHub](https://img.shields.io/github/watchers/ropengov/pxweb.svg?style=social)](https://github.com/rOpenGov/pxweb)
 [![Star on
-GitHub](https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social)](https://github.com/ropengov/pxweb/stargazers)
+GitHub](https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social)](https://github.com/rOpenGov/pxweb)
 [![R-CMD-check](https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -145,7 +143,7 @@ You are welcome to contact us:
 - [Send a pull request](https://github.com/ropengov/pxweb)
 - [Star us on the Github page](https://github.com/ropengov/pxweb)
 - [Join the discussion in
-  Gitter](https://app.gitter.im/#/room/#rOpenGov_pxweb:gitter.im)
+  Gitter](https://app.gitter.im/#/room/%23rOpenGov_pxweb:gitter.im)
 
 ### Acknowledgements
 
