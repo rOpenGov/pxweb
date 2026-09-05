@@ -2,9 +2,9 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [main, master, dev]
+    branches: ['**']
   pull_request:
-    branches: [main, master, dev]
+    branches: ['**']
 
 name: R-CMD-check
 
@@ -50,6 +50,16 @@ jobs:
           upload-snapshots: true
 
   R-CMD-check-macos:
+    if: >-
+      ${{
+        github.event_name == 'schedule' ||
+        github.ref_name == 'dev' ||
+        github.ref_name == 'main' ||
+        github.ref_name == 'master' ||
+        github.base_ref == 'dev' ||
+        github.base_ref == 'main' ||
+        github.base_ref == 'master'
+      }}
     needs: R-CMD-check
     runs-on: macos-latest
 
@@ -90,6 +100,16 @@ jobs:
           upload-snapshots: true
 
   R-CMD-check-windows:
+    if: >-
+      ${{
+        github.event_name == 'schedule' ||
+        github.ref_name == 'dev' ||
+        github.ref_name == 'main' ||
+        github.ref_name == 'master' ||
+        github.base_ref == 'dev' ||
+        github.base_ref == 'main' ||
+        github.base_ref == 'master'
+      }}
     needs: R-CMD-check
     runs-on: windows-2022
 

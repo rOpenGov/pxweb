@@ -3,7 +3,7 @@
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '0 0 * * 0'
+    - cron: '0 0 1 * *'
 
 name: R-CMD-check (standard)
 
@@ -47,6 +47,16 @@ jobs:
           upload-snapshots: true
 
   R-CMD-check-macos:
+    if: >-
+      ${{
+        github.event_name == 'schedule' ||
+        github.ref_name == 'dev' ||
+        github.ref_name == 'main' ||
+        github.ref_name == 'master' ||
+        github.base_ref == 'dev' ||
+        github.base_ref == 'main' ||
+        github.base_ref == 'master'
+      }}
     needs: R-CMD-check
     runs-on: macos-latest
 
@@ -85,6 +95,16 @@ jobs:
           upload-snapshots: true
 
   R-CMD-check-windows:
+    if: >-
+      ${{
+        github.event_name == 'schedule' ||
+        github.ref_name == 'dev' ||
+        github.ref_name == 'main' ||
+        github.ref_name == 'master' ||
+        github.base_ref == 'dev' ||
+        github.base_ref == 'main' ||
+        github.base_ref == 'master'
+      }}
     needs: R-CMD-check
     runs-on: windows-2022
 
