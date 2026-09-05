@@ -30,7 +30,7 @@
 @Article{Kantanen2025hetu,
   title   = {Validating and Extracting Information from National Identification
              Numbers in {R}: The Case of {Finland} and {Sweden}},
-  author  = {Pyry Kantanen and Erik B{\"u}low and Aleksi Lahtinen and Måns
+  author  = {Pyry Kantanen and Erik B{\"u}low and Aleksi Lahtinen and M{\r{a}}ns
              Magnusson and Jussi Paananen and Leo Lahti},
   journal = {The R Journal},
   year    = {2025},
@@ -100,7 +100,7 @@
   volume =	 6,
   number =	 67,
   pages =	 3900,
-  author =	 {Diego Hernangómez},
+  author =	 {Diego Hernang{\'o}mez},
   title =	 {{cffr}: Generate Citation File Format Metadata for
                   {R} Packages},
   journal =	 {Journal of Open Source Software},
@@ -126,7 +126,7 @@
                   Baker, James and
                   Bliven, Spencer and
                   Willighagen, Egon and
-                  Pérez-Suárez, David and
+                  P{\'e}rez-Su{\'a}rez, David and
                   Konovalov, Alexander},
   title        = {Citation File Format},
   month        = aug,
@@ -217,7 +217,7 @@
 @article{Vannan2020,
   author =	 {Vannan, Suresh and Downs, Robert R. and Meier, Walt
                   and Wilson, Bruce E. and Gerasimov, Irina V.},
-  title =	 {Data sets are foundational to research. Why don’t we
+  title =	 {Data sets are foundational to research. Why don't we
                   cite them?},
   journal =	 {Eos, Transactions American Geophysical Union
                   (Online)},
@@ -260,7 +260,8 @@
   number =	 1,
   pages =	 1198,
   year =	 2019,
-  publisher =	 {Springer-Verlag}
+  publisher =	 {Springer-Verlag},
+  doi =		 {10.1186/s12889-019-7535-1}
 }
 
 
@@ -268,10 +269,13 @@
 @inproceedings{lahti2018open,
   title={Open Data Science},
   author={Lahti, Leo},
-  booktitle={International Symposium on Intelligent Data Analysis},
+  booktitle={Advances in Intelligent Data Analysis XVII},
+  series={Lecture Notes in Computer Science},
+  volume={11191},
   pages={31--39},
   year={2018},
-  organization={Springer-Verlag}
+  publisher={Springer-Verlag},
+  doi={10.1007/978-3-030-01768-2_3}
 }
 
 @Misc{CranlogsPxweb2026,
@@ -282,23 +286,26 @@
   note =	 {Accessed 2026-06-30}
 }
 
-@TechReport{Solt2019,
+@Article{Solt2019,
   author =	 {Frederick Solt},
   title =	 {Measuring Income Inequality Across Countries and Over
                   Time: The Standardized World Income Inequality
                   Database},
-  institution =	 {Center for Open Science},
-  year =	 2019,
-  month =	 jul,
-  doi =		 {10.31235/osf.io/mwnje},
-  url =		 {https://doi.org/10.31235/osf.io/mwnje}
+  journal =	 {Social Science Quarterly},
+  year =	 2020,
+  volume =	 101,
+  number =	 3,
+  pages =	 {1183--1199},
+  month =	 may,
+  doi =		 {10.1111/ssqu.12795},
+  url =		 {https://doi.org/10.1111/ssqu.12795}
 }
 
 @Article{Tanskanen2026,
-  author =	 {Maiju Tanskanen and Aaro Beuker and Karoliina Suonpää
+  author =	 {Maiju Tanskanen and Aaro Beuker and Karoliina Suonp{\"a}{\"a}
                   and Kimmo Haapakangas and Janne Kivivuori},
-  title =	 {Nuorten vakavan väkivallan kehitystrendit eri
-                  osoittimien valossa: Toistettava menetelmä avoimien
+  title =	 {Nuorten vakavan v{\"a}kivallan kehitystrendit eri
+                  osoittimien valossa: Toistettava menetelm{\"a} avoimien
                   tilastotietokantojen analyysiin},
   journal =	 {Kriminologia},
   year =	 2026,
@@ -310,7 +317,7 @@
 }
 
 @TechReport{Tondel2025,
-  author =	 {Martin Tondel and Katja Gabrysch and Christopher Rääf
+  author =	 {Martin Tondel and Katja Gabrysch and Christopher R{\"a}{\"a}f
                   and Mats Isaksson},
   title =	 {A Model for Estimating Radiation Doses and Population
                   Cancer Risk in Sweden after the {Chernobyl} Nuclear
@@ -328,7 +335,7 @@
   publisher    = {{World Bank}},
   address      = {Washington, DC},
   year         = {2026},
-  note         = {Accessed 30 June 2026}
+  note         = {Accessed 2026-06-30}
 }
 
 @article{GrovesLyberg2010,
@@ -372,11 +379,28 @@
 
 @Manual{pxR,
   title = {{pxR}: {PC-Axis} with {R}},
-  author = {Carlos J. Gil Bellosta and Francisco J. Viciana and Oscar Perpinan Lamigueiro},
+  author = {Carlos J. Gil Bellosta and Francisco J. Viciana and Oscar Perpinan Lamigueiro and Emilio Torres Manzanera},
   year = {2025},
   note = {R package version 0.42.8},
   url = {https://CRAN.R-project.org/package=pxR},
   doi = {10.32614/CRAN.package.pxR}
+}
+
+@Manual{PxWebApiData,
+  title = {{PxWebApiData}: {PX-Web} Data by {API}},
+  author = {{\O}yvind Langsrud and Jan Bruusgaard and Solveig Bj{\o}rkholt and Susie Jentoft},
+  year = {2026},
+  note = {R package version 1.9.0},
+  url = {https://CRAN.R-project.org/package=PxWebApiData},
+  doi = {10.32614/CRAN.package.PxWebApiData}
+}
+
+@Manual{pxwebpy,
+  title = {{pxwebpy}: Client Library for the {PxWeb} {API} to Easily Load Data into a DataFrame},
+  author = {Stefan Furne},
+  year = {2026},
+  note = {Python package version 0.6.0},
+  url = {https://pypi.org/project/pxwebpy/}
 }
 
 
