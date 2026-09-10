@@ -57,6 +57,7 @@ require_cache <- function(path) {
   }
 }
 
+# Keep provider comments compact in printed replication output.
 abbreviate_comment <- function(x, width = 58) {
   too_long <- nchar(x, type = "width") > width
   x[too_long] <- paste0(substr(x[too_long], 1, width - 4), " ...")
@@ -111,7 +112,7 @@ if (refresh_data) {
   )
 }
 
-url <- search_results$metadata_url[search_results$id == "TAB638"][1]
+url <- search_results$metadata_url[1]
 url
 
 #' # Metadata and codelists
@@ -139,7 +140,7 @@ age_codelists_print
 #' period and aggregation codelists.
 
 #+ helper-query
-age_5_year_id <- age_codelists$id[age_codelists$label == "5-year intervals"][1]
+age_5_year_id <- age_codelists$id[age_codelists$label == "5-year intervals"]
 
 query <- list(
   Region = "00",
@@ -203,6 +204,7 @@ large_query <- list(
   Tid = years
 )
 
+# Compute the size
 prod(lengths(large_query))
 
 #' # Case-study data and figure
