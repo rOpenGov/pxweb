@@ -29,7 +29,7 @@ Users also need software that can bridge the gap between online statistical data
 
 There are many dedicated software packages that simplify and automate analysis workflows.
 They take into account variations in raw data formats, access details, metadata conventions, and typical use cases so that users can avoid repetitive programming tasks and reduce the risk of processing errors \citep{GrovesLyberg2010}.
-In R, several packages support programmatic data retrieval in different ways, from specific sources \citep{Lahti17eurostat, osmar, WDI}, broader compiled sources such as economic and financial time-series data \citep{pdfetch}, generic data sources \citep{szocs2020webchem, caro2017intsvy}, or specific statistical standards, such as the SDMX data standard \citep{rsdmx}.
+In R, several packages support programmatic data retrieval in different ways, from specific sources \citep{Lahti17eurostat, WDI}, broader compiled sources such as economic and financial time-series data \citep{pdfetch}, generic data sources \citep{szocs2020webchem, caro2017intsvy}, or specific statistical standards, such as the SDMX data standard \citep{rsdmx}.
 
 The \CRANpkg{pxweb} package \citep{pxweb} fills a complementary role: it provides a general R interface to databases exposed through the PxWeb application programming interface (API) \citep{PxToolsPxWeb2Intro}.
 The package can navigate PxWeb resources, fetch metadata, construct and validate queries, retrieve data, convert responses into standard R data structures.
@@ -78,7 +78,7 @@ The \CRANpkg{pxweb} package therefore collects available provider configuration 
 The R ecosystem contains several packages for accessing official statistics and other public data.
 However, these tools differ in the publication systems and data models they target.
 Table~\ref{tab:related-software} summarizes the main distinctions.
-Provider-specific packages, such as \CRANpkg{eurostat} \citep{Lahti17eurostat}, \CRANpkg{WDI} \citep{WDI}, and \CRANpkg{osmar} \citep{osmar}, provide convenient access to individual statistical sources or data families.
+Provider-specific packages, such as \CRANpkg{eurostat} \citep{Lahti17eurostat} and \CRANpkg{WDI} \citep{WDI}, provide convenient access to individual statistical sources or data families.
 Broader data-retrieval packages, such as \CRANpkg{pdfetch} \citep{pdfetch}, \CRANpkg{webchem} \citep{szocs2020webchem}, and \CRANpkg{intsvy} \citep{caro2017intsvy}, support broader data collection areas.
 The \CRANpkg{rsdmx} package supports the Statistical Data and Metadata eXchange (SDMX) standard, which is an important alternative standard for statistical data exchange \citep{rsdmx,willekens2023sdmx}.
 The closest software relatives are direct PxWeb API clients.
@@ -100,7 +100,7 @@ The contribution of \CRANpkg{pxweb} is to support the common case where official
 Software type & Packages & Relation to \CRANpkg{pxweb}\\
 \midrule
 Provider-specific data clients &
-\CRANpkg{eurostat}, \CRANpkg{WDI}, \CRANpkg{osmar} &
+\CRANpkg{eurostat}, \CRANpkg{WDI} &
 Focus on one data provider or data family \\
 Generic data retrieval tools &
 \CRANpkg{pdfetch}, \CRANpkg{webchem}, \CRANpkg{intsvy} &
@@ -235,7 +235,7 @@ For the typical case of fewer than seven splittable dimensions, all orderings ar
 Otherwise, a random sample of orderings is used to keep computation bounded.
 
 The \code{pxweb} package follows common software engineering practices, including version control, automated tests, API fixtures, continuous integration, and test workflows for selected APIs \citep{PerezRiverol2016}.
-The default local test suite currently uses mocked and offline-safe tests and live contnous integration (CI) tests at GitHub.
+The default local test suite uses mocked and offline-safe tests, and live tests run in continuous integration (CI) on GitHub.
 
 \begin{figure}[t!]
 \centering
