@@ -1,5 +1,29 @@
-To reproduce the JSS manuscript PDF and replication HTML, run in R from this
-directory:
+## The R Journal manuscript
+
+`paperRJ.tex` is the article body. Build it with the journal's wrapper by
+running this in R from this directory:
+
+```r
+tools::texi2pdf("RJwrapper.tex", clean = TRUE)
+```
+
+This produces `RJwrapper.pdf` using `paperRJ.bib` and the two figure PDFs.
+The local `RJournal.sty` comes from the journal's official template and is
+needed to compile here. The journal's LaTeX author guide excludes it from the
+submission archive.
+
+Run the R Journal replication entry point from this directory with
+`Rscript --vanilla paperRJ.R`. It runs the examples and regenerates both
+figures using the snapshots in `data/`. Install `pxweb` 1.0.0 or later and
+`knitr` first. Graphviz is optional.
+
+The generated `rj-submission/` folder contains the staged manuscript,
+replication files, figures, PDF, and motivating letter.
+
+## Replication and standard LaTeX build
+
+To regenerate the figures, replication HTML, and standard article PDF, run in
+R from this directory:
 
 ```r
 source("main.R")

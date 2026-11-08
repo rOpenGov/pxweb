@@ -2,29 +2,36 @@
 % Copyright (C) 2010 by the R Foundation
 % Copyright (C) 2013 by the R Journal
 %
-% Originally written by Kurt Hornik and Friedrich Leisch with subsequent 
+% Originally written by Kurt Hornik and Friedrich Leisch with subsequent
 % edits by the editorial board
+%
+% CAUTION:
+% Do not modify this style file. Any changes to this file will be reset when your
+% article is submitted.
+% If you must modify the style or add LaTeX packages to the article, these
+% should be specified in RJwrapper.tex
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{RJournal}[2013/08/27 v0.13 RJournal package]
+\ProvidesPackage{RJournal}[2025/07/15 v0.16 RJournal package]
 
 \RequirePackage{tikz}
 
 % Overall page layout, fonts etc -----------------------------------------------
 
 % Issues of of \emph{The R Journal} are created from the standard \LaTeX{}
-% document class \pkg{report}. 
+% document class \pkg{report}.
 
 \RequirePackage{geometry}
-\geometry{a4paper, 
+\geometry{a4paper,
    textwidth=14cm, top=1cm, bottom=1cm,
    includehead,includefoot,centering,
    footskip=1.5cm}
 \raggedbottom
+\sloppy
 
 \RequirePackage{fancyhdr}
 \fancyhead{}
-\fancyheadoffset{2cm} 
+\fancyheadoffset{2cm}
 \fancyhead[L]{\textsc{\RJ@sectionhead}}
 \fancyhead[R]{\thepage}
 \fancyfoot{}
@@ -33,7 +40,7 @@
 \pagestyle{fancy}
 
 % We use the following fonts (all with T1 encoding):
-% 
+%
 %   rm   & palatino
 %   tt   & inconsolata
 %   sf   & helvetica
@@ -91,19 +98,19 @@
 \renewcommand{\title}        [1]{\def\RJ@title{#1}}
 \newcommand  {\subtitle}     [1]{\def\RJ@subtitle{#1}}
 
-% Control appearance of titles: make slightly smaller than usual, and 
+% Control appearance of titles: make slightly smaller than usual, and
 % suppress section numbering. See http://tex.stackexchange.com/questions/69749
-% for why we don't use \setcounter{secnumdepth}{-1} 
+% for why we don't use \setcounter{secnumdepth}{-1}
 
 \usepackage[medium]{titlesec}
 \usepackage{titletoc}
-\titleformat{\section}   {\normalfont\large\bfseries}{}{0em}{}
-\titleformat{\subsection}{\normalfont\normalsize\bfseries}{}{0em}{}
+\titleformat{\section}   {\normalfont\large\bfseries}{\arabic{section}}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\arabic{section}.\arabic{subsection}}{0.5em}{}
 \titlecontents{chapter}   [0em]{}{}{}{\titlerule*[1em]{.}\contentspage}
 
 % Article layout ---------------------------------------------------------------
 
-% Environment |article| clears the article header information at its beginning. 
+% Environment |article| clears the article header information at its beginning.
 % We use |\FloatBarrier| from the placeins package to keep floats within
 % the article.
 \RequirePackage{placeins}
@@ -112,12 +119,8 @@
 % Refereed articles should have an abstract, so we redefine |\abstract| to
 % give the desired style
 
-\renewcommand{\abstract}[1]{%
-\setstretch{1}%
-\noindent%
-\small%
-\textbf{Abstract} #1 
-}
+\renewcommand{\abstract}[1]{\noindent\textbf{Abstract} #1}
+\renewenvironment{abstract}{\noindent\textbf{Abstract}~}{}
 
 % The real work is done by a redefined version of |\maketitle|.  Note
 % that even though we do not want chapters (articles) numbered, we
@@ -167,13 +170,14 @@
 }
 
 % We want bibliographies as starred sections within articles.
-% 
+%
 \RequirePackage[sectionbib,round]{natbib}
 \bibliographystyle{abbrvnat}
+\renewcommand{\bibsection}{\section*{References}}
 
 % Equations, figures and tables are counted within articles, but we do
 % not show the article number. For equations it becomes a bit messy to avoid
-% having hyperref getting it wrong. 
+% having hyperref getting it wrong.
 
 % \numberwithin{equation}{chapter}
 \renewcommand{\theequation}{\@arabic\c@equation}
@@ -201,9 +205,9 @@
   \noindent
   \begin{center}
     \fontsize{50pt}{50pt}\selectfont
-    The \raisebox{-8pt}{\includegraphics[height=77pt]{Rlogo-4}}\hspace{10pt}
+    The \raisebox{-8pt}{\includegraphics[height=77pt]{Rlogo-5}}\hspace{10pt}
     Journal
-  
+
   \end{center}
   {\large \hfill Volume \RJ@volume/\RJ@number, \RJ@month{} \RJ@year \quad}
 
@@ -266,7 +270,7 @@
 \newcommand{\CRANpkg}[1]{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}%
 \let\cpkg=\CRANpkg
 \newcommand{\ctv}[1]{\href{https://CRAN.R-project.org/view=#1}{\emph{#1}}}
-\newcommand{\BIOpkg}[1]{\href{http://www.bioconductor.org/packages/release/bioc/html/#1.html}{\pkg{#1}}}
+\newcommand{\BIOpkg}[1]{\href{https://www.bioconductor.org/packages/release/bioc/html/#1.html}{\pkg{#1}}}
 
 % Example environments ---------------------------------------------------------
 \RequirePackage{fancyvrb}
@@ -309,6 +313,18 @@
 \newcommand{\COR}{\operatorname{cor}}
 
 % Figures ----------------------------------------------------------------------
+
+% For use with pandoc > 3.2.1
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 
 \RequirePackage[font=small,labelfont=bf]{caption}
 
