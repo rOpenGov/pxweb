@@ -233,6 +233,7 @@ test_that(desc = "PXWEB API v2 response parser stores non JSON-stat2 output", {
   expect_silent(path <- pxweb_parse_response(response))
   expect_true(file.exists(path))
   expect_match(path, "\\.csv$")
+  expect_identical(readBin(path, "raw", n = length(response$content)), response$content)
 })
 
 test_that(desc = "PXWEB API v2 data.frame wrapper requires JSON-stat2", {
