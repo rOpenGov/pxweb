@@ -195,6 +195,13 @@ pxweb_get_api_test_data_frame <- function(x) {
 #' @return
 #' A data.frame with one row per catalogue URL.
 #'
+#' @examples
+#' \dontrun{
+#' # Check only the Statistics Sweden entry, rather than the whole catalogue.
+#' apis <- pxweb_api_catalogue()["api.scb.se"]
+#' pxweb_audit_api_catalogue_config(apis, timeout = 5, verbose = FALSE)
+#' }
+#'
 #' @export
 pxweb_audit_api_catalogue_config <- function(apis = pxweb_api_catalogue(), timeout = 10, verbose = TRUE) {
   checkmate::assert_class(apis, "list")

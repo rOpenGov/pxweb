@@ -12,6 +12,14 @@ pxweb_query_as_rcode(pxq)
 \description{
 Print a \code{pxweb_query} object as R code
 }
+\examples{
+query_file <- system.file(
+  "extdata", "examples", "json_query_example.json", package = "pxweb"
+)
+pxq <- pxweb_query(query_file)
+pxweb_query_as_rcode(pxq)
+
+}
 \seealso{
 \code{\link{pxweb_query_as_json}}, \code{\link{pxweb_query}}
 }

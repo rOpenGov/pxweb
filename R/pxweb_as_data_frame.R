@@ -10,6 +10,17 @@
 #'
 #' @seealso \code{\link[base]{as.data.frame}}.
 #'
+#' @examples
+#' \dontrun{
+#' url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
+#' query <- list(
+#'   Region = "00", Civilstand = "OG", Alder = "0", Kon = "1",
+#'   ContentsCode = "BE0101N1", Tid = "2024"
+#' )
+#' population <- pxweb_get(url, query = query)
+#' pxweb_as_data_frame(population, column.name.type = "code", variable.value.type = "code")
+#' }
+#'
 #' @export
 pxweb_as_data_frame <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = FALSE, column.name.type = "text", variable.value.type = "text") {
   checkmate::assert_choice(column.name.type, c("code", "text"))

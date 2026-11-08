@@ -24,3 +24,11 @@ A data.frame with one row per catalogue URL.
 Checks whether each version and language combination in a PXWEB API
 catalogue entry exposes a valid config endpoint.
 }
+\examples{
+\dontrun{
+# Check only the Statistics Sweden entry, rather than the whole catalogue.
+apis <- pxweb_api_catalogue()["api.scb.se"]
+pxweb_audit_api_catalogue_config(apis, timeout = 5, verbose = FALSE)
+}
+
+}

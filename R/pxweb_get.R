@@ -118,6 +118,14 @@ pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text"
 #' @param ... Further arguments sent to \code{httr::POST} (for queries) or \code{httr::GET} (for query = \code{NULL}).
 #'            If used with query, also supply a \code{pxweb_metadata} object. Otherwise the same parameters are sent to
 #'            both \code{httr::POST} and \code{httr::GET}.
+#'
+#' @examples
+#' \dontrun{
+#' url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
+#' metadata <- pxweb_advanced_get(url, config = httr::timeout(10))
+#' metadata
+#' }
+#'
 #' @export
 pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls = FALSE, pxmdo = NULL, output_format = "json-stat2", ...) {
   checkmate::assert_flag(log_http_calls)
