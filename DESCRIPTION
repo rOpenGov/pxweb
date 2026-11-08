@@ -36,16 +36,15 @@ Depends:
 Imports: 
     checkmate,
     curl,
+    digest,
     httr (>= 1.1),
     jsonlite
 Suggests: 
-    digest,
     httptest,
     knitr,
     remotes,
     rmarkdown,
-    testthat (>= 3.1.7),
-    xml2
+    testthat (>= 3.1.7)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
