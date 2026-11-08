@@ -20,5 +20,10 @@ LaTeX search path and run this command from this folder:
 
     Rscript --vanilla -e 'tools::texi2pdf("RJwrapper.tex", clean = TRUE)'
 
+From the staged folder in the repository, this command uses the style in the
+parent directory on macOS or Linux:
+
+    TEXINPUTS=..: Rscript --vanilla -e 'tools::texi2pdf("RJwrapper.tex", clean = TRUE)'
+
 The R Journal supplies RJournal.sty in its LaTeX template:
 https://github.com/rjournal/share/raw/refs/heads/master/RJtemplate.zip

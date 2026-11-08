@@ -19,6 +19,12 @@ figures using the snapshots in `data/`. Install `pxweb` 1.0.0 or later and
 
 The generated `rj-submission/` folder contains the staged manuscript,
 replication files, figures, PDF, and motivating letter.
+From inside that folder, this command uses the style in the parent directory
+on macOS or Linux:
+
+```sh
+TEXINPUTS=..: Rscript --vanilla -e 'tools::texi2pdf("RJwrapper.tex", clean = TRUE)'
+```
 
 ## Replication and standard LaTeX build
 
