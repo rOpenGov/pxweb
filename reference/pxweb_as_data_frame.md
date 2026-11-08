@@ -190,3 +190,17 @@ pxweb_pxd_slot_idx_pos(x)
 ## See also
 
 [`as.data.frame`](https://rdrr.io/r/base/as.data.frame.html).
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
+query <- list(
+  Region = "00", Civilstand = "OG", Alder = "0", Kon = "1",
+  ContentsCode = "BE0101N1", Tid = "2024"
+)
+population <- pxweb_get(url, query = query)
+pxweb_as_data_frame(population, column.name.type = "code", variable.value.type = "code")
+} # }
+```

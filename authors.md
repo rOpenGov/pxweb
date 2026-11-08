@@ -35,14 +35,14 @@ Source:
 Magnusson M, Kainu M, Huovari J, Lahti L (2026). *pxweb: R Interface to
 PXWEB APIs*.
 [doi:10.32614/CRAN.package.pxweb](https://doi.org/10.32614/CRAN.package.pxweb).
-R package version 0.19.2, <https://github.com/rOpenGov/pxweb>.
+R package version 0.19.3, <https://github.com/rOpenGov/pxweb>.
 
     @Manual{R-pxweb,
       title = {{pxweb: R Interface to PXWEB APIs}},
       doi = {10.32614/CRAN.package.pxweb},
       author = {Mans Magnusson and Markus Kainu and Janne Huovari and Leo Lahti},
       year = {2026},
-      version = {0.19.2},
-      note = {R package version 0.19.2},
+      version = {0.19.3},
+      note = {R package version 0.19.3},
       url = {https://github.com/rOpenGov/pxweb},
     }

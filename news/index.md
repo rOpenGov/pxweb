@@ -2,6 +2,8 @@
 
 ## Version 0.19.2
 
+CRAN release: 2026-09-06
+
 - Fixed PXWEB API v2 URL/language handling
 - Improved
   [`pxweb_cite()`](https://ropengov.github.io/pxweb/reference/pxweb_cite.md)

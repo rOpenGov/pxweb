@@ -905,13 +905,13 @@ We created this vignette with
 sessionInfo()
 ```
 
-    ## R version 4.6.1 (2026-06-24)
+    ## R version 4.6.2 (2026-10-29)
     ## Platform: x86_64-pc-linux-gnu
-    ## Running under: Ubuntu 24.04.4 LTS
+    ## Running under: Ubuntu 26.04.1 LTS
     ## 
     ## Matrix products: default
     ## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-    ## LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
+    ## LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.32.so;  LAPACK version 3.12.0
     ## 
     ## locale:
     ##  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -926,14 +926,14 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] pxweb_0.19.2
+    ## [1] pxweb_0.19.3
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] backports_1.5.1   digest_0.6.39     desc_1.4.3        R6_2.6.1         
-    ##  [5] fastmap_1.2.0     xfun_0.60         cachem_1.1.0      knitr_1.51       
+    ##  [5] fastmap_1.2.0     xfun_0.62         cachem_1.1.0      knitr_1.52       
     ##  [9] htmltools_0.5.9   rmarkdown_2.32    lifecycle_1.0.5   cli_3.6.6        
     ## [13] sass_0.4.10       pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4  
-    ## [17] systemfonts_1.3.2 compiler_4.6.1    tools_4.6.1       ragg_1.5.2       
+    ## [17] systemfonts_1.3.2 compiler_4.6.2    tools_4.6.2       ragg_1.5.2       
     ## [21] checkmate_2.3.4   bslib_0.12.0      evaluate_1.0.5    yaml_2.3.12      
-    ## [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
+    ## [25] otel_0.3.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
     ## [29] htmlwidgets_1.6.4

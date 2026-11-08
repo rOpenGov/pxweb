@@ -30,3 +30,13 @@ pxweb_audit_api_catalogue_config(
 ## Value
 
 A data.frame with one row per catalogue URL.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Check only the Statistics Sweden entry, rather than the whole catalogue.
+apis <- pxweb_api_catalogue()["api.scb.se"]
+pxweb_audit_api_catalogue_config(apis, timeout = 5, verbose = FALSE)
+} # }
+```

@@ -63,3 +63,13 @@ specific arguments in `httr` calls or what to debug `httr` calls.
 
 [`pxweb_get()`](https://ropengov.github.io/pxweb/reference/pxweb_get.md)
 is a wrapper for standard use.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
+metadata <- pxweb_advanced_get(url, config = httr::timeout(10))
+metadata
+} # }
+```

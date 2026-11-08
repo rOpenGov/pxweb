@@ -134,7 +134,8 @@ You are welcome to contact us:
   of [`sessionInfo()`](https://rdrr.io/r/utils/sessionInfo.html) and
   `packageVersion("pxweb")`)
 - [Send a pull request](https://github.com/ropengov/pxweb)
-- [Star us on the Github page](https://github.com/ropengov/pxweb)
+- Use **Watch** or **Star** at the top of the [GitHub
+  repository](https://github.com/rOpenGov/pxweb).
 - [Join the discussion in
   Gitter](https://app.gitter.im/#/room/%23rOpenGov_pxweb:gitter.im)
 
