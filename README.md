@@ -7,10 +7,6 @@
 [![Downloads](http://cranlogs.r-pkg.org/badges/pxweb)](https://cran.r-project.org/package=pxweb)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/pxweb)](https://cran.r-project.org/package=pxweb)
 [![Gitter](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://app.gitter.im/#/room/%23rOpenGov_pxweb:gitter.im?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![GitHub
-Watch](man/figures/github-watch.svg)](https://github.com/rOpenGov/pxweb "Open pxweb on GitHub to watch it")
-[![GitHub
-Star](man/figures/github-star.svg)](https://github.com/rOpenGov/pxweb "Open pxweb on GitHub to star it")
 [![R-CMD-check](https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
