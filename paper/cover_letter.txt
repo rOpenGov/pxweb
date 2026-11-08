@@ -1,12 +1,12 @@
 Dear Editors,
 
-We are happy to submit the manuscript “Opening Up Official Statistics in R with pxweb” for consideration in the Journal of Statistical Software.
+We are pleased to submit “Opening Up Official Statistics in R with pxweb” as a contributed research article for The R Journal.
 
-The manuscript presents pxweb, an R package for programmatic access to official statistics disseminated through the PxWeb API. PxWeb is used by national, regional, and international statistical organisations. The package supports the complete workflow from API discovery and metadata inspection to query construction, request validation, retrieval, conversion to R data structures, comment extraction, and citation of retrieved data.
+Official statistics are used across disciplines, but retrieving them through PxWeb requires users to interpret table metadata, work within provider limits, and record which data they retrieved. The manuscript presents pxweb, a general R client for both PxWeb API versions. It compares pxweb with related software and explains how its common interface validates selections against provider metadata, splits large requests into smaller ones, and preserves notes and citation information.
 
-Although pxweb is primarily a data access package rather than a package introducing a new statistical method, we believe it fits well within the scope of JSS. Reliable access to official statistics is a prerequisite for many statistical analyses, and pxweb addresses several statistical software challenges that arise in this setting. In this respect, the manuscript is similar in spirit to other JSS articles presenting infrastructure for statistical data access, retrieval, or reuse, such as packages for accessing economic, survey, chemical, geospatial, and statistical-exchange data sources.
+The paper complements the package vignette by explaining the design of the batching algorithm and showing how provider configuration, query validation, and response handling work together. A case study uses a 967,176-cell population query from Statistics Sweden to demonstrate the workflow from table discovery to analysis and visualization. The accompanying scripts and cached inputs reproduce the reported results and figures without depending on a live API.
 
-We believe the manuscript will be of interest to JSS readers who work with official statistics, reproducible data pipelines, public-sector data, survey and register-based research, and statistical analysis workflows that depend on regularly updated external data sources. The package helps bridge the gap between interactive statistical databases and scripted, reproducible analysis in R.
+pxweb has been available on CRAN since 2014 and has been used in published research across several fields, as documented in the manuscript. The package includes a workflow vignette and automated tests that check returned values. We expect the paper to interest R users who work with official statistics, as well as developers of clients for public statistical databases.
 
 The manuscript has not been published previously and is not under consideration elsewhere. All authors have approved the submission.
 

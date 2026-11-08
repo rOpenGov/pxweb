@@ -28,10 +28,7 @@ candidate_dirs <- unique(c(
   file.path(getwd(), "paper"),
   dirname(normalizePath(script_file, mustWork = FALSE))
 ))
-paper_dir <- candidate_dirs[
-  file.exists(file.path(candidate_dirs, "article.tex")) &
-    file.exists(file.path(candidate_dirs, "case-study.R"))
-]
+paper_dir <- candidate_dirs[file.exists(file.path(candidate_dirs, "case-study.R"))]
 if (length(paper_dir) < 1) {
   stop("Run code.R from the paper directory or the package root.", call. = FALSE)
 }
@@ -112,7 +109,10 @@ if (refresh_data) {
   )
 }
 
-url <- search_results$metadata_url[1]
+url <- search_results$metadata_url[search_results$id == "TAB638"][1]
+if (is.na(url)) {
+  stop("Could not find Statistics Sweden table TAB638 in the search results.", call. = FALSE)
+}
 url
 
 #' # Metadata and codelists
@@ -183,11 +183,15 @@ pxweb_cite(px_data)
 
 #' # Case-study query
 #'
-#' The case study uses all Swedish counties, all marital-status categories,
+#' The case study uses the metadata for table TAB638 and selects all Swedish
+#' counties, all marital-status categories,
 #' single-year ages from 0 to 100+, both sexes, the population count content
 #' variable, and all years from 1968 to 2024.
 
 #+ case-study-query
+px_metadata <- meta
+px_metadata
+
 years <- as.character(1968:2024)
 ages <- c(as.character(0:99), "100+")
 county_codes <- c(
@@ -203,6 +207,9 @@ large_query <- list(
   ContentsCode = "BE0101N1",
   Tid = years
 )
+
+pxq <- pxweb_query(large_query)
+pxq
 
 # Compute the size
 prod(lengths(large_query))
