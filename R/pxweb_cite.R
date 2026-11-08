@@ -5,6 +5,18 @@
 #'
 #' @param x a \code{pxweb_data} or \code{pxweb_data_v2} object to cite.
 #' @param style see \code{\link[utils]{bibentry}}.
+#'
+#' @examples
+#' \dontrun{
+#' url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
+#' query <- list(
+#'   Region = "00", Civilstand = "OG", Alder = "0", Kon = "1",
+#'   ContentsCode = "BE0101N1", Tid = "2024"
+#' )
+#' population <- pxweb_get(url, query = query)
+#' pxweb_cite(population)
+#' }
+#'
 #' @export
 pxweb_cite <- function(x, style = "citation") {
   if (!inherits(x, "pxweb_data") && !inherits(x, "pxweb_data_v2")) {

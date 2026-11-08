@@ -7,10 +7,6 @@
 [![Downloads](http://cranlogs.r-pkg.org/badges/pxweb)](https://cran.r-project.org/package=pxweb)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/pxweb)](https://cran.r-project.org/package=pxweb)
 [![Gitter](https://badges.gitter.im/rOpenGov/pxweb.svg)](https://app.gitter.im/#/room/%23rOpenGov_pxweb:gitter.im?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Watch on
-GitHub](https://img.shields.io/github/watchers/ropengov/pxweb.svg?style=social)](https://github.com/rOpenGov/pxweb)
-[![Star on
-GitHub](https://img.shields.io/github/stars/ropengov/pxweb.svg?style=social)](https://github.com/rOpenGov/pxweb)
 [![R-CMD-check](https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rOpenGov/pxweb/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -141,7 +137,8 @@ You are welcome to contact us:
   reports](https://github.com/ropengov/pxweb/issues) (provide the output
   of `sessionInfo()` and `packageVersion("pxweb")`)
 - [Send a pull request](https://github.com/ropengov/pxweb)
-- [Star us on the Github page](https://github.com/ropengov/pxweb)
+- Use **Watch** or **Star** at the top of the [GitHub
+  repository](https://github.com/rOpenGov/pxweb).
 - [Join the discussion in
   Gitter](https://app.gitter.im/#/room/%23rOpenGov_pxweb:gitter.im)
 

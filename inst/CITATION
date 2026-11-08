@@ -4,8 +4,6 @@ pkg <- meta$Package
 title <- gsub("'", "", meta$Title)
 doi <- paste0("10.32614/CRAN.package.", pkg)
 
-citHeader("Kindly cite the pxweb R package as follows:")
-
 bibentry(bibtype="Manual",
   header = sprintf("Kindly cite the '%s' R package as follows:", pkg),
   title = sprintf("{%s: %s}", pkg, title),

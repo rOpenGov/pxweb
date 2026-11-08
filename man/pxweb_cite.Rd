@@ -17,3 +17,15 @@ Cite a PXWEB data object
 \details{
 Functionality to automatic cite PXWEB data objects.
 }
+\examples{
+\dontrun{
+url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
+query <- list(
+  Region = "00", Civilstand = "OG", Alder = "0", Kon = "1",
+  ContentsCode = "BE0101N1", Tid = "2024"
+)
+population <- pxweb_get(url, query = query)
+pxweb_cite(population)
+}
+
+}
