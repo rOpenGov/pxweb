@@ -7,6 +7,22 @@
 #'
 #' @param x a \code{httr} response object from a PXWEB call.
 #'
+#' @return
+#' \code{pxweb_parse_response()} returns the parsed response or, for file-based
+#' formats, a path to the downloaded file. \code{is_pxweb_response()} returns
+#' \code{TRUE} if the response can be parsed and \code{FALSE} otherwise.
+#'
+#' @examples
+#' \dontrun{
+#' url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
+#' response <- httr::GET(url, httr::timeout(10))
+#' httr::stop_for_status(response)
+#' if (is_pxweb_response(response)) {
+#'   metadata <- pxweb_parse_response(response)
+#'   print(metadata)
+#' }
+#' }
+#'
 #' @export
 pxweb_parse_response <- function(x) {
   checkmate::assert_class(x, "response")

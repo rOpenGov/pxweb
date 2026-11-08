@@ -575,6 +575,13 @@ assert_pxweb_query_v2 <- function(x) {
 #'
 #' @seealso \code{\link{pxweb_query_as_json}}, \code{\link{pxweb_query}}
 #'
+#' @examples
+#' query_file <- system.file(
+#'   "extdata", "examples", "json_query_example.json", package = "pxweb"
+#' )
+#' pxq <- pxweb_query(query_file)
+#' pxweb_query_as_rcode(pxq)
+#'
 #' @export
 pxweb_query_as_rcode <- function(pxq) {
   checkmate::assert_class(pxq, "pxweb_query")

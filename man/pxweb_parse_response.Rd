@@ -12,8 +12,25 @@ is_pxweb_response(x)
 \arguments{
 \item{x}{a \code{httr} response object from a PXWEB call.}
 }
+\value{
+\code{pxweb_parse_response()} returns the parsed response or, for file-based
+formats, a path to the downloaded file. \code{is_pxweb_response()} returns
+\code{TRUE} if the response can be parsed and \code{FALSE} otherwise.
+}
 \description{
 The function parses the response from a call made to a PXWEB API
 using the \code{httr} R package. In this way it is possible to parse the
 content of calls made outside the pxweb R package.
+}
+\examples{
+\dontrun{
+url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
+response <- httr::GET(url, httr::timeout(10))
+httr::stop_for_status(response)
+if (is_pxweb_response(response)) {
+  metadata <- pxweb_parse_response(response)
+  print(metadata)
+}
+}
+
 }

@@ -246,9 +246,13 @@ test_that(desc = "PXWEB API v2 data objects can be cited", {
     class = c("pxweb_data_v2", "pxweb_data_jsonstat2", "list")
   )
 
-  expect_output(pxweb_cite(x), regexp = "Population by region")
-  expect_output(pxweb_cite(x), regexp = "Statistics Sweden")
-  expect_output(pxweb_cite(x), regexp = "pxweb R package")
+  output <- capture.output(pxweb_cite(x))
+  citation <- paste(output, collapse = "\n")
+  expect_match(citation, "Population by region")
+  expect_match(citation, "Statistics Sweden")
+  expect_match(citation, "pxweb R package")
+  headings <- grep("^Kindly cite the '?pxweb'? R package as follows:$", output)
+  expect_length(headings, 1L)
 })
 
 test_that(desc = "PXWEB API v2 constructor fixture contract", {

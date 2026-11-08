@@ -42,3 +42,11 @@ This function is intended for more advanced users that want to supply specific a
 
 \code{pxweb_get()} is a wrapper for standard use.
 }
+\examples{
+\dontrun{
+url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
+metadata <- pxweb_advanced_get(url, config = httr::timeout(10))
+metadata
+}
+
+}
