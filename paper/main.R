@@ -1,4 +1,4 @@
-# To reproduce the JSS manuscript PDF and replication HTML:
+# To reproduce the standard LaTeX manuscript PDF and replication HTML:
 
 local({
 

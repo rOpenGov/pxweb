@@ -1,9 +1,44 @@
-\documentclass[article]{jss}
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
 \usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{fancyvrb}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% declarations for a standard article build %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareRobustCommand{\pkg}[1]{\textsf{#1}}
+\DeclareRobustCommand{\proglang}[1]{\textsf{#1}}
+\DeclareRobustCommand{\code}[1]{\texttt{\detokenize{#1}}}
+\DeclareRobustCommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand{\Plainauthor}[1]{}
+\newcommand{\Plaintitle}[1]{}
+\newcommand{\Shorttitle}[1]{}
+\newcommand{\Plainkeywords}[1]{}
+\newcommand{\Address}[1]{\gdef\articleaddress{#1}}
+\newcommand{\And}{\and}
+\makeatletter
+\newcommand{\Abstract}[1]{\gdef\articleabstract{#1}}
+\newcommand{\Keywords}[1]{\gdef\articlekeywords{#1}}
+\newcommand{\printfrontmatter}{%
+  \maketitle
+  \begin{abstract}
+  \articleabstract
+  \end{abstract}
+  \noindent\textbf{Keywords:} \articlekeywords\par\bigskip
+}
+\makeatother
+\DefineVerbatimEnvironment{Code}{Verbatim}{fontsize=\small}
+\DefineVerbatimEnvironment{CodeOutput}{Verbatim}{fontsize=\small}
 
 %% almost as usual
 \author{M\r{a}ns Magnusson\\Uppsala University \And
@@ -13,6 +48,7 @@
 
 %\title{\pkg{pxweb}: a toolkit for open public data}
 \title{Opening Up Official Statistics in \proglang{R} with \pkg{pxweb}}
+\date{}
 
 %% for pretty printing and a nice hypersummary also set:
 \Plainauthor{Mans Magnusson, Leo Lahti} %% comma-separated
@@ -30,26 +66,15 @@ This article introduces the motivation and design of \pkg{pxweb}, outlines the s
 \Plainkeywords{open data, citing data, public data, pxweb, PC-Axis, R} %% without formatting
 %% at least one keyword must be supplied
 
-%% Compatibility aliases while the manuscript is migrated from the R Journal
-%% template to the JSS template.
+%% Compatibility aliases retained for package-style citations and names.
 \newcommand{\CRANpkg}[1]{\pkg{#1}}
 \newcommand{\Cpkg}[1]{\pkg{#1}}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 %% Force references with very long author lists to always use the
 %% abbreviated "et al." citation form, avoiding fully spelled-out
-%% author lists on first in-text citation (natbib's longnamesfirst
-%% default, as used by jss.cls).
+%% author lists on first in-text citation.
 \shortcites{tidyverse2019,PerezRiverol2016,Hakkarainen2026}
-
-%% The JSS class uses Zapf Chancery for the journal header and footer.
-%% Keep the official font when available, but fall back to Latin Modern
-%% on minimal TeX installations where the pzc metrics are not installed.
-\IfFileExists{pzcmi8t.tfm}{}{%
-  \DeclareFontFamily{T1}{pzc}{}%
-  \DeclareFontShape{T1}{pzc}{m}{n}{<->ssub*lmr/m/n}{}%
-  \DeclareFontShape{T1}{pzc}{m}{it}{<->ssub*lmr/m/it}{}%
-}
 
 %% publication information
 %% NOTE: Typically, this can be left commented and will be filled out by the technical editor
@@ -89,8 +114,10 @@ This article introduces the motivation and design of \pkg{pxweb}, outlines the s
 
 \begin{document}
 
-%% This is now the canonical JSS manuscript source. Earlier R Journal
-%% draft material is retained in magnusson-kainu-lahti.tex for reference.
+\printfrontmatter
+
+%% This is now the canonical manuscript source. Earlier R Journal draft
+%% material is retained in magnusson-kainu-lahti.tex for reference.
 
 
 \section{Introduction}
@@ -374,7 +401,7 @@ In this example the English metadata endpoint returns English labels, while the 
 The five-year age aggregation can therefore be selected from the metadata and stored as an object before query construction.
 
 Queries can be written as named \proglang{R} lists and converted to \code{pxweb_query} objects when needed.
-For codelists, the \code{id} column returned by \code{pxweb_codelists()} is passed to helpers such as \code{pxweb_aggregation()} or \code{pxweb_valueset()}.
+For codelists, the returned \code{id} column is passed to aggregation or value-set helpers.
 Query helper functions express common selection patterns such as "all values", "the latest time period", top or bottom selections, aggregations, and value sets.
 Queries are validated against the metadata of the table before calling the PxWeb API.
 
@@ -674,6 +701,7 @@ Research Council of Finland (decision 372345 to LL), and is part of
 rOpenGov\footnote{\url{https://ropengov.org/}}.
 
 
+\bibliographystyle{plainnat}
 \bibliography{magnusson-kainu-lahti}
 
 \end{document}
