@@ -12,6 +12,7 @@ local({
   }
   paper_dir <- dirname(normalizePath(script_file, mustWork = TRUE))
 
-  source(file.path(paper_dir, "workflow-figure.R"), chdir = TRUE, local = TRUE)
-  source(file.path(paper_dir, "code.R"), chdir = TRUE, local = TRUE, print.eval = TRUE)
+  scripts_dir <- file.path(paper_dir, "scripts")
+  source(file.path(scripts_dir, "workflow-figure.R"), chdir = TRUE, local = TRUE)
+  source(file.path(scripts_dir, "code.R"), chdir = TRUE, local = TRUE, print.eval = TRUE)
 })
