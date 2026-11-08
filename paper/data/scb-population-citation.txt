@@ -13,8 +13,6 @@ A BibTeX entry for LaTeX users is
     url = {https://statistikdatabasen.scb.se/api/v2/tables/TAB638/data},
     note = {[Data accessed 2026-09-01 14:21:25.642737 using pxweb R package 1.0.0]},
   }
-Kindly cite the pxweb R package as follows:
-
 Kindly cite the 'pxweb' R package as follows:
 
   Magnusson M, Kainu M, Huovari J, Lahti L (2026). _pxweb: R Interface
