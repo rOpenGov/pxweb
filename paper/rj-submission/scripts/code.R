@@ -25,12 +25,13 @@ script_arg <- grep("^--file=", commandArgs(FALSE), value = TRUE)
 script_file <- if (length(script_arg) > 0) sub("^--file=", "", script_arg[[1]]) else "code.R"
 candidate_dirs <- unique(c(
   getwd(),
+  dirname(getwd()),
   file.path(getwd(), "paper"),
-  dirname(normalizePath(script_file, mustWork = FALSE))
+  dirname(dirname(normalizePath(script_file, mustWork = FALSE)))
 ))
-paper_dir <- candidate_dirs[file.exists(file.path(candidate_dirs, "case-study.R"))]
+paper_dir <- candidate_dirs[file.exists(file.path(candidate_dirs, "scripts", "case-study.R"))]
 if (length(paper_dir) < 1) {
-  stop("Run code.R from the paper directory or the package root.", call. = FALSE)
+  stop("Run paperRJ.R from the submission folder.", call. = FALSE)
 }
 paper_dir <- normalizePath(paper_dir[[1]])
 
@@ -220,7 +221,7 @@ prod(lengths(large_query))
 #' Otherwise it reads the cached data file and regenerates the figure.
 
 #+ case-study-source
-source(file.path(paper_dir, "case-study.R"), chdir = TRUE)
+source(file.path(paper_dir, "scripts", "case-study.R"), chdir = TRUE)
 
 population <- readRDS(cache_file("scb-population-counties-1968-2024.rds"))
 dim(population)

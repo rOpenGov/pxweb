@@ -18,16 +18,16 @@ script_file <- if (length(source_file) == 1L && !is.na(source_file) && nzchar(so
 
 candidate_dirs <- unique(c(
   getwd(),
+  dirname(getwd()),
   file.path(getwd(), "paper"),
-  dirname(normalizePath(script_file, mustWork = FALSE)),
-  dirname(normalizePath(file.path(getwd(), script_file), mustWork = FALSE))
+  dirname(dirname(normalizePath(script_file, mustWork = FALSE)))
 ))
-script_dir <- candidate_dirs[file.exists(file.path(candidate_dirs, "workflow-figure.R"))]
+script_dir <- candidate_dirs[file.exists(file.path(candidate_dirs, "scripts", "workflow-figure.R"))]
 if (length(script_dir) < 1) {
-  stop("Run workflow-figure.R from the paper directory or the package root.", call. = FALSE)
+  stop("Run paperRJ.R from the submission folder.", call. = FALSE)
 }
 script_dir <- normalizePath(script_dir[[1]])
-dot_path <- file.path(script_dir, "workflow-model.dot")
+dot_path <- tempfile("workflow-model-", fileext = ".dot")
 figure_path <- file.path(script_dir, "workflow-model.pdf")
 
 workflow_dot <- '

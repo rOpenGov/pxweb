@@ -16,13 +16,13 @@ script_file <- if (length(source_file) == 1L && !is.na(source_file) && nzchar(so
 
 candidate_dirs <- unique(c(
   getwd(),
+  dirname(getwd()),
   file.path(getwd(), "paper"),
-  dirname(normalizePath(script_file, mustWork = FALSE)),
-  dirname(normalizePath(file.path(getwd(), script_file), mustWork = FALSE))
+  dirname(dirname(normalizePath(script_file, mustWork = FALSE)))
 ))
-script_dir <- candidate_dirs[file.exists(file.path(candidate_dirs, "case-study.R"))]
+script_dir <- candidate_dirs[file.exists(file.path(candidate_dirs, "scripts", "case-study.R"))]
 if (length(script_dir) < 1) {
-  stop("Run case-study.R from the paper directory or the package root.", call. = FALSE)
+  stop("Run paperRJ.R from the submission folder.", call. = FALSE)
 }
 script_dir <- normalizePath(script_dir[[1]])
 data_dir <- file.path(script_dir, "data")
