@@ -1,4 +1,4 @@
-# Generate the package workflow figure for the JSS manuscript.
+# Generate the package workflow figure for the manuscript.
 #
 # The workflow is specified as a Graphviz DOT graph. If Graphviz is
 # available, the DOT graph is rendered directly. Otherwise, a base R
