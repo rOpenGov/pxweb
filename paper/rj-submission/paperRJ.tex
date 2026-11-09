@@ -16,9 +16,8 @@ This article introduces the motivation and design of pxweb, outlines the support
 \section{Introduction}
 
 Open data science workflows rely heavily on algorithmic tools for data retrieval.
-Automating major parts of the data workflow, such as finding, accessing, integrating, citing, and reporting data, helps users spend more time on statistical analysis and interpretation.
-By automating parts of the data workflow we can help users to focus their time on analysis, rather than finding, accessing, and building references for data.
-It also improves reproducible research \citep{Gandrud13, Boettiger2015} by making data acquisition both explicit and repeatable.
+Automating data discovery, retrieval, integration, and citation gives users more time for analysis and interpretation.
+It also supports reproducible research \citep{Gandrud13, Boettiger2015} by making data acquisition explicit and repeatable.
 
 Official statistics are a particularly important type of public data \citep{UNGA_2014_FPOS}.
 National statistical institutes (NSI) and international agencies publish large amounts of data in a vast number of areas, such as demography, economics, health, infrastructure, climate, to name a few \citep{UNGA_2014_FPOS,WorldBank_WDI}.
@@ -32,7 +31,7 @@ They take into account variations in raw data formats, access details, metadata 
 In R, several packages support programmatic data retrieval in different ways, from specific sources \citep{Lahti17eurostat, WDI}, broader compiled sources such as economic and financial time-series data \citep{pdfetch}, generic data sources \citep{szocs2020webchem, caro2017intsvy}, or specific statistical standards, such as the SDMX data standard \citep{rsdmx}.
 
 The \CRANpkg{pxweb} package \citep{pxweb} fills a complementary role: it provides a general R interface to databases exposed through the PxWeb application programming interface (API) \citep{PxToolsPxWeb2Intro}.
-The package can navigate PxWeb resources, fetch metadata, construct and validate queries, retrieve data, convert responses into standard R data structures.
+The package can navigate PxWeb resources, fetch metadata, construct and validate queries, retrieve data, and convert responses into standard R data structures.
 The package source submitted with this manuscript corresponds to a forthcoming version 1.0.0 release; it includes 46 API catalogue entries and supports both PxWeb API version 1 and 2.
 
 Data citation is another motivation for the package.
@@ -130,7 +129,7 @@ Its core design goal is to provide a stable R workflow across PxWeb providers wh
 The \CRANpkg{pxweb} package turns API workflows into R operations.
 The package is licensed under the BSD-2-Clause (aka FreeBSD) license, consistent with common practice for research software \citep{Morin2012}.
 
-In the forthcoming version 1.0.0 release described here, the package interface has 39 exported functions, but the main workflow are built from a smaller set of recommended functions.
+The forthcoming version 1.0.0 release described here exports 39 functions, but the main workflow uses a smaller set of recommended functions.
 The central workflow is built around the \code{pxweb\_get()} function, which retrieves hierarchy levels, table metadata, or table data depending on the supplied PxWeb version, URL and query.
 The helper \code{pxweb\_get\_data()} wraps the same workflow and returns a \code{data.frame}.
 Additional methods, such as \code{as.data.frame()}, integrate the outputs directly with \CRANpkg{tidyverse} workflows \citep{tidyverse2019}, allowing users to move from data retrieval to tidy data analysis \citep{Wickham2014tidy}.
@@ -186,11 +185,11 @@ Class & Role and common methods\\
 \code{pxweb} &
 Represents an API endpoint created from a URL; printed with \code{print()}\\
 \code{pxweb\_metadata} &
-Stores table metadata and selected version 2 metadata; used by \code{pxweb\_metadata\_dim()}, \code{pxweb\_codelists()}, and \code{pxweb\_validate\_query\_with\_metadata()}\\
+Stores table metadata and selected version 2 metadata; inspected with \code{as.data.frame()} and \code{pxweb\_codelists()}, and used by \code{pxweb\_validate\_query\_with\_metadata()}\\
 \code{pxweb\_query} &
-Represents selections to send to the API; created with \code{pxweb\_query()}, converted to JSON with \code{pxweb\_query\_as\_json()}, and converted back to executable code with \code{pxweb\_query\_as\_rcode()}\\
+Represents selections to send to the API; created with \code{pxweb\_query()} and converted to JSON with \code{pxweb\_query\_as\_json()}. For simple selections, \code{pxweb\_query\_as\_rcode()} prints an R list of value codes; it does not preserve codelist selections.\\
 \code{pxweb\_data}, \code{pxweb\_data\_v2} &
-Represent retrieved table data for API versions 1 and 2; created by \code{pxweb\_get()}, converted with \code{as.data.frame()} or \code{as.matrix()}, inspected with \code{pxweb\_data\_dim()} and \code{pxweb\_data\_colnames()}, and cited with \code{pxweb\_cite()}\\
+Represent retrieved table data for API versions 1 and 2; created by \code{pxweb\_get()}, converted with \code{as.data.frame()} or \code{as.matrix()}, and cited with \code{pxweb\_cite()}\\
 \code{pxweb\_data\_comments} &
 Collects dataset, dimension, value, and observation comments from \code{pxweb\_data\_comments()}; printed or converted to a \code{data.frame} for inspection and reporting\\
 \bottomrule
@@ -214,7 +213,7 @@ Provider configuration is normalized into a common internal representation with 
 This lets the same retrieval workflow use version 1 \code{?config} responses and version 2 \code{/config} responses through a shared interface.
 
 Support for PxWeb API version 2 is expressed in the same top-level workflow as version 1.
-Version 2 tables use separate metadata and data endpoints and return JSON-stat2 by default\citep{PxToolsPxWeb2Intro}.
+Version 2 tables use separate metadata and data endpoints and return JSON-stat2 by default \citep{PxToolsPxWeb2Intro}.
 The \CRANpkg{pxweb} package (1) detects v2 URLs, (2) builds the corresponding data endpoint, (3) constructs the v2 query body, and (4) adds query parameters for codelists and output values when needed.
 This keeps the user workflow similar across API versions, even though the underlying endpoints and request details differ.
 
@@ -224,7 +223,7 @@ The returned pieces are parsed into package-specific S3 objects.
 
 Large queries of statistical tables can exceed provider-side limits.
 This makes it hard for the individual user who needs to download the data in multiple batches by partitioning the original query in smaller pieces, download them, and then combine them into one dataset.
-The \code{pxweb} package automatically solves this for the user with an in-built batching procedure.
+The \code{pxweb} package handles this automatically when the query can be split within the provider's limit.
 This procedure can be viewed as a greedy constrained multidimensional query-partitioning heuristic.
 Given the provider's maximum downloadable size, the algorithm first identifies splittable dimensions from the table metadata.
 Time variables can be split, and so can variables marked as eliminable in the provider metadata, meaning that the API allows them to be omitted or partitioned across requests.
@@ -240,9 +239,8 @@ The default local test suite uses mocked and offline-safe tests, and live tests 
 \begin{figure}[t!]
 \centering
 \includegraphics[width=\textwidth]{workflow-model}
-\caption{\label{fig:workflow-model}Main \CRANpkg{pxweb} workflow:
-search and discovery, metadata, query construction, retrieval,
-conversion, comments, and citation.}
+\caption{\label{fig:workflow-model}Main \CRANpkg{pxweb} workflow.
+After retrieval, the same data object can be converted for analysis or used to extract comments and generate a citation.}
 \end{figure}
 
 \subsection{Functionality}
