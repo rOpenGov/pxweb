@@ -514,13 +514,12 @@ The \CRANpkg{pxweb} package provides access to official statistics shared throug
 It supports the full workflow from API discovery and metadata inspection to query construction, retrieval, conversion, comments, codelists, and citation.
 In doing so, it helps users move from interactive table browsing to scripted, transparent, and reproducible statistical workflows following the tidy data principles \citep{tidyverse2019, Wickham2014tidy}.
 
-The package has matured through active development since its first CRAN release in 2014 and now include support for PxWeb API version 2.
+The package has matured through active development since its first CRAN release in 2014 and now includes support for PxWeb API version 2.
 As an indication of use at the time of writing, CRAN download logs report 116,164 downloads between January 2014 and June 2026 \citep{CranlogsPxweb2026}.
 The package has also been cited in research using official-statistics data, for instance in work on electronic gambling machines and socioeconomic status \citep{raisamo2019density}, income-inequality data construction \citep{Solt2019}, trends in youth violence and mortality \citep{Tanskanen2026, Hakkarainen2026}, radiation-dose modeling after the Chernobyl nuclear power plant accident \citep{Tondel2025}, and programmatic access to open statistical data for population studies \citep{willekens2023sdmx}.
 
 However, PxWeb installations differ across providers, with different provider-side query limits and rate limits, and APIs can change independently of the \CRANpkg{pxweb} package.
 These issues motivate the package's emphasis on provider config handling, metadata validation, and request splitting.
-Together this creates a flexibility to handle many different types of PxWeb APIs-
 
 More broadly, \CRANpkg{pxweb} contributes to the open data science ecosystem \citep{lahti2018open} by making official statistics easier to retrieve, document, and reuse in R.
 The package does not replace provider documentation, but it gives researchers, public-sector analysts, educators, and civic users a common programmatic interface to a widely used dissemination infrastructure.
