@@ -260,14 +260,29 @@ The following example searches Statistics Sweden's PxWeb API version 2 for a pop
 
 \begin{example}
 search_results <- pxweb_search(
-  query = "Population by region marital status age sex",
+  query = "population marital status",
   api_url = "https://statistikdatabasen.scb.se/api/v2",
   lang = "en",
   page_size = 5
 )
 
-# Select the population table used in the examples
-url <- search_results$metadata_url[search_results$id == "TAB638"][1]
+print(search_results[, c("id", "label")], row.names = FALSE, right = FALSE)
+\end{example}
+
+\begin{example}
+ id      label
+ TAB638  Population by region, marital status, age and sex.  Year 1968-2024
+ TAB5557 Population by region, marital status, age and sex. Year 2025
+ TAB2819 Mean population by region, marital status, age and sex. Year 2006-2024
+ TAB6759 Mean population by region, marital status, age and sex.  Year 2025
+ TAB6570 Population per region by marital status and sex. Year 2010-2025
+\end{example}
+
+The results include population tables for 1968--2024 and for 2025.
+We select \code{TAB638} for the longer period by matching its ID, rather than relying on the order of the results.
+
+\begin{example}
+url <- search_results$metadata_url[search_results$id == "TAB638"]
 \end{example}
 
 Metadata are retrieved with \code{pxweb\_get()} when no query is supplied.
@@ -353,7 +368,7 @@ The replication materials include cached inputs from the original retrieval and 
 library("pxweb")
 
 search_results <- pxweb_search(
-  query = "Population by region marital status age sex",
+  query = "population marital status",
   api_url = "https://statistikdatabasen.scb.se/api/v2",
   lang = "en",
   page_size = 5
