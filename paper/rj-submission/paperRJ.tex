@@ -81,11 +81,7 @@ Table~\ref{tab:related-software} summarizes the main distinctions.
 Provider-specific packages, such as \CRANpkg{eurostat} \citep{Lahti17eurostat} and \CRANpkg{WDI} \citep{WDI}, provide convenient access to individual statistical sources or data families.
 Broader data-retrieval packages, such as \CRANpkg{pdfetch} \citep{pdfetch}, \CRANpkg{webchem} \citep{szocs2020webchem}, and \CRANpkg{intsvy} \citep{caro2017intsvy}, support broader data collection areas.
 The \CRANpkg{rsdmx} package supports the Statistical Data and Metadata eXchange (SDMX) standard, which is an important alternative standard for statistical data exchange \citep{rsdmx,willekens2023sdmx}.
-The closest software relatives are direct PxWeb API clients.
-In R, \CRANpkg{PxWebApiData} reads PxWeb data by API and supports both PxWeb API version 1 and 2 \citep{PxWebApiData}.
-It has been developed in the Statistics Norway software ecosystem for specialized PxWeb data-access workflows, and its documented backend options can use \CRANpkg{pxweb} for API capture and data-frame conversion.
-The \CRANpkg{pxweb} package predates these newer clients, with a first CRAN release in 2014, and is positioned as general R infrastructure for PxWeb APIs.
-In Python, pxwebpy targets PxWeb API version 2 and plays a similar role as \CRANpkg{pxweb} does for R \citep{pxwebpy}.
+In Python, pxwebpy provides access to PxWeb API version 2 \citep{pxwebpy}.
 
 In this landscape, \CRANpkg{pxweb} occupies the PxWeb API niche.
 It provides a common interface for (1) discovering databases and tables, (2) inspecting metadata, (3) constructing valid queries, (4) respecting provider limits, (5) retrieving data, and (6) retaining comments and citation information across statistical organizations that publish through PxWeb.
@@ -111,9 +107,9 @@ Work with local \code{.px} files\\
 SDMX clients &
 \CRANpkg{rsdmx} &
 Access data via the alternative SDMX standard.\\
-Direct PxWeb API clients &
-\CRANpkg{PxWebApiData}, pxwebpy &
-Address PxWeb APIs directly; \CRANpkg{PxWebApiData} provides specialized R workflows and can use \CRANpkg{pxweb} through optional backend settings and wrappers, while pxwebpy serves Python\\
+Python PxWeb API client &
+pxwebpy &
+Accesses PxWeb API version 2 from Python\\
 Downstream domain packages &
 \CRANpkg{geofi} \citep{geofi} &
 Specialized workflows on top of official-data access\\
@@ -125,9 +121,8 @@ Specialized workflows on top of official-data access\\
 \section[The pxweb package]{The \CRANpkg{pxweb} package}
 \label{sec:package-design}
 
-The \CRANpkg{pxweb} package is designed as a generic interface.
+The \CRANpkg{pxweb} package is designed for analysts who need to retrieve official statistics reproducibly from R without writing provider-specific HTTP requests.
 Its core design goal is to provide a stable R workflow across PxWeb providers while preserving provider-specific metadata where it affects query construction, codelists, comments, and citation.
-The \CRANpkg{pxweb} package turns API workflows into R operations.
 The package is licensed under the BSD-2-Clause (aka FreeBSD) license, consistent with common practice for research software \citep{Morin2012}.
 
 The forthcoming version 1.0.0 release described here exports 39 functions, but the main workflow uses a smaller set of recommended functions.
@@ -233,6 +228,9 @@ The procedure then evaluates candidate orderings of the splittable dimensions an
 The ordering with the smallest resulting number of batches is then used to download the query.
 For the typical case of fewer than seven splittable dimensions, all orderings are evaluated.
 Otherwise, a random sample of orderings is used to keep computation bounded.
+
+For requests that return parsed data, the package retrieves batches sequentially and holds them in memory until it combines them.
+Batching works within the provider's per-response limit, but both the batches and the combined result must fit in memory.
 
 The \code{pxweb} package follows common software engineering practices, including version control, automated tests, API fixtures, continuous integration, and test workflows for selected APIs \citep{PerezRiverol2016}.
 The default local test suite uses mocked and offline-safe tests, and live tests run in continuous integration (CI) on GitHub.
@@ -528,6 +526,9 @@ In doing so, it helps users move from interactive table browsing to scripted, tr
 
 The package has matured through active development since its first CRAN release in 2014 and now includes support for PxWeb API version 2.
 As an indication of use at the time of writing, CRAN download logs report 116,164 downloads between January 2014 and June 2026 \citep{CranlogsPxweb2026}.
+The \href{https://CRAN.R-project.org/package=pxweb}{CRAN package index} lists \CRANpkg{BFS} \citep{BFS} and \CRANpkg{PxWebApiData} \citep{PxWebApiData} as packages that import \CRANpkg{pxweb}.
+For example, the \code{PxData()} function in \CRANpkg{PxWebApiData} uses \CRANpkg{pxweb} to retrieve data, including queries that require multiple downloads.
+The \CRANpkg{pixieweb} package \citep{pixieweb} lists \CRANpkg{pxweb} in its \code{Suggests} field.
 The package has also been cited in research using official-statistics data, for instance in work on electronic gambling machines and socioeconomic status \citep{raisamo2019density}, income-inequality data construction \citep{Solt2019}, trends in youth violence and mortality \citep{Tanskanen2026, Hakkarainen2026}, radiation-dose modeling after the Chernobyl nuclear power plant accident \citep{Tondel2025}, and programmatic access to open statistical data for population studies \citep{willekens2023sdmx}.
 
 However, PxWeb installations differ across providers, with different provider-side query limits and rate limits, and APIs can change independently of the \CRANpkg{pxweb} package.
