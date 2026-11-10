@@ -447,6 +447,7 @@ Downloading the full table would imply more than 29 million cells.
 Statistics Sweden's PxWeb API version 2 configuration currently limits a single data response to 150,000 data cells.
 Our subset contains 967,176 cells, which is also above the single-response limit.
 Calling \code{pxweb\_get()} validates the query, splits it into seven batches, downloads the pieces, and combines them into one \code{pxweb\_data\_v2} object.
+Seven is the minimum possible number of data requests for this subset, since six responses of 150,000 cells could not cover it.
 
 \begin{example}
 px_data <- pxweb_get(metadata_url, query = pxq)
@@ -503,12 +504,6 @@ package 1.0.0],
 <https://statistikdatabasen.scb.se/api/v2/tables/TAB638/data>.
 \end{example}
 
-Finally, the data are aggregated and plotted.
-Figure~\ref{fig:case-study-population} summarizes the downloaded data.
-The first two panels aggregate counties, marital statuses, ages, and sexes to show the growth of the population and the increasing share of the population aged 65 years or older.
-The lower panels compare the age and sex structure in 1968 and 2024.
-The example demonstrates the main package workflow: a PxWeb API version 2 table is found through search, queried programmatically, split because it exceeds the API cell limit, inspected for comments, cited, and transformed into standard R objects for analysis and visualization.
-
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{case-study-population}
@@ -519,8 +514,9 @@ single-year age groups from 0 to 100+, both sexes, and all
 marital-status categories.
 The request contains 967,176 cells and is split by \CRANpkg{pxweb} into seven API calls before being combined for analysis.}
 \end{figure}
-
-\clearpage
+Figure~\ref{fig:case-study-population} shows that the population grew from 7.93 million in 1968 to 10.59 million in 2024.
+Over the same period, the share aged 65 or older rose from 13.4\% to 20.8\%, calculated by dividing the sum of counts at ages 65 and older by the total for each year.
+The two population pyramids use the same horizontal scale to compare age and sex structure across the two years.
 
 \section{Discussion}
 \label{sec:discussion}
