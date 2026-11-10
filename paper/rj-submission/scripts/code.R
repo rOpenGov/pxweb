@@ -237,7 +237,7 @@ head(comments_display, 2)
 #' The generated case-study figure is included below.
 
 #+ case-study-figure, echo=FALSE, out.width="100%"
-knitr::include_graphics(file.path(paper_dir, "case-study-population.pdf"))
+knitr::include_graphics(file.path(paper_dir, "figs", "case-study-population.pdf"))
 
 #' # Cached citation text
 #'

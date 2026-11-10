@@ -31,7 +31,8 @@ dir.create(data_dir, showWarnings = FALSE, recursive = TRUE)
 data_path <- file.path(data_dir, "scb-population-counties-1968-2024.rds")
 citation_path <- file.path(data_dir, "scb-population-citation.txt")
 comments_path <- file.path(data_dir, "scb-population-comments.rds")
-figure_path <- file.path(script_dir, "case-study-population.pdf")
+figure_path <- file.path(script_dir, "figs", "case-study-population.pdf")
+dir.create(dirname(figure_path), showWarnings = FALSE)
 
 if (!requireNamespace("pxweb", quietly = TRUE)) {
   stop("The pxweb package is required to run this case study.", call. = FALSE)
@@ -230,4 +231,4 @@ print(data.frame(
 ), row.names = FALSE)
 
 cat("Wrote data cache:", file.path("data", basename(data_path)), "\n")
-cat("Wrote figure:", basename(figure_path), "\n")
+cat("Wrote figure:", file.path("figs", basename(figure_path)), "\n")

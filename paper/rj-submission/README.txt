@@ -6,8 +6,8 @@ from this folder:
     Rscript --vanilla paperRJ.R
 
 The entry point uses the helper scripts in scripts/. It runs the manuscript
-examples and regenerates workflow-model.pdf
-and case-study-population.pdf. The workflow figure uses Graphviz if available
+examples and regenerates figs/workflow-model.pdf and
+figs/case-study-population.pdf. The workflow figure uses Graphviz if available
 and has a base R fallback. The cached Statistics Sweden TAB638 inputs in data/
 include the search results, metadata, a small API response, and the full
 case-study dataset, comments, and citation.

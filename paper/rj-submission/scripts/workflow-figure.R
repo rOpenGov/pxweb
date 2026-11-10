@@ -28,7 +28,8 @@ if (length(script_dir) < 1) {
 }
 script_dir <- normalizePath(script_dir[[1]])
 dot_path <- tempfile("workflow-model-", fileext = ".dot")
-figure_path <- file.path(script_dir, "workflow-model.pdf")
+figure_path <- file.path(script_dir, "figs", "workflow-model.pdf")
+dir.create(dirname(figure_path), showWarnings = FALSE)
 
 workflow_dot <- '
 digraph pxweb_workflow {
