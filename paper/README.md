@@ -7,18 +7,18 @@ running this in R from this directory:
 tools::texi2pdf("RJwrapper.tex", clean = TRUE)
 ```
 
-This produces `RJwrapper.pdf` using `paperRJ.bib` and the two figure PDFs.
+This produces `RJwrapper.pdf` using `paperRJ.bib` and the two figure PDFs in `figs/`.
 The local `RJournal.sty` comes from the journal's official template and is
 needed to compile here. The journal's LaTeX author guide excludes it from the
 submission archive.
 
 Run the R Journal replication entry point from this directory with
 `Rscript --vanilla paperRJ.R`. It runs the examples and regenerates both
-figures using the snapshots in `data/`. Install `pxweb` 1.0.0 or later and
-`knitr` first. Graphviz is optional.
+figures in `figs/` using the snapshots in `data/`. Install `pxweb` 0.19.2 or later
+and `knitr` first. Graphviz is optional.
 
 The generated `rj-submission/` folder contains the staged manuscript,
-replication files, figures, PDF, and motivating letter.
+replication files, figures in `figs/`, PDF, and motivating letter.
 From inside that folder, this command uses the style in the parent directory
 on macOS or Linux:
 
@@ -35,7 +35,7 @@ R from this directory:
 source("main.R")
 ```
 
-This regenerates `case-study-population.pdf`, `workflow-model.pdf`,
+This regenerates `figs/case-study-population.pdf`, `figs/workflow-model.pdf`,
 `code.html`, and `article.pdf`. The file `code.html` is generated from
 `code.R` with `knitr::spin()`, following the JSS recommendation for replication
 code. By default the paper uses the cached Statistics Sweden metadata, data,
