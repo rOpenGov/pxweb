@@ -7,8 +7,8 @@
 \abstract{
 The pxweb package provides an interface from R to statistical databases published through the PxWeb API.
 PxWeb is used by national, regional, and international statistical organizations to disseminate official statistics in multidimensional tables.
-The package supports discovery of API resources, construction and validation of table queries, retrieval and parsing of data and metadata, conversion to standard R data structures, extraction of comments, and citation of retrieved data.
-This article introduces the motivation and design of pxweb, outlines the support for both PxWeb API version 1 and version 2, and provides a reproducible case study using official statistics.
+The package supports discovery of API resources, construction and validation of queries, retrieval and parsing of data and metadata, conversion to standard R data structures, extraction of comments, and citation of retrieved data.
+This article introduces the motivation and design of the pxweb R package, show the use of both PxWeb API version 1 and version 2, and provides a reproducible case study using official statistics.
 }
 
 % Keywords: open data, citing data, public data, pxweb, PC-Axis, R
@@ -22,7 +22,7 @@ It also supports reproducible research \citep{Gandrud13, Boettiger2015} by makin
 Official statistics are a particularly important type of public data \citep{UNGA_2014_FPOS}.
 National statistical institutes (NSI) and international agencies publish large amounts of data in a vast number of areas, such as demography, economics, health, infrastructure, climate, to name a few \citep{UNGA_2014_FPOS,WorldBank_WDI}.
 Such data are often multidimensional, geographically detailed, and updated over long time periods.
-During the last decade this data has become increasingly available through open web-based application programming interfaces (API).
+During the last decade such data has become increasingly available through open web-based application programming interfaces (API).
 Opening statistical resources through public web APIs is, however, only the first step to enable use of statistical data.
 Users also need software that can bridge the gap between online statistical databases and analysis in statistical programming environments such as R.
 
@@ -32,8 +32,7 @@ In R, several packages support programmatic data retrieval in different ways, fr
 
 The \CRANpkg{pxweb} package \citep{pxweb} fills a complementary role: it provides a general R interface to databases exposed through the PxWeb application programming interface (API) \citep{PxToolsPxWeb2Intro}.
 The package can navigate PxWeb resources, fetch metadata, construct and validate queries, retrieve data, and convert responses into standard R data structures.
-The package includes 46 API catalogue entries and supports versions 1 and 2 of the PxWeb API.
-Version 1.0.0 is planned to accompany publication of this article.
+The package includes 46 API catalogue entries and supports versions 1 and 2 of the PxWeb API \citep{PxToolsPxWeb2Intro}.
 
 Data citation is another motivation for the package.
 Data reuse should document source organizations, accessed resources, version information, and retrieval times where possible \citep{Parsons2019}.
@@ -41,18 +40,19 @@ The \CRANpkg{pxweb} package helps standardize and streamline this process for Px
 
 The \CRANpkg{pxweb} package was first released on CRAN in 2014 and was substantially upgraded in 2018 and 2026.
 Recent development in 2026 has added support for the PxWeb API version 2, including table search, \texttt{JSON-stat2} responses, v2 metadata, codelists, value sets, aggregation helpers, and observation status comments.
+Here we introduce the use of \citep{pxweb} version 1.0.0. \footnote{The package is now version 0.19.2 at CRAN. Version 1.0.0 will be released on CRAN to accompany publication of this article. Then also this footnote will be removed.}
 The current package is part of the rOpenGov open data science project \citep{Lahti13icml}.
 
 \subsection[PxWeb and PC-Axis]{PxWeb and PC-Axis}
 \label{sec:pxweb-pcaxis}
 
 PxWeb is a web application and API for disseminating PC-Axis-type statistical data \citep{PxToolsPxWeb2Intro}.
-In turn, PC-Axis data are data files typically organized as multidimensional tables with dimensions such as region, time, sex, age, indicator, or content.
-The PX software family (including both PC-Axis and PxWeb) is used by a large number of NSIs, e.g. Statistics Sweden, Statistics Finland, and Statistics Norway \citep{SCBPxPrograms,StatisticsFinlandPxSuite,StatisticsNorwayAPI} to name a few.
+PC-Axis data are data files typically organized as multidimensional tables with dimensions such as region, time, sex, age, indicator, or content.
+The PX software family (including both PC-Axis and PxWeb) is used by a large number of NSIs, e.g. Statistics Sweden, Statistics Finland, and Statistics Norway to name a few \citep{SCBPxPrograms,StatisticsFinlandPxSuite,StatisticsNorwayAPI}.
 PxWeb exposes data and metadata through hypertext transfer protocol (HTTP) endpoints that can be accessed programmatically.
 
 The PX file format stores metadata and data in a single file.
-The specification lists 1990 as the introduction year for \code{CONTENTS}, \code{DATA}, \code{MATRIX}, \code{STUB}, and \code{CODES} \citep[Section~3.1]{SCBPxFileFormat2013}.
+% The specification lists 1990 as the introduction year for \code{CONTENTS}, \code{DATA}, \code{MATRIX}, \code{STUB}, and \code{CODES} \citep[Section~3.1]{SCBPxFileFormat2013}.
 Statistics Sweden describes PX as a standard format for statistics files used by many statistical offices and as the basis for tools such as PxWin, PxWeb, and PxEdit \citep{SCBPxPrograms}.
 PxWeb extends this file-oriented tradition to online dissemination by publishing statistical tables through web interfaces \citep{PxToolsPxWeb2Intro}.
 
@@ -66,12 +66,11 @@ Second, the data response has to be retrieved and converted into an analysis-rea
 Third, the downloaded data should be easy to cite to facilitate provenance and reproducibility.
 The \CRANpkg{pxweb} package handles all three parts for the R user.
 
-The \CRANpkg{pxweb} package is solely designed for PxWeb APIs, while packages such as \CRANpkg{pxR} focus on parsing legacy PC-Axis files \citep{pxR}.
+The \CRANpkg{pxweb} package is solely designed for PxWeb APIs, while packages such as \CRANpkg{pxR} focus on parsing PC-Axis files \citep{pxR}.
 This distinction is important because API access requires metadata discovery, query construction, request validation, and response parsing rather than only local file import.
 
-Since PxWeb installations are configured by individual providers, such as NSIs, API version support and request limits are endpoint-level properties rather than package-level constants.
-The \CRANpkg{pxweb} package therefore collects available provider configuration metadata, including version 1 and 2 \code{config} responses, and uses this information when validating requests, making calls, and splitting large downloads.
-
+Since PxWeb installations are configured by individual providers, such as NSIs, API version support and request limits are server-level properties rather than package-level constants.
+The \CRANpkg{pxweb} package therefore collects available configuration metadata, including version 1 and 2 \code{config} responses, and uses this information when validating requests, making calls, and splitting large downloads.
 \subsection{Related software}
 \label{sec:related}
 
