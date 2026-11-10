@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
   fig.align = "center"
 )
 
+# Get command arguments
 script_arg <- grep("^--file=", commandArgs(FALSE), value = TRUE)
 script_file <- if (length(script_arg) > 0) sub("^--file=", "", script_arg[[1]]) else "code.R"
 candidate_dirs <- unique(c(
@@ -38,13 +39,14 @@ paper_dir <- normalizePath(paper_dir[[1]])
 if (!requireNamespace("pxweb", quietly = TRUE)) {
   stop("The pxweb package is required to run this replication script.", call. = FALSE)
 }
-if (utils::packageVersion("pxweb") < "1.0.0") {
-  stop("This replication script requires pxweb >= 1.0.0.", call. = FALSE)
+if (utils::packageVersion("pxweb") < "0.19.2") {
+  stop("This replication script requires pxweb >= 0.19.2.", call. = FALSE)
 }
 
 refresh_data <- identical(tolower(Sys.getenv("PXWEB_PAPER_REFRESH_DATA")), "true")
 cache_file <- function(name) file.path(paper_dir, "data", name)
 
+# Load cached data
 require_cache <- function(path) {
   if (!file.exists(path)) {
     stop(
@@ -83,36 +85,33 @@ length(pxweb_api_catalogue())
 
 #' # Search and metadata URL
 #'
-#' The manuscript locates the Statistics Sweden population table through the
-#' PxWeb API version 2 search endpoint. The live search is evaluated only when
-#' `PXWEB_PAPER_REFRESH_DATA=true`; otherwise the known metadata URL is used so
-#' that the replication file is stable without network access.
+#' Search Statistics Sweden's PxWeb API version 2 for population and marital
+#' status tables, then select the table covering 1968-2024. The default run
+#' displays the archived search results without contacting the API.
 
 #+ search-metadata
-metadata_url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
 search_cache <- cache_file("scb-population-search-results.rds")
 
 if (refresh_data) {
   search_results <- pxweb_search(
-    query = "Population by region marital status age sex",
+    query = "population marital status",
     api_url = "https://statistikdatabasen.scb.se/api/v2",
     lang = "en",
     page_size = 5
   )
-  saveRDS(search_results, search_cache)
-} else if (file.exists(search_cache)) {
-  search_results <- readRDS(search_cache)
 } else {
-  search_results <- data.frame(
-    id = "TAB638",
-    metadata_url = metadata_url,
-    stringsAsFactors = FALSE
-  )
+  require_cache(search_cache)
+  search_results <- readRDS(search_cache)
 }
 
-url <- search_results$metadata_url[search_results$id == "TAB638"][1]
-if (is.na(url)) {
-  stop("Could not find Statistics Sweden table TAB638 in the search results.", call. = FALSE)
+print(search_results[, c("id", "label")], row.names = FALSE, right = FALSE)
+
+url <- search_results$metadata_url[search_results$id == "TAB638"]
+if (length(url) != 1L || is.na(url)) {
+  stop("Expected exactly one metadata URL for Statistics Sweden table TAB638.", call. = FALSE)
+}
+if (refresh_data) {
+  saveRDS(search_results, search_cache)
 }
 url
 
