@@ -37,8 +37,8 @@ dir.create(dirname(figure_path), showWarnings = FALSE)
 if (!requireNamespace("pxweb", quietly = TRUE)) {
   stop("The pxweb package is required to run this case study.", call. = FALSE)
 }
-if (utils::packageVersion("pxweb") < "1.0.0") {
-  stop("This case study requires pxweb >= 1.0.0.", call. = FALSE)
+if (utils::packageVersion("pxweb") < "0.19.2") {
+  stop("This case study requires pxweb >= 0.19.2.", call. = FALSE)
 }
 
 years <- as.character(1968:2024)
