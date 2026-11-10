@@ -121,16 +121,16 @@ Specialized workflows on top of official-data access\\
 \section[The pxweb package]{The \CRANpkg{pxweb} package}
 \label{sec:package-design}
 
-The \CRANpkg{pxweb} package is designed for analysts who need to retrieve official statistics reproducibly from R without writing provider-specific HTTP requests.
-Its core design goal is to provide a stable R workflow across PxWeb providers while preserving provider-specific metadata where it affects query construction, codelists, comments, and citation.
+The \CRANpkg{pxweb} package is designed for R users who need to retrieve official statistics reproducibly from R without writing specific HTTP requests.
+Its core design goal is to provide a stable R workflow across PxWeb APIs while preserving metadata where it affects query construction, codelists, comments, and citation.
 The package is licensed under the BSD-2-Clause (aka FreeBSD) license, consistent with common practice for research software \citep{Morin2012}.
 
-The forthcoming version 1.0.0 release described here exports 39 functions, but the main workflow uses a smaller set of recommended functions.
+Version 1.0.0 described here exports 39 functions, but the main workflow uses a smaller set of recommended functions.
 The central workflow is built around the \code{pxweb\_get()} function, which retrieves hierarchy levels, table metadata, or table data depending on the supplied PxWeb version, URL and query.
 The helper \code{pxweb\_get\_data()} wraps the same workflow and returns a \code{data.frame}.
 Additional methods, such as \code{as.data.frame()}, integrate the outputs directly with \CRANpkg{tidyverse} workflows \citep{tidyverse2019}, allowing users to move from data retrieval to tidy data analysis \citep{Wickham2014tidy}.
 Query construction is handled by \code{pxweb\_query()} together with query construction helper functions \code{pxweb\_all()}, \code{pxweb\_latest()}, and \code{pxweb\_aggregation()}.
-Table~\ref{tab:workflow-functions} summarizes the main user-facing functions and methods by their role in the recommended workflow.
+Table~\ref{tab:workflow-functions} summarises the main user-facing functions and methods by their role in the recommended workflow.
 
 \begin{table}[!htbp]
 \centering
@@ -194,58 +194,62 @@ Collects dataset, dimension, value, and observation comments from \code{pxweb\_d
 \CRANpkg{pxweb} in ordinary data-access workflows.}
 \end{table}
 
-The bundled API catalogue is a practical layer on top of the generic API client.
+The API catalogue is a practical layer on top of the API functionality.
 It stores provider URL templates, available languages, version paths, aliases, and citation metadata.
-Users can rely on the catalogue for common providers or pass explicit PxWeb URLs for APIs that are not already bundled with the package.
-The current catalogue contains 46 entries covering national, regional, and international statistical resources; the complete list is given in the appendix (Table~\ref{tab:api-catalogue}).
-Since PxWeb installations are maintained by the individual data providers, the catalogue is a tested convenience layer rather than a guarantee that every endpoint will remain permanently available.
-Hence, users can pass explicit PxWeb URLs when catalogue entries change or are missing.
-At the time of writing, the bundled catalogue entries point mainly to version 1 API paths.
+Users can rely on the catalogue for common APIs or pass explicit PxWeb URLs for APIs that are not already part of the package.
+The current catalogue contains 46 entries covering national, regional, and international statistical resources.
+The complete list is given in the appendix (Table~\ref{tab:api-catalogue}).
+% Since PxWeb installations are maintained by the individual data providers, the catalogue is a tested convenience layer rather than a guarantee that every provider will remain permanently available.
+% Hence, users can pass explicit PxWeb URLs when catalogue entries change or are missing.
+At the time of writing, the catalogue entries point mainly to version 1 API paths.
 Version 2 APIs can also be used by passing explicit PxWeb URLs.
 
-A central implementation detail is that user-supplied URLs are first converted into \code{pxweb} objects.
+A central implementation detail is that user-supplied URLs are first converted into a \code{pxweb} object.
 The constructor (1) parses the URL, (2) detects whether the endpoint belongs to PxWeb API version 1 or 2, (3) retrieves provider configuration metadata, and (4) stores call history in a temporary cache.
-Provider configuration is normalized into a common internal representation with the number of calls allowed per time window, the length of that time window, and the maximum number of downloadable values or cells.
-This lets the same retrieval workflow use version 1 \code{?config} responses and version 2 \code{/config} responses through a shared interface.
+Provider configuration is normalised into a common internal representation with the number of calls allowed per time window, the length of that time window, and the maximum number of downloadable values or cells.
+This lets the same retrieval workflow use version 1 \code{?config} responses and version 2 \code{/config} responses through the same interface.
 
-Support for PxWeb API version 2 is expressed in the same top-level workflow as version 1.
-Version 2 tables use separate metadata and data endpoints and return JSON-stat2 by default \citep{PxToolsPxWeb2Intro}.
-The \CRANpkg{pxweb} package (1) detects v2 URLs, (2) builds the corresponding data endpoint, (3) constructs the v2 query body, and (4) adds query parameters for codelists and output values when needed.
-This keeps the user workflow similar across API versions, even though the underlying endpoints and request details differ.
+Support for PxWeb API version 2 is expressed in the same workflow as version 1.
+Version 2 tables use separate metadata and data URL endpoints and return JSON-stat2 by default \citep{PxToolsPxWeb2Intro}.
+The \CRANpkg{pxweb} package (1) detects v2 URLs, (2) builds the corresponding data URL, (3) constructs the v2 query body, and (4) adds query parameters for codelists and output values when needed.
+This keeps the user workflow similar across API versions, even though the underlying URL and request details differ.
 
-For data requests, \code{pxweb\_get()} first obtains table metadata, then adds mandatory variables (if needed), validates the query against the metadata, and computes any required batches before making data requests.
-Version 1 tables are queried with the table URL and a JSON request body, whereas version 2 tables use the corresponding \code{/tables/\{id\}/data} endpoint with version-specific query parameters.
-The returned pieces are parsed into package-specific S3 objects.
+For data requests, \code{pxweb\_get()} first fetch table metadata, then adds mandatory variables (if needed), validates the query against the metadata, and computes any required download batches before making data requests.
+Version 1 tables are queried with the table URL and a JSON request body, whereas version 2 tables use the corresponding \code{/tables/\{id\}/data} URL with version-specific query parameters.
+The returned data objects are parsed into package-specific S3 objects.
 
-Large queries of statistical tables can exceed provider-side limits.
-This makes it hard for the individual user who needs to download the data in multiple batches by partitioning the original query in smaller pieces, download them, and then combine them into one dataset.
+Large queries of statistical tables can exceed server-side limits.
+This makes it hard for individual user.
+They need to download the data in multiple batches by partitioning the original query in smaller pieces, download each query, and then combine them into one dataset.
 The \code{pxweb} package handles this automatically when the query can be split within the provider's limit.
-This procedure can be viewed as a greedy constrained multidimensional query-partitioning heuristic.
+This procedure can be viewed as a greedy multidimensional query-partitioning heuristic.
 Given the provider's maximum downloadable size, the algorithm first identifies splittable dimensions from the table metadata.
-Time variables can be split, and so can variables marked as eliminable in the provider metadata, meaning that the API allows them to be omitted or partitioned across requests.
+Time variables can be split, and so can variables marked as eliminable in the provider metadata, meaning that the API allows them to be omitted or partitioned.
 Content variables and top or bottom selections are kept intact because they affect the meaning or ordering of the returned values.
-The procedure then evaluates candidate orderings of the splittable dimensions and, for each ordering, greedily chooses the largest dimension chunks that keep each subquery below the provider limit.
+The partitioning procedure then evaluates candidate orderings of the splittable dimensions and, for each ordering, greedily chooses the largest dimension chunks that keep each subquery below the provider limit.
 The ordering with the smallest resulting number of batches is then used to download the query.
 For the typical case of fewer than seven splittable dimensions, all orderings are evaluated.
 Otherwise, a random sample of orderings is used to keep computation bounded.
 
-For requests that return parsed data, the package retrieves batches sequentially and holds them in memory until it combines them.
-Batching works within the provider's per-response limit, but both the batches and the combined result must fit in memory.
+% For requests that return parsed data, the package retrieves batches sequentially and holds them in memory until it combines them.
+% Batching works within the provider's per-response limit, but both the batches and the combined result must fit in memory.
 
 The \code{pxweb} package follows common software engineering practices, including version control, automated tests, API fixtures, continuous integration, and test workflows for selected APIs \citep{PerezRiverol2016}.
 The default local test suite uses mocked and offline-safe tests, and live tests run in continuous integration (CI) on GitHub.
 
-\begin{figure}[t!]
-\centering
-\includegraphics[width=\textwidth]{figs/workflow-model}
-\caption{\label{fig:workflow-model}Main \CRANpkg{pxweb} workflow.
-After retrieval, the same data object can be converted for analysis or used to extract comments and generate a citation.}
-\end{figure}
+
 
 \subsection{Functionality}
 \label{sec:functionality}
 
 The package supports the full workflow shown in Figure~\ref{fig:workflow-model}: search and discovery, metadata inspection, query construction, retrieval, conversion, comments, and citation.
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=\textwidth]{figs/workflow-model}
+\caption{\label{fig:workflow-model}Main \CRANpkg{pxweb} workflow.
+After retrieval, the same data object can be converted for analysis or used to extract comments and generate a citation (or both).}
+\end{figure}
 
 For released versions, installation from CRAN follows the standard procedure in R.
 
@@ -255,7 +259,7 @@ library("pxweb")
 \end{example}
 
 Search and discovery start either from the bundled API catalogue, for PxWeb API version 1, from an explicit URL, or, for PxWeb API version 2, from table search.
-The following example searches Statistics Sweden's PxWeb API version 2 for a population table and stores its metadata URL.
+The following example searches Statistics Sweden's PxWeb API version 2 for a population table.
 
 \begin{example}
 search_results <- pxweb_search(
@@ -278,7 +282,7 @@ print(search_results[, c("id", "label")], row.names = FALSE, right = FALSE)
 \end{example}
 
 The results include population tables for 1968--2024 and for 2025.
-We select \code{TAB638} for the longer period by matching its ID, rather than relying on the order of the results.
+We select \code{TAB638} for the longer period by matching its ID, rather than relying on the order of the results, and extract the table metadata URL.
 
 \begin{example}
 url <- search_results$metadata_url[search_results$id == "TAB638"]
@@ -302,8 +306,7 @@ age_codelists[, c("id", "type", "label")]
 4   vs_ÅlderTotA    Valueset Age, total, all presented ages
 \end{example}
 
-The codelist labels are provider-supplied.
-In this example the English metadata endpoint returns English labels, while the \code{id} values remain provider identifiers that are passed unchanged to query helpers.
+In this example the English metadata endpoint returns English labels, while the \code{id} values remain identifiers that are passed unchanged to query helper functions.
 The five-year age aggregation can therefore be selected from the metadata and stored as an object before query construction.
 
 Queries can be written as named R lists and converted to \code{pxweb\_query} objects when needed.
@@ -329,7 +332,7 @@ px_query <- pxweb_query(query)
 Retrieval is handled by \code{pxweb\_get()}.
 Users who want a \code{data.frame} directly can instead use
 \code{pxweb\_get\_data()}.
-The same top-level workflow handles version 1 and version 2 URLs, constructs the appropriate request body, and splits large supported queries into batches when needed.
+The same workflow handles version 1 and version 2 URLs, constructs the appropriate request body, and splits large supported queries into batches when needed.
 
 \begin{example}
 px_data <- pxweb_get(url, query = query)
@@ -347,7 +350,7 @@ px_df <- as.data.frame(
 \end{example}
 
 Finally, PxWeb responses may include comments, notes, or status information.
-The \CRANpkg{pxweb} package exposes these through \code{pxweb\_data\_comments()}, with support for both version 1 comments and version 2 dataset notes, dimension notes, value notes, and observation status comments.
+The \CRANpkg{pxweb} package enable access to these through \code{pxweb\_data\_comments()}, with support for both version 1 comments and version 2 dataset notes, dimension notes, value notes, and observation status comments.
 Citation support is provided by \code{pxweb\_cite()}, which prints citation information for the retrieved data source and the \CRANpkg{pxweb} package itself.
 
 \begin{example}
