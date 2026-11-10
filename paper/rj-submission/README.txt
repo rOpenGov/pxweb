@@ -1,6 +1,6 @@
 Replication for Opening Up Official Statistics in R with pxweb
 
-Install pxweb 1.0.0 or later and knitr (see _Rpackages.txt). Run this command
+Install pxweb 0.19.2 or later and knitr (see _Rpackages.txt). Run this command
 from this folder:
 
     Rscript --vanilla paperRJ.R
