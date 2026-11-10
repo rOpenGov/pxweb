@@ -28,7 +28,8 @@ if (length(script_dir) < 1) {
 }
 script_dir <- normalizePath(script_dir[[1]])
 dot_path <- file.path(script_dir, "workflow-model.dot")
-figure_path <- file.path(script_dir, "workflow-model.pdf")
+figure_path <- file.path(script_dir, "figs", "workflow-model.pdf")
+dir.create(dirname(figure_path), showWarnings = FALSE)
 
 workflow_dot <- '
 digraph pxweb_workflow {
@@ -68,7 +69,8 @@ digraph pxweb_workflow {
   metadata -> query;
   query -> retrieval;
   retrieval -> conversion;
-  conversion -> comments;
+  retrieval -> comments;
+  { rank = same; conversion; comments; }
 }
 '
 
@@ -106,15 +108,17 @@ draw_arrow <- function(x0, y0, x1, y1) {
 }
 
 render_with_base_r <- function(figure_path) {
-  grDevices::pdf(figure_path, width = 9.4, height = 3.1, paper = "special")
+  grDevices::pdf(figure_path, width = 7.2, height = 1.9, paper = "special")
   on.exit(grDevices::dev.off(), add = TRUE)
 
   par(mar = c(0.2, 0.2, 0.2, 0.2), xaxs = "i", yaxs = "i")
   plot.new()
   plot.window(xlim = c(0, 1), ylim = c(0, 1), asp = NA)
 
-  xs <- seq(0.10, 0.90, length.out = 6)
-  y <- 0.56
+  xs <- c(seq(0.10, 0.90, length.out = 5), 0.90)
+  ys <- c(rep(0.50, 4), 0.76, 0.24)
+  node_width <- 0.17
+  half_width <- node_width / 2
   labels <- c(
     "Search and\ndiscovery\ncatalogue, URL,\nor API search",
     "Metadata\nhierarchy, values,\ncodelists",
@@ -125,11 +129,14 @@ render_with_base_r <- function(figure_path) {
   )
 
   for (i in seq_along(xs)) {
-    draw_node(xs[i], y, labels[i], width = 0.13, height = 0.22,
+    draw_node(xs[i], ys[i], labels[i], width = node_width, height = 0.36,
               fill = if (i >= 5) "#EDF2F7" else "#F7FAFC")
   }
-  for (i in seq_len(length(xs) - 1L)) {
-    draw_arrow(xs[i] + 0.065, y, xs[i + 1L] - 0.065, y)
+  for (i in 1:3) {
+    draw_arrow(xs[i] + half_width, ys[i], xs[i + 1L] - half_width, ys[i + 1L])
+  }
+  for (i in 5:6) {
+    draw_arrow(xs[4] + half_width, ys[4], xs[i] - half_width, ys[i])
   }
 
   invisible(TRUE)

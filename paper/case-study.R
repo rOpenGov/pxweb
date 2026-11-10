@@ -31,16 +31,15 @@ dir.create(data_dir, showWarnings = FALSE, recursive = TRUE)
 data_path <- file.path(data_dir, "scb-population-counties-1968-2024.rds")
 citation_path <- file.path(data_dir, "scb-population-citation.txt")
 comments_path <- file.path(data_dir, "scb-population-comments.rds")
-figure_path <- file.path(script_dir, "case-study-population.pdf")
+figure_path <- file.path(script_dir, "figs", "case-study-population.pdf")
+dir.create(dirname(figure_path), showWarnings = FALSE)
 
 if (!requireNamespace("pxweb", quietly = TRUE)) {
   stop("The pxweb package is required to run this case study.", call. = FALSE)
 }
-if (utils::packageVersion("pxweb") < "1.0.0") {
-  stop("This case study requires pxweb >= 1.0.0.", call. = FALSE)
+if (utils::packageVersion("pxweb") < "0.19.2") {
+  stop("This case study requires pxweb >= 0.19.2.", call. = FALSE)
 }
-
-metadata_url <- "https://statistikdatabasen.scb.se/api/v2/tables/TAB638/metadata?lang=en"
 
 years <- as.character(1968:2024)
 ages <- c(as.character(0:99), "100+")
@@ -59,14 +58,16 @@ if (file.exists(data_path) && !refresh_data) {
 
 if (!file.exists(data_path) || refresh_data) {
   search_results <- pxweb::pxweb_search(
-    query = "Population by region marital status age sex",
+    query = "population marital status",
     api_url = "https://statistikdatabasen.scb.se/api/v2",
     lang = "en",
     page_size = 5
   )
-  metadata_url <- search_results$metadata_url[search_results$id == "TAB638"][1]
-  if (is.na(metadata_url)) {
-    stop("Could not find Statistics Sweden table TAB638 with pxweb_search().", call. = FALSE)
+  print(search_results[, c("id", "label")], row.names = FALSE, right = FALSE)
+
+  metadata_url <- search_results$metadata_url[search_results$id == "TAB638"]
+  if (length(metadata_url) != 1L || is.na(metadata_url)) {
+    stop("Expected exactly one metadata URL for Statistics Sweden table TAB638.", call. = FALSE)
   }
 
   query <- list(
@@ -128,9 +129,18 @@ age65_wide <- reshape(
 age65_wide$share65 <- age65_wide$value.TRUE /
   (age65_wide$value.FALSE + age65_wide$value.TRUE)
 
+pyramid_years <- c(1968L, 2024L)
+pyramid_data <- aggregate(
+  value ~ year + age + sex,
+  data = data[data$year %in% pyramid_years, ],
+  sum,
+  na.rm = TRUE
+)
+pyramid_ticks <- pretty(c(-1, 1) * max(pyramid_data$value) / 1000)
+pyramid_xlim <- range(pyramid_ticks)
+
 population_pyramid <- function(year_value, main) {
-  subset_data <- data[data$year == year_value, ]
-  age_sex <- aggregate(value ~ age + sex, data = subset_data, sum, na.rm = TRUE)
+  age_sex <- pyramid_data[pyramid_data$year == year_value, ]
   wide <- reshape(age_sex, idvar = "age", timevar = "sex", direction = "wide")
   wide <- wide[order(wide$age), ]
   wide$value.Men[is.na(wide$value.Men)] <- 0
@@ -138,14 +148,13 @@ population_pyramid <- function(year_value, main) {
 
   male <- -wide$value.Men / 1000
   female <- wide$value.Women / 1000
-  max_value <- max(abs(c(male, female)), na.rm = TRUE)
 
   bar_midpoints <- barplot(
     male,
     horiz = TRUE,
     col = "#4C78A8",
     border = NA,
-    xlim = c(-max_value, max_value),
+    xlim = pyramid_xlim,
     names.arg = rep("", length(male)),
     axes = FALSE,
     main = main,
@@ -158,14 +167,13 @@ population_pyramid <- function(year_value, main) {
     horiz = TRUE,
     col = "#F58518",
     border = NA,
-    xlim = c(-max_value, max_value),
+    xlim = pyramid_xlim,
     names.arg = rep("", length(female)),
     axes = FALSE,
     xlab = "",
     ylab = ""
   )
-  axis(1, at = pretty(c(-max_value, max_value)),
-       labels = abs(pretty(c(-max_value, max_value))))
+  axis(1, at = pyramid_ticks, labels = abs(pyramid_ticks))
   age_labels <- ifelse(wide$age == 100L, "100+", as.character(wide$age))
   age_tick_idx <- seq(1, length(wide$age), by = 20)
   axis(2, at = bar_midpoints[age_tick_idx], labels = age_labels[age_tick_idx], las = 1)
@@ -210,11 +218,17 @@ plot(
 )
 grid(col = "grey88")
 
-population_pyramid(1968, "C. Age and sex structure, 1968")
-population_pyramid(2024, "D. Age and sex structure, 2024")
+population_pyramid(pyramid_years[1], "C. Age and sex structure, 1968")
+population_pyramid(pyramid_years[2], "D. Age and sex structure, 2024")
 
 par(op)
 dev.off()
 
+print(data.frame(
+  year = pyramid_years,
+  population_millions = round(total_by_year$value[match(pyramid_years, total_by_year$year)] / 1e6, 2),
+  share_65_plus_percent = round(100 * age65_wide$share65[match(pyramid_years, age65_wide$year)], 1)
+), row.names = FALSE)
+
 cat("Wrote data cache:", file.path("data", basename(data_path)), "\n")
-cat("Wrote figure:", basename(figure_path), "\n")
+cat("Wrote figure:", file.path("figs", basename(figure_path)), "\n")

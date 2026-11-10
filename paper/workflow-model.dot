@@ -36,6 +36,7 @@ digraph pxweb_workflow {
   metadata -> query;
   query -> retrieval;
   retrieval -> conversion;
-  conversion -> comments;
+  retrieval -> comments;
+  { rank = same; conversion; comments; }
 }
 

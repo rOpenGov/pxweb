@@ -345,7 +345,7 @@ The default local test suite currently uses mocked and offline-safe tests and li
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=\textwidth]{workflow-model}
+\includegraphics[width=\textwidth]{figs/workflow-model}
 \caption{\label{fig:workflow-model}Main \pkg{pxweb} workflow:
 search and discovery, metadata, query construction, retrieval,
 conversion, comments, and citation.}
@@ -364,18 +364,34 @@ library("pxweb")
 \end{Code}
 
 Search and discovery start either from the bundled API catalogue, for PxWeb API version 1, from an explicit URL, or, for PxWeb API version 2, from table search.
-The following example searches Statistics Sweden's PxWeb API version 2 for a population table and stores its metadata URL.
+The following example searches Statistics Sweden's PxWeb API version 2 for population tables by marital status and displays the table IDs and labels.
 
 \begin{Code}
 search_results <- pxweb_search(
-  query = "Population by region marital status age sex",
+  query = "population marital status",
   api_url = "https://statistikdatabasen.scb.se/api/v2",
   lang = "en",
   page_size = 5
 )
 
-# Pick the first result url
-url <- search_results$metadata_url[1]
+print(search_results[, c("id", "label")], row.names = FALSE, right = FALSE)
+\end{Code}
+
+\begin{CodeOutput}
+ id      label
+ TAB638  Population by region, marital status, age and sex.  Year 1968-2024
+ TAB5557 Population by region, marital status, age and sex. Year 2025
+ TAB2819 Mean population by region, marital status, age and sex. Year 2006-2024
+ TAB6759 Mean population by region, marital status, age and sex.  Year 2025
+ TAB6570 Population per region by marital status and sex. Year 2010-2025
+\end{CodeOutput}
+
+The results include population tables for 1968--2024 and for 2025.
+We select \code{TAB638} for the longer period by matching its ID, rather than relying on the order of the results.
+
+\begin{Code}
+url <- search_results$metadata_url[search_results$id == "TAB638"]
+stopifnot(length(url) == 1L, !is.na(url))
 \end{Code}
 
 Metadata are retrieved with \code{pxweb_get()} when no query is supplied.
@@ -460,13 +476,15 @@ Exact results can change if Statistics Sweden changes table metadata, values, or
 library("pxweb")
 
 search_results <- pxweb_search(
-  query = "Population by region marital status age sex",
+  query = "population marital status",
   api_url = "https://statistikdatabasen.scb.se/api/v2",
   lang = "en",
   page_size = 5
 )
 
+print(search_results[, c("id", "label")], row.names = FALSE, right = FALSE)
 metadata_url <- search_results$metadata_url[search_results$id == "TAB638"]
+stopifnot(length(metadata_url) == 1L, !is.na(metadata_url))
 \end{Code}
 
 We use a large but manageable subset of the table: all 21 Swedish counties, all marital-status categories, single-year ages from 0 to 100+, both sexes, the population count content variable, and all years from 1968 to 2024.
@@ -597,7 +615,7 @@ The example demonstrates the main package workflow: a PxWeb API version 2 table 
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{case-study-population}
+\includegraphics[width=\textwidth]{figs/case-study-population}
 \caption{\label{fig:case-study-population}Population development in
 Sweden based on Statistics Sweden table \code{TAB638}.
 The data are downloaded at county level for all years from 1968 to 2024, all
