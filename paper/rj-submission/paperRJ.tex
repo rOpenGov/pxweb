@@ -71,19 +71,20 @@ This distinction is important because API access requires metadata discovery, qu
 
 Since PxWeb installations are configured by individual providers, such as NSIs, API version support and request limits are server-level properties rather than package-level constants.
 The \CRANpkg{pxweb} package therefore collects available configuration metadata, including version 1 and 2 \code{config} responses, and uses this information when validating requests, making calls, and splitting large downloads.
+
 \subsection{Related software}
 \label{sec:related}
 
 The R ecosystem contains several packages for accessing official statistics and other public data.
-However, these tools differ in the publication systems and data models they target.
+However, these tools differ in the publication systems and data models they work with.
 Table~\ref{tab:related-software} summarizes the main distinctions.
-Provider-specific packages, such as \CRANpkg{eurostat} \citep{Lahti17eurostat} and \CRANpkg{WDI} \citep{WDI}, provide convenient access to individual statistical sources or data families.
-Broader data-retrieval packages, such as \CRANpkg{pdfetch} \citep{pdfetch}, \CRANpkg{webchem} \citep{szocs2020webchem}, and \CRANpkg{intsvy} \citep{caro2017intsvy}, support broader data collection areas.
+Provider-specific packages, such as \CRANpkg{eurostat} \citep{Lahti17eurostat} and \CRANpkg{WDI} \citep{WDI}, provide convenient access to individual statistical sources.
+Broader data-retrieval packages, such as \CRANpkg{pdfetch} \citep{pdfetch}, \CRANpkg{webchem} \citep{szocs2020webchem}, and \CRANpkg{intsvy} \citep{caro2017intsvy}, support data collection in specific areas, such as finance, chemistry, and education.
 The \CRANpkg{rsdmx} package supports the Statistical Data and Metadata eXchange (SDMX) standard, which is an important alternative standard for statistical data exchange \citep{rsdmx,willekens2023sdmx}.
 In Python, pxwebpy provides access to PxWeb API version 2 \citep{pxwebpy}.
 
-In this landscape, \CRANpkg{pxweb} occupies the PxWeb API niche.
-It provides a common interface for (1) discovering databases and tables, (2) inspecting metadata, (3) constructing valid queries, (4) respecting provider limits, (5) retrieving data, and (6) retaining comments and citation information across statistical organizations that publish through PxWeb.
+In this landscape, \CRANpkg{pxweb} focus on PxWeb APIs.
+It provides a common interface for (1) discovering databases and tables, (2) inspecting metadata, (3) constructing valid queries, (4) respecting server limits, (5) retrieving data, and (6) retaining comments and citation information across statistical organisations that publish through PxWeb APIs.
 This makes \CRANpkg{pxweb} complementary to existing tools.
 The contribution of \CRANpkg{pxweb} is to support the common case where official statistics are distributed through PxWeb APIs and where users need a general, metadata-aware, and reproducible interface from R.
 
